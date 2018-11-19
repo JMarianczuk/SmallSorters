@@ -18,15 +18,14 @@ void GenerateRandomArray(Sortable* arr) {
 	return arr;
 }
 
-void CopyArray(Sortable* items, int count) {
-    Sortable* arr = (Sortable*) malloc(count * sizeof(Sortable));
-    for (int i = 0; i < count; i += 1) {
-        arr[i] = items[i];
+void CopyArray(Sortable* source, Sortable* destination) {
+    for (int i = 0; i < ArraySize; i += 1) {
+        destination[i] = source[i];
     }
 }
 
-void ThrowIfNotSorted(Sortable* items, int count) {
-    for (int i = 0; i < count - 1; i += 1) {
+void ThrowIfNotSorted(Sortable* items) {
+    for (int i = 0; i < ArraySize - 1; i += 1) {
         if (items[i].key > items[i + 1].key) {
             throw logic_error("Array not sorted");
         }
@@ -48,7 +47,7 @@ int main()
 		InsertionSort(copy);
 		perf->StopMeasuring();
 
-        ThrowIfNotSorted(arr, ArraySize);
+        ThrowIfNotSorted(arr);
 		WriteResultLine(
 			Sorter::INSERTION_SORT, 
 			PerformanceMetric::CPU_CYCLES, 
@@ -61,7 +60,7 @@ int main()
         NetworkSort_Naive(copy);
         perf->StopMeasuring();
 
-        ThrowIfNotSorted(copy, ArraySize);
+        ThrowIfNotSorted(copy);
         WriteResultLine(
 			Sorter::SORTING_NETWORK_NAIVE, 
 			PerformanceMetric::CPU_CYCLES, 
@@ -74,7 +73,7 @@ int main()
         NetworkSort_Optimised(copy);
         perf->StopMeasuring();
 
-        ThrowIfNotSorted(copy, ArraySize);
+        ThrowIfNotSorted(copy);
         WriteResultLine(
 			Sorter::SORTING_NETWORK_OPTIMISED, 
 			PerformanceMetric::CPU_CYCLES, 
