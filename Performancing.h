@@ -21,4 +21,17 @@
 #include <time.h>
 
 
+enum class PerformanceMetric {
+	CPU_CYCLES
+};
+
+class Performancing {
+public:
+    Performancing(PerformanceMetric metric);
+    ~Performancing();
+    void StartMeasuring();
+    void StopMeasuring();
+    uint64_t GetValue();
+};
+
 // TODO: Reference additional headers your program requires here.
