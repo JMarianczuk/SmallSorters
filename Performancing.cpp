@@ -16,6 +16,7 @@ struct read_format {
 
 
 Performancing::Performancing(PerformanceMetric metric) {
+	rf = (struct read_format*) buf;
 	memset(&performance_event_attribute, 0, sizeof(struct perf_event_attr));
 	performance_event_attribute.type = PERF_TYPE_HARDWARE;
 	performance_event_attribute.size = sizeof(struct perf_event_attr);
