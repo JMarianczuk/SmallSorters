@@ -10,12 +10,11 @@ using namespace std;
 
 void GenerateRandomArray(Sortable* arr) {
     void* pointer = (void*) rand();
-	for (int i = 0; i < size; i += 1)
+	for (int i = 0; i < ArraySize; i += 1)
 	{
 		arr[i].key = rand();
         arr[i].pointer = pointer + i;
 	}
-	return arr;
 }
 
 void CopyArray(Sortable* source, Sortable* destination) {
