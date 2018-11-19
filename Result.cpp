@@ -16,7 +16,7 @@ void WriteResultLine(Sorter sorter, PerformanceMetric metric, uint64_t metric_va
             sorter_name = "Sorting Network Optimised";
             break;
         default:
-            throw exception("Missing Sorter!");
+            throw logic_error("Missing Sorter!");
     };
 
     switch (metric) {
@@ -24,7 +24,7 @@ void WriteResultLine(Sorter sorter, PerformanceMetric metric, uint64_t metric_va
             metric_name = "Cpu Cycles";
             break;
         default:
-            throw exception("Missing Performance Metric!");
+            throw logic_error("Missing Performance Metric!");
     }
 
     printf("RESULT sorter=%s metric=%s value=%"PRIu64" iteration=%i", sorter_name, metric_name, metric_value, iteration); 

@@ -30,7 +30,7 @@ private:
 	uint64_t id;
 
 	char buf[4096];
-	struct read_format* rf = (struct read_format*) buf;
+	struct read_format* rf;
 
 	int file_descriptor;
 public:
