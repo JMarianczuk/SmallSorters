@@ -4,6 +4,7 @@
 
 #include <inttypes.h>
 #include <string>
+#include <stdexcept>
 #include "Enumerations.h"
 
 void WriteResultLine(
