@@ -1,5 +1,6 @@
 
 #include <stdexcept>
+#include <string>
 
 #include "Performancing.h"
 #include "InsertionSort.h"
@@ -9,7 +10,7 @@
 using namespace std;
 
 void GenerateRandomArray(Sortable* arr) {
-    void* pointer = (void*) rand();
+    int pointer = (void*) rand();
 	for (int i = 0; i < ArraySize; i += 1)
 	{
 		arr[i].key = rand();
@@ -31,12 +32,26 @@ void ThrowIfNotSorted(Sortable* items) {
     }
 }
 
+void PrintArray(string descriptor, Sortable* arr) {
+    printf("%s: ", descriptor.c_str());
+    for (int i = 0; i < ArraySize; i += 1) {
+        printf("(%i,%i), ", arr[i].key, arr[i].pointer);
+    }
+    printf("\n");
+}
+
 int main()
 {
 	auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
 
     Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
     Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+
+    GenerateRandomArray(arr);
+    PrintArray("Before", arr);
+    InsertionSort(arr);
+    PrintArray("AfterInsertionSort", arr);
+    return 0;
 	for (int iteration = 0; iteration < 20; iteration += 1)
 	{
         GenerateRandomArray(arr);

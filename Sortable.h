@@ -6,7 +6,7 @@
 
 struct Sortable {
     int key;
-    void* pointer;
+    int pointer;
 };
 
 #endif;
