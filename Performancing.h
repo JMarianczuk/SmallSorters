@@ -28,7 +28,13 @@ enum class PerformanceMetric {
 
 class Performancing {
 private:
-    
+    struct perf_event_attr performance_event_attribute;
+	uint64_t id;
+
+	char buf[4096];
+	struct read_format* rf = (struct read_format*) buf;
+
+	int file_descriptor;
 public:
     Performancing(PerformanceMetric metric);
     ~Performancing();
@@ -36,5 +42,7 @@ public:
     void StopMeasuring();
     uint64_t GetValue();
 };
+
+#endif
 
 // TODO: Reference additional headers your program requires here.
