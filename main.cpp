@@ -27,7 +27,7 @@ void CopyArray(Sortable* source, Sortable* destination) {
 bool IsSorted(Sortable* items) {
     for (int i = 0; i < ArraySize - 1; i += 1) {
         if (items[i].key > items[i + 1].key) {
-            return false
+            return false;
         }
     }
     return true;
@@ -58,14 +58,14 @@ int main()
 		perf->StopMeasuring();
 
         if (IsSorted(arr)) {
-                WriteResultLine(
+            WriteResultLine(
                 Sorter::INSERTION_SORT, 
                 PerformanceMetric::CPU_CYCLES, 
                 perf->GetValue(), 
                 iteration
             );
         } else {
-            PrintArray("Original Array", arr)
+            PrintArray("Original Array", arr);
             PrintArray("Did not sort INSERTION SORT:", copy);
         }
 		
@@ -76,14 +76,14 @@ int main()
         perf->StopMeasuring();
 
         if (IsSorted(arr)) {
-                WriteResultLine(
+            WriteResultLine(
                 Sorter::SORTING_NETWORK_NAIVE, 
                 PerformanceMetric::CPU_CYCLES, 
                 perf->GetValue(), 
                 iteration
             );
         } else {
-            PrintArray("Original Array", arr)
+            PrintArray("Original Array", arr);
             PrintArray("Did not sort NETWORK SORT NAIVE:", copy);
         }
         
@@ -94,14 +94,14 @@ int main()
         perf->StopMeasuring();
 
         if (IsSorted(arr)) {
-                WriteResultLine(
+            WriteResultLine(
                 Sorter::SORTING_NETWORK_OPTIMISED, 
                 PerformanceMetric::CPU_CYCLES, 
                 perf->GetValue(), 
                 iteration
             );
         } else {
-            PrintArray("Original Array", arr)
+            PrintArray("Original Array", arr);
             PrintArray("Did not sort NETWORK SORT OPTIMISED:", copy);
         }
         
