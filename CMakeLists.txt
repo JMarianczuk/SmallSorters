@@ -4,8 +4,11 @@
 cmake_minimum_required (VERSION 3.5)
 
 # Add source to this project's executable.
-project(SmallSorters)
+file(GLOB small_sorters_SRC
+    "*.h"
+    "*.cpp"
+)
 
-add_executable (Performancing "Performancing.cpp" "Performancing.h")
+add_executable (SmallSortersPerformancing ${small_sorters_SRC})
 
 # TODO: Add tests and install targets if needed.

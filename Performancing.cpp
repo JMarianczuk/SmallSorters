@@ -2,6 +2,7 @@
 //
 
 #include "Performancing.h"
+#include "Result.h"
 
 using namespace std;
 
@@ -15,16 +16,16 @@ struct read_format {
 
 
 Performancing::Performancing(PerformanceMetric metric) {
-		memset(&performance_event_attribute, 0, sizeof(struct perf_event_attr));
-		performance_event_attribute.type = PERF_TYPE_HARDWARE;
-		performance_event_attribute.size = sizeof(struct perf_event_attr);
-		performance_event_attribute.config = PERF_COUNT_HW_CPU_CYCLES;
-		performance_event_attribute.disabled = 1;
-		performance_event_attribute.exclude_kernel = 1;
-		performance_event_attribute.exclude_hv = 1;
-		performance_event_attribute.read_format = PERF_FORMAT_GROUP | PERF_FORMAT_ID;
-		file_descriptor = syscall(__NR_perf_event_open, &performance_event_attribute, 0, -1, -1, 0);
-		ioctl(file_descriptor, PERF_EVENT_IOC_ID, &id);
+	memset(&performance_event_attribute, 0, sizeof(struct perf_event_attr));
+	performance_event_attribute.type = PERF_TYPE_HARDWARE;
+	performance_event_attribute.size = sizeof(struct perf_event_attr);
+	performance_event_attribute.config = PERF_COUNT_HW_CPU_CYCLES;
+	performance_event_attribute.disabled = 1;
+	performance_event_attribute.exclude_kernel = 1;
+	performance_event_attribute.exclude_hv = 1;
+	performance_event_attribute.read_format = PERF_FORMAT_GROUP | PERF_FORMAT_ID;
+	file_descriptor = syscall(__NR_perf_event_open, &performance_event_attribute, 0, -1, -1, 0);
+	ioctl(file_descriptor, PERF_EVENT_IOC_ID, &id);
 }
 Performancing::~Performancing() {
 	close(file_descriptor);
@@ -40,7 +41,6 @@ void Performancing::StopMeasuring() {
 uint64_t Performancing::GetValue() {
 	read(file_descriptor, buf, sizeof(buf));
 
-	// printf("%i\n", c);
 	for (int i = 0; i < rf->number; i += 1)
 	{
 		if (rf->values[i].id == id)
@@ -66,11 +66,16 @@ int main()
 
 		perf->StopMeasuring();
 
-		printf("Count: %i\n", c);
-		printf("Iteration %i", iteration);
-		printf("cpu cycles: %"PRIu64"\n", perf->GetValue());
+		// printf("Count: %i, Iteration %i\n", c, iteration);
+		// printf("cpu cycles: %"PRIu64"\n", perf->GetValue());
+		WriteResultLine(
+			Sorter::INSERTION_SORT, 
+			PerformanceMetric::CPU_CYCLES, 
+			perf->GetValue(), 
+			iteration);
 	}
 	
+	delete perf;
 
 	return 0;
 }

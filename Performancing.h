@@ -21,10 +21,8 @@
 #include <stdint.h>
 #include <time.h>
 
+#include "Enumerations.h"
 
-enum class PerformanceMetric {
-	CPU_CYCLES
-};
 
 class Performancing {
 private:
