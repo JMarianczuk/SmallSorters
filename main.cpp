@@ -8,8 +8,7 @@
 
 using namespace std;
 
-Sortable* GenerateRandomArray(int size) {
-    Sortable* arr = (Sortable*) malloc(size * sizeof(Sortable));
+void GenerateRandomArray(Sortable* arr) {
     void* pointer = (void*) rand();
 	for (int i = 0; i < size; i += 1)
 	{
@@ -19,7 +18,7 @@ Sortable* GenerateRandomArray(int size) {
 	return arr;
 }
 
-Sortable* CopyArray(Sortable* items, int count) {
+void CopyArray(Sortable* items, int count) {
     Sortable* arr = (Sortable*) malloc(count * sizeof(Sortable));
     for (int i = 0; i < count; i += 1) {
         arr[i] = items[i];
@@ -38,11 +37,13 @@ int main()
 {
 	auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
 
+    Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+    Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
 	for (int iteration = 0; iteration < 20; iteration += 1)
 	{
-        Sortable* arr = GenerateRandomArray(ArraySize);
+        GenerateRandomArray(arr);
 
-        Sortable* copy = CopyArray(arr, ArraySize);
+        CopyArray(arr, copy);
 		perf->StartMeasuring();
 		InsertionSort(copy);
 		perf->StopMeasuring();
@@ -55,8 +56,7 @@ int main()
 			iteration
         );
 
-        free(copy);
-        copy = CopyArray(arr, ArraySize);
+        CopyArray(arr, copy);
         perf->StartMeasuring();
         NetworkSort_Naive(copy);
         perf->StopMeasuring();
@@ -69,8 +69,7 @@ int main()
 			iteration
         );
 
-        free(copy);
-        copy = CopyArray(arr, ArraySize);
+        CopyArray(arr, copy);
         perf->StartMeasuring();
         NetworkSort_Optimised(copy);
         perf->StopMeasuring();
@@ -82,10 +81,10 @@ int main()
 			perf->GetValue(), 
 			iteration
         );
-
-        free(copy);
-        free(arr);
 	}
+
+    free(arr);
+    free(copy);
 	
 	delete perf;
 
