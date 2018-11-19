@@ -1,7 +1,8 @@
 ﻿// Performancing.h : Include file for standard system include files,
 // or project specific include files.
 
-#pragma once
+#ifndef PERFORMANCING_H
+#define PERFORMANCING_H
 
 #include <iostream>
 #include <inttypes.h>
@@ -26,6 +27,8 @@ enum class PerformanceMetric {
 };
 
 class Performancing {
+private:
+    
 public:
     Performancing(PerformanceMetric metric);
     ~Performancing();
