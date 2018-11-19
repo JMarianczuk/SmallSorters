@@ -6,6 +6,8 @@
 #include "NetworkSort.h"
 #include "Result.h"
 
+using namespace std;
+
 Sortable* GenerateRandomArray(int size) {
     Sortable* arr = (Sortable*) malloc(size * sizeof(Sortable));
     void* pointer = (void*) rand();
