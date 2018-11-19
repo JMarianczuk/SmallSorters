@@ -67,7 +67,7 @@ int main()
 		perf->StopMeasuring();
 
 		printf("Count: %i\n", c);
-		printf("Iteration %i", iteration)
+		printf("Iteration %i", iteration);
 		printf("cpu cycles: %"PRIu64"\n", perf->GetValue());
 	}
 	

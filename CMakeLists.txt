@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for Performancing, include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.5)
 
 # Add source to this project's executable.
 project(SmallSorters)
