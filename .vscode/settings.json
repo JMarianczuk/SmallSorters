@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "istream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "xstring": "cpp"
     }
 }

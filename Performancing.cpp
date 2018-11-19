@@ -55,7 +55,7 @@ int main()
 {
 	auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
 
-	for (int iteration = 0; iteration < 100; iteration += 1)
+	for (int iteration = 0; iteration < 20; iteration += 1)
 	{
 		perf->StartMeasuring();
 

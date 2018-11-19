@@ -27,5 +27,5 @@ void WriteResultLine(Sorter sorter, PerformanceMetric metric, uint64_t metric_va
             throw logic_error("Missing Performance Metric!");
     }
 
-    printf("RESULT sorter=%s metric=%s value=%"PRIu64" iteration=%i", sorter_name, metric_name, metric_value, iteration); 
+    printf("RESULT sorter=%s metric=%s value=%"PRIu64" iteration=%i\n", sorter_name.c_str(), metric_name.c_str(), metric_value, iteration); 
 }
