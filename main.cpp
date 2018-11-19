@@ -3,10 +3,12 @@
 #include "Performancing.h"
 #include "InsertionSort.h"
 #include "NetworkSort.h"
+#include "Result.h"
+#include <stdexcept>
 
 Sortable* GenerateRandomArray(int size) {
     Sortable* arr = (Sortable*) malloc(size * sizeof(Sortable));
-    void* pointer = rand();
+    void* pointer = (void*) rand();
 	for (int i = 0; i < size; i += 1)
 	{
 		arr[i].key = rand();
