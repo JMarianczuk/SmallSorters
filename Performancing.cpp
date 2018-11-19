@@ -50,33 +50,3 @@ uint64_t Performancing::GetValue() {
 		}
 	}
 }
-
-int main()
-{
-	auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
-
-	for (int iteration = 0; iteration < 20; iteration += 1)
-	{
-		perf->StartMeasuring();
-
-		int c = 0;
-		for (int i = 0; i < 1000; i += 1)
-		{
-			c += 1;
-		}
-
-		perf->StopMeasuring();
-
-		// printf("Count: %i, Iteration %i\n", c, iteration);
-		// printf("cpu cycles: %"PRIu64"\n", perf->GetValue());
-		WriteResultLine(
-			Sorter::INSERTION_SORT, 
-			PerformanceMetric::CPU_CYCLES, 
-			perf->GetValue(), 
-			iteration);
-	}
-	
-	delete perf;
-
-	return 0;
-}
