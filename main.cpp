@@ -10,7 +10,7 @@
 using namespace std;
 
 void GenerateRandomArray(Sortable* arr) {
-    int pointer = (void*) rand();
+    int pointer = rand();
 	for (int i = 0; i < ArraySize; i += 1)
 	{
 		arr[i].key = rand();

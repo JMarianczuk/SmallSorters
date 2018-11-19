@@ -6,6 +6,7 @@
         "iosfwd": "cpp",
         "xutility": "cpp",
         "stdexcept": "cpp",
-        "exception": "cpp"
+        "exception": "cpp",
+        "xlocale": "cpp"
     }
 }
