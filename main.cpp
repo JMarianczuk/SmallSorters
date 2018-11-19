@@ -1,10 +1,10 @@
 
+#include <stdexcept>
 
 #include "Performancing.h"
 #include "InsertionSort.h"
 #include "NetworkSort.h"
 #include "Result.h"
-#include <stdexcept>
 
 Sortable* GenerateRandomArray(int size) {
     Sortable* arr = (Sortable*) malloc(size * sizeof(Sortable));

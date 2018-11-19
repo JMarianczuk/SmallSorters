@@ -5,6 +5,7 @@
         "xstring": "cpp",
         "iosfwd": "cpp",
         "xutility": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "exception": "cpp"
     }
 }
