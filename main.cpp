@@ -51,13 +51,13 @@ int main()
 			iteration
         );
 
-        free copy;
+        free(copy);
         copy = CopyArray(arr, ArraySize);
         perf->StartMeasuring();
         NetworkSort_Naive(copy);
         perf->StopMeasuring();
 
-        ThrowIfNotSorted(copy);
+        ThrowIfNotSorted(copy, ArraySize);
         WriteResultLine(
 			Sorter::SORTING_NETWORK_NAIVE, 
 			PerformanceMetric::CPU_CYCLES, 
@@ -65,13 +65,13 @@ int main()
 			iteration
         );
 
-        free copy;
+        free(copy);
         copy = CopyArray(arr, ArraySize);
         perf->StartMeasuring();
         NetworkSort_Optimised(copy);
         perf->StopMeasuring();
 
-        ThrowIfNotSorted(copy);
+        ThrowIfNotSorted(copy, ArraySize);
         WriteResultLine(
 			Sorter::SORTING_NETWORK_OPTIMISED, 
 			PerformanceMetric::CPU_CYCLES, 
@@ -79,8 +79,8 @@ int main()
 			iteration
         );
 
-        free copy;
-        free arr;
+        free(copy);
+        free(arr);
 	}
 	
 	delete perf;
