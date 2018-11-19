@@ -57,7 +57,7 @@ int main()
 		InsertionSort(copy);
 		perf->StopMeasuring();
 
-        if (IsSorted(arr)) {
+        if (IsSorted(copy)) {
             WriteResultLine(
                 Sorter::INSERTION_SORT, 
                 PerformanceMetric::CPU_CYCLES, 
@@ -75,7 +75,7 @@ int main()
         NetworkSort_Naive(copy);
         perf->StopMeasuring();
 
-        if (IsSorted(arr)) {
+        if (IsSorted(copy)) {
             WriteResultLine(
                 Sorter::SORTING_NETWORK_NAIVE, 
                 PerformanceMetric::CPU_CYCLES, 
@@ -93,7 +93,7 @@ int main()
         NetworkSort_Optimised(copy);
         perf->StopMeasuring();
 
-        if (IsSorted(arr)) {
+        if (IsSorted(copy)) {
             WriteResultLine(
                 Sorter::SORTING_NETWORK_OPTIMISED, 
                 PerformanceMetric::CPU_CYCLES, 
