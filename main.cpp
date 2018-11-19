@@ -47,11 +47,6 @@ int main()
     Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
     Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
 
-    GenerateRandomArray(arr);
-    PrintArray("Before", arr);
-    InsertionSort(arr);
-    PrintArray("AfterInsertionSort", arr);
-    return 0;
 	for (int iteration = 0; iteration < 20; iteration += 1)
 	{
         GenerateRandomArray(arr);
