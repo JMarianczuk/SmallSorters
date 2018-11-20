@@ -120,7 +120,7 @@ void SetOutputFile() {
     tstruct = *localtime(&now);
     strftime(filename_buffer, sizeof(filename_buffer), "output_%Y-%m-%d_%X_.txt", &tstruct);
 
-    ofstream(filename_buffer);
+    ofstream out(filename_buffer);
     cout.rdbuf(out.rdbuf);
 }
 
