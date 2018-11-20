@@ -111,8 +111,20 @@ void Measure(Performancing* perf) {
     free(copy);
 }
 
+void SetOutputFile() {
+    time_t now = time(0);
+    struct tm tstruct;
+    char buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "output_%Y-%m-%d_%X_.txt", &tstruct);
+
+    ofstream(buf);
+    cout.rdbuf(out.rdbuf);
+}
+
 int main()
 {
+
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     Measure(perf_cpu_cycles);	
 	delete perf_cpu_cycles;
