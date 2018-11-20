@@ -1,6 +1,8 @@
 
 #include <stdexcept>
 #include <string>
+#include <iostream>
+#include <fstream>
 
 #include "Performancing.h"
 #include "InsertionSort.h"
@@ -114,16 +116,17 @@ void Measure(Performancing* perf) {
 void SetOutputFile() {
     time_t now = time(0);
     struct tm tstruct;
-    char buf[80];
+    char filename_buffer[80];
     tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "output_%Y-%m-%d_%X_.txt", &tstruct);
+    strftime(filename_buffer, sizeof(filename_buffer), "output_%Y-%m-%d_%X_.txt", &tstruct);
 
-    ofstream(buf);
+    ofstream(filename_buffer);
     cout.rdbuf(out.rdbuf);
 }
 
 int main()
 {
+    SetOutputFile();
 
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     Measure(perf_cpu_cycles);	

@@ -9,8 +9,7 @@
 
 void WriteResultLine(
     Sorter sorter, 
-    PerformanceMetric metric, 
-    uint64_t metric_value,
+    Performancing* perf,
     int iteration);
 
 #endif
