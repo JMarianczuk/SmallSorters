@@ -1,6 +1,5 @@
 
 #include "Result.h"
-#include "Performancing.h"
 
 using namespace std;
 

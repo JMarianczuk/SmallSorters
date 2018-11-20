@@ -6,6 +6,7 @@
 #include <string>
 #include <stdexcept>
 #include "Enumerations.h"
+#include "Performancing.h"
 
 void WriteResultLine(
     Sorter sorter, 
