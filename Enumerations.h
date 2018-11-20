@@ -3,7 +3,9 @@
 #define ENUMERATIONS_H
 
 enum class PerformanceMetric {
-	CPU_CYCLES
+	CPU_CYCLES,
+    CACHE_MISSES,
+    BRANCH_MISSES,
 };
 
 enum class Sorter {

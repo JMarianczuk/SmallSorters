@@ -33,12 +33,15 @@ private:
 	struct read_format* rf;
 
 	int file_descriptor;
+
+    PerformanceMetric metric;
 public:
     Performancing(PerformanceMetric metric);
     ~Performancing();
     void StartMeasuring();
     void StopMeasuring();
     uint64_t GetValue();
+    PerformanceMetric GetMetric();
 };
 
 #endif

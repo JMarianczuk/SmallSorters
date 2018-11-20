@@ -14,8 +14,8 @@ struct read_format {
 	} values[];
 };
 
-
 Performancing::Performancing(PerformanceMetric metric) {
+	this.metric = metric;
 	rf = (struct read_format*) buf;
 	memset(&performance_event_attribute, 0, sizeof(struct perf_event_attr));
 	performance_event_attribute.type = PERF_TYPE_HARDWARE;
@@ -49,4 +49,8 @@ uint64_t Performancing::GetValue() {
 			return rf->values[i].value;
 		}
 	}
+}
+
+PerformanceMetric Performancing::GetMetric() {
+	return metric;
 }

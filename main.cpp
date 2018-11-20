@@ -41,10 +41,13 @@ void PrintArray(string descriptor, Sortable* arr) {
     printf("\n");
 }
 
-int main()
-{
-	auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
+void MeasureInsertionSort(Sortable* arr, Performancing* perf) {
+    perf->StartMeasuring();
+    InsertionSort(arr);
+    perf->StopMeasuring();
+}
 
+void Measure(Performancing* perf) {
     Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
     Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
 
@@ -60,8 +63,7 @@ int main()
         if (IsSorted(copy)) {
             WriteResultLine(
                 Sorter::INSERTION_SORT, 
-                PerformanceMetric::CPU_CYCLES, 
-                perf->GetValue(), 
+                perf, 
                 iteration
             );
         } else {
@@ -78,8 +80,7 @@ int main()
         if (IsSorted(copy)) {
             WriteResultLine(
                 Sorter::SORTING_NETWORK_NAIVE, 
-                PerformanceMetric::CPU_CYCLES, 
-                perf->GetValue(), 
+                perf, 
                 iteration
             );
         } else {
@@ -96,8 +97,7 @@ int main()
         if (IsSorted(copy)) {
             WriteResultLine(
                 Sorter::SORTING_NETWORK_OPTIMISED, 
-                PerformanceMetric::CPU_CYCLES, 
-                perf->GetValue(), 
+                perf, 
                 iteration
             );
         } else {
@@ -109,8 +109,21 @@ int main()
 
     free(arr);
     free(copy);
-	
-	delete perf;
+}
+
+int main()
+{
+	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
+    Measure(perf_cpu_cycles);	
+	delete perf_cpu_cycles;
+
+    auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
+    Measure(perf_cache_misses);
+    delete perf_cache_misses;
+
+    auto perf_branch_misses = new Performancing(PerformanceMetric::BRANCH_MISSES);
+    Measure(perf_branch_misses);
+    delete perf_branch_misses;
 
 	return 0;
 }
