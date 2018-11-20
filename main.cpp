@@ -121,7 +121,7 @@ void SetOutputFile() {
     strftime(filename_buffer, sizeof(filename_buffer), "output_%Y-%m-%d_%X_.txt", &tstruct);
 
     ofstream out(filename_buffer);
-    stdout.rdbuf(out.rdbuf());
+    stdout->rdbuf(out.rdbuf());
 }
 
 int main()
