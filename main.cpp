@@ -120,8 +120,7 @@ void SetOutputFile() {
     tstruct = *localtime(&now);
     strftime(filename_buffer, sizeof(filename_buffer), "output_%Y-%m-%d_%X_.txt", &tstruct);
 
-    ofstream out(filename_buffer);
-    stdout->rdbuf(out.rdbuf());
+    freopen(filename_buffer, "w", stdout);
 }
 
 int main()
