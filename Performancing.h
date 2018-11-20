@@ -34,7 +34,7 @@ private:
 
 	int file_descriptor;
 
-    PerformanceMetric metric;
+    PerformanceMetric performance_metric;
 public:
     Performancing(PerformanceMetric metric);
     ~Performancing();
