@@ -20,7 +20,19 @@ Performancing::Performancing(PerformanceMetric metric) {
 	memset(&performance_event_attribute, 0, sizeof(struct perf_event_attr));
 	performance_event_attribute.type = PERF_TYPE_HARDWARE;
 	performance_event_attribute.size = sizeof(struct perf_event_attr);
-	performance_event_attribute.config = PERF_COUNT_HW_CPU_CYCLES;
+	switch (metric) {
+		case PerformanceMetric::CPU_CYCLES:
+			performance_event_attribute.config = PERF_COUNT_HW_CPU_CYCLES;
+			break;
+		case PerformanceMetric::CACHE_MISSES:
+			performance_event_attribute.config = PERF_COUNT_HW_CACHE_MISSES;
+			break;
+		case PerformanceMetric::BRANCH_MISSES:
+			performance_event_attribute.config = PERF_COUNT_HW_BRANCH_MISSES;
+			break;
+		default:
+			throw logic_error("Missing Performance Metric!");
+	}
 	performance_event_attribute.disabled = 1;
 	performance_event_attribute.exclude_kernel = 1;
 	performance_event_attribute.exclude_hv = 1;
