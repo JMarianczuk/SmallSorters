@@ -7,6 +7,7 @@
 #define CS(l, r) Compare(l, r)
 
 void NetworkSort_Optimised(Sortable* items) {
+	//Greens Network: 60-comparator 10 parallel steps 16-input sorting network
     CS(0, 1)
 	CS(2, 3)
 	CS(4, 5)
