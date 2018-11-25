@@ -9,6 +9,8 @@ file(GLOB small_sorters_SRC
     "*.cpp"
 )
 
+set(CMAKE_CXX_FLAGS "-g3")
+
 add_executable (SmallSortersPerformancing ${small_sorters_SRC})
 
 # TODO: Add tests and install targets if needed.
