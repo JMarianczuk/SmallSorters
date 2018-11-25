@@ -3,10 +3,11 @@
 #define SORTABLE_H
 
 #define ArraySize 16
+#include <inttypes.h>
 
 struct Sortable {
-    int key;
-    int pointer;
+    uint64_t key;
+    uint64_t reference;
 };
 
 #endif

@@ -11,12 +11,20 @@
 
 using namespace std;
 
+uint64_t GenerateRandomUint64() {
+    uint64_t number = rand();
+    for (int i = 0; i < 3; i += 1) {
+        number = (number << 16) | rand();
+    }
+    return number;
+}
+
 void GenerateRandomArray(Sortable* arr) {
-    int pointer = rand();
+    uint64_t pointer = GenerateRandomUint64();
 	for (int i = 0; i < ArraySize; i += 1)
 	{
-		arr[i].key = rand();
-        arr[i].pointer = pointer + i;
+		arr[i].key = GenerateRandomUint64();
+        arr[i].reference = pointer + i;
 	}
 }
 
@@ -49,68 +57,153 @@ void MeasureInsertionSort(Sortable* arr, Performancing* perf) {
     perf->StopMeasuring();
 }
 
-void Measure(Performancing* perf) {
+void Measure(Performancing* perf, int numberOfIterations) {
     Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
-    Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+    
+    int numberOfBadSorts = 0;
+    GenerateRandomArray(arr);
+    InsertionSort(arr);
+    if (!IsSorted(arr)) {
+        numberOfBadSorts += 1;
+        PrintArray("Did not sort warmup Insertion sort", arr);
+    }
 
-	for (int iteration = 0; iteration < 20; iteration += 1)
-	{
+    perf->StartMeasuring();    
+    for (int i = 0; i < numberOfIterations; i += 1) {
         GenerateRandomArray(arr);
-
-        CopyArray(arr, copy);
-		perf->StartMeasuring();
-		InsertionSort(copy);
-		perf->StopMeasuring();
-
-        if (IsSorted(copy)) {
-            WriteResultLine(
-                Sorter::INSERTION_SORT, 
-                perf, 
-                iteration
-            );
-        } else {
-            PrintArray("Original Array", arr);
-            PrintArray("Did not sort INSERTION SORT:", copy);
+        InsertionSort(arr);
+        if (!IsSorted(arr)) {
+            numberOfBadSorts += 1;
+            PrintArray("Did not sort insertion sort", arr);
         }
+    }
+    perf->StopMeasuring();
+
+    WriteResultLine(
+        "Insertion Sort",
+        perf,
+        numberOfIterations,
+        numberOfBadSorts
+    );
+
+
+
+    numberOfBadSorts = 0;
+    GenerateRandomArray(arr);
+    NetworkSort_Naive(arr);
+    if (!IsSorted(arr)) {
+        numberOfBadSorts += 1;
+        PrintArray("Did not sort warmup network sort naive", arr);
+    }
+
+    perf->StartMeasuring();
+    for (int i = 0; i < numberOfIterations; i += 1) {
+        GenerateRandomArray(arr);
+        NetworkSort_Naive(arr);
+        if (!IsSorted(arr)) {
+            numberOfBadSorts += 1;
+            PrintArray("Did not sort network sort naive", arr);
+        }
+    }
+    perf->StopMeasuring();
+
+    WriteResultLine(
+        "Network Sort Naive",
+        perf,
+        numberOfIterations,
+        numberOfBadSorts
+    );
+
+
+
+    numberOfBadSorts = 0;
+    GenerateRandomArray(arr);
+    NetworkSort_Optimised(arr);
+    if (!IsSorted(arr)) {
+        numberOfBadSorts += 1;
+        PrintArray("Did not sort warmup network sort optimised", arr);
+    }
+
+    perf->StartMeasuring();
+    for (int i = 0; i < numberOfIterations; i += 1) {
+        GenerateRandomArray(arr);
+        NetworkSort_Optimised(arr);
+        if (!IsSorted(arr)) {
+            numberOfBadSorts += 1;
+            PrintArray("Did not sort network sort optimised", arr);
+        }
+    }
+    perf->StopMeasuring();
+
+    WriteResultLine(
+        "Network Sort Optimised",
+        perf,
+        numberOfIterations,
+        numberOfBadSorts
+    );
+
+
+    // Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+    // Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+
+	// for (int iteration = 0; iteration < 20; iteration += 1)
+	// {
+    //     GenerateRandomArray(arr);
+
+    //     CopyArray(arr, copy);
+	// 	perf->StartMeasuring();
+	// 	InsertionSort(copy);
+	// 	perf->StopMeasuring();
+
+    //     if (IsSorted(copy)) {
+    //         WriteResultLine(
+    //             Sorter::INSERTION_SORT, 
+    //             perf, 
+    //             iteration
+    //         );
+    //     } else {
+    //         PrintArray("Original Array", arr);
+    //         PrintArray("Did not sort INSERTION SORT:", copy);
+    //     }
 		
 
-        CopyArray(arr, copy);
-        perf->StartMeasuring();
-        NetworkSort_Naive(copy);
-        perf->StopMeasuring();
+    //     CopyArray(arr, copy);
+    //     perf->StartMeasuring();
+    //     NetworkSort_Naive(copy);
+    //     perf->StopMeasuring();
 
-        if (IsSorted(copy)) {
-            WriteResultLine(
-                Sorter::SORTING_NETWORK_NAIVE, 
-                perf, 
-                iteration
-            );
-        } else {
-            PrintArray("Original Array", arr);
-            PrintArray("Did not sort NETWORK SORT NAIVE:", copy);
-        }
+    //     if (IsSorted(copy)) {
+    //         WriteResultLine(
+    //             Sorter::SORTING_NETWORK_NAIVE, 
+    //             perf, 
+    //             iteration
+    //         );
+    //     } else {
+    //         PrintArray("Original Array", arr);
+    //         PrintArray("Did not sort NETWORK SORT NAIVE:", copy);
+    //     }
         
 
-        CopyArray(arr, copy);
-        perf->StartMeasuring();
-        NetworkSort_Optimised(copy);
-        perf->StopMeasuring();
+    //     CopyArray(arr, copy);
+    //     perf->StartMeasuring();
+    //     NetworkSort_Optimised(copy);
+    //     perf->StopMeasuring();
 
-        if (IsSorted(copy)) {
-            WriteResultLine(
-                Sorter::SORTING_NETWORK_OPTIMISED, 
-                perf, 
-                iteration
-            );
-        } else {
-            PrintArray("Original Array", arr);
-            PrintArray("Did not sort NETWORK SORT OPTIMISED:", copy);
-        }
+    //     if (IsSorted(copy)) {
+    //         WriteResultLine(
+    //             Sorter::SORTING_NETWORK_OPTIMISED, 
+    //             perf, 
+    //             iteration
+    //         );
+    //     } else {
+    //         PrintArray("Original Array", arr);
+    //         PrintArray("Did not sort NETWORK SORT OPTIMISED:", copy);
+    //     }
         
-	}
+	// }
 
-    free(arr);
-    free(copy);
+    // free(arr);
+    // free(copy);
 }
 
 void SetOutputFile() {
@@ -128,15 +221,15 @@ int main()
     SetOutputFile();
 
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
-    Measure(perf_cpu_cycles);	
+    Measure(perf_cpu_cycles, 1000);	
 	delete perf_cpu_cycles;
 
     auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
-    Measure(perf_cache_misses);
+    Measure(perf_cache_misses, 1000);
     delete perf_cache_misses;
 
     auto perf_branch_misses = new Performancing(PerformanceMetric::BRANCH_MISSES);
-    Measure(perf_branch_misses);
+    Measure(perf_branch_misses, 1000);
     delete perf_branch_misses;
 
 	return 0;

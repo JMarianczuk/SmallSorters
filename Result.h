@@ -9,8 +9,9 @@
 #include "Performancing.h"
 
 void WriteResultLine(
-    Sorter sorter, 
-    Performancing* perf,
-    int iteration);
+    string sorter, 
+    Performancing* perf, 
+    int numberOfIterations, 
+    int numberOfBadSorts);
 
 #endif

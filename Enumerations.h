@@ -8,10 +8,4 @@ enum class PerformanceMetric {
     BRANCH_MISSES,
 };
 
-enum class Sorter {
-    INSERTION_SORT,
-    SORTING_NETWORK_NAIVE,
-    SORTING_NETWORK_OPTIMISED
-};
-
 #endif
