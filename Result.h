@@ -8,6 +8,8 @@
 #include "Enumerations.h"
 #include "Performancing.h"
 
+using namespace std;
+
 void WriteResultLine(
     string sorter, 
     Performancing* perf, 
