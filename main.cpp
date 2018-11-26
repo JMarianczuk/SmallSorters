@@ -8,6 +8,7 @@
 #include "InsertionSort.h"
 #include "NetworkSort.h"
 #include "Result.h"
+#include "GitInfo.h"
 
 using namespace std;
 
@@ -219,6 +220,7 @@ void SetOutputFile() {
 int main()
 {
     SetOutputFile();
+    string commit = GetGitCommitOfContainingRepository();
 
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     Measure(perf_cpu_cycles, 1000);	

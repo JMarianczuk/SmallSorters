@@ -7,6 +7,7 @@
         "xutility": "cpp",
         "stdexcept": "cpp",
         "exception": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "xiosbase": "cpp"
     }
 }
