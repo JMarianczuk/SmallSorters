@@ -4,8 +4,6 @@
 
 #include <string>
 
-using namespace std;
-
-string GetGitCommitOfContainingRepository();
+std::string GetGitCommitOfContainingRepository();
 
 #endif

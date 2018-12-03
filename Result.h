@@ -8,10 +8,8 @@
 #include "Enumerations.h"
 #include "Performancing.h"
 
-using namespace std;
-
 void WriteResultLine(
-    string sorter, 
+    std::string sorter, 
     Performancing* perf, 
     int numberOfIterations, 
     int numberOfBadSorts);

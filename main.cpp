@@ -10,8 +10,6 @@
 #include "Result.h"
 #include "GitInfo.h"
 
-using namespace std;
-
 uint64_t GenerateRandomUint64() {
     uint64_t number = rand();
     for (int i = 0; i < 3; i += 1) {
@@ -44,7 +42,7 @@ bool IsSorted(Sortable* items) {
     return true;
 }
 
-void PrintArray(string descriptor, Sortable* arr) {
+void PrintArray(std::string descriptor, Sortable* arr) {
     printf("%s: ", descriptor.c_str());
     for (int i = 0; i < ArraySize; i += 1) {
         printf("%i, ", arr[i].key);
@@ -142,69 +140,6 @@ void Measure(Performancing* perf, int numberOfIterations) {
         numberOfIterations,
         numberOfBadSorts
     );
-
-
-    // Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
-    // Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
-
-	// for (int iteration = 0; iteration < 20; iteration += 1)
-	// {
-    //     GenerateRandomArray(arr);
-
-    //     CopyArray(arr, copy);
-	// 	perf->StartMeasuring();
-	// 	InsertionSort(copy);
-	// 	perf->StopMeasuring();
-
-    //     if (IsSorted(copy)) {
-    //         WriteResultLine(
-    //             Sorter::INSERTION_SORT, 
-    //             perf, 
-    //             iteration
-    //         );
-    //     } else {
-    //         PrintArray("Original Array", arr);
-    //         PrintArray("Did not sort INSERTION SORT:", copy);
-    //     }
-		
-
-    //     CopyArray(arr, copy);
-    //     perf->StartMeasuring();
-    //     NetworkSort_Naive(copy);
-    //     perf->StopMeasuring();
-
-    //     if (IsSorted(copy)) {
-    //         WriteResultLine(
-    //             Sorter::SORTING_NETWORK_NAIVE, 
-    //             perf, 
-    //             iteration
-    //         );
-    //     } else {
-    //         PrintArray("Original Array", arr);
-    //         PrintArray("Did not sort NETWORK SORT NAIVE:", copy);
-    //     }
-        
-
-    //     CopyArray(arr, copy);
-    //     perf->StartMeasuring();
-    //     NetworkSort_Optimised(copy);
-    //     perf->StopMeasuring();
-
-    //     if (IsSorted(copy)) {
-    //         WriteResultLine(
-    //             Sorter::SORTING_NETWORK_OPTIMISED, 
-    //             perf, 
-    //             iteration
-    //         );
-    //     } else {
-    //         PrintArray("Original Array", arr);
-    //         PrintArray("Did not sort NETWORK SORT OPTIMISED:", copy);
-    //     }
-        
-	// }
-
-    // free(arr);
-    // free(copy);
 }
 
 void SetOutputFile() {
@@ -220,7 +155,7 @@ void SetOutputFile() {
 int main()
 {
     SetOutputFile();
-    string commit = GetGitCommitOfContainingRepository();
+    std::string commit = GetGitCommitOfContainingRepository();
 
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     Measure(perf_cpu_cycles, 1000);	
