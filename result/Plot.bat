@@ -1,0 +1,2 @@
+sqlplot small_sorters.plot
+gnuplot small_sorters.plot
