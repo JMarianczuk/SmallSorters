@@ -1,7 +1,8 @@
 ﻿// Performancing.h : Include file for standard system include files,
 // or project specific include files.
 
-#pragma once
+#ifndef PERFORMANCING_H
+#define PERFORMANCING_H
 
 #include <iostream>
 #include <inttypes.h>
@@ -20,5 +21,29 @@
 #include <stdint.h>
 #include <time.h>
 
+#include "Enumerations.h"
+
+
+class Performancing {
+private:
+    struct perf_event_attr performance_event_attribute;
+	uint64_t id;
+
+	char buf[4096];
+	struct read_format* rf;
+
+	int file_descriptor;
+
+    PerformanceMetric performance_metric;
+public:
+    Performancing(PerformanceMetric metric);
+    ~Performancing();
+    void StartMeasuring();
+    void StopMeasuring();
+    uint64_t GetValue();
+    PerformanceMetric GetMetric();
+};
+
+#endif
 
 // TODO: Reference additional headers your program requires here.

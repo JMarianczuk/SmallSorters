@@ -26,7 +26,12 @@
 *.a
 *.lib
 
+build/*
+!build
+
 # Executables
 *.exe
 *.out
 *.app
+
+test.s
