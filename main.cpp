@@ -147,7 +147,7 @@ void SetOutputFile() {
     struct tm tstruct;
     char filename_buffer[80];
     tstruct = *localtime(&now);
-    strftime(filename_buffer, sizeof(filename_buffer), "result/output_%Y-%m-%d_%X.txt", &tstruct);
+    strftime(filename_buffer, sizeof(filename_buffer), "../result/output_%Y-%m-%d_%X.txt", &tstruct);
 
     freopen(filename_buffer, "w", stdout);
 }

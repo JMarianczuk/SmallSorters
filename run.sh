@@ -1,3 +1,3 @@
-cd build
 mkdir result
+cd build
 ./SmallSortersPerformancing
