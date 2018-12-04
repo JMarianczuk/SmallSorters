@@ -93,8 +93,8 @@
    7:NetworkSort_Simple.cpp **** 
    8:NetworkSort_Simple.cpp **** }
   88              		.loc 1 8 0
-  89 0000 31C0     		xor	eax, eax	#
-  90 0002 C3       		ret
+  89 ???? 31C0     		xor	eax, eax	#
+  90 ???? C3       		ret
   91              		.cfi_endproc
   92              	.LFE901:
   94              		.text
@@ -108,8 +108,11 @@
  101              		.loc 1 10 0
  102              		.cfi_startproc
  103              	.LVL0:
- 104              	# NetworkSort_Simple.cpp:20: }
-  11:NetworkSort_Simple.cpp ****     Sortable tmp = items[left];
+ 104              	# NetworkSort_Simple.cpp:11:     uint64_t tmp = items[left].key;
+  11:NetworkSort_Simple.cpp ****     uint64_t tmp = items[left].key;
+ 105              		.loc 1 11 0
+ 106 ???? 4863F6   		movsx	rsi, esi	# left, left
+ 107              	# NetworkSort_Simple.cpp:24:         : [left_key] "=xm"(items[left].key), [right_key] "=xm"(items[r
   12:NetworkSort_Simple.cpp ****     // __asm__(
   13:NetworkSort_Simple.cpp ****     //     "cmpq %[left_key],%[right_key]\n"
   14:NetworkSort_Simple.cpp ****     //     "cmovbq %[items_left],%[items_right]\n"
@@ -118,68 +121,175 @@
   17:NetworkSort_Simple.cpp ****     //     : [tmp] "rm"(tmp), [left_key] "x"(items[left].key), [right_key] "xm"(items[right].key)
   18:NetworkSort_Simple.cpp ****     //     : "cc"
   19:NetworkSort_Simple.cpp ****     // );
-  20:NetworkSort_Simple.cpp **** }
- 105              		.loc 1 20 0
- 106 0000 C3       		ret
- 107              		.cfi_endproc
- 108              	.LFE902:
- 110              		.p2align 4,,10
- 111 0001 0F1F8000 		.p2align 3
- 111      000000
- 112              		.globl	_Z27NetworkSortSimple_OptimisedP8Sortable
- 114              	_Z27NetworkSortSimple_OptimisedP8Sortable:
- 115              	.LFB903:
-  21:NetworkSort_Simple.cpp **** 
-  22:NetworkSort_Simple.cpp **** void NetworkSortSimple_Optimised(Sortable* items) {
- 116              		.loc 1 22 0
- 117              		.cfi_startproc
- 118              	.LVL1:
- 119              	# NetworkSort_Simple.cpp:32: }
-  23:NetworkSort_Simple.cpp ****     Compare(items, 0, 1);
-  24:NetworkSort_Simple.cpp ****     Compare(items, 3, 4);
-  25:NetworkSort_Simple.cpp ****     Compare(items, 0, 2);
-  26:NetworkSort_Simple.cpp ****     // Compare(items, 1, 2);
-  27:NetworkSort_Simple.cpp ****     // Compare(items, 0, 3);
-  28:NetworkSort_Simple.cpp ****     // Compare(items, 2, 3);
-  29:NetworkSort_Simple.cpp ****     // Compare(items, 1, 4);
-  30:NetworkSort_Simple.cpp ****     // Compare(items, 1, 2);
-  31:NetworkSort_Simple.cpp ****     // Compare(items, 3, 4);
-  32:NetworkSort_Simple.cpp **** }
- 120              		.loc 1 32 0
- 121 0008 C3       		ret
- 122              		.cfi_endproc
- 123              	.LFE903:
- 125 0009 0F1F8000 		.p2align 4,,10
- 125      000000
- 126              		.p2align 3
- 127              		.globl	_Z12Compare_SwapP8Sortableii
- 129              	_Z12Compare_SwapP8Sortableii:
- 130              	.LFB904:
-  33:NetworkSort_Simple.cpp **** 
-  34:NetworkSort_Simple.cpp **** void Compare_Swap(Sortable* items, int left, int right) {
- 131              		.loc 1 34 0
- 132              		.cfi_startproc
- 133              	.LVL2:
- 134              	# NetworkSort_Simple.cpp:35:     if (items[left].key > items[right].key) {std::swap(items[left], it
-  35:NetworkSort_Simple.cpp ****     if (items[left].key > items[right].key) {std::swap(items[left], items[right]);}
- 135              		.loc 1 35 0
- 136 0010 4863F6   		movsx	rsi, esi	# left, left
- 137 0013 4863D2   		movsx	rdx, edx	# right, right
- 138 0016 48C1E604 		sal	rsi, 4	# tmp100,
- 139              	.LVL3:
- 140 001a 48C1E204 		sal	rdx, 4	# tmp102,
- 141              	.LVL4:
- 142 001e 4801FE   		add	rsi, rdi	# _3, items
- 143 0021 4801D7   		add	rdi, rdx	# _7, tmp102
- 144              	.LVL5:
- 145 0024 488B06   		mov	rax, QWORD PTR [rsi]	# _4, _3->key
- 146 0027 483B07   		cmp	rax, QWORD PTR [rdi]	# _4, _7->key
- 147 002a 7613     		jbe	.L7	#,
- 148              	.LVL6:
- 149              	.LBB28:
- 150              	.LBB29:
- 151              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
- 152              		.file 2 "/usr/include/c++/7/bits/move.h"
+  20:NetworkSort_Simple.cpp ****     __asm__(
+  21:NetworkSort_Simple.cpp ****         "cmpq %[left_key],%[right_key]\n"
+  22:NetworkSort_Simple.cpp ****         "cmovbq %[left_key],%[right_key]\n"
+  23:NetworkSort_Simple.cpp ****         "cmovbq %[right_key],%[tmp]\n"
+  24:NetworkSort_Simple.cpp ****         : [left_key] "=xm"(items[left].key), [right_key] "=xm"(items[right].key)
+ 108              		.loc 1 24 0
+ 109 ???? 4863D2   		movsx	rdx, edx	# right, right
+ 110              	# NetworkSort_Simple.cpp:11:     uint64_t tmp = items[left].key;
+  11:NetworkSort_Simple.cpp ****     uint64_t tmp = items[left].key;
+ 111              		.loc 1 11 0
+ 112 ???? 48C1E604 		sal	rsi, 4	# tmp98,
+ 113              	.LVL1:
+ 114              	# NetworkSort_Simple.cpp:27:     );
+  25:NetworkSort_Simple.cpp ****         : [tmp] "r"(tmp)
+  26:NetworkSort_Simple.cpp ****         : "cc"
+  27:NetworkSort_Simple.cpp ****     );
+ 115              		.loc 1 27 0
+ 116 ???? 48C1E204 		sal	rdx, 4	# tmp102,
+ 117              	.LVL2:
+ 118              	# NetworkSort_Simple.cpp:11:     uint64_t tmp = items[left].key;
+  11:NetworkSort_Simple.cpp ****     // __asm__(
+ 119              		.loc 1 11 0
+ 120 ???? 4801FE   		add	rsi, rdi	# _3, items
+ 121              	.LVL3:
+ 122              	# NetworkSort_Simple.cpp:27:     );
+ 123              		.loc 1 27 0
+ 124 ???? 488B06   		mov	rax, QWORD PTR [rsi]	# _3->key, _3->key
+ 125              	#APP
+ 126              	# 27 "NetworkSort_Simple.cpp" 1
+  28              	}
+  29              	
+  30              	void NetworkSortSimple_Optimised(Sortable* items) {
+  31              	    Compare(items, 0, 1);
+ 127              		cmpq xmm0,xmm1	# tmp99, tmp100
+ 128              	cmovbq xmm0,xmm1	# tmp99, tmp100
+ 129              	cmovbq xmm1,rax	# tmp100, _3->key
+ 130              	
+ 131              	# 0 "" 2
+ 132              	#NO_APP
+ 133 ???? C5F9D606 		vmovq	QWORD PTR [rsi], xmm0	# _3->key, tmp99
+ 134              	.LVL4:
+ 135 ???? C5F9D60C 		vmovq	QWORD PTR [rdi+rdx], xmm1	# _6->key, tmp100
+ 135      17
+ 136              	# NetworkSort_Simple.cpp:28: }
+  28:NetworkSort_Simple.cpp **** 
+ 137              		.loc 1 28 0
+ 138 ???? C3       		ret
+ 139              		.cfi_endproc
+ 140              	.LFE902:
+ 142 ???? 6690     		.p2align 4,,10
+ 143              		.p2align 3
+ 144              		.globl	_Z27NetworkSortSimple_OptimisedP8Sortable
+ 146              	_Z27NetworkSortSimple_OptimisedP8Sortable:
+ 147              	.LFB903:
+  30:NetworkSort_Simple.cpp ****     Compare(items, 0, 1);
+ 148              		.loc 1 30 0
+ 149              		.cfi_startproc
+ 150              	.LVL5:
+ 151              	.LBB20:
+ 152              	.LBB21:
+ 153              	# NetworkSort_Simple.cpp:27:     );
+  27:NetworkSort_Simple.cpp **** }
+ 154              		.loc 1 27 0
+ 155 ???? 488B07   		mov	rax, QWORD PTR [rdi]	# items_2(D)->key, items_2(D)->key
+ 156              	#APP
+ 157              	# 27 "NetworkSort_Simple.cpp" 1
+ 158              		cmpq QWORD PTR -8[rsp],xmm0	# %sfp, tmp96
+ 159              	cmovbq QWORD PTR -8[rsp],xmm0	# %sfp, tmp96
+ 160              	cmovbq xmm0,rax	# tmp96, items_2(D)->key
+ 161              	
+ 162              	# 0 "" 2
+ 163              	#NO_APP
+ 164              	.LBE21:
+ 165              	.LBE20:
+ 166              	.LBB23:
+ 167              	.LBB24:
+ 168 ???? 488B4730 		mov	rax, QWORD PTR 48[rdi]	# MEM[(struct Sortable *)items_2(D) + 48B].key, MEM[(struct Sortable *)
+ 169              	.LBE24:
+ 170              	.LBE23:
+ 171              	.LBB27:
+ 172              	.LBB22:
+ 173 ???? C5F9D647 		vmovq	QWORD PTR 16[rdi], xmm0	# _9->key, tmp96
+ 173      10
+ 174              	.LVL6:
+ 175              	.LBE22:
+ 176              	.LBE27:
+ 177              	.LBB28:
+ 178              	.LBB25:
+ 179              	#APP
+ 180              	# 27 "NetworkSort_Simple.cpp" 1
+ 181              		cmpq xmm0,xmm1	# tmp98, tmp99
+ 182              	cmovbq xmm0,xmm1	# tmp98, tmp99
+ 183              	cmovbq xmm1,rax	# tmp99, MEM[(struct Sortable *)items_2(D) + 48B].key
+ 184              	
+ 185              	# 0 "" 2
+ 186              	#NO_APP
+ 187              	.LBE25:
+ 188              	.LBE28:
+ 189              	.LBB29:
+ 190              	.LBB30:
+ 191 ???? 488B4424 		mov	rax, QWORD PTR -8[rsp]	# tmp95, %sfp
+ 191      F8
+ 192              	.LVL7:
+ 193              	.LBE30:
+ 194              	.LBE29:
+ 195              	.LBB32:
+ 196              	.LBB26:
+ 197 ???? C5F9D647 		vmovq	QWORD PTR 48[rdi], xmm0	# _5->key, tmp98
+ 197      30
+ 198              	.LVL8:
+ 199 ???? C5F9D64F 		vmovq	QWORD PTR 64[rdi], xmm1	# _7->key, tmp99
+ 199      40
+ 200              	.LVL9:
+ 201              	.LBE26:
+ 202              	.LBE32:
+ 203              	.LBB33:
+ 204              	.LBB31:
+ 205              	#APP
+ 206              	# 27 "NetworkSort_Simple.cpp" 1
+ 207              		cmpq xmm0,xmm1	# tmp101, tmp102
+ 208              	cmovbq xmm0,xmm1	# tmp101, tmp102
+ 209              	cmovbq xmm1,rax	# tmp102, tmp95
+ 210              	
+ 211              	# 0 "" 2
+ 212              	#NO_APP
+ 213 ???? C5F9D607 		vmovq	QWORD PTR [rdi], xmm0	# items_2(D)->key, tmp101
+ 214              	.LVL10:
+ 215 ???? C5F9D64F 		vmovq	QWORD PTR 32[rdi], xmm1	# _4->key, tmp102
+ 215      20
+ 216              	.LVL11:
+ 217              	.LBE31:
+ 218              	.LBE33:
+ 219              	# NetworkSort_Simple.cpp:40: }
+  32:NetworkSort_Simple.cpp ****     Compare(items, 3, 4);
+  33:NetworkSort_Simple.cpp ****     Compare(items, 0, 2);
+  34:NetworkSort_Simple.cpp ****     // Compare(items, 1, 2);
+  35:NetworkSort_Simple.cpp ****     // Compare(items, 0, 3);
+  36:NetworkSort_Simple.cpp ****     // Compare(items, 2, 3);
+  37:NetworkSort_Simple.cpp ****     // Compare(items, 1, 4);
+  38:NetworkSort_Simple.cpp ****     // Compare(items, 1, 2);
+  39:NetworkSort_Simple.cpp ****     // Compare(items, 3, 4);
+  40:NetworkSort_Simple.cpp **** }
+ 220              		.loc 1 40 0
+ 221 ???? C3       		ret
+ 222              		.cfi_endproc
+ 223              	.LFE903:
+ 225              		.p2align 4,,10
+ 226 ???? 0F1F00   		.p2align 3
+ 227              		.globl	_Z23NetworkSortSimple_NaiveP8Sortable
+ 229              	_Z23NetworkSortSimple_NaiveP8Sortable:
+ 230              	.LFB904:
+  41:NetworkSort_Simple.cpp **** 
+  42:NetworkSort_Simple.cpp **** #define Compare_Swap(left, right) if (items[left].key > items[right].key) {std::swap(items[left], i
+  43:NetworkSort_Simple.cpp **** 
+  44:NetworkSort_Simple.cpp **** void NetworkSortSimple_Naive(Sortable* items) {
+ 231              		.loc 1 44 0
+ 232              		.cfi_startproc
+ 233              	.LVL12:
+ 234              	# NetworkSort_Simple.cpp:45:     Compare_Swap(0, 1);
+  45:NetworkSort_Simple.cpp ****     Compare_Swap(0, 1);
+ 235              		.loc 1 45 0
+ 236 ???? 488B07   		mov	rax, QWORD PTR [rdi]	# _1, items_11(D)->key
+ 237 ???? 483B4710 		cmp	rax, QWORD PTR 16[rdi]	# _1, MEM[(struct Sortable *)items_11(D) + 16B].key
+ 238 ???? 761C     		jbe	.L6	#,
+ 239              	.LVL13:
+ 240              	.LBB34:
+ 241              	.LBB35:
+ 242              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 243              		.file 2 "/usr/include/c++/7/bits/move.h"
    1:/usr/include/c++/7/bits/move.h **** // Move, forward and identity for C++11 + swap -*- C++ -*-
    2:/usr/include/c++/7/bits/move.h **** 
    3:/usr/include/c++/7/bits/move.h **** // Copyright (C) 2007-2017 Free Software Foundation, Inc.
@@ -378,190 +488,132 @@
  196:/usr/include/c++/7/bits/move.h ****       __glibcxx_function_requires(_SGIAssignableConcept<_Tp>)
  197:/usr/include/c++/7/bits/move.h **** 
  198:/usr/include/c++/7/bits/move.h ****       _Tp __tmp = _GLIBCXX_MOVE(__a);
- 153              		.loc 2 198 0 discriminator 1
- 154 002c 488B5608 		mov	rdx, QWORD PTR 8[rsi]	# __tmp$reference, MEM[(struct Sortable &)_3 + 8]
- 155              	.LVL7:
- 156              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
  199:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 157              		.loc 2 199 0 discriminator 1
- 158 0030 C5F81007 		vmovups	xmm0, XMMWORD PTR [rdi]	# tmp104, *_7
- 159 0034 C5F81106 		vmovups	XMMWORD PTR [rsi], xmm0	# *_3, tmp104
- 160              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 244              		.loc 2 199 0 discriminator 1
+ 245 ???? C5F8104F 		vmovups	xmm1, XMMWORD PTR 16[rdi]	# tmp101, MEM[(struct Sortable &)items_11(D) + 16]
+ 245      10
+ 246              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
+ 198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
+ 247              		.loc 2 198 0 discriminator 1
+ 248 ???? 488B4F08 		mov	rcx, QWORD PTR 8[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_11(D) + 8]
+ 249              	.LVL14:
+ 250              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 251              		.loc 2 199 0 discriminator 1
+ 252 ???? 488B5710 		mov	rdx, QWORD PTR 16[rdi]	# tmp99, MEM[(struct Sortable &)items_11(D) + 16]
+ 253              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
  200:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 161              		.loc 2 200 0 discriminator 1
- 162 0038 488907   		mov	QWORD PTR [rdi], rax	# MEM[(struct Sortable *)_7], _4
- 163 003b 48895708 		mov	QWORD PTR 8[rdi], rdx	# MEM[(struct Sortable *)_7 + 8B], __tmp$reference
- 164              	.LVL8:
- 165              	.L7:
- 166              	.LBE29:
- 167              	.LBE28:
- 168              	# NetworkSort_Simple.cpp:36: }
-  36:NetworkSort_Simple.cpp **** }
- 169              		.loc 1 36 0
- 170 003f C3       		ret
- 171              		.cfi_endproc
- 172              	.LFE904:
- 174              		.p2align 4,,10
- 175              		.p2align 3
- 176              		.globl	_Z23NetworkSortSimple_NaiveP8Sortable
- 178              	_Z23NetworkSortSimple_NaiveP8Sortable:
- 179              	.LFB905:
-  37:NetworkSort_Simple.cpp **** 
-  38:NetworkSort_Simple.cpp **** void NetworkSortSimple_Naive(Sortable* items) {
- 180              		.loc 1 38 0
- 181              		.cfi_startproc
- 182              	.LVL9:
- 183              	.LBB30:
- 184              	.LBB31:
- 185              	# NetworkSort_Simple.cpp:35:     if (items[left].key > items[right].key) {std::swap(items[left], it
-  35:NetworkSort_Simple.cpp **** }
- 186              		.loc 1 35 0
- 187 0040 488B07   		mov	rax, QWORD PTR [rdi]	# _9, items_2(D)->key
- 188 0043 483B4710 		cmp	rax, QWORD PTR 16[rdi]	# _9, MEM[(struct Sortable *)items_2(D) + 16B].key
- 189 0047 761C     		jbe	.L9	#,
- 190              	.LVL10:
- 191              	.LBB32:
- 192              	.LBB33:
- 193              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 254              		.loc 2 200 0 discriminator 1
+ 255 ???? 48894710 		mov	QWORD PTR 16[rdi], rax	# MEM[(struct Sortable *)items_11(D) + 16B], _1
+ 256              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
  199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 194              		.loc 2 199 0
- 195 0049 C5F8104F 		vmovups	xmm1, XMMWORD PTR 16[rdi]	# tmp101, MEM[(struct Sortable &)items_2(D) + 16]
- 195      10
- 196              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
+ 257              		.loc 2 199 0 discriminator 1
+ 258 ???? C5F8110F 		vmovups	XMMWORD PTR [rdi], xmm1	# *items_11(D), tmp101
+ 259              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 260              		.loc 2 200 0 discriminator 1
+ 261 ???? 48894F18 		mov	QWORD PTR 24[rdi], rcx	# MEM[(struct Sortable *)items_11(D) + 24B], __tmp$reference
+ 262              	.LVL15:
+ 263 ???? 4889D0   		mov	rax, rdx	# _1, tmp99
+ 264              	.LVL16:
+ 265              	.L6:
+ 266              	.LBE35:
+ 267              	.LBE34:
+ 268              	# NetworkSort_Simple.cpp:46:     Compare_Swap(3, 4);
+  46:NetworkSort_Simple.cpp ****     Compare_Swap(3, 4);
+ 269              		.loc 1 46 0
+ 270 ???? 488B5730 		mov	rdx, QWORD PTR 48[rdi]	# _3, MEM[(struct Sortable *)items_11(D) + 48B].key
+ 271 ???? 483B5740 		cmp	rdx, QWORD PTR 64[rdi]	# _3, MEM[(struct Sortable *)items_11(D) + 64B].key
+ 272 ???? 7616     		jbe	.L7	#,
+ 273              	.LVL17:
+ 274              	.LBB36:
+ 275              	.LBB37:
+ 276              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 277              		.loc 2 199 0 discriminator 1
+ 278 ???? C5F81057 		vmovups	xmm2, XMMWORD PTR 64[rdi]	# tmp102, MEM[(struct Sortable &)items_11(D) + 64]
+ 278      40
+ 279              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
  198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 197              		.loc 2 198 0
- 198 004e 488B4F08 		mov	rcx, QWORD PTR 8[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_2(D) + 8]
- 199              	.LVL11:
- 200              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 280              		.loc 2 198 0 discriminator 1
+ 281 ???? 488B4F38 		mov	rcx, QWORD PTR 56[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_11(D) + 56]
+ 282              	.LVL18:
+ 283              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 284              		.loc 2 200 0 discriminator 1
+ 285 ???? 48895740 		mov	QWORD PTR 64[rdi], rdx	# MEM[(struct Sortable *)items_11(D) + 64B], _3
+ 286              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
  199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 201              		.loc 2 199 0
- 202 0052 488B5710 		mov	rdx, QWORD PTR 16[rdi]	# tmp99, MEM[(struct Sortable &)items_2(D) + 16]
- 203              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 204              		.loc 2 200 0
- 205 0056 48894710 		mov	QWORD PTR 16[rdi], rax	# MEM[(struct Sortable *)items_2(D) + 16B], _9
- 206              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 287              		.loc 2 199 0 discriminator 1
+ 288 ???? C5F81157 		vmovups	XMMWORD PTR 48[rdi], xmm2	# MEM[(struct Sortable *)items_11(D) + 48B], tmp102
+ 288      30
+ 289              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 290              		.loc 2 200 0 discriminator 1
+ 291 ???? 48894F48 		mov	QWORD PTR 72[rdi], rcx	# MEM[(struct Sortable *)items_11(D) + 72B], __tmp$reference
+ 292              	.LVL19:
+ 293              	.L7:
+ 294              	.LBE37:
+ 295              	.LBE36:
+ 296              	# NetworkSort_Simple.cpp:47:     Compare_Swap(0, 2);
+  47:NetworkSort_Simple.cpp ****     Compare_Swap(0, 2);
+ 297              		.loc 1 47 0
+ 298 ???? 48394720 		cmp	QWORD PTR 32[rdi], rax	# MEM[(struct Sortable *)items_11(D) + 32B].key, _1
+ 299 ???? 7315     		jnb	.L9	#,
+ 300              	.LVL20:
+ 301              	.LBB38:
+ 302              	.LBB39:
+ 303              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
  199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 207              		.loc 2 199 0
- 208 005a C5F8110F 		vmovups	XMMWORD PTR [rdi], xmm1	# *items_2(D), tmp101
- 209              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 210              		.loc 2 200 0
- 211 005e 48894F18 		mov	QWORD PTR 24[rdi], rcx	# MEM[(struct Sortable *)items_2(D) + 24B], __tmp$reference
- 212              	.LVL12:
- 213 0062 4889D0   		mov	rax, rdx	# _9, tmp99
- 214              	.LVL13:
- 215              	.L9:
- 216              	.LBE33:
- 217              	.LBE32:
- 218              	.LBE31:
- 219              	.LBE30:
- 220              	.LBB34:
- 221              	.LBB35:
- 222              	# NetworkSort_Simple.cpp:35:     if (items[left].key > items[right].key) {std::swap(items[left], it
-  35:NetworkSort_Simple.cpp **** }
- 223              		.loc 1 35 0
- 224 0065 488B5730 		mov	rdx, QWORD PTR 48[rdi]	# _6, MEM[(struct Sortable *)items_2(D) + 48B].key
- 225 0069 483B5740 		cmp	rdx, QWORD PTR 64[rdi]	# _6, MEM[(struct Sortable *)items_2(D) + 64B].key
- 226 006d 7616     		jbe	.L10	#,
- 227              	.LVL14:
- 228              	.LBB36:
- 229              	.LBB37:
- 230              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 231              		.loc 2 199 0
- 232 006f C5F81057 		vmovups	xmm2, XMMWORD PTR 64[rdi]	# tmp102, MEM[(struct Sortable &)items_2(D) + 64]
- 232      40
- 233              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
+ 304              		.loc 2 199 0 discriminator 1
+ 305 ???? C5F81047 		vmovups	xmm0, XMMWORD PTR 32[rdi]	# tmp103, MEM[(struct Sortable &)items_11(D) + 32]
+ 305      20
+ 306              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
  198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 234              		.loc 2 198 0
- 235 0074 488B4F38 		mov	rcx, QWORD PTR 56[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_2(D) + 56]
- 236              	.LVL15:
- 237              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 238              		.loc 2 200 0
- 239 0078 48895740 		mov	QWORD PTR 64[rdi], rdx	# MEM[(struct Sortable *)items_2(D) + 64B], _6
- 240              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 307              		.loc 2 198 0 discriminator 1
+ 308 ???? 488B5708 		mov	rdx, QWORD PTR 8[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_11(D) + 8]
+ 309              	.LVL21:
+ 310              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 311              		.loc 2 200 0 discriminator 1
+ 312 ???? 48894720 		mov	QWORD PTR 32[rdi], rax	# MEM[(struct Sortable *)items_11(D) + 32B], _1
+ 313              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
  199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 241              		.loc 2 199 0
- 242 007c C5F81157 		vmovups	XMMWORD PTR 48[rdi], xmm2	# MEM[(struct Sortable *)items_2(D) + 48B], tmp102
- 242      30
- 243              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 244              		.loc 2 200 0
- 245 0081 48894F48 		mov	QWORD PTR 72[rdi], rcx	# MEM[(struct Sortable *)items_2(D) + 72B], __tmp$reference
- 246              	.LVL16:
- 247              	.L10:
- 248              	.LBE37:
- 249              	.LBE36:
- 250              	.LBE35:
- 251              	.LBE34:
- 252              	.LBB38:
- 253              	.LBB39:
- 254              	# NetworkSort_Simple.cpp:35:     if (items[left].key > items[right].key) {std::swap(items[left], it
-  35:NetworkSort_Simple.cpp **** }
- 255              		.loc 1 35 0
- 256 0085 48394720 		cmp	QWORD PTR 32[rdi], rax	# MEM[(struct Sortable *)items_2(D) + 32B].key, _9
- 257 0089 7315     		jnb	.L12	#,
- 258              	.LVL17:
- 259              	.LBB40:
- 260              	.LBB41:
- 261              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 262              		.loc 2 199 0
- 263 008b C5F81047 		vmovups	xmm0, XMMWORD PTR 32[rdi]	# tmp103, MEM[(struct Sortable &)items_2(D) + 32]
- 263      20
- 264              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
- 198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 265              		.loc 2 198 0
- 266 0090 488B5708 		mov	rdx, QWORD PTR 8[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_2(D) + 8]
- 267              	.LVL18:
- 268              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 269              		.loc 2 200 0
- 270 0094 48894720 		mov	QWORD PTR 32[rdi], rax	# MEM[(struct Sortable *)items_2(D) + 32B], _9
- 271              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 272              		.loc 2 199 0
- 273 0098 C5F81107 		vmovups	XMMWORD PTR [rdi], xmm0	# *items_2(D), tmp103
- 274              	.LVL19:
- 275              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 276              		.loc 2 200 0
- 277 009c 48895728 		mov	QWORD PTR 40[rdi], rdx	# MEM[(struct Sortable *)items_2(D) + 40B], __tmp$reference
- 278              	.LVL20:
- 279              	.L12:
- 280              	.LBE41:
- 281              	.LBE40:
- 282              	.LBE39:
- 283              	.LBE38:
- 284              	# NetworkSort_Simple.cpp:48: }
-  39:NetworkSort_Simple.cpp ****     Compare_Swap(items, 0, 1);
-  40:NetworkSort_Simple.cpp ****     Compare_Swap(items, 3, 4);
-  41:NetworkSort_Simple.cpp ****     Compare_Swap(items, 0, 2);
-  42:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 2);
-  43:NetworkSort_Simple.cpp ****     // Compare_Swap(0, 3);
-  44:NetworkSort_Simple.cpp ****     // Compare_Swap(2, 3);
-  45:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 4);
-  46:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 2);
-  47:NetworkSort_Simple.cpp ****     // Compare_Swap(3, 4);
-  48:NetworkSort_Simple.cpp **** }...
- 285              		.loc 1 48 0
- 286 00a0 C3       		ret
- 287              		.cfi_endproc
- 288              	.LFE905:
- 290              	.Letext0:
- 291              		.file 3 "/usr/include/c++/7/type_traits"
- 292              		.file 4 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h"
- 293              		.file 5 "/usr/include/c++/7/bits/stl_pair.h"
- 294              		.file 6 "/usr/include/c++/7/debug/debug.h"
- 295              		.file 7 "/usr/include/c++/7/cstdlib"
- 296              		.file 8 "/usr/include/c++/7/bits/algorithmfwd.h"
- 297              		.file 9 "/usr/include/c++/7/bits/exception_ptr.h"
- 298              		.file 10 "/usr/include/c++/7/new"
- 299              		.file 11 "/usr/include/c++/7/bits/stl_algo.h"
- 300              		.file 12 "/usr/include/c++/7/bits/predefined_ops.h"
- 301              		.file 13 "/usr/include/c++/7/ext/numeric_traits.h"
- 302              		.file 14 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h"
- 303              		.file 15 "/usr/include/stdlib.h"
- 304              		.file 16 "/usr/include/x86_64-linux-gnu/bits/types.h"
- 305              		.file 17 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"
- 306              		.file 18 "/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h"
- 307              		.file 19 "/usr/include/x86_64-linux-gnu/bits/stdlib.h"
- 308              		.file 20 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
- 309              		.file 21 "Sortable.h"
- 310              		.file 22 "<built-in>"
+ 314              		.loc 2 199 0 discriminator 1
+ 315 ???? C5F81107 		vmovups	XMMWORD PTR [rdi], xmm0	# *items_11(D), tmp103
+ 316              	.LVL22:
+ 317              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 318              		.loc 2 200 0 discriminator 1
+ 319 ???? 48895728 		mov	QWORD PTR 40[rdi], rdx	# MEM[(struct Sortable *)items_11(D) + 40B], __tmp$reference
+ 320              	.LVL23:
+ 321              	.L9:
+ 322              	.LBE39:
+ 323              	.LBE38:
+ 324              	# NetworkSort_Simple.cpp:54: }
+  48:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 2);
+  49:NetworkSort_Simple.cpp ****     // Compare_Swap(0, 3);
+  50:NetworkSort_Simple.cpp ****     // Compare_Swap(2, 3);
+  51:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 4);
+  52:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 2);
+  53:NetworkSort_Simple.cpp ****     // Compare_Swap(3, 4);
+  54:NetworkSort_Simple.cpp **** }...
+ 325              		.loc 1 54 0
+ 326 ???? C3       		ret
+ 327              		.cfi_endproc
+ 328              	.LFE904:
+ 330              	.Letext0:
+ 331              		.file 3 "/usr/include/c++/7/type_traits"
+ 332              		.file 4 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h"
+ 333              		.file 5 "/usr/include/c++/7/bits/stl_pair.h"
+ 334              		.file 6 "/usr/include/c++/7/debug/debug.h"
+ 335              		.file 7 "/usr/include/c++/7/cstdlib"
+ 336              		.file 8 "/usr/include/c++/7/bits/algorithmfwd.h"
+ 337              		.file 9 "/usr/include/c++/7/bits/exception_ptr.h"
+ 338              		.file 10 "/usr/include/c++/7/new"
+ 339              		.file 11 "/usr/include/c++/7/bits/stl_algo.h"
+ 340              		.file 12 "/usr/include/c++/7/bits/predefined_ops.h"
+ 341              		.file 13 "/usr/include/c++/7/ext/numeric_traits.h"
+ 342              		.file 14 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h"
+ 343              		.file 15 "/usr/include/stdlib.h"
+ 344              		.file 16 "/usr/include/x86_64-linux-gnu/bits/types.h"
+ 345              		.file 17 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"
+ 346              		.file 18 "/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h"
+ 347              		.file 19 "/usr/include/x86_64-linux-gnu/bits/stdlib.h"
+ 348              		.file 20 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
+ 349              		.file 21 "Sortable.h"
+ 350              		.file 22 "<built-in>"

@@ -9,6 +9,7 @@
 #include "NetworkSort.h"
 #include "Result.h"
 #include "GitInfo.h"
+#include "EnvironmentInfo.h"
 
 uint64_t GenerateRandomUint64() {
     uint64_t number = rand();
@@ -45,7 +46,7 @@ bool IsSorted(Sortable* items) {
 void PrintArray(std::string descriptor, Sortable* arr) {
     printf("%s: ", descriptor.c_str());
     for (int i = 0; i < ArraySize; i += 1) {
-        printf("%i, ", arr[i].key);
+        printf("%i: " PRIu64 ", ", i, arr[i].key);
     }
     printf("\n");
 }
@@ -56,7 +57,7 @@ void MeasureInsertionSort(Sortable* arr, Performancing* perf) {
     perf->StopMeasuring();
 }
 
-void Measure(Performancing* perf, int numberOfIterations) {
+void Measure(Performancing* perf, int numberOfIterations, EnvironmentInfo info) {
     Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
     
     int numberOfBadSorts = 0;
@@ -81,6 +82,7 @@ void Measure(Performancing* perf, int numberOfIterations) {
     WriteResultLine(
         "Insertion Sort",
         perf,
+        info,
         numberOfIterations,
         numberOfBadSorts
     );
@@ -109,6 +111,7 @@ void Measure(Performancing* perf, int numberOfIterations) {
     WriteResultLine(
         "Network Sort Naive",
         perf,
+        info,
         numberOfIterations,
         numberOfBadSorts
     );
@@ -137,6 +140,7 @@ void Measure(Performancing* perf, int numberOfIterations) {
     WriteResultLine(
         "Network Sort Optimised",
         perf,
+        info,
         numberOfIterations,
         numberOfBadSorts
     );
@@ -147,26 +151,34 @@ void SetOutputFile() {
     struct tm tstruct;
     char filename_buffer[80];
     tstruct = *localtime(&now);
-    strftime(filename_buffer, sizeof(filename_buffer), "../result/output_%Y-%m-%d_%X.txt", &tstruct);
+    strftime(filename_buffer, sizeof(filename_buffer), "../result/output_%Y-%m-%d_%H-%M-%S.txt", &tstruct);
 
-    freopen(filename_buffer, "w", stdout);
+    auto _ = freopen(filename_buffer, "w", stdout);
 }
 
 int main()
 {
     SetOutputFile();
     std::string commit = GetGitCommitOfContainingRepository();
+    std::string hostname = Environment_GetComputerName();
 
+    printf("Commit: %s\n", commit.c_str());
+    printf("Computer Name: %s \n", hostname.c_str());
+
+    EnvironmentInfo info;
+    info.commit = commit;
+    info.hostname = hostname;
+    
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
-    Measure(perf_cpu_cycles, 1000);	
+    Measure(perf_cpu_cycles, 1000, info);	
 	delete perf_cpu_cycles;
 
     auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
-    Measure(perf_cache_misses, 1000);
+    Measure(perf_cache_misses, 1000, info);
     delete perf_cache_misses;
 
     auto perf_branch_misses = new Performancing(PerformanceMetric::BRANCH_MISSES);
-    Measure(perf_branch_misses, 1000);
+    Measure(perf_branch_misses, 1000, info);
     delete perf_branch_misses;
 
 	return 0;

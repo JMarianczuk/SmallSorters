@@ -50,7 +50,7 @@ void Performancing::StopMeasuring() {
 }
 
 uint64_t Performancing::GetValue() {
-	read(file_descriptor, buf, sizeof(buf));
+	auto _ = read(file_descriptor, buf, sizeof(buf));
 
 	for (int i = 0; i < rf->number; i += 1)
 	{

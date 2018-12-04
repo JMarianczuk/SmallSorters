@@ -7,10 +7,12 @@
 #include <stdexcept>
 #include "Enumerations.h"
 #include "Performancing.h"
+#include "EnvironmentInfo.h"
 
 void WriteResultLine(
     std::string sorter, 
     Performancing* perf, 
+    EnvironmentInfo info,
     int numberOfIterations, 
     int numberOfBadSorts);
 

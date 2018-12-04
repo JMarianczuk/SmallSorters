@@ -3,12 +3,8 @@
 
 #include "NetworkSort_Simple.h"
 
-// int main() {
-
-// }
-
 void Compare(Sortable* items, int left, int right) {
-    Sortable tmp = items[left];
+    uint64_t tmp = items[left].key;
     // __asm__(
     //     "cmpq %[left_key],%[right_key]\n"
     //     "cmovbq %[items_left],%[items_right]\n"
@@ -17,6 +13,14 @@ void Compare(Sortable* items, int left, int right) {
     //     : [tmp] "rm"(tmp), [left_key] "x"(items[left].key), [right_key] "xm"(items[right].key)
     //     : "cc"
     // );
+    __asm__(
+        "cmpq %[left_key],%[right_key]\n"
+        "cmovbq %[right_key],%[left_key]\n"
+        "cmovbq %[tmp],%[right_key]\n"
+        : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key)
+        : [tmp] "r"(tmp)
+        : "cc"
+    );
 }
 
 void NetworkSortSimple_Optimised(Sortable* items) {

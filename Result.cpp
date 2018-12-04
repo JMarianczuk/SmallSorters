@@ -4,6 +4,7 @@
 void WriteResultLine(
     std::string sorter, 
     Performancing* perf, 
+    EnvironmentInfo info,
     int numberOfIterations, 
     int numberOfBadSorts) 
 {
@@ -23,5 +24,5 @@ void WriteResultLine(
             throw std::logic_error("Missing Performance Metric!");
     }
 
-    printf("RESULT\tsorter=%s\tmetric=%s\tvalue=%"PRIu64"\tnumber_of_iterations=%i\tnumber_of_bad_sorts=%i\n", sorter.c_str(), metric_name.c_str(), perf->GetValue(), numberOfIterations, numberOfBadSorts); 
+    printf("RESULT\tsorter=%s\tmetric=%s\tvalue=%" PRIu64 "\tcommit_id=%s\tcomputer_name=%s\tnumber_of_iterations=%i\tnumber_of_bad_sorts=%i\n", sorter.c_str(), metric_name.c_str(), perf->GetValue(), info.commit.c_str(), info.hostname.c_str(), numberOfIterations, numberOfBadSorts); 
 }
