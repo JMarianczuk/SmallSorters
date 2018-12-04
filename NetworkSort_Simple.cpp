@@ -3,9 +3,9 @@
 
 #include "NetworkSort_Simple.h"
 
-int main() {
+// int main() {
 
-}
+// }
 
 void Compare(Sortable* items, int left, int right) {
     Sortable tmp = items[left];
