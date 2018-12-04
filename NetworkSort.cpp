@@ -1,7 +1,9 @@
 
 #include "NetworkSort.h"
 
-#define ConditionalSwap(left, right) if (items[left].key > items[right].key) {std::swap(items[left], items[right])}
+#include <algorithm>
+
+#define ConditionalSwap(left, right) if (items[left].key > items[right].key) {std::swap(items[left], items[right]);}
 #define ConditionalSet(condition, left, right) { left = (condition) ? right : left; }
 #define Compare(left, right) { Sortable itemLeft = items[left]; ConditionalSet(items[right].key < itemLeft.key, items[left], items[right]); ConditionalSet(items[right].key < itemLeft.key, items[right], itemLeft);}
 #define CS(l, r) Compare(l, r)
