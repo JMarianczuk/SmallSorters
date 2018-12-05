@@ -20,13 +20,21 @@ uint64_t GenerateRandomUint64() {
     return number;
 }
 
-void GenerateRandomArray(Sortable* arr) {
-    uint64_t pointer = GenerateRandomUint64();
+void GenerateRandomArray(Sortable* arr, uint64_t limit) {
+    uint64_t pointer = GenerateRandomUint64() % limit;
 	for (int i = 0; i < ArraySize; i += 1)
 	{
-		arr[i].key = GenerateRandomUint64();
-        arr[i].reference = pointer + i;
+		arr[i].key = GenerateRandomUint64() % limit;
+        arr[i].reference = (pointer + i) % limit;
 	}
+}
+void GenerateRandomArray(Sortable* arr) {
+    uint64_t max = 1 << 20;
+    max -= 1;
+    max << 1;
+    max += 1;
+    printf("Max uint: %" PRIu64 "\n", max);
+    GenerateRandomArray(arr, max);
 }
 
 void CopyArray(Sortable* source, Sortable* destination) {
@@ -38,6 +46,22 @@ void CopyArray(Sortable* source, Sortable* destination) {
 bool IsSorted(Sortable* items) {
     for (int i = 0; i < ArraySize - 1; i += 1) {
         if (items[i].key > items[i + 1].key) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool IsPermutation(Sortable* arr, Sortable* reference) {
+    for (int i = 0; i < ArraySize; i += 1) {
+        bool isIncluded = false;
+        for (int j = 0; j < ArraySize; j += 1) {
+            if (arr[i].key == reference[j].key) {
+                isIncluded = true;
+                break;
+            }
+        }
+        if (!isIncluded) {
             return false;
         }
     }
@@ -164,19 +188,39 @@ void SetOutputFile() {
 
 void test() {
     Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
-    arr[2].key = 6;
-    arr[2].reference = 15;
-    arr[3].key = 4;
-    arr[3].reference = 27;
-    PrintArray("Before", arr);
-    // SingleSort(arr);
-    // printf("Keys:  index 2: %" PRIu64 ", index 3: %" PRIu64 ".\n", arr[2].key, arr[3].key);
-    // printf("References:  index 2: %" PRIu64 ", index 3: %" PRIu64 ".\n", arr[2].reference, arr[3].reference);
-    PrintArray("After", arr);
+    Sortable* copy = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+    
+    GenerateRandomArray(arr, 100);
+    PrintArray("Source", arr);
+
+    CopyArray(arr, copy);
+    SortTestJumpXchg(copy);
+    if (!IsSorted(copy) || !IsPermutation(copy, arr)) {
+        PrintArray("JumpXchg", copy);
+    }
+
+    CopyArray(arr, copy);
+    SortTestTwoCmovTemp(copy);
+    if (!IsSorted(copy) || !IsPermutation(copy, arr)) {
+        PrintArray("TwoCmovTemp", copy);
+    }
+
+    CopyArray(arr, copy);
+    SortTestThreeCmovVolatileTemp(copy);
+    if (!IsSorted(copy) || !IsPermutation(copy, arr)) {
+        PrintArray("ThreeCmovVolatileTemp", copy);
+    }
+
+    CopyArray(arr, copy);
+    SortTestThreeCmovRegisterTemp(copy);
+    if (!IsSorted(copy) || !IsPermutation(copy, arr)) {
+        PrintArray("ThreeCmovRegisterTemp", copy);
+    }
 }
 
 int main()
 {
+    srand(time(NULL));
     test();
     return 0;
     SetOutputFile();

@@ -3,7 +3,7 @@
 
 #define ConditionalSwap_JumpXchg(left, right) __asm__( \
     "cmpq %[left_key],%[right_key]; \
-    jb %=f; \
+    jae %=f; \
     xchg %[left_key],%[right_key]; \
     %=:;" \
     : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key) \
@@ -11,7 +11,7 @@
     : "cc" \
 );
 
-#define ConditionalSwap_TwoCmovTmp(left, right) { \
+#define ConditionalSwap_TwoCmovTemp(left, right) { \
     uint64_t tmp = items[left].key; \
     __asm__( \
         "cmpq %[left_key],%[right_key]; \

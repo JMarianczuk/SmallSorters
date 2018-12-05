@@ -24,6 +24,38 @@ void Compare_Copied(Sortable* items, int left, int right) {
 
 }
 
+void SortTestJumpXchg(Sortable* items) {
+    for (int outer = 0; outer < ArraySize; outer += 1) {
+        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+            ConditionalSwap_JumpXchg(inner, inner + 1);
+        }
+    }
+}
+
+void SortTestTwoCmovTemp(Sortable* items) {
+    for (int outer = 0; outer < ArraySize; outer += 1) {
+        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+            ConditionalSwap_TwoCmovTemp(inner, inner + 1);
+        }
+    }
+}
+
+void SortTestThreeCmovVolatileTemp(Sortable* items) {
+    for (int outer = 0; outer < ArraySize; outer += 1) {
+        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+            ConditionalSwap_ThreeCmovVolatileTemp(inner, inner + 1);
+        }
+    }
+}
+
+void SortTestThreeCmovRegisterTemp(Sortable* items) {
+    for (int outer = 0; outer < ArraySize; outer += 1) {
+        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+            ConditionalSwap_ThreeCmovRegisterTemp(inner, inner + 1);
+        }
+    }
+}
+
 #define Compare(left, right) ConditionalSwap_JumpXchg(left, right)
 
 void NetworkSort_Generic(Sortable* items) {

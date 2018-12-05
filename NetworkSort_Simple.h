@@ -4,8 +4,11 @@
 
 #include "Sortable.h"
 
-void NetworkSortSimple_Naive(Sortable* items);
-void NetworkSortSimple_Optimised(Sortable* items);
-void SingleSort(Sortable* items);
+void NetworkSortSimple_Generic(Sortable* items);
+
+void SortTestJumpXchg(Sortable* items);
+void SortTestTwoCmovTemp(Sortable* items);
+void SortTestThreeCmovVolatileTemp(Sortable* items);
+void SortTestThreeCmovRegisterTemp(Sortable* items);
 
 #endif
