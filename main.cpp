@@ -169,7 +169,7 @@ void test() {
     arr[3].key = 4;
     arr[3].reference = 27;
     PrintArray("Before", arr);
-    SingleSort(arr);
+    // SingleSort(arr);
     // printf("Keys:  index 2: %" PRIu64 ", index 3: %" PRIu64 ".\n", arr[2].key, arr[3].key);
     // printf("References:  index 2: %" PRIu64 ", index 3: %" PRIu64 ".\n", arr[2].reference, arr[3].reference);
     PrintArray("After", arr);
