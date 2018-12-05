@@ -689,90 +689,93 @@
  397 0170 C3       		ret
  398              		.cfi_endproc
  399              	.LFE905:
- 401              		.section	.text.startup,"ax",@progbits
- 402              		.p2align 4,,10
- 403              		.p2align 3
- 404              		.globl	main
- 406              	main:
- 407              	.LFB906:
+ 401              		.p2align 4,,10
+ 402 0171 0F1F8000 		.p2align 3
+ 402      000000
+ 403              		.globl	_Z10SingleSortP8Sortable
+ 405              	_Z10SingleSortP8Sortable:
+ 406              	.LFB906:
   82:asm_test.cpp  **** 
-  83:asm_test.cpp  **** int main() {}
- 408              		.loc 1 83 0
- 409              		.cfi_startproc
- 410              	# asm_test.cpp:83: int main() {}
- 411              		.loc 1 83 0
- 412 0000 31C0     		xorl	%eax, %eax	#
- 413 0002 C3       		ret
- 414              		.cfi_endproc
- 415              	.LFE906:
- 417              		.text
- 418              		.p2align 4,,10
- 419 0171 0F1F8000 		.p2align 3
- 419      000000
- 420              		.globl	_Z10SingleSortP8Sortable
- 422              	_Z10SingleSortP8Sortable:
- 423              	.LFB907:
-  84:asm_test.cpp  **** 
-  85:asm_test.cpp  **** void SingleSort(Sortable* items) {
- 424              		.loc 1 85 0
- 425              		.cfi_startproc
- 426              	.LVL33:
- 427              	# asm_test.cpp:99:     );
-  86:asm_test.cpp  ****     __asm__(
-  87:asm_test.cpp  ****         "leaq 32(%rdi), %rax\n\t"
-  88:asm_test.cpp  ****         "movups 32(%rdi), %xmm0\n\t"
-  89:asm_test.cpp  ****         "movaps %xmm0, -24(%rsp)\n\t"
-  90:asm_test.cpp  ****         "leaq 48(%rdi), %rdx\n\t"
-  91:asm_test.cpp  ****         "movq 48(%rdi), %rsi\n\t"
-  92:asm_test.cpp  ****         "cmpq -24(%rsp), %rsi\n\t"
-  93:asm_test.cpp  ****         "cmovbq %rdx, %rax\n\t"
-  94:asm_test.cpp  ****         "movups (%rax), %xmm0\n\t"
-  95:asm_test.cpp  ****         "movups %xmm0, 32(%rdi)\n\t"
-  96:asm_test.cpp  ****         "cmovbq %rcx, %rdx\n\t"
-  97:asm_test.cpp  ****         "movups (%rdx), %xmm0\n\t"
-  98:asm_test.cpp  ****         "movups %xmm0, 48(%rdi)"
-  99:asm_test.cpp  ****     );
- 428              		.loc 1 99 0
- 429              	#APP
- 430              	# 99 "asm_test.cpp" 1
- 100 017c 0F104720 	}...
- 431              		leaq 32(%rdi), %rax
- 432              		movups 32(%rdi), %xmm0
- 433              		movaps %xmm0, -24(%rsp)
- 434              		leaq 48(%rdi), %rdx
- 435              		movq 48(%rdi), %rsi
- 436              		cmpq -24(%rsp), %rsi
- 437              		cmovbq %rdx, %rax
- 438              		movups (%rax), %xmm0
- 439              		movups %xmm0, 32(%rdi)
- 440              		cmovbq %rcx, %rdx
- 441              		movups (%rdx), %xmm0
- 442              		movups %xmm0, 48(%rdi)
- 443              	# 0 "" 2
- 444              	# asm_test.cpp:100: }
+  83:asm_test.cpp  **** void SingleSort(Sortable* items) {
+ 407              		.loc 1 83 0
+ 408              		.cfi_startproc
+ 409              	.LVL33:
+ 410              	# asm_test.cpp:98:     );
+  84:asm_test.cpp  ****     __asm__(
+  85:asm_test.cpp  ****         "leaq 32(%rdi), %rax\n\t"
+  86:asm_test.cpp  ****         "movups 32(%rdi), %xmm0\n\t"
+  87:asm_test.cpp  ****         "movaps %xmm0, -24(%rsp)\n\t"
+  88:asm_test.cpp  ****         "leaq 48(%rdi), %rcx\n\t"
+  89:asm_test.cpp  ****         "movq 48(%rdi), %rdx\n\t"
+  90:asm_test.cpp  ****         "cmpq -24(%rsp), %rdx\n\t"
+  91:asm_test.cpp  ****         "cmovbq %rcx, %rax\n\t"
+  92:asm_test.cpp  ****         "movups (%rax), %xmm0\n\t"
+  93:asm_test.cpp  ****         "movups %xmm0, 32(%rdi)\n\t"
+  94:asm_test.cpp  ****         "leaq -24(%rsp), %rax\n\t"
+  95:asm_test.cpp  ****         "cmovaeq %rcx, %rax\n\t"
+  96:asm_test.cpp  ****         "movups (%rax), %xmm0\n\t"
+  97:asm_test.cpp  ****         "movups %xmm0, 48(%rdi)"
+  98:asm_test.cpp  ****     );
+ 411              		.loc 1 98 0
+ 412              	#APP
+ 413              	# 98 "asm_test.cpp" 1
+  99 017c 0F104720 	}
+ 100 0180 0F294424 	int main() {}...
+ 100      E8
+ 414              		leaq 32(%rdi), %rax
+ 415              		movups 32(%rdi), %xmm0
+ 416              		movaps %xmm0, -24(%rsp)
+ 417              		leaq 48(%rdi), %rcx
+ 418              		movq 48(%rdi), %rdx
+ 419              		cmpq -24(%rsp), %rdx
+ 420              		cmovbq %rcx, %rax
+ 421              		movups (%rax), %xmm0
+ 422              		movups %xmm0, 32(%rdi)
+ 423              		leaq -24(%rsp), %rax
+ 424              		cmovaeq %rcx, %rax
+ 425              		movups (%rax), %xmm0
+ 426              		movups %xmm0, 48(%rdi)
+ 427              	# 0 "" 2
+ 428              	# asm_test.cpp:99: }
+  99:asm_test.cpp  **** }
+ 429              		.loc 1 99 0
+ 430              	#NO_APP
+ 431 01ad C3       		ret
+ 432              		.cfi_endproc
+ 433              	.LFE906:
+ 435              		.section	.text.startup,"ax",@progbits
+ 436              		.p2align 4,,10
+ 437              		.p2align 3
+ 438              		.globl	main
+ 440              	main:
+ 441              	.LFB907:
+ 442              		.loc 1 100 0
+ 443              		.cfi_startproc
+ 444              	# asm_test.cpp:100: int main() {}
  445              		.loc 1 100 0
- 446              	#NO_APP
- 447 01a8 C3       		ret
+ 446 0000 31C0     		xorl	%eax, %eax	#
+ 447 0002 C3       		ret
  448              		.cfi_endproc
  449              	.LFE907:
- 451              	.Letext0:
- 452              		.file 3 "/usr/include/c++/7/type_traits"
- 453              		.file 4 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h"
- 454              		.file 5 "/usr/include/c++/7/bits/stl_pair.h"
- 455              		.file 6 "/usr/include/c++/7/debug/debug.h"
- 456              		.file 7 "/usr/include/c++/7/cstdlib"
- 457              		.file 8 "/usr/include/c++/7/bits/algorithmfwd.h"
- 458              		.file 9 "/usr/include/c++/7/bits/exception_ptr.h"
- 459              		.file 10 "/usr/include/c++/7/new"
- 460              		.file 11 "/usr/include/c++/7/bits/stl_algo.h"
- 461              		.file 12 "/usr/include/c++/7/bits/predefined_ops.h"
- 462              		.file 13 "/usr/include/c++/7/ext/numeric_traits.h"
- 463              		.file 14 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h"
- 464              		.file 15 "/usr/include/stdlib.h"
- 465              		.file 16 "/usr/include/x86_64-linux-gnu/bits/types.h"
- 466              		.file 17 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"
- 467              		.file 18 "/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h"
- 468              		.file 19 "/usr/include/x86_64-linux-gnu/bits/stdlib.h"
- 469              		.file 20 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
- 470              		.file 21 "Sortable.h"
- 471              		.file 22 "<built-in>"
+ 451              		.text
+ 452              	.Letext0:
+ 453              		.file 3 "/usr/include/c++/7/type_traits"
+ 454              		.file 4 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h"
+ 455              		.file 5 "/usr/include/c++/7/bits/stl_pair.h"
+ 456              		.file 6 "/usr/include/c++/7/debug/debug.h"
+ 457              		.file 7 "/usr/include/c++/7/cstdlib"
+ 458              		.file 8 "/usr/include/c++/7/bits/algorithmfwd.h"
+ 459              		.file 9 "/usr/include/c++/7/bits/exception_ptr.h"
+ 460              		.file 10 "/usr/include/c++/7/new"
+ 461              		.file 11 "/usr/include/c++/7/bits/stl_algo.h"
+ 462              		.file 12 "/usr/include/c++/7/bits/predefined_ops.h"
+ 463              		.file 13 "/usr/include/c++/7/ext/numeric_traits.h"
+ 464              		.file 14 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h"
+ 465              		.file 15 "/usr/include/stdlib.h"
+ 466              		.file 16 "/usr/include/x86_64-linux-gnu/bits/types.h"
+ 467              		.file 17 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"
+ 468              		.file 18 "/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h"
+ 469              		.file 19 "/usr/include/x86_64-linux-gnu/bits/stdlib.h"
+ 470              		.file 20 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
+ 471              		.file 21 "Sortable.h"
+ 472              		.file 22 "<built-in>"
