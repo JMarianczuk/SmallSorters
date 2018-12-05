@@ -3,7 +3,28 @@
 
 #include "NetworkSort_Simple.h"
 
-void Compare(Sortable* items, int left, int right) {
+void Compare3(Sortable* items, int left, int right) {
+    volatile uint64_t tmp;
+    // __asm__(
+    //     "cmpq %[left_key],%[right_key]\n"
+    //     "cmovbq %[items_left],%[items_right]\n"
+    //     "cmovbq %[items_right],%[tmp]\n"
+    //     : [items_left] "+r"(items[left]), [items_right] "+r"(items[right])
+    //     : [tmp] "rm"(tmp), [left_key] "x"(items[left].key), [right_key] "xm"(items[right].key)
+    //     : "cc"
+    // );
+    __asm__(
+        "cmpq %[left_key],%[right_key]\n"
+        "cmovbq %[left_key],%[tmp]\n"
+        "cmovbq %[right_key],%[left_key]\n"
+        "cmovbq %[tmp],%[right_key]\n"
+        : [left_key] "+r"(items[left].key), [right_key] "+r" (items[right].key), [tmp] "+r"(tmp)
+        :
+        : "cc"
+    );
+}
+
+void Compare2(Sortable* items, int left, int right) {
     uint64_t tmp = items[left].key;
     // __asm__(
     //     "cmpq %[left_key],%[right_key]\n"
@@ -17,8 +38,29 @@ void Compare(Sortable* items, int left, int right) {
         "cmpq %[left_key],%[right_key]\n"
         "cmovbq %[right_key],%[left_key]\n"
         "cmovbq %[tmp],%[right_key]\n"
-        : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key)
-        : [tmp] "r"(tmp)
+        : [left_key] "+r"(items[left].key), [right_key] "+r" (items[right].key), [tmp] "+r"(tmp)
+        :
+        : "cc"
+    );
+}
+
+void Compare(Sortable* items, int left, int right) {
+    volatile uint64_t tmp;
+    // __asm__(
+    //     "cmpq %[left_key],%[right_key]\n"
+    //     "cmovbq %[items_left],%[items_right]\n"
+    //     "cmovbq %[items_right],%[tmp]\n"
+    //     : [items_left] "+r"(items[left]), [items_right] "+r"(items[right])
+    //     : [tmp] "rm"(tmp), [left_key] "x"(items[left].key), [right_key] "xm"(items[right].key)
+    //     : "cc"
+    // );
+    __asm__(
+        "cmpq %[left_key],%[right_key]\n"
+        "jae %=f\n"
+        "xchg %[left_key],%[right_key]\n"
+        "%=:\n"
+        : [left_key] "+r"(items[left].key), [right_key] "+r" (items[right].key), [tmp] "+r"(tmp)
+        :
         : "cc"
     );
 }
@@ -55,9 +97,9 @@ void Compare_Copied(Sortable* items, int left, int right) {
 }
 
 void NetworkSortSimple_Optimised(Sortable* items) {
-    Compare_Brute(items, 0, 1);
-    Compare_Brute(items, 3, 4);
-    Compare_Brute(items, 0, 2);
+    Compare(items, 0, 1);
+    Compare(items, 3, 4);
+    Compare(items, 0, 2);
     // Compare(items, 1, 2);
     // Compare(items, 0, 3);
     // Compare(items, 2, 3);
