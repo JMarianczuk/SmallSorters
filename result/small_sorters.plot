@@ -21,6 +21,10 @@ set title 'Sorting of small lists'
 set xlabel 'Computer'
 set ylabel 'Run Time per 16 elements'
 
-## MULTIPLOT(sorter) SELECT computer_name AS x, MEDIAN(value / number_of_iterations) AS y, MULTIPLOT
-## FROM stats GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+## MULTIPLOT(sorter) SELECT substr(computer_name, 6) AS x, MEDIAN(value / number_of_iterations) AS y, MULTIPLOT
+## FROM stats WHERE metric LIKE "Cpu Cycles" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+plot \
+    'small_sorters-data.txt' index 0 title "sorter=Insertion Sort" with linespoints, \
+    'small_sorters-data.txt' index 1 title "sorter=Network Sort Naive" with linespoints, \
+    'small_sorters-data.txt' index 2 title "sorter=Network Sort Optimised" with linespoints
 
