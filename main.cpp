@@ -7,6 +7,7 @@
 #include "Performancing.h"
 #include "InsertionSort.h"
 #include "NetworkSort.h"
+#include "NetworkSort_Simple.h"
 #include "Result.h"
 #include "GitInfo.h"
 #include "EnvironmentInfo.h"
@@ -44,11 +45,16 @@ bool IsSorted(Sortable* items) {
 }
 
 void PrintArray(std::string descriptor, Sortable* arr) {
-    printf("%s: ", descriptor.c_str());
+    printf("%s: \nKeys: ", descriptor.c_str());
     for (int i = 0; i < ArraySize; i += 1) {
-        printf("%i: " PRIu64 ", ", i, arr[i].key);
+        printf("%i: %" PRIu64 ", ", i, arr[i].key);
+    }
+    printf("\nReferences: ");
+    for (int i = 0; i < ArraySize; i += 1) {
+        printf("%i: %" PRIu64 ", ", i, arr[i].reference);
     }
     printf("\n");
+    
 }
 
 void MeasureInsertionSort(Sortable* arr, Performancing* perf) {
@@ -156,8 +162,23 @@ void SetOutputFile() {
     auto _ = freopen(filename_buffer, "w", stdout);
 }
 
+void test() {
+    Sortable* arr = (Sortable*) malloc(ArraySize * sizeof(Sortable));
+    arr[2].key = 6;
+    arr[2].reference = 15;
+    arr[3].key = 4;
+    arr[3].reference = 27;
+    PrintArray("Before", arr);
+    SingleSort(arr);
+    // printf("Keys:  index 2: %" PRIu64 ", index 3: %" PRIu64 ".\n", arr[2].key, arr[3].key);
+    // printf("References:  index 2: %" PRIu64 ", index 3: %" PRIu64 ".\n", arr[2].reference, arr[3].reference);
+    PrintArray("After", arr);
+}
+
 int main()
 {
+    test();
+    return 0;
     SetOutputFile();
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
@@ -173,9 +194,9 @@ int main()
     Measure(perf_cpu_cycles, 1000, info);	
 	delete perf_cpu_cycles;
 
-    auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
-    Measure(perf_cache_misses, 1000, info);
-    delete perf_cache_misses;
+    // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
+    // Measure(perf_cache_misses, 1000, info);
+    // delete perf_cache_misses;
 
     auto perf_branch_misses = new Performancing(PerformanceMetric::BRANCH_MISSES);
     Measure(perf_branch_misses, 1000, info);

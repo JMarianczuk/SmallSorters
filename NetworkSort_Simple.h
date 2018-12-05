@@ -6,5 +6,6 @@
 
 void NetworkSortSimple_Naive(Sortable* items);
 void NetworkSortSimple_Optimised(Sortable* items);
+void SingleSort(Sortable* items);
 
 #endif

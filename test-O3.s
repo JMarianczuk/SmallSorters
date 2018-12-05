@@ -1,295 +1,388 @@
-   1              		.file	"NetworkSort_Simple.cpp"
-   2              		.intel_syntax noprefix
-   3              	# GNU C++14 (Ubuntu 7.3.0-27ubuntu1~18.04) version 7.3.0 (x86_64-linux-gnu)
-   4              	#	compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl ve
-   5              	
-   6              	# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-   7              	# options passed:  -imultiarch x86_64-linux-gnu -D_GNU_SOURCE
-   8              	# NetworkSort_Simple.cpp -march=bdver2 -mmmx -mno-3dnow -msse -msse2 -msse3
-   9              	# -mssse3 -msse4a -mcx16 -msahf -mno-movbe -maes -mno-sha -mpclmul -mpopcnt
-  10              	# -mabm -mlwp -mfma -mfma4 -mxop -mbmi -mno-sgx -mno-bmi2 -mtbm -mavx
-  11              	# -mno-avx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mno-rdrnd -mf16c
-  12              	# -mno-fsgsbase -mno-rdseed -mprfchw -mno-adx -mfxsr -mxsave -mno-xsaveopt
-  13              	# -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1
-  14              	# -mno-clflushopt -mno-xsavec -mno-xsaves -mno-avx512dq -mno-avx512bw
-  15              	# -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps
-  16              	# -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid
-  17              	# --param l1-cache-size=16 --param l1-cache-line-size=64
-  18              	# --param l2-cache-size=2048 -mtune=bdver2 -masm=intel -g -O3 -fverbose-asm
-  19              	# -fstack-protector-strong -Wformat -Wformat-security
-  20              	# options enabled:  -fPIC -fPIE -faggressive-loop-optimizations
-  21              	# -falign-labels -fasynchronous-unwind-tables -fauto-inc-dec
-  22              	# -fbranch-count-reg -fcaller-saves -fchkp-check-incomplete-type
-  23              	# -fchkp-check-read -fchkp-check-write -fchkp-instrument-calls
-  24              	# -fchkp-narrow-bounds -fchkp-optimize -fchkp-store-bounds
-  25              	# -fchkp-use-static-bounds -fchkp-use-static-const-bounds
-  26              	# -fchkp-use-wrappers -fcode-hoisting -fcombine-stack-adjustments -fcommon
-  27              	# -fcompare-elim -fcprop-registers -fcrossjumping -fcse-follow-jumps
-  28              	# -fdefer-pop -fdelete-null-pointer-checks -fdevirtualize
-  29              	# -fdevirtualize-speculatively -fdwarf2-cfi-asm -fearly-inlining
-  30              	# -feliminate-unused-debug-types -fexceptions -fexpensive-optimizations
-  31              	# -fforward-propagate -ffp-int-builtin-inexact -ffunction-cse -fgcse
-  32              	# -fgcse-after-reload -fgcse-lm -fgnu-runtime -fgnu-unique
-  33              	# -fguess-branch-probability -fhoist-adjacent-loads -fident -fif-conversion
-  34              	# -fif-conversion2 -findirect-inlining -finline -finline-atomics
-  35              	# -finline-functions -finline-functions-called-once
-  36              	# -finline-small-functions -fipa-bit-cp -fipa-cp -fipa-cp-clone -fipa-icf
-  37              	# -fipa-icf-functions -fipa-icf-variables -fipa-profile -fipa-pure-const
-  38              	# -fipa-ra -fipa-reference -fipa-sra -fipa-vrp -fira-hoist-pressure
-  39              	# -fira-share-save-slots -fira-share-spill-slots
-  40              	# -fisolate-erroneous-paths-dereference -fivopts -fkeep-static-consts
-  41              	# -fleading-underscore -flifetime-dse -flra-remat -flto-odr-type-merging
-  42              	# -fmath-errno -fmerge-constants -fmerge-debug-strings
-  43              	# -fmove-loop-invariants -fomit-frame-pointer -foptimize-sibling-calls
-  44              	# -foptimize-strlen -fpartial-inlining -fpeel-loops -fpeephole -fpeephole2
-  45              	# -fplt -fpredictive-commoning -fprefetch-loop-arrays -free
-  46              	# -freg-struct-return -freorder-blocks -freorder-functions
-  47              	# -frerun-cse-after-loop -fsched-critical-path-heuristic
-  48              	# -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
-  49              	# -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
-  50              	# -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
-  51              	# -fschedule-insns2 -fsemantic-interposition -fshow-column -fshrink-wrap
-  52              	# -fshrink-wrap-separate -fsigned-zeros -fsplit-ivs-in-unroller
-  53              	# -fsplit-loops -fsplit-paths -fsplit-wide-types -fssa-backprop
-  54              	# -fssa-phiopt -fstack-protector-strong -fstdarg-opt -fstore-merging
-  55              	# -fstrict-aliasing -fstrict-overflow -fstrict-volatile-bitfields
-  56              	# -fsync-libcalls -fthread-jumps -ftoplevel-reorder -ftrapping-math
-  57              	# -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch
-  58              	# -ftree-coalesce-vars -ftree-copy-prop -ftree-cselim -ftree-dce
-  59              	# -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre
-  60              	# -ftree-loop-distribute-patterns -ftree-loop-if-convert -ftree-loop-im
-  61              	# -ftree-loop-ivcanon -ftree-loop-optimize -ftree-loop-vectorize
-  62              	# -ftree-parallelize-loops= -ftree-partial-pre -ftree-phiprop -ftree-pre
-  63              	# -ftree-pta -ftree-reassoc -ftree-scev-cprop -ftree-sink
-  64              	# -ftree-slp-vectorize -ftree-slsr -ftree-sra -ftree-switch-conversion
-  65              	# -ftree-tail-merge -ftree-ter -ftree-vrp -funit-at-a-time -funswitch-loops
-  66              	# -funwind-tables -fvar-tracking -fvar-tracking-assignments -fverbose-asm
-  67              	# -fzero-initialized-in-bss -m128bit-long-double -m64 -m80387 -mabm -maes
-  68              	# -malign-stringops -mavx -mavx256-split-unaligned-store -mbmi -mcx16
-  69              	# -mf16c -mfancy-math-387 -mfma -mfma4 -mfp-ret-in-387 -mfxsr -mglibc
-  70              	# -mieee-fp -mlong-double-80 -mlwp -mlzcnt -mmmx -mpclmul -mpopcnt
-  71              	# -mprefer-avx128 -mprfchw -mpush-args -mred-zone -msahf -msse -msse2
-  72              	# -msse3 -msse4 -msse4.1 -msse4.2 -msse4a -mssse3 -mstv -mtbm
-  73              	# -mtls-direct-seg-refs -mvzeroupper -mxop -mxsave
-  74              	
-  75              		.text
-  76              	.Ltext0:
-  77              		.section	.text.startup,"ax",@progbits
-  78              		.p2align 4,,10
-  79              		.p2align 3
-  80              		.globl	main
-  82              	main:
-  83              	.LFB901:
-  84              		.file 1 "NetworkSort_Simple.cpp"
-   1:NetworkSort_Simple.cpp **** 
-   2:NetworkSort_Simple.cpp **** #include <algorithm>
-   3:NetworkSort_Simple.cpp **** 
-   4:NetworkSort_Simple.cpp **** #include "NetworkSort_Simple.h"
-   5:NetworkSort_Simple.cpp **** 
-   6:NetworkSort_Simple.cpp **** int main() {
-  85              		.loc 1 6 0
-  86              		.cfi_startproc
-  87              	# NetworkSort_Simple.cpp:8: }
-   7:NetworkSort_Simple.cpp **** 
-   8:NetworkSort_Simple.cpp **** }
-  88              		.loc 1 8 0
-  89 ???? 31C0     		xor	eax, eax	#
-  90 ???? C3       		ret
-  91              		.cfi_endproc
-  92              	.LFE901:
-  94              		.text
-  95              		.p2align 4,,10
-  96              		.p2align 3
-  97              		.globl	_Z7CompareP8Sortableii
-  99              	_Z7CompareP8Sortableii:
- 100              	.LFB902:
-   9:NetworkSort_Simple.cpp **** 
-  10:NetworkSort_Simple.cpp **** void Compare(Sortable* items, int left, int right) {
- 101              		.loc 1 10 0
- 102              		.cfi_startproc
- 103              	.LVL0:
- 104              	# NetworkSort_Simple.cpp:11:     uint64_t tmp = items[left].key;
-  11:NetworkSort_Simple.cpp ****     uint64_t tmp = items[left].key;
- 105              		.loc 1 11 0
- 106 ???? 4863F6   		movsx	rsi, esi	# left, left
- 107              	# NetworkSort_Simple.cpp:24:         : [left_key] "=xm"(items[left].key), [right_key] "=xm"(items[r
-  12:NetworkSort_Simple.cpp ****     // __asm__(
-  13:NetworkSort_Simple.cpp ****     //     "cmpq %[left_key],%[right_key]\n"
-  14:NetworkSort_Simple.cpp ****     //     "cmovbq %[items_left],%[items_right]\n"
-  15:NetworkSort_Simple.cpp ****     //     "cmovbq %[items_right],%[tmp]\n"
-  16:NetworkSort_Simple.cpp ****     //     : [items_left] "+r"(items[left]), [items_right] "+r"(items[right])
-  17:NetworkSort_Simple.cpp ****     //     : [tmp] "rm"(tmp), [left_key] "x"(items[left].key), [right_key] "xm"(items[right].key)
-  18:NetworkSort_Simple.cpp ****     //     : "cc"
-  19:NetworkSort_Simple.cpp ****     // );
-  20:NetworkSort_Simple.cpp ****     __asm__(
-  21:NetworkSort_Simple.cpp ****         "cmpq %[left_key],%[right_key]\n"
-  22:NetworkSort_Simple.cpp ****         "cmovbq %[left_key],%[right_key]\n"
-  23:NetworkSort_Simple.cpp ****         "cmovbq %[right_key],%[tmp]\n"
-  24:NetworkSort_Simple.cpp ****         : [left_key] "=xm"(items[left].key), [right_key] "=xm"(items[right].key)
- 108              		.loc 1 24 0
- 109 ???? 4863D2   		movsx	rdx, edx	# right, right
- 110              	# NetworkSort_Simple.cpp:11:     uint64_t tmp = items[left].key;
-  11:NetworkSort_Simple.cpp ****     uint64_t tmp = items[left].key;
- 111              		.loc 1 11 0
- 112 ???? 48C1E604 		sal	rsi, 4	# tmp98,
- 113              	.LVL1:
- 114              	# NetworkSort_Simple.cpp:27:     );
-  25:NetworkSort_Simple.cpp ****         : [tmp] "r"(tmp)
-  26:NetworkSort_Simple.cpp ****         : "cc"
-  27:NetworkSort_Simple.cpp ****     );
- 115              		.loc 1 27 0
- 116 ???? 48C1E204 		sal	rdx, 4	# tmp102,
- 117              	.LVL2:
- 118              	# NetworkSort_Simple.cpp:11:     uint64_t tmp = items[left].key;
-  11:NetworkSort_Simple.cpp ****     // __asm__(
- 119              		.loc 1 11 0
- 120 ???? 4801FE   		add	rsi, rdi	# _3, items
- 121              	.LVL3:
- 122              	# NetworkSort_Simple.cpp:27:     );
- 123              		.loc 1 27 0
- 124 ???? 488B06   		mov	rax, QWORD PTR [rsi]	# _3->key, _3->key
- 125              	#APP
- 126              	# 27 "NetworkSort_Simple.cpp" 1
-  28              	}
-  29              	
-  30              	void NetworkSortSimple_Optimised(Sortable* items) {
-  31              	    Compare(items, 0, 1);
- 127              		cmpq xmm0,xmm1	# tmp99, tmp100
- 128              	cmovbq xmm0,xmm1	# tmp99, tmp100
- 129              	cmovbq xmm1,rax	# tmp100, _3->key
- 130              	
- 131              	# 0 "" 2
- 132              	#NO_APP
- 133 ???? C5F9D606 		vmovq	QWORD PTR [rsi], xmm0	# _3->key, tmp99
- 134              	.LVL4:
- 135 ???? C5F9D60C 		vmovq	QWORD PTR [rdi+rdx], xmm1	# _6->key, tmp100
- 135      17
- 136              	# NetworkSort_Simple.cpp:28: }
-  28:NetworkSort_Simple.cpp **** 
- 137              		.loc 1 28 0
- 138 ???? C3       		ret
- 139              		.cfi_endproc
- 140              	.LFE902:
- 142 ???? 6690     		.p2align 4,,10
- 143              		.p2align 3
- 144              		.globl	_Z27NetworkSortSimple_OptimisedP8Sortable
- 146              	_Z27NetworkSortSimple_OptimisedP8Sortable:
- 147              	.LFB903:
-  30:NetworkSort_Simple.cpp ****     Compare(items, 0, 1);
- 148              		.loc 1 30 0
- 149              		.cfi_startproc
- 150              	.LVL5:
- 151              	.LBB20:
- 152              	.LBB21:
- 153              	# NetworkSort_Simple.cpp:27:     );
-  27:NetworkSort_Simple.cpp **** }
- 154              		.loc 1 27 0
- 155 ???? 488B07   		mov	rax, QWORD PTR [rdi]	# items_2(D)->key, items_2(D)->key
- 156              	#APP
- 157              	# 27 "NetworkSort_Simple.cpp" 1
- 158              		cmpq QWORD PTR -8[rsp],xmm0	# %sfp, tmp96
- 159              	cmovbq QWORD PTR -8[rsp],xmm0	# %sfp, tmp96
- 160              	cmovbq xmm0,rax	# tmp96, items_2(D)->key
- 161              	
- 162              	# 0 "" 2
- 163              	#NO_APP
- 164              	.LBE21:
- 165              	.LBE20:
- 166              	.LBB23:
- 167              	.LBB24:
- 168 ???? 488B4730 		mov	rax, QWORD PTR 48[rdi]	# MEM[(struct Sortable *)items_2(D) + 48B].key, MEM[(struct Sortable *)
- 169              	.LBE24:
- 170              	.LBE23:
- 171              	.LBB27:
- 172              	.LBB22:
- 173 ???? C5F9D647 		vmovq	QWORD PTR 16[rdi], xmm0	# _9->key, tmp96
- 173      10
- 174              	.LVL6:
- 175              	.LBE22:
- 176              	.LBE27:
- 177              	.LBB28:
- 178              	.LBB25:
- 179              	#APP
- 180              	# 27 "NetworkSort_Simple.cpp" 1
- 181              		cmpq xmm0,xmm1	# tmp98, tmp99
- 182              	cmovbq xmm0,xmm1	# tmp98, tmp99
- 183              	cmovbq xmm1,rax	# tmp99, MEM[(struct Sortable *)items_2(D) + 48B].key
- 184              	
- 185              	# 0 "" 2
- 186              	#NO_APP
- 187              	.LBE25:
- 188              	.LBE28:
- 189              	.LBB29:
- 190              	.LBB30:
- 191 ???? 488B4424 		mov	rax, QWORD PTR -8[rsp]	# tmp95, %sfp
- 191      F8
- 192              	.LVL7:
- 193              	.LBE30:
- 194              	.LBE29:
- 195              	.LBB32:
- 196              	.LBB26:
- 197 ???? C5F9D647 		vmovq	QWORD PTR 48[rdi], xmm0	# _5->key, tmp98
- 197      30
- 198              	.LVL8:
- 199 ???? C5F9D64F 		vmovq	QWORD PTR 64[rdi], xmm1	# _7->key, tmp99
- 199      40
- 200              	.LVL9:
- 201              	.LBE26:
- 202              	.LBE32:
- 203              	.LBB33:
- 204              	.LBB31:
- 205              	#APP
- 206              	# 27 "NetworkSort_Simple.cpp" 1
- 207              		cmpq xmm0,xmm1	# tmp101, tmp102
- 208              	cmovbq xmm0,xmm1	# tmp101, tmp102
- 209              	cmovbq xmm1,rax	# tmp102, tmp95
- 210              	
- 211              	# 0 "" 2
- 212              	#NO_APP
- 213 ???? C5F9D607 		vmovq	QWORD PTR [rdi], xmm0	# items_2(D)->key, tmp101
- 214              	.LVL10:
- 215 ???? C5F9D64F 		vmovq	QWORD PTR 32[rdi], xmm1	# _4->key, tmp102
- 215      20
- 216              	.LVL11:
- 217              	.LBE31:
- 218              	.LBE33:
- 219              	# NetworkSort_Simple.cpp:40: }
-  32:NetworkSort_Simple.cpp ****     Compare(items, 3, 4);
-  33:NetworkSort_Simple.cpp ****     Compare(items, 0, 2);
-  34:NetworkSort_Simple.cpp ****     // Compare(items, 1, 2);
-  35:NetworkSort_Simple.cpp ****     // Compare(items, 0, 3);
-  36:NetworkSort_Simple.cpp ****     // Compare(items, 2, 3);
-  37:NetworkSort_Simple.cpp ****     // Compare(items, 1, 4);
-  38:NetworkSort_Simple.cpp ****     // Compare(items, 1, 2);
-  39:NetworkSort_Simple.cpp ****     // Compare(items, 3, 4);
-  40:NetworkSort_Simple.cpp **** }
- 220              		.loc 1 40 0
- 221 ???? C3       		ret
- 222              		.cfi_endproc
- 223              	.LFE903:
- 225              		.p2align 4,,10
- 226 ???? 0F1F00   		.p2align 3
- 227              		.globl	_Z23NetworkSortSimple_NaiveP8Sortable
- 229              	_Z23NetworkSortSimple_NaiveP8Sortable:
- 230              	.LFB904:
-  41:NetworkSort_Simple.cpp **** 
-  42:NetworkSort_Simple.cpp **** #define Compare_Swap(left, right) if (items[left].key > items[right].key) {std::swap(items[left], i
-  43:NetworkSort_Simple.cpp **** 
-  44:NetworkSort_Simple.cpp **** void NetworkSortSimple_Naive(Sortable* items) {
- 231              		.loc 1 44 0
- 232              		.cfi_startproc
- 233              	.LVL12:
- 234              	# NetworkSort_Simple.cpp:45:     Compare_Swap(0, 1);
-  45:NetworkSort_Simple.cpp ****     Compare_Swap(0, 1);
- 235              		.loc 1 45 0
- 236 ???? 488B07   		mov	rax, QWORD PTR [rdi]	# _1, items_11(D)->key
- 237 ???? 483B4710 		cmp	rax, QWORD PTR 16[rdi]	# _1, MEM[(struct Sortable *)items_11(D) + 16B].key
- 238 ???? 761C     		jbe	.L6	#,
- 239              	.LVL13:
- 240              	.LBB34:
- 241              	.LBB35:
- 242              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 243              		.file 2 "/usr/include/c++/7/bits/move.h"
+   1              		.file	"asm_test.cpp"
+   2              	# GNU C++14 (Ubuntu 7.3.0-27ubuntu1~18.04) version 7.3.0 (x86_64-linux-gnu)
+   3              	#	compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl ve
+   4              	
+   5              	# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+   6              	# options passed:  -imultiarch x86_64-linux-gnu -D_GNU_SOURCE asm_test.cpp
+   7              	# -march=bdver2 -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -msse4a -mcx16
+   8              	# -msahf -mno-movbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mlwp -mfma
+   9              	# -mfma4 -mxop -mbmi -mno-sgx -mno-bmi2 -mtbm -mavx -mno-avx2 -msse4.2
+  10              	# -msse4.1 -mlzcnt -mno-rtm -mno-hle -mno-rdrnd -mf16c -mno-fsgsbase
+  11              	# -mno-rdseed -mprfchw -mno-adx -mfxsr -mxsave -mno-xsaveopt -mno-avx512f
+  12              	# -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1
+  13              	# -mno-clflushopt -mno-xsavec -mno-xsaves -mno-avx512dq -mno-avx512bw
+  14              	# -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps
+  15              	# -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid
+  16              	# --param l1-cache-size=16 --param l1-cache-line-size=64
+  17              	# --param l2-cache-size=2048 -mtune=bdver2 -masm=att -g -O3 -fverbose-asm
+  18              	# -fstack-protector-strong -Wformat -Wformat-security
+  19              	# options enabled:  -fPIC -fPIE -faggressive-loop-optimizations
+  20              	# -falign-labels -fasynchronous-unwind-tables -fauto-inc-dec
+  21              	# -fbranch-count-reg -fcaller-saves -fchkp-check-incomplete-type
+  22              	# -fchkp-check-read -fchkp-check-write -fchkp-instrument-calls
+  23              	# -fchkp-narrow-bounds -fchkp-optimize -fchkp-store-bounds
+  24              	# -fchkp-use-static-bounds -fchkp-use-static-const-bounds
+  25              	# -fchkp-use-wrappers -fcode-hoisting -fcombine-stack-adjustments -fcommon
+  26              	# -fcompare-elim -fcprop-registers -fcrossjumping -fcse-follow-jumps
+  27              	# -fdefer-pop -fdelete-null-pointer-checks -fdevirtualize
+  28              	# -fdevirtualize-speculatively -fdwarf2-cfi-asm -fearly-inlining
+  29              	# -feliminate-unused-debug-types -fexceptions -fexpensive-optimizations
+  30              	# -fforward-propagate -ffp-int-builtin-inexact -ffunction-cse -fgcse
+  31              	# -fgcse-after-reload -fgcse-lm -fgnu-runtime -fgnu-unique
+  32              	# -fguess-branch-probability -fhoist-adjacent-loads -fident -fif-conversion
+  33              	# -fif-conversion2 -findirect-inlining -finline -finline-atomics
+  34              	# -finline-functions -finline-functions-called-once
+  35              	# -finline-small-functions -fipa-bit-cp -fipa-cp -fipa-cp-clone -fipa-icf
+  36              	# -fipa-icf-functions -fipa-icf-variables -fipa-profile -fipa-pure-const
+  37              	# -fipa-ra -fipa-reference -fipa-sra -fipa-vrp -fira-hoist-pressure
+  38              	# -fira-share-save-slots -fira-share-spill-slots
+  39              	# -fisolate-erroneous-paths-dereference -fivopts -fkeep-static-consts
+  40              	# -fleading-underscore -flifetime-dse -flra-remat -flto-odr-type-merging
+  41              	# -fmath-errno -fmerge-constants -fmerge-debug-strings
+  42              	# -fmove-loop-invariants -fomit-frame-pointer -foptimize-sibling-calls
+  43              	# -foptimize-strlen -fpartial-inlining -fpeel-loops -fpeephole -fpeephole2
+  44              	# -fplt -fpredictive-commoning -fprefetch-loop-arrays -free
+  45              	# -freg-struct-return -freorder-blocks -freorder-functions
+  46              	# -frerun-cse-after-loop -fsched-critical-path-heuristic
+  47              	# -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+  48              	# -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+  49              	# -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+  50              	# -fschedule-insns2 -fsemantic-interposition -fshow-column -fshrink-wrap
+  51              	# -fshrink-wrap-separate -fsigned-zeros -fsplit-ivs-in-unroller
+  52              	# -fsplit-loops -fsplit-paths -fsplit-wide-types -fssa-backprop
+  53              	# -fssa-phiopt -fstack-protector-strong -fstdarg-opt -fstore-merging
+  54              	# -fstrict-aliasing -fstrict-overflow -fstrict-volatile-bitfields
+  55              	# -fsync-libcalls -fthread-jumps -ftoplevel-reorder -ftrapping-math
+  56              	# -ftree-bit-ccp -ftree-builtin-call-dce -ftree-ccp -ftree-ch
+  57              	# -ftree-coalesce-vars -ftree-copy-prop -ftree-cselim -ftree-dce
+  58              	# -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre
+  59              	# -ftree-loop-distribute-patterns -ftree-loop-if-convert -ftree-loop-im
+  60              	# -ftree-loop-ivcanon -ftree-loop-optimize -ftree-loop-vectorize
+  61              	# -ftree-parallelize-loops= -ftree-partial-pre -ftree-phiprop -ftree-pre
+  62              	# -ftree-pta -ftree-reassoc -ftree-scev-cprop -ftree-sink
+  63              	# -ftree-slp-vectorize -ftree-slsr -ftree-sra -ftree-switch-conversion
+  64              	# -ftree-tail-merge -ftree-ter -ftree-vrp -funit-at-a-time -funswitch-loops
+  65              	# -funwind-tables -fvar-tracking -fvar-tracking-assignments -fverbose-asm
+  66              	# -fzero-initialized-in-bss -m128bit-long-double -m64 -m80387 -mabm -maes
+  67              	# -malign-stringops -mavx -mavx256-split-unaligned-store -mbmi -mcx16
+  68              	# -mf16c -mfancy-math-387 -mfma -mfma4 -mfp-ret-in-387 -mfxsr -mglibc
+  69              	# -mieee-fp -mlong-double-80 -mlwp -mlzcnt -mmmx -mpclmul -mpopcnt
+  70              	# -mprefer-avx128 -mprfchw -mpush-args -mred-zone -msahf -msse -msse2
+  71              	# -msse3 -msse4 -msse4.1 -msse4.2 -msse4a -mssse3 -mstv -mtbm
+  72              	# -mtls-direct-seg-refs -mvzeroupper -mxop -mxsave
+  73              	
+  74              		.text
+  75              	.Ltext0:
+  76              		.p2align 4,,10
+  77              		.p2align 3
+  78              		.globl	_Z7CompareP8Sortableii
+  80              	_Z7CompareP8Sortableii:
+  81              	.LFB901:
+  82              		.file 1 "asm_test.cpp"
+   1:asm_test.cpp  **** 
+   2:asm_test.cpp  **** #include <algorithm>
+   3:asm_test.cpp  **** 
+   4:asm_test.cpp  **** #include "NetworkSort_Simple.h"
+   5:asm_test.cpp  **** 
+   6:asm_test.cpp  **** void Compare(Sortable* items, int left, int right) {
+  83              		.loc 1 6 0
+  84              		.cfi_startproc
+  85              	.LVL0:
+  86              	# asm_test.cpp:7:     uint64_t tmp = items[left].key;
+   7:asm_test.cpp  ****     uint64_t tmp = items[left].key;
+  87              		.loc 1 7 0
+  88 0000 4863F6   		movslq	%esi, %rsi	# left, left
+  89              	# asm_test.cpp:20:         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key)
+   8:asm_test.cpp  ****     // __asm__(
+   9:asm_test.cpp  ****     //     "cmpq %[left_key],%[right_key]\n"
+  10:asm_test.cpp  ****     //     "cmovbq %[items_left],%[items_right]\n"
+  11:asm_test.cpp  ****     //     "cmovbq %[items_right],%[tmp]\n"
+  12:asm_test.cpp  ****     //     : [items_left] "+r"(items[left]), [items_right] "+r"(items[right])
+  13:asm_test.cpp  ****     //     : [tmp] "rm"(tmp), [left_key] "x"(items[left].key), [right_key] "xm"(items[right].key)
+  14:asm_test.cpp  ****     //     : "cc"
+  15:asm_test.cpp  ****     // );
+  16:asm_test.cpp  ****     __asm__(
+  17:asm_test.cpp  ****         "cmpq %[left_key],%[right_key]\n"
+  18:asm_test.cpp  ****         "cmovbq %[right_key],%[left_key]\n"
+  19:asm_test.cpp  ****         "cmovbq %[tmp],%[right_key]\n"
+  20:asm_test.cpp  ****         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key)
+  90              		.loc 1 20 0
+  91 0003 4863D2   		movslq	%edx, %rdx	# right, right
+  92 0006 48C1E204 		salq	$4, %rdx	#, tmp101
+  93              	.LVL1:
+  94              	# asm_test.cpp:7:     uint64_t tmp = items[left].key;
+   7:asm_test.cpp  ****     uint64_t tmp = items[left].key;
+  95              		.loc 1 7 0
+  96 000a 48C1E604 		salq	$4, %rsi	#, tmp99
+  97              	.LVL2:
+  98 000e 4801FE   		addq	%rdi, %rsi	# items, _3
+  99              	.LVL3:
+ 100              	# asm_test.cpp:20:         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key)
+ 101              		.loc 1 20 0
+ 102 0011 4801D7   		addq	%rdx, %rdi	# tmp101, _6
+ 103              	.LVL4:
+ 104              	# asm_test.cpp:23:     );
+  21:asm_test.cpp  ****         : [tmp] "r"(tmp)
+  22:asm_test.cpp  ****         : "cc"
+  23:asm_test.cpp  ****     );
+ 105              		.loc 1 23 0
+ 106 0014 488B06   		movq	(%rsi), %rax	# _3->key, tmp102
+ 107 0017 488B17   		movq	(%rdi), %rdx	# _6->key, tmp103
+ 108              	#APP
+ 109              	# 23 "asm_test.cpp" 1
+  24 001d 480F42C2 	}
+  25 0021 480F42D0 	
+  26              	void Compare_Brute(Sortable* items, int left, int right) {
+  27              	    uint64_t tmpKey = items[left].key;
+ 110              		cmpq %rax,%rdx	# tmp102, tmp103
+ 111              	cmovbq %rdx,%rax	# tmp103, tmp102
+ 112              	cmovbq %rax,%rdx	# tmp102, tmp103
+ 113              	
+ 114              	# 0 "" 2
+ 115              	#NO_APP
+ 116 0025 488906   		movq	%rax, (%rsi)	# tmp102, _3->key
+ 117              	.LVL5:
+ 118 0028 488917   		movq	%rdx, (%rdi)	# tmp103, _6->key
+ 119              	# asm_test.cpp:24: }
+  24:asm_test.cpp  **** 
+ 120              		.loc 1 24 0
+ 121 002b C3       		ret
+ 122              		.cfi_endproc
+ 123              	.LFE901:
+ 125 002c 0F1F4000 		.p2align 4,,10
+ 126              		.p2align 3
+ 127              		.globl	_Z13Compare_BruteP8Sortableii
+ 129              	_Z13Compare_BruteP8Sortableii:
+ 130              	.LFB902:
+  26:asm_test.cpp  ****     uint64_t tmpKey = items[left].key;
+ 131              		.loc 1 26 0
+ 132              		.cfi_startproc
+ 133              	.LVL6:
+ 134              	# asm_test.cpp:27:     uint64_t tmpKey = items[left].key;
+ 135              		.loc 1 27 0
+ 136 0030 4863F6   		movslq	%esi, %rsi	# left, left
+ 137              	# asm_test.cpp:36:         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key), 
+  28:asm_test.cpp  ****     uint64_t tmpReference = items[left].reference;
+  29:asm_test.cpp  **** 
+  30:asm_test.cpp  ****     __asm__(
+  31:asm_test.cpp  ****         "cmpq %[left_key],%[right_key]\n"
+  32:asm_test.cpp  ****         "cmovbq %[right_key],%[left_key]\n"
+  33:asm_test.cpp  ****         "cmovbq %[right_reference],%[left_reference]\n"
+  34:asm_test.cpp  ****         "cmovbq %[tmp_key],%[right_key]\n"
+  35:asm_test.cpp  ****         "cmovbq %[tmp_reference],%[right_reference]\n"
+  36:asm_test.cpp  ****         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key), [left_reference] "+
+ 138              		.loc 1 36 0
+ 139 0033 4863D2   		movslq	%edx, %rdx	# right, right
+ 140 0036 48C1E204 		salq	$4, %rdx	#, tmp103
+ 141              	.LVL7:
+ 142              	# asm_test.cpp:27:     uint64_t tmpKey = items[left].key;
+  27:asm_test.cpp  ****     uint64_t tmpReference = items[left].reference;
+ 143              		.loc 1 27 0
+ 144 003a 48C1E604 		salq	$4, %rsi	#, tmp101
+ 145              	.LVL8:
+ 146 003e 4801FE   		addq	%rdi, %rsi	# items, _3
+ 147              	.LVL9:
+ 148              	# asm_test.cpp:36:         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key), 
+ 149              		.loc 1 36 0
+ 150 0041 4801D7   		addq	%rdx, %rdi	# tmp103, _6
+ 151              	.LVL10:
+ 152              	# asm_test.cpp:39:     );
+  37:asm_test.cpp  ****         : [tmp_key] "rm"(tmpKey), [tmp_reference] "rm"(tmpReference)
+  38:asm_test.cpp  ****         : "cc"
+  39:asm_test.cpp  ****     );
+ 153              		.loc 1 39 0
+ 154 0044 4C8B07   		movq	(%rdi), %r8	# _6->key, tmp105
+ 155 0047 488B16   		movq	(%rsi), %rdx	# _3->key, tmp104
+ 156 004a 488B4608 		movq	8(%rsi), %rax	# _3->reference, tmp106
+ 157 004e 488B4F08 		movq	8(%rdi), %rcx	# _6->reference, tmp107
+ 158              	#APP
+ 159              	# 39 "asm_test.cpp" 1
+  40 0055 490F42D0 	}
+  41 0059 480F42C1 	
+  42 005d 4C0F42C2 	// #define Compare_Brute(left, right) __asm__( \
+  43 0061 480F42C8 	//     "cmpq %[left_key],%[right_key]\n" \
+  44              	//     "cmovbq %[right_key],%[left_key]\n" \
+  45              	//     "cmovbq %[right_reference],%[left_reference]\n" \
+ 160              		cmpq %rdx,%r8	# tmp104, tmp105
+ 161              	cmovbq %r8,%rdx	# tmp105, tmp104
+ 162              	cmovbq %rcx,%rax	# tmp107, tmp106
+ 163              	cmovbq %rdx,%r8	# tmp104, tmp105
+ 164              	cmovbq %rax,%rcx	# tmp106, tmp107
+ 165              	
+ 166              	# 0 "" 2
+ 167              	#NO_APP
+ 168 0065 488916   		movq	%rdx, (%rsi)	# tmp104, _3->key
+ 169              	.LVL11:
+ 170 0068 4C8907   		movq	%r8, (%rdi)	# tmp105, _6->key
+ 171 006b 48894608 		movq	%rax, 8(%rsi)	# tmp106, _3->reference
+ 172              	.LVL12:
+ 173 006f 48894F08 		movq	%rcx, 8(%rdi)	# tmp107, _6->reference
+ 174              	# asm_test.cpp:40: }
+  40:asm_test.cpp  **** 
+ 175              		.loc 1 40 0
+ 176 0073 C3       		ret
+ 177              		.cfi_endproc
+ 178              	.LFE902:
+ 180              		.p2align 4,,10
+ 181 0074 0F1F4000 		.p2align 3
+ 182              		.globl	_Z14Compare_CopiedP8Sortableii
+ 184              	_Z14Compare_CopiedP8Sortableii:
+ 185              	.LFB903:
+  46:asm_test.cpp  **** //     "cmovbq %[tmp_key],%[right_key]\n" \
+  47:asm_test.cpp  **** //     "cmovbq %[tmp_reference],%[right_reference]\n" \
+  48:asm_test.cpp  **** //     : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key), [left_reference] "+r
+  49:asm_test.cpp  **** //     : [tmp_key] "rm"(tmpKey), [tmp_reference] "rm"(tmpReference) \
+  50:asm_test.cpp  **** //     : "cc" \
+  51:asm_test.cpp  **** // );
+  52:asm_test.cpp  **** 
+  53:asm_test.cpp  **** void Compare_Copied(Sortable* items, int left, int right) {
+ 186              		.loc 1 53 0
+ 187              		.cfi_startproc
+ 188              	.LVL13:
+ 189              	# asm_test.cpp:55: }
+  54:asm_test.cpp  **** 
+  55:asm_test.cpp  **** }
+ 190              		.loc 1 55 0
+ 191 0078 C3       		ret
+ 192              		.cfi_endproc
+ 193              	.LFE903:
+ 195 0079 0F1F8000 		.p2align 4,,10
+ 195      000000
+ 196              		.p2align 3
+ 197              		.globl	_Z27NetworkSortSimple_OptimisedP8Sortable
+ 199              	_Z27NetworkSortSimple_OptimisedP8Sortable:
+ 200              	.LFB904:
+  56:asm_test.cpp  **** 
+  57:asm_test.cpp  **** void NetworkSortSimple_Optimised(Sortable* items) {
+ 201              		.loc 1 57 0
+ 202              		.cfi_startproc
+ 203              	.LVL14:
+ 204              	.LBB20:
+ 205              	.LBB21:
+ 206              	# asm_test.cpp:39:     );
+  39:asm_test.cpp  **** }
+ 207              		.loc 1 39 0
+ 208 0080 488B17   		movq	(%rdi), %rdx	# items_2(D)->key, tmp104
+ 209 0083 488B7710 		movq	16(%rdi), %rsi	# MEM[(struct Sortable *)items_2(D) + 16B].key, tmp105
+ 210 0087 488B4708 		movq	8(%rdi), %rax	# items_2(D)->reference, tmp106
+ 211 008b 488B4F18 		movq	24(%rdi), %rcx	# MEM[(struct Sortable *)items_2(D) + 16B].reference, tmp107
+ 212              	.LBE21:
+ 213              	.LBE20:
+ 214              	.LBB23:
+ 215              	.LBB24:
+ 216 008f 4C8B4F40 		movq	64(%rdi), %r9	# MEM[(struct Sortable *)items_2(D) + 64B].key, tmp111
+ 217 0093 4C8B4748 		movq	72(%rdi), %r8	# MEM[(struct Sortable *)items_2(D) + 64B].reference, tmp113
+ 218              	.LBE24:
+ 219              	.LBE23:
+ 220              	.LBB27:
+ 221              	.LBB22:
+ 222              	#APP
+ 223              	# 39 "asm_test.cpp" 1
+ 224              		cmpq %rdx,%rsi	# tmp104, tmp105
+ 225              	cmovbq %rsi,%rdx	# tmp105, tmp104
+ 226              	cmovbq %rcx,%rax	# tmp107, tmp106
+ 227              	cmovbq %rdx,%rsi	# tmp104, tmp105
+ 228              	cmovbq %rax,%rcx	# tmp106, tmp107
+ 229              	
+ 230              	# 0 "" 2
+ 231              	#NO_APP
+ 232 00aa 48897710 		movq	%rsi, 16(%rdi)	# tmp105, _16->key
+ 233 00ae 48894F18 		movq	%rcx, 24(%rdi)	# tmp107, _16->reference
+ 234              	.LVL15:
+ 235              	.LBE22:
+ 236              	.LBE27:
+ 237              	.LBB28:
+ 238              	.LBB25:
+ 239 00b2 488B7730 		movq	48(%rdi), %rsi	# MEM[(struct Sortable *)items_2(D) + 48B].key, tmp110
+ 240 00b6 488B4F38 		movq	56(%rdi), %rcx	# MEM[(struct Sortable *)items_2(D) + 48B].reference, tmp112
+ 241              	#APP
+ 242              	# 39 "asm_test.cpp" 1
+ 243              		cmpq %rsi,%r9	# tmp110, tmp111
+ 244              	cmovbq %r9,%rsi	# tmp111, tmp110
+ 245              	cmovbq %r8,%rcx	# tmp113, tmp112
+ 246              	cmovbq %rsi,%r9	# tmp110, tmp111
+ 247              	cmovbq %rcx,%r8	# tmp112, tmp113
+ 248              	
+ 249              	# 0 "" 2
+ 250              	#NO_APP
+ 251 00cd 48897730 		movq	%rsi, 48(%rdi)	# tmp110, _8->key
+ 252              	.LVL16:
+ 253 00d1 48894F38 		movq	%rcx, 56(%rdi)	# tmp112, _8->reference
+ 254              	.LVL17:
+ 255              	.LBE25:
+ 256              	.LBE28:
+ 257              	.LBB29:
+ 258              	.LBB30:
+ 259 00d5 488B7720 		movq	32(%rdi), %rsi	# MEM[(struct Sortable *)items_2(D) + 32B].key, tmp117
+ 260 00d9 488B4F28 		movq	40(%rdi), %rcx	# MEM[(struct Sortable *)items_2(D) + 32B].reference, tmp119
+ 261              	.LBE30:
+ 262              	.LBE29:
+ 263              	.LBB32:
+ 264              	.LBB26:
+ 265 00dd 4C894F40 		movq	%r9, 64(%rdi)	# tmp111, _11->key
+ 266 00e1 4C894748 		movq	%r8, 72(%rdi)	# tmp113, _11->reference
+ 267              	.LVL18:
+ 268              	.LBE26:
+ 269              	.LBE32:
+ 270              	.LBB33:
+ 271              	.LBB31:
+ 272              	#APP
+ 273              	# 39 "asm_test.cpp" 1
+ 274              		cmpq %rdx,%rsi	# tmp116, tmp117
+ 275              	cmovbq %rsi,%rdx	# tmp117, tmp116
+ 276              	cmovbq %rcx,%rax	# tmp119, tmp118
+ 277              	cmovbq %rdx,%rsi	# tmp116, tmp117
+ 278              	cmovbq %rax,%rcx	# tmp118, tmp119
+ 279              	
+ 280              	# 0 "" 2
+ 281              	.LVL19:
+ 282              	#NO_APP
+ 283 00f8 488917   		movq	%rdx, (%rdi)	# tmp116, items_2(D)->key
+ 284 00fb 48897720 		movq	%rsi, 32(%rdi)	# tmp117, _5->key
+ 285 00ff 48894708 		movq	%rax, 8(%rdi)	# tmp118, items_2(D)->reference
+ 286 0103 48894F28 		movq	%rcx, 40(%rdi)	# tmp119, _5->reference
+ 287              	.LVL20:
+ 288              	.LBE31:
+ 289              	.LBE33:
+ 290              	# asm_test.cpp:67: }
+  58:asm_test.cpp  ****     Compare_Brute(items, 0, 1);
+  59:asm_test.cpp  ****     Compare_Brute(items, 3, 4);
+  60:asm_test.cpp  ****     Compare_Brute(items, 0, 2);
+  61:asm_test.cpp  ****     // Compare(items, 1, 2);
+  62:asm_test.cpp  ****     // Compare(items, 0, 3);
+  63:asm_test.cpp  ****     // Compare(items, 2, 3);
+  64:asm_test.cpp  ****     // Compare(items, 1, 4);
+  65:asm_test.cpp  ****     // Compare(items, 1, 2);
+  66:asm_test.cpp  ****     // Compare(items, 3, 4);
+  67:asm_test.cpp  **** }
+ 291              		.loc 1 67 0
+ 292 0107 C3       		ret
+ 293              		.cfi_endproc
+ 294              	.LFE904:
+ 296 0108 0F1F8400 		.p2align 4,,10
+ 296      00000000 
+ 297              		.p2align 3
+ 298              		.globl	_Z23NetworkSortSimple_NaiveP8Sortable
+ 300              	_Z23NetworkSortSimple_NaiveP8Sortable:
+ 301              	.LFB905:
+  68:asm_test.cpp  **** 
+  69:asm_test.cpp  **** #define Compare_Swap(left, right) if (items[left].key > items[right].key) {std::swap(items[left], i
+  70:asm_test.cpp  **** 
+  71:asm_test.cpp  **** void NetworkSortSimple_Naive(Sortable* items) {
+ 302              		.loc 1 71 0
+ 303              		.cfi_startproc
+ 304              	.LVL21:
+ 305              	# asm_test.cpp:72:     Compare_Swap(0, 1);
+  72:asm_test.cpp  ****     Compare_Swap(0, 1);
+ 306              		.loc 1 72 0
+ 307 0110 488B07   		movq	(%rdi), %rax	# items_11(D)->key, _1
+ 308 0113 483B4710 		cmpq	16(%rdi), %rax	# MEM[(struct Sortable *)items_11(D) + 16B].key, _1
+ 309 0117 761C     		jbe	.L7	#,
+ 310              	.LVL22:
+ 311              	.LBB34:
+ 312              	.LBB35:
+ 313              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 314              		.file 2 "/usr/include/c++/7/bits/move.h"
    1:/usr/include/c++/7/bits/move.h **** // Move, forward and identity for C++11 + swap -*- C++ -*-
    2:/usr/include/c++/7/bits/move.h **** 
    3:/usr/include/c++/7/bits/move.h **** // Copyright (C) 2007-2017 Free Software Foundation, Inc.
@@ -489,131 +582,197 @@
  197:/usr/include/c++/7/bits/move.h **** 
  198:/usr/include/c++/7/bits/move.h ****       _Tp __tmp = _GLIBCXX_MOVE(__a);
  199:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 244              		.loc 2 199 0 discriminator 1
- 245 ???? C5F8104F 		vmovups	xmm1, XMMWORD PTR 16[rdi]	# tmp101, MEM[(struct Sortable &)items_11(D) + 16]
- 245      10
- 246              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
+ 315              		.loc 2 199 0 discriminator 1
+ 316 0119 C5F8104F 		vmovups	16(%rdi), %xmm1	# MEM[(struct Sortable &)items_11(D) + 16], tmp101
+ 316      10
+ 317              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
  198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 247              		.loc 2 198 0 discriminator 1
- 248 ???? 488B4F08 		mov	rcx, QWORD PTR 8[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_11(D) + 8]
- 249              	.LVL14:
- 250              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 251              		.loc 2 199 0 discriminator 1
- 252 ???? 488B5710 		mov	rdx, QWORD PTR 16[rdi]	# tmp99, MEM[(struct Sortable &)items_11(D) + 16]
- 253              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 200:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 254              		.loc 2 200 0 discriminator 1
- 255 ???? 48894710 		mov	QWORD PTR 16[rdi], rax	# MEM[(struct Sortable *)items_11(D) + 16B], _1
- 256              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 257              		.loc 2 199 0 discriminator 1
- 258 ???? C5F8110F 		vmovups	XMMWORD PTR [rdi], xmm1	# *items_11(D), tmp101
- 259              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 260              		.loc 2 200 0 discriminator 1
- 261 ???? 48894F18 		mov	QWORD PTR 24[rdi], rcx	# MEM[(struct Sortable *)items_11(D) + 24B], __tmp$reference
- 262              	.LVL15:
- 263 ???? 4889D0   		mov	rax, rdx	# _1, tmp99
- 264              	.LVL16:
- 265              	.L6:
- 266              	.LBE35:
- 267              	.LBE34:
- 268              	# NetworkSort_Simple.cpp:46:     Compare_Swap(3, 4);
-  46:NetworkSort_Simple.cpp ****     Compare_Swap(3, 4);
- 269              		.loc 1 46 0
- 270 ???? 488B5730 		mov	rdx, QWORD PTR 48[rdi]	# _3, MEM[(struct Sortable *)items_11(D) + 48B].key
- 271 ???? 483B5740 		cmp	rdx, QWORD PTR 64[rdi]	# _3, MEM[(struct Sortable *)items_11(D) + 64B].key
- 272 ???? 7616     		jbe	.L7	#,
- 273              	.LVL17:
- 274              	.LBB36:
- 275              	.LBB37:
- 276              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 277              		.loc 2 199 0 discriminator 1
- 278 ???? C5F81057 		vmovups	xmm2, XMMWORD PTR 64[rdi]	# tmp102, MEM[(struct Sortable &)items_11(D) + 64]
- 278      40
- 279              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
- 198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 280              		.loc 2 198 0 discriminator 1
- 281 ???? 488B4F38 		mov	rcx, QWORD PTR 56[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_11(D) + 56]
- 282              	.LVL18:
- 283              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 284              		.loc 2 200 0 discriminator 1
- 285 ???? 48895740 		mov	QWORD PTR 64[rdi], rdx	# MEM[(struct Sortable *)items_11(D) + 64B], _3
- 286              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 287              		.loc 2 199 0 discriminator 1
- 288 ???? C5F81157 		vmovups	XMMWORD PTR 48[rdi], xmm2	# MEM[(struct Sortable *)items_11(D) + 48B], tmp102
- 288      30
- 289              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 290              		.loc 2 200 0 discriminator 1
- 291 ???? 48894F48 		mov	QWORD PTR 72[rdi], rcx	# MEM[(struct Sortable *)items_11(D) + 72B], __tmp$reference
- 292              	.LVL19:
- 293              	.L7:
- 294              	.LBE37:
- 295              	.LBE36:
- 296              	# NetworkSort_Simple.cpp:47:     Compare_Swap(0, 2);
-  47:NetworkSort_Simple.cpp ****     Compare_Swap(0, 2);
- 297              		.loc 1 47 0
- 298 ???? 48394720 		cmp	QWORD PTR 32[rdi], rax	# MEM[(struct Sortable *)items_11(D) + 32B].key, _1
- 299 ???? 7315     		jnb	.L9	#,
- 300              	.LVL20:
- 301              	.LBB38:
- 302              	.LBB39:
- 303              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 304              		.loc 2 199 0 discriminator 1
- 305 ???? C5F81047 		vmovups	xmm0, XMMWORD PTR 32[rdi]	# tmp103, MEM[(struct Sortable &)items_11(D) + 32]
- 305      20
- 306              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
- 198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
- 307              		.loc 2 198 0 discriminator 1
- 308 ???? 488B5708 		mov	rdx, QWORD PTR 8[rdi]	# __tmp$reference, MEM[(struct Sortable &)items_11(D) + 8]
- 309              	.LVL21:
- 310              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 311              		.loc 2 200 0 discriminator 1
- 312 ???? 48894720 		mov	QWORD PTR 32[rdi], rax	# MEM[(struct Sortable *)items_11(D) + 32B], _1
- 313              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
- 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
- 314              		.loc 2 199 0 discriminator 1
- 315 ???? C5F81107 		vmovups	XMMWORD PTR [rdi], xmm0	# *items_11(D), tmp103
- 316              	.LVL22:
- 317              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
- 318              		.loc 2 200 0 discriminator 1
- 319 ???? 48895728 		mov	QWORD PTR 40[rdi], rdx	# MEM[(struct Sortable *)items_11(D) + 40B], __tmp$reference
+ 318              		.loc 2 198 0 discriminator 1
+ 319 011e 488B4F08 		movq	8(%rdi), %rcx	# MEM[(struct Sortable &)items_11(D) + 8], __tmp$reference
  320              	.LVL23:
- 321              	.L9:
- 322              	.LBE39:
- 323              	.LBE38:
- 324              	# NetworkSort_Simple.cpp:54: }
-  48:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 2);
-  49:NetworkSort_Simple.cpp ****     // Compare_Swap(0, 3);
-  50:NetworkSort_Simple.cpp ****     // Compare_Swap(2, 3);
-  51:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 4);
-  52:NetworkSort_Simple.cpp ****     // Compare_Swap(1, 2);
-  53:NetworkSort_Simple.cpp ****     // Compare_Swap(3, 4);
-  54:NetworkSort_Simple.cpp **** }...
- 325              		.loc 1 54 0
- 326 ???? C3       		ret
- 327              		.cfi_endproc
- 328              	.LFE904:
- 330              	.Letext0:
- 331              		.file 3 "/usr/include/c++/7/type_traits"
- 332              		.file 4 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h"
- 333              		.file 5 "/usr/include/c++/7/bits/stl_pair.h"
- 334              		.file 6 "/usr/include/c++/7/debug/debug.h"
- 335              		.file 7 "/usr/include/c++/7/cstdlib"
- 336              		.file 8 "/usr/include/c++/7/bits/algorithmfwd.h"
- 337              		.file 9 "/usr/include/c++/7/bits/exception_ptr.h"
- 338              		.file 10 "/usr/include/c++/7/new"
- 339              		.file 11 "/usr/include/c++/7/bits/stl_algo.h"
- 340              		.file 12 "/usr/include/c++/7/bits/predefined_ops.h"
- 341              		.file 13 "/usr/include/c++/7/ext/numeric_traits.h"
- 342              		.file 14 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h"
- 343              		.file 15 "/usr/include/stdlib.h"
- 344              		.file 16 "/usr/include/x86_64-linux-gnu/bits/types.h"
- 345              		.file 17 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"
- 346              		.file 18 "/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h"
- 347              		.file 19 "/usr/include/x86_64-linux-gnu/bits/stdlib.h"
- 348              		.file 20 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
- 349              		.file 21 "Sortable.h"
- 350              		.file 22 "<built-in>"
+ 321              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 322              		.loc 2 199 0 discriminator 1
+ 323 0122 488B5710 		movq	16(%rdi), %rdx	# MEM[(struct Sortable &)items_11(D) + 16], tmp99
+ 324              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 200:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 325              		.loc 2 200 0 discriminator 1
+ 326 0126 48894710 		movq	%rax, 16(%rdi)	# _1, MEM[(struct Sortable *)items_11(D) + 16B]
+ 327              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 328              		.loc 2 199 0 discriminator 1
+ 329 012a C5F8110F 		vmovups	%xmm1, (%rdi)	# tmp101, *items_11(D)
+ 330              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 331              		.loc 2 200 0 discriminator 1
+ 332 012e 48894F18 		movq	%rcx, 24(%rdi)	# __tmp$reference, MEM[(struct Sortable *)items_11(D) + 24B]
+ 333              	.LVL24:
+ 334 0132 4889D0   		movq	%rdx, %rax	# tmp99, _1
+ 335              	.LVL25:
+ 336              	.L7:
+ 337              	.LBE35:
+ 338              	.LBE34:
+ 339              	# asm_test.cpp:73:     Compare_Swap(3, 4);
+  73:asm_test.cpp  ****     Compare_Swap(3, 4);
+ 340              		.loc 1 73 0
+ 341 0135 488B5730 		movq	48(%rdi), %rdx	# MEM[(struct Sortable *)items_11(D) + 48B].key, _3
+ 342 0139 483B5740 		cmpq	64(%rdi), %rdx	# MEM[(struct Sortable *)items_11(D) + 64B].key, _3
+ 343 013d 7616     		jbe	.L8	#,
+ 344              	.LVL26:
+ 345              	.LBB36:
+ 346              	.LBB37:
+ 347              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 348              		.loc 2 199 0 discriminator 1
+ 349 013f C5F81057 		vmovups	64(%rdi), %xmm2	# MEM[(struct Sortable &)items_11(D) + 64], tmp102
+ 349      40
+ 350              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
+ 198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
+ 351              		.loc 2 198 0 discriminator 1
+ 352 0144 488B4F38 		movq	56(%rdi), %rcx	# MEM[(struct Sortable &)items_11(D) + 56], __tmp$reference
+ 353              	.LVL27:
+ 354              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 355              		.loc 2 200 0 discriminator 1
+ 356 0148 48895740 		movq	%rdx, 64(%rdi)	# _3, MEM[(struct Sortable *)items_11(D) + 64B]
+ 357              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 358              		.loc 2 199 0 discriminator 1
+ 359 014c C5F81157 		vmovups	%xmm2, 48(%rdi)	# tmp102, MEM[(struct Sortable *)items_11(D) + 48B]
+ 359      30
+ 360              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 361              		.loc 2 200 0 discriminator 1
+ 362 0151 48894F48 		movq	%rcx, 72(%rdi)	# __tmp$reference, MEM[(struct Sortable *)items_11(D) + 72B]
+ 363              	.LVL28:
+ 364              	.L8:
+ 365              	.LBE37:
+ 366              	.LBE36:
+ 367              	# asm_test.cpp:74:     Compare_Swap(0, 2);
+  74:asm_test.cpp  ****     Compare_Swap(0, 2);
+ 368              		.loc 1 74 0
+ 369 0155 48394720 		cmpq	%rax, 32(%rdi)	# _1, MEM[(struct Sortable *)items_11(D) + 32B].key
+ 370 0159 7315     		jnb	.L10	#,
+ 371              	.LVL29:
+ 372              	.LBB38:
+ 373              	.LBB39:
+ 374              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 375              		.loc 2 199 0 discriminator 1
+ 376 015b C5F81047 		vmovups	32(%rdi), %xmm0	# MEM[(struct Sortable &)items_11(D) + 32], tmp103
+ 376      20
+ 377              	# /usr/include/c++/7/bits/move.h:198:       _Tp __tmp = _GLIBCXX_MOVE(__a);
+ 198:/usr/include/c++/7/bits/move.h ****       __a = _GLIBCXX_MOVE(__b);
+ 378              		.loc 2 198 0 discriminator 1
+ 379 0160 488B5708 		movq	8(%rdi), %rdx	# MEM[(struct Sortable &)items_11(D) + 8], __tmp$reference
+ 380              	.LVL30:
+ 381              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 382              		.loc 2 200 0 discriminator 1
+ 383 0164 48894720 		movq	%rax, 32(%rdi)	# _1, MEM[(struct Sortable *)items_11(D) + 32B]
+ 384              	# /usr/include/c++/7/bits/move.h:199:       __a = _GLIBCXX_MOVE(__b);
+ 199:/usr/include/c++/7/bits/move.h ****       __b = _GLIBCXX_MOVE(__tmp);
+ 385              		.loc 2 199 0 discriminator 1
+ 386 0168 C5F81107 		vmovups	%xmm0, (%rdi)	# tmp103, *items_11(D)
+ 387              	.LVL31:
+ 388              	# /usr/include/c++/7/bits/move.h:200:       __b = _GLIBCXX_MOVE(__tmp);
+ 389              		.loc 2 200 0 discriminator 1
+ 390 016c 48895728 		movq	%rdx, 40(%rdi)	# __tmp$reference, MEM[(struct Sortable *)items_11(D) + 40B]
+ 391              	.LVL32:
+ 392              	.L10:
+ 393              	.LBE39:
+ 394              	.LBE38:
+ 395              	# asm_test.cpp:81: }
+  75:asm_test.cpp  ****     // Compare_Swap(1, 2);
+  76:asm_test.cpp  ****     // Compare_Swap(0, 3);
+  77:asm_test.cpp  ****     // Compare_Swap(2, 3);
+  78:asm_test.cpp  ****     // Compare_Swap(1, 4);
+  79:asm_test.cpp  ****     // Compare_Swap(1, 2);
+  80:asm_test.cpp  ****     // Compare_Swap(3, 4);
+  81:asm_test.cpp  **** }
+ 396              		.loc 1 81 0
+ 397 0170 C3       		ret
+ 398              		.cfi_endproc
+ 399              	.LFE905:
+ 401              		.section	.text.startup,"ax",@progbits
+ 402              		.p2align 4,,10
+ 403              		.p2align 3
+ 404              		.globl	main
+ 406              	main:
+ 407              	.LFB906:
+  82:asm_test.cpp  **** 
+  83:asm_test.cpp  **** int main() {}
+ 408              		.loc 1 83 0
+ 409              		.cfi_startproc
+ 410              	# asm_test.cpp:83: int main() {}
+ 411              		.loc 1 83 0
+ 412 0000 31C0     		xorl	%eax, %eax	#
+ 413 0002 C3       		ret
+ 414              		.cfi_endproc
+ 415              	.LFE906:
+ 417              		.text
+ 418              		.p2align 4,,10
+ 419 0171 0F1F8000 		.p2align 3
+ 419      000000
+ 420              		.globl	_Z10SingleSortP8Sortable
+ 422              	_Z10SingleSortP8Sortable:
+ 423              	.LFB907:
+  84:asm_test.cpp  **** 
+  85:asm_test.cpp  **** void SingleSort(Sortable* items) {
+ 424              		.loc 1 85 0
+ 425              		.cfi_startproc
+ 426              	.LVL33:
+ 427              	# asm_test.cpp:99:     );
+  86:asm_test.cpp  ****     __asm__(
+  87:asm_test.cpp  ****         "leaq 32(%rdi), %rax\n\t"
+  88:asm_test.cpp  ****         "movups 32(%rdi), %xmm0\n\t"
+  89:asm_test.cpp  ****         "movaps %xmm0, -24(%rsp)\n\t"
+  90:asm_test.cpp  ****         "leaq 48(%rdi), %rdx\n\t"
+  91:asm_test.cpp  ****         "movq 48(%rdi), %rsi\n\t"
+  92:asm_test.cpp  ****         "cmpq -24(%rsp), %rsi\n\t"
+  93:asm_test.cpp  ****         "cmovbq %rdx, %rax\n\t"
+  94:asm_test.cpp  ****         "movups (%rax), %xmm0\n\t"
+  95:asm_test.cpp  ****         "movups %xmm0, 32(%rdi)\n\t"
+  96:asm_test.cpp  ****         "cmovbq %rcx, %rdx\n\t"
+  97:asm_test.cpp  ****         "movups (%rdx), %xmm0\n\t"
+  98:asm_test.cpp  ****         "movups %xmm0, 48(%rdi)"
+  99:asm_test.cpp  ****     );
+ 428              		.loc 1 99 0
+ 429              	#APP
+ 430              	# 99 "asm_test.cpp" 1
+ 100 017c 0F104720 	}...
+ 431              		leaq 32(%rdi), %rax
+ 432              		movups 32(%rdi), %xmm0
+ 433              		movaps %xmm0, -24(%rsp)
+ 434              		leaq 48(%rdi), %rdx
+ 435              		movq 48(%rdi), %rsi
+ 436              		cmpq -24(%rsp), %rsi
+ 437              		cmovbq %rdx, %rax
+ 438              		movups (%rax), %xmm0
+ 439              		movups %xmm0, 32(%rdi)
+ 440              		cmovbq %rcx, %rdx
+ 441              		movups (%rdx), %xmm0
+ 442              		movups %xmm0, 48(%rdi)
+ 443              	# 0 "" 2
+ 444              	# asm_test.cpp:100: }
+ 445              		.loc 1 100 0
+ 446              	#NO_APP
+ 447 01a8 C3       		ret
+ 448              		.cfi_endproc
+ 449              	.LFE907:
+ 451              	.Letext0:
+ 452              		.file 3 "/usr/include/c++/7/type_traits"
+ 453              		.file 4 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h"
+ 454              		.file 5 "/usr/include/c++/7/bits/stl_pair.h"
+ 455              		.file 6 "/usr/include/c++/7/debug/debug.h"
+ 456              		.file 7 "/usr/include/c++/7/cstdlib"
+ 457              		.file 8 "/usr/include/c++/7/bits/algorithmfwd.h"
+ 458              		.file 9 "/usr/include/c++/7/bits/exception_ptr.h"
+ 459              		.file 10 "/usr/include/c++/7/new"
+ 460              		.file 11 "/usr/include/c++/7/bits/stl_algo.h"
+ 461              		.file 12 "/usr/include/c++/7/bits/predefined_ops.h"
+ 462              		.file 13 "/usr/include/c++/7/ext/numeric_traits.h"
+ 463              		.file 14 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h"
+ 464              		.file 15 "/usr/include/stdlib.h"
+ 465              		.file 16 "/usr/include/x86_64-linux-gnu/bits/types.h"
+ 466              		.file 17 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h"
+ 467              		.file 18 "/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h"
+ 468              		.file 19 "/usr/include/x86_64-linux-gnu/bits/stdlib.h"
+ 469              		.file 20 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
+ 470              		.file 21 "Sortable.h"
+ 471              		.file 22 "<built-in>"

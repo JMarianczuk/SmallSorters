@@ -1,1 +1,1 @@
-gcc $1 -o test -Wa,-adhln=test-O3.s -g -fverbose-asm -masm=intel -O3 -march=native
+gcc $1 -o test -Wa,-adhln=test-O3.s -g -fverbose-asm -masm=att -O3 -march=native

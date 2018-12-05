@@ -1,0 +1,1 @@
+AddMainMethod -f NetworkSort_Simple.cpp -o asm_test.cpp
