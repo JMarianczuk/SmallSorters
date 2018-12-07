@@ -163,7 +163,8 @@ int main()
         MeasureNetworkSort<Sortable_TwoCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-TwoCmovTemp");
         MeasureNetworkSort<Sortable_ThreeCmovVolatileTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovVolatileTempl");
         MeasureNetworkSort<Sortable_ThreeCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovRegisterTemp");
-
+        MeasureInsertionSort<Sortable>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
+        MeasureInsertionSort<Sortable_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Only");
     }
     // Measure(perf_cpu_cycles, 1000, info);	
 	delete perf_cpu_cycles;
