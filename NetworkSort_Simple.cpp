@@ -1,60 +1,64 @@
 
 #include <algorithm>
+#include <fstream>
+#include <iostream>
 
 #include "NetworkSort_Simple.h"
 #include "ConditionalSwap.h"
 
-void Compare_Brute(Sortable* items, int left, int right) {
-    uint64_t tmpKey = items[left].key;
-    uint64_t tmpReference = items[left].reference;
 
-    __asm__(
-        "cmpq %[left_key],%[right_key]\n"
-        "cmovbq %[right_key],%[left_key]\n"
-        "cmovbq %[right_reference],%[left_reference]\n"
-        "cmovbq %[tmp_key],%[right_key]\n"
-        "cmovbq %[tmp_reference],%[right_reference]\n"
-        : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key), [left_reference] "+r"(items[left].reference), [right_reference] "+r"(items[right].reference)
-        : [tmp_key] "rm"(tmpKey), [tmp_reference] "rm"(tmpReference)
-        : "cc"
-    );
-}
 
-void Compare_Copied(Sortable* items, int left, int right) {
+// void Compare_Brute(Sortable* items, int left, int right) {
+//     uint64_t tmpKey = items[left].key;
+//     uint64_t tmpReference = items[left].reference;
 
-}
+//     __asm__(
+//         "cmpq %[left_key],%[right_key]\n"
+//         "cmovbq %[right_key],%[left_key]\n"
+//         "cmovbq %[right_reference],%[left_reference]\n"
+//         "cmovbq %[tmp_key],%[right_key]\n"
+//         "cmovbq %[tmp_reference],%[right_reference]\n"
+//         : [left_key] "+r"(items[left].key), [right_key] "+r"(items[right].key), [left_reference] "+r"(items[left].reference), [right_reference] "+r"(items[right].reference)
+//         : [tmp_key] "rm"(tmpKey), [tmp_reference] "rm"(tmpReference)
+//         : "cc"
+//     );
+// }
 
-void SortTestJumpXchg(Sortable* items) {
-    for (int outer = 0; outer < ArraySize; outer += 1) {
-        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
-            ConditionalSwap_JumpXchg(inner, inner + 1);
-        }
-    }
-}
+// void Compare_Copied(Sortable* items, int left, int right) {
 
-void SortTestTwoCmovTemp(Sortable* items) {
-    for (int outer = 0; outer < ArraySize; outer += 1) {
-        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
-            ConditionalSwap_TwoCmovTemp(inner, inner + 1);
-        }
-    }
-}
+// }
 
-void SortTestThreeCmovVolatileTemp(Sortable* items) {
-    for (int outer = 0; outer < ArraySize; outer += 1) {
-        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
-            ConditionalSwap_ThreeCmovVolatileTemp(inner, inner + 1);
-        }
-    }
-}
+// void SortTestJumpXchg(Sortable* items) {
+//     for (int outer = 0; outer < ArraySize; outer += 1) {
+//         for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+//             ConditionalSwap_JumpXchg(inner, inner + 1);
+//         }
+//     }
+// }
 
-void SortTestThreeCmovRegisterTemp(Sortable* items) {
-    for (int outer = 0; outer < ArraySize; outer += 1) {
-        for (int inner = 0; inner < ArraySize - 1; inner += 1) {
-            ConditionalSwap_ThreeCmovRegisterTemp(inner, inner + 1);
-        }
-    }
-}
+// void SortTestTwoCmovTemp(Sortable* items) {
+//     for (int outer = 0; outer < ArraySize; outer += 1) {
+//         for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+//             ConditionalSwap_TwoCmovTemp(inner, inner + 1);
+//         }
+//     }
+// }
+
+// void SortTestThreeCmovVolatileTemp(Sortable* items) {
+//     for (int outer = 0; outer < ArraySize; outer += 1) {
+//         for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+//             ConditionalSwap_ThreeCmovVolatileTemp(inner, inner + 1);
+//         }
+//     }
+// }
+
+// void SortTestThreeCmovRegisterTemp(Sortable* items) {
+//     for (int outer = 0; outer < ArraySize; outer += 1) {
+//         for (int inner = 0; inner < ArraySize - 1; inner += 1) {
+//             ConditionalSwap_ThreeCmovRegisterTemp(inner, inner + 1);
+//         }
+//     }
+// }
 
 #define Compare(left, right) ConditionalSwap_JumpXchg(left, right)
 

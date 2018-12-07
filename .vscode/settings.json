@@ -9,6 +9,8 @@
         "exception": "cpp",
         "xlocale": "cpp",
         "xiosbase": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "initializer_list": "cpp",
+        "type_traits": "cpp"
     }
 }

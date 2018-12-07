@@ -13,6 +13,7 @@ void WriteResultLine(
     std::string sorter, 
     Performancing* perf, 
     EnvironmentInfo info,
+    int arraySize,
     int numberOfIterations, 
     int numberOfBadSorts);
 
