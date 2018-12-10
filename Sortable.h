@@ -5,16 +5,17 @@
 #define ArraySize 16
 #include <inttypes.h>
 
-struct Sortable {
-    uint64_t key;
-    uint64_t reference;
-    friend bool operator>(const Sortable& left, const Sortable& right) {
+struct SortableRef {
+    uint64_t key, reference;
+    friend bool operator>(const SortableRef& left, const SortableRef& right) {
         return left.key > right.key;
     }
-    friend bool operator==(const Sortable& left, const Sortable& right) {
+    friend bool operator==(const SortableRef& left, const SortableRef& right) {
         return left.key == right.key;
     }
 };
+
+
 
 struct Sortable_JumpXchg {
     uint64_t key;
@@ -25,6 +26,17 @@ struct Sortable_JumpXchg {
         return left.key == right.key;
     }
 };
+struct SortableRef_JumpXchg {
+    uint64_t key, reference;
+    friend bool operator>(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right) {
+        return left.key > right.key;
+    }
+    friend bool operator==(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right) {
+        return left.key == right.key;
+    }
+};
+
+
 
 struct Sortable_TwoCmovTemp {
     uint64_t key;
@@ -35,6 +47,17 @@ struct Sortable_TwoCmovTemp {
         return left.key == right.key;
     }
 };
+struct SortableRef_FourCmovTemp {
+    uint64_t key, reference;
+    friend bool operator>(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right) {
+        return left.key > right.key;
+    }
+    friend bool operator==(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right) {
+        return left.key == right.key;
+    }
+};
+
+
 
 struct Sortable_ThreeCmovVolatileTemp {
     uint64_t key;
@@ -45,6 +68,17 @@ struct Sortable_ThreeCmovVolatileTemp {
         return left.key == right.key;
     }
 };
+struct SortableRef_SixCmovVolatileTemp {
+    uint64_t key, reference;
+    friend bool operator>(const SortableRef_SixCmovVolatileTemp& left, const SortableRef_SixCmovVolatileTemp& right) {
+        return left.key > right.key;
+    }
+    friend bool operator==(const SortableRef_SixCmovVolatileTemp& left, const SortableRef_SixCmovVolatileTemp& right) {
+        return left.key == right.key;
+    }
+};
+
+
 
 struct Sortable_ThreeCmovRegisterTemp {
     uint64_t key;
@@ -55,6 +89,40 @@ struct Sortable_ThreeCmovRegisterTemp {
         return left.key == right.key;
     }
 };
+struct SortableRef_SixCmovRegisterTemp {
+    uint64_t key, reference;
+    friend bool operator>(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right) {
+        return left.key > right.key;
+    }
+    friend bool operator==(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right) {
+        return left.key == right.key;
+    }
+};
 
+
+
+struct SortableRef_ClangVersion {
+    uint64_t key, reference;
+    friend bool operator>(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right) {
+        return left.key > right.key;
+    }
+    friend bool operator==(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right) {
+        return left.key == right.key;
+    }
+};
+
+template <typename TValueType>
+static inline
+int GetStructSizeInBits()
+{
+    return 64;
+}
+
+template<>
+inline
+int GetStructSizeInBits<SortableRef>()
+{
+    return 128;
+}
 
 #endif

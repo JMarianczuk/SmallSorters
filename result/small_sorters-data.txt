@@ -9,26 +9,131 @@
 ################################################################################
 
 ################################################################################
-# MULTIPLOT(sorter) SELECT substr(computer_name, 6) AS x, MEDIAN(value / number_of_iterations) AS y, MULTIPLOT FROM stats WHERE metric LIKE "Cpu Cycles" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+# MULTIPLOT(sorter) SELECT array_size AS x, AVG(value / number_of_iterations) AS y, MULTIPLOT FROM stats WHERE metric LIKE "Cpu Cycles" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
 #
-# index 0 sorter=Insertion Sort
-132	2297
-133	2552
-134	2557.5
-135	2259
+# index 0 sorter=Insertion Sort Key-Only
+2	307.0
+3	442.0
+4	594.0
+5	744.0
+6	902.0
+7	1058.0
+8	1209.0
+9	1368.0
+10	1535.0
+11	1685.0
+12	1851.0
+13	2018.0
+14	2167.0
+15	2331.0
+16	2489.0
 
 
-# index 1 sorter=Network Sort Naive
-132	2345
-133	2792
-134	2789.0
-135	2418
+# index 1 sorter=Insertion Sort Key-Reference-Tuple
+2	422.0
+3	556.0
+4	707.0
+5	857.0
+6	1009.0
+7	1164.0
+8	1317.0
+9	1472.0
+10	1638.0
+11	1790.0
+12	1950.0
+13	2106.0
+14	2262.0
+15	2420.0
+16	2576.0
 
 
-# index 2 sorter=Network Sort Optimised
-132	2620
-133	3041
-134	3061.0
-135	2702
+# index 2 sorter=Network Key-JumpXchg
+2	308.0
+3	435.0
+4	582.0
+5	743.0
+6	888.0
+7	1051.0
+8	1215.0
+9	1374.0
+10	1546.0
+11	1712.0
+12	1876.0
+13	2068.0
+14	2241.0
+15	2421.0
+16	2617.0
+
+
+# index 3 sorter=Network Key-Reference-Tuple
+2	446.0
+3	548.0
+4	696.0
+5	852.0
+6	1009.0
+7	1172.0
+8	1334.0
+9	1508.0
+10	1652.0
+11	1839.0
+12	2017.0
+13	2188.0
+14	2406.0
+15	2609.0
+16	2781.0
+
+
+# index 4 sorter=Network Key-ThreeCmovRegisterTemp
+2	303.0
+3	404.0
+4	529.0
+5	654.0
+6	792.0
+7	923.0
+8	1036.0
+9	1175.0
+10	1293.0
+11	1422.0
+12	1560.0
+13	1682.0
+14	1818.0
+15	1941.0
+16	2062.0
+
+
+# index 5 sorter=Network Key-ThreeCmovVolatileTempl
+2	296.0
+3	403.0
+4	529.0
+5	653.0
+6	779.0
+7	927.0
+8	1073.0
+9	1175.0
+10	1309.0
+11	1454.0
+12	1590.0
+13	1732.0
+14	1878.0
+15	2017.0
+16	2163.0
+
+
+# index 6 sorter=Network Key-TwoCmovTemp
+2	291.0
+3	407.0
+4	529.0
+5	656.0
+6	780.0
+7	907.0
+8	1049.0
+9	1158.0
+10	1283.0
+11	1415.0
+12	1569.0
+13	1668.0
+14	1797.0
+15	1975.0
+16	2077.0
 
 

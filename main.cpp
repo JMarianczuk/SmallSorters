@@ -14,7 +14,7 @@
 #include "Randomisation.h"
 #include "ArrayHelpers.h"
 
-void PrintArray(std::string descriptor, Sortable* arr) {
+void PrintArray(std::string descriptor, SortableRef* arr) {
     printf("%s: \nKeys: ", descriptor.c_str());
     for (int i = 0; i < ArraySize; i += 1) {
         printf("%i: %" PRIu64 ", ", i, arr[i].key);
@@ -61,6 +61,7 @@ void MeasureInsertionSort(
         sorterName,
         perf,
         info,
+        sizeof(TValueType),
         arraySize,
         numberOfIterations,
         numberOfBadSorts
@@ -103,6 +104,7 @@ void MeasureNetworkSort(
         sorterName,
         perf,
         info,
+        sizeof(TValueType),
         arraySize,
         numberOfIterations,
         numberOfBadSorts
@@ -123,7 +125,7 @@ void SetOutputFile() {
 
 void test() {
     int a = 6, b = 4;
-    Sortable a1 = {6, 5}, b1 = {4, 7};
+    SortableRef a1 = {6, 5}, b1 = {4, 7};
     Sortable_JumpXchg a2 = {6}, b2 = {4};
     Sortable_TwoCmovTemp a3 = {6}, b3 = {4};
     Sortable_ThreeCmovVolatileTemp a4 = {6}, b4 = {4};
@@ -149,7 +151,6 @@ int main()
     std::string hostname = Environment_GetComputerName();
 
     printf("Commit: %s\n", commit.c_str());
-    printf("Computer Name: %s \n", hostname.c_str());
 
     EnvironmentInfo info;
     info.commit = commit;
@@ -158,13 +159,24 @@ int main()
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     for (int arraySize = 2; arraySize <= 16; arraySize += 1)
     {
-        MeasureNetworkSort<Sortable>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-Tuple");
+        MeasureNetworkSort<SortableRef>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-Tuple");
+
         MeasureNetworkSort<Sortable_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-JumpXchg");
+        MeasureNetworkSort<SortableRef_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-JumpXchg");
+
         MeasureNetworkSort<Sortable_TwoCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-TwoCmovTemp");
+        MeasureNetworkSort<SortableRef_FourCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-FourCmovTemp");
+
         MeasureNetworkSort<Sortable_ThreeCmovVolatileTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovVolatileTempl");
+        MeasureNetworkSort<SortableRef_SixCmovVolatileTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-SixCmovVolatileTempl");
+
         MeasureNetworkSort<Sortable_ThreeCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovRegisterTemp");
-        MeasureInsertionSort<Sortable>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
+        MeasureNetworkSort<SortableRef_SixCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-SixCmovRegisterTemp");
+
+        MeasureNetworkSort<SortableRef_ClangVersion>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-ClangVersion");
+
         MeasureInsertionSort<Sortable_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Only");
+        MeasureInsertionSort<SortableRef>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
     }
     // Measure(perf_cpu_cycles, 1000, info);	
 	delete perf_cpu_cycles;

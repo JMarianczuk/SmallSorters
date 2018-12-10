@@ -5,10 +5,10 @@
 
 #define ConditionalSwapDef(left, right) if (items[left].key > items[right].key) {std::swap(items[left], items[right]);}
 #define ConditionalSet(condition, left, right) { left = (condition) ? right : left; }
-#define Compare(left, right) { Sortable itemLeft = items[left]; ConditionalSet(items[right].key < itemLeft.key, items[left], items[right]); ConditionalSet(items[right].key < itemLeft.key, items[right], itemLeft);}
+#define Compare(left, right) { SortableRef itemLeft = items[left]; ConditionalSet(items[right].key < itemLeft.key, items[left], items[right]); ConditionalSet(items[right].key < itemLeft.key, items[right], itemLeft);}
 #define CS(l, r) Compare(l, r)
 
-void NetworkSort_Optimised(Sortable* items) {
+void NetworkSort_Optimised(SortableRef* items) {
 	//Greens Network: 60-comparator 10 parallel steps 16-input sorting network
     CS(0, 1)
 	CS(2, 3)
@@ -81,7 +81,7 @@ void NetworkSort_Optimised(Sortable* items) {
 	CS(8, 9)
 }
 
-void NetworkSort_Naive(Sortable* items) {
+void NetworkSort_Naive(SortableRef* items) {
     ConditionalSwapDef(0, 1)
 	ConditionalSwapDef(2, 3)
 	ConditionalSwapDef(4, 5)

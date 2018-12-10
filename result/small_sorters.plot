@@ -18,13 +18,17 @@ set grid xtics ytics
 set key top left
 
 set title 'Sorting of small lists'
-set xlabel 'Computer'
-set ylabel 'Run Time per 16 elements'
+set xlabel 'Number Of Items'
+set ylabel 'Cpu Cycles Needed'
 
-## MULTIPLOT(sorter) SELECT substr(computer_name, 6) AS x, MEDIAN(value / number_of_iterations) AS y, MULTIPLOT
+## MULTIPLOT(sorter) SELECT array_size AS x, AVG(value / number_of_iterations) AS y, MULTIPLOT
 ## FROM stats WHERE metric LIKE "Cpu Cycles" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
 plot \
-    'small_sorters-data.txt' index 0 title "sorter=Insertion Sort" with linespoints, \
-    'small_sorters-data.txt' index 1 title "sorter=Network Sort Naive" with linespoints, \
-    'small_sorters-data.txt' index 2 title "sorter=Network Sort Optimised" with linespoints
+    'small_sorters-data.txt' index 0 title "sorter=Insertion Sort Key-Only" with linespoints, \
+    'small_sorters-data.txt' index 1 title "sorter=Insertion Sort Key-Reference-Tuple" with linespoints, \
+    'small_sorters-data.txt' index 2 title "sorter=Network Key-JumpXchg" with linespoints, \
+    'small_sorters-data.txt' index 3 title "sorter=Network Key-Reference-Tuple" with linespoints, \
+    'small_sorters-data.txt' index 4 title "sorter=Network Key-ThreeCmovRegisterTemp" with linespoints, \
+    'small_sorters-data.txt' index 5 title "sorter=Network Key-ThreeCmovVolatileTempl" with linespoints, \
+    'small_sorters-data.txt' index 6 title "sorter=Network Key-TwoCmovTemp" with linespoints
 

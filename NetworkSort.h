@@ -4,7 +4,7 @@
 
 #include "Sortable.h"
 
-void NetworkSort_Naive(Sortable* items);
-void NetworkSort_Optimised(Sortable* items);
+void NetworkSort_Naive(SortableRef* items);
+void NetworkSort_Optimised(SortableRef* items);
 
 #endif

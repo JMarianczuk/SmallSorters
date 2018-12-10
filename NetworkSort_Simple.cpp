@@ -60,13 +60,13 @@
 //     }
 // }
 
-#define Compare(left, right) ConditionalSwap_JumpXchg(left, right)
+// #define Compare(left, right) ConditionalSwap_JumpXchg(left, right)
 
-void NetworkSort_Generic(Sortable* items) {
-    Compare(32, 48)
-    // Compare(3, 4)
-    // Compare(0, 2)
-}
+// void NetworkSort_Generic(SortableRef* items) {
+//     Compare(32, 48)
+//     Compare(3, 4)
+//     Compare(0, 2)
+// }
 
 // void NetworkSortSimple_Optimised(Sortable* items) {
 //     CompareM(items, 0, 1);
@@ -76,7 +76,7 @@ void NetworkSort_Generic(Sortable* items) {
 
 #define Compare_Swap(left, right) if (items[left].key > items[right].key) {std::swap(items[left], items[right]);}
 
-void NetworkSortSimple_Naive(Sortable* items) {
+void NetworkSortSimple_Naive(SortableRef* items) {
     Compare_Swap(0, 1);
     Compare_Swap(3, 4);
     Compare_Swap(0, 2);

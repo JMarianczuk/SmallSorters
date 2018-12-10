@@ -1,8 +1,12 @@
 ﻿// Performancing.cpp : Defines the entry point for the application.
 //
 
+#include <inttypes.h>
+#include <string>
+#include <stdexcept>
+
+#include "Enumerations.h"
 #include "Performancing.h"
-#include "Result.h"
 
 struct read_format {
 	uint64_t number;

@@ -6,12 +6,12 @@
 #include <fstream>
 #include <iostream>
 
-void NetworkSortSimple_Generic(Sortable* items);
+// void NetworkSortSimple_Generic(SortableRef* items);
 
-void SortTestJumpXchg(Sortable* items);
-void SortTestTwoCmovTemp(Sortable* items);
-void SortTestThreeCmovVolatileTemp(Sortable* items);
-void SortTestThreeCmovRegisterTemp(Sortable* items);
+// void SortTestJumpXchg(SortableRef* items);
+// void SortTestTwoCmovTemp(SortableRef* items);
+// void SortTestThreeCmovVolatileTemp(SortableRef* items);
+// void SortTestThreeCmovRegisterTemp(SortableRef* items);
 
 namespace networks {
 
@@ -22,12 +22,12 @@ void ConditionalSwap(TValueType& left, TValueType& right)
     if (left > right) {std::swap(left, right); }
 }
 
-template<>
-inline
-void ConditionalSwap<Sortable>(Sortable& left, Sortable& right)
-{
-    if (left.key > right.key) {std::swap(left, right); }
-}
+// template<>
+// inline
+// void ConditionalSwap<Sortable>(SortableRef& left, SortableRef& right)
+// {
+//     if (left.key > right.key) {std::swap(left, right); }
+// }
 
 template<>
 inline
@@ -43,6 +43,23 @@ void ConditionalSwap<Sortable_JumpXchg>(Sortable_JumpXchg& left, Sortable_JumpXc
         : "cc" 
     );
 }
+template<>
+inline
+void ConditionalSwap<SortableRef_JumpXchg>(SortableRef_JumpXchg& left, SortableRef_JumpXchg& right)
+{
+    __asm__(
+        "cmpq %[left_key],%[right_key]\n\t" 
+        "jae %=f\n\t"
+        "xchg %[left_key],%[right_key]\n\t" 
+        "xchg %[left_reference],%[right_reference]\n\t"
+        "%=:\n\t" 
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference)
+        : 
+        : "cc" 
+    );
+}
+
+
 
 template<>
 inline
@@ -58,6 +75,25 @@ void ConditionalSwap<Sortable_TwoCmovTemp>(Sortable_TwoCmovTemp& left, Sortable_
         : "cc" 
     ); \
 }
+template<>
+inline
+void ConditionalSwap<SortableRef_FourCmovTemp>(SortableRef_FourCmovTemp& left, SortableRef_FourCmovTemp& right)
+{
+    uint64_t tmp = left.key;
+    uint64_t tmpRef = left.reference;
+    __asm__( 
+        "cmpq %[left_key],%[right_key]\n\t" 
+        "cmovbq %[right_key],%[left_key]\n\t" 
+        "cmovbq %[right_reference],%[left_reference]\n\t"
+        "cmovbq %[tmp],%[right_key]\n\t"
+        "cmovbq %[tmp_ref],%[right_reference]\n\t"
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference), [tmp] "+r"(tmp), [tmp_ref] "+r"(tmpRef)
+        : 
+        : "cc" 
+    ); \
+}
+
+
 
 template<>
 inline
@@ -74,6 +110,27 @@ void ConditionalSwap<Sortable_ThreeCmovVolatileTemp>(Sortable_ThreeCmovVolatileT
         : "cc" 
     ); 
 }
+template<>
+inline
+void ConditionalSwap<SortableRef_SixCmovVolatileTemp>(SortableRef_SixCmovVolatileTemp& left, SortableRef_SixCmovVolatileTemp& right)
+{
+    volatile uint64_t tmp;
+    volatile uint64_t tmpRef;
+    __asm__ ( 
+        "cmpq %[left_key],%[right_key]\n\t" 
+        "cmovbq %[left_key],%[tmp]\n\t"
+        "cmovbq %[left_reference],%[tmp_ref]\n\t"
+        "cmovbq %[right_key],%[left_key]\n\t" 
+        "cmovbq %[right_reference],%[left_reference]\n\t"
+        "cmovbq %[tmp],%[right_key]\n\t"
+        "cmovbq %[tmp_ref],%[right_reference]\n\t"
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference), [tmp] "+r"(tmp), [tmp_ref] "+r"(tmpRef)
+        : 
+        : "cc" 
+    ); 
+}
+
+
 
 template<>
 inline
@@ -89,6 +146,52 @@ void ConditionalSwap<Sortable_ThreeCmovRegisterTemp>(Sortable_ThreeCmovRegisterT
         : 
         : "cc" 
     ); 
+}
+template<>
+inline
+void ConditionalSwap<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovRegisterTemp& left, SortableRef_SixCmovRegisterTemp& right)
+{
+    register uint64_t tmp;
+    register uint64_t tmpRef;
+    __asm__ ( 
+        "cmpq %[left_key],%[right_key]\n\t" 
+        "cmovbq %[left_key],%[tmp]\n\t"
+        "cmovbq %[left_reference],%[tmp_ref]\n\t"
+        "cmovbq %[right_key],%[left_key]\n\t" 
+        "cmovbq %[right_reference],%[left_reference]\n\t"
+        "cmovbq %[tmp],%[right_key]\n\t"
+        "cmovbq %[tmp_ref],%[right_reference]\n\t"
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference), [tmp] "+r"(tmp), [tmp_ref] "+r"(tmpRef)
+        : 
+        : "cc" 
+    ); 
+}
+
+
+
+template<>
+inline
+void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, SortableRef_ClangVersion& right)
+{
+    register SortableRef_ClangVersion* leftPointer = &left;
+    register SortableRef_ClangVersion* rightPointer = &right;
+    register uint64_t registerThree;
+    __asm__(
+        "movups %[left],%%xmm0\n\t"
+        "movaps %%xmm0,-24(%%rsp)\n\t"
+        "movq %[right_key],%[register_three]\n\t"
+        "cmpq -24(%%rsp),%[register_three]\n\t"
+        "cmovbq %[right_pointer],%[left_pointer]\n\t"
+        "movups (%[left_pointer]),%%xmm0\n\t"
+        "movups %%xmm0,%[left]\n\t"
+        "leaq -24(%%rsp),%[left_pointer]\n\t"
+        "cmovaeq %[right_pointer],%[left_pointer]\n\t"
+        "movups (%[right_pointer]),%%xmm0\n\t"
+        "movups %%xmm0,%[right]\n\t"
+        : [left] "+m"(left), [right] "+m"(right), [register_three] "+r"(registerThree), [left_pointer] "+r"(leftPointer)
+        : [right_pointer] "r"(rightPointer), [right_key] "m"(right.key)
+        : "cc", "xmm0"
+    );
 }
 
 template <typename TValueType> static inline
