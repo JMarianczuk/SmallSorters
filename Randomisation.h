@@ -116,6 +116,16 @@ void GenerateRandomArray<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovReg
 }
 
 
+
+template<>
+void GenerateRandomArray<SortableRef_ClangVersion>(SortableRef_ClangVersion* arr, int arraySize) {
+    uint64_t reference = GenerateRandomUint64();
+    for (int i = 0; i < arraySize; i += 1) {
+        arr[i].key = GenerateRandomUint64();
+        arr[i].reference = reference + i;
+    }
+}
+
 // void GenerateRandomArray(Sortable* arr, uint64_t limit) {
 //     uint64_t pointer = GenerateRandomUint64() % limit;
 // 	for (int i = 0; i < ArraySize; i += 1)
