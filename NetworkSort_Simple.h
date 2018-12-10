@@ -175,22 +175,23 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
 {
     register SortableRef_ClangVersion* leftPointer = &left;
     register SortableRef_ClangVersion* rightPointer = &right;
-    register uint64_t registerThree;
+    register uint64_t registerThree = right.key;
+    SortableRef_ClangVersion tmp = left;
     __asm__(
-        "movups %[left],%%xmm0\n\t"
-        "movaps %%xmm0,-24(%%rsp)\n\t"
-        "movq %[right_key],%[register_three]\n\t"
-        "cmpq -24(%%rsp),%[register_three]\n\t"
+        // "movups %[left],%%xmm0\n\t"
+        // "movaps %%xmm0,-24(%%rsp)\n\t"
+        // "movq %[right_key],%[register_three]\n\t"
+        "cmpq %[tmp_key],%[register_three]\n\t"
         "cmovbq %[right_pointer],%[left_pointer]\n\t"
         "movups (%[left_pointer]),%%xmm0\n\t"
         "movups %%xmm0,%[left]\n\t"
-        "leaq -24(%%rsp),%[left_pointer]\n\t"
+        "movq %[tmp_pointer],%[left_pointer]\n\t"
         "cmovaeq %[right_pointer],%[left_pointer]\n\t"
         "movups (%[right_pointer]),%%xmm0\n\t"
         "movups %%xmm0,%[right]\n\t"
         : [left] "+m"(left), [right] "+m"(right), [register_three] "+r"(registerThree), [left_pointer] "+r"(leftPointer)
-        : [right_pointer] "r"(rightPointer), [right_key] "m"(right.key)
-        : "cc", "xmm0"
+        : [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [tmp_pointer] "r"(&tmp)
+        : "cc", "%xmm0"
     );
 }
 
