@@ -3,8 +3,8 @@
 #define NETWORK_SORT_SIMPLE_H
 
 #include "Sortable.h"
-#include <fstream>
-#include <iostream>
+
+#include <algorithm>
 
 // void NetworkSortSimple_Generic(SortableRef* items);
 
@@ -167,7 +167,28 @@ void ConditionalSwap<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovRegiste
     ); 
 }
 
-
+// template<>
+// inline
+// void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, SortableRef_ClangVersion& right)
+// {
+//     register SortableRef_ClangVersion* leftPointer = &left;
+//     register SortableRef_ClangVersion* rightPointer = &right;
+//     register uint64_t registerThree = right.key;
+//     SortableRef_ClangVersion tmp = left;
+//     __asm__(
+//         "cmpq %[tmp_key],%[register_three]\n\t"
+//         "cmovbq %[right_pointer],%[left_pointer]\n\t"
+//         "movups (%[left_pointer]),%%xmm0\n\t"
+//         "movups %%xmm0,%[left]\n\t"
+//         "movq %[tmp_pointer],%[left_pointer]\n\t"
+//         "cmovaeq %[right_pointer],%[left_pointer]\n\t"
+//         "movups (%[left_pointer]),%%xmm0\n\t"
+//         "movups %%xmm0,%[right]\n\t"
+//         : [left] "=m"(left), [right] "=m"(right), [register_three] "+r"(registerThree), [left_pointer] "+r"(leftPointer)
+//         : [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [tmp_pointer] "r"(&tmp)
+//         : "cc", "%xmm0"
+//     );
+// }
 
 template<>
 inline
@@ -175,24 +196,24 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
 {
     register SortableRef_ClangVersion* leftPointer = &left;
     register SortableRef_ClangVersion* rightPointer = &right;
-    register uint64_t registerThree = right.key;
+    register uint64_t rightKey = right.key;
     SortableRef_ClangVersion tmp = left;
     __asm__(
-        // "movups %[left],%%xmm0\n\t"
-        // "movaps %%xmm0,-24(%%rsp)\n\t"
-        // "movq %[right_key],%[register_three]\n\t"
-        "cmpq %[tmp_key],%[register_three]\n\t"
+        "cmpq %[tmp_key],%[right_key]\n\t"
         "cmovbq %[right_pointer],%[left_pointer]\n\t"
-        "movups (%[left_pointer]),%%xmm0\n\t"
-        "movups %%xmm0,%[left]\n\t"
-        "movq %[tmp_pointer],%[left_pointer]\n\t"
-        "cmovaeq %[right_pointer],%[left_pointer]\n\t"
-        "movups (%[right_pointer]),%%xmm0\n\t"
-        "movups %%xmm0,%[right]\n\t"
-        : [left] "+m"(left), [right] "+m"(right), [register_three] "+r"(registerThree), [left_pointer] "+r"(leftPointer)
-        : [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [tmp_pointer] "r"(&tmp)
-        : "cc", "%xmm0"
+        : [left_pointer] "+r"(leftPointer)
+        : [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [right_key] "r"(rightKey)
+        : "cc"
     );
+    left = *leftPointer;
+    leftPointer = &tmp;
+    __asm__(
+        "cmovbq %[left_pointer],%[right_pointer]\n\t"
+        : [right_pointer] "+r"(rightPointer)
+        : [left_pointer] "m"(leftPointer)
+        :
+    );
+    right = *rightPointer;
 }
 
 template <typename TValueType> static inline
