@@ -126,21 +126,4 @@ void GenerateRandomArray<SortableRef_ClangVersion>(SortableRef_ClangVersion* arr
     }
 }
 
-// void GenerateRandomArray(Sortable* arr, uint64_t limit) {
-//     uint64_t pointer = GenerateRandomUint64() % limit;
-// 	for (int i = 0; i < ArraySize; i += 1)
-// 	{
-// 		arr[i].key = GenerateRandomUint64() % limit;
-//         arr[i].reference = (pointer + i) % limit;
-// 	}
-// }
-// void GenerateRandomArray(Sortable* arr) {
-//     uint64_t max = 1 << 20;
-//     max -= 1;
-//     max << 1;
-//     max += 1;
-//     printf("Max uint: %" PRIu64 "\n", max);
-//     GenerateRandomArray(arr, max);
-// }
-
 #endif

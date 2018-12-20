@@ -7,7 +7,7 @@
 
 // void test()
 // {
-//     SortableRef_ClangVersion* arr = (SortableRef_ClangVersion*) malloc(TestArraySize * sizeof(SortableRef_ClangVersion));
+//     SortableRef_FourCmovTemp* arr = (SortableRef_FourCmovTemp*) malloc(TestArraySize * sizeof(SortableRef_FourCmovRegisterTemp));
 //     int start = 425;
 //     for (int i = 0; i < TestArraySize; i+= 1)
 //     {

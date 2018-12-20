@@ -6,13 +6,6 @@
 
 #include <algorithm>
 
-// void NetworkSortSimple_Generic(SortableRef* items);
-
-// void SortTestJumpXchg(SortableRef* items);
-// void SortTestTwoCmovTemp(SortableRef* items);
-// void SortTestThreeCmovVolatileTemp(SortableRef* items);
-// void SortTestThreeCmovRegisterTemp(SortableRef* items);
-
 namespace networks {
 
 template <typename TValueType>
@@ -21,13 +14,6 @@ void ConditionalSwap(TValueType& left, TValueType& right)
 {
     if (left > right) {std::swap(left, right); }
 }
-
-// template<>
-// inline
-// void ConditionalSwap<Sortable>(SortableRef& left, SortableRef& right)
-// {
-//     if (left.key > right.key) {std::swap(left, right); }
-// }
 
 template<>
 inline
@@ -166,29 +152,6 @@ void ConditionalSwap<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovRegiste
         : "cc" 
     ); 
 }
-
-// template<>
-// inline
-// void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, SortableRef_ClangVersion& right)
-// {
-//     register SortableRef_ClangVersion* leftPointer = &left;
-//     register SortableRef_ClangVersion* rightPointer = &right;
-//     register uint64_t registerThree = right.key;
-//     SortableRef_ClangVersion tmp = left;
-//     __asm__(
-//         "cmpq %[tmp_key],%[register_three]\n\t"
-//         "cmovbq %[right_pointer],%[left_pointer]\n\t"
-//         "movups (%[left_pointer]),%%xmm0\n\t"
-//         "movups %%xmm0,%[left]\n\t"
-//         "movq %[tmp_pointer],%[left_pointer]\n\t"
-//         "cmovaeq %[right_pointer],%[left_pointer]\n\t"
-//         "movups (%[left_pointer]),%%xmm0\n\t"
-//         "movups %%xmm0,%[right]\n\t"
-//         : [left] "=m"(left), [right] "=m"(right), [register_three] "+r"(registerThree), [left_pointer] "+r"(leftPointer)
-//         : [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [tmp_pointer] "r"(&tmp)
-//         : "cc", "%xmm0"
-//     );
-// }
 
 template<>
 inline

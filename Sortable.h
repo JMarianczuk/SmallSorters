@@ -111,18 +111,4 @@ struct SortableRef_ClangVersion {
     }
 };
 
-template <typename TValueType>
-static inline
-int GetStructSizeInBits()
-{
-    return 64;
-}
-
-template<>
-inline
-int GetStructSizeInBits<SortableRef>()
-{
-    return 128;
-}
-
 #endif

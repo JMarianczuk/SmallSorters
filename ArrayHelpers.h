@@ -20,14 +20,6 @@ bool IsSorted(TComparable* items, int arraySize) {
     }
     return true;
 }
-// bool IsSorted(Sortable* items, int arraySize) {
-//     for (int i = 0; i < arraySize - 1; i += 1) {
-//         if (items[i].key > items[i + 1].key) {
-//             return false;
-//         }
-//     }
-//     return true;
-// }
 
 template <typename TEquatable>
 bool IsPermutation(TEquatable* arr, TEquatable* reference, int arraySize) {

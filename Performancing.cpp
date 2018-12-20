@@ -1,5 +1,4 @@
-﻿// Performancing.cpp : Defines the entry point for the application.
-//
+﻿
 
 #include <inttypes.h>
 #include <string>
