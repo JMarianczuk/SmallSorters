@@ -1,7 +1,7 @@
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
-cd CMakeLists/SmallSortersPerformancing.dir
+cd build/CMakeLists/SmallSortersPerformancing.dir
 rm *.o
-cd ../..
+cd ../../..
 make
