@@ -22,7 +22,7 @@ set xlabel 'Number Of Items'
 set ylabel 'Cpu Cycles Needed'
 
 ## MULTIPLOT(sorter) SELECT array_size AS x, AVG(value / number_of_iterations) AS y, MULTIPLOT
-## FROM stats WHERE metric LIKE "Cpu Cycles" AND commit_id LIKE "7b27e90" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+## FROM stats WHERE metric LIKE "Cpu Cycles" AND commit_id LIKE "b84d2a5" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
 plot \
     'small_sorters-data.txt' index 0 title "sorter=Insertion Sort Key-Only" with linespoints, \
     'small_sorters-data.txt' index 1 title "sorter=Insertion Sort Key-Reference-Tuple" with linespoints, \
