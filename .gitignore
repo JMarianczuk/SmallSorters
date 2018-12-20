@@ -39,3 +39,5 @@ asm_test.cpp
 
 test
 test-O3.s
+
+build/commit.txt
