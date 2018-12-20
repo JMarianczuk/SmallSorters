@@ -1,0 +1,180 @@
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=416996	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=300083	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=434427	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=285066	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=417583	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=290214	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=418784	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=291461	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=416049	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=397071	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=294846	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=431197	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=2	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=550038	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=427032	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=567790	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=395388	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=544449	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=401702	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=524200	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=397399	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=520692	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=523423	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=430754	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=556525	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=3	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=703394	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=574812	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=706881	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=517009	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=669195	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=525475	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=646942	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=519069	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=641860	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=655010	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=582557	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=707225	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=4	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=847690	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=725263	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=862079	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=640881	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=800926	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=658348	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=822833	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=644101	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=779967	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=807751	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=735178	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=859681	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=5	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=1009029	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=874377	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=1007839	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=761430	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=900106	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=769655	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=925618	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=769605	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=919728	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=939070	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=882884	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1014377	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=6	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=1161628	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=1028699	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=1158751	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=883210	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1026974	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=913209	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=1093522	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=893197	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1029813	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1083832	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=1044475	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1171144	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=7	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=1328155	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=1189657	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=1325756	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1002477	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1174659	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1057621	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=1216331	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1016851	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1167736	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1218377	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=1208705	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1334235	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=8	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=1514330	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=1344432	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=1491813	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1125244	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1294466	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1183449	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=1403292	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1148996	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1315221	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1405931	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=1366868	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1490427	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=9	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=1656005	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=1516195	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=1693517	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1254366	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1428614	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1311291	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=1559730	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1275307	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1450100	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1508574	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=1539219	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1651171	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=10	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=1864136	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=1689999	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=1849568	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1379268	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1567136	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1434345	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=1716631	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1420592	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1590297	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1649946	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=1700800	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1812567	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=11	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=2021791	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=1859595	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=2040175	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1504443	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1729996	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1595627	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=1860018	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1537770	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1718143	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1785699	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=1861082	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=1967115	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=12	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=2210869	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=2027509	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=2235887	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1625581	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=1880158	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1731325	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=2035881	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1668987	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=1873654	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=1947481	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=2025139	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=2130784	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=13	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=2424104	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=2202330	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=2447652	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1754181	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=2041574	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=1870466	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=2199027	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1797108	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=2036481	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=2089187	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=2182261	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=2285538	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=14	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=2589935	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=2382552	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=2640067	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=1883822	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=2181506	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=2018987	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=2352557	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=1928726	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=2178893	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=2250097	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=2345807	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=2443261	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=15	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-Tuple	metric=Cpu Cycles	value=2811535	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-JumpXchg	metric=Cpu Cycles	value=2572300	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-JumpXchg	metric=Cpu Cycles	value=2856893	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-TwoCmovTemp	metric=Cpu Cycles	value=2007217	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-FourCmovTemp	metric=Cpu Cycles	value=2334816	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovVolatileTempl	metric=Cpu Cycles	value=2156979	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovVolatileTempl	metric=Cpu Cycles	value=2515537	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-ThreeCmovRegisterTemp	metric=Cpu Cycles	value=2057779	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-SixCmovRegisterTemp	metric=Cpu Cycles	value=2323138	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Network Key-Reference-ClangVersion	metric=Cpu Cycles	value=2380912	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=100
+RESULT	sorter=Insertion Sort Key-Only	metric=Cpu Cycles	value=2506770	commit_id=7b27e90	computer_name=i10pc133	struct_size=8	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
+RESULT	sorter=Insertion Sort Key-Reference-Tuple	metric=Cpu Cycles	value=2606414	commit_id=7b27e90	computer_name=i10pc133	struct_size=16	array_size=16	number_of_iterations=1000	number_of_bad_sorts=0
