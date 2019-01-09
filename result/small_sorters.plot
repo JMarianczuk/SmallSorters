@@ -22,18 +22,13 @@ set xlabel 'Number Of Items'
 set ylabel 'Cpu Cycles Needed'
 
 ## MULTIPLOT(sorter) SELECT array_size AS x, AVG(value / number_of_iterations) AS y, MULTIPLOT
-## FROM stats WHERE metric LIKE "Cpu Cycles" AND commit_id LIKE "b84d2a5" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+## FROM stats WHERE metric LIKE "Cpu Cycles" AND commit_id LIKE "41a9f99" GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
 plot \
-    'small_sorters-data.txt' index 0 title "sorter=Insertion Sort Key-Only" with linespoints, \
-    'small_sorters-data.txt' index 1 title "sorter=Insertion Sort Key-Reference-Tuple" with linespoints, \
-    'small_sorters-data.txt' index 2 title "sorter=Network Key-JumpXchg" with linespoints, \
-    'small_sorters-data.txt' index 3 title "sorter=Network Key-Reference-ClangVersion" with linespoints, \
-    'small_sorters-data.txt' index 4 title "sorter=Network Key-Reference-FourCmovTemp" with linespoints, \
-    'small_sorters-data.txt' index 5 title "sorter=Network Key-Reference-JumpXchg" with linespoints, \
-    'small_sorters-data.txt' index 6 title "sorter=Network Key-Reference-SixCmovRegisterTemp" with linespoints, \
-    'small_sorters-data.txt' index 7 title "sorter=Network Key-Reference-SixCmovVolatileTempl" with linespoints, \
-    'small_sorters-data.txt' index 8 title "sorter=Network Key-Reference-Tuple" with linespoints, \
-    'small_sorters-data.txt' index 9 title "sorter=Network Key-ThreeCmovRegisterTemp" with linespoints, \
-    'small_sorters-data.txt' index 10 title "sorter=Network Key-ThreeCmovVolatileTempl" with linespoints, \
-    'small_sorters-data.txt' index 11 title "sorter=Network Key-TwoCmovTemp" with linespoints
+    'small_sorters-data.txt' index 0 title "sorter=Insertion Sort Key-Reference-Tuple" with linespoints, \
+    'small_sorters-data.txt' index 1 title "sorter=Network Key-Reference-ClangVersion" with linespoints, \
+    'small_sorters-data.txt' index 2 title "sorter=Network Key-Reference-FourCmovTemp" with linespoints, \
+    'small_sorters-data.txt' index 3 title "sorter=Network Key-Reference-JumpXchg" with linespoints, \
+    'small_sorters-data.txt' index 4 title "sorter=Network Key-Reference-SixCmovRegisterTemp" with linespoints, \
+    'small_sorters-data.txt' index 5 title "sorter=Network Key-Reference-SixCmovVolatileTempl" with linespoints, \
+    'small_sorters-data.txt' index 6 title "sorter=Network Key-Reference-Tuple" with linespoints
 

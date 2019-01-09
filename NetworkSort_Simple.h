@@ -56,8 +56,8 @@ void ConditionalSwap<Sortable_TwoCmovTemp>(Sortable_TwoCmovTemp& left, Sortable_
         "cmpq %[left_key],%[right_key]\n\t" 
         "cmovbq %[right_key],%[left_key]\n\t" 
         "cmovbq %[tmp],%[right_key]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [tmp] "+r"(tmp) 
-        : 
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key)
+        : [tmp] "r"(tmp) 
         : "cc" 
     ); \
 }
@@ -73,8 +73,8 @@ void ConditionalSwap<SortableRef_FourCmovTemp>(SortableRef_FourCmovTemp& left, S
         "cmovbq %[right_reference],%[left_reference]\n\t"
         "cmovbq %[tmp],%[right_key]\n\t"
         "cmovbq %[tmp_ref],%[right_reference]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference), [tmp] "+r"(tmp), [tmp_ref] "+r"(tmpRef)
-        : 
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference)
+        : [tmp] "r"(tmp), [tmp_ref] "r"(tmpRef)
         : "cc" 
     ); \
 }
