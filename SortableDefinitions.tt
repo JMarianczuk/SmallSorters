@@ -1,0 +1,82 @@
+<#@ template language="C#" #>
+<#@ output extension="/" #>
+
+<#
+    SortableStruct.transform = this;
+
+    SortableStruct[] sortableStructs = {
+        new SortableStruct("", true, "Key-Reference-Tuple"),
+        new SortableStruct("JumpXchg", false),
+        new SortableStruct("JumpXchg", true),
+        new SortableStruct("TwoCmovTemp", false),
+        new SortableStruct("FourCmovTemp", true),
+        new SortableStruct("FourCmovTemp_Split", true),
+        new SortableStruct("ThreeCmovRegisterTemp", false),
+        new SortableStruct("SixCmovRegisterTemp", true),
+        new SortableStruct("ClangVersion", true)
+    };
+#>
+<#+
+    class SortableStruct 
+    { 
+		public static GeneratedTextTransformation transform;
+        public string Name {get;set;} 
+        public string DisplayName {get;set;}
+        public bool HasReference {get;set;}
+        public SortableStruct(string name, bool hasReference, string displayName = null)
+        {
+            Name = name;
+            HasReference = hasReference;
+            if (!string.IsNullOrEmpty(displayName))
+            {
+                DisplayName = displayName;
+            }
+            else 
+            {
+                DisplayName = "Key-";
+                if (HasReference)
+                {
+                    DisplayName += "Reference-";
+                }
+                DisplayName += Name;
+            }
+        }
+        public string FullName
+        {
+            get 
+            {
+                var result = "Sortable";
+                if (HasReference)
+                {
+                    result += "Ref";
+                }
+                if (!string.IsNullOrEmpty(Name))
+                {
+                    result += $"_{Name}";
+                }
+                return result;
+            }
+        }
+        public void WriteVariables()
+        {
+            transform.WriteLine("uint64_t key;");
+            if (HasReference)
+            {
+                transform.WriteLine("uint64_t reference;");
+            }
+        }
+        public void WriteOperators()
+        {
+            transform.WriteLine($"friend bool operator>(const {FullName}& left, const {FullName}& right) {{");
+            transform.PushIndent("\t");
+            transform.WriteLine("return left.key > right.key;");
+            transform.PopIndent();
+            transform.WriteLine("}");
+            transform.WriteLine($"friend bool operator==(const {FullName}&left, const {FullName}&right) {{");
+            transform.PushIndent("\t");
+            transform.WriteLine("return left.key == right.key;");
+            transform.PopIndent();
+            transform.WriteLine("}");
+        }
+    }
+#>

@@ -12,72 +12,9 @@
 #include "EnvironmentInfo.h"
 #include "Randomisation.h"
 #include "ArrayHelpers.h"
+#include "Sortable.generated.h"
+#include "Measurement.generated.h"
 
-template <typename TValueType>
-void Measure(
-    Performancing* perf,
-    EnvironmentInfo info,
-    int numberOfIterations,
-    int arraySize,
-    std::string sorterName,
-    void(*sortFunc)(TValueType*,size_t))
-{
-    TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
-    
-    int numberOfBadSorts = 0;
-    randomisation::GenerateRandomArray(arr, arraySize);
-    sortFunc(arr, arraySize);
-    if (!IsSorted(arr, arraySize)) 
-    {
-        numberOfBadSorts += 1;
-    }
-
-    perf->StartMeasuring();
-    for (int i = 0; i < numberOfIterations; i += 1)
-    {
-        randomisation::GenerateRandomArray(arr, arraySize);
-        sortFunc(arr, arraySize);
-        if (!IsSorted(arr, arraySize))
-        {
-            numberOfBadSorts += 1;
-        }
-    }
-    perf->StopMeasuring();
-
-    WriteResultLine(
-        sorterName,
-        perf,
-        info,
-        sizeof(TValueType),
-        arraySize,
-        numberOfIterations,
-        numberOfBadSorts
-    );
-
-    free(arr);
-}
-
-template <typename TValueType>
-void MeasureInsertionSort(
-    Performancing* perf, 
-    EnvironmentInfo info, 
-    int numberOfIterations, 
-    int arraySize,
-    std::string sorterName) 
-{
-    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &insertionsort::InsertionSort<TValueType>);
-}
-
-template <typename TValueType>
-void MeasureNetworkSort(
-    Performancing* perf, 
-    EnvironmentInfo info, 
-    int numberOfIterations, 
-    int arraySize,
-    std::string sorterName) 
-{
-    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &networks::sortN<TValueType>);
-}
 
 void SetOutputFile() {
     time_t now = time(0);
@@ -124,21 +61,15 @@ int main()
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            MeasureNetworkSort<SortableRef>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-Tuple");
-
-            // MeasureNetworkSort<Sortable_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-JumpXchg");
-            MeasureNetworkSort<SortableRef_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-JumpXchg");
-
-            // MeasureNetworkSort<Sortable_TwoCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-TwoCmovTemp");
-            MeasureNetworkSort<SortableRef_FourCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-FourCmovTemp");
-
-            // MeasureNetworkSort<Sortable_ThreeCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovRegisterTemp");
-            MeasureNetworkSort<SortableRef_SixCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-SixCmovRegisterTemp");
-
-            MeasureNetworkSort<SortableRef_ClangVersion>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-ClangVersion");
-
-            // MeasureInsertionSort<Sortable_JumpXchg>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Only");
-            MeasureInsertionSort<SortableRef>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
+            measurement::MeasureSorting(perf, info, NumberOfIterations, arraySize);
+        }
+    }
+    randomisation::SetSeed(seed);
+    for (int numberOfMeasures = 0; numberOfMeasure < NumberOfMeasures; numberOfMeasure += 1)
+    {
+        for (int arraySize = 2; arraySize <= 16; arraySize += 1)
+        {
+            measurement::MeasureRandomGenerationAndSortedChecking(perf, info, NumberOfIterations, arraySize);
         }
     }
 	delete perf_cpu_cycles;
