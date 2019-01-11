@@ -22,7 +22,7 @@ bool IsSorted(TComparable* items, size_t arraySize) {
 }
 
 template <typename TComparable>
-bool HasEqualNeighbour(TComparable* source, size_t arraySize) {
+bool HasEqualNeighbour(TComparable* items, size_t arraySize) {
     for (int i = 0; i < arraySize - 1; i += 1) {
         if (items[i] == items[i + 1]) {
             return true;

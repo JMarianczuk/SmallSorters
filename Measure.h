@@ -2,6 +2,10 @@
 #ifndef MEASURE_H
 #define MEASURE_H
 
+#include <string>
+
+#include "Result.h"
+
 namespace measurement
 {
     
@@ -43,7 +47,8 @@ void Measure(
         sizeof(TValueType),
         arraySize,
         numberOfIterations,
-        numberOfBadSorts
+        numberOfBadSorts,
+        true
     );
 
     free(arr);
@@ -71,11 +76,13 @@ void MeasureNetworkSort(
     Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &networks::sortN<TValueType>);
 }
 
+template <typename TValueType>
 void MeasureRandomGeneration(
     Performancing* perf,
     EnvironmentInfo info,
     int numberOfIterations,
-    size_t arraySize)
+    size_t arraySize,
+    std::string sorterName)
 {
     TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
 
@@ -97,7 +104,16 @@ void MeasureRandomGeneration(
     }
     perf->StopMeasuring();
 
-    WriteResultLine()
+    WriteResultLine(
+        sorterName,
+        perf,
+        info,
+        sizeof(TValueType),
+        arraySize,
+        numberOfIterations,
+        numberOfEqualNeighbours,
+        false
+    );
 }
 
 }

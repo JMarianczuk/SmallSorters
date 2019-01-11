@@ -3,6 +3,8 @@
 <#@ include file="SortableDefinitions.tt"#>
 <#@ assembly name="System.Core"#>
 
+<#@ import namespace="System"#>
+<#@ import namespace="System.Collections.Generic"#>
 <#@ import namespace="System.Linq"#>
 
 //------------------------------------------------------------------------------
@@ -30,15 +32,9 @@ void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfItera
 {
 <#
     PushIndent("\t");
-    foreach (var sortableStruct in sortableStructs.Where(UseForNetworkSort))
-    {
-        WriteLine($"MeasureNetworkSort<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"Network {sortableStruct.DisplayName}\")");
-    }
+    WriteSorterMeasureLine(sortableStructs.Where(UseForNetworkSort), "Network");
     WriteLine("");
-    foreach (var sortableStruct in sortableStructs.Where(UseForInsertionSort))
-    {
-        WriteLine($"MeasureInsertionSort<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"Insertion Sort {sortableStruct.DisplayName}\")");
-    }
+    WriteSorterMeasureLine(sortableStructs.Where(UseForInsertionSort), "Insertion");
     PopIndent();
 #>
 }
@@ -47,10 +43,9 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
 {
 <#
     PushIndent("\t");
-    for (int i = 0; i < sortableStructs.Count(UseForNetworkSort) + sortableStructs.Count(UseForInsertionSort); i += 1)
-    {
-        WriteLine("MeasureRandomGeneration(perf, info, numberOfIterations, arraySize)");
-    }
+    WriteRandomMeasureLine(sortableStructs.Where(UseForNetworkSort), "Network");
+    WriteLine("");
+    WriteRandomMeasureLine(sortableStructs.Where(UseForInsertionSort), "Insertion");
     PopIndent();
 #>
 }
@@ -60,6 +55,21 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
 #endif
 
 <#
+    void WriteSorterMeasureLine(IEnumerable<SortableStruct> structs, string sorter)
+    {
+        WriteMeasureLine(structs, $"{sorter}Sort", sorter);
+    }
+    void WriteRandomMeasureLine(IEnumerable<SortableStruct> structs, string sorter)
+    {
+        WriteMeasureLine(structs, "RandomGeneration", sorter);
+    }
+    void WriteMeasureLine(IEnumerable<SortableStruct> structs, string toMeasure, string sorter)
+    {
+        foreach (var sortableStruct in structs)
+        {
+            WriteLine($"measurement::Measure{toMeasure}<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\");");
+        }
+    }
     bool UseForNetworkSort(SortableStruct sortableStruct)
     {
         return sortableStruct.HasReference;

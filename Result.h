@@ -16,7 +16,8 @@ void WriteResultLine(
     int structSize,
     int arraySize,
     int numberOfIterations, 
-    int numberOfBadSorts) 
+    int numberOfBadSorts,
+    bool isActualSorterMeasurement) 
 {
     std::string metric_name;
 

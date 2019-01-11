@@ -61,15 +61,15 @@ int main()
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            measurement::MeasureSorting(perf, info, NumberOfIterations, arraySize);
+            measurement::MeasureSorting(perf_cpu_cycles, info, NumberOfIterations, arraySize);
         }
     }
     randomisation::SetSeed(seed);
-    for (int numberOfMeasures = 0; numberOfMeasure < NumberOfMeasures; numberOfMeasure += 1)
+    for (int numberOfMeasures = 0; numberOfMeasures < NumberOfMeasures; numberOfMeasures += 1)
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            measurement::MeasureRandomGenerationAndSortedChecking(perf, info, NumberOfIterations, arraySize);
+            measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, info, NumberOfIterations, arraySize);
         }
     }
 	delete perf_cpu_cycles;
