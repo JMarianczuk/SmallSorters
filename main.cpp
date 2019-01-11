@@ -143,7 +143,9 @@ void test() {
 
 int main()
 {
-    srand(time(NULL));
+    // srand(time(NULL));
+    auto seed = time(NULL);
+    SetSeed(seed);
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();

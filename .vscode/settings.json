@@ -12,6 +12,7 @@
         "ios": "cpp",
         "initializer_list": "cpp",
         "type_traits": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "random": "cpp"
     }
 }

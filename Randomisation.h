@@ -5,15 +5,21 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <stdexcept>
+#include <random>
 
+äinclude "Numbers.h"
 #include "Sortable.h"
 
+std::default_random_engine randomisation_h_generator;
+std::uniform_int_distribution<unsigned long long> randomisation_h_distribution(0, UINT_64_MAX_VALUE);
+auto randomisation_h_dice = std::bind(randomisation_h_distribution, randomisation_h_generator);
+
+static void SetSeed(unsigned long seed) {
+    randomisation_h_generator.seed(seed);
+}
+
 static uint64_t GenerateRandomUint64() {
-    uint64_t number = rand();
-    for (int i = 0; i < 3; i += 1) {
-        number = (number << 16) | rand();
-    }
-    return number;
+    return (uint64_t) randomisation_h_dice();
 }
 
 template <typename TValueType>
