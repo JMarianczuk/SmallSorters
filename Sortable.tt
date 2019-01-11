@@ -1,4 +1,4 @@
-<#@ template language="C#" hostspecific="True"
+<#@ template language="C#" hostspecific="False" compilerOptions="/langversion:6"
 #><#@ output extension=".generated.h"
 #>
 
@@ -22,10 +22,12 @@
 <#	SortableStruct.transform = this;
 
     SortableStruct[] sortableStructs = {
+        new SortableStruct("", true),
         new SortableStruct("JumpXchg", false),
         new SortableStruct("JumpXchg", true),
         new SortableStruct("TwoCmovTemp", false),
         new SortableStruct("FourCmovTemp", true),
+        new SortableStruct("FourCmovTemp_Split", true),
         new SortableStruct("ThreeCmovRegisterTemp", false),
         new SortableStruct("SixCmovRegisterTemp", true),
         new SortableStruct("ClangVersion", true)
@@ -64,23 +66,29 @@
                 {
                     result += "Ref";
                 }
-                result += "_";
-                result += Name;
+                if (!string.IsNullOrEmpty(Name))
+                {
+                    result += $"_{Name}";
+                }
                 return result;
             }
         }
         public void WriteVariables()
         {
-            transform.WriteLine("uint64_t key" + (HasReference ? ", reference" : "") + ";");
+            transform.WriteLine("uint64_t key;");
+            if (HasReference)
+            {
+                transform.WriteLine("uint64_t reference;");
+            }
         }
         public void WriteOperators()
         {
-            transform.WriteLine("friend bool operator>(const " + FullName + "& left, const " + FullName + "& right)" + " {");
+            transform.WriteLine($"friend bool operator>(const {FullName}& left, const {FullName}& right) {{");
             transform.PushIndent("\t");
             transform.WriteLine("return left.key > right.key;");
             transform.PopIndent();
             transform.WriteLine("}");
-            transform.WriteLine("friend bool operator==(const " + FullName + "&left, const " + FullName + "&right)" + " {");
+            transform.WriteLine($"friend bool operator==(const {FullName}&left, const {FullName}&right) {{");
             transform.PushIndent("\t");
             transform.WriteLine("return left.key == right.key;");
             transform.PopIndent();

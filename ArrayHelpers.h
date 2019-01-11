@@ -2,7 +2,7 @@
 #ifndef ARRAY_HELPERS_H
 #define ARRAY_HELPERS_H
 
-#include "Sortable.h"
+#include "Sortable.generated.h"
 
 template <typename TValueType>
 void CopyArray(TValueType* source, TValueType* destination, int arraySize) {

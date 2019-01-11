@@ -2,7 +2,7 @@
 #ifndef NETWORK_SORT_SIMPLE_H
 #define NETWORK_SORT_SIMPLE_H
 
-#include "Sortable.h"
+#include "Sortable.generated.h"
 
 #include <algorithm>
 
@@ -78,45 +78,6 @@ void ConditionalSwap<SortableRef_FourCmovTemp>(SortableRef_FourCmovTemp& left, S
         : "cc" 
     ); \
 }
-
-
-
-template<>
-inline
-void ConditionalSwap<Sortable_ThreeCmovVolatileTemp>(Sortable_ThreeCmovVolatileTemp& left, Sortable_ThreeCmovVolatileTemp& right)
-{
-    volatile uint64_t tmp; 
-    __asm__ ( 
-        "cmpq %[left_key],%[right_key]\n\t" 
-        "cmovbq %[left_key],%[tmp]\n\t"
-        "cmovbq %[right_key],%[left_key]\n\t" 
-        "cmovbq %[tmp],%[right_key]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [tmp] "+r"(tmp) 
-        : 
-        : "cc" 
-    ); 
-}
-template<>
-inline
-void ConditionalSwap<SortableRef_SixCmovVolatileTemp>(SortableRef_SixCmovVolatileTemp& left, SortableRef_SixCmovVolatileTemp& right)
-{
-    volatile uint64_t tmp;
-    volatile uint64_t tmpRef;
-    __asm__ ( 
-        "cmpq %[left_key],%[right_key]\n\t" 
-        "cmovbq %[left_key],%[tmp]\n\t"
-        "cmovbq %[left_reference],%[tmp_ref]\n\t"
-        "cmovbq %[right_key],%[left_key]\n\t" 
-        "cmovbq %[right_reference],%[left_reference]\n\t"
-        "cmovbq %[tmp],%[right_key]\n\t"
-        "cmovbq %[tmp_ref],%[right_reference]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference), [tmp] "+r"(tmp), [tmp_ref] "+r"(tmpRef)
-        : 
-        : "cc" 
-    ); 
-}
-
-
 
 template<>
 inline

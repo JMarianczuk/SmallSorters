@@ -2,13 +2,13 @@
 #ifndef INSERTION_SORT_H
 #define INSERTION_SORT_H
 
-#include "Sortable.h"
+#include "Sortable.generated.h"
 
 namespace insertionsort {
 
 template <typename TValueType>
 static inline
-void InsertionSort(TValueType* items, int arraySize) {
+void InsertionSort(TValueType* items, size_t arraySize) {
     int inner, outer;
     for (outer = 1; outer < arraySize; outer += 1) {
         TValueType current = items[outer];

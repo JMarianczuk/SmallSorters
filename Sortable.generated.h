@@ -16,6 +16,16 @@
 #include <inttypes.h>
 
 
+struct SortableRef {
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef& left, const SortableRef& right) {
+		return left.key > right.key;
+	}
+	friend bool operator==(const SortableRef&left, const SortableRef&right) {
+		return left.key == right.key;
+	}
+};
 struct Sortable_JumpXchg {
 	uint64_t key;
 	friend bool operator>(const Sortable_JumpXchg& left, const Sortable_JumpXchg& right) {
@@ -26,7 +36,8 @@ struct Sortable_JumpXchg {
 	}
 };
 struct SortableRef_JumpXchg {
-	uint64_t key, reference;
+	uint64_t key;
+	uint64_t reference;
 	friend bool operator>(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right) {
 		return left.key > right.key;
 	}
@@ -44,11 +55,22 @@ struct Sortable_TwoCmovTemp {
 	}
 };
 struct SortableRef_FourCmovTemp {
-	uint64_t key, reference;
+	uint64_t key;
+	uint64_t reference;
 	friend bool operator>(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right) {
 		return left.key > right.key;
 	}
 	friend bool operator==(const SortableRef_FourCmovTemp&left, const SortableRef_FourCmovTemp&right) {
+		return left.key == right.key;
+	}
+};
+struct SortableRef_FourCmovTemp_Split {
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef_FourCmovTemp_Split& left, const SortableRef_FourCmovTemp_Split& right) {
+		return left.key > right.key;
+	}
+	friend bool operator==(const SortableRef_FourCmovTemp_Split&left, const SortableRef_FourCmovTemp_Split&right) {
 		return left.key == right.key;
 	}
 };
@@ -62,7 +84,8 @@ struct Sortable_ThreeCmovRegisterTemp {
 	}
 };
 struct SortableRef_SixCmovRegisterTemp {
-	uint64_t key, reference;
+	uint64_t key;
+	uint64_t reference;
 	friend bool operator>(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right) {
 		return left.key > right.key;
 	}
@@ -71,7 +94,8 @@ struct SortableRef_SixCmovRegisterTemp {
 	}
 };
 struct SortableRef_ClangVersion {
-	uint64_t key, reference;
+	uint64_t key;
+	uint64_t reference;
 	friend bool operator>(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right) {
 		return left.key > right.key;
 	}

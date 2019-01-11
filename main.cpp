@@ -13,32 +13,20 @@
 #include "Randomisation.h"
 #include "ArrayHelpers.h"
 
-void PrintArray(std::string descriptor, SortableRef_ClangVersion* arr) {
-    printf("%s: \nKeys: ", descriptor.c_str());
-    for (int i = 0; i < ArraySize; i += 1) {
-        printf("%i: %" PRIu64 ", ", i, arr[i].key);
-    }
-    printf("\nReferences: ");
-    for (int i = 0; i < ArraySize; i += 1) {
-        printf("%i: %" PRIu64 ", ", i, arr[i].reference);
-    }
-    printf("\n");
-    
-}
-
 template <typename TValueType>
-void MeasureInsertionSort(
-    Performancing* perf, 
-    EnvironmentInfo info, 
-    int numberOfIterations, 
+void Measure(
+    Performancing* perf,
+    EnvironmentInfo info,
+    int numberOfIterations,
     int arraySize,
-    std::string sorterName) 
+    std::string sorterName,
+    void(*sortFunc)(TValueType*,size_t))
 {
     TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
     
     int numberOfBadSorts = 0;
-    GenerateRandomArray(arr, arraySize);
-    insertionsort::InsertionSort(arr, arraySize);
+    randomisation::GenerateRandomArray(arr, arraySize);
+    sortFunc(arr, arraySize);
     if (!IsSorted(arr, arraySize)) 
     {
         numberOfBadSorts += 1;
@@ -47,8 +35,8 @@ void MeasureInsertionSort(
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
-        GenerateRandomArray(arr, arraySize);
-        insertionsort::InsertionSort(arr, arraySize);
+        randomisation::GenerateRandomArray(arr, arraySize);
+        sortFunc(arr, arraySize);
         if (!IsSorted(arr, arraySize))
         {
             numberOfBadSorts += 1;
@@ -70,6 +58,17 @@ void MeasureInsertionSort(
 }
 
 template <typename TValueType>
+void MeasureInsertionSort(
+    Performancing* perf, 
+    EnvironmentInfo info, 
+    int numberOfIterations, 
+    int arraySize,
+    std::string sorterName) 
+{
+    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &insertionsort::InsertionSort<TValueType>);
+}
+
+template <typename TValueType>
 void MeasureNetworkSort(
     Performancing* perf, 
     EnvironmentInfo info, 
@@ -77,39 +76,7 @@ void MeasureNetworkSort(
     int arraySize,
     std::string sorterName) 
 {
-    TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
-
-    int numberOfBadSorts = 0;
-    GenerateRandomArray(arr, arraySize);
-    networks::sortN(arr, arraySize);
-    if (!IsSorted(arr, arraySize)) 
-    {
-        numberOfBadSorts += 1;
-    }
-
-    perf->StartMeasuring();
-    for (int i = 0; i < numberOfIterations; i += 1)
-    {
-        GenerateRandomArray(arr, arraySize);
-        networks::sortN(arr, arraySize);
-        if (!IsSorted(arr, arraySize)) 
-        {
-            numberOfBadSorts += 1;
-        }
-    }
-    perf->StopMeasuring();
-
-    WriteResultLine(
-        sorterName,
-        perf,
-        info,
-        sizeof(TValueType),
-        arraySize,
-        numberOfIterations,
-        numberOfBadSorts
-    );
-
-    free(arr);
+    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &networks::sortN<TValueType>);
 }
 
 void SetOutputFile() {
@@ -127,14 +94,12 @@ void test() {
     SortableRef a1 = {6, 5}, b1 = {4, 7};
     Sortable_JumpXchg a2 = {6}, b2 = {4};
     Sortable_TwoCmovTemp a3 = {6}, b3 = {4};
-    Sortable_ThreeCmovVolatileTemp a4 = {6}, b4 = {4};
     Sortable_ThreeCmovRegisterTemp a5 = {6}, b5 = {4};
 
     networks::ConditionalSwap(a, b);
     networks::ConditionalSwap(a1, b1);
     networks::ConditionalSwap(a2, b2);
     networks::ConditionalSwap(a3, b3);
-    networks::ConditionalSwap(a4, b4);
     networks::ConditionalSwap(a5, b5);
 }
 
@@ -145,7 +110,7 @@ int main()
 {
     // srand(time(NULL));
     auto seed = time(NULL);
-    SetSeed(seed);
+    randomisation::SetSeed(seed);
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();
@@ -166,9 +131,6 @@ int main()
 
             // MeasureNetworkSort<Sortable_TwoCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-TwoCmovTemp");
             MeasureNetworkSort<SortableRef_FourCmovTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-FourCmovTemp");
-
-            // MeasureNetworkSort<Sortable_ThreeCmovVolatileTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovVolatileTempl");
-            MeasureNetworkSort<SortableRef_SixCmovVolatileTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-SixCmovVolatileTempl");
 
             // MeasureNetworkSort<Sortable_ThreeCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-ThreeCmovRegisterTemp");
             MeasureNetworkSort<SortableRef_SixCmovRegisterTemp>(perf_cpu_cycles, info, NumberOfIterations, arraySize, "Network Key-Reference-SixCmovRegisterTemp");
