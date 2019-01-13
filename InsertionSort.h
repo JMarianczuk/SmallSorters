@@ -28,7 +28,7 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
         SortableRef_StlVersion* next_temp = next;
         SortableRef_StlVersion val = *next;
 
-        if (val <= *first)
+        if (val < *first)
         {
             next_temp++;
             while (first != next)
@@ -40,7 +40,7 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
         else
         {
             for (SortableRef_StlVersion* first_temp = next_temp; 
-                val <= *--first_temp; 
+                val < *--first_temp; 
                 next_temp = first_temp)
             {
                 *next_temp = *first_temp;

@@ -7,13 +7,12 @@
 #include <stdexcept>
 #include <random>
 
-#include "Numbers.h"
 #include "Sortable.generated.h"
 
 namespace randomisation {
 
 std::default_random_engine generator;
-std::uniform_int_distribution<unsigned long long> distribution(0, UINT_64_MAX_VALUE);
+std::uniform_int_distribution<unsigned long long> distribution(0); //default top limit at numeric_limit<unsigned long long>()
 
 void SetSeed(unsigned long seed) {
     generator.seed(seed);
