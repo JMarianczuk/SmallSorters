@@ -31,7 +31,7 @@ namespace measurement
 void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfIterations, size_t arraySize)
 {
 <#
-    PushIndent("\t");
+    PushIndent("\t"); 
     WriteSorterMeasureLine(sortableStructs.Where(UseForNetworkSort), "Network");
     WriteLine("");
     WriteSorterMeasureLine(sortableStructs.Where(UseForInsertionSort), "Insertion");

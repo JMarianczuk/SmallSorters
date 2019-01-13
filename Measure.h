@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Result.h"
+#include "Randomisation.generated.h"
 
 namespace measurement
 {
