@@ -6,7 +6,7 @@
 
 #include "Performancing.h"
 #include "InsertionSort.h"
-#include "NetworkSort_Simple.h"
+#include "NetworkSort.h"
 #include "Result.h"
 #include "GitInfo.h"
 #include "EnvironmentInfo.h"

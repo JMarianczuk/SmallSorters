@@ -13,7 +13,8 @@
         new SortableStruct("FourCmovTemp_Split", true),
         new SortableStruct("ThreeCmovRegisterTemp", false),
         new SortableStruct("SixCmovRegisterTemp", true),
-        new SortableStruct("ClangVersion", true)
+        new SortableStruct("ClangVersion", true),
+        new SortableStruct("StlVersion", true),
     };
 #>
 <#+
@@ -67,14 +68,15 @@
         }
         public void WriteOperators()
         {
-            transform.WriteLine($"friend bool operator>(const {FullName}& left, const {FullName}& right) {{");
+            WriteOperatorInternal(">");
+            WriteOperatorInternal("==");
+            WriteOperatorInternal("<=");
+        }
+        private void WriteOperatorInternal(string operatorSymbol)
+        {
+            transform.WriteLine($"friend bool operator{operatorSymbol}(const {FullName}& left, const {FullName}& right) {{");
             transform.PushIndent("\t");
-            transform.WriteLine("return left.key > right.key;");
-            transform.PopIndent();
-            transform.WriteLine("}");
-            transform.WriteLine($"friend bool operator==(const {FullName}&left, const {FullName}&right) {{");
-            transform.PushIndent("\t");
-            transform.WriteLine("return left.key == right.key;");
+            transform.WriteLine($"return left.key {operatorSymbol} right.key;");
             transform.PopIndent();
             transform.WriteLine("}");
         }

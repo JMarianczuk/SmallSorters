@@ -1,7 +1,7 @@
 
 // #include <fstream>
 
-#include "NetworkSort_Simple.h"
+#include "NetworkSort.h"
 
 #define TestArraySize 3
 

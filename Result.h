@@ -38,7 +38,7 @@ void WriteResultLine(
     }
 
     printf(
-        "RESULT\tsorter=%s\tmetric=%s\tvalue=%" PRIu64 "\tcommit_id=%s\tcomputer_name=%s\tstruct_size=%i\tarray_size=%i\tnumber_of_iterations=%i\tnumber_of_bad_sorts=%i\n", 
+        "RESULT\tsorter=%s\tmetric=%s\tvalue=%" PRIu64 "\tcommit_id=%s\tcomputer_name=%s\tstruct_size=%i\tarray_size=%i\tnumber_of_iterations=%i\tnumber_of_bad_sorts=%i\tcompensation_measurement=%i\n", 
 
         sorter.c_str(), 
         metric_name.c_str(), 
@@ -48,7 +48,8 @@ void WriteResultLine(
         structSize,
         arraySize,
         numberOfIterations, 
-        numberOfBadSorts); 
+        numberOfBadSorts,
+        isActualSorterMeasurement ? 0 : 1); 
 }
 
 #endif
