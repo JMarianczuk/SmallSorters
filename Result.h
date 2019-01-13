@@ -5,6 +5,8 @@
 #include <inttypes.h>
 #include <string>
 #include <stdexcept>
+#include <iostream>
+
 #include "Enumerations.h"
 #include "Performancing.h"
 #include "EnvironmentInfo.h"
