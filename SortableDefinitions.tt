@@ -39,7 +39,7 @@
                 {
                     DisplayName += "Reference-";
                 }
-                DisplayName += Name;
+                DisplayName += Name.Replace("_", "-");
             }
         }
         public string FullName

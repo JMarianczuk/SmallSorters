@@ -56,6 +56,7 @@ void Measure(
 }
 
 template <typename TValueType>
+static inline
 void MeasureInsertionSort(
     Performancing* perf, 
     EnvironmentInfo info, 
@@ -67,6 +68,7 @@ void MeasureInsertionSort(
 }
 
 template <typename TValueType>
+static inline
 void MeasureNetworkSort(
     Performancing* perf, 
     EnvironmentInfo info, 
@@ -115,6 +117,8 @@ void MeasureRandomGeneration(
         numberOfEqualNeighbours,
         false
     );
+
+    free(arr);
 }
 
 }

@@ -72,10 +72,10 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
     }
     bool UseForNetworkSort(SortableStruct sortableStruct)
     {
-        return sortableStruct.HasReference;
+        return sortableStruct.HasReference && !sortableStruct.FullName.Contains("Stl");
     }
     bool UseForInsertionSort(SortableStruct sortableStruct)
     {
-        return sortableStruct.FullName == "SortableRef";
+        return sortableStruct.FullName == "SortableRef" || sortableStruct.FullName.Contains("Stl");
     }
 #>
