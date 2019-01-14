@@ -126,7 +126,7 @@ void ConditionalSwap<Sortable_ThreeCmovRegisterTemp>(Sortable_ThreeCmovRegisterT
         "cmovbq %[left_key],%[tmp]\n\t"
         "cmovbq %[right_key],%[left_key]\n\t" 
         "cmovbq %[tmp],%[right_key]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [tmp] "+r"(tmp) \
+        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [tmp] "+r"(tmp)
         : 
         : "cc" 
     ); 
