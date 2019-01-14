@@ -26,7 +26,7 @@ namespace randomisation
 
 template<typename TValueType>
 void GenerateRandomArray(TValueType* arr, size_t arraySize) {
-    throw std::logic_error("Not implemented for generic type");
+    throw std::logic_error("randomisation::GenerateRandomArray => Not implemented for generic type");
 }
 
 <#

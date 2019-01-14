@@ -34,7 +34,7 @@ void WriteResultLine(
             metric_name = "Branch Misses";
             break;
         default:
-            throw std::logic_error("Missing Performance Metric!");
+            throw std::logic_error("Result_h::WriteResultLine => Missing Performance Metric!");
     }
 
     printf(

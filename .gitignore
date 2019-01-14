@@ -43,3 +43,5 @@ test-O3.s
 build/commit.txt
 result/small_sorters_eval.pdf
 result/small_sorters-data.txt
+
+db.sqlite

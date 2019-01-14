@@ -21,7 +21,7 @@ namespace randomisation
 
 template<typename TValueType>
 void GenerateRandomArray(TValueType* arr, size_t arraySize) {
-    throw std::logic_error("Not implemented for generic type");
+    throw std::logic_error("randomisation::GenerateRandomArray => Not implemented for generic type");
 }
 
 template<>
@@ -84,6 +84,14 @@ void GenerateRandomArray<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovReg
 }
 template<>
 void GenerateRandomArray<SortableRef_ClangVersion>(SortableRef_ClangVersion* arr, size_t arraySize) {
+	uint64_t reference = randomisation::GenerateRandomUint64();
+	for (int i = 0; i < arraySize; i += 1) {
+		arr[i].key = randomisation::GenerateRandomUint64();
+		arr[i].reference = reference + i;
+	}
+}
+template<>
+void GenerateRandomArray<SortableRef_StlVersion>(SortableRef_StlVersion* arr, size_t arraySize) {
 	uint64_t reference = randomisation::GenerateRandomUint64();
 	for (int i = 0; i < arraySize; i += 1) {
 		arr[i].key = randomisation::GenerateRandomUint64();

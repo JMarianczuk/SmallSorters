@@ -32,7 +32,7 @@ Performancing::Performancing(PerformanceMetric metric) {
 			performance_event_attribute.config = PERF_COUNT_HW_BRANCH_MISSES;
 			break;
 		default:
-			throw std::logic_error("Missing Performance Metric!");
+			throw std::logic_error("Performancing::Performancing => Missing Performance Metric!");
 	}
 	performance_event_attribute.disabled = 1;
 	performance_event_attribute.exclude_kernel = 1;
