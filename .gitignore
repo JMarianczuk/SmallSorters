@@ -41,6 +41,8 @@ test
 test-O3.s
 
 build/commit.txt
+result/*.pdf
+result/small_sorters*.txt
 result/small_sorters_eval.pdf
 result/small_sorters-data.txt
 

@@ -1,0 +1,227 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.14)  14 JAN 2019 23:27
+entering extended mode
+**./Vorstellen_Prof_Asm.tex
+(Vorstellen_Prof_Asm.tex
+LaTeX2e <2018-12-01>
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\article.cls"
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\size12.clo"
+File: size12.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(C:\Users\Jasper\AppData\Roaming\MiKTeX\2.9\tex/latex/listings\listings.sty
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\lst@mode=\count88
+\lst@gtempboxa=\box27
+\lst@token=\toks15
+\lst@length=\count89
+\lst@currlwidth=\dimen103
+\lst@column=\count90
+\lst@pos=\count91
+\lst@lostspace=\dimen104
+\lst@width=\dimen105
+\lst@newlines=\count92
+\lst@lineno=\count93
+\lst@maxwidth=\dimen106
+
+(C:\Users\Jasper\AppData\Roaming\MiKTeX\2.9\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count94
+\lst@skipnumbers=\count95
+\lst@framebox=\box28
+)
+(C:\Users\Jasper\AppData\Roaming\MiKTeX\2.9\tex/latex/listings\listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(C:\Users\Jasper\AppData\Roaming\MiKTeX\2.9\tex/latex/memoir\memhfixc.sty
+Package: memhfixc 2013/05/30 v1.17 nameref/hyperref package fixes for memoir cl
+ass
+
+No memoir class: memhfixc does nothing
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/geometry\geometry.sty"
+Package: geometry 2018/04/16 v5.8 Page Geometry
+
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\ifpdf.sty"
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\ifvtex.sty"
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files\MiKTeX 2.9\tex/generic/ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count96
+\Gm@cntv=\count97
+\c@Gm@tempcnt=\count98
+\Gm@bindingoffset=\dimen107
+\Gm@wd@mp=\dimen108
+\Gm@odd@mp=\dimen109
+\Gm@even@mp=\dimen110
+\Gm@layoutwidth=\dimen111
+\Gm@layoutheight=\dimen112
+\Gm@layouthoffset=\dimen113
+\Gm@layoutvoffset=\dimen114
+\Gm@dimlist=\toks16
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/geometry\geometry.cfg"))
+(Vorstellen_Prof_Asm.aux)
+\openout1 = `Vorstellen_Prof_Asm.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+\c@lstlisting=\count99
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(42.67912pt, 512.14963pt, 42.67912pt)
+* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=512.14963pt
+* \textheight=731.23584pt
+* \oddsidemargin=-29.59087pt
+* \evensidemargin=-29.59087pt
+* \topmargin=-52.36449pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+[1
+
+{C:/Users/Jasper/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Overfull \hbox (49.77565pt too wide) in paragraph at lines 66--66
+[]\OT1/cmtt/m/n/12 void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVe
+rsion* first, size_t arraySize)[] 
+ []
+
+[2]
+Overfull \hbox (43.60065pt too wide) in paragraph at lines 107--107
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<Sortable_JumpXchg>(Sortable_JumpXchg& l
+eft, Sortable_JumpXchg& right)[] 
+ []
+
+
+Overfull \hbox (99.17567pt too wide) in paragraph at lines 107--107
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<SortableRef_JumpXchg>(SortableRef_JumpX
+chg& left, SortableRef_JumpXchg& right)[] 
+ []
+
+
+Overfull \hbox (6.55063pt too wide) in paragraph at lines 107--107
+[]      \OT1/cmtt/m/n/12 [left_reference] "+r"(left.reference), [right_referenc
+e] "+r"(right.reference)[] 
+ []
+
+[3]
+Overfull \hbox (99.17567pt too wide) in paragraph at lines 143--143
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<Sortable_TwoCmovTemp>(Sortable_TwoCmovT
+emp& left, Sortable_TwoCmovTemp& right)[] 
+ []
+
+
+Overfull \hbox (173.27571pt too wide) in paragraph at lines 143--143
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<SortableRef_FourCmovTemp>(SortableRef_F
+ourCmovTemp& left, SortableRef_FourCmovTemp& right)[] 
+ []
+
+
+Overfull \hbox (6.55063pt too wide) in paragraph at lines 143--143
+[]      \OT1/cmtt/m/n/12 [left_reference] "+r"(left.reference), [right_referenc
+e] "+r"(right.reference)[] 
+ []
+
+[4]
+Overfull \hbox (284.42577pt too wide) in paragraph at lines 183--183
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<SortableRef_FourCmovTemp_Split>(Sortabl
+eRef_FourCmovTemp_Split& left, SortableRef_FourCmovTemp_Split& right)[] 
+ []
+
+[5]
+Overfull \hbox (284.42577pt too wide) in paragraph at lines 223--223
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<Sortable_ThreeCmovRegisterTemp>(Sortabl
+e_ThreeCmovRegisterTemp& left, Sortable_ThreeCmovRegisterTemp& right)[] 
+ []
+
+
+Overfull \hbox (302.95078pt too wide) in paragraph at lines 223--223
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<SortableRef_SixCmovRegisterTemp>(Sortab
+leRef_SixCmovRegisterTemp& left, SortableRef_SixCmovRegisterTemp& right)[] 
+ []
+
+
+Overfull \hbox (12.72563pt too wide) in paragraph at lines 223--223
+[]      \OT1/cmtt/m/n/12 [left_reference] "+r"(left.reference), [right_referenc
+e] "+r"(right.reference),[] 
+ []
+
+[6]
+Overfull \hbox (173.27571pt too wide) in paragraph at lines 252--252
+[]\OT1/cmtt/m/n/12 void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_C
+langVersion& left, SortableRef_ClangVersion& right)[] 
+ []
+
+[7] (Vorstellen_Prof_Asm.aux) ) 
+Here is how much of TeX's memory you used:
+ 2091 strings out of 492946
+ 29902 string characters out of 3135524
+ 100831 words of memory out of 3000000
+ 6032 multiletter control sequences out of 15000+200000
+ 4713 words of font info for 18 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 26i,4n,32p,205b,217s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Vorstellen_Prof_Asm.pdf (7 pages, 50031 bytes).
+PDF statistics:
+ 42 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
