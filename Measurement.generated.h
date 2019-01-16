@@ -34,6 +34,7 @@ void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfItera
 
 	measurement::MeasureInsertionSort<SortableRef>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
 	measurement::MeasureInsertionSort<SortableRef_StlVersion>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-StlVersion");
+	measurement::MeasureInsertionSort<SortableRef_PointerOptimized>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-PointerOptimized");
 }
 
 void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentInfo info, int numberOfIterations, size_t arraySize)
@@ -47,6 +48,7 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
 
 	measurement::MeasureRandomGeneration<SortableRef>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
 	measurement::MeasureRandomGeneration<SortableRef_StlVersion>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-StlVersion");
+	measurement::MeasureRandomGeneration<SortableRef_PointerOptimized>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-PointerOptimized");
 }
 
 }

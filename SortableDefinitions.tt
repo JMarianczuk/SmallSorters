@@ -1,6 +1,8 @@
 <#@ template language="C#" #>
 <#@ output extension="/" #>
 
+<#@ import namespace="System.Linq"#>
+
 <#
     SortableStruct.transform = this;
 
@@ -15,6 +17,7 @@
         new SortableStruct("SixCmovRegisterTemp", true),
         new SortableStruct("ClangVersion", true),
         new SortableStruct("StlVersion", true),
+        new SortableStruct("PointerOptimized", true),
     };
 #>
 <#+
@@ -58,6 +61,10 @@
                 return result;
             }
         }
+        public bool UseForNetworkSort => HasReference && !IsInsertionSortOnly;
+        public bool UseForInsertionSort => FullName == "SortableRef" || IsInsertionSortOnly;
+        private string[] InsertionSortOnlyNames = {"StlVersion", "PointerOptimized"};
+        private bool IsInsertionSortOnly => InsertionSortOnlyNames.Any(name => FullName.Contains(name));
         public void WriteVariables()
         {
             transform.WriteLine("uint64_t key;");

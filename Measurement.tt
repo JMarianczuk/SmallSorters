@@ -32,9 +32,9 @@ void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfItera
 {
 <#
     PushIndent("\t"); 
-    WriteSorterMeasureLine(sortableStructs.Where(UseForNetworkSort), "Network");
+    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network");
     WriteLine("");
-    WriteSorterMeasureLine(sortableStructs.Where(UseForInsertionSort), "Insertion");
+    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion");
     PopIndent();
 #>
 }
@@ -43,9 +43,9 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
 {
 <#
     PushIndent("\t");
-    WriteRandomMeasureLine(sortableStructs.Where(UseForNetworkSort), "Network");
+    WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network");
     WriteLine("");
-    WriteRandomMeasureLine(sortableStructs.Where(UseForInsertionSort), "Insertion");
+    WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion");
     PopIndent();
 #>
 }
@@ -69,13 +69,5 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
         {
             WriteLine($"measurement::Measure{toMeasure}<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\");");
         }
-    }
-    bool UseForNetworkSort(SortableStruct sortableStruct)
-    {
-        return sortableStruct.HasReference && !sortableStruct.FullName.Contains("Stl");
-    }
-    bool UseForInsertionSort(SortableStruct sortableStruct)
-    {
-        return sortableStruct.FullName == "SortableRef" || sortableStruct.FullName.Contains("Stl");
     }
 #>

@@ -6,7 +6,7 @@
 
 #include "Performancing.h"
 #include "InsertionSort.h"
-#include "NetworkSort.h"
+#include "Networks.generated.h"
 #include "Result.h"
 #include "GitInfo.h"
 #include "EnvironmentInfo.h"
@@ -47,8 +47,8 @@ void test() {
     // networks::ConditionalSwap(a5, b5);
 }
 
-#define NumberOfIterations 1000
-#define NumberOfMeasures 100
+#define NumberOfIterations 100
+#define NumberOfMeasures 1000
 
 int main()
 {

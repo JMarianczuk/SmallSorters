@@ -145,5 +145,18 @@ struct SortableRef_StlVersion {
 		return left.key < right.key;
 	}
 };
+struct SortableRef_PointerOptimized {
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right) {
+		return left.key > right.key;
+	}
+	friend bool operator==(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right) {
+		return left.key == right.key;
+	}
+	friend bool operator<(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right) {
+		return left.key < right.key;
+	}
+};
 
 #endif

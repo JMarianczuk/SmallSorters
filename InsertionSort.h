@@ -2,13 +2,16 @@
 #ifndef INSERTION_SORT_H
 #define INSERTION_SORT_H
 
+#include <utility>
+
 #include "Sortable.generated.h"
 
 namespace insertionsort {
 
 template <typename TValueType>
 static inline
-void InsertionSort(TValueType* items, size_t arraySize) {
+void InsertionSort(TValueType* items, size_t arraySize) 
+{
     int inner, outer;
     for (outer = 1; outer < arraySize; outer += 1) {
         TValueType current = items[outer];
@@ -22,8 +25,27 @@ void InsertionSort(TValueType* items, size_t arraySize) {
 
 template<>
 inline
-void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t arraySize) {
-    SortableRef_StlVersion* last = first + arraySize - 1;
+void InsertionSort<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* first, size_t arraySize) 
+{
+    auto current = first + 1;
+    auto last = first + arraySize;
+    for (auto current = first; ++current != last; )
+    {
+        auto next_temp = current;
+        auto val = *current;
+        for (auto first_temp = next_temp; val < *--first_temp; next_temp = first_temp)
+        {
+            *next_temp = *first_temp;
+        }
+        *next_temp = val;
+    }
+}
+
+template<>
+inline
+void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t arraySize) 
+{
+    SortableRef_StlVersion* last = first + arraySize;
     for (SortableRef_StlVersion* next = first; ++next != last; )
     {
         SortableRef_StlVersion* next_temp = next;
@@ -31,11 +53,12 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
 
         if (val < *first)
         {
-            next_temp++;
-            while (first != next)
-            {
-                *--next_temp = *--next;
-            }
+            std::move_backward(first, next, next+1);
+            // next_temp++;
+            // while (first != next)
+            // {
+            //     *--next_temp = *--next;
+            // }
             *first = val;
         }
         else
