@@ -1,8 +1,6 @@
 <#@ template language="C#" #>
 <#@ output extension="/" #>
 
-<#@ import namespace="System.Linq"#>
-
 <#
     SortableStruct.transform = this;
 
