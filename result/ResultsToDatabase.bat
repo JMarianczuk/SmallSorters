@@ -1,0 +1,1 @@
+sqlplot import-data -D sqlite:db.sqlite stats *.txt

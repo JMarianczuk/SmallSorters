@@ -48,7 +48,7 @@ void test() {
 }
 
 #define NumberOfIterations 100
-#define NumberOfMeasures 1000
+#define NumberOfMeasures 100
 
 int main()
 {
