@@ -95,7 +95,7 @@ void sortN(TValueType* A, size_t n)
         public int RightIndex { get; set; }
         public ConditionalSwap(int leftIndex, int rightIndex)
         {
-            LeftIndex = LeftIndex;
+            LeftIndex = leftIndex;
             RightIndex = rightIndex;
         }
     }

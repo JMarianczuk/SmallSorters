@@ -11,7 +11,7 @@
 
 namespace randomisation {
 
-std::default_random_engine generator;
+std::minstd_rand generator;
 std::uniform_int_distribution<unsigned long long> distribution(0); //default top limit at numeric_limit<unsigned long long>()
 
 void SetSeed(unsigned long seed) {
