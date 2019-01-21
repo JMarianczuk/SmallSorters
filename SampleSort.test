@@ -1,0 +1,155 @@
+
+template <typename Splitter, typename Element, typename Bucket>
+void SampleSort_3States()
+{
+    register Bucket* b1, b2, b3, b4;
+    register Bucket* b1p = b1 + 1, b2p = b2 + 1, b3p = b3 + 1, b4p = b4 + 1;
+    register Splitter t1, t2, t3;
+    register Element a;
+    register int state1 = 0, state2 = 0, state2 = 0;
+
+    //Asm Starts
+    //Save state of table
+    cmp a, t2
+    addc state2, 0
+
+    cmp a, t1
+    addc state1, 0
+
+    cmp a, t3
+    addc state3, 0
+
+    /*
+        Table after comparisons:
+            States      Bucket
+          1   2   3 
+
+          0   0   0       1
+          0   0   1       -
+          0   1   0       -
+          0   1   1       -
+          1   0   0       2
+          1   0   1       -
+          1   1   0       3
+          1   1   1       4
+    */
+
+    /*
+        Table after comparisons (without invalid states):
+            States      Bucket
+          1   2   3 
+
+          0   0   0       1
+          1   0   0       2
+          1   1   0       3
+          1   1   1       4
+    */
+
+    cmp state1, state2
+    cmovne a, (b2)
+    cmovne b2p, b2
+
+    cmp state2, state3
+    cmovne a, (b3)
+    cmovne b3p, b3
+
+    add state1, state3
+    cmove a, (b1)
+    cmove b1p, b1
+
+    /*
+        Table after add:
+            States      Bucket
+          1   2   3 
+
+          0   0   0       1
+          1   0   1       2
+          1   1   1       3
+          1   1   2       4
+    */
+
+    sub $2, state3
+    cmove a, (b4)
+    cmove b4p, b4
+
+    // a has been written to correct bucket slot, pointer to that slot has been incremented
+
+    /*  =>  5 cmp
+            8 cmov
+            3 addc
+            1 add
+            1 sub
+            ------
+            18 instructions per element
+
+        =>  8 Register Buckets
+            3 Register Splitter
+            4 Register pro Element
+            -----------------------
+            11+4q Register
+    */
+}
+
+template <typename Splitter, typename Element, typename Bucket>
+void SampleSort_1State()
+{
+    register Bucket* b1, b2, b3, b4;
+    register Bucket* b1p = b1 + 1, b2p = b2 + 1, b3p = b3 + 1, b4p = b4 + 1;
+    register Splitter t1, t2, t3;
+    register Element a;
+    register uint state = 0;
+
+    //Asm starts
+
+    cmp a, t1
+    addc state, 0
+    shl state, state
+
+    cmp a, t2
+    addc state, 0
+    shl state, state
+
+    cmp a, t3
+    addc state, 0
+    shl state, state
+
+    /*
+        State after comparisons:
+
+        State   Bucket
+         000      1
+         100      2
+         110      3
+         111      4
+    */
+
+    cmp $0, state
+    cmove a, (b1)
+    cmove b1p, b1
+
+    cmp $4, state
+    cmove a, (b2)
+    cmove b2p, b2
+
+    cmp $6, state
+    cmove a, (b3)
+    cmove b3p, b3
+
+    cmp $7, state
+    cmove a, (b4)
+    cmove b4p, b4
+
+    /*  =>  7 cmp
+            8 cmov
+            3 addc
+            3 shl
+            ------
+            21 instructions per element
+        
+        =>  8 Register Buckets
+            3 Register Splitter
+            2 Register pro Element
+            -----------------------
+            11+2q Register
+    */
+}
