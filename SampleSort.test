@@ -6,7 +6,7 @@ void SampleSort_3States()
     register Bucket* b1p = b1 + 1, b2p = b2 + 1, b3p = b3 + 1, b4p = b4 + 1;
     register Splitter t1, t2, t3;
     register Element a;
-    register int state1 = 0, state2 = 0, state2 = 0;
+    register uint8_t state1 = 0, state2 = 0, state2 = 0;
 
     //Asm Starts
     //Save state of table
@@ -68,17 +68,16 @@ void SampleSort_3States()
           1   1   2       4
     */
 
-    sub $2, state3
+    cmp $2, state3
     cmove a, (b4)
     cmove b4p, b4
 
     // a has been written to correct bucket slot, pointer to that slot has been incremented
 
-    /*  =>  5 cmp
+    /*  =>  6 cmp
             8 cmov
             3 addc
             1 add
-            1 sub
             ------
             18 instructions per element
 
@@ -97,21 +96,18 @@ void SampleSort_1State()
     register Bucket* b1p = b1 + 1, b2p = b2 + 1, b3p = b3 + 1, b4p = b4 + 1;
     register Splitter t1, t2, t3;
     register Element a;
-    register uint state = 0;
+    register uint8_t state = 0;
 
     //Asm starts
 
     cmp a, t1
-    addc state, 0
-    shl state, state
+    rcl $1, state
 
     cmp a, t2
-    addc state, 0
-    shl state, state
+    rcl $1, state
 
     cmp a, t3
-    addc state, 0
-    shl state, state
+    rcl $1, state
 
     /*
         State after comparisons:
@@ -141,10 +137,9 @@ void SampleSort_1State()
 
     /*  =>  7 cmp
             8 cmov
-            3 addc
-            3 shl
+            3 rcl
             ------
-            21 instructions per element
+            18 instructions per element
         
         =>  8 Register Buckets
             3 Register Splitter
