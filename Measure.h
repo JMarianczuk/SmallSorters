@@ -76,7 +76,7 @@ void MeasureNetworkSort(
     size_t arraySize,
     std::string sorterName) 
 {
-    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &networks::sortN<TValueType>);
+    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &networks::sortNbest<TValueType>);
 }
 
 template <typename TValueType>
