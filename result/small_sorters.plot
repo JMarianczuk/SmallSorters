@@ -1,6 +1,6 @@
 # IMPORT-DATA stats output_2019-01-23_13-04-23.txt
 
-## CREATE INDEX ind ON stats (sorter, array_size, metric, struct_size, number_of_iterations, compensation_measurement)
+## SQL CREATE INDEX ind ON stats (s, as, m, ss, n)
 
 set terminal pdf size 28cm,18cm linewidth 2.0
 set output "small_sorters_eval.pdf"
@@ -23,9 +23,9 @@ set title 'Sorting of small lists'
 set xlabel 'Number of elements'
 set ylabel 'Cpu cycles needed per element'
 
-## MULTIPLOT(sorter) SELECT Real.array_size AS x, Avg((Real.value - Compensation.value) / Real.number_of_iterations) / Real.array_size AS y, Real.MULTIPLOT
-## FROM stats Real, stats Compensation WHERE Real.sorter = Compensation.sorter AND Real.array_size = Compensation.array_size AND Real.metric = Compensation.metric AND Real.struct_size = Compensation.struct_size and Real.number_of_iterations = Compensation.number_of_iterations And Real.compensation_measurement = 0 AND Compensation.compensation_measurement = 1
-## AND Real.metric LIKE "Cpu Cycles" GROUP BY Real.MULTIPLOT,x ORDER BY Real.MULTIPLOT,x
+## MULTIPLOT(s) SELECT Real.as AS x, Avg((Real.v - Compensation.v) / Real.n) / Real.as AS y, Real.MULTIPLOT
+## FROM stats Real, stats Compensation WHERE Real.s = Compensation.s AND Real.as = Compensation.as AND Real.m = Compensation.m AND Real.ss = Compensation.ss and Real.n = Compensation.n And Real.c = 0 AND Compensation.c = 1
+## AND Real.m LIKE "Cpu Cycles" GROUP BY Real.MULTIPLOT,x ORDER BY Real.MULTIPLOT,x
 plot \
     'small_sorters-data.txt' index 0 title "sorter=Insertion Sort Key-Reference-PointerOptimized" with linespoints, \
     'small_sorters-data.txt' index 1 title "sorter=Insertion Sort Key-Reference-StlVersion" with linespoints, \

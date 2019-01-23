@@ -49,7 +49,7 @@ void test() {
 }
 
 #define NumberOfIterations 100
-#define NumberOfMeasures 100
+#define NumberOfMeasures 400
 
 int main()
 {
@@ -59,17 +59,15 @@ int main()
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();
-
-    EnvironmentInfo info;
-    info.commit = commit;
-    info.hostname = hostname;
+    printf("General Info: Commit=%s, Hostname=%s", commit, hostname);
+    WriteAbbreviationExplanatoryLine();
     
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     for (int numberOfMeasures = 0; numberOfMeasures < NumberOfMeasures; numberOfMeasures += 1)
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            measurement::MeasureSorting(perf_cpu_cycles, info, NumberOfIterations, arraySize);
+            measurement::MeasureSorting(perf_cpu_cycles, NumberOfIterations, arraySize);
         }
     }
     randomisation::SetSeed(seed);
@@ -77,7 +75,7 @@ int main()
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, info, NumberOfIterations, arraySize);
+            measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, NumberOfIterations, arraySize);
         }
     }
 	delete perf_cpu_cycles;

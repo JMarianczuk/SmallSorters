@@ -11,10 +11,22 @@
 #include "Performancing.h"
 #include "EnvironmentInfo.h"
 
+void WriteAbbreviationExplanatoryLine()
+{
+    printf(
+        "s = sorter, 
+        m = metric, 
+        v = value, 
+        ss = struct_size, 
+        as = array_size, 
+        n = number_of_iterations, 
+        b = number_of_bad_sorts, 
+        c = compensation_measurement");
+}
+
 void WriteResultLine(
     std::string sorter, 
     Performancing* perf, 
-    EnvironmentInfo info,
     int structSize,
     int arraySize,
     int numberOfIterations, 
@@ -38,13 +50,11 @@ void WriteResultLine(
     }
 
     printf(
-        "RESULT\tsorter=%s\tmetric=%s\tvalue=%" PRIu64 "\tcommit_id=%s\tcomputer_name=%s\tstruct_size=%i\tarray_size=%i\tnumber_of_iterations=%i\tnumber_of_bad_sorts=%i\tcompensation_measurement=%i\n", 
+        "RESULT\ts=%s\tm=%s\tv=%" PRIu64 "\tss=%i\tas=%i\tn=%i\tb=%i\tc=%i\n", 
 
         sorter.c_str(), 
         metric_name.c_str(), 
         perf->GetValue(), 
-        info.commit.c_str(), 
-        info.hostname.c_str(),
         structSize,
         arraySize,
         numberOfIterations, 

@@ -6,8 +6,4 @@
 
 std::string Environment_GetComputerName();
 
-struct EnvironmentInfo {
-    std::string commit, hostname;
-};
-
 #endif

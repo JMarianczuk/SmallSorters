@@ -13,7 +13,6 @@ namespace measurement
 template <typename TValueType>
 void Measure(
     Performancing* perf,
-    EnvironmentInfo info,
     int numberOfIterations,
     size_t arraySize,
     std::string sorterName,
@@ -45,7 +44,6 @@ void Measure(
     WriteResultLine(
         sorterName,
         perf,
-        info,
         sizeof(TValueType),
         arraySize,
         numberOfIterations,
@@ -58,33 +56,8 @@ void Measure(
 }
 
 template <typename TValueType>
-static inline
-void MeasureInsertionSort(
-    Performancing* perf, 
-    EnvironmentInfo info, 
-    int numberOfIterations, 
-    size_t arraySize,
-    std::string sorterName) 
-{
-    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &insertionsort::InsertionSort<TValueType>);
-}
-
-template <typename TValueType>
-static inline
-void MeasureNetworkSort(
-    Performancing* perf, 
-    EnvironmentInfo info, 
-    int numberOfIterations, 
-    size_t arraySize,
-    std::string sorterName) 
-{
-    Measure<TValueType>(perf, info, numberOfIterations, arraySize, sorterName, &networks::sortNbest<TValueType>);
-}
-
-template <typename TValueType>
 void MeasureRandomGeneration(
     Performancing* perf,
-    EnvironmentInfo info,
     int numberOfIterations,
     size_t arraySize,
     std::string sorterName)
@@ -113,7 +86,6 @@ void MeasureRandomGeneration(
     WriteResultLine(
         sorterName,
         perf,
-        info,
         sizeof(TValueType),
         arraySize,
         numberOfIterations,
