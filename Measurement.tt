@@ -37,7 +37,7 @@ void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfItera
     PushIndent("\t"); 
     WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network Best", "networks::sortNbest");
     WriteLine("");
-    //WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson", "networks::sortNbosenelson");
+    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson", "networks::sortNbosenelson");
     WriteLine("");
     WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion", "insertionsort::InsertionSort");
     PopIndent();
@@ -50,7 +50,7 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
     PushIndent("\t");
     WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network Best");
     WriteLine("");
-    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson");
+    WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson");
     WriteLine("");
     WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion");
     PopIndent();

@@ -19,7 +19,8 @@ void Measure(
     std::string sorterName,
     void(*sortFunc)(TValueType*,size_t))
 {
-    TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
+    // TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
+    TValueType arr[arraySize];
     
     int numberOfBadSorts = 0;
     randomisation::GenerateRandomArray(arr, arraySize);
@@ -52,7 +53,8 @@ void Measure(
         true
     );
 
-    free(arr);
+    // free(arr);
+    // delete[] arr;
 }
 
 template <typename TValueType>
@@ -87,7 +89,8 @@ void MeasureRandomGeneration(
     size_t arraySize,
     std::string sorterName)
 {
-    TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
+    TValueType arr[arraySize];
+    // TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
 
     int numberOfEqualNeighbours = 0;
     randomisation::GenerateRandomArray(arr, arraySize);
@@ -118,7 +121,7 @@ void MeasureRandomGeneration(
         false
     );
 
-    free(arr);
+    // free(arr);
 }
 
 }
