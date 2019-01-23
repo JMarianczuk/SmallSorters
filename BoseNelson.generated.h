@@ -557,6 +557,9 @@ void sortNbosenelson(TValueType* A, size_t n)
 		case 16:
 			sort16bosenelson(A);
 			break;
+        default:
+            abort();
+            break;
     }
 }
 
