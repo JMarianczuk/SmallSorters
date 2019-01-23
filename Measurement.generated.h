@@ -25,26 +25,40 @@ namespace measurement
 
 void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfIterations, size_t arraySize)
 {
-	measurement::MeasureNetworkSort<SortableRef>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-Tuple");
-	measurement::MeasureNetworkSort<SortableRef_JumpXchg>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-JumpXchg");
-	measurement::MeasureNetworkSort<SortableRef_FourCmovTemp>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-FourCmovTemp");
-	measurement::MeasureNetworkSort<SortableRef_FourCmovTemp_Split>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-FourCmovTemp-Split");
-	measurement::MeasureNetworkSort<SortableRef_SixCmovRegisterTemp>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-SixCmovRegisterTemp");
-	measurement::MeasureNetworkSort<SortableRef_ClangVersion>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-ClangVersion");
+	measurement::Measure<SortableRef>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-Tuple", &networks::sortNbest<SortableRef>);
+	measurement::Measure<SortableRef_JumpXchg>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-JumpXchg", &networks::sortNbest<SortableRef_JumpXchg>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-FourCmovTemp", &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-FourCmovTemp-Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-SixCmovRegisterTemp", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
+	measurement::Measure<SortableRef_ClangVersion>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-ClangVersion", &networks::sortNbest<SortableRef_ClangVersion>);
 
-	measurement::MeasureInsertionSort<SortableRef>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
-	measurement::MeasureInsertionSort<SortableRef_StlVersion>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-StlVersion");
-	measurement::MeasureInsertionSort<SortableRef_PointerOptimized>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-PointerOptimized");
+	measurement::Measure<SortableRef>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-Tuple", &networks::sortNbosenelson<SortableRef>);
+	measurement::Measure<SortableRef_JumpXchg>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-JumpXchg", &networks::sortNbosenelson<SortableRef_JumpXchg>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-FourCmovTemp", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-FourCmovTemp-Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-SixCmovRegisterTemp", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
+	measurement::Measure<SortableRef_ClangVersion>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-ClangVersion", &networks::sortNbosenelson<SortableRef_ClangVersion>);
+
+	measurement::Measure<SortableRef>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple", &insertionsort::InsertionSort<SortableRef>);
+	measurement::Measure<SortableRef_StlVersion>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-StlVersion", &insertionsort::InsertionSort<SortableRef_StlVersion>);
+	measurement::Measure<SortableRef_PointerOptimized>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 }
 
 void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentInfo info, int numberOfIterations, size_t arraySize)
 {
-	measurement::MeasureRandomGeneration<SortableRef>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-Tuple");
-	measurement::MeasureRandomGeneration<SortableRef_JumpXchg>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-JumpXchg");
-	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-FourCmovTemp");
-	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-FourCmovTemp-Split");
-	measurement::MeasureRandomGeneration<SortableRef_SixCmovRegisterTemp>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-SixCmovRegisterTemp");
-	measurement::MeasureRandomGeneration<SortableRef_ClangVersion>(perf, info, numberOfIterations, arraySize, "Network Sort Key-Reference-ClangVersion");
+	measurement::MeasureRandomGeneration<SortableRef>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-Tuple");
+	measurement::MeasureRandomGeneration<SortableRef_JumpXchg>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-JumpXchg");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-FourCmovTemp");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-FourCmovTemp-Split");
+	measurement::MeasureRandomGeneration<SortableRef_SixCmovRegisterTemp>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-SixCmovRegisterTemp");
+	measurement::MeasureRandomGeneration<SortableRef_ClangVersion>(perf, info, numberOfIterations, arraySize, "Network Best Sort Key-Reference-ClangVersion");
+
+	measurement::MeasureRandomGeneration<SortableRef>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-Tuple");
+	measurement::MeasureRandomGeneration<SortableRef_JumpXchg>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-JumpXchg");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-FourCmovTemp");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-FourCmovTemp-Split");
+	measurement::MeasureRandomGeneration<SortableRef_SixCmovRegisterTemp>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-SixCmovRegisterTemp");
+	measurement::MeasureRandomGeneration<SortableRef_ClangVersion>(perf, info, numberOfIterations, arraySize, "Network BoseNelson Sort Key-Reference-ClangVersion");
 
 	measurement::MeasureRandomGeneration<SortableRef>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-Tuple");
 	measurement::MeasureRandomGeneration<SortableRef_StlVersion>(perf, info, numberOfIterations, arraySize, "Insertion Sort Key-Reference-StlVersion");

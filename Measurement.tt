@@ -32,9 +32,11 @@ void MeasureSorting(Performancing* perf, EnvironmentInfo info, int numberOfItera
 {
 <#
     PushIndent("\t"); 
-    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network");
+    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network Best", "networks::sortNbest");
     WriteLine("");
-    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion");
+    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson", "networks::sortNbosenelson");
+    WriteLine("");
+    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion", "insertionsort::InsertionSort");
     PopIndent();
 #>
 }
@@ -43,7 +45,9 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
 {
 <#
     PushIndent("\t");
-    WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network");
+    WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network Best");
+    WriteLine("");
+    WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson");
     WriteLine("");
     WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion");
     PopIndent();
@@ -55,19 +59,22 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, EnvironmentIn
 #endif
 
 <#
-    void WriteSorterMeasureLine(IEnumerable<SortableStruct> structs, string sorter)
+    void WriteSorterMeasureLine(IEnumerable<SortableStruct> structs, string sorter, string sortMethod)
     {
-        WriteMeasureLine(structs, $"{sorter}Sort", sorter);
+        WriteMeasureLine(structs, $"{sorter}Sort", sorter, sortMethod);
     }
     void WriteRandomMeasureLine(IEnumerable<SortableStruct> structs, string sorter)
     {
-        WriteMeasureLine(structs, "RandomGeneration", sorter);
+        foreach (var sortableStruct in structs)
+        {
+            WriteLine($"measurement::MeasureRandomGeneration<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\");");
+        }
     }
-    void WriteMeasureLine(IEnumerable<SortableStruct> structs, string toMeasure, string sorter)
+    void WriteMeasureLine(IEnumerable<SortableStruct> structs, string toMeasure, string sorter, string sortMethod)
     {
         foreach (var sortableStruct in structs)
         {
-            WriteLine($"measurement::Measure{toMeasure}<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\");");
+            WriteLine($"measurement::Measure<{sortableStruct.FullName}>(perf, info, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\", &{sortMethod}<{sortableStruct.FullName}>);");
         }
     }
 #>
