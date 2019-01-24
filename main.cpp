@@ -27,39 +27,17 @@ void SetOutputFile() {
     auto _ = freopen(filename_buffer, "w", stdout);
 }
 
-void test() {
-    auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
-    EnvironmentInfo info;
-    measurement::MeasureSorting(perf, info, 2, 2);
-    for (int i = 0; i < 20; i += 1)
-    {
-        printf("Random Number %" PRIu64 "\n", randomisation::GenerateRandomUint64());
-    }
-    // int a = 6, b = 4;
-    // SortableRef a1 = {6, 5}, b1 = {4, 7};
-    // Sortable_JumpXchg a2 = {6}, b2 = {4};
-    // Sortable_TwoCmovTemp a3 = {6}, b3 = {4};
-    // Sortable_ThreeCmovRegisterTemp a5 = {6}, b5 = {4};
-
-    // networks::ConditionalSwap(a, b);
-    // networks::ConditionalSwap(a1, b1);
-    // networks::ConditionalSwap(a2, b2);
-    // networks::ConditionalSwap(a3, b3);
-    // networks::ConditionalSwap(a5, b5);
-}
-
 #define NumberOfIterations 100
 #define NumberOfMeasures 400
 
 int main()
 {
-    // srand(time(NULL));
     auto seed = time(NULL);
     randomisation::SetSeed(seed);
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();
-    printf("General Info: Commit=%s, Hostname=%s", commit, hostname);
+    printf("General Info: Commit=%s, Hostname=%s", commit.c_str(), hostname.c_str());
     WriteAbbreviationExplanatoryLine();
     
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);

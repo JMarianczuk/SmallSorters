@@ -148,3 +148,102 @@ void SampleSort_1State()
             11+2q Register
     */
 }
+
+
+template <typename Splitter, typename Element, typename Bucket>
+void SampleSort_1State_BucketIndex()
+{
+    register Bucket* buckets;
+    register Splitter t1, t2, t3;
+    register Element a;
+    register uint8_t state = 0;
+
+    //Asm starts
+
+    cmp a, t1
+    addc $0, state
+
+    cmp a, t2
+    addc $0, state
+
+    cmp a, t3
+    addc $0, state
+
+    /*
+        State after comparisons:
+
+        State   Bucket
+          0       1
+          1       2
+          2       3
+          3       4
+    */
+
+    //Asm ends
+
+    *buckets[state] = a;
+    buckets[state]++;
+
+    /*  =>  1 =0
+            3 cmp
+            3 addc
+            1 assignment
+            1 increment
+            ------
+            9 instructions per element
+        
+        =>  1 Register Buckets
+            3 Register Splitter
+            2 Register pro Element
+            -----------------------
+            4+2q Register
+    */
+}
+
+template <typename Splitter, typename Element, typename Bucket>
+void SampleSort_1State_BucketIndex_2Compare()
+{
+    register Bucket* buckets;
+    register Splitter t1, t2, t3;
+    register Element a;
+
+    register Splitter tx = t1;
+    register uint8_t state = 0;
+
+    //Asm starts
+    cmp a, t2
+    cmovc t3, tx
+    rcl $1, state
+
+    cmp a, tx
+    rcl $1, state
+
+    /*
+        State after comparisons:
+
+        State   Bucket
+         00       1
+         01       2
+         10       3
+         11       4
+    */
+
+    *buckets[state] = a;
+    buckets[state]++;
+
+    /*  =>  2 =x register
+            2 cmp
+            1 cmov
+            2 rcl
+            1 =x mem
+            1 increment mem
+            ------
+            9 instructions per element
+        
+        =>  1 Register Buckets
+            3 Register Splitter
+            2 Register pro Element
+            -----------------------
+            4+2q Register
+    */
+}
