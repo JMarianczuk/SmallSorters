@@ -1,1 +1,1 @@
-sqlplot import-data -D sqlite:db.sqlite stats *.txt
+sqlplot import-data -D sqlite:db.sqlite stats output_2019-01-23_13-04-23.txt

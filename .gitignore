@@ -47,3 +47,4 @@ result/small_sorters_eval.pdf
 result/small_sorters-data.txt
 
 db.sqlite
+result/db.sqlite-journal
