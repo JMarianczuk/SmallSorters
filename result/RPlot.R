@@ -3,13 +3,25 @@
 
 
 library(RSQLite)
+library(optparse)
+
+option_list = list(
+    make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot")
+)
+opt_parser = OptionParser(option_list = option_list)
+options = parse_args(opt_parser)
+
 con <- dbConnect(SQLite(), "db.sqlite")
 
-res <- dbGetQuery(con, "select * from stats where array_size = 16 and compensation_measurement = 0")
+query <- paste("select (value / number_of_iterations) as normalized_value, sorter from stats where array_size =", options$array_size, "and compensation_measurement = 0")
+res <- dbGetQuery(con, query)
 
-png(file = "boxplot.png", width=550, height=800)
+array_size_string <- paste(options$array_size)
+if (options$array_size < 10) {
+    array_size_string <- pase("0", array_size_string, sep="", collapse="")
+}
+filename <- paste("boxplot-array_size", array_size_string, ".png", sep = "", collapse = "")
+png(file = filename, width=550, height=800)
 
 par(mar=c(27,5,2,1))
-boxplot(value ~ sorter, data = res, xlab = "Sorter", ylab = "Cycles", main = "Sorter speed", las=2)
-
-dev.off()
+boxplot(normalized_value ~ sorter, data = res, xlab = "Sorter", ylab = "Cycles", main = "Sorter speed", las=2)

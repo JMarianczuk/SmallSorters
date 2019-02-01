@@ -1,3 +1,3 @@
 mkdir result -p
 cd build
-./SmallSortersPerformancing
+taskset 0x1 ./SmallSortersPerformancing
