@@ -15,6 +15,7 @@ void Measure(
     Performancing* perf,
     int numberOfIterations,
     size_t arraySize,
+    int measureIteration,
     std::string sorterName,
     void(*sortFunc)(TValueType*,size_t))
 {
@@ -46,6 +47,7 @@ void Measure(
         perf,
         sizeof(TValueType),
         arraySize,
+        measureIteration,
         numberOfIterations,
         numberOfBadSorts,
         true
@@ -60,6 +62,7 @@ void MeasureRandomGeneration(
     Performancing* perf,
     int numberOfIterations,
     size_t arraySize,
+    int measureIteration,
     std::string sorterName)
 {
     TValueType arr[arraySize];
@@ -88,6 +91,7 @@ void MeasureRandomGeneration(
         perf,
         sizeof(TValueType),
         arraySize,
+        measureIteration,
         numberOfIterations,
         numberOfEqualNeighbours,
         false

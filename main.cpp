@@ -28,7 +28,7 @@ void SetOutputFile() {
 }
 
 #define NumberOfIterations 100
-#define NumberOfMeasures 400
+#define NumberOfMeasures 500
 
 int main()
 {
@@ -41,19 +41,19 @@ int main()
     WriteAbbreviationExplanatoryLine();
     
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
-    for (int numberOfMeasures = 0; numberOfMeasures < NumberOfMeasures; numberOfMeasures += 1)
+    for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            measurement::MeasureSorting(perf_cpu_cycles, NumberOfIterations, arraySize);
+            measurement::MeasureSorting(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
         }
     }
     randomisation::SetSeed(seed);
-    for (int numberOfMeasures = 0; numberOfMeasures < NumberOfMeasures; numberOfMeasures += 1)
+    for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
     {
         for (int arraySize = 2; arraySize <= 16; arraySize += 1)
         {
-            measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, NumberOfIterations, arraySize);
+            measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
         }
     }
 	delete perf_cpu_cycles;

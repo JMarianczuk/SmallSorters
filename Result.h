@@ -13,14 +13,15 @@
 
 void WriteAbbreviationExplanatoryLine()
 {
-    printf("s = sorter, m = metric, v = value, ss = struct_size, a = array_size, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement");
+    printf("s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement");
 }
 
 void WriteResultLine(
     std::string sorter, 
     Performancing* perf, 
     int structSize,
-    int arraySize,
+    size_t arraySize,
+    int measureIteration,
     int numberOfIterations, 
     int numberOfBadSorts,
     bool isActualSorterMeasurement) 
@@ -42,13 +43,14 @@ void WriteResultLine(
     }
 
     printf(
-        "RESULT\ts=%s\tm=%s\tv=%" PRIu64 "\tss=%i\ta=%i\tn=%i\tb=%i\tc=%i\n", 
+        "RESULT\ts=%s\tm=%s\tv=%" PRIu64 "\tss=%i\ta=%zu\ti=%i\tn=%i\tb=%i\tc=%i\n", 
 
         sorter.c_str(), 
         metric_name.c_str(), 
         perf->GetValue(), 
         structSize,
         arraySize,
+        measureIteration,
         numberOfIterations, 
         numberOfBadSorts,
         isActualSorterMeasurement ? 0 : 1); 

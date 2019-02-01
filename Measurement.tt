@@ -31,7 +31,7 @@
 namespace measurement
 {
 
-void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySize)
+void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 <#
     PushIndent("\t"); 
@@ -44,7 +44,7 @@ void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySiz
 #>
 }
 
-void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfIterations, size_t arraySize)
+void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 <#
     PushIndent("\t");
@@ -70,14 +70,14 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfI
     {
         foreach (var sortableStruct in structs)
         {
-            WriteLine($"measurement::MeasureRandomGeneration<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\");");
+            WriteLine($"measurement::MeasureRandomGeneration<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, measureIteration, \"{sorter} Sort {sortableStruct.DisplayName}\");");
         }
     }
     void WriteMeasureLine(IEnumerable<SortableStruct> structs, string toMeasure, string sorter, string sortMethod)
     {
         foreach (var sortableStruct in structs)
         {
-            WriteLine($"measurement::Measure<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, \"{sorter} Sort {sortableStruct.DisplayName}\", &{sortMethod}<{sortableStruct.FullName}>);");
+            WriteLine($"measurement::Measure<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, measureIteration, \"{sorter} Sort {sortableStruct.DisplayName}\", &{sortMethod}<{sortableStruct.FullName}>);");
         }
     }
 #>
