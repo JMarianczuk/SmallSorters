@@ -37,7 +37,7 @@ int main()
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();
-    printf("General Info: Commit=%s, Hostname=%s", commit.c_str(), hostname.c_str());
+    printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
     WriteAbbreviationExplanatoryLine();
     
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);

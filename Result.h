@@ -13,7 +13,7 @@
 
 void WriteAbbreviationExplanatoryLine()
 {
-    printf("s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement");
+    printf("Result Mapping: s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement\n");
 }
 
 void WriteResultLine(

@@ -5,6 +5,8 @@
 #include <string>
 
 #include "Result.h"
+#include "ArrayHelpers.h"
+#include "Performancing.h"
 #include "Randomisation.generated.h"
 
 namespace measurement
@@ -70,7 +72,7 @@ void MeasureRandomGeneration(
 
     int numberOfEqualNeighbours = 0;
     randomisation::GenerateRandomArray(arr, arraySize);
-    if (HasEqualNeighbour(arr, arraySize))
+    if (!NotHasEqualNeighbour(arr, arraySize))
     {
         numberOfEqualNeighbours += 1;
     }
@@ -79,7 +81,7 @@ void MeasureRandomGeneration(
     for (int i = 0; i < numberOfIterations; i += 1)
     {
         randomisation::GenerateRandomArray(arr, arraySize);
-        if (HasEqualNeighbour(arr, arraySize))
+        if (!NotHasEqualNeighbour(arr, arraySize))
         {
             numberOfEqualNeighbours += 1;
         }

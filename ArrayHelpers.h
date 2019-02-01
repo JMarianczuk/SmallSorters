@@ -5,16 +5,21 @@
 #include "Sortable.generated.h"
 
 template <typename TValueType>
-void CopyArray(TValueType* source, TValueType* destination, int arraySize) {
-    for (int i = 0; i < arraySize; i += 1) {
+void CopyArray(TValueType* source, TValueType* destination, int arraySize) 
+{
+    for (int i = 0; i < arraySize; i += 1) 
+    {
         destination[i] = source[i];
     }
 }
 
 template <typename TComparable>
-bool IsSorted(TComparable* items, size_t arraySize) {
-    for (int i = 0; i < arraySize - 1; i += 1) {
-        if (items[i] > items[i + 1]) {
+bool IsSorted(TComparable* items, size_t arraySize) 
+{
+    for (int i = 0; i < arraySize - 1; i += 1) 
+    {
+        if (items[i] > items[i + 1]) 
+        {
             return false;
         }
     }
@@ -22,26 +27,47 @@ bool IsSorted(TComparable* items, size_t arraySize) {
 }
 
 template <typename TComparable>
-bool HasEqualNeighbour(TComparable* items, size_t arraySize) {
-    for (int i = 0; i < arraySize - 1; i += 1) {
-        if (items[i] == items[i + 1]) {
-            return true;
+bool IsSortedFake(TComparable* items, size_t arraySize, TComparable fakeCompareTo) 
+{
+    for (int i = 0; i < arraySize - 1; i += 1)
+    {
+        if (items[i] > fakeCompareTo)
+        {
+            return false;
         }
     }
-    return false;
+    return true;
+}
+
+template <typename TComparable>
+bool NotHasEqualNeighbour(TComparable* items, size_t arraySize) 
+{
+    for (int i = 0; i < arraySize - 1; i += 1) 
+    {
+        if (items[i] == items[i + 1]) 
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 template <typename TEquatable>
-bool IsPermutation(TEquatable* arr, TEquatable* reference, int arraySize) {
-    for (int i = 0; i < arraySize; i += 1) {
+bool IsPermutation(TEquatable* arr, TEquatable* reference, int arraySize) 
+{
+    for (int i = 0; i < arraySize; i += 1) 
+    {
         bool isIncluded = false;
-        for (int j = 0; j < arraySize; j += 1) {
-            if (arr[i] == reference[j]) {
+        for (int j = 0; j < arraySize; j += 1) 
+        {
+            if (arr[i] == reference[j])
+            {
                 isIncluded = true;
                 break;
             }
         }
-        if (!isIncluded) {
+        if (!isIncluded) 
+        {
             return false;
         }
     }
