@@ -1,0 +1,1 @@
+CREATE INDEX ind ON stats (s, ss, a, i, c);

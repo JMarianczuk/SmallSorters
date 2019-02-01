@@ -1,6 +1,6 @@
 # IMPORT-DATA stats output_2019-01-23_13-04-23.txt
 
-## SQL CREATE INDEX ind ON stats (s, as, m, ss, n)
+## SQL CREATE INDEX ind ON stats (s, a, m, ss, n)
 
 set terminal pdf size 28cm,18cm linewidth 2.0
 set output "small_sorters_eval.pdf"

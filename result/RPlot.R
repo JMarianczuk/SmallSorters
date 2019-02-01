@@ -13,12 +13,12 @@ options = parse_args(opt_parser)
 
 con <- dbConnect(SQLite(), "db.sqlite")
 
-query <- paste("select (value / number_of_iterations) as normalized_value, sorter from stats where array_size =", options$array_size, "and compensation_measurement = 0")
+query <- paste("select (v / n) as normalized_value, s as sorter from stats where a =", options$array_size, "and c = 0")
 res <- dbGetQuery(con, query)
 
 array_size_string <- paste(options$array_size)
 if (options$array_size < 10) {
-    array_size_string <- pase("0", array_size_string, sep="", collapse="")
+    array_size_string <- paste("0", array_size_string, sep="", collapse="")
 }
 filename <- paste("boxplot-array_size", array_size_string, ".png", sep = "", collapse = "")
 png(file = filename, width=550, height=800)
