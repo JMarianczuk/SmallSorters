@@ -38,7 +38,7 @@ int main()
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();
     printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
-    WriteAbbreviationExplanatoryLine();
+    result::WriteAbbreviationExplanatoryLine();
     
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)

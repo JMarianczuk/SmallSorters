@@ -44,7 +44,7 @@ void Measure(
     }
     perf->StopMeasuring();
 
-    WriteResultLine(
+    result::WriteResultLine(
         sorterName,
         perf,
         sizeof(TValueType),
@@ -88,7 +88,7 @@ void MeasureRandomGeneration(
     }
     perf->StopMeasuring();
 
-    WriteResultLine(
+    result::WriteResultLine(
         sorterName,
         perf,
         sizeof(TValueType),
