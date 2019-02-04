@@ -5,7 +5,7 @@
     SortableStruct.transform = this;
 
     SortableStruct[] sortableStructs = {
-        new SortableStruct("", true, "Key-Reference-Tuple"),
+        new SortableStruct("", true, "KR-Default"),
         new SortableStruct("JumpXchg", false),
         new SortableStruct("JumpXchg", true),
         new SortableStruct("TwoCmovTemp", false),
@@ -35,11 +35,12 @@
             }
             else 
             {
-                DisplayName = "Key-";
+                DisplayName = "K";
                 if (HasReference)
                 {
-                    DisplayName += "Reference-";
+                    DisplayName += "R";
                 }
+                DisplayName += "-";
                 DisplayName += Name.Replace("_", "-");
             }
         }

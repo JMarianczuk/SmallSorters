@@ -17,7 +17,7 @@ void SetSeed(unsigned long seed) {
 }
 
 uint64_t GenerateRandomUint64() {
-    _seed *= 48271;
+    _seed = _seed * 48271 % 2147483647;
     return (uint64_t) _seed;
 }
 
