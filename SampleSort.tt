@@ -20,6 +20,8 @@
 #ifndef SAMPLESORT_GENERATED_H
 #define SAMPLESORT_GENERATED_H
 
+#include <cstring>
+
 <#
     WriteRegisterSampleSort(3, 2);
     void WriteRegisterSampleSort(int numberOfSplitters, int blockSize)
@@ -45,53 +47,32 @@
             for (int i = 0; i < blockSize; i += 1)
             {
                 WriteLine($"register TValueType element{i};");
-                WriteLine($"register uint8_t state{i};");
+                WriteLine($"register int state{i};");
                 WriteLine($"register TValueType splitter0{i}x;");
             }
             WriteLine("");
 
-            WriteLine("int max = elementCount - blockSize;");
+            WriteLine($"int max = elementCount - {blockSize};");
             WriteLine("int current = 0;");
-            WriteLine("for ( ; current < max; current += blockSize)");
+            WriteLine($"//Sort {blockSize} elements simultaneously into the buckets");
+            WriteLine($"for ( ; current <= max; current += {blockSize})");
             WriteBlock(() => WriteSortElementsIntoBuckets(blockSize));
             WriteLine("");
 
+            WriteLine($"//Sort the remaining k < {blockSize} elements into the buckets");
             WriteLine("for ( ; current < elementCount; current += 1)");
             WriteBlock(() => WriteSortElementsIntoBuckets(1));
+            WriteLine("");
+
+            WriteLine("TValueType* currentPos = A;");
+            WriteLine($"int bucketSize[{numberOfBuckets}];");
+            WriteLine($"for (int currentBucket = 0; currentBucket < {numberOfBuckets}; currentBucket += 1)");
+            WriteBlock(() => {
+                WriteLine("bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);");
+                WriteLine("std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));");
+                WriteLine("currentPos += bucketSize[currentBucket];");
+            });
         });
-    }
-    void WriteSortElementsIntoBuckets(int blockSize)
-    {
-        Func<int, string> getPlusI = (i) => i > 0 ? $" + {i}" : "";
-        for (int i = 0; i < blockSize; i += 1)
-        {
-            WriteLine($"element{i} = A[current{getPlusI(i)}];");
-            WriteLine($"state{i} = 0;");
-            WriteLine($"splitter0{i}x = splitter1;");
-        }
-        for (int i = 0; i < blockSize; i += 1)
-        {
-            WriteAsmBlock(() => {
-                WriteAsmLine("cmp %[ele],%[splitter2]");
-                WriteAsmLine("cmovc %[splitter3],%[splitterx]");
-                WriteAsmLine("rcl $1,%[state]");
-                WriteLine($": [splitterx] \"+r\"(splitter0{i}x), [state] \"=r\"(state{i})");
-                WriteLine($": [ele] \"r\"(element{i}), [splitter2] \"r\"(splitter2), [splitter3] \"r\"(splitter3)");
-                WriteLine("\"cc\"");
-            });
-            WriteAsmBlock(() => {
-                WriteAsmLine("cmp %[ele],%[splitterx]");
-                WriteAsmLine("rcl $1,%[state]");
-                WriteLine($": [state] \"=r\"(state{i})");
-                WriteLine($": [ele] \"r\"(element{i}), [splitterx] \"r\"(splitter0{i}x)");
-                WriteLine("\"cc\"");
-            });
-        }
-        for (int i = 0; i < blockSize; i += 1)
-        {
-            WriteLine($"*buckets[state{i}] = element{i};");
-            WriteLine($"buckets[state{i}]++;");
-        }
     }
     void WriteAsmBlock(Action writeContent, string indent = "\t")
     {
@@ -102,6 +83,39 @@
         WriteLine(");");
     }
     void WriteAsmLine(string content) => WriteLine($"\"{content}\\n\\t\"");
+    void WriteSortElementsIntoBuckets(int blockSize)
+    {
+        Func<int, string> getPlusI = (i) => i > 0 ? $" + {i}" : "";
+        for (int i = 0; i < blockSize; i += 1)
+        {
+            WriteLine($"element{i} = A[current{getPlusI(i)}];");
+            WriteLine($"state{i} = 0;");
+            WriteLine($"splitter0{i}x = splitter0;");
+        }
+        for (int i = 0; i < blockSize; i += 1)
+        {
+            WriteAsmBlock(() => {
+                WriteAsmLine("cmp %[ele],%[splitter1]");
+                WriteAsmLine("cmovc %[splitter2],%[splitterx]");
+                WriteAsmLine("rcl $1,%[state]");
+                WriteLine($": [splitterx] \"+r\"(splitter0{i}x), [state] \"+r\"(state{i})");
+                WriteLine($": [ele] \"r\"(element{i}), [splitter1] \"r\"(splitter1), [splitter2] \"r\"(splitter2)");
+                WriteLine(": \"cc\"");
+            });
+            WriteAsmBlock(() => {
+                WriteAsmLine("cmp %[ele],%[splitterx]");
+                WriteAsmLine("rcl $1,%[state]");
+                WriteLine($": [state] \"+r\"(state{i})");
+                WriteLine($": [ele] \"r\"(element{i}), [splitterx] \"r\"(splitter0{i}x)");
+                WriteLine(": \"cc\"");
+            });
+        }
+        for (int i = 0; i < blockSize; i += 1)
+        {
+            WriteLine($"*buckets[state{i}] = element{i};");
+            WriteLine($"buckets[state{i}]++;");
+        }
+    }
 #>
 
 #endif

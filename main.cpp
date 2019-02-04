@@ -15,6 +15,7 @@
 #include "ArrayHelpers.h"
 #include "Sortable.generated.h"
 #include "Measurement.generated.h"
+#include "SampleSort.generated.h"
 
 
 void SetOutputFile() {
@@ -25,6 +26,50 @@ void SetOutputFile() {
     strftime(filename_buffer, sizeof(filename_buffer), "../result/output_%Y-%m-%d_%H-%M-%S.txt", &tstruct);
 
     auto _ = freopen(filename_buffer, "w", stdout);
+}
+
+#define ElementCount 4
+void test()
+{
+    uint test[32];
+    uint test_2[32];
+    auto seed = time(NULL);
+    for (int i = 0; i < 32; i += 1)
+    {
+        seed = seed * 48271 % 200000;
+        test[i] = (int) seed;
+    }
+    test[0] = 55000;
+    test[1] = 155000;
+    for (int i = 0; i < 32; i += 1)
+    {
+        test_2[i] = test[i];
+    }
+    uint splitters[3];
+    splitters[0] = 50000;
+    splitters[1] = 100000;
+    splitters[2] = 150000;
+
+    printf("Array before: ");
+    for (int i = 0; i < 32; i += 1)
+    {
+        printf("%u, ", test[i]);
+    }
+    printf("\n");
+    SampleSort3Splitters2BlockSize(test, 32, splitters);
+    printf("After samplesort: ");
+    for (int i = 0; i < 32; i += 1)
+    {
+        printf("%u, ", test[i]);
+    }
+    printf("\n");
+    insertionsort::InsertionSort(test_2, 32);
+    printf("Correctly Sorted: ");
+    for (int i = 0; i < 32; i += 1)
+    {
+        printf("%u, ", test_2[i]);
+    }
+    printf("\n");
 }
 
 #define NumberOfIterations 100

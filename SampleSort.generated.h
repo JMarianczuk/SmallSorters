@@ -15,6 +15,8 @@
 #ifndef SAMPLESORT_GENERATED_H
 #define SAMPLESORT_GENERATED_H
 
+#include <cstring>
+
 template <typename TValueType>
 static inline
 void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType* splitters)
@@ -30,51 +32,52 @@ void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType*
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
 	register TValueType element0;
-	register uint8_t state0;
+	register int state0;
 	register TValueType splitter00x;
 	register TValueType element1;
-	register uint8_t state1;
+	register int state1;
 	register TValueType splitter01x;
 
-	int max = elementCount - blockSize;
+	int max = elementCount - 2;
 	int current = 0;
-	for ( ; current < max; current += blockSize)
+	//Sort 2 elements simultaneously into the buckets
+	for ( ; current <= max; current += 2)
 	{
 		element0 = A[current];
 		state0 = 0;
-		splitter00x = splitter1;
+		splitter00x = splitter0;
 		element1 = A[current + 1];
 		state1 = 0;
-		splitter01x = splitter1;
+		splitter01x = splitter0;
 		__asm__(
-			"cmp %[ele],%[splitter2]\n\t"
-			"cmovc %[splitter3],%[splitterx]\n\t"
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
-			: [ele] "r"(element0), [splitter2] "r"(splitter2), [splitter3] "r"(splitter3)
-			"cc"
+			: [splitterx] "+r"(splitter00x), [state] "+r"(state0)
+			: [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [state] "=r"(state0)
+			: [state] "+r"(state0)
 			: [ele] "r"(element0), [splitterx] "r"(splitter00x)
-			"cc"
+			: "cc"
 		);
 		__asm__(
-			"cmp %[ele],%[splitter2]\n\t"
-			"cmovc %[splitter3],%[splitterx]\n\t"
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
-			: [ele] "r"(element1), [splitter2] "r"(splitter2), [splitter3] "r"(splitter3)
-			"cc"
+			: [splitterx] "+r"(splitter01x), [state] "+r"(state1)
+			: [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [state] "=r"(state1)
+			: [state] "+r"(state1)
 			: [ele] "r"(element1), [splitterx] "r"(splitter01x)
-			"cc"
+			: "cc"
 		);
 		*buckets[state0] = element0;
 		buckets[state0]++;
@@ -82,28 +85,38 @@ void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType*
 		buckets[state1]++;
 	}
 
+	//Sort the remaining k < 2 elements into the buckets
 	for ( ; current < elementCount; current += 1)
 	{
 		element0 = A[current];
 		state0 = 0;
-		splitter00x = splitter1;
+		splitter00x = splitter0;
 		__asm__(
-			"cmp %[ele],%[splitter2]\n\t"
-			"cmovc %[splitter3],%[splitterx]\n\t"
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
-			: [ele] "r"(element0), [splitter2] "r"(splitter2), [splitter3] "r"(splitter3)
-			"cc"
+			: [splitterx] "+r"(splitter00x), [state] "+r"(state0)
+			: [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [state] "=r"(state0)
+			: [state] "+r"(state0)
 			: [ele] "r"(element0), [splitterx] "r"(splitter00x)
-			"cc"
+			: "cc"
 		);
 		*buckets[state0] = element0;
 		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
 	}
 }
 
