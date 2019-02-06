@@ -92,26 +92,26 @@ void ConditionalSwap<SortableRef_FourCmovTemp_Split>(SortableRef_FourCmovTemp_Sp
     );
     __asm__(
         "cmovbq %[right_key],%[left_key]\n\t"
-        : [left_key] "+r"(left.key)
-        : [right_key] "r"(right.key)
+        : [left_key] "=&r"(left.key)
+        : "0"(left.key), [right_key] "r"(right.key)
         : 
     );
     __asm__(
         "cmovbq %[right_reference],%[left_reference]\n\t"
-        : [left_reference] "+r"(left.reference)
-        : [right_reference] "r"(right.reference)
+        : [left_reference] "=&r"(left.reference)
+        : "0"(left.reference), [right_reference] "r"(right.reference)
         :
     );
     __asm__(
         "cmovbq %[tmp],%[right_key]\n\t"
-        : [right_key] "+r"(right.key)
-        : [tmp] "r"(tmp)
+        : [right_key] "=&r"(right.key)
+        : "0"(right.key), [tmp] "r"(tmp)
         : 
     );
     __asm__(
         "cmovbq %[tmp_ref],%[right_reference]\n\t"
-        : [right_reference] "+r"(right.reference)
-        : [tmp_ref] "r"(tmpRef)
+        : [right_reference] "=&r"(right.reference)
+        : "0"(right.reference), [tmp_ref] "r"(tmpRef)
         : 
     );
 }
@@ -145,8 +145,8 @@ void ConditionalSwap<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovRegiste
         "cmovbq %[right_reference],%[left_reference]\n\t"
         "cmovbq %[tmp],%[right_key]\n\t"
         "cmovbq %[tmp_ref],%[right_reference]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference), [tmp] "+r"(tmp), [tmp_ref] "+r"(tmpRef)
-        : 
+        : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=&r"(left.reference), [right_reference] "=&r"(right.reference), [tmp] "=&r"(tmp), [tmp_ref] "=&r"(tmpRef)
+        : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference), "4"(tmp), "5"(tmpRef)
         : "cc" 
     ); 
 }
@@ -162,16 +162,16 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
     __asm__(
         "cmpq %[tmp_key],%[right_key]\n\t"
         "cmovbq %[right_pointer],%[left_pointer]\n\t"
-        : [left_pointer] "+r"(leftPointer)
-        : [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [right_key] "r"(rightKey)
+        : [left_pointer] "=&r"(leftPointer)
+        : "0"(leftPointer), [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [right_key] "r"(rightKey)
         : "cc"
     );
     left = *leftPointer;
     leftPointer = &tmp;
     __asm__(
         "cmovbq %[left_pointer],%[right_pointer]\n\t"
-        : [right_pointer] "+r"(rightPointer)
-        : [left_pointer] "m"(leftPointer)
+        : [right_pointer] "=&r"(rightPointer)
+        : "0"(rightPointer), [left_pointer] "m"(leftPointer)
         :
     );
     right = *rightPointer;
