@@ -27,15 +27,17 @@ template<>
 inline
 void InsertionSort<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* first, size_t arraySize) 
 {
-    auto current = first + 1;
     auto last = first + arraySize;
-    for (auto current = first; ++current != last; )
+    for (auto current = first + 1; current != last; current += 1)
     {
         auto next_temp = current;
         auto val = *current;
-        for (auto first_temp = next_temp; val < *--first_temp; next_temp = first_temp)
+        auto first_temp = next_temp - 1;
+        while (val < *first_temp && first_temp >= first)
         {
             *next_temp = *first_temp;
+            next_temp = first_temp;
+            first_temp -= 1;
         }
         *next_temp = val;
     }
