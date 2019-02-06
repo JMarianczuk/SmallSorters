@@ -69,7 +69,7 @@ namespace networks {
         }
 
         int leftMiddle = leftLength / 2;
-        int rightMiddle = rightLength / 2;
+        int rightMiddle = leftLength % 2 == 1 ? rightLength / 2 : (rightLength + 1) / 2;
 
         return Append(
             BoseNelsonMerge(leftStart, leftMiddle, rightStart, rightMiddle),

@@ -49,6 +49,7 @@ void sort5bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[2], A[4]);
 	networks::ConditionalSwap(A[2], A[3]);
+	networks::ConditionalSwap(A[0], A[3]);
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[1], A[4]);
 	networks::ConditionalSwap(A[1], A[3]);
@@ -125,18 +126,22 @@ void sort9bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[7], A[8]);
 	networks::ConditionalSwap(A[6], A[8]);
 	networks::ConditionalSwap(A[6], A[7]);
+	networks::ConditionalSwap(A[4], A[7]);
 	networks::ConditionalSwap(A[4], A[6]);
 	networks::ConditionalSwap(A[5], A[8]);
 	networks::ConditionalSwap(A[5], A[7]);
 	networks::ConditionalSwap(A[5], A[6]);
+	networks::ConditionalSwap(A[0], A[5]);
 	networks::ConditionalSwap(A[0], A[4]);
+	networks::ConditionalSwap(A[1], A[6]);
 	networks::ConditionalSwap(A[1], A[5]);
 	networks::ConditionalSwap(A[1], A[4]);
-	networks::ConditionalSwap(A[2], A[6]);
+	networks::ConditionalSwap(A[2], A[7]);
 	networks::ConditionalSwap(A[3], A[8]);
 	networks::ConditionalSwap(A[3], A[7]);
-	networks::ConditionalSwap(A[3], A[6]);
+	networks::ConditionalSwap(A[2], A[5]);
 	networks::ConditionalSwap(A[2], A[4]);
+	networks::ConditionalSwap(A[3], A[6]);
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
@@ -147,6 +152,7 @@ void sort10bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[2], A[4]);
 	networks::ConditionalSwap(A[2], A[3]);
+	networks::ConditionalSwap(A[0], A[3]);
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[1], A[4]);
 	networks::ConditionalSwap(A[1], A[3]);
@@ -155,6 +161,7 @@ void sort10bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[8], A[9]);
 	networks::ConditionalSwap(A[7], A[9]);
 	networks::ConditionalSwap(A[7], A[8]);
+	networks::ConditionalSwap(A[5], A[8]);
 	networks::ConditionalSwap(A[5], A[7]);
 	networks::ConditionalSwap(A[6], A[9]);
 	networks::ConditionalSwap(A[6], A[8]);
@@ -181,6 +188,7 @@ void sort11bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[2], A[4]);
 	networks::ConditionalSwap(A[2], A[3]);
+	networks::ConditionalSwap(A[0], A[3]);
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[1], A[4]);
 	networks::ConditionalSwap(A[1], A[3]);
@@ -197,6 +205,7 @@ void sort11bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[7], A[9]);
 	networks::ConditionalSwap(A[6], A[8]);
 	networks::ConditionalSwap(A[7], A[8]);
+	networks::ConditionalSwap(A[0], A[6]);
 	networks::ConditionalSwap(A[0], A[5]);
 	networks::ConditionalSwap(A[1], A[7]);
 	networks::ConditionalSwap(A[1], A[6]);
@@ -291,25 +300,27 @@ void sort13bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[7], A[9]);
 	networks::ConditionalSwap(A[8], A[10]);
 	networks::ConditionalSwap(A[8], A[9]);
+	networks::ConditionalSwap(A[0], A[7]);
 	networks::ConditionalSwap(A[0], A[6]);
-	networks::ConditionalSwap(A[1], A[7]);
+	networks::ConditionalSwap(A[1], A[8]);
+	networks::ConditionalSwap(A[2], A[9]);
 	networks::ConditionalSwap(A[2], A[8]);
-	networks::ConditionalSwap(A[2], A[7]);
 	networks::ConditionalSwap(A[1], A[6]);
+	networks::ConditionalSwap(A[2], A[7]);
 	networks::ConditionalSwap(A[2], A[6]);
 	networks::ConditionalSwap(A[3], A[10]);
-	networks::ConditionalSwap(A[3], A[9]);
 	networks::ConditionalSwap(A[4], A[11]);
 	networks::ConditionalSwap(A[5], A[12]);
 	networks::ConditionalSwap(A[5], A[11]);
-	networks::ConditionalSwap(A[4], A[9]);
+	networks::ConditionalSwap(A[4], A[10]);
 	networks::ConditionalSwap(A[5], A[10]);
-	networks::ConditionalSwap(A[5], A[9]);
+	networks::ConditionalSwap(A[3], A[7]);
 	networks::ConditionalSwap(A[3], A[6]);
-	networks::ConditionalSwap(A[4], A[7]);
+	networks::ConditionalSwap(A[4], A[8]);
+	networks::ConditionalSwap(A[5], A[9]);
 	networks::ConditionalSwap(A[5], A[8]);
-	networks::ConditionalSwap(A[5], A[7]);
 	networks::ConditionalSwap(A[4], A[6]);
+	networks::ConditionalSwap(A[5], A[7]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
 template <typename TValueType> static inline
@@ -363,11 +374,12 @@ void sort14bosenelson(TValueType* A)
 	networks::ConditionalSwap(A[6], A[11]);
 	networks::ConditionalSwap(A[6], A[10]);
 	networks::ConditionalSwap(A[3], A[7]);
+	networks::ConditionalSwap(A[4], A[8]);
 	networks::ConditionalSwap(A[4], A[7]);
-	networks::ConditionalSwap(A[5], A[8]);
+	networks::ConditionalSwap(A[5], A[9]);
 	networks::ConditionalSwap(A[6], A[9]);
-	networks::ConditionalSwap(A[6], A[8]);
 	networks::ConditionalSwap(A[5], A[7]);
+	networks::ConditionalSwap(A[6], A[8]);
 	networks::ConditionalSwap(A[6], A[7]);
 }
 template <typename TValueType> static inline
