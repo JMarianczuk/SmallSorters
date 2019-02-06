@@ -23,8 +23,8 @@ set title 'Sorting of small lists'
 set xlabel 'Number of elements'
 set ylabel 'Cpu cycles needed per element'
 
-## MULTIPLOT(s) SELECT Real.as AS x, Avg((Real.v - Compensation.v) / Real.n) / Real.as AS y, Real.MULTIPLOT
-## FROM stats Real, stats Compensation WHERE Real.s = Compensation.s AND Real.as = Compensation.as AND Real.m = Compensation.m AND Real.ss = Compensation.ss and Real.n = Compensation.n And Real.c = 0 AND Compensation.c = 1
+## MULTIPLOT(s) SELECT Real.a AS x, Avg((Real.v - Compensation.v) / Real.n) / Real.a AS y, Real.MULTIPLOT
+## FROM stats Real, stats Compensation WHERE Real.s = Compensation.s AND Real.a = Compensation.a AND Real.m = Compensation.m AND Real.ss = Compensation.ss and Real.n = Compensation.n And Real.c = 0 AND Compensation.c = 1
 ## AND Real.m LIKE "Cpu Cycles" GROUP BY Real.MULTIPLOT,x ORDER BY Real.MULTIPLOT,x
 plot \
     'small_sorters-data.txt' index 0 title "sorter=Insertion Sort Key-Reference-PointerOptimized" with linespoints, \

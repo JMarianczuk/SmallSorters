@@ -53,30 +53,30 @@ void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType*
 			"cmp %[ele],%[splitter1]\n\t"
 			"cmovc %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [splitterx] "+r"(splitter00x), [state] "+r"(state0)
-			: [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
 			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [state] "+r"(state0)
-			: [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
 			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitter1]\n\t"
 			"cmovc %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [splitterx] "+r"(splitter01x), [state] "+r"(state1)
-			: [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
 			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [state] "+r"(state1)
-			: [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
 			: "cc"
 		);
 		*buckets[state0] = element0;
@@ -95,15 +95,15 @@ void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType*
 			"cmp %[ele],%[splitter1]\n\t"
 			"cmovc %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [splitterx] "+r"(splitter00x), [state] "+r"(state0)
-			: [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
 			: "cc"
 		);
 		__asm__(
 			"cmp %[ele],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
-			: [state] "+r"(state0)
-			: [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
 			: "cc"
 		);
 		*buckets[state0] = element0;

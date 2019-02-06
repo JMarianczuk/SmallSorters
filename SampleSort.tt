@@ -98,15 +98,15 @@
                 WriteAsmLine("cmp %[ele],%[splitter1]");
                 WriteAsmLine("cmovc %[splitter2],%[splitterx]");
                 WriteAsmLine("rcl $1,%[state]");
-                WriteLine($": [splitterx] \"+r\"(splitter0{i}x), [state] \"+r\"(state{i})");
-                WriteLine($": [ele] \"r\"(element{i}), [splitter1] \"r\"(splitter1), [splitter2] \"r\"(splitter2)");
+                WriteLine($": [splitterx] \"+r\"(splitter0{i}x), [state] \"=r\"(state{i})");
+                WriteLine($": \"1\"(state{i}), [ele] \"r\"(element{i}), [splitter1] \"r\"(splitter1), [splitter2] \"r\"(splitter2)");
                 WriteLine(": \"cc\"");
             });
             WriteAsmBlock(() => {
                 WriteAsmLine("cmp %[ele],%[splitterx]");
                 WriteAsmLine("rcl $1,%[state]");
-                WriteLine($": [state] \"+r\"(state{i})");
-                WriteLine($": [ele] \"r\"(element{i}), [splitterx] \"r\"(splitter0{i}x)");
+                WriteLine($": [state] \"=r\"(state{i})");
+                WriteLine($": \"0\"(state{i}), [ele] \"r\"(element{i}), [splitterx] \"r\"(splitter0{i}x)");
                 WriteLine(": \"cc\"");
             });
         }
