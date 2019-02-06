@@ -2,14 +2,39 @@
 #ifndef ARRAY_HELPERS_H
 #define ARRAY_HELPERS_H
 
+#include <iostream>
+#include <string>
+#include <vector>
 #include "Sortable.generated.h"
 
+template<typename TValueType>
+void PrintArray(TValueType* source, int arraySize, std::string comment)
+{
+    printf("%s: ", comment.c_str());
+    for (int i = 0; i < arraySize; i += 1)
+    {
+        printf("%" PRIu64 ", ", GetKey(source[i]));
+    }
+    printf("\n");
+}
+
 template <typename TValueType>
-void CopyArray(TValueType* source, TValueType* destination, int arraySize) 
+void PrintVector(std::vector<TValueType> source, std::string comment)
+{
+    printf("%s: ", comment.c_str());
+    for (TValueType ele : source)
+    {
+        printf("%" PRIu64 ", ", GetKey(ele));
+    }
+    printf("\n");
+}
+
+template <typename TValueType>
+void CopyArray(TValueType* source, std::vector<TValueType>& destination, int arraySize) 
 {
     for (int i = 0; i < arraySize; i += 1) 
     {
-        destination[i] = source[i];
+        destination.push_back(source[i]);
     }
 }
 
@@ -19,6 +44,19 @@ bool IsSorted(TComparable* items, size_t arraySize)
     for (int i = 0; i < arraySize - 1; i += 1) 
     {
         if (items[i] > items[i + 1]) 
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename TComparable>
+bool IsSameArray(TComparable* left, std::vector<TComparable> right, size_t arraySize)
+{
+    for (int i = 0; i < arraySize; i += 1)
+    {
+        if (left[i] != right[i])
         {
             return false;
         }

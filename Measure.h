@@ -3,11 +3,13 @@
 #define MEASURE_H
 
 #include <string>
+#include <vector>
 
 #include "Result.h"
 #include "ArrayHelpers.h"
 #include "Performancing.h"
 #include "Randomisation.generated.h"
+#include "StructHelpers.generated.h"
 
 namespace measurement
 {
@@ -23,6 +25,7 @@ void Measure(
 {
     // TValueType* arr = (TValueType*) malloc(arraySize * sizeof(TValueType));
     TValueType arr[arraySize];
+    TValueType copy[arraySize];
     
     int numberOfBadSorts = 0;
     randomisation::GenerateRandomArray(arr, arraySize);
@@ -36,10 +39,16 @@ void Measure(
     for (int i = 0; i < numberOfIterations; i += 1)
     {
         randomisation::GenerateRandomArray(arr, arraySize);
+        std::vector<TValueType> copy;
+        CopyArray(arr, copy, arraySize);
         sortFunc(arr, arraySize);
-        if (!IsSorted(arr, arraySize))
+        std::sort(copy.begin(), copy.end(), [](const TValueType& left, const TValueType& right) {return left < right;});
+        if (!IsSameArray(arr, copy, arraySize))
         {
             numberOfBadSorts += 1;
+            PrintVector(copy, "Correctly Sorted");
+            PrintArray(arr, arraySize, "Bad Sort");
+            printf("\n");
         }
     }
     perf->StopMeasuring();
