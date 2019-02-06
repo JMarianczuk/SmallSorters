@@ -74,6 +74,8 @@ void test()
 
 #define NumberOfIterations 100
 #define NumberOfMeasures 500
+#define SmallestArraySize 2
+#define LargestArraySize 16
 
 int main()
 {
@@ -88,19 +90,19 @@ int main()
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
     {
-        for (int arraySize = 2; arraySize <= 16; arraySize += 1)
+        for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
         {
             measurement::MeasureSorting(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
         }
     }
-    randomisation::SetSeed(seed);
-    for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
-    {
-        for (int arraySize = 2; arraySize <= 16; arraySize += 1)
-        {
-            measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
-        }
-    }
+    // randomisation::SetSeed(seed);
+    // for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
+    // {
+    //     for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
+    //     {
+    //         measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
+    //     }
+    // }
 	delete perf_cpu_cycles;
 
     // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);

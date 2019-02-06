@@ -17,6 +17,10 @@
         "algorithm": "cpp",
         "utility": "cpp",
         "*.rmd": "markdown",
-        "*.test": "cpp"
+        "*.test": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "xlocnum": "cpp",
+        "cstdio": "cpp"
     }
 }
