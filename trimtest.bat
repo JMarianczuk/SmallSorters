@@ -1,0 +1,1 @@
+CommandLineToolbox removeLines -i test-O3.s -o test-03_slim.s -p :#\.loc#\.LVL#\.LBB

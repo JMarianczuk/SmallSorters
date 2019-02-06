@@ -39,6 +39,7 @@ asm_test.cpp
 
 test
 test-O3.s
+test-O3_slim.s
 
 build/commit.txt
 result/*.pdf
@@ -47,6 +48,7 @@ result/small_sorters_eval.pdf
 result/small_sorters-data.txt
 
 db.sqlite
+db_test.sqlite
 result/db.sqlite-journal
 
 boxplot*.png
