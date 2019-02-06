@@ -171,7 +171,7 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
     __asm__(
         "cmovbq %[left_pointer],%[right_pointer]\n\t"
         : [right_pointer] "=&r"(rightPointer)
-        : "0"(rightPointer), [left_pointer] "m"(leftPointer)
+        : "0"(rightPointer), [left_pointer] "r"(leftPointer)
         :
     );
     right = *rightPointer;
