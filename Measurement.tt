@@ -31,16 +31,19 @@
 
 namespace measurement
 {
+<#
+    (IEnumerable<SortableStruct>, string, string)[] measureParams = new[] {
+        (sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. Best", "networks::sortNbest"), 
+        (sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. BoseNelson", "networks::sortNbosenelson"), 
+        (sortableStructs.Where(ss => ss.UseForInsertionSort), "Ins.", "insertionsort::InsertionSort")
+    };
+#>
 
 void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 <#
     WriteIndented(() => {
-        (IEnumerable<SortableStruct>, string, string)[] measureParams = new[] {
-            (sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. Best", "networks::sortNbest"), 
-            (sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. BoseNelson", "networks::sortNbosenelson"), 
-            (sortableStructs.Where(ss => ss.UseForInsertionSort), "Ins.", "insertionsort::InsertionSort")
-        };
+        
         Multicall(WriteSorterMeasureLine, measureParams);
         Multicall((structs, sorter, sortMethod) => WriteSorterMeasureInRowLine(structs, sorter + " InRow", sortMethod), measureParams);
     });
@@ -74,6 +77,10 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfI
     {
         WriteMeasureLine(structs, "MeasureInRow", sorter, sortMethod);
         WriteLine("");
+    }
+    void WriteSampleSorterMeasureLine(IEnumerable<SortableStruct> structs, string sorter, string sortMethod)
+    {
+
     }
     void WriteRandomMeasureLine(IEnumerable<SortableStruct> structs, string sorter)
     {

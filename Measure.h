@@ -79,14 +79,14 @@ void MeasureInRow(
     CopyArray(arr, compare, numberOfArrays * arraySize);
     randomisation::GenerateRandomArray(warmupArr, arraySize);
 
-    for (TValueType* current = compare; current < compareEnd; current += 1)
+    for (TValueType* current = compare; current < compareEnd; current += arraySize)
     {
         insertionsort::InsertionSort(current, arraySize);
     }
 
     sortFunc(warmupArr, arraySize);
     perf->StartMeasuring();
-    for (TValueType* current = arr; current < arrEnd; current += 1)
+    for (TValueType* current = arr; current < arrEnd; current += arraySize)
     {
         sortFunc(current, arraySize);
     }
