@@ -159,7 +159,7 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
     register SortableRef_ClangVersion* rightPointer = &right;
     register uint64_t rightKey = right.key;
     SortableRef_ClangVersion tmp = left;
-    __asm__(
+    __asm__ volatile(
         "cmpq %[tmp_key],%[right_key]\n\t"
         "cmovbq %[right_pointer],%[left_pointer]\n\t"
         : [left_pointer] "=&r"(leftPointer)
@@ -168,7 +168,7 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
     );
     left = *leftPointer;
     leftPointer = &tmp;
-    __asm__(
+    __asm__ volatile(
         "cmovbq %[left_pointer],%[right_pointer]\n\t"
         : [right_pointer] "=&r"(rightPointer)
         : "0"(rightPointer), [left_pointer] "r"(leftPointer)
