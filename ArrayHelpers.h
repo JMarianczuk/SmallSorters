@@ -38,6 +38,15 @@ void CopyArray(TValueType* source, std::vector<TValueType>& destination, int arr
     }
 }
 
+template <typename TValueType>
+void CopyArray(TValueType* source, TValueType* destination, size_t arraySize)
+{
+    for (int i = 0; i < arraySize; i += 1) 
+    {
+        destination[i] = source[i];
+    }
+}
+
 template <typename TComparable>
 bool IsSorted(TComparable* items, size_t arraySize) 
 {
@@ -53,6 +62,19 @@ bool IsSorted(TComparable* items, size_t arraySize)
 
 template <typename TComparable>
 bool IsSameArray(TComparable* left, std::vector<TComparable> right, size_t arraySize)
+{
+    for (int i = 0; i < arraySize; i += 1)
+    {
+        if (left[i] != right[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename TComparable>
+bool IsSameArray(TComparable* left, TComparable* right, size_t arraySize)
 {
     for (int i = 0; i < arraySize; i += 1)
     {

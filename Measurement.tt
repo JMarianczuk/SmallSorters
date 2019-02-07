@@ -1,6 +1,7 @@
 <#@ template language="C#" hostspecific="False" compilerOptions="/langversion:7"#>
 <#@ output extension=".generated.h"#>
 <#@ include file="SortableDefinitions.tt"#>
+<#@ include file="Base.tt"#>
 <#@ assembly name="System.Core"#>
 
 <#@ import namespace="System"#>
@@ -34,13 +35,15 @@ namespace measurement
 void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 <#
-    PushIndent("\t"); 
-    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. Best", "networks::sortNbest");
-    WriteLine("");
-    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. BoseNelson", "networks::sortNbosenelson");
-    WriteLine("");
-    WriteSorterMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Ins.", "insertionsort::InsertionSort");
-    PopIndent();
+    WriteIndented(() => {
+        (IEnumerable<SortableStruct>, string, string)[] measureParams = new[] {
+            (sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. Best", "networks::sortNbest"), 
+            (sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. BoseNelson", "networks::sortNbosenelson"), 
+            (sortableStructs.Where(ss => ss.UseForInsertionSort), "Ins.", "insertionsort::InsertionSort")
+        };
+        Multicall(WriteSorterMeasureLine, measureParams);
+        Multicall((structs, sorter, sortMethod) => WriteSorterMeasureInRowLine(structs, sorter + " InRow", sortMethod), measureParams);
+    });
 #>
 }
 
@@ -48,11 +51,11 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfI
 {
 <#
     PushIndent("\t");
-    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network Best");
+    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. Best");
     WriteLine("");
-    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Network BoseNelson");
+    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForNetworkSort), "Netw. BoseNelson");
     WriteLine("");
-    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Insertion");
+    //WriteRandomMeasureLine(sortableStructs.Where(ss => ss.UseForInsertionSort), "Ins.");
     PopIndent();
 #>
 }
@@ -64,7 +67,13 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfI
 <#
     void WriteSorterMeasureLine(IEnumerable<SortableStruct> structs, string sorter, string sortMethod)
     {
-        WriteMeasureLine(structs, sorter, sortMethod);
+        WriteMeasureLine(structs, "Measure", sorter, sortMethod);
+        WriteLine("");
+    }
+    void WriteSorterMeasureInRowLine(IEnumerable<SortableStruct> structs, string sorter, string sortMethod)
+    {
+        WriteMeasureLine(structs, "MeasureInRow", sorter, sortMethod);
+        WriteLine("");
     }
     void WriteRandomMeasureLine(IEnumerable<SortableStruct> structs, string sorter)
     {
@@ -73,11 +82,11 @@ void MeasureRandomGenerationAndSortedChecking(Performancing* perf, int numberOfI
             WriteLine($"measurement::MeasureRandomGeneration<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, measureIteration, \"{sorter} Sort {sortableStruct.DisplayName}\");");
         }
     }
-    void WriteMeasureLine(IEnumerable<SortableStruct> structs, string sorter, string sortMethod)
+    void WriteMeasureLine(IEnumerable<SortableStruct> structs, string measureMethod, string sorter, string sortMethod)
     {
         foreach (var sortableStruct in structs)
         {
-            WriteLine($"measurement::Measure<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, measureIteration, \"{sorter} {sortableStruct.DisplayName}\", &{sortMethod}<{sortableStruct.FullName}>);");
+            WriteLine($"measurement::{measureMethod}<{sortableStruct.FullName}>(perf, numberOfIterations, arraySize, measureIteration, \"{sorter} {sortableStruct.DisplayName}\", &{sortMethod}<{sortableStruct.FullName}>);");
         }
     }
 #>
