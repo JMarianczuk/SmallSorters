@@ -17,10 +17,147 @@
 
 #include <cstring>
 
+namespace samplesort {
+
 template <typename TValueType>
 static inline
-void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType* splitters)
+void Find3Splitters1OversamplingFactor(
+	TValueType* items,
+	size_t elementCount,
+	TValueType* splitterDestination,
+	void(*sortFunc)(TValueType*,size_t))
 {
+	TValueType sample[3];
+	int blockSize = elementCount / 3;
+	for (int i = 0; i < 3; i += 1)
+	{
+		sample[i] = items[i * blockSize];
+	}
+	sortFunc(sample, 3);
+
+	for (int i = 0; i < 3; i += 1)
+	{
+		splitterDestination[i] = sample[i * 1 + 0];
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters1OversamplingFactor1BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+
+	int max = elementCount - 1;
+	int current = 0;
+	//Sort 1 elements simultaneously into the buckets
+	for ( ; current <= max; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	//Sort the remaining k < 1 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters1OversamplingFactor1BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters1OversamplingFactor2BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc);
 	register TValueType splitter0 = splitters[0];
 	register TValueType splitter1 = splitters[1];
 	register TValueType splitter2 = splitters[2];
@@ -112,12 +249,3582 @@ void SampleSort3Splitters2BlockSize(TValueType* A, int elementCount, TValueType*
 
 	TValueType* currentPos = A;
 	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
 		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters1OversamplingFactor2BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters1OversamplingFactor3BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+
+	int max = elementCount - 3;
+	int current = 0;
+	//Sort 3 elements simultaneously into the buckets
+	for ( ; current <= max; current += 3)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+	}
+
+	//Sort the remaining k < 3 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters1OversamplingFactor3BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters1OversamplingFactor4BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+
+	int max = elementCount - 4;
+	int current = 0;
+	//Sort 4 elements simultaneously into the buckets
+	for ( ; current <= max; current += 4)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+	}
+
+	//Sort the remaining k < 4 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters1OversamplingFactor4BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters1OversamplingFactor5BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+	register TValueType element4;
+	register int state4;
+	register TValueType splitter04x;
+
+	int max = elementCount - 5;
+	int current = 0;
+	//Sort 5 elements simultaneously into the buckets
+	for ( ; current <= max; current += 5)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		element4 = A[current + 4];
+		state4 = 0;
+		splitter04x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter04x), [state] "=r"(state4)
+			: "1"(state4), [ele] "r"(element4), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state4)
+			: "0"(state4), [ele] "r"(element4), [splitterx] "r"(splitter04x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+		*buckets[state4] = element4;
+		buckets[state4]++;
+	}
+
+	//Sort the remaining k < 5 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters1OversamplingFactor5BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void Find3Splitters2OversamplingFactor(
+	TValueType* items,
+	size_t elementCount,
+	TValueType* splitterDestination,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	TValueType sample[6];
+	int blockSize = elementCount / 6;
+	for (int i = 0; i < 6; i += 1)
+	{
+		sample[i] = items[i * blockSize];
+	}
+	sortFunc(sample, 6);
+
+	for (int i = 0; i < 3; i += 1)
+	{
+		splitterDestination[i] = sample[i * 2 + 1];
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters2OversamplingFactor1BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+
+	int max = elementCount - 1;
+	int current = 0;
+	//Sort 1 elements simultaneously into the buckets
+	for ( ; current <= max; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	//Sort the remaining k < 1 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters2OversamplingFactor1BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters2OversamplingFactor2BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+
+	int max = elementCount - 2;
+	int current = 0;
+	//Sort 2 elements simultaneously into the buckets
+	for ( ; current <= max; current += 2)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+	}
+
+	//Sort the remaining k < 2 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters2OversamplingFactor2BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters2OversamplingFactor3BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+
+	int max = elementCount - 3;
+	int current = 0;
+	//Sort 3 elements simultaneously into the buckets
+	for ( ; current <= max; current += 3)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+	}
+
+	//Sort the remaining k < 3 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters2OversamplingFactor3BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters2OversamplingFactor4BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+
+	int max = elementCount - 4;
+	int current = 0;
+	//Sort 4 elements simultaneously into the buckets
+	for ( ; current <= max; current += 4)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+	}
+
+	//Sort the remaining k < 4 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters2OversamplingFactor4BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters2OversamplingFactor5BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+	register TValueType element4;
+	register int state4;
+	register TValueType splitter04x;
+
+	int max = elementCount - 5;
+	int current = 0;
+	//Sort 5 elements simultaneously into the buckets
+	for ( ; current <= max; current += 5)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		element4 = A[current + 4];
+		state4 = 0;
+		splitter04x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter04x), [state] "=r"(state4)
+			: "1"(state4), [ele] "r"(element4), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state4)
+			: "0"(state4), [ele] "r"(element4), [splitterx] "r"(splitter04x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+		*buckets[state4] = element4;
+		buckets[state4]++;
+	}
+
+	//Sort the remaining k < 5 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters2OversamplingFactor5BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void Find3Splitters3OversamplingFactor(
+	TValueType* items,
+	size_t elementCount,
+	TValueType* splitterDestination,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	TValueType sample[9];
+	int blockSize = elementCount / 9;
+	for (int i = 0; i < 9; i += 1)
+	{
+		sample[i] = items[i * blockSize];
+	}
+	sortFunc(sample, 9);
+
+	for (int i = 0; i < 3; i += 1)
+	{
+		splitterDestination[i] = sample[i * 3 + 1];
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters3OversamplingFactor1BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+
+	int max = elementCount - 1;
+	int current = 0;
+	//Sort 1 elements simultaneously into the buckets
+	for ( ; current <= max; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	//Sort the remaining k < 1 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters3OversamplingFactor1BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters3OversamplingFactor2BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+
+	int max = elementCount - 2;
+	int current = 0;
+	//Sort 2 elements simultaneously into the buckets
+	for ( ; current <= max; current += 2)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+	}
+
+	//Sort the remaining k < 2 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters3OversamplingFactor2BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters3OversamplingFactor3BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+
+	int max = elementCount - 3;
+	int current = 0;
+	//Sort 3 elements simultaneously into the buckets
+	for ( ; current <= max; current += 3)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+	}
+
+	//Sort the remaining k < 3 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters3OversamplingFactor3BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters3OversamplingFactor4BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+
+	int max = elementCount - 4;
+	int current = 0;
+	//Sort 4 elements simultaneously into the buckets
+	for ( ; current <= max; current += 4)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+	}
+
+	//Sort the remaining k < 4 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters3OversamplingFactor4BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters3OversamplingFactor5BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+	register TValueType element4;
+	register int state4;
+	register TValueType splitter04x;
+
+	int max = elementCount - 5;
+	int current = 0;
+	//Sort 5 elements simultaneously into the buckets
+	for ( ; current <= max; current += 5)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		element4 = A[current + 4];
+		state4 = 0;
+		splitter04x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter04x), [state] "=r"(state4)
+			: "1"(state4), [ele] "r"(element4), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state4)
+			: "0"(state4), [ele] "r"(element4), [splitterx] "r"(splitter04x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+		*buckets[state4] = element4;
+		buckets[state4]++;
+	}
+
+	//Sort the remaining k < 5 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters3OversamplingFactor5BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void Find3Splitters4OversamplingFactor(
+	TValueType* items,
+	size_t elementCount,
+	TValueType* splitterDestination,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	TValueType sample[12];
+	int blockSize = elementCount / 12;
+	for (int i = 0; i < 12; i += 1)
+	{
+		sample[i] = items[i * blockSize];
+	}
+	sortFunc(sample, 12);
+
+	for (int i = 0; i < 3; i += 1)
+	{
+		splitterDestination[i] = sample[i * 4 + 2];
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters4OversamplingFactor1BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+
+	int max = elementCount - 1;
+	int current = 0;
+	//Sort 1 elements simultaneously into the buckets
+	for ( ; current <= max; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	//Sort the remaining k < 1 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters4OversamplingFactor1BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters4OversamplingFactor2BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+
+	int max = elementCount - 2;
+	int current = 0;
+	//Sort 2 elements simultaneously into the buckets
+	for ( ; current <= max; current += 2)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+	}
+
+	//Sort the remaining k < 2 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters4OversamplingFactor2BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters4OversamplingFactor3BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+
+	int max = elementCount - 3;
+	int current = 0;
+	//Sort 3 elements simultaneously into the buckets
+	for ( ; current <= max; current += 3)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+	}
+
+	//Sort the remaining k < 3 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters4OversamplingFactor3BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters4OversamplingFactor4BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+
+	int max = elementCount - 4;
+	int current = 0;
+	//Sort 4 elements simultaneously into the buckets
+	for ( ; current <= max; current += 4)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+	}
+
+	//Sort the remaining k < 4 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters4OversamplingFactor4BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters4OversamplingFactor5BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+	register TValueType element4;
+	register int state4;
+	register TValueType splitter04x;
+
+	int max = elementCount - 5;
+	int current = 0;
+	//Sort 5 elements simultaneously into the buckets
+	for ( ; current <= max; current += 5)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		element4 = A[current + 4];
+		state4 = 0;
+		splitter04x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter04x), [state] "=r"(state4)
+			: "1"(state4), [ele] "r"(element4), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state4)
+			: "0"(state4), [ele] "r"(element4), [splitterx] "r"(splitter04x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+		*buckets[state4] = element4;
+		buckets[state4]++;
+	}
+
+	//Sort the remaining k < 5 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters4OversamplingFactor5BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void Find3Splitters5OversamplingFactor(
+	TValueType* items,
+	size_t elementCount,
+	TValueType* splitterDestination,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	TValueType sample[15];
+	int blockSize = elementCount / 15;
+	for (int i = 0; i < 15; i += 1)
+	{
+		sample[i] = items[i * blockSize];
+	}
+	sortFunc(sample, 15);
+
+	for (int i = 0; i < 3; i += 1)
+	{
+		splitterDestination[i] = sample[i * 5 + 2];
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters5OversamplingFactor1BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+
+	int max = elementCount - 1;
+	int current = 0;
+	//Sort 1 elements simultaneously into the buckets
+	for ( ; current <= max; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	//Sort the remaining k < 1 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters5OversamplingFactor1BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters5OversamplingFactor2BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+
+	int max = elementCount - 2;
+	int current = 0;
+	//Sort 2 elements simultaneously into the buckets
+	for ( ; current <= max; current += 2)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+	}
+
+	//Sort the remaining k < 2 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters5OversamplingFactor2BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters5OversamplingFactor3BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+
+	int max = elementCount - 3;
+	int current = 0;
+	//Sort 3 elements simultaneously into the buckets
+	for ( ; current <= max; current += 3)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+	}
+
+	//Sort the remaining k < 3 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters5OversamplingFactor3BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters5OversamplingFactor4BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+
+	int max = elementCount - 4;
+	int current = 0;
+	//Sort 4 elements simultaneously into the buckets
+	for ( ; current <= max; current += 4)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+	}
+
+	//Sort the remaining k < 4 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters5OversamplingFactor4BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+template <typename TValueType>
+static inline
+void SampleSort3Splitters5OversamplingFactor5BlockSize(
+	TValueType* A,
+	size_t elementCount,
+	size_t baseCaseLimit,
+	void(*sortFunc)(TValueType*,size_t))
+{
+	if (elementCount <= baseCaseLimit)
+	{
+		sortFunc(A, elementCount);
+		return;
+	}
+
+	TValueType splitters[3];
+	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc);
+	register TValueType splitter0 = splitters[0];
+	register TValueType splitter1 = splitters[1];
+	register TValueType splitter2 = splitters[2];
+
+	TValueType rawbuckets[4 * elementCount];
+	TValueType* buckets[4];
+	for (int i = 0; i < 4; i += 1)
+	{
+		buckets[i] = &rawbuckets[i * elementCount];
+	}
+	register TValueType element0;
+	register int state0;
+	register TValueType splitter00x;
+	register TValueType element1;
+	register int state1;
+	register TValueType splitter01x;
+	register TValueType element2;
+	register int state2;
+	register TValueType splitter02x;
+	register TValueType element3;
+	register int state3;
+	register TValueType splitter03x;
+	register TValueType element4;
+	register int state4;
+	register TValueType splitter04x;
+
+	int max = elementCount - 5;
+	int current = 0;
+	//Sort 5 elements simultaneously into the buckets
+	for ( ; current <= max; current += 5)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		element1 = A[current + 1];
+		state1 = 0;
+		splitter01x = splitter0;
+		element2 = A[current + 2];
+		state2 = 0;
+		splitter02x = splitter0;
+		element3 = A[current + 3];
+		state3 = 0;
+		splitter03x = splitter0;
+		element4 = A[current + 4];
+		state4 = 0;
+		splitter04x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter01x), [state] "=r"(state1)
+			: "1"(state1), [ele] "r"(element1), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state1)
+			: "0"(state1), [ele] "r"(element1), [splitterx] "r"(splitter01x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter02x), [state] "=r"(state2)
+			: "1"(state2), [ele] "r"(element2), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state2)
+			: "0"(state2), [ele] "r"(element2), [splitterx] "r"(splitter02x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter03x), [state] "=r"(state3)
+			: "1"(state3), [ele] "r"(element3), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state3)
+			: "0"(state3), [ele] "r"(element3), [splitterx] "r"(splitter03x)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter04x), [state] "=r"(state4)
+			: "1"(state4), [ele] "r"(element4), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state4)
+			: "0"(state4), [ele] "r"(element4), [splitterx] "r"(splitter04x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+		*buckets[state1] = element1;
+		buckets[state1]++;
+		*buckets[state2] = element2;
+		buckets[state2]++;
+		*buckets[state3] = element3;
+		buckets[state3]++;
+		*buckets[state4] = element4;
+		buckets[state4]++;
+	}
+
+	//Sort the remaining k < 5 elements into the buckets
+	for ( ; current < elementCount; current += 1)
+	{
+		element0 = A[current];
+		state0 = 0;
+		splitter00x = splitter0;
+		__asm__(
+			"cmp %[ele],%[splitter1]\n\t"
+			"cmovc %[splitter2],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [splitterx] "+r"(splitter00x), [state] "=r"(state0)
+			: "1"(state0), [ele] "r"(element0), [splitter1] "r"(splitter1), [splitter2] "r"(splitter2)
+			: "cc"
+		);
+		__asm__(
+			"cmp %[ele],%[splitterx]\n\t"
+			"rcl $1,%[state]\n\t"
+			: [state] "=r"(state0)
+			: "0"(state0), [ele] "r"(element0), [splitterx] "r"(splitter00x)
+			: "cc"
+		);
+		*buckets[state0] = element0;
+		buckets[state0]++;
+	}
+
+	TValueType* currentPos = A;
+	int bucketSize[4];
+	int exclusiveBucketSizePrefixSum[4];
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);
+		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
+		currentPos += bucketSize[currentBucket];
+	}
+
+	exclusiveBucketSizePrefixSum[0] = 0;
+	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
+	exclusiveBucketSizePrefixSum[2] = exclusiveBucketSizePrefixSum[1] + bucketSize[1];
+	exclusiveBucketSizePrefixSum[3] = exclusiveBucketSizePrefixSum[2] + bucketSize[2];
+
+	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
+	{
+		SampleSort3Splitters5OversamplingFactor5BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);
+	}
+}
+
 }
 
 #endif

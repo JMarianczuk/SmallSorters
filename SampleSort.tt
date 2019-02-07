@@ -22,15 +22,75 @@
 
 #include <cstring>
 
+namespace samplesort {
+
 <#
-    WriteRegisterSampleSort(3, 2);
-    void WriteRegisterSampleSort(int numberOfSplitters, int blockSize)
+    //currently asm blocks only do with 3 splitters
+    for (int splits = 3; splits <= 3; splits = splits * 2 + 1)
+    {
+        for (int oversample = 1; oversample * splits <= 16; oversample += 1)
+        {
+            WriteFindSplitters(splits, oversample);
+            for (int blockSize = 1; blockSize <= 5; blockSize += 1)
+            {
+                WriteRegisterSampleSort(splits, oversample, blockSize);
+            }
+        }
+    }
+    //WriteFindSplitters(3, 4);
+    //WriteRegisterSampleSort(3, 4, 2);
+
+    string GetName(int numberOfSplitters, int oversamplingFactor) => $"{numberOfSplitters}Splitters{oversamplingFactor}OversamplingFactor";
+    void WriteFindSplitters(int numberOfSplitters, int oversamplingFactor)
+    {
+        int sampleSize = numberOfSplitters * oversamplingFactor;
+        WriteLine("template <typename TValueType>");
+        WriteLine("static inline");
+        WriteLine($"void Find{GetName(numberOfSplitters, oversamplingFactor)}(");
+        WriteIndented(() => {
+            WriteLine("TValueType* items,");
+            WriteLine("size_t elementCount,");
+            WriteLine("TValueType* splitterDestination,");
+            WriteLine("void(*sortFunc)(TValueType*,size_t))");
+        });
+        WriteBlock(() => {
+            WriteLine($"TValueType sample[{sampleSize}];");
+            WriteLine($"int blockSize = elementCount / {sampleSize};");
+            WriteLine($"for (int i = 0; i < {sampleSize}; i += 1)");
+            WriteBlock(() => {
+                WriteLine($"sample[i] = items[i * blockSize];");
+            });
+            WriteLine($"sortFunc(sample, {sampleSize});");
+            WriteLine("");
+
+            WriteLine($"for (int i = 0; i < {numberOfSplitters}; i += 1)");
+            WriteBlock(() => {
+                WriteLine($"splitterDestination[i] = sample[i * {oversamplingFactor} + {oversamplingFactor / 2}];");
+            });
+        });
+    }
+    void WriteRegisterSampleSort(int numberOfSplitters, int oversamplingFactor, int blockSize)
     {
         var numberOfBuckets = numberOfSplitters + 1;
         WriteLine("template <typename TValueType>");
         WriteLine("static inline");
-        WriteLine($"void SampleSort{numberOfSplitters}Splitters{blockSize}BlockSize(TValueType* A, int elementCount, TValueType* splitters)");
+        WriteLine($"void SampleSort{GetName(numberOfSplitters, oversamplingFactor)}{blockSize}BlockSize(");
+        WriteIndented(() => {
+            WriteLine("TValueType* A,");
+            WriteLine("size_t elementCount,");
+            WriteLine("size_t baseCaseLimit,");
+            WriteLine("void(*sortFunc)(TValueType*,size_t))");
+        });
         WriteBlock(() => {
+            WriteLine("if (elementCount <= baseCaseLimit)");
+            WriteBlock(() => {
+                WriteLine("sortFunc(A, elementCount);");
+                WriteLine("return;");
+            });
+            WriteLine("");
+
+            WriteLine($"TValueType splitters[{numberOfSplitters}];");
+            WriteLine($"Find{GetName(numberOfSplitters, oversamplingFactor)}(A, elementCount, splitters, sortFunc);");
             for (int i = 0; i < numberOfSplitters; i += 1)
             {
                 WriteLine($"register TValueType splitter{i} = splitters[{i}];");
@@ -56,21 +116,45 @@
             WriteLine("int current = 0;");
             WriteLine($"//Sort {blockSize} elements simultaneously into the buckets");
             WriteLine($"for ( ; current <= max; current += {blockSize})");
-            WriteBlock(() => WriteSortElementsIntoBuckets(blockSize));
+            WriteBlock(() => WriteSortElementsIntoBuckets(numberOfSplitters, blockSize));
             WriteLine("");
 
             WriteLine($"//Sort the remaining k < {blockSize} elements into the buckets");
             WriteLine("for ( ; current < elementCount; current += 1)");
-            WriteBlock(() => WriteSortElementsIntoBuckets(1));
+            WriteBlock(() => WriteSortElementsIntoBuckets(numberOfSplitters, 1));
             WriteLine("");
 
             WriteLine("TValueType* currentPos = A;");
             WriteLine($"int bucketSize[{numberOfBuckets}];");
+            WriteLine($"int exclusiveBucketSizePrefixSum[{numberOfBuckets}];");
             WriteLine($"for (int currentBucket = 0; currentBucket < {numberOfBuckets}; currentBucket += 1)");
             WriteBlock(() => {
                 WriteLine("bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);");
                 WriteLine("std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));");
                 WriteLine("currentPos += bucketSize[currentBucket];");
+            });
+            WriteLine("");
+
+            for (int i = 0; i < numberOfBuckets; i += 1)
+            {
+                if (i == 0) 
+                {
+                    WriteLine("exclusiveBucketSizePrefixSum[0] = 0;");
+                }
+                else if (i == 1)
+                {
+                    WriteLine("exclusiveBucketSizePrefixSum[1] = bucketSize[0];");
+                }
+                else
+                {
+                    WriteLine($"exclusiveBucketSizePrefixSum[{i}] = exclusiveBucketSizePrefixSum[{i-1}] + bucketSize[{i-1}];");
+                }
+            }
+            WriteLine("");
+
+            WriteLine($"for (int currentBucket = 0; currentBucket < {numberOfBuckets}; currentBucket += 1)");
+            WriteBlock(() => {
+                WriteLine($"SampleSort{GetName(numberOfSplitters, oversamplingFactor)}{blockSize}BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);");
             });
         });
     }
@@ -83,7 +167,7 @@
         WriteLine(");");
     }
     void WriteAsmLine(string content) => WriteLine($"\"{content}\\n\\t\"");
-    void WriteSortElementsIntoBuckets(int blockSize)
+    void WriteSortElementsIntoBuckets(int numberOfSplitters, int blockSize)
     {
         Func<int, string> getPlusI = (i) => i > 0 ? $" + {i}" : "";
         for (int i = 0; i < blockSize; i += 1)
@@ -117,5 +201,7 @@
         }
     }
 #>
+
+}
 
 #endif
