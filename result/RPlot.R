@@ -13,7 +13,7 @@ options = parse_args(opt_parser)
 
 con <- dbConnect(SQLite(), "db.sqlite")
 
-query <- paste("select (v / n) as normalized_value, s as sorter from stats where a =", options$array_size, "and c = 0")
+query <- paste("select (v / n) as normalized_value, s as sorter from stats where a =", options$array_size, "and c = 0 and s not like '%InRow%'")
 res <- dbGetQuery(con, query)
 
 array_size_string <- paste(options$array_size)
@@ -21,7 +21,7 @@ if (options$array_size < 10) {
     array_size_string <- paste("0", array_size_string, sep="", collapse="")
 }
 filename <- paste("boxplot-array_size", array_size_string, ".png", sep = "", collapse = "")
-png(file = filename, width=550, height=800)
+png(file = filename, width=550, height=750)
 
-par(mar=c(27,5,2,1))
+par(mar=c(22,5,2,1))
 boxplot(normalized_value ~ sorter, data = res, xlab = "Sorter", ylab = "Cycles", main = "Sorter speed", las=2)
