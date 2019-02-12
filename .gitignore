@@ -29,6 +29,8 @@
 build/*
 !build
 
+CodeGeneration/build/*
+
 # Executables
 *.exe
 *.out

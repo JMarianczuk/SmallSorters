@@ -3,6 +3,7 @@
 #define NETWORK_H
 
 #include <vector>
+#include <iostream>
 
 #include "nlohmann/json.hpp"
 
@@ -17,7 +18,7 @@ struct ConditionalSwap
 struct Network 
 {
     int NetworkSize;
-    std::vector<ConditionalSwap> Swaps;
+    std::vector<ConditionalSwap> *Swaps;
 };
 
 ConditionalSwap GetSwap(int leftIndex, int rightIndex)
@@ -31,17 +32,19 @@ nlohmann::json SwapToJson(const ConditionalSwap swap)
     nlohmann::json swapJson;
     swapJson["LeftIndex"] = swap.LeftIndex;
     swapJson["RightIndex"] = swap.RightIndex;
+    return swapJson;
 }
 
 nlohmann::json NetworkToJson(const Network network)
 {
     nlohmann::json networkJson;
     networkJson["NetworkSize"] = network.NetworkSize;
-    networkJson["Swaps"] = nlohmann::json::array();
-    for (ConditionalSwap swap : network.Swaps)
+    nlohmann::json swaps;
+    for (auto it = network.Swaps->begin(); it != network.Swaps->end(); it++)
     {
-        networkJson["Swaps"].push_back(SwapToJson(swap));
+        swaps.push_back(SwapToJson(*it));
     }
+    networkJson["Swaps"] = swaps;
     return networkJson;
 }
 

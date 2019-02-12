@@ -1,18 +1,20 @@
 
 
 #include <vector>
+#include <iostream>
 
 #include "CodeGeneration.h"
 #include "nlohmann/json.hpp"
 #include "Network.h"
 #include "GenerateBoseNelson.h"
+#include "WriteNetwork.h"
 
 
 using namespace codegeneration;
 
 int main()
 {
-    auto generator = new CodeGenerator("BoseNelson.generated.h");
+    auto boseNelsonJsonGen = new CodeGenerator("../BoseNelsonNetworks.json");
     std::vector<nlohmann::json> boseNelsonNetworks;
     for (int arraySize = 2; arraySize <= 16; arraySize += 1)
     {
@@ -23,6 +25,15 @@ int main()
     {
         boseNelsonResult.push_back(network);
     }
-    generator->WriteJson(boseNelsonResult);
-    delete generator;
+    boseNelsonJsonGen->WriteJson(boseNelsonResult);
+    delete boseNelsonJsonGen;
+
+    auto boseNelsonGen = new CodeGenerator("../../BoseNelson.generated.h");
+    WriteNetwork(boseNelsonGen, "BOSENELSON_GENERATED_H", "bosenelson", "../BoseNelsonNetworks.json");
+    delete boseNelsonGen;
+
+    auto bestNetworkGen = new CodeGenerator("../../BestNetworks.generated.h");
+    WriteNetwork(bestNetworkGen, "BESTNETWORKS_GENERATED_H", "best", "../BestNetworks.json");
+    delete bestNetworkGen;
+
 }

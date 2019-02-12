@@ -2,6 +2,7 @@
 #ifndef GENERATE_BOSENELSON_H
 #define GENERATE_BOSENELSON_H
 
+#include <iostream>
 #include <vector>
 #include "Network.h"
 #include "VectorHelper.h"
@@ -9,23 +10,23 @@
 namespace codegeneration
 {
 
-std::vector<ConditionalSwap> BoseNelsonMerge(int leftStart, int leftLength, int rightStart, int rightLength)
+std::vector<ConditionalSwap>* BoseNelsonMerge(int leftStart, int leftLength, int rightStart, int rightLength)
 {
-    std::vector<ConditionalSwap> result;
+    auto result = new std::vector<ConditionalSwap>();
 
     if (leftLength == 1 && rightLength == 1)
     {
-        result.push_back(GetSwap(leftStart, rightStart));
+        result->push_back(GetSwap(leftStart, rightStart));
     }
     else if (leftLength == 1 && rightLength == 2)
     {
-        result.push_back(GetSwap(leftStart, rightStart + 1));
-        result.push_back(GetSwap(leftStart, rightStart));
+        result->push_back(GetSwap(leftStart, rightStart + 1));
+        result->push_back(GetSwap(leftStart, rightStart));
     }
     else if (leftLength == 2 && rightLength == 1)
     {
-        result.push_back(GetSwap(leftStart, rightStart));
-        result.push_back(GetSwap(leftStart + 1, rightStart));
+        result->push_back(GetSwap(leftStart, rightStart));
+        result->push_back(GetSwap(leftStart + 1, rightStart));
     }
     else 
     {
@@ -41,9 +42,9 @@ std::vector<ConditionalSwap> BoseNelsonMerge(int leftStart, int leftLength, int 
     return result;
 }
 
-std::vector<ConditionalSwap> BoseNelsonSplit(int start, int length)
+std::vector<ConditionalSwap>* BoseNelsonSplit(int start, int length)
 {
-    std::vector<ConditionalSwap> result;
+    auto result = new std::vector<ConditionalSwap>();
     if (length >= 2)
     {
         int middle = length / 2;
@@ -61,6 +62,7 @@ Network GenerateBoseNelsonNetwork(int arraySize)
     Network network;
     network.NetworkSize = arraySize;
     network.Swaps = BoseNelsonSplit(0, arraySize);
+    return network;
 }
 
 }

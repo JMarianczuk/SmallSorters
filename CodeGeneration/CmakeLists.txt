@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.1)
+
+file(GLOB generate_SRC
+    "Generate.cc"
+    "CodeGeneration.h"
+    "GenerateBoseNelson.h"
+    "WriteNetwork.h"
+    "Network.h"
+    "VectorHelper.h"
+    "nlohmann/*.hpp"
+)
+
+set(CMAKE_CXX_FLAGS "-lstdc++")
+
+include_directories("./")
+
+add_executable (Generate ${generate_SRC})
