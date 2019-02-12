@@ -17,6 +17,8 @@
 #include "Measurement.generated.h"
 #include "SampleSort.generated.h"
 
+#include "CodeGeneration/CodeGeneration.h"
+
 
 void SetOutputFile() {
     time_t now = time(0);

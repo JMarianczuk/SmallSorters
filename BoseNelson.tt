@@ -1,5 +1,5 @@
 <#@ template language="C#" hostspecific="True" compilerOptions="/langversion:7"#>
-<#@ output extension=".generated.h"#>
+<#@ output extension=".generated2.h"#>
 
 <#@ include file="Networks.tt"#>
 
