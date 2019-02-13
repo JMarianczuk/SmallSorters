@@ -57,7 +57,13 @@ SortableStruct::SortableStruct(std::string name, bool hasReference) : Name(name)
         DisplayName += "R";
     }
     DisplayName += "-";
-    DisplayName += Name;
+    std::string nameReplaced(name);
+    size_t occ;
+    while ((occ = nameReplaced.find("_")) != std::string::npos)
+    {
+        nameReplaced = nameReplaced.replace(occ, 1, "-");
+    }
+    DisplayName += nameReplaced;
 }
 SortableStruct::SortableStruct(std::string name, bool hasReference, std::string displayName) : Name(name), HasReference(hasReference), DisplayName(displayName)
 {

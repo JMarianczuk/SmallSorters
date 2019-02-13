@@ -5,6 +5,8 @@ file(GLOB generate_SRC
     "CodeGeneration.h"
     "GenerateBoseNelson.h"
     "GenerateMeasurements.h"
+    "GenerateSortableStructs.h"
+    "GenerateStructHelpers.h"
     "WriteNetwork.h"
     "Network.h"
     "VectorHelpers.h"

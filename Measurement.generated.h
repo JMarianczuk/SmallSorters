@@ -24,15 +24,15 @@ void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySiz
 {
 	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-Default", &networks::sortNbest<SortableRef>);
 	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-JumpXchg", &networks::sortNbest<SortableRef_JumpXchg>);
-	measurement::Measure<SortableRef_TwoCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-TwoCmovTemp", &networks::sortNbest<SortableRef_TwoCmovTemp>);
-	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-FourCmovTemp_Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-FourCmovTemp", &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-FourCmovTemp-Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
 	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-SixCmovRegisterTemp", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
 	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-ClangVersion", &networks::sortNbest<SortableRef_ClangVersion>);
 	
 	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-Default", &networks::sortNbosenelson<SortableRef>);
 	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-JumpXchg", &networks::sortNbosenelson<SortableRef_JumpXchg>);
-	measurement::Measure<SortableRef_TwoCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-TwoCmovTemp", &networks::sortNbosenelson<SortableRef_TwoCmovTemp>);
-	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-FourCmovTemp_Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-FourCmovTemp", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-FourCmovTemp-Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
 	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-SixCmovRegisterTemp", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
 	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelson KR-ClangVersion", &networks::sortNbosenelson<SortableRef_ClangVersion>);
 	
@@ -42,15 +42,15 @@ void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySiz
 	
 	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-Default", &networks::sortNbest<SortableRef>);
 	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-JumpXchg", &networks::sortNbest<SortableRef_JumpXchg>);
-	measurement::MeasureInRow<SortableRef_TwoCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-TwoCmovTemp", &networks::sortNbest<SortableRef_TwoCmovTemp>);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-FourCmovTemp_Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-FourCmovTemp", &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-FourCmovTemp-Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
 	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-SixCmovRegisterTemp", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
 	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-ClangVersion", &networks::sortNbest<SortableRef_ClangVersion>);
 	
 	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-Default", &networks::sortNbosenelson<SortableRef>);
 	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-JumpXchg", &networks::sortNbosenelson<SortableRef_JumpXchg>);
-	measurement::MeasureInRow<SortableRef_TwoCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-TwoCmovTemp", &networks::sortNbosenelson<SortableRef_TwoCmovTemp>);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-FourCmovTemp_Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-FourCmovTemp", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-FourCmovTemp-Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
 	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-SixCmovRegisterTemp", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
 	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonInRow KR-ClangVersion", &networks::sortNbosenelson<SortableRef_ClangVersion>);
 	

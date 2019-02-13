@@ -9,8 +9,24 @@
 #include "GenerateBoseNelson.h"
 #include "WriteNetwork.h"
 #include "GenerateMeasurements.h"
+#include "GenerateSortableStructs.h"
+#include "GenerateStructHelpers.h"
 
 using namespace codegeneration;
+
+void GenerateSortableStructs()
+{
+    auto sortableStructsGen = new CodeGenerator("../../Sortable.generated.h");
+    WriteSortableStructs(sortableStructsGen);
+    delete sortableStructsGen;
+}
+
+void GenerateStructHelpers()
+{
+    auto structHelpersGen = new CodeGenerator("../../StructHelpers.generated.h");
+    WriteStructHelpers(structHelpersGen);
+    delete structHelpersGen;
+}
 
 void GenerateBoseNelsonNetworkJson()
 {
@@ -49,9 +65,9 @@ void GenerateMeasurements()
 
 int main()
 {
+    GenerateSortableStructs();
+    GenerateStructHelpers();
     GenerateBoseNelsonNetworkJson();
-
     GenerateNetworks();
-
     GenerateMeasurements();
 }
