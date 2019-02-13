@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "Network.h"
-#include "VectorHelper.h"
+#include "VectorHelpers.h"
 
 namespace codegeneration
 {
@@ -33,7 +33,7 @@ std::vector<ConditionalSwap>* BoseNelsonMerge(int leftStart, int leftLength, int
         int leftMiddle = leftLength / 2;
         int rightMiddle = leftLength % 2 == 1 ? rightLength / 2 : (rightLength + 1) / 2;
 
-        Concatenate(
+        VectorConcatenate<ConditionalSwap>(
             result, 
             BoseNelsonMerge(leftStart, leftMiddle, rightStart, rightMiddle),
             BoseNelsonMerge(leftStart + leftMiddle, leftLength - leftMiddle, rightStart + rightMiddle, rightLength - rightMiddle),
@@ -48,7 +48,7 @@ std::vector<ConditionalSwap>* BoseNelsonSplit(int start, int length)
     if (length >= 2)
     {
         int middle = length / 2;
-        Concatenate(
+        VectorConcatenate<ConditionalSwap>(
             result, 
             BoseNelsonSplit(start, middle), 
             BoseNelsonSplit(start + middle, length - middle), 

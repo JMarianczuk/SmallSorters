@@ -1,2 +1,5 @@
-gcc -I./ Generate.cc -o Generate -lstdc++
+cd build
+cmake ..
+make
 ./Generate
+cd ..

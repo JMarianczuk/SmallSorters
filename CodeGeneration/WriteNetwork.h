@@ -29,11 +29,12 @@ void WriteNetwork(CodeGenerator *gen, std::string headerDefine, std::string sort
     gen->WriteLine("");
     gen->WriteLine("");
 
-    gen->WriteLine("namespace networks");
-    gen->WriteBlock([=]{
+    gen->WriteIncludeQuotes("NetworkSort.h");
+
+    gen->WriteNamespace("networks", [=]{
         for (auto network : networksJson)
         {
-            gen->WriteLine("template <typename TValueType> statin inline");
+            gen->WriteLine("template <typename TValueType> static inline");
             gen->Write("void sort");
             gen->Write(network["NetworkSize"].get<int>());
             gen->Write(sortMethodName);
@@ -89,7 +90,7 @@ void WriteNetwork(CodeGenerator *gen, std::string headerDefine, std::string sort
                 });
             });
         });
-    });
+    }, "");
 
     gen->WriteLine("#endif");
 }

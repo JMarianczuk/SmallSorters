@@ -42,6 +42,12 @@ public:
     void WriteIndented(std::function<void()> writeFunc, std::string indent);
     void WriteBlock(std::function<void()> writeFunc);
     void WriteBlock(std::function<void()> writeFunc, std::string indent);
+    void WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc);
+    void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc);
+    void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent);    
+    void WriteIncludeBrackets(std::string fileName);
+    void WriteIncludeQuotes(std::string fileName);
+
 };
 
 // CodeGenerator* operator<<(CodeGenerator* gen, std::string content)
@@ -144,6 +150,41 @@ void CodeGenerator::WriteBlock(std::function<void()> writeFunc, std::string inde
     WriteLine("{");
     WriteIndented(writeFunc, indent);
     WriteLine("}");
+}
+void CodeGenerator::WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc)
+{
+    Write("#ifndef ");
+    WriteLine(headerName);
+    Write("#define ");
+    WriteLine(headerName);
+    WriteLine("");
+    writeFunc();
+    WriteLine("");
+    WriteLine("#endif");
+}
+void CodeGenerator::WriteNamespace(std::string namespaceName, std::function<void()> writeFunc)
+{
+    Write("namespace ");
+    WriteLine(namespaceName);
+    WriteBlock(writeFunc);
+}
+void CodeGenerator::WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent)
+{
+    Write("namespace ");
+    WriteLine(namespaceName);
+    WriteBlock(writeFunc, indent);
+}
+void CodeGenerator::WriteIncludeBrackets(std::string fileName)
+{
+    Write("#include <");
+    Write(fileName);
+    WriteLine(">");
+}
+void CodeGenerator::WriteIncludeQuotes(std::string fileName)
+{
+    Write("#include \"");
+    Write(fileName);
+    WriteLine("\"");
 }
 
 CodeGenerator::~CodeGenerator()

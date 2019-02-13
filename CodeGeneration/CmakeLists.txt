@@ -4,9 +4,12 @@ file(GLOB generate_SRC
     "Generate.cc"
     "CodeGeneration.h"
     "GenerateBoseNelson.h"
+    "GenerateMeasurements.h"
     "WriteNetwork.h"
     "Network.h"
-    "VectorHelper.h"
+    "VectorHelpers.h"
+    "FunctionalHelpers.h"
+    "SortableDefinitions.h"
     "nlohmann/*.hpp"
 )
 
