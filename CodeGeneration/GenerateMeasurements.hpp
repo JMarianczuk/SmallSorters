@@ -4,10 +4,10 @@
 
 #include <string>
 
-#include "CodeGeneration.h"
-#include "SortableDefinitions.h"
-#include "VectorHelpers.h"
-#include "FunctionalHelpers.h"
+#include "CodeGeneration.hpp"
+#include "SortableDefinitions.hpp"
+#include "VectorHelpers.hpp"
+#include "FunctionalHelpers.hpp"
 
 namespace codegeneration
 {

@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "CodeGeneration.h"
+#include "CodeGeneration.hpp"
 #include "nlohmann/json.hpp"
 
 namespace codegeneration

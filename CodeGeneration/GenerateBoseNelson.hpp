@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <vector>
-#include "Network.h"
-#include "VectorHelpers.h"
+#include "Network.hpp"
+#include "VectorHelpers.hpp"
 
 namespace codegeneration
 {

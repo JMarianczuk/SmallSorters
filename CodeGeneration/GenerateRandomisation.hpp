@@ -4,8 +4,8 @@
 
 #include <string>
 
-#include "CodeGeneration.h"
-#include "SortableDefinitions.h"
+#include "CodeGeneration.hpp"
+#include "SortableDefinitions.hpp"
 
 namespace codegeneration
 {

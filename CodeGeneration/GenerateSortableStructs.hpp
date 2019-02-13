@@ -2,9 +2,9 @@
 #ifndef GENERATE_SORTABLE_STRUCTS_H
 #define GENERATE_SORTABLE_STRUCTS_H
 
-#include "CodeGeneration.h"
-#include "SortableDefinitions.h"
-#include "FunctionalHelpers.h"
+#include "CodeGeneration.hpp"
+#include "SortableDefinitions.hpp"
+#include "FunctionalHelpers.hpp"
 
 namespace codegeneration
 {

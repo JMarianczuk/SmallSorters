@@ -15,74 +15,74 @@
 
 template <typename TValueType>
 static inline
-uint64_t GetKey(TValueType& item
+uint64_t GetKey(TValueType& item)
 {
 	return 0;
 }
 
 template <>
 inline
-uint64_t GetKey(SortableRef& item
+uint64_t GetKey(SortableRef& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(Sortable_JumpXchg& item
+uint64_t GetKey(Sortable_JumpXchg& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_JumpXchg& item
+uint64_t GetKey(SortableRef_JumpXchg& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(Sortable_TwoCmovTemp& item
+uint64_t GetKey(Sortable_TwoCmovTemp& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_FourCmovTemp& item
+uint64_t GetKey(SortableRef_FourCmovTemp& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_FourCmovTemp_Split& item
+uint64_t GetKey(SortableRef_FourCmovTemp_Split& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(Sortable_ThreeCmovRegisterTemp& item
+uint64_t GetKey(Sortable_ThreeCmovRegisterTemp& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_SixCmovRegisterTemp& item
+uint64_t GetKey(SortableRef_SixCmovRegisterTemp& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_ClangVersion& item
+uint64_t GetKey(SortableRef_ClangVersion& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_StlVersion& item
+uint64_t GetKey(SortableRef_StlVersion& item)
 {
 	return item.key;
 }
 template <>
 inline
-uint64_t GetKey(SortableRef_PointerOptimized& item
+uint64_t GetKey(SortableRef_PointerOptimized& item)
 {
 	return item.key;
 }

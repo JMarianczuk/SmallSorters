@@ -2,8 +2,8 @@
 #ifndef GENERATE_STRUCT_HELPERS_H
 #define GENERATE_STRUCT_HELPERS_H
 
-#include "CodeGeneration.h"
-#include "SortableDefinitions.h"
+#include "CodeGeneration.hpp"
+#include "SortableDefinitions.hpp"
 
 namespace codegeneration
 {
@@ -19,7 +19,7 @@ void WriteStructHelpers(CodeGenerator* gen)
 
         gen->WriteLine("template <typename TValueType>");
         gen->WriteLine("static inline");
-        gen->WriteLine("uint64_t GetKey(TValueType& item");
+        gen->WriteLine("uint64_t GetKey(TValueType& item)");
         gen->WriteBlock([=]{
             gen->WriteLine("return 0;");
         });
@@ -31,7 +31,7 @@ void WriteStructHelpers(CodeGenerator* gen)
             gen->WriteLine("inline");
             gen->Write("uint64_t GetKey(");
             gen->Write(sortableStruct->FullName());
-            gen->WriteLine("& item");
+            gen->WriteLine("& item)");
             gen->WriteBlock([=]{
                 gen->WriteLine("return item.key;");
             });

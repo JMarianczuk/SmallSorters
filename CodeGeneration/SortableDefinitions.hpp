@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-#include "VectorHelpers.h"
+#include "VectorHelpers.hpp"
 
 namespace codegeneration 
 {

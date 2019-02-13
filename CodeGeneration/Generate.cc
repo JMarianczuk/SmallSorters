@@ -3,15 +3,15 @@
 #include <vector>
 #include <iostream>
 
-#include "CodeGeneration.h"
+#include "CodeGeneration.hpp"
 #include "nlohmann/json.hpp"
-#include "Network.h"
-#include "GenerateBoseNelson.h"
-#include "WriteNetwork.h"
-#include "GenerateMeasurements.h"
-#include "GenerateSortableStructs.h"
-#include "GenerateStructHelpers.h"
-#include "GenerateRandomisation.h"
+#include "Network.hpp"
+#include "GenerateBoseNelson.hpp"
+#include "WriteNetwork.hpp"
+#include "GenerateMeasurements.hpp"
+#include "GenerateSortableStructs.hpp"
+#include "GenerateStructHelpers.hpp"
+#include "GenerateRandomisation.hpp"
 
 using namespace codegeneration;
 
