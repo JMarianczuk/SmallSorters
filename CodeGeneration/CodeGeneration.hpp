@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <functional>
 #include <tuple>
+#include <cstdarg>
 
 #include "nlohmann/json.hpp"
 
@@ -28,14 +29,14 @@ private:
     void MakeStream();
     void WriteIndent();
     void WriteEndl();
+    void WriteInclude(std::string fileName, std::string beforeFileName, std::string afterFileName);
 public:
-    CodeGenerator(std::string filename);
-    CodeGenerator(std::string filename, std::string indent);
+    CodeGenerator(std::string filename, std::string indent = "\t");
     ~CodeGenerator();
     void Write(std::string content);
     void Write(int number);
-    void WriteJson(nlohmann::json json);
-    void WriteLine(std::string content);
+    void WriteJson(nlohmann::json json, int indent = 2);
+    template <typename... TInputs> void WriteLine(TInputs... inputs);
     void PushIndent();
     void PushIndent(std::string indent);
     void PopIndent();
@@ -43,6 +44,8 @@ public:
     void WriteIndented(std::function<void()> writeFunc, std::string indent);
     void WriteBlock(std::function<void()> writeFunc);
     void WriteBlock(std::function<void()> writeFunc, std::string indent);
+    void WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc);
+    void WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc, std::string indent);
     void WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc);
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc);
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent);    
@@ -51,21 +54,7 @@ public:
 
 };
 
-// CodeGenerator* operator<<(CodeGenerator* gen, std::string content)
-// {
-//     gen->Write(content);
-// }
-// CodeGenerator* operator<<(CodeGenerator* gen, int number)
-// {
-//     gen->Write(number);
-// }
-
-CodeGenerator::CodeGenerator(std::string filename) : _filename(filename), _indent("\t")
-{
-    MakeStream();
-}
-
-CodeGenerator::CodeGenerator(std::string filename, std::string indent) : _filename(filename), _indent(indent)
+CodeGenerator::CodeGenerator(std::string filename, std::string indent = "\t") : _filename(filename), _indent(indent)
 {
     MakeStream();
 }
@@ -87,14 +76,20 @@ void CodeGenerator::Write(int number)
     _fileStream << number;
 }
 
-void CodeGenerator::WriteJson(nlohmann::json json)
+void CodeGenerator::WriteJson(nlohmann::json json, int indent = 2)
 {
-    _fileStream << std::setw(2) << json << std::endl;
+    _fileStream << std::setw(indent) << json << std::endl;
 }
 
-void CodeGenerator::WriteLine(std::string content)
+template <typename... TInputs>
+void CodeGenerator::WriteLine(TInputs... inputs)
 {
-    Write(content);
+    std::vector<std::string> args = {inputs...};
+    
+    for (std::string arg : args)
+    {
+        Write(arg);
+    }
     WriteEndl();
 }
 
@@ -130,9 +125,7 @@ void CodeGenerator::PopIndent()
 }
 void CodeGenerator::WriteIndented(std::function<void()> writeFunc)
 {
-    PushIndent();
-    writeFunc();
-    PopIndent();
+    WriteIndented(writeFunc, _indent);
 }
 void CodeGenerator::WriteIndented(std::function<void()> writeFunc, std::string indent)
 {
@@ -142,9 +135,7 @@ void CodeGenerator::WriteIndented(std::function<void()> writeFunc, std::string i
 }
 void CodeGenerator::WriteBlock(std::function<void()> writeFunc)
 {
-    WriteLine("{");
-    WriteIndented(writeFunc);
-    WriteLine("}");
+    WriteBlock(writeFunc, _indent);
 }
 void CodeGenerator::WriteBlock(std::function<void()> writeFunc, std::string indent)
 {
@@ -152,12 +143,19 @@ void CodeGenerator::WriteBlock(std::function<void()> writeFunc, std::string inde
     WriteIndented(writeFunc, indent);
     WriteLine("}");
 }
+void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc)
+{
+    WriteForLoop(loopVariableName, lowerInclusive, upperExclusive, writeFunc, _indent);
+}
+void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc, std::string indent)
+{
+    WriteLine("for (int ", loopVariableName, " = ", std::to_string(lowerInclusive), "; ", loopVariableName, " < ", std::to_string(upperExclusive), "; ", loopVariableName, " += 1)");
+    WriteBlock(writeFunc, indent);
+}
 void CodeGenerator::WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc)
 {
-    Write("#ifndef ");
-    WriteLine(headerName);
-    Write("#define ");
-    WriteLine(headerName);
+    WriteLine("#ifndef ", headerName);
+    WriteLine("#define ", headerName);
     WriteLine("");
     writeFunc();
     WriteLine("");
@@ -165,27 +163,24 @@ void CodeGenerator::WriteHeaderPragma(std::string headerName, std::function<void
 }
 void CodeGenerator::WriteNamespace(std::string namespaceName, std::function<void()> writeFunc)
 {
-    Write("namespace ");
-    WriteLine(namespaceName);
-    WriteBlock(writeFunc);
+    WriteNamespace(namespaceName, writeFunc, _indent);
 }
 void CodeGenerator::WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent)
 {
-    Write("namespace ");
-    WriteLine(namespaceName);
+    WriteLine("namespace ", namespaceName);
     WriteBlock(writeFunc, indent);
+}
+void CodeGenerator::WriteInclude(std::string fileName, std::string beforeFileName, std::string afterFileName)
+{
+    WriteLine("#include ", beforeFileName, fileName, afterFileName);
 }
 void CodeGenerator::WriteIncludeBrackets(std::string fileName)
 {
-    Write("#include <");
-    Write(fileName);
-    WriteLine(">");
+    WriteInclude(fileName, "<", ">");
 }
 void CodeGenerator::WriteIncludeQuotes(std::string fileName)
 {
-    Write("#include \"");
-    Write(fileName);
-    WriteLine("\"");
+    WriteInclude(fileName, "\"", "\"");
 }
 
 CodeGenerator::~CodeGenerator()
