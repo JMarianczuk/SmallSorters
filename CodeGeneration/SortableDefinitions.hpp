@@ -106,8 +106,6 @@ bool SortableStruct::IsInsertionSortOnly()
         });
 }
 
-
-
 }
 
 #endif

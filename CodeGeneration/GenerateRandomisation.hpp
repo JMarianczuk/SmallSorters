@@ -13,19 +13,14 @@ namespace codegeneration
 void GenerateRandomArrayMethod(CodeGenerator* gen, std::string fullName, bool hasReference)
 {
     gen->WriteLine("template<>");
-    gen->Write("void GenerateRandomArray<");
-    gen->Write(fullName);
-    gen->Write(">(");
-    gen->Write(fullName);
-    gen->WriteLine("* arr, size_t arraySize)");
+    gen->WriteLine("void GenerateRandomArray<", fullName, ">(", fullName, "* arr, size_t arraySize)");
 
     gen->WriteBlock([=]{
         if (hasReference)
         {
             gen->WriteLine("uint64_t reference = randomisation::GenerateRandomUint64();");
         }
-        gen->WriteLine("for (int i = 0; i < arraySize; i += 1)");
-        gen->WriteBlock([=]{
+        gen->WriteForLoop("i", 0, "arraySize", [=]{
             gen->WriteLine("arr[i].key = randomisation::GenerateRandomUint64();");
             if (hasReference)
             {

@@ -29,9 +29,7 @@ void WriteStructHelpers(CodeGenerator* gen)
         {
             gen->WriteLine("template <>");
             gen->WriteLine("inline");
-            gen->Write("uint64_t GetKey(");
-            gen->Write(sortableStruct->FullName());
-            gen->WriteLine("& item)");
+            gen->WriteLine("uint64_t GetKey(", sortableStruct->FullName(), "& item)");
             gen->WriteBlock([=]{
                 gen->WriteLine("return item.key;");
             });

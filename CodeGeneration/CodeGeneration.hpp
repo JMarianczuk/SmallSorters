@@ -30,6 +30,7 @@ private:
     void WriteIndent();
     void WriteEndl();
     void WriteInclude(std::string fileName, std::string beforeFileName, std::string afterFileName);
+    void WriteStructOrClassBlock(std::function<void()> writeFunc, std::string indent);
 public:
     CodeGenerator(std::string filename, std::string indent = "\t");
     ~CodeGenerator();
@@ -46,6 +47,12 @@ public:
     void WriteBlock(std::function<void()> writeFunc, std::string indent);
     void WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc);
     void WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc, std::string indent);
+    void WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc);
+    void WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc, std::string indent);
+    void WriteStruct(std::string structName, std::function<void()> writeFunc);
+    void WriteStruct(std::string structName, std::function<void()> writeFunc, std::string indent);
+    void WriteClassDeclaration(std::string className, std::function<void()> writePrivateFunc, std::function<void()> writePublicFunc);
+    void WriteClassDeclaration(std::string className, std::function<void()> writePrivateFunc, std::function<void()> writePublicFunc, std::string indent);
     void WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc);
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc);
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent);    
@@ -54,7 +61,7 @@ public:
 
 };
 
-CodeGenerator::CodeGenerator(std::string filename, std::string indent = "\t") : _filename(filename), _indent(indent)
+CodeGenerator::CodeGenerator(std::string filename, std::string indent) : _filename(filename), _indent(indent)
 {
     MakeStream();
 }
@@ -76,7 +83,7 @@ void CodeGenerator::Write(int number)
     _fileStream << number;
 }
 
-void CodeGenerator::WriteJson(nlohmann::json json, int indent = 2)
+void CodeGenerator::WriteJson(nlohmann::json json, int indent)
 {
     _fileStream << std::setw(indent) << json << std::endl;
 }
@@ -151,6 +158,44 @@ void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusiv
 {
     WriteLine("for (int ", loopVariableName, " = ", std::to_string(lowerInclusive), "; ", loopVariableName, " < ", std::to_string(upperExclusive), "; ", loopVariableName, " += 1)");
     WriteBlock(writeFunc, indent);
+}
+void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc)
+{
+    WriteForLoop(loopVariableName, lowerInclusive, upperExclusive, writeFunc, _indent);
+}
+void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc, std::string indent)
+{
+    WriteLine("for (int ", loopVariableName, " = ", std::to_string(lowerInclusive), "; ", loopVariableName, " < ", upperExclusive, "; ", loopVariableName, " += 1)");
+    WriteBlock(writeFunc, indent);
+}
+void CodeGenerator::WriteStructOrClassBlock(std::function<void()> writeFunc, std::string indent)
+{
+    WriteLine("{");
+    WriteIndented(writeFunc, indent);
+    WriteLine("};");
+}
+void CodeGenerator::WriteStruct(std::string structName, std::function<void()> writeFunc)
+{
+    WriteStruct(structName, writeFunc, _indent);
+}
+void CodeGenerator::WriteStruct(std::string structName, std::function<void()> writeFunc, std::string indent)
+{
+    WriteLine("struct ", structName);
+    WriteStructOrClassBlock(writeFunc, indent);
+}
+void CodeGenerator::WriteClassDeclaration(std::string className, std::function<void()> writePrivateFunc, std::function<void()> writePublicFunc)
+{
+    WriteClassDeclaration(className, writePrivateFunc, writePublicFunc, _indent);
+}
+void CodeGenerator::WriteClassDeclaration(std::string className, std::function<void()> writePrivateFunc, std::function<void()> writePublicFunc, std::string indent)
+{
+    WriteLine("class ", className);
+    WriteStructOrClassBlock([=]{
+        WriteLine("private:");
+        WriteIndented(writePrivateFunc, indent);
+        WriteLine("public:");
+        WriteIndented(writePublicFunc, indent);
+    }, "");
 }
 void CodeGenerator::WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc)
 {

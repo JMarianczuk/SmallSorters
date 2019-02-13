@@ -37,19 +37,7 @@ void WriteMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
-        gen->Write("measurement::");
-        gen->Write(measureMethod);
-        gen->Write("<");
-        gen->Write(sortableStruct->FullName());
-        gen->Write(">(perf, numberOfIterations, arraySize, measureIteration, \"");
-        gen->Write(sorter);
-        gen->Write(" ");
-        gen->Write(sortableStruct->DisplayName);
-        gen->Write("\", &");
-        gen->Write(sortMethod);
-        gen->Write("<");
-        gen->Write(sortableStruct->FullName());
-        gen->WriteLine(">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), ">);");
     }
 }
 

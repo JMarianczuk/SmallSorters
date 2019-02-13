@@ -20,18 +20,10 @@ void WriteVariables(CodeGenerator* gen, SortableStruct* sortableStruct)
 
 void WriteOperator(CodeGenerator* gen, SortableStruct* sortableStruct, std::string op)
 {
-    gen->Write("friend bool operator");
-    gen->Write(op);
-    gen->Write("(const ");
-    gen->Write(sortableStruct->FullName());
-    gen->Write("& left, const ");
-    gen->Write(sortableStruct->FullName());
-    gen->WriteLine("& right)");
+    gen->WriteLine("friend bool operator", op, "(const ", sortableStruct->FullName(), "& left, const ", sortableStruct->FullName(), "& right)");
 
     gen->WriteBlock([=]{
-        gen->Write("return left.key ");
-        gen->Write(op);
-        gen->WriteLine(" right.key;");
+        gen->WriteLine("return left.key ", op, " right.key;");
     });
 }
 
@@ -53,14 +45,10 @@ void WriteSortableStructs(CodeGenerator* gen)
         gen->WriteIncludeBrackets("inttypes.h");
         for (SortableStruct* sortableStruct : sortableStructs)
         {
-            gen->Write("struct ");
-            gen->WriteLine(sortableStruct->FullName());
-            gen->WriteLine("{");
-            gen->WriteIndented([=]{
+            gen->WriteStruct(sortableStruct->FullName(), [=]{
                 WriteVariables(gen, sortableStruct);
                 WriteOperators(gen, sortableStruct);
             });
-            gen->WriteLine("};");
         }
     });
 }

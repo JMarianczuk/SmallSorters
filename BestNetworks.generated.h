@@ -537,4 +537,5 @@ void sortNbest(TValueType* A, size_t n)
 	}
 }
 }
+
 #endif
