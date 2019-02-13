@@ -1,17 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 
 file(GLOB generate_SRC
-    "Generate.cc"
-    "CodeGeneration.h"
-    "GenerateBoseNelson.h"
-    "GenerateMeasurements.h"
-    "GenerateSortableStructs.h"
-    "GenerateStructHelpers.h"
-    "WriteNetwork.h"
-    "Network.h"
-    "VectorHelpers.h"
-    "FunctionalHelpers.h"
-    "SortableDefinitions.h"
+    "*.cc"
+    "*.hpp"
     "nlohmann/*.hpp"
 )
 

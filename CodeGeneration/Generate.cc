@@ -11,6 +11,7 @@
 #include "GenerateMeasurements.h"
 #include "GenerateSortableStructs.h"
 #include "GenerateStructHelpers.h"
+#include "GenerateRandomisation.h"
 
 using namespace codegeneration;
 
@@ -26,6 +27,13 @@ void GenerateStructHelpers()
     auto structHelpersGen = new CodeGenerator("../../StructHelpers.generated.h");
     WriteStructHelpers(structHelpersGen);
     delete structHelpersGen;
+}
+
+void GenerateRandomisation()
+{
+    auto randomisationGen = new CodeGenerator("../../Randomisation.generated.h");
+    WriteRandomisation(randomisationGen);
+    delete randomisationGen;
 }
 
 void GenerateBoseNelsonNetworkJson()
@@ -67,6 +75,7 @@ int main()
 {
     GenerateSortableStructs();
     GenerateStructHelpers();
+    GenerateRandomisation();
     GenerateBoseNelsonNetworkJson();
     GenerateNetworks();
     GenerateMeasurements();
