@@ -37,6 +37,7 @@ void WriteMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
+        gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), ">);");
     }
 }
@@ -53,17 +54,20 @@ void GenerateMeasurementMethod(CodeGenerator* gen)
     gen->WriteLine("");
 
     gen->WriteHeaderPragma("MEASUREMENT_GENERATED_H", [=](){
-        gen->WriteIncludeQuotes("Sortable.generated.h");
-        gen->WriteIncludeQuotes("Performancing.h");
-        gen->WriteIncludeQuotes("EnvironmentInfo.h");
-        gen->WriteIncludeQuotes("Measure.h");
-        gen->WriteIncludeQuotes("BestNetworks.generated.h");
-        gen->WriteIncludeQuotes("BoseNelson.generated.h");
-        gen->WriteIncludeQuotes("InsertionSort.h");
+        gen->WriteIncludeBrackets("inttypes.h");
+        gen->WriteIncludeQuotes(
+            "Sortable.generated.h",
+            "Performancing.h",
+            "EnvironmentInfo.h",
+            "Measure.h",
+            "BestNetworks.generated.h",
+            "BoseNelson.generated.h",
+            "InsertionSort.h",
+            "Randomisation.h");
         gen->WriteLine("");
 
         gen->WriteNamespace("measurement", [=](){
-            gen->WriteLine("void MeasureSorting(Performancing* perf, int numberOfIterations, size_t arraySize, int measureIteration)");
+            gen->WriteLine("void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)");
             gen->WriteBlock([=](){
                 Multicall<MeasureParams>(
                     [=](MeasureParams measureParams){

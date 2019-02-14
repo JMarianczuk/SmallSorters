@@ -10,15 +10,15 @@
 
 namespace randomisation {
 
-unsigned long _seed;
+uint64_t _seed;
 
-void SetSeed(unsigned long seed) {
+void SetSeed(uint64_t seed) {
     _seed = seed;
 }
 
 uint64_t GenerateRandomUint64() {
     _seed = _seed * 48271 % 2147483647;
-    return (uint64_t) _seed;
+    return _seed;
 }
 
 }

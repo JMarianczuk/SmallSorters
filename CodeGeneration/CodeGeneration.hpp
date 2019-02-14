@@ -29,7 +29,7 @@ private:
     void MakeStream();
     void WriteIndent();
     void WriteEndl();
-    void WriteInclude(std::string fileName, std::string beforeFileName, std::string afterFileName);
+    void WriteInclude(std::vector<std::string> fileNames, std::string beforeFileName, std::string afterFileName);
     void WriteStructOrClassBlock(std::function<void()> writeFunc, std::string indent);
 public:
     CodeGenerator(std::string filename, std::string indent = "\t");
@@ -49,6 +49,8 @@ public:
     void WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc, std::string indent);
     void WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc);
     void WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc, std::string indent);
+    void WriteForEachLoop(std::string loopVariableName, std::string source, std::function<void()> writeFunc, std::string loopVariableType = "auto");
+    void WriteForEachLoop(std::string loopVariableName, std::string source, std::function<void()> writeFunc, std::string indent, std::string loopVariableType = "auto");
     void WriteStruct(std::string structName, std::function<void()> writeFunc);
     void WriteStruct(std::string structName, std::function<void()> writeFunc, std::string indent);
     void WriteClassDeclaration(std::string className, std::function<void()> writePrivateFunc, std::function<void()> writePublicFunc);
@@ -56,8 +58,8 @@ public:
     void WriteHeaderPragma(std::string headerName, std::function<void()> writeFunc);
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc);
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent);    
-    void WriteIncludeBrackets(std::string fileName);
-    void WriteIncludeQuotes(std::string fileName);
+    template <typename... TInputs> void WriteIncludeBrackets(TInputs... inputs);
+    template <typename... TInputs> void WriteIncludeQuotes(TInputs... inputs);
 
 };
 
@@ -168,6 +170,15 @@ void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusiv
     WriteLine("for (int ", loopVariableName, " = ", std::to_string(lowerInclusive), "; ", loopVariableName, " < ", upperExclusive, "; ", loopVariableName, " += 1)");
     WriteBlock(writeFunc, indent);
 }
+void CodeGenerator::WriteForEachLoop(std::string loopVariableName, std::string source, std::function<void()> writeFunc, std::string loopVariableType)
+{
+    WriteForEachLoop(loopVariableName, source, writeFunc, _indent, loopVariableName);
+}
+void CodeGenerator::WriteForEachLoop(std::string loopVariableName, std::string source, std::function<void()> writeFunc, std::string indent, std::string loopVariableType)
+{
+    WriteLine("for (", loopVariableType, " ", loopVariableName, " : ", source, ")");
+    WriteBlock(writeFunc, indent);
+}
 void CodeGenerator::WriteStructOrClassBlock(std::function<void()> writeFunc, std::string indent)
 {
     WriteLine("{");
@@ -215,17 +226,24 @@ void CodeGenerator::WriteNamespace(std::string namespaceName, std::function<void
     WriteLine("namespace ", namespaceName);
     WriteBlock(writeFunc, indent);
 }
-void CodeGenerator::WriteInclude(std::string fileName, std::string beforeFileName, std::string afterFileName)
+void CodeGenerator::WriteInclude(std::vector<std::string> fileNames, std::string beforeFileName, std::string afterFileName)
 {
-    WriteLine("#include ", beforeFileName, fileName, afterFileName);
+    for (std::string fileName : fileNames)
+    {
+        WriteLine("#include ", beforeFileName, fileName, afterFileName);
+    }
 }
-void CodeGenerator::WriteIncludeBrackets(std::string fileName)
+template <typename... TInputs>
+void CodeGenerator::WriteIncludeBrackets(TInputs... inputs)
 {
-    WriteInclude(fileName, "<", ">");
+    std::vector<std::string> args = {inputs...};
+    WriteInclude(args, "<", ">");
 }
-void CodeGenerator::WriteIncludeQuotes(std::string fileName)
+template <typename... TInputs>
+void CodeGenerator::WriteIncludeQuotes(TInputs... inputs)
 {
-    WriteInclude(fileName, "\"", "\"");
+    std::vector<std::string> args = {inputs...};
+    WriteInclude(args, "\"", "\"");
 }
 
 CodeGenerator::~CodeGenerator()

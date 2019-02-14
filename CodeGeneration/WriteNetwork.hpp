@@ -23,7 +23,6 @@ void WriteNetwork(CodeGenerator *gen, std::string headerDefine, std::string sort
 
     gen->WriteHeaderPragma(headerDefine, [=]{
         gen->WriteIncludeQuotes("NetworkSort.h");
-
         gen->WriteNamespace("networks", [=]{
             for (auto network : networksJson)
             {

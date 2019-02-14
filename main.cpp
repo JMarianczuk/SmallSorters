@@ -73,8 +73,8 @@ void test()
 
 int main()
 {
-    auto seed = time(NULL);
-    randomisation::SetSeed(seed);
+    uint64_t seed;
+    // randomisation::SetSeed(seed);
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();
@@ -84,9 +84,10 @@ int main()
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
     {
+        seed = time(NULL);
         for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
         {
-            measurement::MeasureSorting(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
+            measurement::MeasureSorting(perf_cpu_cycles, unsigned long seed, NumberOfIterations, arraySize, measureIteration);
         }
     }
     // randomisation::SetSeed(seed);

@@ -96,13 +96,6 @@ void GenerateSampleSort()
     delete sampleSortGen;
 }
 
-void test()
-{
-    auto gen = new CodeGenerator("test.c");
-    gen->WriteLine("one ", "two ", "three!");
-    delete gen;
-}
-
 int main()
 {
     GenerateSortableStructs();
