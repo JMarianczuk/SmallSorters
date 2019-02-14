@@ -240,5 +240,26 @@ struct SortableRef_PointerOptimized
 		return left.key != right.key;
 	}
 };
+struct SortableRef_ArrayIndex_FirstCheck
+{
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
+	{
+		return left.key > right.key;
+	}
+	friend bool operator==(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
+	{
+		return left.key == right.key;
+	}
+	friend bool operator<(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
+	{
+		return left.key < right.key;
+	}
+	friend bool operator!=(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
+	{
+		return left.key != right.key;
+	}
+};
 
 #endif

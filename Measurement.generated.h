@@ -56,6 +56,8 @@ void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, 
 	measurement::Measure<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-StlVersion", &insertionsort::InsertionSort<SortableRef_StlVersion>);
 	randomisation::SetSeed(seed);
 	measurement::Measure<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-Default", &networks::sortNbest<SortableRef>);
@@ -89,6 +91,8 @@ void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, 
 	measurement::MeasureInRow<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "Ins.InRow KR-StlVersion", &insertionsort::InsertionSort<SortableRef_StlVersion>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins.InRow KR-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins.InRow KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
 }
 }

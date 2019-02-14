@@ -42,11 +42,13 @@ std::vector<SortableStruct*> sortableStructs =
     new SortableStruct("ClangVersion", true),
     new SortableStruct("StlVersion", true),
     new SortableStruct("PointerOptimized", true),
+    new SortableStruct("ArrayIndex_FirstCheck", true)
 };
 std::vector<std::string> insertionSortOnlyNames = 
 {
     "StlVersion",
-    "PointerOptimized"
+    "PointerOptimized",
+    "ArrayIndex_FirstCheck"
 };
 
 SortableStruct::SortableStruct(std::string name, bool hasReference) : Name(name), HasReference(hasReference)

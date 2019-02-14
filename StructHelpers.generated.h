@@ -86,5 +86,11 @@ uint64_t GetKey(SortableRef_PointerOptimized& item)
 {
 	return item.key;
 }
+template <>
+inline
+uint64_t GetKey(SortableRef_ArrayIndex_FirstCheck& item)
+{
+	return item.key;
+}
 
 #endif
