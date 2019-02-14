@@ -87,7 +87,7 @@ int main()
         seed = time(NULL);
         for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
         {
-            measurement::MeasureSorting(perf_cpu_cycles, unsigned long seed, NumberOfIterations, arraySize, measureIteration);
+            measurement::MeasureSorting(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
         }
     }
     // randomisation::SetSeed(seed);
