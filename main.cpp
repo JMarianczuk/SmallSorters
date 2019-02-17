@@ -66,15 +66,47 @@ void test()
     printf("\n");
 }
 
+
+
 #define NumberOfIterations 100
 #define NumberOfMeasures 500
 #define SmallestArraySize 2
 #define LargestArraySize 16
 
+void badSort(SortableRef* arr, size_t arraySize)
+{
+    for (int i = 0; i < arraySize; i += 1)
+    {
+        arr[i].key = i;
+    }
+}
+void badSort2(SortableRef* arr, size_t arraySize)
+{
+    SortableRef first = arr[0];
+    for (int i = 0; i < arraySize - 1; i += 1)
+    {
+        arr[i] = arr[i+1];
+    }
+    arr[arraySize - 1] = first;
+}
+
+void testPermutationCheck()
+{
+    SetOutputFile();
+    randomisation::SetSeed(time(NULL));
+    auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
+    printf("Testing Bad Sort that ignores permutation\n");
+    measurement::Measure<SortableRef>(perf, NumberOfIterations, 16, 0, "BadSort", &badSort);
+    printf("Testing Bad Sort that ignores sorting\n");
+    measurement::Measure<SortableRef>(perf, NumberOfIterations, 16, 0, "BadSort", &badSort2);
+    printf("Testing Bad Sort that sorts correctly\n");
+    measurement::Measure<SortableRef>(perf, NumberOfIterations, 16, 0, "BadSort", &insertionsort::InsertionSort<SortableRef>);
+    delete perf;
+}
+
 int main()
 {
     uint64_t seed;
-    // randomisation::SetSeed(seed);
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
     SetOutputFile();

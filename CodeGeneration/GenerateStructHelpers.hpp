@@ -23,6 +23,12 @@ void WriteStructHelpers(CodeGenerator* gen)
         gen->WriteBlock([=]{
             gen->WriteLine("return 0;");
         });
+        gen->WriteLine("template <typename TValueType>");
+        gen->WriteLine("static inline");
+        gen->WriteLine("uint64_t GetReference(TValueType& item)");
+        gen->WriteBlock([=]{
+            gen->WriteLine("return 0;");
+        });
         gen->WriteLine("");
 
         for (SortableStruct* sortableStruct : sortableStructs)
@@ -32,6 +38,15 @@ void WriteStructHelpers(CodeGenerator* gen)
             gen->WriteLine("uint64_t GetKey(", sortableStruct->FullName(), "& item)");
             gen->WriteBlock([=]{
                 gen->WriteLine("return item.key;");
+            });
+        }
+        for (SortableStruct* sortableStruct : *VectorWhere<SortableStruct*>(sortableStructs, [=](SortableStruct* ss){return ss->HasReference;}))
+        {
+            gen->WriteLine("template <>");
+            gen->WriteLine("inline");
+            gen->WriteLine("uint64_t GetReference(", sortableStruct->FullName(), "& item)");
+            gen->WriteBlock([=]{
+                gen->WriteLine("return item.reference;");
             });
         }
     });

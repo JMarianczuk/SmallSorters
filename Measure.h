@@ -34,14 +34,21 @@ void Measure(
         numberOfBadSorts += 1;
     }
 
+    uint64_t permutation_iter = 1;
+    uint64_t permutation_key_value;
+    uint64_t permutation_reference_value;
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
         randomisation::GenerateRandomArray(arr, arraySize);
-        // std::vector<TValueType> copy;
-        // CopyArray(arr, copy, arraySize);
+
+        permutation_key_value = GetPermutationValue(arr, arraySize, &GetKey<TValueType>, permutation_iter);
+        permutation_reference_value = GetPermutationValue(arr, arraySize, &GetReference<TValueType>, permutation_iter);
         sortFunc(arr, arraySize);
-        if (!IsSorted(arr, arraySize))
+
+        if (!IsSorted(arr, arraySize) 
+            || !CheckPermutationValue(arr, arraySize, &GetKey<TValueType>, permutation_iter, permutation_key_value)
+            || !CheckPermutationValue(arr, arraySize, &GetReference<TValueType>, permutation_iter, permutation_reference_value))
         {
             numberOfBadSorts += 1;
         }

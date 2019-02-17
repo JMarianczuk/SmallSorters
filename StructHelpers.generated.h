@@ -19,6 +19,12 @@ uint64_t GetKey(TValueType& item)
 {
 	return 0;
 }
+template <typename TValueType>
+static inline
+uint64_t GetReference(TValueType& item)
+{
+	return 0;
+}
 
 template <>
 inline
@@ -91,6 +97,60 @@ inline
 uint64_t GetKey(SortableRef_ArrayIndex_FirstCheck& item)
 {
 	return item.key;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_JumpXchg& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_FourCmovTemp& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_FourCmovTemp_Split& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_SixCmovRegisterTemp& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_ClangVersion& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_StlVersion& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_PointerOptimized& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_ArrayIndex_FirstCheck& item)
+{
+	return item.reference;
 }
 
 #endif
