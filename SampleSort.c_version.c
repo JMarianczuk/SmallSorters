@@ -48,16 +48,24 @@ void RegisterSampleSort_C_Style(
         state = 0;
         splitter0x = splitter0;
         //BEGIN Asm block
-        if (element < splitter1)
+        if (element > splitter1)
         {
             splitter0x = splitter2;
             state << 1;
             state = state | 1;
         }
-        if (element < splitter0x)
+        else 
+        {
+            state << 1;
+        }
+        if (element > splitter0x)
         {
             state << 1;
             state = state | 1;
+        }
+        else 
+        {
+            state << 1;
         }
         //END Asm block
 
