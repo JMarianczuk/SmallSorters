@@ -9,14 +9,17 @@ namespace codegeneration
 {
 
 template <typename TValueType>
-void VectorConcatenate(std::vector<TValueType> *source, std::vector<TValueType> *first, std::vector<TValueType> *second, std::vector<TValueType> *third)
+void VectorConcatenate(std::vector<TValueType> *source, std::vector<TValueType> *first, std::vector<TValueType> *second, std::vector<TValueType> *third = nullptr)
 {
     source->insert(source->end(), first->begin(), first->end());
     source->insert(source->end(), second->begin(), second->end());
-    source->insert(source->end(), third->begin(), third->end());
     delete first;
     delete second;
-    delete third;
+    if (third != nullptr)
+    {
+        source->insert(source->end(), third->begin(), third->end());
+        delete third;
+    }
 }
 
 template <typename TValueType>

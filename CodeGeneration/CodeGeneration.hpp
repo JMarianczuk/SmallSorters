@@ -11,8 +11,6 @@
 #include <tuple>
 #include <cstdarg>
 
-#include "nlohmann/json.hpp"
-
 namespace codegeneration
 {
 
@@ -36,7 +34,6 @@ public:
     ~CodeGenerator();
     void Write(std::string content);
     void Write(int number);
-    void WriteJson(nlohmann::json json, int indent = 2);
     template <typename... TInputs> void WriteLine(TInputs... inputs);
     void PushIndent();
     void PushIndent(std::string indent);
@@ -68,6 +65,12 @@ CodeGenerator::CodeGenerator(std::string filename, std::string indent) : _filena
     MakeStream();
 }
 
+CodeGenerator::~CodeGenerator()
+{
+    _fileStream.flush();
+    _fileStream.close();
+}
+
 void CodeGenerator::MakeStream()
 {
     // _fileStream = new std::ofstream();
@@ -83,11 +86,6 @@ void CodeGenerator::Write(int number)
 {
     WriteIndent();
     _fileStream << number;
-}
-
-void CodeGenerator::WriteJson(nlohmann::json json, int indent)
-{
-    _fileStream << std::setw(indent) << json << std::endl;
 }
 
 template <typename... TInputs>
@@ -244,13 +242,6 @@ void CodeGenerator::WriteIncludeQuotes(TInputs... inputs)
 {
     std::vector<std::string> args = {inputs...};
     WriteInclude(args, "\"", "\"");
-}
-
-CodeGenerator::~CodeGenerator()
-{
-    _fileStream.flush();
-    _fileStream.close();
-    // delete _fileStream;
 }
     
 }
