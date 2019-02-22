@@ -120,6 +120,18 @@ void GenerateNetworks()
     delete bestNetworkGen;
 }
 
+void GenerateNetworks_ParameterStyle()
+{
+    auto gen = new CodeGenerator(
+        "../../BoseNelsonParameter.generated.h");
+    WriteNetwork_ParameterStyle(
+        gen,
+        "BOSENELSON_PARAMETER_GENERATED_H",
+        "bosenelsonparameter",
+        "../BoseNelsonNetworks_ParameterStyle.json");
+    delete gen;
+}
+
 void GenerateMeasurements()
 {
     auto measurementGen = 
@@ -159,6 +171,7 @@ int main()
     // GenerateStructHelpers();
     // GenerateRandomisation();
     GenerateBoseNelsonNetworksJson();
+    GenerateNetworks_ParameterStyle();
     // GenerateNetworks();
     // GenerateMeasurements();
     // GenerateSampleSort();
