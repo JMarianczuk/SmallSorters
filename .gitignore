@@ -54,3 +54,4 @@ db_test.sqlite
 result/db.sqlite-journal
 
 boxplot*.png
+Network_Size_*.jpg

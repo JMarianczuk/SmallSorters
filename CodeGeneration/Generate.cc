@@ -14,6 +14,8 @@
 #include "GenerateRandomisation.hpp"
 #include "GenerateSampleSort.hpp"
 
+#include "BoseNelsonHelper.hpp"
+
 using namespace codegeneration;
 
 void GenerateSortableStructs()
@@ -65,6 +67,27 @@ void GenerateBoseNelsonNetworkWithArrangement(
     filestream.close();
 }
 
+void GenerateBoseNelsonNetwork_ParameterStyle(std::string filename)
+{
+    std::ofstream filestream;
+    filestream.open(filename);
+    std::vector<nlohmann::json> boseNelsonRecursive;
+    for (int arraySize = 2; arraySize <= 16; arraySize += 1)
+    {
+        boseNelsonRecursive.push_back(
+            RecursiveNetworkToJson(
+                GenerateBoseNelsonRecursiveParameterNetwork(arraySize)));
+    }
+    nlohmann::json boseNelsonResult = nlohmann::json::array();
+    for (auto network : boseNelsonRecursive)
+    {
+        boseNelsonResult.push_back(network);
+    }
+    filestream << std::setw(2) << boseNelsonResult << std::endl;
+    filestream.flush();
+    filestream.close();
+}
+
 void GenerateBoseNelsonNetworksJson()
 {
     GenerateBoseNelsonNetworkWithArrangement(
@@ -73,6 +96,8 @@ void GenerateBoseNelsonNetworksJson()
     GenerateBoseNelsonNetworkWithArrangement(
         "../BoseNelsonNetworks_Parallelism.json", 
         NetworkArrangement::Parallelism);
+    GenerateBoseNelsonNetwork_ParameterStyle(
+        "../BoseNelsonNetworks_ParameterStyle.json");
 }
 
 void GenerateNetworks()
@@ -130,11 +155,11 @@ void GenerateSampleSort()
 
 int main()
 {
-    GenerateSortableStructs();
-    GenerateStructHelpers();
-    GenerateRandomisation();
+    // GenerateSortableStructs();
+    // GenerateStructHelpers();
+    // GenerateRandomisation();
     GenerateBoseNelsonNetworksJson();
-    GenerateNetworks();
-    GenerateMeasurements();
-    GenerateSampleSort();
+    // GenerateNetworks();
+    // GenerateMeasurements();
+    // GenerateSampleSort();
 }
