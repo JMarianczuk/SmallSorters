@@ -34,7 +34,8 @@ void Measure(
         numberOfBadSorts += 1;
     }
 
-    uint64_t permutation_iter = 1;
+    uint64_t permutation_key_iter = 1;
+    uint64_t permutation_reference_iter = 1;
     uint64_t permutation_key_value;
     uint64_t permutation_reference_value;
     perf->StartMeasuring();
@@ -42,13 +43,13 @@ void Measure(
     {
         randomisation::GenerateRandomArray(arr, arraySize);
 
-        permutation_key_value = GetPermutationValue(arr, arraySize, &GetKey<TValueType>, permutation_iter);
-        permutation_reference_value = GetPermutationValue(arr, arraySize, &GetReference<TValueType>, permutation_iter);
+        permutation_key_value = GetPermutationValue(arr, arraySize, &GetKey<TValueType>, permutation_key_iter);
+        permutation_reference_value = GetPermutationValue(arr, arraySize, &GetReference<TValueType>, permutation_reference_iter);
         sortFunc(arr, arraySize);
 
         if (!IsSorted(arr, arraySize) 
-            || !CheckPermutationValue(arr, arraySize, &GetKey<TValueType>, permutation_iter, permutation_key_value)
-            || !CheckPermutationValue(arr, arraySize, &GetReference<TValueType>, permutation_iter, permutation_reference_value))
+            || !CheckPermutationValue(arr, arraySize, &GetKey<TValueType>, permutation_key_iter, permutation_key_value)
+            || !CheckPermutationValue(arr, arraySize, &GetReference<TValueType>, permutation_reference_iter, permutation_reference_value))
         {
             numberOfBadSorts += 1;
         }
@@ -92,6 +93,7 @@ void MeasureInRow(
     }
 
     sortFunc(warmupArr, arraySize);
+    TValueType val = warmupArr[0];
     perf->StartMeasuring();
     for (TValueType* current = arr; current < arrEnd; current += arraySize)
     {
@@ -118,6 +120,8 @@ void MeasureInRow(
         numberOfBadSorts,
         true
     );
+
+    printf("Creating sideeffect: %i%" PRIu64 "\n", numberOfBadSorts, GetKey(val));
 }
 
 template <typename TValueType>

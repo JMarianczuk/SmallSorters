@@ -167,12 +167,12 @@ void GenerateSampleSort()
 
 int main()
 {
-    // GenerateSortableStructs();
-    // GenerateStructHelpers();
-    // GenerateRandomisation();
+    GenerateSortableStructs();
+    GenerateStructHelpers();
+    GenerateRandomisation();
     GenerateBoseNelsonNetworksJson();
     GenerateNetworks_ParameterStyle();
-    // GenerateNetworks();
-    // GenerateMeasurements();
-    // GenerateSampleSort();
+    GenerateNetworks();
+    GenerateMeasurements();
+    GenerateSampleSort();
 }

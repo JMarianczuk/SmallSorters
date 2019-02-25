@@ -33,7 +33,7 @@ void WriteOperators(CodeGenerator* gen, SortableStruct* sortableStruct)
         [=](std::string op){
             WriteOperator(gen, sortableStruct, op);
         },
-        {">", "==", "<", "!="});
+        {">", ">=", "==", "<", "<=", "!="});
 }
 
 void WriteSortableStructs(CodeGenerator* gen)

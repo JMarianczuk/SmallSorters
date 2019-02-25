@@ -74,7 +74,7 @@ uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*val
 
         for (size_t i = 0; i < arraySize; i += 1)
         {
-            v = (v * ((z - GetKey(items[i])) % p)) % p;
+            v = (v * ((z - value_func(items[i])) % p)) % p;
         }
         if (v != 0)
         {
@@ -93,7 +93,7 @@ bool CheckPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value
 
     for (size_t i = 0; i < arraySize; i += 1)
     {
-        w = (w * ((z - GetKey(items[i])) % p)) % p;
+        w = (w * ((z - value_func(items[i])) % p)) % p;
     }
     return permutationValueBefore == w;
 }

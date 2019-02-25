@@ -16,6 +16,7 @@
 #include "Sortable.generated.h"
 #include "Measurement.generated.h"
 #include "SampleSort.generated.h"
+#include "QuickSort.h"
 
 
 void SetOutputFile() {
@@ -104,8 +105,39 @@ void testPermutationCheck()
     delete perf;
 }
 
+void testQuickSort()
+{
+    randomisation::SetSeed(time(NULL));
+    size_t totalArraySize = 1024 * 1024;
+    printf("before array allocation\n");
+    SortableRef *arr = (SortableRef*) malloc(sizeof(SortableRef) * totalArraySize);
+    printf("before array random generation\n");
+    randomisation::GenerateRandomArray(arr, totalArraySize);
+    uint64_t permutation_key_iter = 1;
+    uint64_t permutation_reference_iter = 1;
+    uint64_t permutation_key_value;
+    uint64_t permutation_reference_value;
+
+    printf("before permutation values\n");
+    permutation_key_value = GetPermutationValue(arr, totalArraySize, &GetKey<SortableRef>, permutation_key_iter);
+    permutation_reference_value = GetPermutationValue(arr, totalArraySize, &GetReference<SortableRef>, permutation_reference_iter);
+
+    printf("before quick sort\n");
+    quicksort::QuickSort(arr, totalArraySize, &networks::sortNbest);
+    printf("after quick sort\n");
+
+    if (!IsSorted(arr, totalArraySize) 
+        || !CheckPermutationValue(arr, totalArraySize, &GetKey<SortableRef>, permutation_key_iter, permutation_key_value)
+        || !CheckPermutationValue(arr, totalArraySize, &GetReference<SortableRef>, permutation_reference_iter, permutation_reference_value))
+    {
+        printf("Wrong sort!\n");
+    }
+}
+
 int main()
 {
+    // testQuickSort();
+    // return 0;
     uint64_t seed;
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();

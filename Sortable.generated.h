@@ -20,6 +20,10 @@ struct SortableRef
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef& left, const SortableRef& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef& left, const SortableRef& right)
 	{
 		return left.key == right.key;
@@ -27,6 +31,10 @@ struct SortableRef
 	friend bool operator<(const SortableRef& left, const SortableRef& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef& left, const SortableRef& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef& left, const SortableRef& right)
 	{
@@ -40,6 +48,10 @@ struct Sortable_JumpXchg
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const Sortable_JumpXchg& left, const Sortable_JumpXchg& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const Sortable_JumpXchg& left, const Sortable_JumpXchg& right)
 	{
 		return left.key == right.key;
@@ -47,6 +59,10 @@ struct Sortable_JumpXchg
 	friend bool operator<(const Sortable_JumpXchg& left, const Sortable_JumpXchg& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const Sortable_JumpXchg& left, const Sortable_JumpXchg& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const Sortable_JumpXchg& left, const Sortable_JumpXchg& right)
 	{
@@ -61,6 +77,10 @@ struct SortableRef_JumpXchg
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right)
 	{
 		return left.key == right.key;
@@ -68,6 +88,10 @@ struct SortableRef_JumpXchg
 	friend bool operator<(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_JumpXchg& left, const SortableRef_JumpXchg& right)
 	{
@@ -81,6 +105,10 @@ struct Sortable_TwoCmovTemp
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const Sortable_TwoCmovTemp& left, const Sortable_TwoCmovTemp& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const Sortable_TwoCmovTemp& left, const Sortable_TwoCmovTemp& right)
 	{
 		return left.key == right.key;
@@ -88,6 +116,10 @@ struct Sortable_TwoCmovTemp
 	friend bool operator<(const Sortable_TwoCmovTemp& left, const Sortable_TwoCmovTemp& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const Sortable_TwoCmovTemp& left, const Sortable_TwoCmovTemp& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const Sortable_TwoCmovTemp& left, const Sortable_TwoCmovTemp& right)
 	{
@@ -102,6 +134,10 @@ struct SortableRef_FourCmovTemp
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right)
 	{
 		return left.key == right.key;
@@ -109,6 +145,10 @@ struct SortableRef_FourCmovTemp
 	friend bool operator<(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_FourCmovTemp& left, const SortableRef_FourCmovTemp& right)
 	{
@@ -123,6 +163,10 @@ struct SortableRef_FourCmovTemp_Split
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_FourCmovTemp_Split& left, const SortableRef_FourCmovTemp_Split& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_FourCmovTemp_Split& left, const SortableRef_FourCmovTemp_Split& right)
 	{
 		return left.key == right.key;
@@ -130,6 +174,10 @@ struct SortableRef_FourCmovTemp_Split
 	friend bool operator<(const SortableRef_FourCmovTemp_Split& left, const SortableRef_FourCmovTemp_Split& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_FourCmovTemp_Split& left, const SortableRef_FourCmovTemp_Split& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_FourCmovTemp_Split& left, const SortableRef_FourCmovTemp_Split& right)
 	{
@@ -143,6 +191,10 @@ struct Sortable_ThreeCmovRegisterTemp
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const Sortable_ThreeCmovRegisterTemp& left, const Sortable_ThreeCmovRegisterTemp& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const Sortable_ThreeCmovRegisterTemp& left, const Sortable_ThreeCmovRegisterTemp& right)
 	{
 		return left.key == right.key;
@@ -150,6 +202,10 @@ struct Sortable_ThreeCmovRegisterTemp
 	friend bool operator<(const Sortable_ThreeCmovRegisterTemp& left, const Sortable_ThreeCmovRegisterTemp& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const Sortable_ThreeCmovRegisterTemp& left, const Sortable_ThreeCmovRegisterTemp& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const Sortable_ThreeCmovRegisterTemp& left, const Sortable_ThreeCmovRegisterTemp& right)
 	{
@@ -164,6 +220,10 @@ struct SortableRef_SixCmovRegisterTemp
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right)
 	{
 		return left.key == right.key;
@@ -171,6 +231,10 @@ struct SortableRef_SixCmovRegisterTemp
 	friend bool operator<(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_SixCmovRegisterTemp& left, const SortableRef_SixCmovRegisterTemp& right)
 	{
@@ -185,6 +249,10 @@ struct SortableRef_ClangVersion
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right)
 	{
 		return left.key == right.key;
@@ -192,6 +260,10 @@ struct SortableRef_ClangVersion
 	friend bool operator<(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_ClangVersion& left, const SortableRef_ClangVersion& right)
 	{
@@ -206,6 +278,10 @@ struct SortableRef_StlVersion
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_StlVersion& left, const SortableRef_StlVersion& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_StlVersion& left, const SortableRef_StlVersion& right)
 	{
 		return left.key == right.key;
@@ -213,6 +289,10 @@ struct SortableRef_StlVersion
 	friend bool operator<(const SortableRef_StlVersion& left, const SortableRef_StlVersion& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_StlVersion& left, const SortableRef_StlVersion& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_StlVersion& left, const SortableRef_StlVersion& right)
 	{
@@ -227,6 +307,10 @@ struct SortableRef_PointerOptimized
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right)
 	{
 		return left.key == right.key;
@@ -234,6 +318,10 @@ struct SortableRef_PointerOptimized
 	friend bool operator<(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_PointerOptimized& left, const SortableRef_PointerOptimized& right)
 	{
@@ -248,6 +336,10 @@ struct SortableRef_ArrayIndex_FirstCheck
 	{
 		return left.key > right.key;
 	}
+	friend bool operator>=(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
+	{
+		return left.key >= right.key;
+	}
 	friend bool operator==(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
 	{
 		return left.key == right.key;
@@ -255,6 +347,10 @@ struct SortableRef_ArrayIndex_FirstCheck
 	friend bool operator<(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
 	{
 		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
+	{
+		return left.key <= right.key;
 	}
 	friend bool operator!=(const SortableRef_ArrayIndex_FirstCheck& left, const SortableRef_ArrayIndex_FirstCheck& right)
 	{
