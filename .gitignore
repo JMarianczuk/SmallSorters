@@ -49,7 +49,7 @@ result/small_sorters*.txt
 result/small_sorters_eval.pdf
 result/small_sorters-data.txt
 
-db.sqlite
+small_sorters_result.sqlite
 db_test.sqlite
 result/db.sqlite-journal
 
