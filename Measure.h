@@ -92,6 +92,7 @@ void MeasureInRow(
         insertionsort::InsertionSort(current, arraySize);
     }
 
+    int numberOfBadSorts = 0;
     sortFunc(warmupArr, arraySize);
     if (!IsSorted(warmupArr, arraySize))
     {
@@ -104,7 +105,6 @@ void MeasureInRow(
     }
     perf->StopMeasuring();
 
-    int numberOfBadSorts = 0;
     for (int i = 0; i < numberOfArrays; i += 1)
     {
         if (!IsSameArray(&arr[i * arraySize], &compare[i * arraySize], arraySize))
