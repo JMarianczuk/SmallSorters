@@ -60,6 +60,10 @@
         "iomanip": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "cstdarg": "cpp"
+        "cstdarg": "cpp",
+        "cctype": "cpp",
+        "optional": "cpp",
+        "set": "cpp",
+        "sstream": "cpp"
     }
 }

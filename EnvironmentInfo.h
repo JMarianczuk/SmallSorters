@@ -3,7 +3,14 @@
 #define ENVIRONMENT_INFO_H
 
 #include <string>
+#include <inttypes.h>
 
-std::string Environment_GetComputerName();
+namespace environment
+{
+
+std::string GetComputerName();
+size_t GetCacheSizeInBytes(std::string hostname);
+
+}
 
 #endif

@@ -80,16 +80,19 @@ void test()
 int main(int argumentCount, char** arguments)
 {
     auto options = commandline::ParseOptions(arguments, argumentCount);
-    if (options.HelpRequested || !options.ParsingSuccessful)
+    if (options.HelpRequested 
+        || !options.ParsingSuccessful 
+        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureCompleteSort))
     {
         commandline::PrintHelpText(std::cout);
         return 0;
     }
     uint64_t seed;
     std::string commit = GetGitCommitOfContainingRepository();
-    std::string hostname = Environment_GetComputerName();
+    std::string hostname = environment::GetComputerName();
     SetOutputFile();
     printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
+    size_t cacheSize = environment::GetCacheSizeInBytes(hostname);
     result::WriteAbbreviationExplanatoryLine();
     
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
@@ -106,7 +109,8 @@ int main(int argumentCount, char** arguments)
                 }
                 if (options.MeasureInRow)
                 {
-                    measurement::MeasureSortingInRow(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
+                    int numberOfArrays = 1.2f * cacheSize / (arraySize * sizeof(SortableRef));
+                    measurement::MeasureSortingInRow(perf_cpu_cycles, seed, numberOfArrays, arraySize, measureIteration);
                 }
             }
         }
