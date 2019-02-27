@@ -146,7 +146,6 @@ void MeasureCompleteSorter(
     uint64_t key_value;
     uint64_t ref_value;
     PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
-    debug::WriteLine("Warmup sort");
     quicksort::QuickSort(arr, arraySize, sortFunc);
     if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
     {
@@ -160,7 +159,6 @@ void MeasureCompleteSorter(
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
-        debug::WriteLine("Sorting iteration ", std::to_string(i));
         quicksort::QuickSort(arr, arraySize, sortFunc);
         if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
         {

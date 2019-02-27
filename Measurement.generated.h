@@ -18,7 +18,6 @@
 #include "BestNetworks.generated.h"
 #include "BoseNelson.generated.h"
 #include "InsertionSort.h"
-#include "DebugHelper.h"
 #include "Randomisation.h"
 
 namespace measurement
