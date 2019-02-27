@@ -93,7 +93,10 @@ void MeasureInRow(
     }
 
     sortFunc(warmupArr, arraySize);
-    TValueType val = warmupArr[0];
+    if (!IsSorted(warmupArr, arraySize))
+    {
+        numberOfBadSorts += 1;
+    }
     perf->StartMeasuring();
     for (TValueType* current = arr; current < arrEnd; current += arraySize)
     {
@@ -120,8 +123,6 @@ void MeasureInRow(
         numberOfBadSorts,
         true
     );
-
-    printf("Creating sideeffect: %i%" PRIu64 "\n", numberOfBadSorts, GetKey(val));
 
     free(arr);
     free(compare);

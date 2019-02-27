@@ -13,7 +13,6 @@ void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*
 {
     if (arraySize > BaseCaseLimit)
     {
-        printf("Sorting qs with size %" PRIu64 "\n", arraySize);
         auto mid = arraySize / 2;
         auto pivot = items[mid];
         int last = arraySize - 1;
@@ -33,7 +32,6 @@ void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*
     }
     else
     {
-        printf("Sorting base case with size %" PRIu64 "\n", arraySize);
         sortFunc(items, arraySize);
     }
 }

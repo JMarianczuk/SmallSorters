@@ -73,6 +73,7 @@ void test()
 #define NumberOfIterations 100
 #define NumberOfIterationsCompleteSort 20
 #define NumberOfMeasures 500
+#define NumberOfMeasuresInRow 10
 #define SmallestArraySize 2
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 128
@@ -107,7 +108,7 @@ int main(int argumentCount, char** arguments)
                 {
                     measurement::MeasureSorting(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
                 }
-                if (options.MeasureInRow)
+                if (options.MeasureInRow && measureIteration < NumberOfMeasuresInRow)
                 {
                     int numberOfArrays = 1.2f * cacheSize / (arraySize * sizeof(SortableRef));
                     measurement::MeasureSortingInRow(perf_cpu_cycles, seed, numberOfArrays, arraySize, measureIteration);
