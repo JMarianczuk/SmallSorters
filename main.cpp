@@ -17,6 +17,7 @@
 #include "Measurement.generated.h"
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
+#include "CommandLineOptions.h"
 
 
 void SetOutputFile() {
@@ -134,10 +135,14 @@ void testQuickSort()
     }
 }
 
-int main()
+int main(int argumentCount, char** arguments)
 {
-    // testQuickSort();
-    // return 0;
+    auto options = commandline::ParseOptions(arguments, argumentCount);
+    if (options.HelpRequested)
+    {
+        commandline::PrintHelpText(std::cout);
+        return 0;
+    }
     uint64_t seed;
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = Environment_GetComputerName();
