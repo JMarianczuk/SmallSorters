@@ -59,6 +59,9 @@ void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, 
 	randomisation::SetSeed(seed);
 	measurement::Measure<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
+}
+void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+{
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestInRow KR-Default", &networks::sortNbest<SortableRef>);
 	randomisation::SetSeed(seed);
@@ -93,6 +96,44 @@ void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, 
 	measurement::MeasureInRow<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins.InRow KR-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins.InRow KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
+	
+}
+void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+{
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestComplete KR-Default", &networks::sortNbest<SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestComplete KR-JumpXchg", &networks::sortNbest<SortableRef_JumpXchg>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestComplete KR-FourCmovTemp", &networks::sortNbest<SortableRef_FourCmovTemp>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestComplete KR-FourCmovTemp-Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestComplete KR-SixCmovRegisterTemp", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BestComplete KR-ClangVersion", &networks::sortNbest<SortableRef_ClangVersion>);
+	
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonComplete KR-Default", &networks::sortNbosenelson<SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonComplete KR-JumpXchg", &networks::sortNbosenelson<SortableRef_JumpXchg>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonComplete KR-FourCmovTemp", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonComplete KR-FourCmovTemp-Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonComplete KR-SixCmovRegisterTemp", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BoseNelsonComplete KR-ClangVersion", &networks::sortNbosenelson<SortableRef_ClangVersion>);
+	
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Ins.Complete KR-Default", &insertionsort::InsertionSort<SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "Ins.Complete KR-StlVersion", &insertionsort::InsertionSort<SortableRef_StlVersion>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins.Complete KR-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins.Complete KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
 }
 }

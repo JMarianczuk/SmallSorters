@@ -85,6 +85,13 @@ uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*val
     return 0;
 }
 
+template <typename TComparable>
+void PutPermutationValues(TComparable* items, size_t arraySize, uint64_t& keyValue, size_t& keyIter, uint64_t& refValue, size_t& refIter)
+{
+    keyValue = GetPermutationValue(items, arraySize, &GetKey<TComparable>, keyIter);
+    refValue = GetPermutationValue(items, arraySize, &GetReference<TComparable>, refIter);
+}
+
 template<typename TComparable>
 bool CheckPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value_func)(TComparable& item), size_t iteration, uint64_t permutationValueBefore)
 {
@@ -96,6 +103,14 @@ bool CheckPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value
         w = (w * ((z - value_func(items[i])) % p)) % p;
     }
     return permutationValueBefore == w;
+}
+
+template <typename TComparable>
+bool IsSortedAndPermutation(TComparable* items, size_t arraySize, size_t keyIteration, uint64_t keyValue, size_t referenceIteration, uint64_t referenceValue)
+{
+    return IsSorted(items, arraySize)
+        && CheckPermutationValue(items, arraySize, &GetKey<TComparable>, keyIteration, keyValue)
+        && CheckPermutationValue(items, arraySize, &GetReference<TComparable>, referenceIteration, referenceValue);
 }
 
 template <typename TComparable>

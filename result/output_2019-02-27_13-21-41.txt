@@ -1,0 +1,2 @@
+General Info: Commit=fb0a2f5, Hostname=R2D2
+Result Mapping: s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement

@@ -71,74 +71,16 @@ void test()
 
 
 #define NumberOfIterations 100
+#define NumberOfIterationsCompleteSort 20
 #define NumberOfMeasures 500
 #define SmallestArraySize 2
 #define LargestArraySize 16
-
-void badSort(SortableRef* arr, size_t arraySize)
-{
-    for (int i = 0; i < arraySize; i += 1)
-    {
-        arr[i].key = i;
-    }
-}
-void badSort2(SortableRef* arr, size_t arraySize)
-{
-    SortableRef first = arr[0];
-    for (int i = 0; i < arraySize - 1; i += 1)
-    {
-        arr[i] = arr[i+1];
-    }
-    arr[arraySize - 1] = first;
-}
-
-void testPermutationCheck()
-{
-    SetOutputFile();
-    randomisation::SetSeed(time(NULL));
-    auto perf = new Performancing(PerformanceMetric::CPU_CYCLES);
-    printf("Testing Bad Sort that ignores permutation\n");
-    measurement::Measure<SortableRef>(perf, NumberOfIterations, 16, 0, "BadSort", &badSort);
-    printf("Testing Bad Sort that ignores sorting\n");
-    measurement::Measure<SortableRef>(perf, NumberOfIterations, 16, 0, "BadSort", &badSort2);
-    printf("Testing Bad Sort that sorts correctly\n");
-    measurement::Measure<SortableRef>(perf, NumberOfIterations, 16, 0, "BadSort", &insertionsort::InsertionSort<SortableRef>);
-    delete perf;
-}
-
-void testQuickSort()
-{
-    randomisation::SetSeed(time(NULL));
-    size_t totalArraySize = 1024 * 1024;
-    printf("before array allocation\n");
-    SortableRef *arr = (SortableRef*) malloc(sizeof(SortableRef) * totalArraySize);
-    printf("before array random generation\n");
-    randomisation::GenerateRandomArray(arr, totalArraySize);
-    uint64_t permutation_key_iter = 1;
-    uint64_t permutation_reference_iter = 1;
-    uint64_t permutation_key_value;
-    uint64_t permutation_reference_value;
-
-    printf("before permutation values\n");
-    permutation_key_value = GetPermutationValue(arr, totalArraySize, &GetKey<SortableRef>, permutation_key_iter);
-    permutation_reference_value = GetPermutationValue(arr, totalArraySize, &GetReference<SortableRef>, permutation_reference_iter);
-
-    printf("before quick sort\n");
-    quicksort::QuickSort(arr, totalArraySize, &networks::sortNbest);
-    printf("after quick sort\n");
-
-    if (!IsSorted(arr, totalArraySize) 
-        || !CheckPermutationValue(arr, totalArraySize, &GetKey<SortableRef>, permutation_key_iter, permutation_key_value)
-        || !CheckPermutationValue(arr, totalArraySize, &GetReference<SortableRef>, permutation_reference_iter, permutation_reference_value))
-    {
-        printf("Wrong sort!\n");
-    }
-}
+#define CompleteSortArraySize 1024 * 128
 
 int main(int argumentCount, char** arguments)
 {
     auto options = commandline::ParseOptions(arguments, argumentCount);
-    if (options.HelpRequested)
+    if (options.HelpRequested || !options.ParsingSuccessful)
     {
         commandline::PrintHelpText(std::cout);
         return 0;
@@ -154,19 +96,26 @@ int main(int argumentCount, char** arguments)
     for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
     {
         seed = time(NULL);
-        for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
+        if (options.MeasureNormal || options.MeasureInRow)
         {
-            measurement::MeasureSorting(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
+            for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
+            {
+                if (options.MeasureNormal) 
+                {
+                    measurement::MeasureSorting(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
+                }
+                if (options.MeasureInRow)
+                {
+                    measurement::MeasureSortingInRow(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
+                }
+            }
         }
+        if (options.MeasureCompleteSort)
+        {
+            measurement::MeasureCompleteSorting(perf_cpu_cycles, seed, NumberOfIterationsCompleteSort, CompleteSortArraySize, measureIteration);
+        }
+        
     }
-    // randomisation::SetSeed(seed);
-    // for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
-    // {
-    //     for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
-    //     {
-    //         measurement::MeasureRandomGenerationAndSortedChecking(perf_cpu_cycles, NumberOfIterations, arraySize, measureIteration);
-    //     }
-    // }
 	delete perf_cpu_cycles;
 
     // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);

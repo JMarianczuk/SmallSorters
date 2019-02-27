@@ -11,6 +11,8 @@ using namespace clara;
 
 detail::Parser GetParser(CommandLineOptions& options)
 {
+    auto name = ExeName();
+    name.set("SmallSortersPerformancing");
     return
         Opt(options.MeasureNormal)
             ["-n"]["--measureNormal"]
@@ -23,7 +25,8 @@ detail::Parser GetParser(CommandLineOptions& options)
             ("Measure sorting of large set with special sorters at base case") |
         Opt(options.HelpRequested)
             ["-h"]["--help"]
-            ("Display help information");
+            ("Display help information") |
+        name;
 }
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)

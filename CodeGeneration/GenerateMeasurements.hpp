@@ -42,9 +42,23 @@ void WriteMeasureLine(
     }
 }
 
+void WriteMeasureMethod(
+    CodeGenerator *gen,
+    std::string measureMethodName,
+    std::vector<MeasureParams> measureParamsList,
+    std::function<void(MeasureParams)> multicallAction)
+{
+    gen->WriteLine("void ", measureMethodName, "(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)");
+    gen->WriteBlock([=](){
+        Multicall<MeasureParams>(
+            multicallAction, 
+            measureParamsList);
+    });
+}
+
 void GenerateMeasurementMethod(CodeGenerator* gen)
 {
-    std::vector<MeasureParams> measureParams = 
+    std::vector<MeasureParams> measureParamsList = 
     {
         GetParams(VectorWhere<SortableStruct*>(sortableStructs, [](SortableStruct* ss){return ss->UseForNetworkSort();}), "Netw. Best", "networks::sortNbest"),
         GetParams(VectorWhere<SortableStruct*>(sortableStructs, [](SortableStruct* ss){return ss->UseForNetworkSort();}), "Netw. BoseNelson", "networks::sortNbosenelson"),
@@ -67,31 +81,48 @@ void GenerateMeasurementMethod(CodeGenerator* gen)
         gen->WriteLine("");
 
         gen->WriteNamespace("measurement", [=](){
-            gen->WriteLine("void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)");
-            gen->WriteBlock([=](){
-                Multicall<MeasureParams>(
-                    [=](MeasureParams measureParams){
-                        WriteMeasureLine(
-                            gen, 
-                            measureParams.Structs, 
-                            "Measure", 
-                            measureParams.Sorter, 
-                            measureParams.SortMethod);
-                        gen->WriteLine("");
-                    }, 
-                    measureParams);
-                Multicall<MeasureParams>(
-                    [=](MeasureParams measureParams){
-                        WriteMeasureLine(
-                            gen,
-                            measureParams.Structs,
-                            "MeasureInRow",
-                            measureParams.Sorter + "InRow",
-                            measureParams.SortMethod);
-                        gen->WriteLine("");
-                    },
-                    measureParams);
-            });
+            WriteMeasureMethod(
+                gen, 
+                "MeasureSorting", 
+                measureParamsList, 
+                [=](MeasureParams measureParams){
+                    WriteMeasureLine(
+                        gen, 
+                        measureParams.Structs, 
+                        "Measure", 
+                        measureParams.Sorter, 
+                        measureParams.SortMethod);
+                    gen->WriteLine("");
+                }
+            );
+            WriteMeasureMethod(
+                gen,
+                "MeasureSortingInRow",
+                measureParamsList,
+                [=](MeasureParams measureParams){
+                    WriteMeasureLine(
+                        gen,
+                        measureParams.Structs,
+                        "MeasureInRow",
+                        measureParams.Sorter + "InRow",
+                        measureParams.SortMethod);
+                    gen->WriteLine("");
+                }
+            );
+            WriteMeasureMethod(
+                gen,
+                "MeasureCompleteSorting",
+                measureParamsList,
+                [=](MeasureParams measureParams) {
+                    WriteMeasureLine(
+                        gen,
+                        measureParams.Structs,
+                        "MeasureCompleteSorter",
+                        measureParams.Sorter + "Complete",
+                        measureParams.SortMethod);
+                    gen->WriteLine("");
+                }
+            );
         }, "");
     });
 }
