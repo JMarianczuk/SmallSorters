@@ -1,0 +1,1 @@
+./run_with_option.sh -nic
