@@ -2,6 +2,8 @@
 #ifndef QUICKSORT_H
 #define QUICKSORT_H
 
+#include "DebugHelper.h"
+
 namespace quicksort
 {
 
@@ -13,6 +15,7 @@ void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*
 {
     if (arraySize > BaseCaseLimit)
     {
+        // debug::WriteLine("Sorting non base case: ", std::to_string(arraySize));
         auto mid = arraySize / 2;
         auto pivot = items[mid];
         int last = arraySize - 1;
@@ -32,6 +35,7 @@ void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*
     }
     else
     {
+        // debug::WriteLine("Sorting base case: ", std::to_string(arraySize));
         sortFunc(items, arraySize);
     }
 }

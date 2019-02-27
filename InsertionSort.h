@@ -72,7 +72,7 @@ inline
 void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t arraySize) 
 {
     SortableRef_StlVersion* last = first + arraySize;
-    for (SortableRef_StlVersion* next = first; ++next != last; )
+    for (SortableRef_StlVersion* next = first; ++next < last; )
     {
         SortableRef_StlVersion* next_temp = next;
         SortableRef_StlVersion val = *next;

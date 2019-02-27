@@ -18,6 +18,7 @@
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
 #include "CommandLineOptions.h"
+#include "DebugHelper.h"
 
 
 void SetOutputFile() {
@@ -76,7 +77,7 @@ void test()
 #define NumberOfMeasuresInRow 10
 #define SmallestArraySize 2
 #define LargestArraySize 16
-#define CompleteSortArraySize 1024 * 128
+#define CompleteSortArraySize 1024 * 16
 
 int main(int argumentCount, char** arguments)
 {
