@@ -75,6 +75,7 @@ void test()
 #define NumberOfIterationsCompleteSort 20
 #define NumberOfMeasures 500
 #define NumberOfMeasuresInRow 10
+#define NumberOfMeasuresComplete 200
 #define SmallestArraySize 2
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 16
@@ -116,7 +117,7 @@ int main(int argumentCount, char** arguments)
                 }
             }
         }
-        if (options.MeasureCompleteSort)
+        if (options.MeasureCompleteSort && measureIteration < NumberOfMeasuresComplete)
         {
             measurement::MeasureCompleteSorting(perf_cpu_cycles, seed, NumberOfIterationsCompleteSort, CompleteSortArraySize, measureIteration);
         }

@@ -31,7 +31,7 @@ detail::Parser GetParser(CommandLineOptions& options)
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)
 {
-    CommandLineOptions options;
+    CommandLineOptions options = {false, false, false, false, false};
     auto commandLine = GetParser(options);
     
     auto result = commandLine.parse(Args(numberOfArguments, arguments));
