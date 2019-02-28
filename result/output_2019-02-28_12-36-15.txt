@@ -1,0 +1,1851 @@
+General Info: Commit=d3033b4, Hostname=i10pc130
+Result Mapping: s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=16125	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=16121	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=15360	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=15638	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=13823	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=15270	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=15651	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=15686	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=15002	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=15025	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=15450	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=14870	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=15506	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=13889	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=12492	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=13570	ss=16	a=2	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=32540347	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=32771808	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22892736	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22394742	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22910765	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=15617839	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=32709083	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=33303596	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22208882	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22357485	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=23072531	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=18495884	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=29767925	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=33446940	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=27475659	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=31848494	ss=16	a=2	i=0	n=1179648	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=24829	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=24126	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=21839	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=22259	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=21845	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=23301	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=23296	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=23409	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=21273	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=21359	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22403	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=22426	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=23101	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=24178	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=23011	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=23324	ss=16	a=3	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=40840506	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=37025170	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=24054896	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24790900	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26619696	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=22576724	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=39826063	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=38066600	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23927955	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24572840	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26939255	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=24383917	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=39772099	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=42608382	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=37150181	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=40955074	ss=16	a=3	i=0	n=786432	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=32170	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=31342	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=28397	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=28272	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28006	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=28369	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=31135	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=31179	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=26898	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=26929	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28533	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=27675	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=31292	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=33612	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=31391	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=31085	ss=16	a=4	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=45515726	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=43450186	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=24035137	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24112646	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28069820	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=23425841	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=45174371	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=45336952	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=24167268	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24048904	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22562486	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=22181012	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=44519351	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=46525181	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=43004874	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=45760046	ss=16	a=4	i=0	n=589824	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=38798	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=39907	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=34869	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=35243	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35936	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=38072	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=39517	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=38697	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=33782	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=33919	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35823	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=36791	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=40757	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=42055	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=40487	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=41030	ss=16	a=5	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=45730704	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=48258938	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22608254	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22652910	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25756088	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=33172064	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=50030310	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=49649665	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22711193	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22518890	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25854980	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=34435372	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=49184372	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=50883648	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=48370472	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=51058794	ss=16	a=5	i=0	n=471859	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=48495	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=48291	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=42588	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=42066	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=42903	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=45709	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=48636	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=48082	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=40909	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=41242	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=42791	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=44074	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=50332	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=51872	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=48855	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=52599	ss=16	a=6	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=52564073	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=49927947	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22617143	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23358499	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26193466	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=35913287	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=56124469	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=52065840	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22565536	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23190606	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26545622	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=36172360	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=54379022	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=56240778	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=54008739	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=56343843	ss=16	a=6	i=0	n=393216	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=57639	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=60157	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=50225	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=49804	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51769	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=54044	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=58984	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=58111	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=48321	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=48904	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51612	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=52996	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=59705	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=62591	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=59246	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=63029	ss=16	a=7	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=53603643	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=59369125	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=23252108	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24391172	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30212782	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=39062186	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=60412274	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=59150757	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23325699	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24308481	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30342550	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39963275	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=60345285	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=61253453	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=59684118	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=61974535	ss=16	a=7	i=0	n=337042	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=66630	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=70574	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=56929	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=56944	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=60640	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=60823	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=68103	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=67585	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=55779	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=56111	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=58711	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=60152	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=69301	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=73062	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=69487	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=72251	ss=16	a=8	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59765045	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=62909778	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=24019070	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24352469	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29478579	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=38540162	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=62217228	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=63198120	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23970126	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24004497	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29623823	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39860895	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=63986896	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=64342154	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=63877829	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=65711931	ss=16	a=8	i=0	n=294912	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=79299	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=79153	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=65973	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=67864	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=72476	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=71348	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=77247	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=80344	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=64970	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=65254	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=69130	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=74569	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=79281	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=84605	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=80715	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=83958	ss=16	a=9	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=61748185	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=67038004	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=26429392	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=26880540	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=33117465	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42113778	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=63620114	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=70174049	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=27658064	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=27700824	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35009491	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=53733227	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=67701734	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=67712785	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=67160003	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=68978052	ss=16	a=9	i=0	n=262144	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=84853	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=91963	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=74441	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=75930	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=83399	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=78471	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=90046	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=92047	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=75864	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=75503	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=78265	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=82935	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=89959	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=94544	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=90875	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=93822	ss=16	a=10	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59111559	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=70267183	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=28525143	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=28290970	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35656091	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=40095023	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=70822379	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=75433722	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=29538360	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=29107429	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=37178544	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=54632213	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=68866979	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=69610178	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=69564106	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=71345191	ss=16	a=10	i=0	n=235929	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=97399	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=102644	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=86282	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=85112	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=94102	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=88148	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=99755	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=104144	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=86300	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=82712	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=97654	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=94442	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=100065	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=104585	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=100525	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=105744	ss=16	a=11	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=67381179	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=76529000	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=30841842	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30262470	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=45996367	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=44153443	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=69063805	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=77668275	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31778121	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30460441	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=40651410	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=59706873	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=70982482	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=72093822	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=71729694	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=73597931	ss=16	a=11	i=0	n=214481	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=109130	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=119949	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=92583	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=95020	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=103999	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=96832	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=116588	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=116179	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=93319	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=94278	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=104876	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=103403	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=110853	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=115164	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=110266	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=116411	ss=16	a=12	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=70479915	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=85648985	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=31909619	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=31720561	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=38793948	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43929658	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=79471308	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=82186993	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31869956	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=32106805	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=41912364	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=58052844	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=72734944	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=74027209	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=73564603	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=75514148	ss=16	a=12	i=0	n=196608	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=121897	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=130838	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=105967	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=106467	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=117455	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=104628	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=126775	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=131998	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=108380	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=104794	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=117253	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=117457	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=123295	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=126515	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=122716	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=126977	ss=16	a=13	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=69752269	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=87038530	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=35443098	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=34828684	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=60234634	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42214301	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=77240403	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=87777650	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=36075675	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=41183615	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=54533649	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=65027740	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=74865393	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=75488123	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=75165587	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=77433093	ss=16	a=13	i=0	n=181484	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=137171	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=144003	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=118133	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=117521	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=130109	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=114406	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=141736	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=144614	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=118256	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=115333	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=132262	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=125070	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=134504	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=135914	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=133989	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=138906	ss=16	a=14	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=76564790	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=90372106	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=49556607	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=37241001	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=64174583	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43036498	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=85183905	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=92723200	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=43833613	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=42287966	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=66090653	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=63714096	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=75906970	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=77021751	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=76625339	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=78858014	ss=16	a=14	i=0	n=168521	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=148608	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=158126	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=128531	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=127455	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=141842	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=123652	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=152424	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=156788	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=125259	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=125485	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=143326	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=136046	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=145393	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=149122	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=145318	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=149737	ss=16	a=15	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=78002665	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=95393944	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=39458712	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=38818742	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=68331770	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43715729	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=86603572	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=93630892	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=45790555	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=35802982	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=66817259	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=64820788	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=77686638	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=78343289	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=78189207	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=80208920	ss=16	a=15	i=0	n=157286	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=159894	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=173640	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=138188	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=138460	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=151823	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=132880	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=163994	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=169578	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=135882	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=134013	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=150877	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=144398	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=156132	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=160261	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=158315	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=163385	ss=16	a=16	i=0	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=82230907	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=99349237	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=51886690	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=46139139	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=69122394	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43779360	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=89447100	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=96010061	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=49314237	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=45324355	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=64462981	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=63443213	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=78828211	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=79150643	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=79506833	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=81272225	ss=16	a=16	i=0	n=147456	b=0	c=0
+RESULT	s=Netw. BestComplete KR-Default	m=Cpu Cycles	v=82670570	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-JumpXchg	m=Cpu Cycles	v=86177748	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-FourCmovTemp	m=Cpu Cycles	v=77524177	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-FourCmovTemp-Split	m=Cpu Cycles	v=77947675	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=81559980	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-ClangVersion	m=Cpu Cycles	v=77719249	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-Default	m=Cpu Cycles	v=83458558	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-JumpXchg	m=Cpu Cycles	v=85945131	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-FourCmovTemp	m=Cpu Cycles	v=77714516	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-FourCmovTemp-Split	m=Cpu Cycles	v=77897093	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=81829005	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-ClangVersion	m=Cpu Cycles	v=79167338	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-Default	m=Cpu Cycles	v=80213897	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-StlVersion	m=Cpu Cycles	v=80578388	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-PointerOptimized	m=Cpu Cycles	v=80666548	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=81118895	ss=16	a=16384	i=0	n=20	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=16654	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=16521	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=16031	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=15788	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=17332	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=15838	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=15695	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=15860	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=14985	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=15025	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=15963	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=14814	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=15448	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=16245	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=15068	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=15201	ss=16	a=2	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=29237426	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=29407054	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=18877509	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18790966	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18925292	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=12567360	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=29222886	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=29564237	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=18850041	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18846504	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18989924	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=15533687	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=26796043	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=31262405	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=25362592	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=28469385	ss=16	a=2	i=1	n=1179648	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=24322	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=23791	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=22611	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=22238	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=21727	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=23278	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=23368	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=23159	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=21039	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=21319	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22163	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=22413	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=23612	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=24579	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=22286	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=24176	ss=16	a=3	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=37220559	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=34072029	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=18456629	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19041353	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=20229109	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=17223710	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=36882676	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=34576215	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=18426426	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18865056	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=20583052	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=19272461	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=38423850	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=40884153	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=35181741	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=39263333	ss=16	a=3	i=1	n=786432	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=32284	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=31840	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=28798	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=29084	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28304	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=28699	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=31052	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=30979	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=26907	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=26990	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28403	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=27774	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=31771	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=33491	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=30077	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=32189	ss=16	a=4	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=43845351	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=42156722	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=20146145	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=20024578	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22168902	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=20050931	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=43686685	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=44039113	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=20226869	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19848465	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22577284	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=22166833	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=44591115	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=46635578	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=43123760	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=45653865	ss=16	a=4	i=1	n=589824	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=38962	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=40431	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=35789	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=35315	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35510	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=38363	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=40005	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=39317	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=33890	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=33765	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=36520	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=36712	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=40927	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=41645	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=42002	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=41184	ss=16	a=5	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=45739963	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=48224165	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22662440	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22697515	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25793827	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=32484095	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=50129328	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=49655793	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22664404	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22460479	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25853830	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=34460205	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=48891058	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=50887009	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=48299751	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=51015394	ss=16	a=5	i=1	n=471859	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=48617	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=48679	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=42261	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=42405	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=42700	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=45276	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=49003	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=48071	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=41390	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=41177	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=43159	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=44107	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=50568	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=52504	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=49939	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=53503	ss=16	a=6	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=52389665	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=49922083	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22613127	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23322424	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26126475	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=35876975	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=56270286	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=52125605	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22626680	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23140981	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26500744	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=36179795	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=54148092	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=56380974	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=54111659	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=56459622	ss=16	a=6	i=1	n=393216	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=57666	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=59273	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=49479	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=49461	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=52129	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=53850	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=59117	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=58472	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=48415	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=48893	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51173	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=52843	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=61168	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=63358	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=59163	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=64112	ss=16	a=7	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=53788041	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=59420237	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=23280459	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24369668	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30226288	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=39021282	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=60437784	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=59168003	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23327926	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24317417	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30320465	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39954262	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=59802503	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=61283538	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=59657357	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=62032982	ss=16	a=7	i=1	n=337042	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=67710	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=71239	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=58479	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=57428	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=60195	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=60800	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=68672	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=68505	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=55975	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=56002	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=59162	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=60010	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=69745	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=73515	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=69151	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=74101	ss=16	a=8	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59732318	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=62987325	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=23988090	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24302884	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29534308	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=38607852	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=62171087	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=63258795	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=24001607	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24022258	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29615226	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39801105	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=64613706	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=64441743	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=63934366	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=65811811	ss=16	a=8	i=1	n=294912	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=79210	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=79644	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=66579	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=68112	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=72536	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=71256	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=77091	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=80543	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=64867	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=65249	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=68716	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=75126	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=81429	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=83492	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=81077	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=83197	ss=16	a=9	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=61728184	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=66970554	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=26457469	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=26896660	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=33123539	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42123282	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=63616980	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=70179373	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=27651945	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=27730054	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=34994751	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=54071330	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=66700097	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=67727334	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=67250828	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=69245644	ss=16	a=9	i=1	n=262144	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=86498	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=93159	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=73778	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=75931	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=82534	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=78723	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=90481	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=91998	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=75688	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=75545	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=79492	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=83103	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=89599	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=94445	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=90462	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=94378	ss=16	a=10	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59126775	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=70252143	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=28552365	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=28289145	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35666752	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=40115725	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=70954580	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=75443208	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=29497311	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=29095606	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=37223150	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=54991469	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=69162373	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=69784170	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=69473101	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=71316386	ss=16	a=10	i=1	n=235929	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=98641	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=103560	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=86182	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=85656	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=93839	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=88367	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=100753	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=103251	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=86593	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=83079	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=93604	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=94674	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=99413	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=105477	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=101009	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=104502	ss=16	a=11	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=67468622	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=76542755	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=30851553	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30224370	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=46015297	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=44130918	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=69063857	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=77656207	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31760474	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30505297	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=40634473	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=59754435	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=71140159	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=72166741	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=71637370	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=73606120	ss=16	a=11	i=1	n=214481	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=115338	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=119923	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=92716	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=95120	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=104413	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=96501	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=115950	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=114532	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=93649	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=94901	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=103758	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=103303	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=110488	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=114625	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=111490	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=116966	ss=16	a=12	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=70433281	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=85670306	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=31884439	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=31709910	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=38797212	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43917588	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=79390069	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=82104211	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31854750	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=32188376	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=41912877	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=58065726	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=72740696	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=73970992	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=73524523	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=75515415	ss=16	a=12	i=1	n=196608	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=121741	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=130851	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=106968	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=106319	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=117920	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=104495	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=126448	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=132656	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=108676	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=105482	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=120937	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=116403	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=123878	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=126188	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=121934	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=126521	ss=16	a=13	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=69717459	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=87020425	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=35436365	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=34841730	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=60233376	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42201565	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=77267756	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=87815228	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=36141106	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=41200032	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=54503958	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=65021007	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=74545428	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=75545987	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=75225640	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=77298831	ss=16	a=13	i=1	n=181484	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=137060	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=144317	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=118824	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=118004	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=130753	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=114356	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=141424	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=144925	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=118247	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=115069	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=128050	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=125377	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=134868	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=137259	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=133499	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=139709	ss=16	a=14	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=76574640	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=90380318	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=49560916	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=37243213	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=64124412	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43028793	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=85053051	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=92648651	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=43791886	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=42269619	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=66119945	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=63735621	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=76217606	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=77019516	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=76556859	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=78869136	ss=16	a=14	i=1	n=168521	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=146673	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=156911	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=127549	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=128088	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=140892	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=123523	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=152190	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=155621	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=125280	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=125340	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=143642	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=136217	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=143838	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=147891	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=144703	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=149034	ss=16	a=15	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=78066941	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=95411417	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=39465753	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=38789189	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=68326394	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43741807	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=86663275	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=93682971	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=45741556	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=35807454	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=66829040	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=64883269	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=77658207	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=78300257	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=78219868	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=80178241	ss=16	a=15	i=1	n=157286	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=161785	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=174608	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=139225	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=139258	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=152642	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=132776	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=165086	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=169288	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=135766	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=133488	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=154958	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=144517	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=155240	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=160025	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=158213	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=163584	ss=16	a=16	i=1	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=82408467	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=99389513	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=51861252	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=46168120	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=69138436	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43782603	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=89401249	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=95968742	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=49288004	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=45324773	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=64438255	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=63297613	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=78768689	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=79125160	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=79507919	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=81321428	ss=16	a=16	i=1	n=147456	b=0	c=0
+RESULT	s=Netw. BestComplete KR-Default	m=Cpu Cycles	v=82619944	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-JumpXchg	m=Cpu Cycles	v=86198376	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-FourCmovTemp	m=Cpu Cycles	v=77514431	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-FourCmovTemp-Split	m=Cpu Cycles	v=77863512	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=81497509	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-ClangVersion	m=Cpu Cycles	v=77687348	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-Default	m=Cpu Cycles	v=83476851	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-JumpXchg	m=Cpu Cycles	v=85889333	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-FourCmovTemp	m=Cpu Cycles	v=77730997	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-FourCmovTemp-Split	m=Cpu Cycles	v=77861438	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=81820633	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-ClangVersion	m=Cpu Cycles	v=79179069	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-Default	m=Cpu Cycles	v=80146397	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-StlVersion	m=Cpu Cycles	v=80498522	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-PointerOptimized	m=Cpu Cycles	v=80625988	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=80986043	ss=16	a=16384	i=1	n=20	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=16743	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=16414	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=15984	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=15705	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=15739	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=15780	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=15938	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=15833	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=15068	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=15135	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=16016	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=14903	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=15568	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=16596	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=14924	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=15335	ss=16	a=2	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=29245999	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=29380005	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=18874271	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18767093	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18918176	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=12571871	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=29188015	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=29539675	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=18847050	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18821931	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=19028892	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=15502513	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=26799386	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=31249394	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=25314555	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=28649979	ss=16	a=2	i=2	n=1179648	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=24750	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=24354	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=23101	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=22644	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=21572	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=23282	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=23227	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=23027	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=21164	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=21320	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22164	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=22544	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=23452	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=24285	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=23242	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=23895	ss=16	a=3	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=37258158	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=33885628	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=18433488	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19039609	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=20194260	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=17308755	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=36804952	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=34519801	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=18325738	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18848874	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=20543739	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=19272346	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=38434206	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=40851890	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=35320007	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=39379960	ss=16	a=3	i=2	n=786432	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=32455	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=31853	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=28771	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=28235	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=27909	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=28478	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=31159	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=30940	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=26965	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=26991	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28238	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=27645	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=32075	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=32843	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=30466	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=31727	ss=16	a=4	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=43908004	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=42199413	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=20139869	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19974056	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22180100	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=20105171	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=43716665	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=44045759	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=20232065	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19792559	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22555389	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=22177655	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=44487924	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=46436707	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=43060684	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=45827596	ss=16	a=4	i=2	n=589824	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=39656	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=39945	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=35675	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=35134	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35438	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=38363	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=39864	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=39105	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=33795	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=33922	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35954	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=37152	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=40479	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=42289	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=40400	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=41746	ss=16	a=5	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=45777901	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=48232609	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22628905	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22681308	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25752843	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=32491887	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=50101049	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=49675360	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22664665	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22504907	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25862118	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=34440308	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=49515069	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=50880647	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=48338581	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=50948945	ss=16	a=5	i=2	n=471859	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=48456	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=48275	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=41800	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=42602	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=42955	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=45386	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=48453	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=47304	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=40931	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=41149	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=43230	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=44087	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=50584	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=53023	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=50418	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=52479	ss=16	a=6	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=52492558	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=49946164	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22605667	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23348356	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26135207	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=35868930	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=56151796	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=52058289	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22588789	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23195833	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26503857	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=36214208	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=54781713	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=56328653	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=54125668	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=56383395	ss=16	a=6	i=2	n=393216	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=56657	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=58332	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=49860	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=50411	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51928	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=53965	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=57855	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=57436	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=48318	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=48804	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51084	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=53355	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=59760	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=62990	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=59304	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=62700	ss=16	a=7	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=53669147	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=59448585	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=23319735	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24359041	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30232336	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=39007230	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=60367639	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=59124672	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23325303	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24315408	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30288912	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39920802	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=60353474	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=61280046	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=59843720	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=61983442	ss=16	a=7	i=2	n=337042	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=67035	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=70939	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=57180	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=57873	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=61128	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=60945	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=68615	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=68740	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=55934	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=56182	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=58695	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=59995	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=70434	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=74030	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=68756	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=72579	ss=16	a=8	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59779769	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=63064244	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=24000829	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24272687	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29510766	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=38581124	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=62226738	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=63198791	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23975329	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24000392	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29597407	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39844034	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=64459632	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=64495016	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=63979592	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=65761965	ss=16	a=8	i=2	n=294912	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=79265	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=79976	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=66212	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=68187	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=73254	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=71421	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=77320	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=80151	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=65042	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=65251	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=68796	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=75381	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=80831	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=82506	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=80744	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=83141	ss=16	a=9	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=61814017	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=67007262	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=26408239	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=26900792	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=33187948	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42143940	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=63629826	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=70235534	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=27686477	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=27733061	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35034973	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=53678240	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=66740297	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=67576379	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=67159766	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=68970288	ss=16	a=9	i=2	n=262144	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=84957	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=92165	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=74972	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=76027	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=82515	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=78492	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=90608	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=92349	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=76416	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=75889	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=78553	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=82840	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=89934	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=92668	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=89452	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=93664	ss=16	a=10	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59105311	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=70270818	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=28500577	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=28316593	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35638402	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=40089066	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=70809849	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=75401277	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=29524464	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=29079600	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=37181416	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=54654341	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=69973927	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=69647742	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=69508477	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=71339417	ss=16	a=10	i=2	n=235929	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=96939	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=103208	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=86622	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=84751	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=93639	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=88159	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=100953	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=103305	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=86354	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=82932	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=97319	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=94114	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=100057	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=104775	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=99980	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=105070	ss=16	a=11	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=67461432	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=76561402	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=30896252	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30190926	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=46023105	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=44173573	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=69068112	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=77639285	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31768889	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30464605	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=40695259	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=59810392	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=71516898	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=72247079	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=71675285	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=73605031	ss=16	a=11	i=2	n=214481	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=109751	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=119877	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=92366	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=95019	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=103421	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=96661	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=116903	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=116871	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=93750	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=94978	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=103304	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=103316	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=113059	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=115993	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=113609	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=115858	ss=16	a=12	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=70517651	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=85687167	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=31854948	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=31761788	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=38777644	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43896417	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=79406007	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=82126713	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31815569	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=32147199	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=41911681	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=58054412	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=72689454	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=73979750	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=73452984	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=75497947	ss=16	a=12	i=2	n=196608	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=121700	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=130449	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=105834	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=105882	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=118060	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=104868	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=127428	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=132692	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=108608	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=105102	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=120871	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=116841	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=123837	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=127233	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=123172	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=127615	ss=16	a=13	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=69793947	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=87063410	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=35420208	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=34860825	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=60249294	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42197980	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=77260994	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=87789074	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=36131205	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=41190676	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=54521733	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=65050604	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=74428493	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=75649336	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=75201298	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=77378723	ss=16	a=13	i=2	n=181484	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=137902	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=144423	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=118226	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=118345	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=131296	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=114391	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=142069	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=145821	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=118333	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=115250	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=128352	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=125107	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=135089	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=138259	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=132674	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=139860	ss=16	a=14	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=76622095	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=90471618	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=49526260	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=37245782	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=64172069	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43054268	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=85173185	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=92693555	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=43849726	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=42318978	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=66122363	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=63982959	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=75948529	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=77056268	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=76676504	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=78846601	ss=16	a=14	i=2	n=168521	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=148182	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=159614	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=128375	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=127164	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=140833	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=123827	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=151811	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=155786	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=124863	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=125255	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=139813	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=136202	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=144445	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=150302	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=145376	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=150010	ss=16	a=15	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=78079240	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=95439833	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=39442541	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=38807795	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=68296287	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43668573	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=86629220	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=93721261	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=45794187	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=35798395	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=66816167	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=64869972	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=77668267	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=78257426	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=78196108	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=80195132	ss=16	a=15	i=2	n=157286	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=160551	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=174572	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=139000	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=138965	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=151613	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=132693	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=164617	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=169286	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=135984	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=133560	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=150842	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=144652	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=156542	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=160739	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=157521	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=162444	ss=16	a=16	i=2	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=82372139	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=99415265	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=51853041	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=46315903	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=69169839	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43796634	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=89419529	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=95915114	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=49278307	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=45361794	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=64469333	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=63371299	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=78838777	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=79088920	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=79522637	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=81330638	ss=16	a=16	i=2	n=147456	b=0	c=0
+RESULT	s=Netw. BestComplete KR-Default	m=Cpu Cycles	v=82728117	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-JumpXchg	m=Cpu Cycles	v=86232462	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-FourCmovTemp	m=Cpu Cycles	v=77562075	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-FourCmovTemp-Split	m=Cpu Cycles	v=77972606	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=81554653	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BestComplete KR-ClangVersion	m=Cpu Cycles	v=77783525	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-Default	m=Cpu Cycles	v=83498406	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-JumpXchg	m=Cpu Cycles	v=85976004	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-FourCmovTemp	m=Cpu Cycles	v=77692914	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-FourCmovTemp-Split	m=Cpu Cycles	v=77951359	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=81834379	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. BoseNelsonComplete KR-ClangVersion	m=Cpu Cycles	v=79244742	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-Default	m=Cpu Cycles	v=80220019	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-StlVersion	m=Cpu Cycles	v=80455280	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-PointerOptimized	m=Cpu Cycles	v=80662134	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Ins.Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=80955354	ss=16	a=16384	i=2	n=20	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=16815	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=17192	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=16167	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=16071	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=15505	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=15866	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=15840	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=15811	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=15002	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=15083	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=15713	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=15016	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=15536	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=18408	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=14869	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=15793	ss=16	a=2	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=29230056	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=29451863	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=18825634	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18762265	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18952191	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=12558002	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=29152708	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=29578283	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=18825229	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18840666	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=19054855	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=15487100	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=26813020	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=31268936	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=25331322	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=28630790	ss=16	a=2	i=3	n=1179648	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=24187	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=23832	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=22578	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=22781	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=21721	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=24024	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=23145	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=23119	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=21002	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=21255	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22411	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=22315	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=23061	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=24185	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=22412	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=23089	ss=16	a=3	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=37191654	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=33925843	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=18371834	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19005649	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=20235292	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=17241064	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=36872615	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=34559495	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=18310193	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=18844505	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=20532901	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=19225935	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=38346428	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=40775452	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=35291912	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=39163350	ss=16	a=3	i=3	n=786432	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=32317	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=32431	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=28398	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=28370	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28009	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=28789	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=31585	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=31108	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=27053	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=27112	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=28604	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=27665	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=31773	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=32695	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=31646	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=32486	ss=16	a=4	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=43878244	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=42126576	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=20105637	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19996324	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22186157	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=20109558	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=43647428	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=44030182	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=20212949	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=19840055	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=22570874	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=22139760	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=44682692	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=46540000	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=43089484	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=45487098	ss=16	a=4	i=3	n=589824	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=39663	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=40094	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=34851	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=35647	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35699	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=38164	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=40242	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=39369	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=33774	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=34004	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35565	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=37155	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=41047	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=41930	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=40865	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=41950	ss=16	a=5	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=45685100	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=48222131	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22681652	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22670763	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25758590	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=32475514	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=49978197	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=49707007	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22637387	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=22498549	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=25868333	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=34435150	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=49186926	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=50662860	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=48366100	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=51057485	ss=16	a=5	i=3	n=471859	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=48090	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=48056	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=42519	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=42729	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=43031	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=45236	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=48430	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=47219	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=41198	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=41465	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=43294	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=44161	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=50380	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=52745	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=50221	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=52397	ss=16	a=6	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=52559208	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=49918233	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=22599116	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23327024	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26114466	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=35913063	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=56110847	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=52119363	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=22544477	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=23219879	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=26512671	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=36175699	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=54114634	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=56082151	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=53915022	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=56431769	ss=16	a=6	i=3	n=393216	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=56710	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=59148	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=50458	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=50217	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51617	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=53843	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=58731	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=57666	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=48653	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=48950	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=51612	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=52914	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=59820	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=63105	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=59539	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=63810	ss=16	a=7	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=53742567	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=59401279	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=23316685	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24370205	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30208361	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=39054471	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=60421571	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=59219923	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23358567	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24312545	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=30340541	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39926725	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=59845837	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=61254961	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=59618463	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=62007229	ss=16	a=7	i=3	n=337042	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=67775	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=72137	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=57744	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=58067	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=60946	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=61035	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=68342	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=68806	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=55785	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=56156	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=58910	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=60046	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=70044	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=73202	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=68873	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=73545	ss=16	a=8	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59748799	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=62929827	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=23970015	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24297016	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29584398	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=38550274	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=62187302	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=63247659	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=23991123	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=24009971	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=29679938	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=39838119	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=63778418	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=64532391	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=63974514	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=65829711	ss=16	a=8	i=3	n=294912	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=78716	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=79599	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=65911	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=69043	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=72596	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=71421	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=76983	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=80380	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=65139	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=65249	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=69055	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=74267	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=80020	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=84038	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=78577	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=84926	ss=16	a=9	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=61730410	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=66987606	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=26442764	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=26893711	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=33181387	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=42151671	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=63674078	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=70229491	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=27638224	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=27716775	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35033833	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=53626003	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=67010209	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=67756363	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=67152670	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=68996720	ss=16	a=9	i=3	n=262144	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=85592	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=92560	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=74546	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=76124	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=83474	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=78830	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=89096	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=91721	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=75189	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=75193	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=82424	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=82841	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=89956	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=94101	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=89814	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=94454	ss=16	a=10	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=59057812	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=70264471	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=28498386	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=28373885	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=35693228	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=40083314	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=70862945	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=75467478	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=29502599	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=29086162	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=37188919	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=54658096	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=68801428	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=69716042	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=69378031	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=71250527	ss=16	a=10	i=3	n=235929	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=98433	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=104064	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=86534	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=86100	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=94628	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=88099	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=100713	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=103563	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=86532	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=82855	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=93301	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=94213	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=100637	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=106332	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=100061	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=103973	ss=16	a=11	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=67499782	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=76564774	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=30864679	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30233635	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=46026421	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=44184375	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=68992216	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=77688787	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31800158	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=30528743	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=40646736	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=59718373	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=71085055	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=72198496	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=71568153	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=73548960	ss=16	a=11	i=3	n=214481	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=108871	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=120552	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=92537	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=97044	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=104676	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=96907	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=116342	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=114879	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=93312	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp-Split	m=Cpu Cycles	v=94277	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-SixCmovRegisterTemp	m=Cpu Cycles	v=103912	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-ClangVersion	m=Cpu Cycles	v=103301	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-Default	m=Cpu Cycles	v=110096	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-StlVersion	m=Cpu Cycles	v=115410	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-PointerOptimized	m=Cpu Cycles	v=111039	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Ins. KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=116894	ss=16	a=12	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BestInRow KR-Default	m=Cpu Cycles	v=70543768	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-JumpXchg	m=Cpu Cycles	v=85663421	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp	m=Cpu Cycles	v=31892224	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=31743025	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=38753905	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BestInRow KR-ClangVersion	m=Cpu Cycles	v=43914203	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-Default	m=Cpu Cycles	v=79436706	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-JumpXchg	m=Cpu Cycles	v=82122373	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp	m=Cpu Cycles	v=31845690	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-FourCmovTemp-Split	m=Cpu Cycles	v=32125053	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-SixCmovRegisterTemp	m=Cpu Cycles	v=41899636	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. BoseNelsonInRow KR-ClangVersion	m=Cpu Cycles	v=58063524	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-Default	m=Cpu Cycles	v=72788725	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-StlVersion	m=Cpu Cycles	v=73916841	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-PointerOptimized	m=Cpu Cycles	v=73535665	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Ins.InRow KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=75507867	ss=16	a=12	i=3	n=196608	b=0	c=0
+RESULT	s=Netw. Best KR-Default	m=Cpu Cycles	v=123412	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-JumpXchg	m=Cpu Cycles	v=131772	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp	m=Cpu Cycles	v=106509	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-FourCmovTemp-Split	m=Cpu Cycles	v=105957	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-SixCmovRegisterTemp	m=Cpu Cycles	v=117693	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. Best KR-ClangVersion	m=Cpu Cycles	v=104957	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-Default	m=Cpu Cycles	v=126981	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-JumpXchg	m=Cpu Cycles	v=132140	ss=16	a=13	i=3	n=100	b=0	c=0
+RESULT	s=Netw. BoseNelson KR-FourCmovTemp	m=Cpu Cycles	v=108429	ss=16	a=13	i=3	n=10
