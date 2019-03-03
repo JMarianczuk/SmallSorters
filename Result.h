@@ -13,7 +13,6 @@
 
 namespace result {
 
-
 void WriteAbbreviationExplanatoryLine()
 {
     printf("Result Mapping: s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement\n");
@@ -58,7 +57,6 @@ void WriteResultLine(
         numberOfBadSorts,
         isActualSorterMeasurement ? 0 : 1); 
 }
-
 
 }
 

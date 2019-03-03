@@ -26,15 +26,14 @@
 
 class Performancing {
 private:
-    struct perf_event_attr performance_event_attribute;
-	uint64_t id;
+    struct perf_event_attr _performanceEventAttribute;
+	uint64_t _id;
+	char _resultBuffer[4096];
+	struct read_format* _readFormat;
+	int _fileDescriptor;
+    PerformanceMetric _performanceMetric;
 
-	char buf[4096];
-	struct read_format* rf;
-
-	int file_descriptor;
-
-    PerformanceMetric performance_metric;
+    void SetupPerformanceEventAttribute(PerformanceMetric metric);
 public:
     Performancing(PerformanceMetric metric);
     ~Performancing();

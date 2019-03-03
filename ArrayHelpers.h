@@ -62,6 +62,7 @@ bool IsSorted(TComparable* items, size_t arraySize)
 }
 
 static const uint64_t p = 4294967291; // largest prime < 2^32
+static const uint64_t two_to_power_of_31_minus_1 = 2147483647;
 
 template<typename TComparable>
 uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value_func)(TComparable& item), size_t& iteration)
@@ -69,12 +70,15 @@ uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*val
     for (uint64_t iter = 1; iter < 100000; iter += 1)
     {
         //Keys are at most 2^32, so take a z that is guaranteed larger than 2^32
-        uint64_t z = ((((uint64_t) items) + iter) % 2147483647) + 2147483647;
+        uint64_t z = ((uint64_t) items) + iter;
+        z = (z % two_to_power_of_31_minus_1) + two_to_power_of_31_minus_1;
         uint64_t v = 1;
+        uint64_t diff;
 
         for (size_t i = 0; i < arraySize; i += 1)
         {
-            v = (v * ((z - value_func(items[i])) % p)) % p;
+            diff = (z - value_func(items[i])) % p;
+            v = (v * diff) % p;
         }
         if (v != 0)
         {
@@ -95,12 +99,15 @@ void PutPermutationValues(TComparable* items, size_t arraySize, uint64_t& keyVal
 template<typename TComparable>
 bool CheckPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value_func)(TComparable& item), size_t iteration, uint64_t permutationValueBefore)
 {
-    uint64_t z = ((((uint64_t) items) + iteration) % 2147483647) + 2147483647;
+    uint64_t z = ((uint64_t) items) + iteration;
+    z = (z % two_to_power_of_31_minus_1) + two_to_power_of_31_minus_1;
     uint64_t w = 1;
+    uint64_t diff;
 
     for (size_t i = 0; i < arraySize; i += 1)
     {
-        w = (w * ((z - value_func(items[i])) % p)) % p;
+        diff = (z - value_func(items[i])) % p;
+        w = (w * diff) % p;
     }
     return permutationValueBefore == w;
 }

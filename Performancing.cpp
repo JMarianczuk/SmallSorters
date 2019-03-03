@@ -15,55 +15,60 @@ struct read_format {
 	} values[];
 };
 
-Performancing::Performancing(PerformanceMetric metric) {
-	performance_metric = metric;
-	rf = (struct read_format*) buf;
-	memset(&performance_event_attribute, 0, sizeof(struct perf_event_attr));
-	performance_event_attribute.type = PERF_TYPE_HARDWARE;
-	performance_event_attribute.size = sizeof(struct perf_event_attr);
+void Performancing::SetupPerformanceEventAttribute(PerformanceMetric metric)
+{
+	memset(&_performanceEventAttribute, 0, sizeof(struct perf_event_attr));
+	_performanceEventAttribute.type = PERF_TYPE_HARDWARE;
+	_performanceEventAttribute.size = sizeof(struct perf_event_attr);
 	switch (metric) {
 		case PerformanceMetric::CPU_CYCLES:
-			performance_event_attribute.config = PERF_COUNT_HW_CPU_CYCLES;
+			_performanceEventAttribute.config = PERF_COUNT_HW_CPU_CYCLES;
 			break;
 		case PerformanceMetric::CACHE_MISSES:
-			performance_event_attribute.config = PERF_COUNT_HW_CACHE_MISSES;
+			_performanceEventAttribute.config = PERF_COUNT_HW_CACHE_MISSES;
 			break;
 		case PerformanceMetric::BRANCH_MISSES:
-			performance_event_attribute.config = PERF_COUNT_HW_BRANCH_MISSES;
+			_performanceEventAttribute.config = PERF_COUNT_HW_BRANCH_MISSES;
 			break;
 		default:
 			throw std::logic_error("Performancing::Performancing => Missing Performance Metric!");
 	}
-	performance_event_attribute.disabled = 1;
-	performance_event_attribute.exclude_kernel = 1;
-	performance_event_attribute.exclude_hv = 1;
-	performance_event_attribute.read_format = PERF_FORMAT_GROUP | PERF_FORMAT_ID;
-	file_descriptor = syscall(__NR_perf_event_open, &performance_event_attribute, 0, -1, -1, 0);
-	ioctl(file_descriptor, PERF_EVENT_IOC_ID, &id);
+	_performanceEventAttribute.disabled = 1;
+	_performanceEventAttribute.exclude_kernel = 1;
+	_performanceEventAttribute.exclude_hv = 1;
+	_performanceEventAttribute.read_format = PERF_FORMAT_GROUP | PERF_FORMAT_ID;
+}
+
+Performancing::Performancing(PerformanceMetric metric) {
+	_performanceMetric = metric;
+	_readFormat = (struct read_format*) _resultBuffer;
+	SetupPerformanceEventAttribute(metric);
+	_fileDescriptor = syscall(__NR_perf_event_open, &_performanceEventAttribute, 0, -1, -1, 0);
+	ioctl(_fileDescriptor, PERF_EVENT_IOC_ID, &_id);
 }
 Performancing::~Performancing() {
-	close(file_descriptor);
+	close(_fileDescriptor);
 }
 void Performancing::StartMeasuring() {
-	ioctl(file_descriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
-	ioctl(file_descriptor, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
+	ioctl(_fileDescriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
+	ioctl(_fileDescriptor, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
 }
 void Performancing::StopMeasuring() {
-	ioctl(file_descriptor, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
+	ioctl(_fileDescriptor, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
 }
 
 uint64_t Performancing::GetValue() {
-	auto _ = read(file_descriptor, buf, sizeof(buf));
+	auto _ = read(_fileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 
-	for (int i = 0; i < rf->number; i += 1)
+	for (int i = 0; i < _readFormat->number; i += 1)
 	{
-		if (rf->values[i].id == id)
+		if (_readFormat->values[i].id == _id)
 		{
-			return rf->values[i].value;
+			return _readFormat->values[i].value;
 		}
 	}
 }
 
 PerformanceMetric Performancing::GetMetric() {
-	return performance_metric;
+	return _performanceMetric;
 }
