@@ -86,7 +86,6 @@ void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(T
         // debug::WriteLine("Going into recursion");
         size_t afterMid = mid + 1;
         ideal = (ideal >> 1) + (ideal >> 2); //from std::sort: "allow 1.5 log2(N) divisions"
-        std::sort
 
         if (mid  < arraySize - afterMid)
         {

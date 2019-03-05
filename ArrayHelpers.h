@@ -7,6 +7,7 @@
 #include <vector>
 #include "Sortable.generated.h"
 #include "StructHelpers.generated.h"
+#include "DebugHelper.h"
 
 template<typename TValueType>
 void PrintArray(TValueType* source, int arraySize, std::string comment)

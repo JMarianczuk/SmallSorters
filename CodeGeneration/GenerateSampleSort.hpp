@@ -37,33 +37,42 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
     for (int i = 0; i < blockSize; i += 1)
     {
         std::string iStr = std::to_string(i);
-        gen->WriteLine("element", iStr, " = A[current", GetPlusI(i), "];");
         gen->WriteLine("state", iStr, " = 0;");
+        gen->WriteLine("predicateResult", iStr, " = (int) predicateLess(splitter1, A[current", GetPlusI(i), "]);");
         gen->WriteLine("splitter0", iStr, "x = splitter0;");
     }
     for (int i = 0; i < blockSize; i += 1)
     {
         std::string iStr = std::to_string(i);
         WriteAsmBlock(gen, [=]{
-            WriteAsmLine(gen, "cmp %[ele],%[splitter1]");
-            WriteAsmLine(gen, "cmovc %[splitter2],%[splitterx]");
+            WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+            WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
             WriteAsmLine(gen, "rcl $1,%[state]");
-            gen->WriteLine(": [splitterx] \"+r\"(splitter0", iStr, "x), [state] \"=r\"(state", iStr, ")");
-            gen->WriteLine(": \"1\"(state", iStr, "), [ele] \"r\"(element", iStr, "), [splitter1] \"r\"(splitter1), [splitter2] \"r\"(splitter2)");
-            gen->WriteLine(": \"cc\"");
-        });
-        WriteAsmBlock(gen, [=]{
-            WriteAsmLine(gen, "cmp %[ele],%[splitterx]");
-            WriteAsmLine(gen, "rcl $1,%[state]");
-            gen->WriteLine(": [state] \"=r\"(state", iStr, ")");
-            gen->WriteLine(": \"0\"(state", iStr, "), [ele] \"r\"(element", iStr, "), [splitterx] \"r\"(splitter0", iStr, "x)");
+            gen->WriteLine(": [splitterx] \"=&r\"(splitter0", iStr, "x), [state] \"=&r\"(state", iStr, ")");
+            gen->WriteLine(": \"0\"(splitter0", iStr, "x), \"1\"(state", iStr, "), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
             gen->WriteLine(": \"cc\"");
         });
     }
     for (int i = 0; i < blockSize; i += 1)
     {
         std::string iStr = std::to_string(i);
-        gen->WriteLine("*buckets[state", iStr, "] = element", iStr, ";");
+        gen->WriteLine("predicateResult", iStr, " = (int) predicateLess(splitter0", iStr, "x, A[current", GetPlusI(i), "]);");
+    }
+    for (int i = 0; i < blockSize; i += 1)
+    {
+        std::string iStr = std::to_string(i);
+        WriteAsmBlock(gen, [=]{
+            WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+            WriteAsmLine(gen, "rcl $1,%[state]");
+            gen->WriteLine(": [state] \"=&r\"(state", iStr, ")");
+            gen->WriteLine(": \"0\"(state", iStr, "), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
+            gen->WriteLine(": \"cc\"");
+        });
+    }
+    for (int i = 0; i < blockSize; i += 1)
+    {
+        std::string iStr = std::to_string(i);
+        gen->WriteLine("*buckets[state", iStr, "] = A[current", GetPlusI(i), "];");
         gen->WriteLine("buckets[state", iStr, "]++;");
     }
 }
@@ -72,15 +81,16 @@ void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversampl
 {
     int sampleSize = numberOfSplitters * oversamplingFactor;
     std::string sampleSizeStr = std::to_string(sampleSize);
-    gen->WriteLine("template <typename TValueType>");
+    gen->WriteLine("template <typename TValueType, typename TKey>");
     gen->WriteLine("static inline");
     gen->WriteLine("void Find", GetName(numberOfSplitters, oversamplingFactor), "(");
 
     gen->WriteIndented([=]{
         gen->WriteLine("TValueType* items,");
         gen->WriteLine("size_t elementCount,");
-        gen->WriteLine("TValueType* splitterDestination,");
-        gen->WriteLine("void(*sortFunc)(TValueType*,size_t))");
+        gen->WriteLine("TKey* splitterDestination,");
+        gen->WriteLine("void(*sortFunc)(TValueType*,size_t),");
+        gen->WriteLine("TKey(*getKeyFunc)(TValueType&))");
     });
     gen->WriteBlock([=]{
         gen->WriteLine("TValueType sample[", sampleSizeStr, "];");
@@ -94,11 +104,11 @@ void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversampl
         gen->WriteLine("");
 
         gen->WriteForLoop("i", 0, numberOfSplitters, [=]{
-            gen->Write("splitterDestination[i] = sample[i * ");
+            gen->Write("splitterDestination[i] = getKeyFunc(sample[i * ");
             gen->Write(oversamplingFactor);
             gen->Write(" + ");
             gen->Write(oversamplingFactor / 2);
-            gen->WriteLine("];");
+            gen->WriteLine("]);");
         });
     });
 }
@@ -109,14 +119,16 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
     std::string blockSizeStr = std::to_string(blockSize);
     std::string numberOfSplittersStr = std::to_string(numberOfSplitters);
     std::string numberOfBucketsStr = std::to_string(numberOfBuckets);
-    gen->WriteLine("template <typename TValueType>");
+    gen->WriteLine("template <typename TValueType, typename TKey>");
     gen->WriteLine("static inline");
     gen->WriteLine("void SampleSort", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(");
     gen->WriteIndented([=]{
         gen->WriteLine("TValueType* A,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("size_t baseCaseLimit,");
-        gen->WriteLine("void(*sortFunc)(TValueType*,size_t))");
+        gen->WriteLine("void(*sortFunc)(TValueType*,size_t),");
+        gen->WriteLine("bool(*predicateLess)(TKey&,TValueType&),");
+        gen->WriteLine("TKey(*getKeyFunc)(TValueType&))");
     });
     gen->WriteBlock([=]{
         gen->WriteLine("if (elementCount <= baseCaseLimit)");
@@ -126,12 +138,12 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         });
         gen->WriteLine("");
 
-        gen->WriteLine("TValueType splitters[", numberOfSplittersStr, "];");
-        gen->WriteLine("Find", GetName(numberOfSplitters, oversamplingFactor), "(A, elementCount, splitters, sortFunc);");
+        gen->WriteLine("TKey splitters[", numberOfSplittersStr, "];");
+        gen->WriteLine("Find", GetName(numberOfSplitters, oversamplingFactor), "(A, elementCount, splitters, sortFunc, getKeyFunc);");
         for (int i = 0; i < numberOfSplitters; i += 1)
         {
             std::string iStr = std::to_string(i);
-            gen->WriteLine("register TValueType splitter", iStr, " = splitters[", iStr, "];");
+            gen->WriteLine("register TKey splitter", iStr, " = splitters[", iStr, "];");
         }
         gen->WriteLine("");
 
@@ -144,14 +156,15 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         for(int i = 0; i < blockSize; i += 1)
         {
             std::string iStr = std::to_string(i);
-            gen->WriteLine("register TValueType element", iStr, ";");
             gen->WriteLine("register int state", iStr, ";");
-            gen->WriteLine("register TValueType splitter0", iStr, "x;");
+            gen->WriteLine("register int predicateResult", iStr, ";");
+            gen->WriteLine("register TKey splitter0", iStr, "x;");
         }
         gen->WriteLine("");
 
         gen->WriteLine("int max = elementCount - ", blockSizeStr, ";");
         gen->WriteLine("int current = 0;");
+        gen->WriteLine("register int zero = 0;");
         gen->WriteLine("//Sort 'blockSize' elements simultaneously into the buckets");
         gen->WriteLine("for ( ; current <= max; current += ", blockSizeStr, ")");
         gen->WriteBlock([=]{
@@ -198,7 +211,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("");
 
         gen->WriteForLoop("currentBucket", 0, numberOfBuckets, [=]{
-            gen->WriteLine("SampleSort", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc);");
+            gen->WriteLine("SampleSort", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc, predicateLess, getKeyFunc);");
         });
     });
 }

@@ -31,42 +31,26 @@ void SetOutputFile() {
     auto _ = freopen(filename_buffer, "w", stdout);
 }
 
+bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
+{
+    return leftKey < right.key;
+}
+
 #define ElementCount 128
 void test()
 {
-    uint test[ElementCount];
-    uint test_2[ElementCount];
-    auto seed = time(NULL);
-    for (int i = 0; i < ElementCount; i += 1)
-    {
-        seed = seed * 48271 % 200000;
-        test[i] = (int) seed;
-    }
-    for (int i = 0; i < ElementCount; i += 1)
-    {
-        test_2[i] = test[i];
-    }
+    SortableRef_FourCmovTemp testArr[ElementCount];
+    SortableRef_FourCmovTemp test_2[ElementCount];
+    randomisation::SetSeed(time(NULL));
+    randomisation::GenerateRandomArray(testArr, ElementCount);
+    CopyArray(testArr, test_2, ElementCount);
 
-    printf("Array before: ");
-    for (int i = 0; i < ElementCount; i += 1)
-    {
-        printf("%u, ", test[i]);
-    }
-    printf("\n");
-    samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize(test, ElementCount, 16, &networks::sortNbest<uint>);
-    printf("After samplesort: ");
-    for (int i = 0; i < ElementCount; i += 1)
-    {
-        printf("%u, ", test[i]);
-    }
-    printf("\n");
+    PrintArray(testArr, ElementCount, "Array before");
+    samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize(testArr, ElementCount, 16, &networks::sortNbest, &sref_less, &GetKey);
+    PrintArray(testArr, ElementCount, "After samplesort");
     insertionsort::InsertionSort(test_2, ElementCount);
-    printf("Correctly Sorted: ");
-    for (int i = 0; i < ElementCount; i += 1)
-    {
-        printf("%u, ", test_2[i]);
-    }
-    printf("\n");
+    PrintArray(test_2, ElementCount, "Correctly sorted");
+    debug::WriteLine("Is correctly sorted: ", std::to_string(IsSameArray(testArr, test_2, ElementCount)));
 }
 
 
@@ -83,8 +67,18 @@ void test()
 int main(int argumentCount, char** arguments)
 {
     auto options = commandline::ParseOptions(arguments, argumentCount);
+    if (!options.ParsingSuccessful)
+    {
+        commandline::PrintHelpText(std::cout);
+        return 0;
+    }
+    if (options.ExecuteTestMethod)
+    {
+        std::cout << "Executing test method" << std::endl;
+        test();
+        return 0;
+    }
     if (options.HelpRequested 
-        || !options.ParsingSuccessful 
         || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureCompleteSort))
     {
         commandline::PrintHelpText(std::cout);

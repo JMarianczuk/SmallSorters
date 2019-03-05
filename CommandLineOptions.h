@@ -14,6 +14,8 @@ struct CommandLineOptions
     bool MeasureNormal;
     bool MeasureInRow;
     bool MeasureCompleteSort;
+
+    bool ExecuteTestMethod;
     bool HelpRequested;
 };
 
