@@ -52,7 +52,7 @@ inline
 void InsertionSort<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* first, size_t arraySize) 
 {
     auto last = first + arraySize;
-    for (auto current = first + 1; current != last; current += 1)
+    for (auto current = first + 1; current < last; current += 1)
     {
         auto next_temp = current;
         auto val = *current;

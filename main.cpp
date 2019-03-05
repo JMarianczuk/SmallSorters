@@ -55,11 +55,11 @@ void test()
 
 #define NumberOfIterations 100
 #define NumberOfIterationsCompleteSort 20
-#define NumberOfIterationsSampleSort 20
+#define NumberOfIterationsSampleSort 50
 #define NumberOfMeasures 500
 #define NumberOfMeasuresInRow 10
 #define NumberOfMeasuresComplete 200
-#define NumberOfSampleSorts 50
+#define NumberOfSampleSorts 200
 #define SmallestArraySize 2
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 16

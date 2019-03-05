@@ -93,6 +93,7 @@ void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversampl
         gen->WriteLine("TKey(*getKeyFunc)(TValueType&))");
     });
     gen->WriteBlock([=]{
+        // gen->WriteLine("debug::WriteLine(\"finding splitters\");"); //DEBUG
         gen->WriteLine("TValueType sample[", sampleSizeStr, "];");
         
         gen->WriteLine("int blockSize = elementCount / ", sampleSizeStr, ";");
@@ -133,12 +134,14 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
     gen->WriteBlock([=]{
         gen->WriteLine("if (elementCount <= baseCaseLimit)");
         gen->WriteBlock([=]{
+            // gen->WriteLine("debug::WriteLine(\"sorting base case\");"); //DEBUG
             gen->WriteLine("sortFunc(A, elementCount);");
             gen->WriteLine("return;");
         });
         gen->WriteLine("");
 
         gen->WriteLine("TKey splitters[", numberOfSplittersStr, "];");
+        // gen->WriteLine("debug::WriteLine(\"Getting splitters\");"); //DEBUG
         gen->WriteLine("Find", GetName(numberOfSplitters, oversamplingFactor), "(A, elementCount, splitters, sortFunc, getKeyFunc);");
         for (int i = 0; i < numberOfSplitters; i += 1)
         {
@@ -147,6 +150,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         }
         gen->WriteLine("");
 
+        // gen->WriteLine("debug::WriteLine(\"Creating raw buckets\");"); //DEBUG
         gen->WriteLine("TValueType rawbuckets[", numberOfBucketsStr, " * elementCount];");
         gen->WriteLine("TValueType* buckets[", numberOfBucketsStr, "];");
         gen->WriteForLoop("i", 0, numberOfBuckets, [=]{
@@ -166,6 +170,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("int current = 0;");
         gen->WriteLine("register int zero = 0;");
         gen->WriteLine("//Sort 'blockSize' elements simultaneously into the buckets");
+        // gen->WriteLine("debug::WriteLine(\"First asm block\");"); //DEBUG
         gen->WriteLine("for ( ; current <= max; current += ", blockSizeStr, ")");
         gen->WriteBlock([=]{
             WriteSortElementsIntoBuckets(gen, numberOfSplitters, blockSize);
@@ -174,6 +179,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
 
         gen->WriteLine("//Sort the remaining k < 'blockSize' elements into the buckets");
         gen->WriteLine("for ( ; current < elementCount; current += 1)");
+        // gen->WriteLine("debug::WriteLine(\"Second asm block\");"); //DEBUG
         gen->WriteBlock([=]{
             WriteSortElementsIntoBuckets(gen, numberOfSplitters, 1);
         });
@@ -184,6 +190,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
 
         gen->WriteLine("int exclusiveBucketSizePrefixSum[", numberOfBucketsStr, "];");
         
+        // gen->WriteLine("debug::WriteLine(\"Writing back buckets\");"); //DEBUG
         gen->WriteForLoop("currentBucket", 0, numberOfBuckets, [=]{
             gen->WriteLine("bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);");
             gen->WriteLine("std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));");
@@ -211,6 +218,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("");
 
         gen->WriteForLoop("currentBucket", 0, numberOfBuckets, [=]{
+            // gen->WriteLine("debug::WriteLine(\"Going into recursion\");"); //DEBUG
             gen->WriteLine("SampleSort", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc, predicateLess, getKeyFunc);");
         });
     });

@@ -148,6 +148,8 @@ void GenerateSampleSort()
     sampleSortGen->WriteHeaderPragma("SAMPLESORT_GENERATED_H", [=]{
         sampleSortGen->WriteIncludeBrackets("cstring");
         sampleSortGen->WriteIncludeBrackets("inttypes.h");
+        sampleSortGen->WriteLine("");
+        sampleSortGen->WriteIncludeQuotes("DebugHelper.h");
         sampleSortGen->WriteNamespace("samplesort", [=]{
             for (int splits = 3; splits <= 3; splits += 1)
             {

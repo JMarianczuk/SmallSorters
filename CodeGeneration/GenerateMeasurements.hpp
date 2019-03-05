@@ -52,6 +52,7 @@ void WriteCompleteSorterMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
+        // gen->WriteLine("debug::WriteLine(\"", sorter, "\");"); //DEBUG
         gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), ", uint64_t>, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
     }
@@ -149,7 +150,7 @@ void GenerateMeasurementMethod(CodeGenerator* gen)
                                     gen,
                                     measureParams.Structs,
                                     "MeasureSampleSort",
-                                    measureParams.Sorter + sampleSortName,
+                                    measureParams.Sorter + " SampleSort " + splitStr + oversampleStr + blockStr,
                                     "samplesort::" + sampleSortName,
                                     measureParams.SortMethod);
                                 gen->WriteLine("");

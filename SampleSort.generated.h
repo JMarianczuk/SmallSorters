@@ -11,6 +11,8 @@
 
 #include <cstring>
 #include <inttypes.h>
+
+#include "DebugHelper.h"
 namespace samplesort
 {
 template <typename TValueType, typename TKey>
