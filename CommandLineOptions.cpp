@@ -20,6 +20,9 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.MeasureInRow)
             ["-i"]["--measureInRow"]
             ("Measure sorting of list of arrays") |
+        Opt(options.MeasureSampleSort)
+            ["-s"]["--measureSampleSort"]
+            ("Measure sorting of medium size set using register sample sort implementation with special sorters at base case") |
         Opt(options.MeasureCompleteSort)
             ["-c"]["--measureCompleteSort"]
             ("Measure sorting of large set with special sorters at base case") |
@@ -34,7 +37,7 @@ detail::Parser GetParser(CommandLineOptions& options)
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)
 {
-    CommandLineOptions options = {false, false, false, false, false, false};
+    CommandLineOptions options = {false, false, false, false, false, false, false};
     auto commandLine = GetParser(options);
     
     auto result = commandLine.parse(Args(numberOfArguments, arguments));

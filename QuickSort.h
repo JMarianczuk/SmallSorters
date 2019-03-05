@@ -77,6 +77,13 @@ int QS_Partition(TValueType* items, size_t arraySize)
 
 template <typename TValueType>
 static inline
+bool templateLess(uint64_t& leftKey, TValueType& right)
+{
+    return leftKey < GetKey(right);
+}
+
+template <typename TValueType>
+static inline
 void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(TValueType*,size_t))
 {
     while (arraySize > BaseCaseLimit && ideal > 0)
@@ -102,9 +109,9 @@ void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(T
 
     if (arraySize > BaseCaseLimit)
     {
-        // samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize(items, arraySize, BaseCaseLimit, sortFunc);
+        samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize(items, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
         //TODO enable sample sort for this
-        QS_Stl(items, arraySize, arraySize, sortFunc);
+        // QS_Stl(items, arraySize, arraySize, sortFunc);
     }
     else if (arraySize >= 2)
     {

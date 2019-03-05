@@ -130,6 +130,57 @@ void MeasureInRow(
 }
 
 template <typename TValueType>
+void MeasureSampleSort(
+    Performancing* perf,
+    int numberOfIterations,
+    size_t arraySize,
+    int measureIteration,
+    std::string sorterName,
+    void(*sortFunc)(TValueType*,size_t,size_t,void(*)(TValueType*,size_t), bool(*)(uint64_t&,TValueType&),uint64_t(*)(TValueType&)),
+    void(*baseCaseSortFunc)(TValueType*,size_t))
+{
+    TValueType *arr = (TValueType*) malloc(sizeof(TValueType) * arraySize);
+    randomisation::GenerateRandomArray(arr, arraySize);
+    int numberOfBadSorts = 0;
+    uint64_t key_iter = 1;
+    uint64_t ref_iter = 1;
+    uint64_t key_value;
+    uint64_t ref_value;
+    PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
+    sortFunc(arr, arraySize, 16, baseCaseSortFunc, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+    if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
+    {
+        numberOfBadSorts += 1;
+    }
+
+    perf->StartMeasuring();
+    for (int i = 0; i < numberOfIterations; i += 1)
+    {
+        randomisation::GenerateRandomArray(arr, arraySize);
+        key_iter = 1;
+        ref_iter = 1;
+        PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
+        sortFunc(arr, arraySize, 16, baseCaseSortFunc, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+        if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
+        {
+            numberOfBadSorts += 1;
+        }
+    }
+    perf->StopMeasuring();
+
+    result::WriteResultLine(
+        sorterName,
+        perf,
+        sizeof(TValueType),
+        arraySize,
+        measureIteration,
+        numberOfIterations,
+        numberOfBadSorts,
+        true
+    );
+}
+
+template <typename TValueType>
 void MeasureCompleteSorter(
     Performancing* perf,
     int numberOfIterations,

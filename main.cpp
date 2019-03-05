@@ -53,16 +53,17 @@ void test()
     debug::WriteLine("Is correctly sorted: ", std::to_string(IsSameArray(testArr, test_2, ElementCount)));
 }
 
-
-
 #define NumberOfIterations 100
 #define NumberOfIterationsCompleteSort 20
+#define NumberOfIterationsSampleSort 20
 #define NumberOfMeasures 500
 #define NumberOfMeasuresInRow 10
 #define NumberOfMeasuresComplete 200
+#define NumberOfSampleSorts 50
 #define SmallestArraySize 2
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 16
+#define SampleSortArraySize 256
 
 int main(int argumentCount, char** arguments)
 {
@@ -79,7 +80,7 @@ int main(int argumentCount, char** arguments)
         return 0;
     }
     if (options.HelpRequested 
-        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureCompleteSort))
+        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureCompleteSort))
     {
         commandline::PrintHelpText(std::cout);
         return 0;
@@ -114,6 +115,10 @@ int main(int argumentCount, char** arguments)
         if (options.MeasureCompleteSort && measureIteration < NumberOfMeasuresComplete)
         {
             measurement::MeasureCompleteSorting(perf_cpu_cycles, seed, NumberOfIterationsCompleteSort, CompleteSortArraySize, measureIteration);
+        }
+        if (options.MeasureSampleSort && measureIteration < NumberOfSampleSorts)
+        {
+            measurement::MeasureSampleSort(perf_cpu_cycles, seed, NumberOfIterationsSampleSort, SampleSortArraySize, measureIteration);
         }
         
     }

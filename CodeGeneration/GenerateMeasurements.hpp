@@ -42,6 +42,21 @@ void WriteMeasureLine(
     }
 }
 
+void WriteCompleteSorterMeasureLine(
+    CodeGenerator* gen,
+    std::vector<SortableStruct*>* structs,
+    std::string measureMethod,
+    std::string sorter,
+    std::string sortMethod,
+    std::string baseCaseSortMethod)
+{
+    for (SortableStruct *sortableStruct : *structs)
+    {
+        gen->WriteLine("randomisation::SetSeed(seed);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), ", uint64_t>, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
+    }
+}
+
 void WriteMeasureMethod(
     CodeGenerator *gen,
     std::string measureMethodName,
@@ -107,6 +122,40 @@ void GenerateMeasurementMethod(CodeGenerator* gen)
                         measureParams.Sorter + "InRow",
                         measureParams.SortMethod);
                     gen->WriteLine("");
+                }
+            );
+            std::vector<MeasureParams> sampleSortMeasureParams = 
+            {
+                GetParams(VectorWhere<SortableStruct*>(sortableStructs, [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. Best", "networks::sortNbest"),
+                GetParams(VectorWhere<SortableStruct*>(sortableStructs, [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. BoseNelson", "networks::sortNbosenelson"),
+                GetParams(VectorWhere<SortableStruct*>(sortableStructs, [](SortableStruct* ss){return ss->Name.compare("PointerOptimized") == 0;}), "Ins.", "insertionsort::InsertionSort")
+            };
+            WriteMeasureMethod(
+                gen,
+                "MeasureSampleSort",
+                sampleSortMeasureParams,
+                [=](MeasureParams measureParams) {
+                    for (int splits = 3; splits <= 3; splits += 1)
+                    {
+                        std::string splitStr = std::to_string(splits);
+                        for (int oversample = 1; oversample * splits <= 16; oversample += 1)
+                        {
+                            std::string oversampleStr = std::to_string(oversample);
+                            for (int blockSize = 1; blockSize <= 5; blockSize += 1)
+                            {
+                                std::string blockStr = std::to_string(blockSize);
+                                std::string sampleSortName = "SampleSort" + splitStr + "Splitters" + oversampleStr + "OversamplingFactor" + blockStr + "BlockSize";
+                                WriteCompleteSorterMeasureLine(
+                                    gen,
+                                    measureParams.Structs,
+                                    "MeasureSampleSort",
+                                    measureParams.Sorter + sampleSortName,
+                                    "samplesort::" + sampleSortName,
+                                    measureParams.SortMethod);
+                                gen->WriteLine("");
+                            }
+                        }
+                    }
                 }
             );
             WriteMeasureMethod(
