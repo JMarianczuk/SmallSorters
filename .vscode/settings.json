@@ -64,6 +64,7 @@
         "cctype": "cpp",
         "optional": "cpp",
         "set": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "stdbool.h": "c"
     }
 }
