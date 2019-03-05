@@ -26,7 +26,7 @@ void SetOutputFile() {
     struct tm tstruct;
     char filename_buffer[80];
     tstruct = *localtime(&now);
-    strftime(filename_buffer, sizeof(filename_buffer), "../result/output_%Y-%m-%d_%H-%M-%S.txt", &tstruct);
+    strftime(filename_buffer, sizeof(filename_buffer), "../result/data/output_%Y-%m-%d_%H-%M-%S.txt", &tstruct);
 
     auto _ = freopen(filename_buffer, "w", stdout);
 }

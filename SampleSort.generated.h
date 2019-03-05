@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 #ifndef SAMPLESORT_GENERATED_H
 #define SAMPLESORT_GENERATED_H
 

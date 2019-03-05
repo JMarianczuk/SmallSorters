@@ -44,10 +44,11 @@ test-O3.s
 test-O3_slim.s
 
 build/commit.txt
-result/*.pdf
-result/small_sorters*.txt
-result/small_sorters_eval.pdf
-result/small_sorters-data.txt
+result/plots/*
+result/combined/*.aux
+result/combined/*.log
+result/combined/*.gz
+result/combined/*.pdf
 
 small_sorters_result.sqlite
 db_test.sqlite

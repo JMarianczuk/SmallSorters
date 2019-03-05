@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 #ifndef STRUCT_HELPERS_H
 #define STRUCT_HELPERS_H
 

@@ -34,7 +34,7 @@ array_size_string <- paste(options$array_size)
 if (options$array_size < 10) {
     array_size_string <- paste("0", array_size_string, sep="", collapse="")
 }
-filename <- paste("boxplot-", options$filePostfix, sep="", collapse="")
+filename <- paste("plots/boxplot-", options$filePostfix, sep="", collapse="")
 if (!options$complete) {
     filename <- paste(filename, "-array_size", array_size_string, sep="", collapse="")
 }

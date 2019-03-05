@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 #ifndef RANDOMISATION_GENERATED_H
 #define RANDOMISATION_GENERATED_H
 

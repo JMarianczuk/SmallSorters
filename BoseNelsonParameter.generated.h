@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 #ifndef BOSENELSON_PARAMETER_GENERATED_H
 #define BOSENELSON_PARAMETER_GENERATED_H
 
