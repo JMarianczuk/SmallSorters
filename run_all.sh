@@ -1,1 +1,1 @@
-./run_with_option.sh -nic
+./run_with_option.sh -nisc

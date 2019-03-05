@@ -10,7 +10,8 @@ option_list = list(
     make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot"),
     make_option(c("-f", "--filter"), type="character", default="", help="additional optional filter"),
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
-    make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement")
+    make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),
+    make_option(c("-t", "--title"), type="character", default="", help="Title for the diagram")
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -39,9 +40,10 @@ if (!options$complete) {
 }
 filename <- paste(filename, ".pdf", sep = "", collapse = "")
 
-plot_title <- paste("ArraySize = ", options$array_size, sep = "", collapse = "")
-if (options$complete) {
-    plot_title <- "QuickSort"
+if (options$title == "") {
+    plot_title <- paste("ArraySize = ", options$array_size, sep = "", collapse = "")
+} else {
+    plot_title <- options$title
 }
 thisplot <- ggplot(res, aes(x = sorter, y = normalized_value)) +
     labs(x = "Sorting algorithm", y = "Cpu cycles needed", title = plot_title) +

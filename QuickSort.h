@@ -109,7 +109,7 @@ void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(T
 
     if (arraySize > BaseCaseLimit)
     {
-        samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize(items, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(items, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
         //TODO enable sample sort for this
         // QS_Stl(items, arraySize, arraySize, sortFunc);
     }
