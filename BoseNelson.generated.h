@@ -569,4 +569,4 @@ void sortNbosenelson(TValueType* A, size_t n)
 }
 }
 
-#endif
+#endif // BOSENELSON_GENERATED_H

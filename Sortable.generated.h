@@ -359,4 +359,4 @@ struct SortableRef_ArrayIndex_FirstCheck
 	}
 };
 
-#endif
+#endif // SORTABLE_GENERATED_H

@@ -481,4 +481,4 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 }
 }
 
-#endif
+#endif // MEASUREMENT_GENERATED_H

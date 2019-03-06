@@ -154,4 +154,4 @@ uint64_t GetReference(SortableRef_ArrayIndex_FirstCheck& item)
 	return item.reference;
 }
 
-#endif
+#endif // STRUCT_HELPERS_H

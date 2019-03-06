@@ -539,4 +539,4 @@ void sortNbest(TValueType* A, size_t n)
 }
 }
 
-#endif
+#endif // BESTNETWORKS_GENERATED_H

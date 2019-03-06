@@ -310,4 +310,4 @@ void sortNbosenelsonparameter(TValueType* A, size_t n)
 }
 }
 
-#endif
+#endif // BOSENELSON_PARAMETER_GENERATED_H

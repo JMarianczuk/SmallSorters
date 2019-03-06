@@ -3,6 +3,7 @@
 #define FUNCTIONAL_HELPERS_H
 
 #include <functional>
+#include <vector>
 
 namespace codegeneration
 {
