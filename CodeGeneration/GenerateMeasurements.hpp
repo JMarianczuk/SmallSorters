@@ -72,7 +72,7 @@ void WriteMeasureMethod(
     });
 }
 
-void GenerateMeasurementMethod(CodeGenerator* gen)
+void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
 {
     std::vector<MeasureParams> measureParamsList = 
     {

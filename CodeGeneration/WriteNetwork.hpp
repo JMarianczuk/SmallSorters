@@ -14,7 +14,7 @@
 namespace codegeneration
 {
 
-void WriteNetwork(CodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath)
+void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath)
 {
     std::ifstream input(networksJsonFilePath);
     nlohmann::json networksJson;
@@ -277,7 +277,7 @@ void WriteSorter_ParameterStyle(
     gen->WriteLine("");
 }
 
-void WriteNetwork_ParameterStyle(CodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath)
+void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath)
 {
     std::ifstream input(networksJsonFilePath);
     nlohmann::json networksJson;
