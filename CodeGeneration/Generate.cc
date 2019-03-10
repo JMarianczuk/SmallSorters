@@ -13,6 +13,7 @@
 #include "GenerateStructHelpers.hpp"
 #include "GenerateRandomisation.hpp"
 #include "GenerateSampleSort.hpp"
+#include "GenerateNetworkVerifier.hpp"
 
 #include "GenerateMeasurementLatex.hpp"
 
@@ -171,12 +172,17 @@ void GenerateSampleSort()
     delete sampleSortGen;
 }
 
+void GenerateNetworkVerifier()
+{
+    auto verifierGen = new CPlusPlusCodeGenerator("../../VerifyNetworks.generated.h");
+    WriteNetworkVerification(verifierGen);
+    delete verifierGen;
+}
+
 void GenerateMeasurementLatex()
 {
     auto latexGen = new LatexCodeGenerator("../../result/combined/measurements.tex");
-
     GenerateCombinedLatex(latexGen);
-
     delete latexGen;
 }
 
@@ -190,6 +196,8 @@ int main()
     GenerateNetworks();
     GenerateMeasurements();
     GenerateSampleSort();
+
+    GenerateNetworkVerifier();
 
     GenerateMeasurementLatex();
 }

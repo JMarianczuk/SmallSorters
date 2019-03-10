@@ -18,6 +18,21 @@ void ConditionalSwap(TValueType& left, TValueType& right)
 
 template<>
 inline
+void ConditionalSwap<int>(int& left, int& right)
+{
+    register int tmp = left;
+    __asm__(
+        "cmp %[left],%[right]\n\t"
+        "cmovb %[right],%[left]\n\t"
+        "cmovb %[tmp],%[right]\n\t"
+        : [left] "=&r" (left), [right] "=&r"(right)
+        : "0"(left), "1"(right), [tmp] "r"(tmp)
+        : "cc"
+    );
+}
+
+template<>
+inline
 void ConditionalSwap<Sortable_JumpXchg>(Sortable_JumpXchg& left, Sortable_JumpXchg& right)
 {
     __asm__( 
@@ -57,8 +72,8 @@ void ConditionalSwap<Sortable_TwoCmovTemp>(Sortable_TwoCmovTemp& left, Sortable_
         "cmpq %[left_key],%[right_key]\n\t" 
         "cmovbq %[right_key],%[left_key]\n\t" 
         "cmovbq %[tmp],%[right_key]\n\t"
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key)
-        : [tmp] "r"(tmp) 
+        : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key)
+        : "0"(left.key), "1"(right.key), [tmp] "r"(tmp) 
         : "cc" 
     );
 }

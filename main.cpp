@@ -17,6 +17,7 @@
 #include "Measurement.generated.h"
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
+#include "VerifyNetworks.generated.h"
 #include "CommandLineOptions.h"
 #include "DebugHelper.h"
 
@@ -71,6 +72,11 @@ int main(int argumentCount, char** arguments)
     if (!options.ParsingSuccessful)
     {
         commandline::PrintHelpText(std::cout);
+        return 0;
+    }
+    if (options.VerifyNetworks)
+    {
+        verification::VerifyNetworks();
         return 0;
     }
     if (options.ExecuteTestMethod)

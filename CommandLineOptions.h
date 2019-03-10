@@ -16,6 +16,8 @@ struct CommandLineOptions
     bool MeasureSampleSort;
     bool MeasureCompleteSort;
 
+    bool VerifyNetworks;
+
     bool ExecuteTestMethod;
     bool HelpRequested;
 };
