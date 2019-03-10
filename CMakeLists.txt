@@ -7,5 +7,6 @@ file(GLOB small_sorters_SRC
 )
 
 set(CMAKE_CXX_FLAGS "-O3 -lstdc++")
+#set(CMAKE_CXX_FLAGS "-O0 -g -lstdc++")
 
 add_executable (SmallSortersPerformancing ${small_sorters_SRC})

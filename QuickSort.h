@@ -57,22 +57,47 @@ int QS_Partition(TValueType* items, size_t arraySize)
     }
     else
     {
-        networks::sort3bosenelsonparameter(items[0], items[mid], items[last]);
+        networks::sort3bosenelsonparameter(items[first], items[mid], items[last]);
     }
     // debug::WriteLine("partition: mid=", std::to_string(mid), ", last=", std::to_string(last));
-    std::swap(items[mid], items[last]);
-    auto pivot = items[last];
-    size_t firstGreater = 0;
-    for (size_t current = 0; current < last; current += 1)
+    std::swap(items[mid], items[first]);
+    auto pivot = items[first];
+    first += 1;
+
+    while(true)
     {
-        if (items[current] <= pivot)
+        while (items[first] < pivot)
         {
-            std::swap(items[current], items[firstGreater]);
-            firstGreater += 1;
+            first += 1;
         }
+        while (pivot < items[last])
+        {
+            last -= 1;
+        }
+        if (last <= first)
+        {
+            std::swap(items[0], items[last]);
+            // debug::WriteLine("returning mid index ", std::to_string(last), ", size was ", std::to_string(arraySize));
+            return last;
+        }
+        std::swap(items[first], items[last]);
+        first += 1;
+        last -= 1;
     }
-    std::swap(items[firstGreater], items[last]);
-    return firstGreater;
+
+    // std::swap(items[last], items[mid]);
+    // auto pivot = items[first];
+    // size_t firstGreater = 0;
+    // for (size_t current = 0; current < last; current += 1)
+    // {
+    //     if (items[current] <= pivot)
+    //     {
+    //         std::swap(items[current], items[firstGreater]);
+    //         firstGreater += 1;
+    //     }
+    // }
+    // std::swap(items[firstGreater], items[last]);
+    // return firstGreater;
 }
 
 template <typename TValueType>

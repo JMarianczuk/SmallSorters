@@ -29,17 +29,18 @@ void WriteMeasureLine(
 
 void WriteCompleteSorterMeasureLine(
     CodeGenerator* gen,
-    std::vector<SortableStruct*>* structs,
+    const std::vector<SortableStruct*>* structs,
     std::string measureMethod,
     std::string sorter,
     std::string sortMethod,
+    std::string additionalTemplateParameters,
     std::string baseCaseSortMethod)
 {
     for (SortableStruct *sortableStruct : *structs)
     {
         // gen->WriteLine("debug::WriteLine(\"", sorter, "\");"); //DEBUG
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), ", uint64_t>, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
     }
 }
 
@@ -47,13 +48,18 @@ void WriteMeasureMethod(
     CodeGenerator *gen,
     std::string measureMethodName,
     std::vector<MeasureParams> measureParamsList,
-    std::function<void(MeasureParams)> multicallAction)
+    std::function<void(MeasureParams)> multicallAction,
+    std::function<void()> additionalAction = nullptr)
 {
     gen->WriteLine("void ", measureMethodName, "(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)");
     gen->WriteBlock([=](){
         Multicall<MeasureParams>(
             multicallAction, 
             measureParamsList);
+        if (additionalAction != nullptr)
+        {
+            additionalAction();
+        }
     });
 }
 
@@ -79,6 +85,7 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
             "BestNetworks.generated.h",
             "BoseNelson.generated.h",
             "InsertionSort.h",
+            "QuickSort.h",
             "Randomisation.h");
         gen->WriteLine("");
 
@@ -139,6 +146,7 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                                     "MeasureSampleSort",
                                     measureParams.Sorter + " SampleSort " + splitStr + oversampleStr + blockStr,
                                     "samplesort::" + sampleSortName,
+                                    ", uint64_t",
                                     measureParams.SortMethod);
                                 gen->WriteLine("");
                             }
@@ -146,18 +154,32 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                     }
                 }
             );
+            std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]};
             WriteMeasureMethod(
                 gen,
                 "MeasureCompleteSorting",
                 measureParamsList,
                 [=](MeasureParams measureParams) {
-                    WriteMeasureLine(
+                    WriteCompleteSorterMeasureLine(
                         gen,
                         measureParams.Structs,
                         "MeasureCompleteSorter",
                         measureParams.Sorter + " Complete",
+                        "quicksort::QS_Stl",
+                        "",
                         measureParams.SortMethod);
                     gen->WriteLine("");
+                },
+                [=]{
+                    WriteCompleteSorterMeasureLine(
+                        gen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        "Std Sort Complete",
+                        "measurement::StdSortWrapper",
+                        "",
+                        "measurement::BaseCaseSortBlank"
+                    );
                 }
             );
         }, "");

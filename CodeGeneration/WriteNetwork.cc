@@ -330,6 +330,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
                             gen->Write("A[");
                             gen->Write(arraySize - 1);
                             gen->WriteLine("]);");
+                            gen->WriteLine("break;");
                         });
                     }
                 });
