@@ -278,34 +278,49 @@ void sortNbosenelsonparameter(TValueType* A, size_t n)
 		case 1: break;
 		case 2:
 			sort2bosenelsonparameter(A[0], A[1]);
+			break;
 		case 3:
 			sort3bosenelsonparameter(A[0], A[1], A[2]);
+			break;
 		case 4:
 			sort4bosenelsonparameter(A[0], A[1], A[2], A[3]);
+			break;
 		case 5:
 			sort5bosenelsonparameter(A[0], A[1], A[2], A[3], A[4]);
+			break;
 		case 6:
 			sort6bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5]);
+			break;
 		case 7:
 			sort7bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6]);
+			break;
 		case 8:
 			sort8bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7]);
+			break;
 		case 9:
 			sort9bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8]);
+			break;
 		case 10:
 			sort10bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9]);
+			break;
 		case 11:
 			sort11bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10]);
+			break;
 		case 12:
 			sort12bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11]);
+			break;
 		case 13:
 			sort13bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12]);
+			break;
 		case 14:
 			sort14bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13]);
+			break;
 		case 15:
 			sort15bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13], A[14]);
+			break;
 		case 16:
 			sort16bosenelsonparameter(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13], A[14], A[15]);
+			break;
 	}
 }
 }
