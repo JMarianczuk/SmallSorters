@@ -116,6 +116,7 @@ int main(int argumentCount, char** arguments)
     size_t cacheSize = environment::GetCacheSizeInBytes(hostname);
     result::WriteAbbreviationExplanatoryLine();
     
+    auto timeBefore = time(NULL);
 	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
     {
@@ -146,6 +147,11 @@ int main(int argumentCount, char** arguments)
         
     }
 	delete perf_cpu_cycles;
+    auto timeAfter = time(NULL);
+    auto secondsElapsed = timeAfter - timeBefore;
+    printf("Time elapsed during measurement\n");
+    printf("In seconds: %" PRIi64 "\n", secondsElapsed);
+    printf("In minutes: " PRIi64 "\n", secondsElapsed / 60);
 
     // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
     // delete perf_cache_misses;

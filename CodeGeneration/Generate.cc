@@ -105,14 +105,23 @@ void GenerateBoseNelsonNetworksJson()
 
 void GenerateNetworks()
 {
-    auto boseNelsonGen = 
+    auto boseNelsonLocalityGen = 
         new CPlusPlusCodeGenerator("../../BoseNelson.generated.h");
     WriteNetwork(
-        boseNelsonGen, 
+        boseNelsonLocalityGen, 
         "BOSENELSON_GENERATED_H", 
         "bosenelson", 
         "../BoseNelsonNetworks_Locality.json");
-    delete boseNelsonGen;
+    delete boseNelsonLocalityGen;
+
+    auto boseNelsonParallelismGen =
+        new CPlusPlusCodeGenerator("../../BoseNelsonParallel.generated.h");
+    WriteNetwork(
+        boseNelsonParallelismGen,
+        "BOSENELSON_PARALLEL_GENERATED_H",
+        "bosenelsonparallel",
+        "../BoseNelsonNetworks_Parallelism.json");
+    delete boseNelsonParallelismGen;
 
     auto bestNetworkGen = 
         new CPlusPlusCodeGenerator("../../BestNetworks.generated.h");
