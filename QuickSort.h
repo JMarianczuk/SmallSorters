@@ -84,20 +84,6 @@ int QS_Partition(TValueType* items, size_t arraySize)
         first += 1;
         last -= 1;
     }
-
-    // std::swap(items[last], items[mid]);
-    // auto pivot = items[first];
-    // size_t firstGreater = 0;
-    // for (size_t current = 0; current < last; current += 1)
-    // {
-    //     if (items[current] <= pivot)
-    //     {
-    //         std::swap(items[current], items[firstGreater]);
-    //         firstGreater += 1;
-    //     }
-    // }
-    // std::swap(items[firstGreater], items[last]);
-    // return firstGreater;
 }
 
 template <typename TValueType>
@@ -117,7 +103,7 @@ void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(T
         auto mid = QS_Partition(items, arraySize);
         // debug::WriteLine("Going into recursion");
         size_t afterMid = mid + 1;
-        ideal = (ideal >> 1) + (ideal >> 2); //from std::sort: "allow 1.5 log2(N) divisions"
+        ideal = (ideal >> 1) + (ideal >> 2); //from std::sort (MSVC): "allow 1.5 log2(N) divisions"
 
         if (mid  < arraySize - afterMid)
         {
@@ -135,8 +121,6 @@ void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(T
     if (arraySize > BaseCaseLimit)
     {
         samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(items, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
-        //TODO enable sample sort for this
-        // QS_Stl(items, arraySize, arraySize, sortFunc);
     }
     else if (arraySize >= 2)
     {

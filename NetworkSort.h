@@ -62,7 +62,6 @@ void ConditionalSwap<SortableRef_JumpXchg>(SortableRef_JumpXchg& left, SortableR
 }
 
 
-
 template<>
 inline
 void ConditionalSwap<Sortable_TwoCmovTemp>(Sortable_TwoCmovTemp& left, Sortable_TwoCmovTemp& right)

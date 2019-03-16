@@ -10,12 +10,16 @@
 #include "DebugHelper.h"
 
 template<typename TValueType>
-void PrintArray(TValueType* source, int arraySize, std::string comment)
+void PrintArray(TValueType* source, int arraySize, std::string comment, uint64_t(*getKeyFunc)(TValueType&) = nullptr)
 {
+    if (getKeyFunc == nullptr)
+    {
+        getKeyFunc = &GetKey<TValueType>;
+    }
     printf("%s: ", comment.c_str());
     for (int i = 0; i < arraySize; i += 1)
     {
-        printf("%" PRIu64 ", ", GetKey(source[i]));
+        printf("%" PRIu64 ", ", getKeyFunc(source[i]));
     }
     printf("\n");
 }
@@ -54,7 +58,7 @@ bool IsSorted(TComparable* items, size_t arraySize)
 {
     for (int i = 0; i < arraySize - 1; i += 1) 
     {
-        if (items[i] > items[i + 1]) 
+        if (__builtin_expect(items[i] > items[i + 1], 0)) 
         {
             return false;
         }
@@ -126,7 +130,7 @@ bool IsSameArray(TComparable* left, std::vector<TComparable> right, size_t array
 {
     for (int i = 0; i < arraySize; i += 1)
     {
-        if (left[i] != right[i])
+        if (__builtin_expect(left[i] != right[i], 0))
         {
             return false;
         }
@@ -139,7 +143,7 @@ bool IsSameArray(TComparable* left, TComparable* right, size_t arraySize)
 {
     for (int i = 0; i < arraySize; i += 1)
     {
-        if (left[i] != right[i])
+        if (__builtin_expect(left[i] != right[i], 0))
         {
             return false;
         }
@@ -152,7 +156,7 @@ bool IsSortedFake(TComparable* items, size_t arraySize, TComparable fakeCompareT
 {
     for (int i = 0; i < arraySize - 1; i += 1)
     {
-        if (items[i] > fakeCompareTo)
+        if (__builtin_expect(items[i] > fakeCompareTo, 0))
         {
             return false;
         }
@@ -165,7 +169,7 @@ bool NotHasEqualNeighbour(TComparable* items, size_t arraySize)
 {
     for (int i = 0; i < arraySize - 1; i += 1) 
     {
-        if (items[i] == items[i + 1]) 
+        if (__builtin_expect(items[i] == items[i + 1], 0)) 
         {
             return false;
         }

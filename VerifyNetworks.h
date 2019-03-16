@@ -17,9 +17,48 @@
 namespace verification
 {
 
+void Reverse(int* first, int* last)
+{
+	while (true)
+	{
+		if (first == last || first == --last)
+		{
+			return;
+		}
+		std::iter_swap(first, last);
+		first += 1;
+	}
+}
+
+bool NextPermutation(int* first, int* last)
+{
+	int* one = last - 1;
+	while (true)
+	{
+		int* two = one;
+		one -= 1;
+		if (*one < *two)
+		{
+			int* three = last;
+			do
+			{
+				three -= 1;
+			} while (*one >= *three);
+			std::iter_swap(one, three);
+			Reverse(two, last);
+			return true;
+		}
+		if (__builtin_expect(one == first, 0))
+		{
+			return false;
+		}
+	}
+}
+
 bool VerifyNetwork(int size, void(*network)(int*,size_t))
 {
 	int* arr = (int*) malloc(sizeof(int) * size * 3);
+	int* last = arr + size;
 	int* sorted = arr + size;
 	int* toSort = arr + 2 * size;
 	for (int index = 0; index < size; index += 1)
@@ -31,11 +70,11 @@ bool VerifyNetwork(int size, void(*network)(int*,size_t))
 	{
 		CopyArray(arr, toSort, size);
 		network(toSort, size);
-		if (!IsSameArray(sorted, toSort, size))
+		if (__builtin_expect(!IsSameArray(sorted, toSort, size), 0))
 		{
 			return false;
 		}
-	} while (std::next_permutation(arr, arr + size));
+	} while (NextPermutation(arr, last));
 
 	return true;
 }

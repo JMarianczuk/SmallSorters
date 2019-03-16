@@ -66,6 +66,8 @@ void test()
 #define CompleteSortArraySize 1024 * 16
 #define SampleSortArraySize 256
 
+uint64_t ID(int& value) {return (uint64_t) value;}
+
 int main(int argumentCount, char** arguments)
 {
     auto options = commandline::ParseOptions(arguments, argumentCount);
@@ -76,7 +78,22 @@ int main(int argumentCount, char** arguments)
     }
     if (options.VerifyNetworks)
     {
-        verification::VerifyNetworks();
+        // for (int size = 2; size <= 16; size += 1)
+        // {
+        //     int* arr = (int*) malloc(sizeof(int) * size);
+        //     int perm = 0;
+        //     for (int i = 0; i < size; i += 1)
+        //     {
+        //         arr[i] = i;
+        //     }
+        //     do
+        //     {
+        //         perm += 1;
+        //     } while (verification::NextPermutation(arr, arr + size));
+        //     debug::WriteLine(std::to_string(perm), " permutations for size ", std::to_string(size));
+        // }
+        debug::WriteLine("This is not yet supported because it is too slow");
+        // verification::VerifyNetworks();
         return 0;
     }
     if (options.ExecuteTestMethod)
