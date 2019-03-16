@@ -85,6 +85,8 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
             "Measure.h",
             "BestNetworks.generated.h",
             "BoseNelson.generated.h",
+            "BoseNelsonParallel.generated.h",
+            "BoseNelsonParameter.generated.h",
             "InsertionSort.h",
             "QuickSort.h",
             "Randomisation.h");
@@ -123,7 +125,8 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
             {
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. Best", "networks::sortNbest"),
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. BN", "networks::sortNbosenelson"),
-                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. BN Par.", "networks::sortNbosenelsonparameter"),
+                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. BN Parl", "networks::sortNbosenelsonparallel"),
+                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "Netw. BN Param", "networks::sortNbosenelsonparameter"),
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("PointerOptimized") == 0;}), "Ins.", "insertionsort::InsertionSort")
             };
             WriteMeasureMethod(

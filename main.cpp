@@ -151,7 +151,7 @@ int main(int argumentCount, char** arguments)
     auto secondsElapsed = timeAfter - timeBefore;
     printf("Time elapsed during measurement\n");
     printf("In seconds: %" PRIi64 "\n", secondsElapsed);
-    printf("In minutes: " PRIi64 "\n", secondsElapsed / 60);
+    printf("In minutes: " PRIi64 "\n", (secondsElapsed / 60));
 
     // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
     // delete perf_cache_misses;
