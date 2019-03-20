@@ -149,9 +149,10 @@ int main(int argumentCount, char** arguments)
 	delete perf_cpu_cycles;
     auto timeAfter = time(NULL);
     auto secondsElapsed = timeAfter - timeBefore;
+    auto minutesElapsed = secondsElapsed / ((int64_t) 60);
     printf("Time elapsed during measurement\n");
     printf("In seconds: %" PRIi64 "\n", secondsElapsed);
-    printf("In minutes: " PRIi64 "\n", (secondsElapsed / 60));
+    printf("In minutes: " PRIi64 "\n", minutesElapsed);
 
     // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
     // delete perf_cache_misses;
