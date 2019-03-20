@@ -16,6 +16,26 @@ void ConditionalSwap(TValueType& left, TValueType& right)
     if (left > right) {std::swap(left, right); }
 }
 
+#if 0
+template <typename TValueType>
+static inline
+void ConditionalSwap(TValueType& left, TValueType& right)
+{
+    std::tie(left, right) =
+        (left > right) ? std::make_tuple(right, left) : std::make_tuple(left, right);
+}
+
+template <typename TValueType>
+static inline
+void ConditionalSwap(TValueType& left, TValueType& right)
+{
+    bool r = (left > right);
+    TValueType x = r ? right : left;
+    TValueType y = r ? left : right;
+    left = x, right = y;
+}
+#endif
+
 template<>
 inline
 void ConditionalSwap<int>(int& left, int& right)
