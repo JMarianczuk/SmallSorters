@@ -55,3 +55,5 @@ db_test.sqlite
 result/db.sqlite-journal
 
 Network_Size_*.jpg
+.vscode/ipch/9f9386b041a8a75/main.ipch
+.vscode/ipch/9f9386b041a8a75/mmap_address.bin
