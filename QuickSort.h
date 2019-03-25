@@ -2,6 +2,8 @@
 #ifndef QUICKSORT_H
 #define QUICKSORT_H
 
+#include <math.h>
+
 #include "DebugHelper.h"
 #include "SampleSort.generated.h"
 #include "BoseNelsonParameter.generated.h"
@@ -95,7 +97,7 @@ bool templateLess(uint64_t& leftKey, TValueType& right)
 
 template <typename TValueType>
 static inline
-void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(TValueType*,size_t))
+void QS_Recursion(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(TValueType*,size_t))
 {
     while (arraySize > BaseCaseLimit && ideal > 0)
     {
@@ -126,6 +128,65 @@ void QS_Stl(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(T
     {
         sortFunc(items, arraySize);
     }
+}
+
+template <typename TValueType, typename TCompare>
+TValueType* QS_UnguardedPartition(TValueType* first, TValueType* last, TValueType* pivot, TCompare compare)
+{
+    while (true)
+    {
+        while (compare(first, pivot))
+        {
+            first += 1;
+        }
+        last -= 1;
+        while (compare(pivot, last))
+        {
+            last -= 1;
+        }
+        if (!(first < last))
+        {
+            return first;
+        }
+        std::iter_swap(first, last);
+        first += 1;
+    }
+}
+
+template <typename TValueType, typename TCompare>
+inline
+TValueType* QS_UnguardedPartitionPivot(TValueType* first, TValueType* last, TCompare compare)
+{
+    TValueType* mid = first + (last - first) / 2;
+    networks::sort3bosenelsonparameter(*mid, *first, *(last - 1));
+    return QS_UnguardedPartition(first + 1, last, first, compare);
+}
+
+template <typename TValueType, typename TCompare>
+inline
+void QS_Stl_Internal(TValueType* first, TValueType* last, uint32_t depthLimit, TCompare compare, void(*sortFunc)(TValueType*,size_t))
+{
+    size_t arraySize;
+    while ((arraySize = last - first) > BaseCaseLimit)
+    {
+        if (depthLimit == 0)
+        {
+            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
+            return;
+        }
+        depthLimit -= 1;
+        TValueType* cut = QS_UnguardedPartitionPivot(first, last, compare);
+        QS_Stl_Internal(cut, last, depthLimit, compare, sortFunc);
+        last = cut;
+    }
+    sortFunc(first, arraySize);
+}
+
+template <typename TValueType>
+inline
+void QS_Stl(TValueType* first, TValueType* last, bool(*compare)(TValueType*,TValueType*), void(*sortFunc)(TValueType*,size_t))
+{
+    QS_Stl_Internal(first, last, (uint32_t)log(last - first), compare, sortFunc);
 }
 
 }

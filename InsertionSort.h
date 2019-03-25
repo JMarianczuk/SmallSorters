@@ -74,7 +74,6 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
     SortableRef_StlVersion* last = first + arraySize;
     for (SortableRef_StlVersion* next = first; ++next < last; )
     {
-        SortableRef_StlVersion* next_temp = next;
         SortableRef_StlVersion val = *next;
 
         if (val < *first)
@@ -84,6 +83,7 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
         }
         else
         {
+            SortableRef_StlVersion* next_temp = next;
             for (SortableRef_StlVersion* first_temp = next_temp; 
                 val < *--first_temp; 
                 next_temp = first_temp)

@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <inttypes.h>
+#include <tuple>
 
 namespace networks {
 
@@ -15,26 +16,6 @@ void ConditionalSwap(TValueType& left, TValueType& right)
 {
     if (left > right) {std::swap(left, right); }
 }
-
-#if 0
-template <typename TValueType>
-static inline
-void ConditionalSwap(TValueType& left, TValueType& right)
-{
-    std::tie(left, right) =
-        (left > right) ? std::make_tuple(right, left) : std::make_tuple(left, right);
-}
-
-template <typename TValueType>
-static inline
-void ConditionalSwap(TValueType& left, TValueType& right)
-{
-    bool r = (left > right);
-    TValueType x = r ? right : left;
-    TValueType y = r ? left : right;
-    left = x, right = y;
-}
-#endif
 
 template<>
 inline
@@ -236,6 +217,24 @@ void ConditionalSwap_ClangVersion_Generic(TValueType& left, TValueType& right, T
         :
     );
     right = *rightPointer;
+}
+
+template <>
+inline
+void ConditionalSwap<SortableRef_Tie>(SortableRef_Tie& left, SortableRef_Tie& right)
+{
+    std::tie(left, right) =
+        (left > right) ? std::make_tuple(right, left) : std::make_tuple(left, right);
+}
+
+template <>
+inline
+void ConditionalSwap<SortableRef_QMark>(SortableRef_QMark& left, SortableRef_QMark& right)
+{
+    bool r = (left > right);
+    SortableRef_QMark temp = left;
+    left = r ? right : left;
+    right = r ? temp : right;
 }
 
 }

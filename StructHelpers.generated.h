@@ -83,6 +83,18 @@ uint64_t GetKey(SortableRef_ClangVersion& item)
 }
 template <>
 inline
+uint64_t GetKey(SortableRef_Tie& item)
+{
+	return item.key;
+}
+template <>
+inline
+uint64_t GetKey(SortableRef_QMark& item)
+{
+	return item.key;
+}
+template <>
+inline
 uint64_t GetKey(SortableRef_StlVersion& item)
 {
 	return item.key;
@@ -132,6 +144,18 @@ uint64_t GetReference(SortableRef_SixCmovRegisterTemp& item)
 template <>
 inline
 uint64_t GetReference(SortableRef_ClangVersion& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_Tie& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_QMark& item)
 {
 	return item.reference;
 }

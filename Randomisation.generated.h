@@ -103,6 +103,26 @@ void GenerateRandomArray<SortableRef_ClangVersion>(SortableRef_ClangVersion* arr
 	}
 }
 template<>
+void GenerateRandomArray<SortableRef_Tie>(SortableRef_Tie* arr, size_t arraySize)
+{
+	uint64_t reference = randomisation::GenerateRandomUint64();
+	for (int i = 0; i < arraySize; i += 1)
+	{
+		arr[i].key = randomisation::GenerateRandomUint64();
+		arr[i].reference = reference + i;
+	}
+}
+template<>
+void GenerateRandomArray<SortableRef_QMark>(SortableRef_QMark* arr, size_t arraySize)
+{
+	uint64_t reference = randomisation::GenerateRandomUint64();
+	for (int i = 0; i < arraySize; i += 1)
+	{
+		arr[i].key = randomisation::GenerateRandomUint64();
+		arr[i].reference = reference + i;
+	}
+}
+template<>
 void GenerateRandomArray<SortableRef_StlVersion>(SortableRef_StlVersion* arr, size_t arraySize)
 {
 	uint64_t reference = randomisation::GenerateRandomUint64();

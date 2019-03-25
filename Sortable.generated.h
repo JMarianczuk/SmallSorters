@@ -271,6 +271,64 @@ struct SortableRef_ClangVersion
 		return left.key != right.key;
 	}
 };
+struct SortableRef_Tie
+{
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef_Tie& left, const SortableRef_Tie& right)
+	{
+		return left.key > right.key;
+	}
+	friend bool operator>=(const SortableRef_Tie& left, const SortableRef_Tie& right)
+	{
+		return left.key >= right.key;
+	}
+	friend bool operator==(const SortableRef_Tie& left, const SortableRef_Tie& right)
+	{
+		return left.key == right.key;
+	}
+	friend bool operator<(const SortableRef_Tie& left, const SortableRef_Tie& right)
+	{
+		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_Tie& left, const SortableRef_Tie& right)
+	{
+		return left.key <= right.key;
+	}
+	friend bool operator!=(const SortableRef_Tie& left, const SortableRef_Tie& right)
+	{
+		return left.key != right.key;
+	}
+};
+struct SortableRef_QMark
+{
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef_QMark& left, const SortableRef_QMark& right)
+	{
+		return left.key > right.key;
+	}
+	friend bool operator>=(const SortableRef_QMark& left, const SortableRef_QMark& right)
+	{
+		return left.key >= right.key;
+	}
+	friend bool operator==(const SortableRef_QMark& left, const SortableRef_QMark& right)
+	{
+		return left.key == right.key;
+	}
+	friend bool operator<(const SortableRef_QMark& left, const SortableRef_QMark& right)
+	{
+		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_QMark& left, const SortableRef_QMark& right)
+	{
+		return left.key <= right.key;
+	}
+	friend bool operator!=(const SortableRef_QMark& left, const SortableRef_QMark& right)
+	{
+		return left.key != right.key;
+	}
+};
 struct SortableRef_StlVersion
 {
 	uint64_t key;

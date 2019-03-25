@@ -15,6 +15,8 @@ std::vector<SortableStruct*> structs =
     new SortableStruct("ThreeCmovRegisterTemp", false),
     new SortableStruct("SixCmovRegisterTemp", true),
     new SortableStruct("ClangVersion", true),
+    new SortableStruct("Tie", true),
+    new SortableStruct("QMark", true),
     new SortableStruct("StlVersion", true),
     new SortableStruct("PointerOptimized", true),
     new SortableStruct("ArrayIndex_FirstCheck", true)
