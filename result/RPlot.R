@@ -28,6 +28,7 @@ if (!options$complete) {
 if (options$filter != "") {
     query <- paste(query, "and", options$filter)
 }
+query <- paste(query, "and s not like '%Xchg%' and s not like '%Six%'")
 res <- dbGetQuery(con, query)
 
 array_size_string <- paste(options$array_size)

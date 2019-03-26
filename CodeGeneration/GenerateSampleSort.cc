@@ -145,7 +145,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("");
 
         // gen->WriteLine("debug::WriteLine(\"Creating raw buckets\");"); //DEBUG
-        gen->WriteLine("TValueType rawbuckets[", numberOfBucketsStr, " * elementCount];");
+        gen->WriteLine("TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * ", numberOfBucketsStr, " * elementCount);");
         gen->WriteLine("TValueType* buckets[", numberOfBucketsStr, "];");
         gen->WriteForLoop("i", 0, numberOfBuckets, [=]{
             gen->WriteLine("buckets[i] = &rawbuckets[i * elementCount];");

@@ -20,6 +20,9 @@ struct CommandLineOptions
 
     bool ExecuteTestMethod;
     bool HelpRequested;
+
+    bool ReadableNumbers;
+    bool DebugToFile;
 };
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments);

@@ -38,7 +38,8 @@ void GenerateCombinedLatex(LatexCodeGenerator* gen)
         std::vector<std::string> sampleSortBaseCases = 
         {
             "best",
-            "bosenelson",
+            "bosenelson-parl",
+            "bosenelson-param",
             "insertionsort"
         };
         for (auto baseCase : sampleSortBaseCases)

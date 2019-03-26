@@ -35,6 +35,12 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.HelpRequested)
             ["-h"]["--help"]
             ("Display help information") |
+        Opt(options.ReadableNumbers)
+            ["-r"]["--readableNumbers"]
+            ("Generate only random numbers with less than three digits") |
+        Opt(options.DebugToFile)
+            ["--debugToFile"]
+            ("Write Debug output to file") |
         name;
 }
 

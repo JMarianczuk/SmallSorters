@@ -186,7 +186,7 @@ void BaseCaseSortBlank(TValueType* arr, size_t arraySize) {}
 template <typename TValueType>
 bool IteratorCompare(TValueType* left, TValueType* right)
 {
-    return left < right;
+    return *left < *right;
 }
 
 template <typename TValueType>

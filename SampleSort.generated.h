@@ -60,7 +60,7 @@ void SampleSort3Splitters1OversamplingFactor1BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -167,7 +167,7 @@ void SampleSort3Splitters1OversamplingFactor2BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -298,7 +298,7 @@ void SampleSort3Splitters1OversamplingFactor3BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -453,7 +453,7 @@ void SampleSort3Splitters1OversamplingFactor4BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -632,7 +632,7 @@ void SampleSort3Splitters1OversamplingFactor5BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -857,7 +857,7 @@ void SampleSort3Splitters2OversamplingFactor1BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -964,7 +964,7 @@ void SampleSort3Splitters2OversamplingFactor2BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -1095,7 +1095,7 @@ void SampleSort3Splitters2OversamplingFactor3BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -1250,7 +1250,7 @@ void SampleSort3Splitters2OversamplingFactor4BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -1429,7 +1429,7 @@ void SampleSort3Splitters2OversamplingFactor5BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -1654,7 +1654,7 @@ void SampleSort3Splitters3OversamplingFactor1BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -1761,7 +1761,7 @@ void SampleSort3Splitters3OversamplingFactor2BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -1892,7 +1892,7 @@ void SampleSort3Splitters3OversamplingFactor3BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -2047,7 +2047,7 @@ void SampleSort3Splitters3OversamplingFactor4BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -2226,7 +2226,7 @@ void SampleSort3Splitters3OversamplingFactor5BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -2451,7 +2451,7 @@ void SampleSort3Splitters4OversamplingFactor1BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -2558,7 +2558,7 @@ void SampleSort3Splitters4OversamplingFactor2BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -2689,7 +2689,7 @@ void SampleSort3Splitters4OversamplingFactor3BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -2844,7 +2844,7 @@ void SampleSort3Splitters4OversamplingFactor4BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -3023,7 +3023,7 @@ void SampleSort3Splitters4OversamplingFactor5BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -3248,7 +3248,7 @@ void SampleSort3Splitters5OversamplingFactor1BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -3355,7 +3355,7 @@ void SampleSort3Splitters5OversamplingFactor2BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -3486,7 +3486,7 @@ void SampleSort3Splitters5OversamplingFactor3BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -3641,7 +3641,7 @@ void SampleSort3Splitters5OversamplingFactor4BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{
@@ -3820,7 +3820,7 @@ void SampleSort3Splitters5OversamplingFactor5BlockSize(
 	register TKey splitter1 = splitters[1];
 	register TKey splitter2 = splitters[2];
 	
-	TValueType rawbuckets[4 * elementCount];
+	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
 	for (int i = 0; i < 4; i += 1)
 	{

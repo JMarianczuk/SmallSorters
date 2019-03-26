@@ -21,8 +21,19 @@
 #include "CommandLineOptions.h"
 #include "DebugHelper.h"
 
+void SetDebugOutputFile()
+{
+    time_t now = time(0);
+    struct tm tstruct;
+    char filename_buffer[80];
+    tstruct = *localtime(&now);
+    strftime(filename_buffer, sizeof(filename_buffer), "../result/data/debug_%Y-%m-%d_%H-%M-%S.txt", &tstruct);
 
-void SetOutputFile() {
+    auto _ = freopen(filename_buffer, "w", stderr);
+}
+
+void SetResultOutputFile() 
+{
     time_t now = time(0);
     struct tm tstruct;
     char filename_buffer[80];
@@ -55,15 +66,18 @@ void test()
 }
 
 #define NumberOfIterations 100
-#define NumberOfIterationsCompleteSort 20
+// #define NumberOfIterationsCompleteSort 20
+#define NumberOfIterationsCompleteSort 5
 #define NumberOfIterationsSampleSort 50
 #define NumberOfMeasures 500
 #define NumberOfMeasuresInRow 10
-#define NumberOfMeasuresComplete 200
+// #define NumberOfMeasuresComplete 200
+#define NumberOfMeasuresComplete 5
 #define NumberOfSampleSorts 200
 #define SmallestArraySize 2
 #define LargestArraySize 16
-#define CompleteSortArraySize 1024 * 16
+// #define CompleteSortArraySize 1024 * 16
+#define CompleteSortArraySize 256
 #define SampleSortArraySize 256
 
 uint64_t ID(int& value) {return (uint64_t) value;}
@@ -75,6 +89,10 @@ int main(int argumentCount, char** arguments)
     {
         commandline::PrintHelpText(std::cout);
         return 0;
+    }
+    if (options.DebugToFile)
+    {
+        SetDebugOutputFile();
     }
     if (options.VerifyNetworks)
     {
@@ -108,10 +126,15 @@ int main(int argumentCount, char** arguments)
         commandline::PrintHelpText(std::cout);
         return 0;
     }
+    if (options.ReadableNumbers)
+    {
+        // randomisation::readableNumbers = true;
+    }
+
     uint64_t seed;
     std::string commit = GetGitCommitOfContainingRepository();
     std::string hostname = environment::GetComputerName();
-    SetOutputFile();
+    SetResultOutputFile();
     printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
     size_t cacheSize = environment::GetCacheSizeInBytes(hostname);
     result::WriteAbbreviationExplanatoryLine();

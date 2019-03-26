@@ -1,0 +1,190 @@
+General Info: Commit=90b91d8, Hostname=R2D2
+Result Mapping: s = sorter, m = metric, v = value, ss = struct_size, a = array_size, i = measureIteration, n = number_of_iterations, b = number_of_bad_sorts, c = compensation_measurement
+RESULT	s=Netw. Best Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-StlVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-PointerOptimized	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Std Sort Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=0	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-StlVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-PointerOptimized	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Std Sort Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=1	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-StlVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-PointerOptimized	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Std Sort Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=2	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-StlVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-PointerOptimized	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Std Sort Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=3	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. Best Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Parl Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-JumpXchg	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-FourCmovTemp-Split	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-SixCmovRegisterTemp	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-ClangVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-Tie	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Netw. BN Param Complete KR-QMark	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-StlVersion	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-PointerOptimized	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Ins. Complete KR-ArrayIndex-FirstCheck	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+RESULT	s=Std Sort Complete KR-Default	m=Cpu Cycles	v=18446744073709551615	ss=16	a=256	i=4	n=5	b=0	c=0
+Time elapsed during measurement
+In seconds: 4
+In minutes: 0
