@@ -66,18 +66,15 @@ void test()
 }
 
 #define NumberOfIterations 100
-// #define NumberOfIterationsCompleteSort 20
-#define NumberOfIterationsCompleteSort 5
+#define NumberOfIterationsCompleteSort 20
 #define NumberOfIterationsSampleSort 50
 #define NumberOfMeasures 500
 #define NumberOfMeasuresInRow 10
-// #define NumberOfMeasuresComplete 200
-#define NumberOfMeasuresComplete 5
+#define NumberOfMeasuresComplete 200
 #define NumberOfSampleSorts 200
 #define SmallestArraySize 2
 #define LargestArraySize 16
-// #define CompleteSortArraySize 1024 * 16
-#define CompleteSortArraySize 256
+#define CompleteSortArraySize 1024 * 16
 #define SampleSortArraySize 256
 
 uint64_t ID(int& value) {return (uint64_t) value;}

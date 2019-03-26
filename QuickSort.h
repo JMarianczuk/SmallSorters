@@ -186,7 +186,7 @@ template <typename TValueType>
 inline
 void QS_Stl(TValueType* first, TValueType* last, bool(*compare)(TValueType*,TValueType*), void(*sortFunc)(TValueType*,size_t))
 {
-    QS_Stl_Internal(first, last, (uint32_t)log(last - first), compare, sortFunc);
+    QS_Stl_Internal(first, last, (uint32_t) log2(last - first), compare, sortFunc);
 }
 
 }
