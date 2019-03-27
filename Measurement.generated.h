@@ -29,622 +29,622 @@ namespace measurement
 void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-Default", &networks::sortNbest<SortableRef>);
+	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR Def", &networks::sortNbest<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-JumpXchg", &networks::sortNbest<SortableRef_JumpXchg>);
+	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR JXc", &networks::sortNbest<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-FourCmovTemp", &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR 4Cm", &networks::sortNbest<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-FourCmovTemp-Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR 4CS", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-SixCmovRegisterTemp", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
+	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR 6Cm", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-ClangVersion", &networks::sortNbest<SortableRef_ClangVersion>);
+	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR Cla", &networks::sortNbest<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-Tie", &networks::sortNbest<SortableRef_Tie>);
+	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR Tie", &networks::sortNbest<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best KR-QMark", &networks::sortNbest<SortableRef_QMark>);
+	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -N KR QMa", &networks::sortNbest<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-Default", &networks::sortNbosenelson<SortableRef>);
+	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR Def", &networks::sortNbosenelson<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-JumpXchg", &networks::sortNbosenelson<SortableRef_JumpXchg>);
+	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR JXc", &networks::sortNbosenelson<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-FourCmovTemp", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR 4Cm", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-FourCmovTemp-Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR 4CS", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-SixCmovRegisterTemp", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
+	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR 6Cm", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-ClangVersion", &networks::sortNbosenelson<SortableRef_ClangVersion>);
+	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR Cla", &networks::sortNbosenelson<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-Tie", &networks::sortNbosenelson<SortableRef_Tie>);
+	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR Tie", &networks::sortNbosenelson<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN KR-QMark", &networks::sortNbosenelson<SortableRef_QMark>);
+	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -N KR QMa", &networks::sortNbosenelson<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-Default", &networks::sortNbosenelsonparallel<SortableRef>);
+	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR Def", &networks::sortNbosenelsonparallel<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-JumpXchg", &networks::sortNbosenelsonparallel<SortableRef_JumpXchg>);
+	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR JXc", &networks::sortNbosenelsonparallel<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-FourCmovTemp", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR 4Cm", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-FourCmovTemp-Split", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR 4CS", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-SixCmovRegisterTemp", &networks::sortNbosenelsonparallel<SortableRef_SixCmovRegisterTemp>);
+	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR 6Cm", &networks::sortNbosenelsonparallel<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-ClangVersion", &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
+	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR Cla", &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-Tie", &networks::sortNbosenelsonparallel<SortableRef_Tie>);
+	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR Tie", &networks::sortNbosenelsonparallel<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl KR-QMark", &networks::sortNbosenelsonparallel<SortableRef_QMark>);
+	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -N KR QMa", &networks::sortNbosenelsonparallel<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-Default", &networks::sortNbosenelsonparameter<SortableRef>);
+	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR Def", &networks::sortNbosenelsonparameter<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-JumpXchg", &networks::sortNbosenelsonparameter<SortableRef_JumpXchg>);
+	measurement::Measure<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR JXc", &networks::sortNbosenelsonparameter<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-FourCmovTemp", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::Measure<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR 4Cm", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-FourCmovTemp-Split", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp_Split>);
+	measurement::Measure<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR 4CS", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-SixCmovRegisterTemp", &networks::sortNbosenelsonparameter<SortableRef_SixCmovRegisterTemp>);
+	measurement::Measure<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR 6Cm", &networks::sortNbosenelsonparameter<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-ClangVersion", &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
+	measurement::Measure<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR Cla", &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-Tie", &networks::sortNbosenelsonparameter<SortableRef_Tie>);
+	measurement::Measure<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR Tie", &networks::sortNbosenelsonparameter<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param KR-QMark", &networks::sortNbosenelsonparameter<SortableRef_QMark>);
+	measurement::Measure<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -N KR QMa", &networks::sortNbosenelsonparameter<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-Default", &insertionsort::InsertionSort<SortableRef>);
+	measurement::Measure<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -N KR Def", &insertionsort::InsertionSort<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-StlVersion", &insertionsort::InsertionSort<SortableRef_StlVersion>);
+	measurement::Measure<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "I       -N KR STL", &insertionsort::InsertionSort<SortableRef_StlVersion>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::Measure<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -N KR POp", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	randomisation::SetSeed(seed);
-	measurement::Measure<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins. KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
+	measurement::Measure<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "I       -N KR AIF", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
 }
 void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-Default", &networks::sortNbest<SortableRef>);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR Def", &networks::sortNbest<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-JumpXchg", &networks::sortNbest<SortableRef_JumpXchg>);
+	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR JXc", &networks::sortNbest<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-FourCmovTemp", &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR 4Cm", &networks::sortNbest<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-FourCmovTemp-Split", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR 4CS", &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-SixCmovRegisterTemp", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR 6Cm", &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-ClangVersion", &networks::sortNbest<SortableRef_ClangVersion>);
+	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR Cla", &networks::sortNbest<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-Tie", &networks::sortNbest<SortableRef_Tie>);
+	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR Tie", &networks::sortNbest<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best InRow KR-QMark", &networks::sortNbest<SortableRef_QMark>);
+	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR QMa", &networks::sortNbest<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-Default", &networks::sortNbosenelson<SortableRef>);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR Def", &networks::sortNbosenelson<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-JumpXchg", &networks::sortNbosenelson<SortableRef_JumpXchg>);
+	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR JXc", &networks::sortNbosenelson<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-FourCmovTemp", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR 4Cm", &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-FourCmovTemp-Split", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR 4CS", &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-SixCmovRegisterTemp", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR 6Cm", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-ClangVersion", &networks::sortNbosenelson<SortableRef_ClangVersion>);
+	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR Cla", &networks::sortNbosenelson<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-Tie", &networks::sortNbosenelson<SortableRef_Tie>);
+	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR Tie", &networks::sortNbosenelson<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN InRow KR-QMark", &networks::sortNbosenelson<SortableRef_QMark>);
+	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR QMa", &networks::sortNbosenelson<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-Default", &networks::sortNbosenelsonparallel<SortableRef>);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR Def", &networks::sortNbosenelsonparallel<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-JumpXchg", &networks::sortNbosenelsonparallel<SortableRef_JumpXchg>);
+	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR JXc", &networks::sortNbosenelsonparallel<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-FourCmovTemp", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR 4Cm", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-FourCmovTemp-Split", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR 4CS", &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-SixCmovRegisterTemp", &networks::sortNbosenelsonparallel<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR 6Cm", &networks::sortNbosenelsonparallel<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-ClangVersion", &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
+	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR Cla", &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-Tie", &networks::sortNbosenelsonparallel<SortableRef_Tie>);
+	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR Tie", &networks::sortNbosenelsonparallel<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl InRow KR-QMark", &networks::sortNbosenelsonparallel<SortableRef_QMark>);
+	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR QMa", &networks::sortNbosenelsonparallel<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-Default", &networks::sortNbosenelsonparameter<SortableRef>);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR Def", &networks::sortNbosenelsonparameter<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-JumpXchg", &networks::sortNbosenelsonparameter<SortableRef_JumpXchg>);
+	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR JXc", &networks::sortNbosenelsonparameter<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-FourCmovTemp", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR 4Cm", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-FourCmovTemp-Split", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR 4CS", &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-SixCmovRegisterTemp", &networks::sortNbosenelsonparameter<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR 6Cm", &networks::sortNbosenelsonparameter<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-ClangVersion", &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
+	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR Cla", &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-Tie", &networks::sortNbosenelsonparameter<SortableRef_Tie>);
+	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR Tie", &networks::sortNbosenelsonparameter<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param InRow KR-QMark", &networks::sortNbosenelsonparameter<SortableRef_QMark>);
+	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR QMa", &networks::sortNbosenelsonparameter<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Ins. InRow KR-Default", &insertionsort::InsertionSort<SortableRef>);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR Def", &insertionsort::InsertionSort<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "Ins. InRow KR-StlVersion", &insertionsort::InsertionSort<SortableRef_StlVersion>);
+	measurement::MeasureInRow<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR STL", &insertionsort::InsertionSort<SortableRef_StlVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. InRow KR-PointerOptimized", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureInRow<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR POp", &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins. InRow KR-ArrayIndex-FirstCheck", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
+	measurement::MeasureInRow<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR AIF", &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
 }
 void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 311 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S311  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 312 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S312  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 313 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S313  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 314 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S314  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 315 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S315  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 321 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S321  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 322 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S322  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 323 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S323  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 324 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S324  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 325 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S325  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 331 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S331  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 332 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S332  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 333 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S333  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 334 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S334  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 335 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S335  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 341 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S341  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 342 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S342  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 343 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S343  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 344 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S344  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 345 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S345  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 351 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S351  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 352 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S352  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 353 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S353  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 354 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S354  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best SampleSort 355 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -S355  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 311 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S311  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 312 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S312  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 313 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S313  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 314 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S314  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 315 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S315  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 321 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S321  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 322 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S322  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 323 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S323  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 324 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S324  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 325 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S325  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 331 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S331  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 332 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S332  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 333 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S333  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 334 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S334  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 335 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S335  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 341 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S341  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 342 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S342  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 343 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S343  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 344 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S344  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 345 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S345  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 351 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S351  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 352 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S352  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 353 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S353  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 354 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S354  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN SampleSort 355 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -S355  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 311 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S311  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 312 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S312  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 313 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S313  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 314 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S314  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 315 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S315  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 321 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S321  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 322 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S322  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 323 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S323  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 324 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S324  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 325 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S325  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 331 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S331  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 332 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S332  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 333 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S333  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 334 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S334  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 335 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S335  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 341 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S341  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 342 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S342  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 343 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S343  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 344 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S344  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 345 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S345  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 351 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S351  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 352 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S352  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 353 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S353  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 354 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S354  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl SampleSort 355 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -S355  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 311 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S311  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 312 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S312  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 313 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S313  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 314 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S314  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 315 KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S315  KR-FourCmovTemp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 321 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S321  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 322 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S322  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 323 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S323  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 324 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S324  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 325 KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S325  KR-FourCmovTemp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 331 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S331  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 332 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S332  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 333 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S333  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 334 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S334  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 335 KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S335  KR-FourCmovTemp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 341 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S341  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 342 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S342  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 343 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S343  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 344 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S344  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 345 KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S345  KR-FourCmovTemp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 351 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S351  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 352 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S352  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 353 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S353  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 354 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S354  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param SampleSort 355 KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureSampleSort<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -S355  KR-FourCmovTemp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_FourCmovTemp, uint64_t>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 311 KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S311  KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 312 KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S312  KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 313 KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S313  KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 314 KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S314  KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 315 KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S315  KR-PointerOptimized", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 321 KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S321  KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 322 KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S322  KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 323 KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S323  KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 324 KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S324  KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 325 KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S325  KR-PointerOptimized", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 331 KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S331  KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 332 KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S332  KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 333 KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S333  KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 334 KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S334  KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 335 KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S335  KR-PointerOptimized", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 341 KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S341  KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 342 KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S342  KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 343 KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S343  KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 344 KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S344  KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 345 KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S345  KR-PointerOptimized", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 351 KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S351  KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 352 KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S352  KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 353 KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S353  KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 354 KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S354  KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. SampleSort 355 KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureSampleSort<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -S355  KR-PointerOptimized", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<SortableRef_PointerOptimized, uint64_t>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	
 }
 void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbest<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbest<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbest<SortableRef_JumpXchg>);
+	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbest<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbest<SortableRef_FourCmovTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbest<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbest<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbest<SortableRef_ClangVersion>);
+	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbest<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbest<SortableRef_Tie>);
+	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbest<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. Best Complete KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbest<SortableRef_QMark>);
+	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -C  KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbest<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbosenelson<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbosenelson<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbosenelson<SortableRef_JumpXchg>);
+	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbosenelson<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbosenelson<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbosenelson<SortableRef_ClangVersion>);
+	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbosenelson<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbosenelson<SortableRef_Tie>);
+	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbosenelson<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Complete KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbosenelson<SortableRef_QMark>);
+	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -C  KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbosenelson<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbosenelsonparallel<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbosenelsonparallel<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbosenelsonparallel<SortableRef_JumpXchg>);
+	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbosenelsonparallel<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbosenelsonparallel<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbosenelsonparallel<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbosenelsonparallel<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
+	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbosenelsonparallel<SortableRef_Tie>);
+	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbosenelsonparallel<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Parl Complete KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbosenelsonparallel<SortableRef_QMark>);
+	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -C  KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbosenelsonparallel<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbosenelsonparameter<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-Default", &quicksort::QS_Stl<SortableRef>, &networks::sortNbosenelsonparameter<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbosenelsonparameter<SortableRef_JumpXchg>);
+	measurement::MeasureCompleteSorter<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-JumpXchg", &quicksort::QS_Stl<SortableRef_JumpXchg>, &networks::sortNbosenelsonparameter<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-FourCmovTemp", &quicksort::QS_Stl<SortableRef_FourCmovTemp>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-FourCmovTemp-Split", &quicksort::QS_Stl<SortableRef_FourCmovTemp_Split>, &networks::sortNbosenelsonparameter<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbosenelsonparameter<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureCompleteSorter<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-SixCmovRegisterTemp", &quicksort::QS_Stl<SortableRef_SixCmovRegisterTemp>, &networks::sortNbosenelsonparameter<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
+	measurement::MeasureCompleteSorter<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-ClangVersion", &quicksort::QS_Stl<SortableRef_ClangVersion>, &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbosenelsonparameter<SortableRef_Tie>);
+	measurement::MeasureCompleteSorter<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-Tie", &quicksort::QS_Stl<SortableRef_Tie>, &networks::sortNbosenelsonparameter<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "Netw. BN Param Complete KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbosenelsonparameter<SortableRef_QMark>);
+	measurement::MeasureCompleteSorter<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -C  KR-QMark", &quicksort::QS_Stl<SortableRef_QMark>, &networks::sortNbosenelsonparameter<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Ins. Complete KR-Default", &quicksort::QS_Stl<SortableRef>, &insertionsort::InsertionSort<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -C  KR-Default", &quicksort::QS_Stl<SortableRef>, &insertionsort::InsertionSort<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "Ins. Complete KR-StlVersion", &quicksort::QS_Stl<SortableRef_StlVersion>, &insertionsort::InsertionSort<SortableRef_StlVersion>);
+	measurement::MeasureCompleteSorter<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "I       -C  KR-StlVersion", &quicksort::QS_Stl<SortableRef_StlVersion>, &insertionsort::InsertionSort<SortableRef_StlVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "Ins. Complete KR-PointerOptimized", &quicksort::QS_Stl<SortableRef_PointerOptimized>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
+	measurement::MeasureCompleteSorter<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "I       -C  KR-PointerOptimized", &quicksort::QS_Stl<SortableRef_PointerOptimized>, &insertionsort::InsertionSort<SortableRef_PointerOptimized>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "Ins. Complete KR-ArrayIndex-FirstCheck", &quicksort::QS_Stl<SortableRef_ArrayIndex_FirstCheck>, &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
+	measurement::MeasureCompleteSorter<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "I       -C  KR-ArrayIndex-FirstCheck", &quicksort::QS_Stl<SortableRef_ArrayIndex_FirstCheck>, &insertionsort::InsertionSort<SortableRef_ArrayIndex_FirstCheck>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Std Sort Complete KR-Default", &measurement::StdSortWrapper<SortableRef>, &measurement::BaseCaseSortBlank<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "Std Sort C  KR-Default", &measurement::StdSortWrapper<SortableRef>, &measurement::BaseCaseSortBlank<SortableRef>);
 }
 }
 

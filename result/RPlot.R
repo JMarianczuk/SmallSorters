@@ -51,4 +51,4 @@ thisplot <- ggplot(res, aes(x = sorter, y = normalized_value)) +
     geom_boxplot() +
     coord_flip()
 
-ggsave(filename, thisplot, width=18, height=10, units="cm")
+ggsave(filename, thisplot, width=18, height=11, units="cm")

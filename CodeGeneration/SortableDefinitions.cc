@@ -6,20 +6,20 @@ namespace codegeneration
 
 std::vector<SortableStruct*> structs =
 {
-    new SortableStruct("", true, "KR-Default"),
-    new SortableStruct("JumpXchg", false),
-    new SortableStruct("JumpXchg", true),
-    new SortableStruct("TwoCmovTemp", false),
-    new SortableStruct("FourCmovTemp", true),
-    new SortableStruct("FourCmovTemp_Split", true),
-    new SortableStruct("ThreeCmovRegisterTemp", false),
-    new SortableStruct("SixCmovRegisterTemp", true),
-    new SortableStruct("ClangVersion", true),
-    new SortableStruct("Tie", true),
-    new SortableStruct("QMark", true),
-    new SortableStruct("StlVersion", true),
-    new SortableStruct("PointerOptimized", true),
-    new SortableStruct("ArrayIndex_FirstCheck", true)
+    new SortableStruct("", "Def", true, "KR-Default"),
+    new SortableStruct("JumpXchg", "JXc", false),
+    new SortableStruct("JumpXchg", "JXc", true),
+    new SortableStruct("TwoCmovTemp", "2Cm", false),
+    new SortableStruct("FourCmovTemp", "4Cm", true),
+    new SortableStruct("FourCmovTemp_Split", "4CS", true),
+    new SortableStruct("ThreeCmovRegisterTemp", "3Cm", false),
+    new SortableStruct("SixCmovRegisterTemp", "6Cm", true),
+    new SortableStruct("ClangVersion", "Cla", true),
+    new SortableStruct("Tie", "Tie", true),
+    new SortableStruct("QMark", "QMa", true),
+    new SortableStruct("StlVersion", "STL", true),
+    new SortableStruct("PointerOptimized", "POp", true),
+    new SortableStruct("ArrayIndex_FirstCheck", "AIF", true)
 };
 
 std::vector<SortableStruct*>* sortableStructs() 
@@ -33,7 +33,7 @@ std::vector<std::string> insertionSortOnlyNames =
     "ArrayIndex_FirstCheck"
 };
 
-SortableStruct::SortableStruct(std::string name, bool hasReference) : Name(name), HasReference(hasReference)
+SortableStruct::SortableStruct(std::string name, std::string nameAbbrev, bool hasReference) : Name(name), NameAbbreviation(nameAbbrev), HasReference(hasReference)
 {
     DisplayName = "K";
     if (HasReference)
@@ -49,7 +49,7 @@ SortableStruct::SortableStruct(std::string name, bool hasReference) : Name(name)
     }
     DisplayName += nameReplaced;
 }
-SortableStruct::SortableStruct(std::string name, bool hasReference, std::string displayName) : Name(name), HasReference(hasReference), DisplayName(displayName)
+SortableStruct::SortableStruct(std::string name, std::string nameAbbrev, bool hasReference, std::string displayName) : Name(name), NameAbbreviation(nameAbbrev), HasReference(hasReference), DisplayName(displayName)
 {
 
 }

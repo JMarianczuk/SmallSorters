@@ -337,6 +337,8 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
             });
         }, "");
     });
+    free(splitIndices);
+    free(mergeIndices);
 }
 
 }

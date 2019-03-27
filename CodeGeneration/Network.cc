@@ -112,7 +112,22 @@ std::vector<ConditionalSwap>* MergeNetworksForParallelism(
             result->push_back(cs);
         }
     }
+    delete left;
+    delete right;
+    for (auto level : leftLevels)
+    {
+        delete level;
+    }
+    for (auto level : rightLevels)
+    {
+        delete level;
+    }
     return result;
+}
+
+void Dispose(Network network)
+{
+    delete network.Swaps;
 }
 
 }

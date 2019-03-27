@@ -13,11 +13,41 @@
 namespace codegeneration
 {
 
+enum class Sorter
+{
+    InsertionSort,
+    SortNetwork,
+    StdSort
+};
+
+enum class NetworkType
+{
+    Best,
+    BoseNelson,
+    None
+};
+enum class BoseNelsonNetworkType
+{
+    Locality,
+    Parallelism,
+    Parameter,
+    None
+};
+enum class MeasureType
+{
+    Normal,
+    InRow,
+    Complete,
+    SampleSort
+};
+
 struct MeasureParams
 {
     std::vector<SortableStruct*>* Structs;
-    std::string Sorter;
     std::string SortMethod;
+    Sorter _Sorter;
+    NetworkType _NetworkType;
+    BoseNelsonNetworkType _BoseNelsonNetworkType;
 };
 
 void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen);

@@ -17,11 +17,12 @@ private:
     bool IsInsertionSortOnly();
 public:
     std::string Name;
+    std::string NameAbbreviation;
     std::string DisplayName;
     bool HasReference;
 
-    SortableStruct(std::string name, bool hasReference);
-    SortableStruct(std::string name, bool hasReference, std::string displayName);
+    SortableStruct(std::string name, std::string nameAbbrev, bool hasReference);
+    SortableStruct(std::string name, std::string nameAbbrev, bool hasReference, std::string displayName);
 
     std::string FullName();
     bool UseForNetworkSort();

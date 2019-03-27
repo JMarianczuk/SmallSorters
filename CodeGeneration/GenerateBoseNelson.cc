@@ -237,4 +237,15 @@ RecursiveParameterNetwork GenerateBoseNelsonRecursiveParameterNetwork(int arrayS
     return BoseNelsonRecursiveParameterNetworkSplit(arraySize);
 }
 
+void Dispose(RecursiveParameterNetwork network)
+{
+    for (auto call : *network.RecursiveSteps)
+    {
+        Dispose(call.Network);
+        delete call.FirstContextParametersIdsToUse;
+        delete call.SecondContextParametersIdsToUse;
+    }
+    delete network.RecursiveSteps;
+}
+
 }

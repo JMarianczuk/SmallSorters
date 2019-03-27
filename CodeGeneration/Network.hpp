@@ -22,6 +22,8 @@ struct Network
     std::vector<ConditionalSwap> *Swaps;
 };
 
+void Dispose(Network network);
+
 ConditionalSwap GetSwap(int leftIndex, int rightIndex);
 nlohmann::json SwapToJson(const ConditionalSwap swap);
 nlohmann::json NetworkToJson(const Network network);
