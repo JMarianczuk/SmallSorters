@@ -137,19 +137,19 @@ TValueType* QS_UnguardedPartition(TValueType* first, TValueType* last, TValueTyp
     {
         while (compare(first, pivot))
         {
-            first += 1;
+            ++first;
         }
-        last -= 1;
+        --last;
         while (compare(pivot, last))
         {
-            last -= 1;
+            --last;
         }
         if (!(first < last))
         {
             return first;
         }
         std::iter_swap(first, last);
-        first += 1;
+        ++first;
     }
 }
 
@@ -164,14 +164,14 @@ TValueType* QS_UnguardedPartitionPivot(TValueType* first, TValueType* last, TCom
 
 template <typename TValueType, typename TCompare>
 inline
-void QS_Stl_Internal(TValueType* first, TValueType* last, uint32_t depthLimit, TCompare compare, void(*sortFunc)(TValueType*,size_t))
+void QS_Stl_Internal(TValueType* first, TValueType* last, int depthLimit, TCompare compare, void(*sortFunc)(TValueType*,size_t))
 {
-    size_t arraySize;
-    while ((arraySize = last - first) > BaseCaseLimit)
+    while (last - first > BaseCaseLimit)
     {
         if (depthLimit == 0)
         {
-            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
+            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
+            // std::partial_sort(first, last, last, compare);
             return;
         }
         depthLimit -= 1;
@@ -179,14 +179,14 @@ void QS_Stl_Internal(TValueType* first, TValueType* last, uint32_t depthLimit, T
         QS_Stl_Internal(cut, last, depthLimit, compare, sortFunc);
         last = cut;
     }
-    sortFunc(first, arraySize);
+    sortFunc(first, last - first);
 }
 
 template <typename TValueType>
 inline
 void QS_Stl(TValueType* first, TValueType* last, bool(*compare)(TValueType*,TValueType*), void(*sortFunc)(TValueType*,size_t))
 {
-    QS_Stl_Internal(first, last, (uint32_t) log2(last - first), compare, sortFunc);
+    QS_Stl_Internal(first, last, (int) log2(last - first), compare, sortFunc);
 }
 
 }
