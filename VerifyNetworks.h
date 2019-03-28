@@ -17,64 +17,40 @@
 namespace verification
 {
 
-void Reverse(int* first, int* last)
+bool NextPermutation(int* first, int size)
 {
-	while (true)
-	{
-		if (first == last || first == --last)
-		{
-			return;
-		}
-		std::iter_swap(first, last);
-		first += 1;
-	}
+	
 }
 
-bool NextPermutation(int* first, int* last)
+int Sum(int* first, int arraySize)
 {
-	int* one = last - 1;
-	while (true)
+	int result = 0;
+	for (int i = 0; i < arraySize; i += 1)
 	{
-		int* two = one;
-		one -= 1;
-		if (*one < *two)
-		{
-			int* three = last;
-			do
-			{
-				three -= 1;
-			} while (*one >= *three);
-			std::iter_swap(one, three);
-			Reverse(two, last);
-			return true;
-		}
-		if (__builtin_expect(one == first, 0))
-		{
-			return false;
-		}
+		result += arr[i];
 	}
+	return result;
 }
 
 bool VerifyNetwork(int size, void(*network)(int*,size_t))
 {
-	int* arr = (int*) malloc(sizeof(int) * size * 3);
-	int* last = arr + size;
-	int* sorted = arr + size;
-	int* toSort = arr + 2 * size;
+	int* arr = (int*) malloc(sizeof(int) * size * 2);
+	int* toSort = arr + size;
+	int ones = 0;
 	for (int index = 0; index < size; index += 1)
 	{
-		arr[index] = index;
+		arr[index] = 0;
 	}
-	CopyArray(arr, sorted, size);
 	do
 	{
+		ones = Sum(arr, size);
 		CopyArray(arr, toSort, size);
 		network(toSort, size);
-		if (__builtin_expect(!IsSameArray(sorted, toSort, size), 0))
+		if (__builtin_expect(!IsSorted(toSort, size) | ones != Sum(toSort, size), 0))
 		{
 			return false;
 		}
-	} while (NextPermutation(arr, last));
+	} while (NextPermutation(arr, size));
 
 	return true;
 }
