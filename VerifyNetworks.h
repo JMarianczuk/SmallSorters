@@ -17,12 +17,27 @@
 namespace verification
 {
 
-bool NextPermutation(int* first, int size)
+int current_permutation = 0;
+int current_2_pow_size = 1;
+
+bool NextPermutation(int* arr, int size)
 {
-	
+	++current_permutation;
+	int shift = current_2_pow_size;
+	int current;
+	for (current = 0 ; current < size; ++current)
+	{
+		shift = shift >> 1;
+		if (current_permutation % shift == 0)
+		{
+			arr[current] = !arr[current];
+			return (current_permutation < current_2_pow_size);
+		}
+	}
+	return false;
 }
 
-int Sum(int* first, int arraySize)
+int Sum(int* arr, int arraySize)
 {
 	int result = 0;
 	for (int i = 0; i < arraySize; i += 1)
@@ -41,6 +56,8 @@ bool VerifyNetwork(int size, void(*network)(int*,size_t))
 	{
 		arr[index] = 0;
 	}
+	current_permutation = 0;
+	current_2_pow_size = 1 << size; // pow(2, size)
 	do
 	{
 		ones = Sum(arr, size);

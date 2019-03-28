@@ -19,6 +19,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteIncludeQuotes(
             "BestNetworks.generated.h",
             "BoseNelson.generated.h",
+            "BoseNelsonParallel.generated.h",
             "BoseNelsonParameter.generated.h",
             "VerifyNetworks.h",
             "DebugHelper.h");
@@ -27,7 +28,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteNamespace("verification", [=](){
             gen->WriteLine("");
 
-            std::vector<std::string> networkNames = {"best", "bosenelson", "bosenelsonparameter"};
+            std::vector<std::string> networkNames = {"best", "bosenelson", "bosenelsonparallel", "bosenelsonparameter"};
             gen->WriteLine("void VerifyNetworks()");
             gen->WriteBlock([=]{
                 gen->WriteLine("int numberOfIncorrectNetworks = 0;");

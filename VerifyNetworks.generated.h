@@ -15,6 +15,7 @@
 
 #include "BestNetworks.generated.h"
 #include "BoseNelson.generated.h"
+#include "BoseNelsonParallel.generated.h"
 #include "BoseNelsonParameter.generated.h"
 #include "VerifyNetworks.h"
 #include "DebugHelper.h"
@@ -47,6 +48,17 @@ void VerifyNetworks()
 			numberOfIncorrectNetworks += 1;
 		}
 	}
+	debug::WriteLine("verifying bosenelsonparallel networks");
+	for (int arraySize = 2; arraySize < 17; arraySize += 1)
+	{
+		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		bool result = verification::VerifyNetwork(arraySize, &networks::sortNbosenelsonparallel<int>);
+		if (!result)
+		{
+			debug::WriteLine("incorrect network: 'bosenelsonparallel' for size '", std::to_string(arraySize), "'.");
+			numberOfIncorrectNetworks += 1;
+		}
+	}
 	debug::WriteLine("verifying bosenelsonparameter networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
@@ -58,7 +70,7 @@ void VerifyNetworks()
 			numberOfIncorrectNetworks += 1;
 		}
 	}
-	debug::WriteLine("finished verification. ", std::to_string(45 - numberOfIncorrectNetworks), " networks out of 45 sorted correctly.");
+	debug::WriteLine("finished verification. ", std::to_string(60 - numberOfIncorrectNetworks), " networks out of 60 sorted correctly.");
 }
 }
 

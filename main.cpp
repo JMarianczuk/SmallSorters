@@ -17,6 +17,7 @@
 #include "Measurement.generated.h"
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
+#include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"
 #include "CommandLineOptions.h"
 #include "DebugHelper.h"
@@ -51,18 +52,29 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
 #define ElementCount 128
 void test()
 {
-    SortableRef_FourCmovTemp testArr[ElementCount];
-    SortableRef_FourCmovTemp test_2[ElementCount];
-    randomisation::SetSeed(time(NULL));
-    randomisation::GenerateRandomArray(testArr, ElementCount);
-    CopyArray(testArr, test_2, ElementCount);
+    int* arr = (int*) malloc(sizeof(int) * 5);
+    for (int i = 0; i < 5; i += 1)
+    {
+        arr[i] = 0;
+    }
+    verification::current_permutation = 0;
+    verification::current_2_pow_size = 32;
+    do
+    {
+        debug::WriteLine(std::to_string(arr[0]), std::to_string(arr[1]), std::to_string(arr[2]), std::to_string(arr[3]), std::to_string(arr[4]));
+    } while (verification::NextPermutation(arr, 5));
+    // SortableRef_FourCmovTemp testArr[ElementCount];
+    // SortableRef_FourCmovTemp test_2[ElementCount];
+    // randomisation::SetSeed(time(NULL));
+    // randomisation::GenerateRandomArray(testArr, ElementCount);
+    // CopyArray(testArr, test_2, ElementCount);
 
-    PrintArray(testArr, ElementCount, "Array before");
-    samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize(testArr, ElementCount, 16, &networks::sortNbest, &sref_less, &GetKey);
-    PrintArray(testArr, ElementCount, "After samplesort");
-    insertionsort::InsertionSort(test_2, ElementCount);
-    PrintArray(test_2, ElementCount, "Correctly sorted");
-    debug::WriteLine("Is correctly sorted: ", std::to_string(IsSameArray(testArr, test_2, ElementCount)));
+    // PrintArray(testArr, ElementCount, "Array before");
+    // samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize(testArr, ElementCount, 16, &networks::sortNbest, &sref_less, &GetKey);
+    // PrintArray(testArr, ElementCount, "After samplesort");
+    // insertionsort::InsertionSort(test_2, ElementCount);
+    // PrintArray(test_2, ElementCount, "Correctly sorted");
+    // debug::WriteLine("Is correctly sorted: ", std::to_string(IsSameArray(testArr, test_2, ElementCount)));
 }
 
 #define NumberOfIterations 100
@@ -93,22 +105,7 @@ int main(int argumentCount, char** arguments)
     }
     if (options.VerifyNetworks)
     {
-        // for (int size = 2; size <= 16; size += 1)
-        // {
-        //     int* arr = (int*) malloc(sizeof(int) * size);
-        //     int perm = 0;
-        //     for (int i = 0; i < size; i += 1)
-        //     {
-        //         arr[i] = i;
-        //     }
-        //     do
-        //     {
-        //         perm += 1;
-        //     } while (verification::NextPermutation(arr, arr + size));
-        //     debug::WriteLine(std::to_string(perm), " permutations for size ", std::to_string(size));
-        // }
-        debug::WriteLine("This is not yet supported because it is too slow");
-        // verification::VerifyNetworks();
+        verification::VerifyNetworks();
         return 0;
     }
     if (options.ExecuteTestMethod)
