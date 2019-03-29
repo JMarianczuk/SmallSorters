@@ -16,7 +16,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "N";
             break;
         case Sorter::StdSort:
-            result += "Std Sort C ";
+            result += "StdSort -C ";
             return result;
     }
     result += " ";
@@ -118,7 +118,7 @@ void WriteCompleteSorterMeasureLine(
     {
         // gen->WriteLine("debug::WriteLine(\"", sorter, "\");"); //DEBUG
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", sorter, " ", sortableStruct->DisplayName, "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
     }
 }
 

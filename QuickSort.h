@@ -4,6 +4,7 @@
 
 #include <math.h>
 
+#include "CustomMath.h"
 #include "DebugHelper.h"
 #include "SampleSort.generated.h"
 #include "BoseNelsonParameter.generated.h"
@@ -186,7 +187,7 @@ template <typename TValueType>
 inline
 void QS_Stl(TValueType* first, TValueType* last, bool(*compare)(TValueType*,TValueType*), void(*sortFunc)(TValueType*,size_t))
 {
-    QS_Stl_Internal(first, last, (int) log2(last - first), compare, sortFunc);
+    QS_Stl_Internal(first, last, custommath::intlog2((int) (last - first)) * 2, compare, sortFunc);
 }
 
 }

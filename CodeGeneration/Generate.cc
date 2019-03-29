@@ -164,7 +164,9 @@ void GenerateSampleSort()
             "cstring", 
             "inttypes.h");
         sampleSortGen->WriteLine("");
-        sampleSortGen->WriteIncludeQuotes("DebugHelper.h");
+        sampleSortGen->WriteIncludeQuotes(
+            "DebugHelper.h",
+            "CustomMath.h");
         sampleSortGen->WriteNamespace("samplesort", [=]{
             for (int splits = 3; splits <= 3; splits += 1)
             {

@@ -14,6 +14,7 @@
 #include <inttypes.h>
 
 #include "DebugHelper.h"
+#include "CustomMath.h"
 namespace samplesort
 {
 template <typename TValueType, typename TKey>
@@ -47,7 +48,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -161,7 +162,7 @@ void SampleSort3Splitters1OversamplingFactor1BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters1OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -172,7 +173,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -310,7 +311,7 @@ void SampleSort3Splitters1OversamplingFactor2BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters1OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -321,7 +322,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -483,7 +484,7 @@ void SampleSort3Splitters1OversamplingFactor3BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters1OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -494,7 +495,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -680,7 +681,7 @@ void SampleSort3Splitters1OversamplingFactor4BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters1OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -691,7 +692,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -901,7 +902,7 @@ void SampleSort3Splitters1OversamplingFactor5BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters1OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -934,7 +935,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -1048,7 +1049,7 @@ void SampleSort3Splitters2OversamplingFactor1BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters2OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -1059,7 +1060,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -1197,7 +1198,7 @@ void SampleSort3Splitters2OversamplingFactor2BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters2OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -1208,7 +1209,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -1370,7 +1371,7 @@ void SampleSort3Splitters2OversamplingFactor3BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters2OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -1381,7 +1382,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -1567,7 +1568,7 @@ void SampleSort3Splitters2OversamplingFactor4BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters2OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -1578,7 +1579,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -1788,7 +1789,7 @@ void SampleSort3Splitters2OversamplingFactor5BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters2OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -1821,7 +1822,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -1935,7 +1936,7 @@ void SampleSort3Splitters3OversamplingFactor1BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters3OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -1946,7 +1947,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -2084,7 +2085,7 @@ void SampleSort3Splitters3OversamplingFactor2BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters3OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -2095,7 +2096,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -2257,7 +2258,7 @@ void SampleSort3Splitters3OversamplingFactor3BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters3OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -2268,7 +2269,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -2454,7 +2455,7 @@ void SampleSort3Splitters3OversamplingFactor4BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters3OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -2465,7 +2466,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -2675,7 +2676,7 @@ void SampleSort3Splitters3OversamplingFactor5BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters3OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -2708,7 +2709,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -2822,7 +2823,7 @@ void SampleSort3Splitters4OversamplingFactor1BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters4OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -2833,7 +2834,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -2971,7 +2972,7 @@ void SampleSort3Splitters4OversamplingFactor2BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters4OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -2982,7 +2983,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -3144,7 +3145,7 @@ void SampleSort3Splitters4OversamplingFactor3BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters4OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -3155,7 +3156,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -3341,7 +3342,7 @@ void SampleSort3Splitters4OversamplingFactor4BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters4OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -3352,7 +3353,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -3562,7 +3563,7 @@ void SampleSort3Splitters4OversamplingFactor5BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters4OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -3595,7 +3596,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -3709,7 +3710,7 @@ void SampleSort3Splitters5OversamplingFactor1BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters5OversamplingFactor1BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -3720,7 +3721,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -3858,7 +3859,7 @@ void SampleSort3Splitters5OversamplingFactor2BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters5OversamplingFactor2BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -3869,7 +3870,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -4031,7 +4032,7 @@ void SampleSort3Splitters5OversamplingFactor3BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters5OversamplingFactor3BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -4042,7 +4043,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -4228,7 +4229,7 @@ void SampleSort3Splitters5OversamplingFactor4BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters5OversamplingFactor4BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 template <typename TValueType, typename TKey>
 static inline
@@ -4239,7 +4240,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	void(*sortFunc)(TValueType*,size_t),
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&),
-	uint32_t depthLimit)
+	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
 	{
@@ -4449,7 +4450,7 @@ void SampleSort3Splitters5OversamplingFactor5BlockSize(
 	bool(*predicateLess)(TKey&,TValueType&),
 	TKey(*getKeyFunc)(TValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / 2); //log to base {numberOfSplitters + 1}
+	SampleSortInternal3Splitters5OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 }
 
