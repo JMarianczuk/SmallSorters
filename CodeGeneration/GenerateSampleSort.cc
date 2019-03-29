@@ -128,7 +128,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("void(*sortFunc)(TValueType*,size_t),");
         gen->WriteLine("bool(*predicateLess)(TKey&,TValueType&),");
         gen->WriteLine("TKey(*getKeyFunc)(TValueType&),");
-        gen->WriteLine("uint32_t depthLimit)");
+        gen->WriteLine("int depthLimit)");
     });
     gen->WriteBlock([=]{
         gen->WriteLine("if (elementCount <= baseCaseLimit)");
@@ -239,7 +239,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("TKey(*getKeyFunc)(TValueType&))");
     });
     gen->WriteBlock([=]{
-        gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, (uint32_t) log2(elementCount) / ", std::to_string((int) log2(numberOfSplitters + 1)), "); //log to base {numberOfSplitters + 1}");
+        gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * ", std::to_string(2.0 / log2(numberOfSplitters + 1)), "); //log to base {(numberOfSplitters + 1) / 2}");
     });
 }
 
