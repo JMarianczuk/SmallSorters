@@ -49,6 +49,7 @@ if (options$title == "") {
 thisplot <- ggplot(res, aes(x = sorter, y = normalized_value)) +
     labs(x = "Sorting algorithm", y = "Cpu cycles needed", title = plot_title) +
     geom_boxplot() +
-    coord_flip()
+    coord_flip() + 
+    theme(axis.text.y = element_text(family="Courier"))
 
 ggsave(filename, thisplot, width=18, height=11, units="cm")
