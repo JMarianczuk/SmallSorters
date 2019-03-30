@@ -3,12 +3,14 @@
 
 #include "Sortable.generated.h"
 #include "BestNetworks.generated.h"
+#include "BoseNelson.generated.h"
+#include "BoseNelsonParallel.generated.h"
+#include "BoseNelsonParameter.generated.h"
 #include "NetworkSort.h"
 
 
 
-void Test(SortableRef_ClangVersion& left, SortableRef_ClangVersion& right)
+void Test()
 {
-    networks::ConditionalSwap(left, right);
-    printf("Correctly Sorted: %s", left > right ? "false" : "true");
+    
 }

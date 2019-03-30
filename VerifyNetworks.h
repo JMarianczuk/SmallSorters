@@ -22,6 +22,15 @@ int current_2_pow_size = 1;
 
 bool NextPermutation(int* arr, int size)
 {
+	//Gray Code Progression
+	/**
+	 * __asm__(
+	 * 		"bsf %[perm],%[shift]\n\t"
+	 * 		: [shift] "r"(shift)
+	 * 		: [perm] "r"(current_permutation)
+	 * )
+	 * 
+	 */
 	++current_permutation;
 	int shift = current_2_pow_size;
 	int current;

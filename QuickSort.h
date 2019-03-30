@@ -56,14 +56,21 @@ int QS_Partition(TValueType* items, size_t arraySize)
     {
         size_t step = (last + 1) / 8;
         size_t twoStep = step * 2;
-        networks::sort9bosenelsonparameter(items[first], items[first + step], items[first + twoStep], items[mid - step], items[mid], items[mid + step], items[last - twoStep], items[last - step], items[last]);
+        networks::sort9bosenelsonparameter(
+            items[first + step], items[first + twoStep], items[mid - step], items[mid], 
+            items[first], 
+            items[mid + step], items[last - twoStep], items[last - step], items[last]);
     }
     else
     {
-        networks::sort3bosenelsonparameter(items[first], items[mid], items[last]);
-    }
+        networks::sort3bosenelsonparameter(
+            items[mid], 
+            items[first], 
+            items[last]);
+    } // The median is now at position first because we passed items[first] as middle parameter into the network
+
     // debug::WriteLine("partition: mid=", std::to_string(mid), ", last=", std::to_string(last));
-    std::swap(items[mid], items[first]);
+    // std::swap(items[mid], items[first]); 
     auto pivot = items[first];
     first += 1;
 
@@ -158,8 +165,26 @@ template <typename TValueType, typename TCompare>
 inline
 TValueType* QS_UnguardedPartitionPivot(TValueType* first, TValueType* last, TCompare compare)
 {
-    TValueType* mid = first + (last - first) / 2;
-    networks::sort3bosenelsonparameter(*mid, *first, *(last - 1));
+    size_t size = last - first;
+    TValueType* mid = first + size / 2;
+    if (size > 40)
+    {
+        size_t step = size / 8;
+        size_t twoStep = step * 2;
+        networks::sort9bosenelsonparameter(
+            *(first + step), *(first + twoStep), *(mid - step), *mid,
+            *first,
+            *(mid + step), *(last - twoStep), *(last - step), *(last - 1)
+        );
+    }
+    else 
+    {
+        networks::sort3bosenelsonparameter(
+            *mid, 
+            *first, 
+            *(last - 1));
+    }
+    
     return QS_UnguardedPartition(first + 1, last, first, compare);
 }
 

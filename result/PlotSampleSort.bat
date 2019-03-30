@@ -4,9 +4,9 @@ Rscript RPlot.R --filter="s like '%%-S%%' and s like '%%BoNeM%%'" --filePostfix=
 Rscript RPlot.R --filter="s like '%%-S%%' and s like '%%I%%'" --filePostfix="sample-sort-insertionsort" --complete=TRUE --title="SampleSort"
 
 for /l %%a in (1, 1, 5) do (
-    Rscript RPlot.R --filter="s like '%%-S%%' and s like '%% 3%%a%%'" --filePostfix="sample-sort-3%%a" --complete=TRUE --title="SampleSort"
+    Rscript RPlot.R --filter="s like '%%-S3%%a%%'" --filePostfix="sample-sort-3%%a" --complete=TRUE --title="SampleSort"
 )
 
 for /l %%a in (1, 1, 5) do (
-    Rscript RPlot.R --filter="s like '%%-S%%' and s like '%% 3_%%a%%'" --filePostfix="sample-sort-3_%%a" --complete=TRUE --title="SampleSort"
+    Rscript RPlot.R --filter="s like '%%-S3_%%a%%'" --filePostfix="sample-sort-3_%%a" --complete=TRUE --title="SampleSort"
 )
