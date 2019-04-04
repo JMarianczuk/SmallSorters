@@ -126,6 +126,27 @@ bool IsSortedAndPermutation(TComparable* items, size_t arraySize, size_t keyIter
 }
 
 template <typename TComparable>
+bool NotHasEqualNeighbour(TComparable* items, size_t arraySize) 
+{
+    for (int i = 0; i < arraySize - 1; i += 1) 
+    {
+        if (__builtin_expect(items[i] == items[i + 1], 0)) 
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename TComparable>
+bool NotHasEqualNeighbourAndPermutation(TComparable* items, size_t arraySize, size_t keyIteration, uint64_t keyValue, size_t referenceIteration, uint64_t referenceValue)
+{
+    return NotHasEqualNeighbour(items, arraySize)
+        && CheckPermutationValue(items, arraySize, &GetKey<TComparable>, keyIteration, keyValue)
+        && CheckPermutationValue(items, arraySize, &GetReference<TComparable>, referenceIteration, referenceValue);
+}
+
+template <typename TComparable>
 bool IsSameArray(TComparable* left, std::vector<TComparable> right, size_t arraySize)
 {
     for (int i = 0; i < arraySize; i += 1)
@@ -157,19 +178,6 @@ bool IsSortedFake(TComparable* items, size_t arraySize, TComparable fakeCompareT
     for (int i = 0; i < arraySize - 1; i += 1)
     {
         if (__builtin_expect(items[i] > fakeCompareTo, 0))
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-template <typename TComparable>
-bool NotHasEqualNeighbour(TComparable* items, size_t arraySize) 
-{
-    for (int i = 0; i < arraySize - 1; i += 1) 
-    {
-        if (__builtin_expect(items[i] == items[i + 1], 0)) 
         {
             return false;
         }
