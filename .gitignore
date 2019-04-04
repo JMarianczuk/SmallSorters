@@ -52,7 +52,7 @@ result/combined/*.pdf
 
 small_sorters_result.sqlite
 db_test.sqlite
-result/db.sqlite-journal
+result/small_sorters_result.sqlite-journal
 
 Network_Size_*.jpg
 .vscode/*
