@@ -17,7 +17,7 @@
 #include "Measurement.generated.h"
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
-#include "QuickSort_Copy.h"
+#include "Quicksort_Copy.h"
 #include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"
 #include "CommandLineOptions.h"
