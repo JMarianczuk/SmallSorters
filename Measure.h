@@ -9,6 +9,7 @@
 #include "ArrayHelpers.h"
 #include "Performancing.h"
 #include "QuickSort.h"
+#include "Quicksort_Copy.h"
 #include "Randomisation.generated.h"
 #include "StructHelpers.generated.h"
 #include "DebugHelper.h"
@@ -43,7 +44,6 @@ void Measure(
     for (int i = 0; i < numberOfIterations; i += 1)
     {
         randomisation::GenerateRandomArray(arr, arraySize);
-
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
@@ -66,7 +66,7 @@ void Measure(
         numberOfBadSorts,
         true
     );
-    
+
     free(arr);
 }
 
@@ -204,6 +204,16 @@ void StdSortWrapper(
 }
 
 template <typename TValueType>
+void QuicksortCopyWrapper(
+    TValueType* first,
+    TValueType* last,
+    bool(*compareFunc)(TValueType* left, TValueType* right),
+    void(*sortFunc)(TValueType*, size_t))
+{
+    quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
+}
+
+template <typename TValueType>
 void MeasureCompleteSorter(
     Performancing* perf,
     int numberOfIterations,
@@ -285,6 +295,7 @@ void MeasureRandomGeneration(
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
+        
         if (!NotHasEqualNeighbourAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
         {
             numberOfEqualNeighbours += 1;

@@ -17,7 +17,8 @@ enum class Sorter
 {
     InsertionSort,
     SortNetwork,
-    StdSort
+    StdSort,
+    QuicksortCopy
 };
 
 enum class NetworkType

@@ -18,6 +18,9 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
         case Sorter::StdSort:
             result += "StdSort -C ";
             return result;
+        case Sorter::QuicksortCopy:
+            result += "QSort   -C ";
+            return result;
     }
     result += " ";
     switch (networkType)
@@ -274,6 +277,15 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Complete),
                         "measurement::StdSortWrapper",
+                        "",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterMeasureLine(
+                        gen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::QuicksortCopy, NetworkType::None, MeasureType::Complete),
+                        "measurement::QuicksortCopyWrapper",
                         "",
                         "measurement::BaseCaseSortBlank"
                     );
