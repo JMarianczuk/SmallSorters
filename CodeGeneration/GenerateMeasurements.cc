@@ -21,6 +21,9 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
         case Sorter::QuicksortCopy:
             result += "QSort   -C ";
             return result;
+        case Sorter::QuicksortCopyMsvc:
+            result += "QSortMs -C ";
+            return result;
     }
     result += " ";
     switch (networkType)
