@@ -172,7 +172,7 @@ void Quicksort_Copy_Stl(TValueType* first, TValueType* last, TCompare compare)
 
 //-------------------------------------------------------------------------------------------
 
-#define ISortMax 32
+#define ISortMax 16
 
 template <typename TValueType, typename TPredicate>
 inline
