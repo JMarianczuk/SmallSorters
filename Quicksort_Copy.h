@@ -213,103 +213,50 @@ void guess_median_unchecked(TValueType* first, TValueType* mid, TValueType* last
     {
         uint64_t step = (count + 1) >> 3;
         uint64_t twoStep = step << 1;
-        networks::sort9bosenelsonparameter(*first, *(first + step), *(first + twoStep), *(mid - step), *mid, *(mid + step), *(last - twoStep), *(last - step), *last);
+        networks::sort9bosenelsonparameter(
+            *(first + step), *(first + twoStep), *(mid - step), *mid, 
+            *first,
+            *(mid + step), *(last - twoStep), *(last - step), *last);
     }
     else
     {
-        networks::sort3bosenelsonparameter(*first, *mid, *last);
+        networks::sort3bosenelsonparameter(
+            *mid, 
+            *first, 
+            *last);
     }
 }
 
 template <typename TValueType, typename TPredicate>
 inline
-std::pair<TValueType*,TValueType*> partition_by_median_guess_unchecked(TValueType* first, TValueType* last, TPredicate predicate)
+TValueType* partition_by_median_guess_unchecked(TValueType* first, TValueType* last, TPredicate predicate)
 {
     TValueType* mid = first + ((last - first) >> 1);
     guess_median_unchecked(first, mid, last - 1, predicate);
-    TValueType* pFirst = mid;
-    TValueType* pLast = pFirst + 1;
 
-    while (first < pFirst && !predicate(pFirst - 1, pFirst) && !predicate(pFirst, pFirst - 1))
-    {
-        --pFirst;
-    }
-    while (pLast < last && !predicate(pLast, pFirst) && !predicate(pFirst, pLast))
-    {
-        ++pLast;
-    }
-
-    TValueType* gFirst = pLast;
-    TValueType* gLast = pFirst;
+    TValueType* pivot = first;
     while (true)
     {
-        for ( ; gFirst < last; ++gFirst)
+        ++first;
+        --last;
+        while (predicate(first, pivot))
         {
-            if (predicate(pFirst, gFirst))
-            {
-
-            }
-            else if (predicate(gFirst, pFirst))
-            {
-                break;
-            }
-            else if (pLast != gFirst)
-            {
-                std::iter_swap(pLast, gFirst);
-                ++pLast;
-            }
-            else
-            {
-                ++pLast;
-            }
+            ++first;
         }
-        for ( ; first < gLast; --gLast)
+        while (predicate(pivot, last))
         {
-            if (predicate(gLast - 1, pFirst))
-            {
-
-            }
-            else if (predicate(pFirst, gLast - 1))
-            {
-                break;
-            }
-            else if (--pFirst != gLast - 1)
-            {
-                std::iter_swap(pFirst, gLast - 1);
-            }
+            --last;
         }
-
-        if (gLast == first && gFirst == last)
+        if (last <= first)
         {
-            return (std::pair<TValueType*,TValueType*>(pFirst, pLast));
+            std::iter_swap(pivot, last);
+            return last;
         }
-
-        if (gLast == first)
-        {
-            if (pLast != gFirst)
-            {
-                std::iter_swap(pFirst, pLast);
-            }
-            ++pLast;
-            std::iter_swap(pFirst, gFirst);
-            ++pFirst;
-            ++gFirst;
-        }
-        else if (gFirst == last)
-        {
-            if (--gLast != --pFirst)
-            {
-                std::iter_swap(gLast, pFirst);
-            }
-            std::iter_swap(pFirst, --pLast);
-        }
-        else
-        {
-            std::iter_swap(gFirst, --gLast);
-            ++gFirst;
-        }
+        std::iter_swap(first, last);
     }
 }
+
+
 
 template <typename TValueType, typename TPredicate>
 inline
@@ -319,18 +266,19 @@ void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredic
     while (ISortMax < (count = (uint64_t) (last - first)) && ideal > 0)
     {
         auto mid = partition_by_median_guess_unchecked(first, last, predicate);
+        auto afterMid = mid + 1;
 
         ideal = (ideal >> 1) + (ideal >> 2);
 
-        if (mid.first - first < last - mid.second)
+        if (mid - first < last - afterMid)
         {
-            sort_unchecked(first, mid.first, ideal, predicate);
-            first = mid.second;
+            sort_unchecked(first, mid, ideal, predicate);
+            first = afterMid;
         }
         else
         {
-            sort_unchecked(mid.second, last, ideal, predicate);
-            last = mid.first;
+            sort_unchecked(afterMid, last, ideal, predicate);
+            last = mid;
         }
     }
 
