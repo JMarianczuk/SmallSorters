@@ -1,6 +1,3 @@
-# library(DBI)
-# con <- dbConnect(RSQLite:SQLite(), "db.sqlite")
-
 
 library(RSQLite)
 library(optparse)
@@ -8,6 +5,7 @@ library(ggplot2)
 
 option_list = list(
     make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot"),
+    make_option(c("--tableName"), type="character", default="normalSort", help="name of table to get data from"),
     make_option(c("-f", "--filter"), type="character", default="", help="additional optional filter"),
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
     make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),
@@ -19,16 +17,16 @@ options = parse_args(opt_parser)
 con <- dbConnect(SQLite(), "small_sorters_result.sqlite")
 
 query <- ""
-if (!options$complete) {
-    query <- paste("select (v / n) as normalized_value, s as sorter from stats where a =", options$array_size, "and c = 0");
+if (options$complete) {
+    query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from completeSort where c = 0");
 } else {
-    query <- paste("select (v / n) as normalized_value, s as sorter from stats where c = 0");
+    query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from", options$tableName, "where a =", options$array_size, "and c = 0");
 }
 
 if (options$filter != "") {
     query <- paste(query, "and", options$filter)
 }
-query <- paste(query, "and s not like '%Xchg%' and s not like '%Six%'")
+query <- paste(query, "and s not like '%JXc%' and s not like '%6Cm%'")
 res <- dbGetQuery(con, query)
 
 array_size_string <- paste(options$array_size)
@@ -46,10 +44,14 @@ if (options$title == "") {
 } else {
     plot_title <- options$title
 }
-thisplot <- ggplot(res, aes(x = sorter, y = normalized_value)) +
+thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
     labs(x = "Sorting algorithm", y = "Cpu cycles needed", title = plot_title) +
     geom_boxplot() +
     coord_flip() + 
-    theme(axis.text.y = element_text(family="Courier"))
+    facet_grid(rows = vars(sortergroup), scales = "free", space = "free")  +
+    theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank())
 
 ggsave(filename, thisplot, width=18, height=11, units="cm")
+
+
+#+ scale_x_discrete(breaks = substring(res$sorter, 0, 8), label=res$x)

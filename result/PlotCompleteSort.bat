@@ -1,1 +1,1 @@
-Rscript RPlot.R --filter="s like '%%-C%%'" --filePostfix="complete" --complete=TRUE --title="QuickSort"
+Rscript RPlot.R --tableName="completeSort" --filePostfix="complete" --complete=TRUE --title="QuickSort"

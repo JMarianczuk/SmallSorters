@@ -1,0 +1,1 @@
+sqlite3 small_sorters_result.sqlite < droptables.sql
