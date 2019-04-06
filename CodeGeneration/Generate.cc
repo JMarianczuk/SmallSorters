@@ -7,6 +7,7 @@
 #include "nlohmann/json.hpp"
 #include "Network.hpp"
 #include "GenerateBoseNelson.hpp"
+#include "GenerateBatcher.hpp"
 #include "WriteNetwork.hpp"
 #include "GenerateMeasurements.hpp"
 #include "GenerateSortableStructs.hpp"
@@ -51,7 +52,7 @@ void GenerateBoseNelsonNetworkWithArrangement(
 {
     std::ofstream filestream;
     filestream.open(filename);
-    std::vector<nlohmann::json> boseNelsonNetworks;
+    nlohmann::json boseNelsonNetworks = nlohmann::json::array();
     for (int arraySize = 2; arraySize <= 16; arraySize += 1)
     {
         auto network = GenerateBoseNelsonNetwork(
@@ -61,12 +62,7 @@ void GenerateBoseNelsonNetworkWithArrangement(
             NetworkToJson(network));
         Dispose(network);
     }
-    nlohmann::json boseNelsonResult = nlohmann::json::array();
-    for (auto network : boseNelsonNetworks)
-    {
-        boseNelsonResult.push_back(network);
-    }
-    filestream << std::setw(2) << boseNelsonResult << std::endl;
+    filestream << std::setw(2) << boseNelsonNetworks << std::endl;
     filestream.flush();
     filestream.close();
 }
@@ -105,6 +101,22 @@ void GenerateBoseNelsonNetworksJson()
         "../BoseNelsonNetworks_ParameterStyle.json");
 }
 
+void GenerateBatcherNetworksJson()
+{
+    std::ofstream filestream;
+    filestream.open("../BatcherNetworks.json");
+    nlohmann::json batcherNetworks = nlohmann::json::array();
+    for (int arraySize = 2; arraySize <= 16; arraySize += 1)
+    {
+        auto network = GenerateBatcherNetwork(arraySize);
+        batcherNetworks.push_back(NetworkToJson(network));
+        Dispose(network);
+    }
+    filestream << std::setw(2) << batcherNetworks << std::endl;
+    filestream.flush();
+    filestream.close();
+}
+
 void GenerateNetworks()
 {
     auto boseNelsonLocalityGen = 
@@ -125,12 +137,22 @@ void GenerateNetworks()
         "../BoseNelsonNetworks_Parallelism.json");
     delete boseNelsonParallelismGen;
 
+    auto batcherNetworkGen =
+        new CPlusPlusCodeGenerator("../../Batcher.generated.h");
+    WriteNetwork(
+        batcherNetworkGen,
+        "BATCHER_GENERATED_H",
+        "batcher",
+        "../BatcherNetworks.json");
+    delete batcherNetworkGen;
+
     auto bestNetworkGen = 
         new CPlusPlusCodeGenerator("../../BestNetworks.generated.h");
     WriteNetwork(
         bestNetworkGen, 
         "BESTNETWORKS_GENERATED_H", 
-        "best", "../BestNetworks.json");
+        "best", 
+        "../BestNetworks.json");
     delete bestNetworkGen;
 }
 
@@ -205,6 +227,7 @@ int main()
     GenerateStructHelpers();
     GenerateRandomisation();
     GenerateBoseNelsonNetworksJson();
+    GenerateBatcherNetworksJson();
     GenerateNetworks_ParameterStyle();
     GenerateNetworks();
     GenerateMeasurements();

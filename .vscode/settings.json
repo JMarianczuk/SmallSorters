@@ -65,6 +65,14 @@
         "optional": "cpp",
         "set": "cpp",
         "sstream": "cpp",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "atomic": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "cwctype": "cpp",
+        "mutex": "cpp",
+        "ratio": "cpp",
+        "string_view": "cpp",
+        "thread": "cpp"
     }
 }
