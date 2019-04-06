@@ -65,6 +65,9 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
         case MeasureType::Complete:
             result += "-C";
             break;
+        case MeasureType::Complete2:
+            result += "-c";
+            break;
         case MeasureType::SampleSort:
             result += "-S";
             result += std::to_string(sampleSortSplits);
@@ -272,6 +275,15 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         "",
                         measureParams.SortMethod);
                     gen->WriteLine("");
+                    WriteCompleteSorterMeasureLine(
+                        gen,
+                        measureParams.Structs,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::Complete2, measureParams._BoseNelsonNetworkType),
+                        "quicksortcopy::Quicksort_Copy_Msvc",
+                        "",
+                        measureParams.SortMethod);
+                    gen->WriteLine("");
                 },
                 [=]{
                     WriteCompleteSorterMeasureLine(
@@ -289,15 +301,6 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::QuicksortCopy, NetworkType::None, MeasureType::Complete),
                         "measurement::QuicksortCopyWrapper",
-                        "",
-                        "measurement::BaseCaseSortBlank"
-                    );
-                    WriteCompleteSorterMeasureLine(
-                        gen,
-                        &sRef,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::QuicksortCopyMsvc, NetworkType::None,MeasureType::Complete),
-                        "measurement::QuicksortCopyMsvcWrapper",
                         "",
                         "measurement::BaseCaseSortBlank"
                     );

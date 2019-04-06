@@ -40,6 +40,7 @@ enum class MeasureType
     Normal,
     InRow,
     Complete,
+    Complete2,
     SampleSort
 };
 

@@ -258,9 +258,9 @@ TValueType* partition_by_median_guess_unchecked(TValueType* first, TValueType* l
 
 
 
-template <typename TValueType, typename TPredicate>
+template <typename TValueType, typename TPredicate, typename TBaseCaseSort>
 inline
-void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredicate predicate)
+void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredicate predicate, TBaseCaseSort baseCaseSort)
 {
     uint64_t count;
     while (ISortMax < (count = (uint64_t) (last - first)) && ideal > 0)
@@ -272,12 +272,12 @@ void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredic
 
         if (mid - first < last - afterMid)
         {
-            sort_unchecked(first, mid, ideal, predicate);
+            sort_unchecked(first, mid, ideal, predicate, baseCaseSort);
             first = afterMid;
         }
         else
         {
-            sort_unchecked(afterMid, last, ideal, predicate);
+            sort_unchecked(afterMid, last, ideal, predicate, baseCaseSort);
             last = mid;
         }
     }
@@ -288,14 +288,14 @@ void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredic
     }
     else if(count >= 2)
     {
-        insertion_sort_unchecked(first, last, predicate);
+        baseCaseSort(first, count);
     }
 }
 
-template <typename TValueType, typename TPredicate>
-void Quicksort_Copy_Msvc(TValueType* first, TValueType* last, TPredicate predicate)
+template <typename TValueType, typename TPredicate, typename TBaseCaseSort>
+void Quicksort_Copy_Msvc(TValueType* first, TValueType* last, TPredicate predicate, TBaseCaseSort baseCaseSort)
 {
-    sort_unchecked(first, last, (uint64_t) (last - first), predicate);
+    sort_unchecked(first, last, (uint64_t) (last - first), predicate, baseCaseSort);
 }
 
 }
