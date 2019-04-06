@@ -53,7 +53,10 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
 #define ElementCount 128
 void test()
 {
-    
+    for (int i = 0; i < 34; i += 1)
+    {
+        debug::WriteLine(std::to_string(i), " bsr => ", std::to_string(custommath::intlog2(i)));
+    }
 }
 
 #define NumberOfIterations 100

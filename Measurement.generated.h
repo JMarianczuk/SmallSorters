@@ -1117,6 +1117,10 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -C KR Def", &measurement::QuicksortCopyWrapper<SortableRef>, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -C KR Def");
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "       -C KR Def", &measurement::QuicksortCopyMsvcWrapper<SortableRef>, &measurement::BaseCaseSortBlank<SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "       -C KR Def");
 }
 }
 

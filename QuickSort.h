@@ -117,13 +117,13 @@ void QS_Recursion(TValueType* items, size_t arraySize, size_t ideal, void(*sortF
 
         if (mid  < arraySize - afterMid)
         {
-            QS_Stl(items, mid, ideal, sortFunc);
+            QS_Recursion(items, mid, ideal, sortFunc);
             items += afterMid;
             arraySize -= afterMid;
         }
         else
         {
-            QS_Stl(items + afterMid, arraySize - afterMid, ideal, sortFunc);
+            QS_Recursion(items + afterMid, arraySize - afterMid, ideal, sortFunc);
             arraySize = mid;
         }
     }

@@ -214,6 +214,16 @@ void QuicksortCopyWrapper(
 }
 
 template <typename TValueType>
+void QuicksortCopyMsvcWrapper(
+    TValueType* first,
+    TValueType* last,
+    bool(*compareFunc)(TValueType* left, TValueType* right),
+    void(*sortFunc)(TValueType*, size_t))
+{
+    quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc);
+}
+
+template <typename TValueType>
 void MeasureCompleteSorter(
     Performancing* perf,
     int numberOfIterations,

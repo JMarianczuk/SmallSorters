@@ -4,90 +4,16 @@
 
 #include <utility>
 #include <algorithm>
+#include <inttypes.h>
 
 #include "CustomMath.h"
+#include "BoseNelsonParameter.generated.h"
+#include "InsertionSort.h"
 
 namespace quicksortcopy
 {
 
 #define S_threshold 16
-
-// template<typename _RandomAccessIterator, typename _Distance,
-// 	   typename _Tp, typename _Compare>
-// void __adjust_heap(_RandomAccessIterator __first, _Distance __holeIndex,
-//         _Distance __len, _Tp __value, _Compare __comp)
-// {
-//     const _Distance __topIndex = __holeIndex;
-//     _Distance __secondChild = __holeIndex;
-//     while (__secondChild < (__len - 1) / 2)
-//     {
-//         __secondChild = 2 * (__secondChild + 1);
-//         if (__comp(__first + __secondChild,
-//                 __first + (__secondChild - 1)))
-//         __secondChild--;
-//         *(__first + __holeIndex) = std::move(*(__first + __secondChild));
-//         __holeIndex = __secondChild;
-//     }
-
-//     if ((__len & 1) == 0 && __secondChild == (__len - 2) / 2)
-//     {
-//         __secondChild = 2 * (__secondChild + 1);
-//         *(__first + __holeIndex) = std::move(*(__first
-//                                 + (__secondChild - 1)));
-//         __holeIndex = __secondChild - 1;
-//     }
-//     __decltype(__gnu_cxx::__ops::__iter_comp_val(std::move(__comp)))
-// __cmp(std::move(__comp));
-//     std::__push_heap(__first, __holeIndex, __topIndex,
-//             std::move(__value), __cmp);
-// }
-
-// template<typename _RandomAccessIterator, typename _Compare>
-// void make_heap(_RandomAccessIterator __first, _RandomAccessIterator __last,
-//     _Compare& __comp)
-// {
-//     typedef typename iterator_traits<_RandomAccessIterator>::value_type _ValueType;
-//     typedef typename iterator_traits<_RandomAccessIterator>::difference_type _DistanceType;
-
-//     if (__last - __first < 2)
-//     {
-//         return;
-//     }
-
-//     const _DistanceType __len = __last - __first;
-//     _DistanceType __parent = (__len - 2) / 2;
-//     while (true)
-//     {
-//         _ValueType __value = std::move(*(__first + __parent));
-//         std::__adjust_heap(__first, __parent, __len, std::move(__value), __comp);
-//         if (__parent == 0)
-//         {
-//             return;
-//         }
-//         __parent--;
-//     }
-// }
-
-// template<typename TValueType*, typename TCompare>
-// void heap_select(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
-// {
-//     make_heap(first, middle, compare);
-//     // for (TValueType* i = middle; i < last; ++i)
-//     // {
-//     //     if (compare(i, first))
-//     //     {
-//     //         pop_heap(first, middle, i, compare);
-//     //     }
-//     // }
-    
-// }
-
-// template <typename TValueType*, typename TCompare>
-// void partial_sort(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
-// {
-//     heap_select(first, middle, last, compare);
-//     sort_heap(first, middle, compare);
-// }
 
 template<typename TValueType, typename TCompare>
 void unguarded_linear_insert(TValueType* last, TCompare compare)
@@ -114,8 +40,7 @@ inline void unguarded_insertion_sort(TValueType* first, TValueType* last, TCompa
 }
 
 template<typename TValueType, typename TCompare>
-void insertion_sort(TValueType* first,
-            TValueType* last, TCompare compare)
+void insertion_sort(TValueType* first, TValueType* last, TCompare compare)
 {
     if (first == last) 
     {
@@ -243,6 +168,186 @@ void Quicksort_Copy_Stl(TValueType* first, TValueType* last, TCompare compare)
         introsort_loop(first, last, custommath::intlog2((int) (last - first)) * 2, compare);
         final_insertion_sort(first, last, compare);
 	}
+}
+
+//-------------------------------------------------------------------------------------------
+
+#define ISortMax 32
+
+template <typename TValueType, typename TPredicate>
+inline
+void insertion_sort_unchecked(TValueType* first, TValueType* last, TPredicate predicate)
+{
+    if (first != last)
+    {
+        for (TValueType* next = first; ++next != last; )
+        {
+            TValueType val = std::move(*next);
+
+            if (predicate(&val, first))
+            {
+                std::move_backward(first, next, next+1);
+                *first = std::move(val);
+            }
+            else
+            {
+                TValueType* next_temp = next;
+                for (TValueType* first_temp = next_temp; 
+                    predicate(&val, --first_temp); 
+                    next_temp = first_temp)
+                {
+                    *next_temp = std::move(*first_temp);
+                }
+                *next_temp = std::move(val);
+            }
+        }
+    }
+}
+
+template <typename TValueType, typename TPredicate>
+inline
+void guess_median_unchecked(TValueType* first, TValueType* mid, TValueType* last, TPredicate predicate)
+{
+    uint64_t count = (uint64_t) (last - first);
+    if (count > 40)
+    {
+        uint64_t step = (count + 1) >> 3;
+        uint64_t twoStep = step << 1;
+        networks::sort9bosenelsonparameter(*first, *(first + step), *(first + twoStep), *(mid - step), *mid, *(mid + step), *(last - twoStep), *(last - step), *last);
+    }
+    else
+    {
+        networks::sort3bosenelsonparameter(*first, *mid, *last);
+    }
+}
+
+template <typename TValueType, typename TPredicate>
+inline
+std::pair<TValueType*,TValueType*> partition_by_median_guess_unchecked(TValueType* first, TValueType* last, TPredicate predicate)
+{
+    TValueType* mid = first + ((last - first) >> 1);
+    guess_median_unchecked(first, mid, last - 1, predicate);
+    TValueType* pFirst = mid;
+    TValueType* pLast = pFirst + 1;
+
+    while (first < pFirst && !predicate(pFirst - 1, pFirst) && !predicate(pFirst, pFirst - 1))
+    {
+        --pFirst;
+    }
+    while (pLast < last && !predicate(pLast, pFirst) && !predicate(pFirst, pLast))
+    {
+        ++pLast;
+    }
+
+    TValueType* gFirst = pLast;
+    TValueType* gLast = pFirst;
+    while (true)
+    {
+        for ( ; gFirst < last; ++gFirst)
+        {
+            if (predicate(pFirst, gFirst))
+            {
+
+            }
+            else if (predicate(gFirst, pFirst))
+            {
+                break;
+            }
+            else if (pLast != gFirst)
+            {
+                std::iter_swap(pLast, gFirst);
+                ++pLast;
+            }
+            else
+            {
+                ++pLast;
+            }
+        }
+        for ( ; first < gLast; --gLast)
+        {
+            if (predicate(gLast - 1, pFirst))
+            {
+
+            }
+            else if (predicate(pFirst, gLast - 1))
+            {
+                break;
+            }
+            else if (--pFirst != gLast - 1)
+            {
+                std::iter_swap(pFirst, gLast - 1);
+            }
+        }
+
+        if (gLast == first && gFirst == last)
+        {
+            return (std::pair<TValueType*,TValueType*>(pFirst, pLast));
+        }
+
+        if (gLast == first)
+        {
+            if (pLast != gFirst)
+            {
+                std::iter_swap(pFirst, pLast);
+            }
+            ++pLast;
+            std::iter_swap(pFirst, gFirst);
+            ++pFirst;
+            ++gFirst;
+        }
+        else if (gFirst == last)
+        {
+            if (--gLast != --pFirst)
+            {
+                std::iter_swap(gLast, pFirst);
+            }
+            std::iter_swap(pFirst, --pLast);
+        }
+        else
+        {
+            std::iter_swap(gFirst, --gLast);
+            ++gFirst;
+        }
+    }
+}
+
+template <typename TValueType, typename TPredicate>
+inline
+void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredicate predicate)
+{
+    uint64_t count;
+    while (ISortMax < (count = (uint64_t) (last - first)) && ideal > 0)
+    {
+        auto mid = partition_by_median_guess_unchecked(first, last, predicate);
+
+        ideal = (ideal >> 1) + (ideal >> 2);
+
+        if (mid.first - first < last - mid.second)
+        {
+            sort_unchecked(first, mid.first, ideal, predicate);
+            first = mid.second;
+        }
+        else
+        {
+            sort_unchecked(mid.second, last, ideal, predicate);
+            last = mid.first;
+        }
+    }
+
+    if (count > ISortMax)
+    {
+        std::partial_sort(first, last, last);
+    }
+    else if(count >= 2)
+    {
+        insertion_sort_unchecked(first, last, predicate);
+    }
+}
+
+template <typename TValueType, typename TPredicate>
+void Quicksort_Copy_Msvc(TValueType* first, TValueType* last, TPredicate predicate)
+{
+    sort_unchecked(first, last, (uint64_t) (last - first), predicate);
 }
 
 }

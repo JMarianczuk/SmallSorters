@@ -289,6 +289,15 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         "",
                         "measurement::BaseCaseSortBlank"
                     );
+                    WriteCompleteSorterMeasureLine(
+                        gen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::QuicksortCopyMsvc, NetworkType::None,MeasureType::Complete),
+                        "measurement::QuicksortCopyMsvcWrapper",
+                        "",
+                        "measurement::BaseCaseSortBlank"
+                    );
                 }
             );
         }, "");

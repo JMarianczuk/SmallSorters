@@ -74,12 +74,12 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
     SortableRef_StlVersion* last = first + arraySize;
     for (SortableRef_StlVersion* next = first; ++next < last; )
     {
-        SortableRef_StlVersion val = *next;
+        SortableRef_StlVersion val = std::move(*next);
 
         if (val < *first)
         {
             std::move_backward(first, next, next+1);
-            *first = val;
+            *first = std::move(val);
         }
         else
         {
@@ -88,9 +88,9 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
                 val < *--first_temp; 
                 next_temp = first_temp)
             {
-                *next_temp = *first_temp;
+                *next_temp = std::move(*first_temp);
             }
-            *next_temp = val;
+            *next_temp = std::move(val);
         }
     }
 }
