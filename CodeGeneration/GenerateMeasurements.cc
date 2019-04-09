@@ -280,15 +280,15 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         "",
                         measureParams.SortMethod);
                     gen->WriteLine("");
-                    WriteCompleteSorterMeasureLine(
-                        gen,
-                        measureParams.Structs,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::Complete2, measureParams._BoseNelsonNetworkType),
-                        "quicksortcopy::Quicksort_Copy_Msvc",
-                        "",
-                        measureParams.SortMethod);
-                    gen->WriteLine("");
+                    // WriteCompleteSorterMeasureLine(
+                    //     gen,
+                    //     measureParams.Structs,
+                    //     "MeasureCompleteSorter",
+                    //     BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::Complete2, measureParams._BoseNelsonNetworkType),
+                    //     "quicksortcopy::Quicksort_Copy_Msvc",
+                    //     "",
+                    //     measureParams.SortMethod);
+                    // gen->WriteLine("");
                 },
                 [=]{
                     WriteCompleteSorterMeasureLine(

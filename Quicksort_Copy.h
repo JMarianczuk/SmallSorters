@@ -270,7 +270,7 @@ void Quicksort_Copy_Stl(TValueType* first, TValueType* last, TCompare compare)
 {
     if (first != last)
 	{
-        introsort_loop(first, last, custommath::intlog2((int) (last - first)) * 2, compare);
+        introsort_loop(first, last, (int64_t) custommath::intlog2((int) (last - first)) * 2, compare);
         final_insertion_sort(first, last, compare);
 	}
 }
