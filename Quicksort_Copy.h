@@ -15,6 +15,110 @@ namespace quicksortcopy
 
 #define S_threshold 16
 
+template <typename TValueType, typename TDistance, typename TCompare>
+void push_heap(TValueType* first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompare& compare)
+{
+    TDistance parent = (holeIndex - 1) / 2;
+    while (holeIndex > topIndex && compare(first + parent, &value))
+    {
+        *(first + holeIndex) = std::move(*(first + parent));
+        holeIndex = parent;
+        parent = (holeIndex - 1) / 2;
+    }
+    *(first + holeIndex) = std::move(value);
+}
+
+template <typename TValueType, typename TDistance, typename TCompare>
+void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TValueType value, TCompare compare)
+{
+    const TDistance topIndex = holeIndex;
+    TDistance secondChild = holeIndex;
+    while (secondChild < (len - 1) / 2)
+    {
+        secondChild = 2 * (secondChild + 1);
+        if (compare(first + secondChild, first + (secondChild - 1)))
+        {
+            secondChild--;
+        }
+        *(first + holeIndex) = std::move(*(first + secondChild));
+        holeIndex = secondChild;
+    }
+
+    if ((len & 1) == 0 && secondChild == (len - 2) / 2)
+    {
+        secondChild = 2 * (secondChild + 1);
+        *(first + holeIndex) = std::move(*(first + (secondChild - 1)));
+        holeIndex = secondChild - 1;
+    }
+
+    push_heap(first, holeIndex, topIndex, std::move(value), compare);
+}
+
+template <typename TValueType, typename TCompare>
+void make_heap(TValueType* first, TValueType* last, TCompare& compare)
+{
+    if (last - first < 2)
+    {
+        return;
+    }
+
+    const long int len = last - first;
+    long int parent = (len - 2) / 2;
+    while (true)
+    {
+        TValueType value = std::move(*(first + parent));
+        adjust_heap(first, parent, len, std::move(value), compare);
+        if (parent == 0)
+        {
+            return;
+        }
+        parent--;
+    }
+}
+
+template <typename TValueType, typename TCompare>
+inline
+void pop_heap(TValueType* first, TValueType* last, TValueType* result, TCompare& compare)
+{
+    TValueType value = std::move(*result);
+    *result = std::move(*first);
+    adjust_heap(first, (long int) 0, last - first, std::move(value), compare);
+}
+
+template <typename TValueType, typename TCompare>
+void sort_heap(TValueType* first, TValueType* last, TCompare& compare)
+{
+    while (last - first > 1)
+    {
+        --last;
+        pop_heap(first, last, last, compare);
+    }
+}
+
+
+template <typename TValueType, typename TCompare>
+void heap_select(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
+{
+    make_heap(first, middle, compare);
+    for (TValueType* i = middle; i < last; ++i)
+    {
+        if (compare(i, first))
+        {
+            pop_heap(first, middle, i, compare);
+        }
+    }
+}
+
+template <typename TValueType, typename TCompare>
+inline
+void partial_sort(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
+{
+    heap_select(first, middle, last, compare);
+    sort_heap(first, middle, compare);
+}
+
+//---------------------------------------------------------------------------------------------
+
 template<typename TValueType, typename TCompare>
 void unguarded_linear_insert(TValueType* last, TCompare compare)
 {
@@ -134,7 +238,8 @@ void move_median_to_first(TValueType* result, TValueType* one, TValueType* two, 
 }
 
 template<typename TValueType, typename TCompare>
-inline TValueType* unguarded_partition_pivot(TValueType* first, TValueType* last, TCompare compare)
+inline 
+TValueType* unguarded_partition_pivot(TValueType* first, TValueType* last, TCompare compare)
 {
     TValueType* mid = first + (last - first) / 2;
     move_median_to_first(first, first + 1, mid, last - 1, compare);
@@ -149,7 +254,7 @@ void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit, TCom
 	{
         if (depth_limit == 0)
         {
-            std::partial_sort(first, last, last);
+            partial_sort(first, last, last, compare);
             return;
         }
         --depth_limit;

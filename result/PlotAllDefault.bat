@@ -1,0 +1,1 @@
+call PlotAll.bat small_sorters_result.sqlite

@@ -14,7 +14,25 @@ template <typename TValueType>
 static inline
 void ConditionalSwap(TValueType& left, TValueType& right)
 {
-    if (left > right) {std::swap(left, right); }
+    if (right < left) { std::swap(left, right); }
+}
+
+template <>
+inline
+void ConditionalSwap<SortableRef_Tie>(SortableRef_Tie& left, SortableRef_Tie& right)
+{
+    std::tie(left, right) =
+        (right < left) ? std::make_tuple(right, left) : std::make_tuple(left, right);
+}
+
+template <>
+inline
+void ConditionalSwap<SortableRef_QMark>(SortableRef_QMark& left, SortableRef_QMark& right)
+{
+    bool r = (right < left);
+    SortableRef_QMark temp = left;
+    left = r ? right : left;
+    right = r ? temp : right;
 }
 
 template<>
@@ -56,8 +74,8 @@ void ConditionalSwap<SortableRef_JumpXchg>(SortableRef_JumpXchg& left, SortableR
         "xchg %[left_key],%[right_key]\n\t" 
         "xchg %[left_reference],%[right_reference]\n\t"
         "%=:\n\t" 
-        : [left_key] "+r"(left.key), [right_key] "+r"(right.key), [left_reference] "+r"(left.reference), [right_reference] "+r"(right.reference)
-        : 
+        : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=r"(left.reference), [right_reference] "=r"(right.reference)
+        : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference)
         : "cc" 
     );
 }
@@ -219,23 +237,7 @@ void ConditionalSwap_ClangVersion_Generic(TValueType& left, TValueType& right, T
     right = *rightPointer;
 }
 
-template <>
-inline
-void ConditionalSwap<SortableRef_Tie>(SortableRef_Tie& left, SortableRef_Tie& right)
-{
-    std::tie(left, right) =
-        (left > right) ? std::make_tuple(right, left) : std::make_tuple(left, right);
-}
 
-template <>
-inline
-void ConditionalSwap<SortableRef_QMark>(SortableRef_QMark& left, SortableRef_QMark& right)
-{
-    bool r = (left > right);
-    SortableRef_QMark temp = left;
-    left = r ? right : left;
-    right = r ? temp : right;
-}
 
 }
 

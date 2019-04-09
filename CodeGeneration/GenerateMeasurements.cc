@@ -117,14 +117,18 @@ void WriteMeasureLine(
     const std::vector<SortableStruct*>* structs, 
     std::string measureMethod, 
     std::string sorter,
-    std::string sortMethod)
+    std::string sortMethod,
+    bool measureRandomGeneration = true)
 {
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">);");
     }
-    WriteMeasureRandomLine(gen, structs, sorter);
+    if (measureRandomGeneration) 
+    {
+        WriteMeasureRandomLine(gen, structs, sorter);
+    }
 }
 
 
@@ -219,7 +223,8 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         measureParams.Structs,
                         "MeasureInRow",
                         BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::InRow, measureParams._BoseNelsonNetworkType),
-                        measureParams.SortMethod);
+                        measureParams.SortMethod,
+                        false);
                     gen->WriteLine("");
                 }
             );

@@ -17,6 +17,7 @@
 #include "BoseNelson.generated.h"
 #include "BoseNelsonParallel.generated.h"
 #include "BoseNelsonParameter.generated.h"
+#include "Batcher.generated.h"
 #include "VerifyNetworks.h"
 #include "DebugHelper.h"
 
@@ -70,7 +71,18 @@ void VerifyNetworks()
 			numberOfIncorrectNetworks += 1;
 		}
 	}
-	debug::WriteLine("finished verification. ", std::to_string(60 - numberOfIncorrectNetworks), " networks out of 60 sorted correctly.");
+	debug::WriteLine("verifying batcher networks");
+	for (int arraySize = 2; arraySize < 17; arraySize += 1)
+	{
+		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		bool result = verification::VerifyNetwork(arraySize, &networks::sortNbatcher<int>);
+		if (!result)
+		{
+			debug::WriteLine("incorrect network: 'batcher' for size '", std::to_string(arraySize), "'.");
+			numberOfIncorrectNetworks += 1;
+		}
+	}
+	debug::WriteLine("finished verification. ", std::to_string(75 - numberOfIncorrectNetworks), " networks out of 75 sorted correctly.");
 }
 }
 

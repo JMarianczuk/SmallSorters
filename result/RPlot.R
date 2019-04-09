@@ -5,6 +5,7 @@ library(ggplot2)
 
 option_list = list(
     make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot"),
+    make_option(c("--dbName"), type="character", default="small_sorters_result.sqlite", help="name of the database to get the data from"),
     make_option(c("--tableName"), type="character", default="normalSort", help="name of table to get data from"),
     make_option(c("-f", "--filter"), type="character", default="", help="additional optional filter"),
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
@@ -14,19 +15,16 @@ option_list = list(
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
 
-con <- dbConnect(SQLite(), "small_sorters_result.sqlite")
+con <- dbConnect(SQLite(), options$dbName)
 
-query <- ""
-if (options$complete) {
-    query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from completeSort where c = 0");
-} else {
-    query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from", options$tableName, "where a =", options$array_size, "and c = 0");
+query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%'")
+if (!options$complete) {
+    query <- paste(query, "and a =", options$array_size)
 }
 
 if (options$filter != "") {
     query <- paste(query, "and", options$filter)
 }
-query <- paste(query, "and s not like '%JXc%' and s not like '%6Cm%'")
 res <- dbGetQuery(con, query)
 
 array_size_string <- paste(options$array_size)
@@ -40,7 +38,7 @@ if (!options$complete) {
 filename <- paste(filename, ".pdf", sep = "", collapse = "")
 
 if (options$title == "") {
-    plot_title <- paste("ArraySize = ", options$array_size, sep = "", collapse = "")
+    plot_title <- paste("ArraySize =", options$array_size)
 } else {
     plot_title <- options$title
 }

@@ -1,2 +1,2 @@
-call PlotCompleteSort.bat
-call PlotNormalSort.bat
+call PlotCompleteSort.bat %1
+call PlotNormalSort.bat %1

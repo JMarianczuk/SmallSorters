@@ -194,13 +194,19 @@ bool IteratorCompare(TValueType* left, TValueType* right)
 }
 
 template <typename TValueType>
+bool NormalCompare(TValueType& left, TValueType& right)
+{
+    return left < right;
+}
+
+template <typename TValueType>
 void StdSortWrapper(
     TValueType* first,
     TValueType* last,
     bool(*compareFunc)(TValueType* left, TValueType* right),
     void(*sortFunc)(TValueType*, size_t))
 {
-    std::sort(first, last, [](TValueType& left, TValueType& right){return left < right;});
+    std::sort(first, last, &NormalCompare<TValueType>);
 }
 
 template <typename TValueType>

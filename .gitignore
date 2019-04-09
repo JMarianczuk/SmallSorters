@@ -56,3 +56,5 @@ result/small_sorters_result.sqlite-journal
 
 Network_Size_*.jpg
 .vscode/*
+
+*.sqlite
