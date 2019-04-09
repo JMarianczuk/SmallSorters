@@ -8,7 +8,7 @@
 #include "BoseNelsonParameter.generated.h"
 #include "NetworkSort.h"
 #include "Randomisation.generated.h"
-#include "QuickSort_Copy.h"
+#include "Quicksort_Copy.h"
 #include "Measure.h"
 #include "DebugHelper.h"
 
