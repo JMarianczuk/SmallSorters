@@ -150,6 +150,24 @@ void WriteCompleteSorterMeasureLine(
     WriteMeasureRandomLine(gen, structs, sorter);
 }
 
+void WriteCompleteSorterWrapperMeasureLine(
+    CodeGenerator* gen,
+    const std::vector<SortableStruct*>* structs,
+    std::string measureMethod,
+    std::string sorter,
+    std::string sortMethod,
+    std::string additionalTemplateParameters,
+    std::string baseCaseSortMethod)
+{
+    for (SortableStruct *sortableStruct : *structs)
+    {
+        // gen->WriteLine("debug::WriteLine(\"", sorter, "\");"); //DEBUG
+        gen->WriteLine("randomisation::SetSeed(seed);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ", &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
+    }
+    WriteMeasureRandomLine(gen, structs, sorter);
+}
+
 void WriteMeasureMethod(
     CodeGenerator *gen,
     std::string measureMethodName,
@@ -195,6 +213,7 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
             "BoseNelsonParameter.generated.h",
             "InsertionSort.h",
             "QuickSort.h",
+            "StdSortWrapper.h",
             "Randomisation.h");
         gen->WriteLine("");
 
@@ -291,7 +310,7 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                     // gen->WriteLine("");
                 },
                 [=]{
-                    WriteCompleteSorterMeasureLine(
+                    WriteCompleteSorterWrapperMeasureLine(
                         gen,
                         &sRef,
                         "MeasureCompleteSorter",
@@ -300,7 +319,7 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen)
                         "",
                         "measurement::BaseCaseSortBlank"
                     );
-                    WriteCompleteSorterMeasureLine(
+                    WriteCompleteSorterWrapperMeasureLine(
                         gen,
                         &sRef,
                         "MeasureCompleteSorter",

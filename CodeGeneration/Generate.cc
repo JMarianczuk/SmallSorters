@@ -187,6 +187,7 @@ void GenerateSampleSort()
             "inttypes.h");
         sampleSortGen->WriteLine("");
         sampleSortGen->WriteIncludeQuotes(
+            "InsertionSort.h",
             "DebugHelper.h",
             "CustomMath.h");
         sampleSortGen->WriteNamespace("samplesort", [=]{

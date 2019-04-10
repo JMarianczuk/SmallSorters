@@ -13,6 +13,7 @@
 #include <cstring>
 #include <inttypes.h>
 
+#include "InsertionSort.h"
 #include "DebugHelper.h"
 #include "CustomMath.h"
 namespace samplesort

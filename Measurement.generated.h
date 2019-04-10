@@ -22,6 +22,7 @@
 #include "BoseNelsonParameter.generated.h"
 #include "InsertionSort.h"
 #include "QuickSort.h"
+#include "StdSortWrapper.h"
 #include "Randomisation.h"
 
 namespace measurement
@@ -1038,11 +1039,11 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef_ArrayIndex_FirstCheck>(perf, numberOfIterations, arraySize, measureIteration, "I       -C KR AIF");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -C KR Def", &measurement::StdSortWrapper<SortableRef>, &measurement::BaseCaseSortBlank<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -C KR Def", &measurement::StdSortWrapper, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -C KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -C KR Def", &measurement::QuicksortCopyWrapper<SortableRef>, &measurement::BaseCaseSortBlank<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -C KR Def", &measurement::QuicksortCopyWrapper, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -C KR Def");
 }

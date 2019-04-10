@@ -30,16 +30,17 @@ void Measure(
     
     int numberOfBadSorts = 0;
     randomisation::GenerateRandomArray(arr, arraySize);
-    sortFunc(arr, arraySize);
-    if (!IsSorted(arr, arraySize)) 
-    {
-        numberOfBadSorts += 1;
-    }
-
     uint64_t key_iter = 1;
     uint64_t ref_iter = 1;
     uint64_t key_value;
     uint64_t ref_value;
+    PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
+    sortFunc(arr, arraySize);
+    if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value)) 
+    {
+        numberOfBadSorts += 1;
+    }
+
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
@@ -193,41 +194,6 @@ bool IteratorCompare(TValueType* left, TValueType* right)
     return *left < *right;
 }
 
-template <typename TValueType>
-bool NormalCompare(TValueType& left, TValueType& right)
-{
-    return left < right;
-}
-
-template <typename TValueType>
-void StdSortWrapper(
-    TValueType* first,
-    TValueType* last,
-    bool(*compareFunc)(TValueType* left, TValueType* right),
-    void(*sortFunc)(TValueType*, size_t))
-{
-    std::sort(first, last, &NormalCompare<TValueType>);
-}
-
-template <typename TValueType>
-void QuicksortCopyWrapper(
-    TValueType* first,
-    TValueType* last,
-    bool(*compareFunc)(TValueType* left, TValueType* right),
-    void(*sortFunc)(TValueType*, size_t))
-{
-    quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
-}
-
-template <typename TValueType>
-void QuicksortCopyMsvcWrapper(
-    TValueType* first,
-    TValueType* last,
-    bool(*compareFunc)(TValueType* left, TValueType* right),
-    void(*sortFunc)(TValueType*, size_t))
-{
-    quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc);
-}
 
 template <typename TValueType>
 void MeasureCompleteSorter(

@@ -150,8 +150,6 @@ int main(int argumentCount, char** arguments)
     printf("In seconds: %" PRIi64 "\n", secondsElapsed);
     printf("In minutes: %" PRIi64 "\n", minutesElapsed);
 
-    debug::WriteLine("times partial sort was called: ", std::to_string(quicksortcopy::partialSort_Times));
-
     // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
     // delete perf_cache_misses;
 
