@@ -246,7 +246,6 @@ TValueType* unguarded_partition_pivot(TValueType* first, TValueType* last, TComp
     return unguarded_partition(first + 1, last, first, compare);
 }
 
-
 template <typename TValueType, typename TSize, typename TCompare>
 void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit, TCompare compare)
 {
