@@ -1,2 +1,3 @@
 ::CommandLineToolbox removeLines -i test-O3.s -o test-O3_slim.s -p ^\s*[0-9]+:.*$#^\s*\.loc\s.*$
-CommandLineToolbox removeLines -i test-O3.s -o test-O3_slim.s -p ^^\s*[0-9]+\s*\.L[BVF].*$#^^\s*[0-9]+\s*\.loc\s.*$#^^.*\.p2align.*$#^^\s*[0-9]+\s*\.cfi_.*$#^^\s*[0-9]*:/usr/include/.*$#^^\s*[0-9]+\s*\#(NO_)?APP.*$#^^\s*[0-9]+\s*\#\s0\"\"\s2.*$#^^\s*[0-9]+\s*\.file.*$#^^\s*[0-9]+.*\.uleb.*$
+::CommandLineToolbox removeLines -i test-O3.s -o test-O3_slim.s -p ^^\s*[0-9]+\s*\.L[BVF].*$#^^\s*[0-9]+\s*\.loc\s.*$#^^.*\.p2align.*$#^^\s*[0-9]+\s*\.cfi_.*$#^^\s*[0-9]*:/usr/include/.*$#^^\s*[0-9]+\s*\#(NO_)?APP.*$#^^\s*[0-9]+\s*\#\s0\"\"\s2.*$#^^\s*[0-9]+\s*\.file.*$#^^\s*[0-9]+.*\.uleb.*$
+CommandLineToolbox removeLines -i test-O3.s -o test-O3_slim.s -p ^^\s*[0-9]+\s*\.L[BVF].*$#^^\s*[0-9]+\s*\.loc\s.*$#^^.*\.p2align.*$#^^\s*[0-9]+\s*\.cfi_.*$#^^\s*[0-9]+\s*\#(NO_)?APP.*$#^^\s*[0-9]+\s*\#\s0\"\"\s2.*$#^^\s*[0-9]+\s*\.file.*$#^^\s*[0-9]+.*\.uleb.*$#^^\s*[0-9]+:[a-zA-Z/]+.*$

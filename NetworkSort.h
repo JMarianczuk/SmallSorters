@@ -154,7 +154,7 @@ template<>
 inline
 void ConditionalSwap<Sortable_ThreeCmovRegisterTemp>(Sortable_ThreeCmovRegisterTemp& left, Sortable_ThreeCmovRegisterTemp& right)
 {
-    register uint64_t tmp; 
+    uint64_t tmp; 
     __asm__ ( 
         "cmpq %[left_key],%[right_key]\n\t" 
         "cmovbq %[left_key],%[tmp]\n\t"
@@ -169,8 +169,8 @@ template<>
 inline
 void ConditionalSwap<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovRegisterTemp& left, SortableRef_SixCmovRegisterTemp& right)
 {
-    register uint64_t tmp;
-    register uint64_t tmpRef;
+    uint64_t tmp;
+    uint64_t tmpRef;
     __asm__ ( 
         "cmpq %[left_key],%[right_key]\n\t" 
         "cmovbq %[left_key],%[tmp]\n\t"
@@ -189,9 +189,9 @@ template<>
 inline
 void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, SortableRef_ClangVersion& right)
 {
-    register SortableRef_ClangVersion* leftPointer = &left;
-    register SortableRef_ClangVersion* rightPointer = &right;
-    register uint64_t rightKey = right.key;
+    SortableRef_ClangVersion* leftPointer = &left;
+    SortableRef_ClangVersion* rightPointer = &right;
+    uint64_t rightKey = right.key;
     SortableRef_ClangVersion tmp = left;
     __asm__ volatile(
         "cmpq %[tmp_key],%[right_key]\n\t"
@@ -215,10 +215,10 @@ template<typename TValueType, typename TPredicate>
 static inline
 void ConditionalSwap_ClangVersion_Generic(TValueType& left, TValueType& right, TPredicate predicate)
 {
-    register TValueType* leftPointer = &left;
-    register TValueType* rightPointer = &right;
+    TValueType* leftPointer = &left;
+    TValueType* rightPointer = &right;
     TValueType temp = left;
-    register int predicateResult = (int) predicate(right, temp);
+    int predicateResult = (int) predicate(right, temp);
     __asm__ volatile(
         "cmp $0,%[predResult]\n\t"
         "cmovneq %[right_pointer],%[left_pointer]\n\t"

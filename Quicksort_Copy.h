@@ -257,8 +257,7 @@ void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit, TCom
             return;
         }
         --depth_limit;
-        TValueType* cut =
-        unguarded_partition_pivot(first, last, compare);
+        TValueType* cut = unguarded_partition_pivot(first, last, compare);
         introsort_loop(cut, last, depth_limit, compare);
         last = cut;
 	}

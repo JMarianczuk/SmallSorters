@@ -43,7 +43,7 @@ if (options$title == "") {
     plot_title <- options$title
 }
 thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
-    labs(x = "Sorting algorithm", y = "Cpu cycles needed", title = plot_title) +
+    labs(x = "Sorting algorithm", y = "Cpu cycles per iteration", title = plot_title) +
     geom_boxplot() +
     coord_flip() + 
     facet_grid(rows = vars(sortergroup), scales = "free", space = "free")  +

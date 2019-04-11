@@ -58,3 +58,5 @@ Network_Size_*.jpg
 .vscode/*
 
 *.sqlite
+test-O3_slim_std.s
+test-O3_std.s
