@@ -19,7 +19,8 @@ enum class Sorter
     SortNetwork,
     StdSort,
     QuicksortCopy,
-    QuicksortCopyMsvc
+    QuicksortCopyMsvc,
+    SampleSort
 };
 
 enum class NetworkType

@@ -24,6 +24,9 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
         case Sorter::QuicksortCopyMsvc:
             result += "QSortMs -C ";
             return result;
+        case Sorter::SampleSort:
+            result += "S";
+            break;
     }
     result += " ";
     switch (networkType)
@@ -279,7 +282,8 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeG
         }, "");
         completeGen->WriteIncludeQuotes("Measurement.generated.h");
         completeGen->WriteNamespace("measurement", [=]{
-            std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]};
+            std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
+            std::vector<SortableStruct*> bRef = {(*sortableStructs())[5]}; // 4CS
             WriteMeasureMethod(
                 completeGen,
                 completeMeasureName,
@@ -322,6 +326,15 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeG
                         "measurement::QuicksortCopyWrapper",
                         "",
                         "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        completeGen,
+                        &bRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete),
+                        "measurement::SampleSortWrapper",
+                        "",
+                        "networks::sortNbest"
                     );
                 }
             );

@@ -2,6 +2,8 @@
 
 #include "StdSortWrapper.h"
 #include "Quicksort_Copy.h"
+#include "SampleSort.generated.h"
+#include "StructHelpers.generated.h"
 
 namespace measurement
 {
@@ -15,6 +17,12 @@ namespace measurement
     bool IteratorCompare(TValueType* left, TValueType* right)
     {
         return *left < *right;
+    }
+
+    template <typename TValueType>
+    bool KeySortableCompare(uint64_t& key, TValueType& value)
+    {
+        return key < GetKey(value);
     }
 
     void StdSortWrapper(
@@ -44,5 +52,14 @@ namespace measurement
         quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc, sortFunc);
     }
 
+    void SampleSortWrapper(
+        SortableRef_FourCmovTemp_Split* first,
+        SortableRef_FourCmovTemp_Split* last,
+        bool(*compareFunc)(SortableRef_FourCmovTemp_Split* left,SortableRef_FourCmovTemp_Split* right),
+        void(*sortFunc)(SortableRef_FourCmovTemp_Split*, size_t))
+    {
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
+    }
+    
 }
 

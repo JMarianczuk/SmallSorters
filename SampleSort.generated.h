@@ -96,13 +96,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -122,13 +116,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -236,20 +224,8 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -271,13 +247,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -400,27 +370,9 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -444,13 +396,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -588,34 +534,10 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -641,13 +563,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -800,41 +716,11 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
 		predicateResult4 = (int) predicateLess(splitter04x, A[current + 4]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state4)
-			: "0"(state4), [predResult] "r"(predicateResult4), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
+		state4 = (state4 << 1) + predicateResult4;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -862,13 +748,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -983,13 +863,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1009,13 +883,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1123,20 +991,8 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -1158,13 +1014,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1287,27 +1137,9 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -1331,13 +1163,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1475,34 +1301,10 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -1528,13 +1330,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1687,41 +1483,11 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
 		predicateResult4 = (int) predicateLess(splitter04x, A[current + 4]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state4)
-			: "0"(state4), [predResult] "r"(predicateResult4), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
+		state4 = (state4 << 1) + predicateResult4;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -1749,13 +1515,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1870,13 +1630,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -1896,13 +1650,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2010,20 +1758,8 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -2045,13 +1781,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2174,27 +1904,9 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -2218,13 +1930,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2362,34 +2068,10 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -2415,13 +2097,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2574,41 +2250,11 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
 		predicateResult4 = (int) predicateLess(splitter04x, A[current + 4]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state4)
-			: "0"(state4), [predResult] "r"(predicateResult4), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
+		state4 = (state4 << 1) + predicateResult4;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -2636,13 +2282,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2757,13 +2397,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2783,13 +2417,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -2897,20 +2525,8 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -2932,13 +2548,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3061,27 +2671,9 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -3105,13 +2697,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3249,34 +2835,10 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -3302,13 +2864,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3461,41 +3017,11 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
 		predicateResult4 = (int) predicateLess(splitter04x, A[current + 4]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state4)
-			: "0"(state4), [predResult] "r"(predicateResult4), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
+		state4 = (state4 << 1) + predicateResult4;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -3523,13 +3049,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3644,13 +3164,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3670,13 +3184,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3784,20 +3292,8 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -3819,13 +3315,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -3948,27 +3438,9 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -3992,13 +3464,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -4136,34 +3602,10 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -4189,13 +3631,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}
@@ -4348,41 +3784,11 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
 		predicateResult3 = (int) predicateLess(splitter03x, A[current + 3]);
 		predicateResult4 = (int) predicateLess(splitter04x, A[current + 4]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state1)
-			: "0"(state1), [predResult] "r"(predicateResult1), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state2)
-			: "0"(state2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state3)
-			: "0"(state3), [predResult] "r"(predicateResult3), [zero] "r"(zero)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state4)
-			: "0"(state4), [predResult] "r"(predicateResult4), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
+		state1 = (state1 << 1) + predicateResult1;
+		state2 = (state2 << 1) + predicateResult2;
+		state3 = (state3 << 1) + predicateResult3;
+		state4 = (state4 << 1) + predicateResult4;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 		*buckets[state1] = A[current + 1];
@@ -4410,13 +3816,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"rcl $1,%[state]\n\t"
-			: [state] "=&r"(state0)
-			: "0"(state0), [predResult] "r"(predicateResult0), [zero] "r"(zero)
-			: "cc"
-		);
+		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
 		buckets[state0]++;
 	}

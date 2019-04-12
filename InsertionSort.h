@@ -58,7 +58,7 @@ void InsertionSort<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* f
         auto next_temp = current;
         auto val = *current;
         auto first_temp = next_temp - 1;
-        while (val < *first_temp && first_temp >= first)
+        while (first_temp >= first && val < *first_temp)
         {
             *next_temp = *first_temp;
             next_temp = first_temp;

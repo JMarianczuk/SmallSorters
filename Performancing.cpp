@@ -50,14 +50,19 @@ Performancing::~Performancing() {
 	close(_fileDescriptor);
 }
 void Performancing::StartMeasuring() {
+#ifndef IGNORE_MEASUREMENT
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
+#endif
 }
 void Performancing::StopMeasuring() {
+#ifndef IGNORE_MEASUREMENT
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
+#endif
 }
 
 uint64_t Performancing::GetValue() {
+#ifndef IGNORE_MEASUREMENT
 	auto _ = read(_fileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 
 	for (int i = 0; i < _readFormat->number; i += 1)
@@ -67,6 +72,9 @@ uint64_t Performancing::GetValue() {
 			return _readFormat->values[i].value;
 		}
 	}
+#else
+	return 0;
+#endif
 }
 
 PerformanceMetric Performancing::GetMetric() {
