@@ -180,7 +180,9 @@ void CPlusPlusCodeGenerator::WriteNamespace(std::string namespaceName, std::func
 void CPlusPlusCodeGenerator::WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent)
 {
     WriteLine("namespace ", namespaceName);
-    WriteBlock(writeFunc, indent);
+    WriteLine("{");
+    WriteIndented(writeFunc, indent);
+    WriteLine("} // namespace ", namespaceName);
 }
 void CPlusPlusCodeGenerator::WriteInclude(std::vector<std::string> fileNames, std::string beforeFileName, std::string afterFileName)
 {

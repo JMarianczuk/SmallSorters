@@ -567,6 +567,6 @@ void sortNbosenelson(TValueType* A, size_t n)
 			break;
 	}
 }
-}
+} // namespace networks
 
 #endif // BOSENELSON_GENERATED_H

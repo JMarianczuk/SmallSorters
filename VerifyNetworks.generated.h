@@ -84,6 +84,6 @@ void VerifyNetworks()
 	}
 	debug::WriteLine("finished verification. ", std::to_string(75 - numberOfIncorrectNetworks), " networks out of 75 sorted correctly.");
 }
-}
+} // namespace verification
 
 #endif // VERIFY_NETWORKS_GENERATED_H

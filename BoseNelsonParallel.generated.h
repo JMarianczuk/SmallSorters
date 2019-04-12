@@ -567,6 +567,6 @@ void sortNbosenelsonparallel(TValueType* A, size_t n)
 			break;
 	}
 }
-}
+} // namespace networks
 
 #endif // BOSENELSON_PARALLEL_GENERATED_H

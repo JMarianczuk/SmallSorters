@@ -555,6 +555,6 @@ void sortNbatcher(TValueType* A, size_t n)
 			break;
 	}
 }
-}
+} // namespace networks
 
 #endif // BATCHER_GENERATED_H

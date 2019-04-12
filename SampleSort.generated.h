@@ -4453,6 +4453,6 @@ void SampleSort3Splitters5OversamplingFactor5BlockSize(
 {
 	SampleSortInternal3Splitters5OversamplingFactor5BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-}
+} // namespace samplesort
 
 #endif // SAMPLESORT_GENERATED_H

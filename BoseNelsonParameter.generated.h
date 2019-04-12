@@ -323,6 +323,6 @@ void sortNbosenelsonparameter(TValueType* A, size_t n)
 			break;
 	}
 }
-}
+} // namespace networks
 
 #endif // BOSENELSON_PARAMETER_GENERATED_H

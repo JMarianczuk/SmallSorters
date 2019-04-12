@@ -10,7 +10,7 @@
 namespace codegeneration
 {
 
-void WriteRandomisation(CPlusPlusCodeGenerator* gen);
+void WriteRandomisation(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeGenerator* implGen);
 
 }
 

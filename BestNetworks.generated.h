@@ -537,6 +537,6 @@ void sortNbest(TValueType* A, size_t n)
 			break;
 	}
 }
-}
+} // namespace networks
 
 #endif // BESTNETWORKS_GENERATED_H

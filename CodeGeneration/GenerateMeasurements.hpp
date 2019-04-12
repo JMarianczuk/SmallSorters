@@ -53,7 +53,7 @@ struct MeasureParams
     BoseNelsonNetworkType _BoseNelsonNetworkType;
 };
 
-void GenerateMeasurementMethod(CPlusPlusCodeGenerator* gen);
+void GenerateMeasurementMethod(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeGenerator* normalGen, CPlusPlusCodeGenerator* inrowGen, CPlusPlusCodeGenerator* completeGen, CPlusPlusCodeGenerator* sampleSortGen);
 
 }
 

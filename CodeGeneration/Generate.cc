@@ -40,10 +40,13 @@ void GenerateStructHelpers()
 
 void GenerateRandomisation()
 {
-    auto randomisationGen = 
+    auto randomisationHeaderGen = 
         new CPlusPlusCodeGenerator("../../Randomisation.generated.h");
-    WriteRandomisation(randomisationGen);
-    delete randomisationGen;
+    auto randomisationImplGen =
+        new CPlusPlusCodeGenerator("../../Randomisation.generated.cpp");
+    WriteRandomisation(randomisationHeaderGen, randomisationImplGen);
+    delete randomisationHeaderGen;
+    delete randomisationImplGen;
 }
 
 void GenerateBoseNelsonNetworkWithArrangement(
@@ -170,10 +173,22 @@ void GenerateNetworks_ParameterStyle()
 
 void GenerateMeasurements()
 {
-    auto measurementGen = 
+    auto measurementHeaderGen = 
         new CPlusPlusCodeGenerator("../../Measurement.generated.h");
-    GenerateMeasurementMethod(measurementGen);
-    delete measurementGen;
+    auto normalMeasurementGen =
+        new CPlusPlusCodeGenerator("../../MeasurementNormal.generated.cpp");
+    auto inrowMeasurementGen =
+        new CPlusPlusCodeGenerator("../../MeasurementInRow.generated.cpp");
+    auto completeMeasurementGen =
+        new CPlusPlusCodeGenerator("../../MeasurementComplete.generated.cpp");
+    auto sampleSortMeasurementGen =
+        new CPlusPlusCodeGenerator("../../MeasurementSampleSort.generated.cpp");
+    GenerateMeasurementMethod(measurementHeaderGen, normalMeasurementGen, inrowMeasurementGen, completeMeasurementGen, sampleSortMeasurementGen);
+    delete measurementHeaderGen;
+    delete normalMeasurementGen;
+    delete inrowMeasurementGen;
+    delete completeMeasurementGen;
+    delete sampleSortMeasurementGen;
 }
 
 void GenerateSampleSort()
