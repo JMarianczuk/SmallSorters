@@ -3,6 +3,7 @@
 #define INSERTION_SORT_H
 
 #include <utility>
+#include <algorithm>
 
 #include "Sortable.generated.h"
 

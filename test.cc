@@ -1,6 +1,14 @@
 
-#include "StdSortWrapper.h"
+#include "SampleSort.generated.h"
+#include "BestNetworks.generated.h"
+#include "StructHelpers.generated.h"
 #include "Randomisation.generated.h"
+#include "ArrayHelpers.h"
+
+bool PredicateLess(uint64_t& key, SortableRef& value)
+{
+    return key < value.key;
+}
 
 
 void Test()
@@ -8,7 +16,7 @@ void Test()
     int arraySize = 1024 * 16;
     SortableRef* arr = (SortableRef*) malloc(sizeof(SortableRef) * arraySize);
     randomisation::GenerateRandomArray(arr, arraySize);
-    quicksortcopy::Quicksort_Copy_Stl(arr, arr + arraySize, &measurement::IteratorCompare<SortableRef>);
+    samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize(arr, arraySize, 16, &networks::sortNbest<SortableRef>, &PredicateLess, &GetKey<SortableRef>);
     if (!IsSorted(arr, arraySize))
     {
         debug::WriteLine("Wrong sort qs copy");
@@ -16,15 +24,5 @@ void Test()
     else
     {
         debug::WriteLine("Correct sort qs copy");
-    }
-    randomisation::GenerateRandomArray(arr, arraySize);
-    std::sort(arr, arr + arraySize, &measurement::NormalCompare<SortableRef>);
-    if (!IsSorted(arr, arraySize))
-    {
-        debug::WriteLine("Wrong sort std sort");
-    }
-    else
-    {
-        debug::WriteLine("Correct sort std sort");
     }
 }

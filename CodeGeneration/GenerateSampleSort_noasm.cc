@@ -33,24 +33,24 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
     for (int i = 0; i < blockSize; i += 1)
     {
         std::string iStr = std::to_string(i);
-        gen->WriteLine("state", iStr, " = 0;");
-        gen->WriteLine("predicateResult", iStr, " = (int) predicateLess(splitter1, A[current", GetPlusI(i), "]);");
+        // gen->WriteLine("state", iStr, " = 0;");
         gen->WriteLine("splitter0", iStr, "x = splitter0;");
+        gen->WriteLine("predicateResult", iStr, " = (int) predicateLess(splitter1, A[current", GetPlusI(i), "]);");
     }
     for (int i = 0; i < blockSize; i += 1)
     {
         std::string iStr = std::to_string(i);
-        // gen->WriteLine("splitter0", iStr, "x = predicateResult", iStr, " ? splitter2 : splitter0", iStr, "x;");
-        // gen->WriteLine("state", iStr, " = predicateResult", iStr, " << 1;");
+        gen->WriteLine("splitter0", iStr, "x = predicateResult", iStr, " ? splitter2 : splitter0", iStr, "x;");
+        gen->WriteLine("state", iStr, " = predicateResult", iStr, " << 1;");
 
-        WriteAsmBlock(gen, [=]{
-            WriteAsmLine(gen, "cmp %[predResult],%[zero]");
-            WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
-            WriteAsmLine(gen, "rcl $1,%[state]");
-            gen->WriteLine(": [splitterx] \"=&r\"(splitter0", iStr, "x), [state] \"=&r\"(state", iStr, ")");
-            gen->WriteLine(": \"0\"(splitter0", iStr, "x), \"1\"(state", iStr, "), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
-            gen->WriteLine(": \"cc\"");
-        });
+        // WriteAsmBlock(gen, [=]{
+        //     WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+        //     WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
+        //     WriteAsmLine(gen, "rcl $1,%[state]");
+        //     gen->WriteLine(": [splitterx] \"=&r\"(splitter0", iStr, "x), [state] \"=&r\"(state", iStr, ")");
+        //     gen->WriteLine(": \"0\"(splitter0", iStr, "x), \"1\"(state", iStr, "), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
+        //     gen->WriteLine(": \"cc\"");
+        // });
     }
     for (int i = 0; i < blockSize; i += 1)
     {
@@ -60,15 +60,15 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
     for (int i = 0; i < blockSize; i += 1)
     {
         std::string iStr = std::to_string(i);
-        // gen->WriteLine("state", iStr, " = state", iStr, " & predicateResult", iStr, ";");
+        gen->WriteLine("state", iStr, " = state", iStr, " & predicateResult", iStr, ";");
 
-        WriteAsmBlock(gen, [=]{
-            WriteAsmLine(gen, "cmp %[predResult],%[zero]");
-            WriteAsmLine(gen, "rcl $1,%[state]");
-            gen->WriteLine(": [state] \"=&r\"(state", iStr, ")");
-            gen->WriteLine(": \"0\"(state", iStr, "), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
-            gen->WriteLine(": \"cc\"");
-        });
+        // WriteAsmBlock(gen, [=]{
+        //     WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+        //     WriteAsmLine(gen, "rcl $1,%[state]");
+        //     gen->WriteLine(": [state] \"=&r\"(state", iStr, ")");
+        //     gen->WriteLine(": \"0\"(state", iStr, "), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
+        //     gen->WriteLine(": \"cc\"");
+        // });
     }
     for (int i = 0; i < blockSize; i += 1)
     {

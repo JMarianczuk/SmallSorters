@@ -64,9 +64,9 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -74,13 +74,13 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -189,9 +189,9 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -199,16 +199,16 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -338,9 +338,9 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -348,19 +348,19 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -511,9 +511,9 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -521,22 +521,22 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -708,9 +708,9 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters1OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -718,25 +718,25 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
-	int state4;
-	int predicateResult4;
-	TKey splitter04x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
+	register int state4;
+	register int predicateResult4;
+	register TKey splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -951,9 +951,9 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -961,13 +961,13 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -1076,9 +1076,9 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -1086,16 +1086,16 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -1225,9 +1225,9 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -1235,19 +1235,19 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -1398,9 +1398,9 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -1408,22 +1408,22 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -1595,9 +1595,9 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters2OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -1605,25 +1605,25 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
-	int state4;
-	int predicateResult4;
-	TKey splitter04x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
+	register int state4;
+	register int predicateResult4;
+	register TKey splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -1838,9 +1838,9 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -1848,13 +1848,13 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -1963,9 +1963,9 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -1973,16 +1973,16 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -2112,9 +2112,9 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -2122,19 +2122,19 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -2285,9 +2285,9 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -2295,22 +2295,22 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -2482,9 +2482,9 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters3OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -2492,25 +2492,25 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
-	int state4;
-	int predicateResult4;
-	TKey splitter04x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
+	register int state4;
+	register int predicateResult4;
+	register TKey splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -2725,9 +2725,9 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -2735,13 +2735,13 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -2850,9 +2850,9 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -2860,16 +2860,16 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -2999,9 +2999,9 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -3009,19 +3009,19 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -3172,9 +3172,9 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -3182,22 +3182,22 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -3369,9 +3369,9 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters4OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -3379,25 +3379,25 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
-	int state4;
-	int predicateResult4;
-	TKey splitter04x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
+	register int state4;
+	register int predicateResult4;
+	register TKey splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -3612,9 +3612,9 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -3622,13 +3622,13 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -3737,9 +3737,9 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -3747,16 +3747,16 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -3886,9 +3886,9 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -3896,19 +3896,19 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -4059,9 +4059,9 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -4069,22 +4069,22 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -4256,9 +4256,9 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	}
 	TKey splitters[3];
 	Find3Splitters5OversamplingFactor(A, elementCount, splitters, sortFunc, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	register TKey splitter0 = splitters[0];
+	register TKey splitter1 = splitters[1];
+	register TKey splitter2 = splitters[2];
 	
 	TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * 4 * elementCount);
 	TValueType* buckets[4];
@@ -4266,25 +4266,25 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	{
 		buckets[i] = &rawbuckets[i * elementCount];
 	}
-	int state0;
-	int predicateResult0;
-	TKey splitter00x;
-	int state1;
-	int predicateResult1;
-	TKey splitter01x;
-	int state2;
-	int predicateResult2;
-	TKey splitter02x;
-	int state3;
-	int predicateResult3;
-	TKey splitter03x;
-	int state4;
-	int predicateResult4;
-	TKey splitter04x;
+	register int state0;
+	register int predicateResult0;
+	register TKey splitter00x;
+	register int state1;
+	register int predicateResult1;
+	register TKey splitter01x;
+	register int state2;
+	register int predicateResult2;
+	register TKey splitter02x;
+	register int state3;
+	register int predicateResult3;
+	register TKey splitter03x;
+	register int state4;
+	register int predicateResult4;
+	register TKey splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
+	register int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
