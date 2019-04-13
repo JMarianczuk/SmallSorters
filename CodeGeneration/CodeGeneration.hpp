@@ -20,6 +20,8 @@ class CodeGenerator
 {
 private:
     std::string _filename;
+    std::string _tempFilename;
+    bool _useTemp;
     std::vector<std::string> _indentationStack;
     std::ofstream _fileStream;
     bool _indentBeforeWrite;

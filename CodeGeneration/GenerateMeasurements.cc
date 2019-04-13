@@ -77,6 +77,12 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += std::to_string(sampleSortOversample);
             result += std::to_string(sampleSortBlockSize);
             break;
+        case MeasureType::SampleSort2:
+            result += "-s";
+            result += std::to_string(sampleSortSplits);
+            result += std::to_string(sampleSortOversample);
+            result += std::to_string(sampleSortBlockSize);
+            break;
     }
     result += " ";
     return result;
@@ -368,7 +374,12 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeG
                                     sampleSortGen,
                                     measureParams.Structs,
                                     "MeasureSampleSort",
-                                    BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::SampleSort, measureParams._BoseNelsonNetworkType, splits, oversample, blockSize),
+                                    BuildSorterName(
+                                        measureParams._Sorter, 
+                                        measureParams._NetworkType, 
+                                        MeasureType::SampleSort, 
+                                        measureParams._BoseNelsonNetworkType, 
+                                        splits, oversample, blockSize),
                                     "samplesort::" + sampleSortName,
                                     ", uint64_t",
                                     measureParams.SortMethod);
@@ -376,6 +387,27 @@ void GenerateMeasurementMethod(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeG
                             }
                         }
                     }
+                },
+                [=] {
+                    Multicall<MeasureParams>(
+                        [=](MeasureParams measureParams){
+                            WriteCompleteSorterMeasureLine(
+                                sampleSortGen,
+                                measureParams.Structs,
+                                "MeasureSampleSort",
+                                BuildSorterName(
+                                    measureParams._Sorter,
+                                    measureParams._NetworkType,
+                                    MeasureType::SampleSort2,
+                                    measureParams._BoseNelsonNetworkType, 
+                                    3, 3, 2),
+                                "samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize", 
+                                ", uint64_t", 
+                                measureParams.SortMethod);
+                            sampleSortGen->WriteLine("");
+                        },
+                        measureParamsList
+                    );
                 }
             );
         }, "");

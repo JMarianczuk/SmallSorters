@@ -42,7 +42,8 @@ enum class MeasureType
     InRow,
     Complete,
     Complete2,
-    SampleSort
+    SampleSort,
+    SampleSort2
 };
 
 struct MeasureParams
