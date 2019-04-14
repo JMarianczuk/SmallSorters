@@ -50,6 +50,8 @@ result/combined/*.log
 result/combined/*.gz
 result/combined/*.pdf
 
+result/data/*.txt
+
 small_sorters_result.sqlite
 db_test.sqlite
 result/small_sorters_result.sqlite-journal
