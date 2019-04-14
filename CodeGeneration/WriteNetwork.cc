@@ -19,7 +19,7 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
             for (auto network : networksJson)
             {
                 std::string sizeStr = std::to_string(network["NetworkSize"].get<int>());
-                gen->WriteLine("template <typename TValueType> static inline");
+                gen->WriteLine("template <typename TValueType> static");
                 gen->WriteLine("void sort", sizeStr, sortMethodName, "(TValueType* A)");
                 gen->WriteBlock([=]{
                     for (auto swap : network["Swaps"])

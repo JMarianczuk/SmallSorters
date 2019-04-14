@@ -27,6 +27,7 @@ enum class NetworkType
 {
     Best,
     BoseNelson,
+    Batcher,
     None
 };
 enum class BoseNelsonNetworkType

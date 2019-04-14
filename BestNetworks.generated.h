@@ -14,19 +14,19 @@
 #include "NetworkSort.h"
 namespace networks
 {
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort2best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort3best(TValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort4best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -35,7 +35,7 @@ void sort4best(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort5best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -48,7 +48,7 @@ void sort5best(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort6best(TValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
@@ -64,7 +64,7 @@ void sort6best(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[2], A[3]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort7best(TValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
@@ -84,7 +84,7 @@ void sort7best(TValueType* A)
 	networks::ConditionalSwap(A[2], A[4]);
 	networks::ConditionalSwap(A[2], A[3]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort8best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -107,7 +107,7 @@ void sort8best(TValueType* A)
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort9best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -136,7 +136,7 @@ void sort9best(TValueType* A)
 	networks::ConditionalSwap(A[2], A[3]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort10best(TValueType* A)
 {
 	networks::ConditionalSwap(A[4], A[9]);
@@ -169,7 +169,7 @@ void sort10best(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[4], A[5]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort11best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -208,7 +208,7 @@ void sort11best(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[7], A[8]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort12best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -251,7 +251,7 @@ void sort12best(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[7], A[8]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort13best(TValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[7]);
@@ -300,7 +300,7 @@ void sort13best(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort14best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -355,7 +355,7 @@ void sort14best(TValueType* A)
 	networks::ConditionalSwap(A[6], A[7]);
 	networks::ConditionalSwap(A[8], A[9]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort15best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
@@ -415,7 +415,7 @@ void sort15best(TValueType* A)
 	networks::ConditionalSwap(A[6], A[7]);
 	networks::ConditionalSwap(A[8], A[9]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort16best(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);

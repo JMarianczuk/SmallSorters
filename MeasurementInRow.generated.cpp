@@ -82,6 +82,23 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR QMa", &networks::sortNbosenelsonparameter<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR Def", &networks::sortNbatcher<SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR JXc", &networks::sortNbatcher<SortableRef_JumpXchg>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR 4Cm", &networks::sortNbatcher<SortableRef_FourCmovTemp>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR 4CS", &networks::sortNbatcher<SortableRef_FourCmovTemp_Split>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR 6Cm", &networks::sortNbatcher<SortableRef_SixCmovRegisterTemp>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR Cla", &networks::sortNbatcher<SortableRef_ClangVersion>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR Tie", &networks::sortNbatcher<SortableRef_Tie>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR QMa", &networks::sortNbatcher<SortableRef_QMark>);
+	
+	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR Def", &insertionsort::InsertionSort<SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_StlVersion>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR STL", &insertionsort::InsertionSort<SortableRef_StlVersion>);

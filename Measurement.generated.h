@@ -20,6 +20,7 @@
 #include "BoseNelson.generated.h"
 #include "BoseNelsonParallel.generated.h"
 #include "BoseNelsonParameter.generated.h"
+#include "Batcher.generated.h"
 #include "InsertionSort.h"
 #include "QuickSort.h"
 #include "StdSortWrapper.h"

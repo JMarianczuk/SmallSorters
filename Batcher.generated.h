@@ -14,19 +14,19 @@
 #include "NetworkSort.h"
 namespace networks
 {
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort2batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort3batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort4batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[2]);
@@ -35,7 +35,7 @@ void sort4batcher(TValueType* A)
 	networks::ConditionalSwap(A[2], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort5batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[4]);
@@ -48,7 +48,7 @@ void sort5batcher(TValueType* A)
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort6batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[4]);
@@ -64,7 +64,7 @@ void sort6batcher(TValueType* A)
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort7batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[4]);
@@ -84,7 +84,7 @@ void sort7batcher(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort8batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[4]);
@@ -107,7 +107,7 @@ void sort8batcher(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort9batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -137,7 +137,7 @@ void sort9batcher(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[7], A[8]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort10batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -172,7 +172,7 @@ void sort10batcher(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[7], A[8]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort11batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -213,7 +213,7 @@ void sort11batcher(TValueType* A)
 	networks::ConditionalSwap(A[7], A[8]);
 	networks::ConditionalSwap(A[9], A[10]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort12batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -258,7 +258,7 @@ void sort12batcher(TValueType* A)
 	networks::ConditionalSwap(A[7], A[8]);
 	networks::ConditionalSwap(A[9], A[10]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort13batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -310,7 +310,7 @@ void sort13batcher(TValueType* A)
 	networks::ConditionalSwap(A[9], A[10]);
 	networks::ConditionalSwap(A[11], A[12]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort14batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -367,7 +367,7 @@ void sort14batcher(TValueType* A)
 	networks::ConditionalSwap(A[9], A[10]);
 	networks::ConditionalSwap(A[11], A[12]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort15batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
@@ -430,7 +430,7 @@ void sort15batcher(TValueType* A)
 	networks::ConditionalSwap(A[11], A[12]);
 	networks::ConditionalSwap(A[13], A[14]);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort16batcher(TValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[8]);
