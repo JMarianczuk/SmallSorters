@@ -83,6 +83,12 @@ uint64_t GetKey(SortableRef_ClangVersion& item)
 }
 template <>
 inline
+uint64_t GetKey(SortableRef_ClangPredicate& item)
+{
+	return item.key;
+}
+template <>
+inline
 uint64_t GetKey(SortableRef_Tie& item)
 {
 	return item.key;
@@ -144,6 +150,12 @@ uint64_t GetReference(SortableRef_SixCmovRegisterTemp& item)
 template <>
 inline
 uint64_t GetReference(SortableRef_ClangVersion& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_ClangPredicate& item)
 {
 	return item.reference;
 }

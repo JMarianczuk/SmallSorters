@@ -211,14 +211,14 @@ void ConditionalSwap<SortableRef_ClangVersion>(SortableRef_ClangVersion& left, S
     right = *rightPointer;
 }
 
-template<typename TValueType, typename TPredicate>
-static inline
-void ConditionalSwap_ClangVersion_Generic(TValueType& left, TValueType& right, TPredicate predicate)
+template<>
+inline
+void ConditionalSwap<SortableRef_ClangPredicate>(SortableRef_ClangPredicate& left, SortableRef_ClangPredicate& right)
 {
-    TValueType* leftPointer = &left;
-    TValueType* rightPointer = &right;
-    TValueType temp = left;
-    int predicateResult = (int) predicate(right, temp);
+    SortableRef_ClangPredicate* leftPointer = &left;
+    SortableRef_ClangPredicate* rightPointer = &right;
+    SortableRef_ClangPredicate temp = left;
+    int predicateResult = (int) (right < temp);
     __asm__ volatile(
         "cmp $0,%[predResult]\n\t"
         "cmovneq %[right_pointer],%[left_pointer]\n\t"

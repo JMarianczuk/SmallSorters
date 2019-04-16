@@ -26,6 +26,8 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR Cla", &networks::sortNbest<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_ClangPredicate>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR CPr", &networks::sortNbest<SortableRef_ClangPredicate>);
+	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR Tie", &networks::sortNbest<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -I KR QMa", &networks::sortNbest<SortableRef_QMark>);
@@ -42,6 +44,8 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR 6Cm", &networks::sortNbosenelson<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR Cla", &networks::sortNbosenelson<SortableRef_ClangVersion>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_ClangPredicate>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR CPr", &networks::sortNbosenelson<SortableRef_ClangPredicate>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeL -I KR Tie", &networks::sortNbosenelson<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
@@ -60,6 +64,8 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR Cla", &networks::sortNbosenelsonparallel<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_ClangPredicate>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR CPr", &networks::sortNbosenelsonparallel<SortableRef_ClangPredicate>);
+	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR Tie", &networks::sortNbosenelsonparallel<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeP -I KR QMa", &networks::sortNbosenelsonparallel<SortableRef_QMark>);
@@ -77,26 +83,30 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR Cla", &networks::sortNbosenelsonparameter<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_ClangPredicate>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR CPr", &networks::sortNbosenelsonparameter<SortableRef_ClangPredicate>);
+	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR Tie", &networks::sortNbosenelsonparameter<SortableRef_Tie>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BoNeM -I KR QMa", &networks::sortNbosenelsonparameter<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR Def", &networks::sortNbatcher<SortableRef>);
+	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR Def", &networks::sortNbatcher<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR JXc", &networks::sortNbatcher<SortableRef_JumpXchg>);
+	measurement::MeasureInRow<SortableRef_JumpXchg>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR JXc", &networks::sortNbatcher<SortableRef_JumpXchg>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR 4Cm", &networks::sortNbatcher<SortableRef_FourCmovTemp>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR 4Cm", &networks::sortNbatcher<SortableRef_FourCmovTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR 4CS", &networks::sortNbatcher<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureInRow<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR 4CS", &networks::sortNbatcher<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR 6Cm", &networks::sortNbatcher<SortableRef_SixCmovRegisterTemp>);
+	measurement::MeasureInRow<SortableRef_SixCmovRegisterTemp>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR 6Cm", &networks::sortNbatcher<SortableRef_SixCmovRegisterTemp>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR Cla", &networks::sortNbatcher<SortableRef_ClangVersion>);
+	measurement::MeasureInRow<SortableRef_ClangVersion>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR Cla", &networks::sortNbatcher<SortableRef_ClangVersion>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR Tie", &networks::sortNbatcher<SortableRef_Tie>);
+	measurement::MeasureInRow<SortableRef_ClangPredicate>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR CPr", &networks::sortNbatcher<SortableRef_ClangPredicate>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BatchP -I KR QMa", &networks::sortNbatcher<SortableRef_QMark>);
+	measurement::MeasureInRow<SortableRef_Tie>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR Tie", &networks::sortNbatcher<SortableRef_Tie>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef_QMark>(perf, numberOfIterations, arraySize, measureIteration, "N BatcP -I KR QMa", &networks::sortNbatcher<SortableRef_QMark>);
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -I KR Def", &insertionsort::InsertionSort<SortableRef>);

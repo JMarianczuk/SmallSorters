@@ -40,6 +40,8 @@ void GenerateRandomArray<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovReg
 template<>
 void GenerateRandomArray<SortableRef_ClangVersion>(SortableRef_ClangVersion* arr, size_t arraySize);
 template<>
+void GenerateRandomArray<SortableRef_ClangPredicate>(SortableRef_ClangPredicate* arr, size_t arraySize);
+template<>
 void GenerateRandomArray<SortableRef_Tie>(SortableRef_Tie* arr, size_t arraySize);
 template<>
 void GenerateRandomArray<SortableRef_QMark>(SortableRef_QMark* arr, size_t arraySize);

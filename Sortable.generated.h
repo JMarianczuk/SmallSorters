@@ -271,6 +271,35 @@ struct SortableRef_ClangVersion
 		return left.key != right.key;
 	}
 };
+struct SortableRef_ClangPredicate
+{
+	uint64_t key;
+	uint64_t reference;
+	friend bool operator>(const SortableRef_ClangPredicate& left, const SortableRef_ClangPredicate& right)
+	{
+		return left.key > right.key;
+	}
+	friend bool operator>=(const SortableRef_ClangPredicate& left, const SortableRef_ClangPredicate& right)
+	{
+		return left.key >= right.key;
+	}
+	friend bool operator==(const SortableRef_ClangPredicate& left, const SortableRef_ClangPredicate& right)
+	{
+		return left.key == right.key;
+	}
+	friend bool operator<(const SortableRef_ClangPredicate& left, const SortableRef_ClangPredicate& right)
+	{
+		return left.key < right.key;
+	}
+	friend bool operator<=(const SortableRef_ClangPredicate& left, const SortableRef_ClangPredicate& right)
+	{
+		return left.key <= right.key;
+	}
+	friend bool operator!=(const SortableRef_ClangPredicate& left, const SortableRef_ClangPredicate& right)
+	{
+		return left.key != right.key;
+	}
+};
 struct SortableRef_Tie
 {
 	uint64_t key;

@@ -36,7 +36,7 @@ filename <- paste("plots/boxplot-", options$filePostfix, sep="", collapse="")
 if (!options$complete) {
     filename <- paste(filename, "-array_size", array_size_string, sep="", collapse="")
 }
-filename <- paste(filename, ".pdf", sep = "", collapse = "")
+filenameExt <- paste(filename, ".pdf", sep = "", collapse = "")
 
 if (options$title == "") {
     plot_title <- paste("ArraySize =", options$array_size)
@@ -50,7 +50,12 @@ thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normaliz
     facet_grid(rows = vars(sortergroup), scales = "free", space = "free")  +
     theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank())
 
-ggsave(filename, thisplot, width=18, height=11, units="cm")
+ggsave(filenameExt, thisplot, width=18, height=11, units="cm")
+
+histogram <- ggplot(subset(res, sorter %in% c("StdSort -C KR Def")), aes(normalized_value)) + 
+    geom_histogram(bins=100)
+
+ggsave(paste(filename, "_histogram.pdf", sep = "", collapse = ""))
 
 
 #+ scale_x_discrete(breaks = substring(res$sorter, 0, 8), label=res$x)

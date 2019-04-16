@@ -38,7 +38,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "BoNe";
             break;
         case NetworkType::Batcher:
-            result += "Batch";
+            result += "Batc";
             break;
         case NetworkType::None:
             result += "    ";
