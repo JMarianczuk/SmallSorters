@@ -5,6 +5,7 @@
 #include <utility>
 #include <algorithm>
 #include <inttypes.h>
+#include <type_traits>
 
 #include "CustomMath.h"
 #include "BoseNelsonParameter.generated.h"
@@ -13,10 +14,44 @@
 namespace quicksortcopy
 {
 
+  template<typename _Iterator, typename = std::void_t<>>
+    struct __iterator_traits { };
+
+  template<typename _Iterator>
+    struct __iterator_traits<_Iterator,
+			     std::void_t<typename _Iterator::value_type,
+				      typename _Iterator::difference_type>>
+    {
+      typedef typename _Iterator::value_type        value_type;
+      typedef typename _Iterator::difference_type   difference_type;
+    };
+
+  template<typename _Iterator>
+    struct iterator_traits
+    : public __iterator_traits<_Iterator> { };
+
+      /// Partial specialization for pointer types.
+  template<typename _Tp>
+    struct iterator_traits<_Tp*>
+    {
+      typedef _Tp                         value_type;
+      typedef ptrdiff_t                   difference_type;
+    };
+
+  /// Partial specialization for const pointer types.
+  template<typename _Tp>
+    struct iterator_traits<const _Tp*>
+    {
+      typedef _Tp                         value_type;
+      typedef ptrdiff_t                   difference_type;
+    };
+
+//--------------------------------------------------------------------------------------------------
+
 #define S_threshold 16
 
-template <typename TValueType, typename TDistance, typename TCompare>
-void push_heap(TValueType* first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompare& compare)
+template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
+void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompare& compare)
 {
     TDistance parent = (holeIndex - 1) / 2;
     while (holeIndex > topIndex && compare(first + parent, &value))
@@ -28,8 +63,8 @@ void push_heap(TValueType* first, TDistance holeIndex, TDistance topIndex, TValu
     *(first + holeIndex) = std::move(value);
 }
 
-template <typename TValueType, typename TDistance, typename TCompare>
-void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TValueType value, TCompare compare)
+template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
+void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType value, TCompare compare)
 {
     const TDistance topIndex = holeIndex;
     TDistance secondChild = holeIndex;
@@ -54,16 +89,18 @@ void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TValueTy
     push_heap(first, holeIndex, topIndex, std::move(value), compare);
 }
 
-template <typename TValueType, typename TCompare>
-void make_heap(TValueType* first, TValueType* last, TCompare& compare)
+template <typename TRanIt, typename TCompare>
+void make_heap(TRanIt first, TRanIt last, TCompare& compare)
 {
+    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
     if (last - first < 2)
     {
         return;
     }
 
-    const long int len = last - first;
-    long int parent = (len - 2) / 2;
+    const TDistanceType len = last - first;
+    TDistanceType parent = (len - 2) / 2;
     while (true)
     {
         TValueType value = std::move(*(first + parent));
@@ -76,17 +113,20 @@ void make_heap(TValueType* first, TValueType* last, TCompare& compare)
     }
 }
 
-template <typename TValueType, typename TCompare>
+template <typename TRanIt, typename TCompare>
 inline
-void pop_heap(TValueType* first, TValueType* last, TValueType* result, TCompare& compare)
+void pop_heap(TRanIt first, TRanIt last, TRanIt result, TCompare& compare)
 {
+    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
+
     TValueType value = std::move(*result);
     *result = std::move(*first);
-    adjust_heap(first, (long int) 0, last - first, std::move(value), compare);
+    adjust_heap(first, TDistanceType(0), TDistanceType(last - first), std::move(value), compare);
 }
 
-template <typename TValueType, typename TCompare>
-void sort_heap(TValueType* first, TValueType* last, TCompare& compare)
+template <typename TRanIt, typename TCompare>
+void sort_heap(TRanIt first, TRanIt last, TCompare& compare)
 {
     while (last - first > 1)
     {
@@ -96,11 +136,11 @@ void sort_heap(TValueType* first, TValueType* last, TCompare& compare)
 }
 
 
-template <typename TValueType, typename TCompare>
-void heap_select(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
+template <typename TRanIt, typename TCompare>
+void heap_select(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
 {
     make_heap(first, middle, compare);
-    for (TValueType* i = middle; i < last; ++i)
+    for (TRanIt i = middle; i < last; ++i)
     {
         if (compare(i, first))
         {
@@ -109,9 +149,9 @@ void heap_select(TValueType* first, TValueType* middle, TValueType* last, TCompa
     }
 }
 
-template <typename TValueType, typename TCompare>
+template <typename TRanIt, typename TCompare>
 inline
-void partial_sort(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
+void partial_sort(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
 {
     heap_select(first, middle, last, compare);
     sort_heap(first, middle, compare);
@@ -119,11 +159,11 @@ void partial_sort(TValueType* first, TValueType* middle, TValueType* last, TComp
 
 //---------------------------------------------------------------------------------------------
 
-template<typename TValueType, typename TCompare>
-void unguarded_linear_insert(TValueType* last, TCompare compare)
+template<typename TRanIt, typename TCompare>
+void unguarded_linear_insert(TRanIt last, TCompare compare)
 {
-    TValueType val = std::move(*last);
-    TValueType* next = last;
+    typename iterator_traits<TRanIt>::value_type val = std::move(*last);
+    TRanIt next = last;
     --next;
     while (compare(&val, next))
     {
@@ -134,28 +174,28 @@ void unguarded_linear_insert(TValueType* last, TCompare compare)
     *last = std::move(val);
 }
 
-template<typename TValueType, typename TCompare>
-inline void unguarded_insertion_sort(TValueType* first, TValueType* last, TCompare compare)
+template<typename TRanIt, typename TCompare>
+inline void unguarded_insertion_sort(TRanIt first, TRanIt last, TCompare compare)
 {
-    for (TValueType* i = first; i != last; ++i)
+    for (TRanIt i = first; i != last; ++i)
     {
         unguarded_linear_insert(i, compare);
     }
 }
 
-template<typename TValueType, typename TCompare>
-void insertion_sort(TValueType* first, TValueType* last, TCompare compare)
+template<typename TRanIt, typename TCompare>
+void insertion_sort(TRanIt first, TRanIt last, TCompare compare)
 {
     if (first == last) 
     {
         return;
     }
 
-    for (TValueType* i = first + 1; i != last; ++i)
+    for (TRanIt i = first + 1; i != last; ++i)
     {
         if (compare(i, first))
         {
-            TValueType val = std::move(*i);
+            typename iterator_traits<TRanIt>::value_type val = std::move(*i);
             std::move_backward(first, i, i + 1);
             *first = std::move(val);
         }
@@ -167,8 +207,8 @@ void insertion_sort(TValueType* first, TValueType* last, TCompare compare)
     }
 }
 
-template<typename TValueType, typename TCompare>
-void final_insertion_sort(TValueType* first, TValueType* last, TCompare compare)
+template<typename TRanIt, typename TCompare>
+void final_insertion_sort(TRanIt first, TRanIt last, TCompare compare)
 {
     if (last - first > S_threshold)
     {
@@ -181,8 +221,8 @@ void final_insertion_sort(TValueType* first, TValueType* last, TCompare compare)
     }
 }
 
-template<typename TValueType, typename TCompare>
-TValueType* unguarded_partition(TValueType* first, TValueType* last, TValueType* pivot, TCompare compare)
+template<typename TRanIt, typename TCompare>
+TRanIt unguarded_partition(TRanIt first, TRanIt last, TRanIt pivot, TCompare compare)
 {
     while (true)
     {
@@ -204,8 +244,8 @@ TValueType* unguarded_partition(TValueType* first, TValueType* last, TValueType*
     }
 }
 
-template<typename TValueType, typename TCompare>
-void move_median_to_first(TValueType* result, TValueType* one, TValueType* two, TValueType* three, TCompare compare)
+template<typename TRanIt, typename TCompare>
+void move_median_to_first(TRanIt result, TRanIt one, TRanIt two, TRanIt three, TCompare compare)
 {
     if (compare(one, two))
     {
@@ -237,17 +277,17 @@ void move_median_to_first(TValueType* result, TValueType* one, TValueType* two, 
     }
 }
 
-template<typename TValueType, typename TCompare>
+template<typename TRanIt, typename TCompare>
 inline 
-TValueType* unguarded_partition_pivot(TValueType* first, TValueType* last, TCompare compare)
+TRanIt unguarded_partition_pivot(TRanIt first, TRanIt last, TCompare compare)
 {
-    TValueType* mid = first + (last - first) / 2;
+    TRanIt mid = first + (last - first) / 2;
     move_median_to_first(first, first + 1, mid, last - 1, compare);
     return unguarded_partition(first + 1, last, first, compare);
 }
 
-template <typename TValueType, typename TSize, typename TCompare>
-void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit, TCompare compare)
+template <typename TRanIt, typename TSize, typename TCompare>
+void introsort_loop(TRanIt first, TRanIt last, TSize depth_limit, TCompare compare)
 {
     while (last - first > S_threshold)
 	{
@@ -257,14 +297,14 @@ void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit, TCom
             return;
         }
         --depth_limit;
-        TValueType* cut = unguarded_partition_pivot(first, last, compare);
+        TRanIt cut = unguarded_partition_pivot(first, last, compare);
         introsort_loop(cut, last, depth_limit, compare);
         last = cut;
 	}
 }
 
-template <typename TValueType, typename TCompare>
-void Quicksort_Copy_Stl(TValueType* first, TValueType* last, TCompare compare)
+template <typename TRanIt, typename TCompare>
+void Quicksort_Copy_Stl(TRanIt first, TRanIt last, TCompare compare)
 {
     if (first != last)
 	{
