@@ -20,7 +20,8 @@ enum class Sorter
     StdSort,
     QuicksortCopy,
     QuicksortCopyMsvc,
-    SampleSort
+    SampleSort,
+    Ipso
 };
 
 enum class NetworkType
@@ -56,7 +57,13 @@ struct MeasureParams
     BoseNelsonNetworkType _BoseNelsonNetworkType;
 };
 
-void GenerateMeasurementMethod(CPlusPlusCodeGenerator* headerGen, CPlusPlusCodeGenerator* normalGen, CPlusPlusCodeGenerator* inrowGen, CPlusPlusCodeGenerator* completeGen, CPlusPlusCodeGenerator* sampleSortGen);
+void GenerateMeasurementMethod(
+    CPlusPlusCodeGenerator* headerGen, 
+    CPlusPlusCodeGenerator* normalGen, 
+    CPlusPlusCodeGenerator* inrowGen, 
+    CPlusPlusCodeGenerator* completeGen, 
+    CPlusPlusCodeGenerator* sampleSortGen,
+    CPlusPlusCodeGenerator* ipsoGen);
 
 }
 

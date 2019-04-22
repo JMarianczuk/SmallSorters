@@ -4,6 +4,7 @@ file(GLOB small_sorters_SRC
     "*.h"
     "*.cpp"
     "lib/*.hpp"
+    "include/*.hpp"
 )
 
 set(CMAKE_CXX_FLAGS "-O3 -lstdc++")

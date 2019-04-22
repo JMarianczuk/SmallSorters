@@ -24,6 +24,7 @@
 #include "InsertionSort.h"
 #include "QuickSort.h"
 #include "StdSortWrapper.h"
+#include "Ipso.h"
 #include "Randomisation.h"
 
 namespace measurement
@@ -32,6 +33,7 @@ void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, 
 void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 } // namespace measurement
 
 #endif // MEASUREMENT_GENERATED_H

@@ -6,7 +6,7 @@ library(ggplot2)
 option_list = list(
     make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot"),
     make_option(c("--dbName"), type="character", default="small_sorters_result.sqlite", help="name of the database to get the data from"),
-    make_option(c("--tableName"), type="character", default="normalSort", help="name of table to get data from"),
+    make_option(c("--tableName"), type="character", default="normalSortWithout", help="name of table to get data from"),
     make_option(c("-f", "--filter"), type="character", default="", help="additional optional filter"),
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
     make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),

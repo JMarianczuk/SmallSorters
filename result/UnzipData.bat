@@ -1,3 +1,3 @@
 cd data
-bunzip2 --keep *.bz2
+bunzip2 --keep --quiet *.bz2
 cd ..

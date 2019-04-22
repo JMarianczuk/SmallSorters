@@ -1,3 +1,3 @@
-install.packages('RSQLite')
-install.packages('optparse')
-install.packages('ggplot2')
+install.packages("RSQLite")
+install.packages("optparse")
+install.packages("ggplot2")
