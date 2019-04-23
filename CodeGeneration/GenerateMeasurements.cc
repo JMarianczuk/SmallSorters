@@ -16,7 +16,15 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "N";
             break;
         case Sorter::StdSort:
-            result += "StdSort -C ";
+            result += "StdSort ";
+            if (measureType == MeasureType::Complete)
+            {
+                result += "-C ";
+            }
+            else if (measureType == MeasureType::SampleSort)
+            {
+                result += "-S ";
+            }
             return result;
         case Sorter::QuicksortCopy:
             result += "QSort   -C ";
@@ -26,9 +34,6 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             return result;
         case Sorter::SampleSort:
             result += "S";
-            break;
-        case Sorter::Ipso:
-            result += "4";
             break;
     }
     result += " ";
@@ -443,8 +448,26 @@ void GenerateMeasurementMethod(
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::Ipso, NetworkType::None, MeasureType::Complete),
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Complete),
                         "external::IpsoWrapper",
+                        "",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        ipsoGen,
+                        &bRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::SortNetwork, NetworkType::BoseNelson, MeasureType::Complete, BoseNelsonNetworkType::Locality),
+                        "external::IpsoWrapper",
+                        "",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        ipsoGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Complete),
+                        "measurement::StdSortWrapper",
                         "",
                         "measurement::BaseCaseSortBlank"
                     );

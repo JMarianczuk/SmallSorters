@@ -41,6 +41,9 @@
 
 #include "ips4o_fwd.hpp"
 #include "utils.hpp"
+#include "../../Sortable.generated.h"
+#include "../../QuickSort.h"
+#include "../../BoseNelson.generated.h"
 
 namespace ips4o {
 namespace detail {
@@ -77,8 +80,8 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
     detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
 }
 
-template <class Comp>
-inline void baseCaseSort<SortableRef_FourCmovTemp_Split*>(SortableRef_FourCmovTemp_Split* begin, SortableRef_FourCmovTemp_Split* end, Comp&& comp) {
+template <>
+inline void baseCaseSort<SortableRef_FourCmovTemp_Split*,std::less<>>(SortableRef_FourCmovTemp_Split* begin, SortableRef_FourCmovTemp_Split* end, std::less<>&& comp) {
     if (begin == end) return;
     samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>, &quicksort::templateLess<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
 }

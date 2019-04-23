@@ -31,7 +31,7 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
                 });
             }
             gen->WriteLine("");
-            gen->WriteLine("template <typename TValueType> static inline");
+            gen->WriteLine("template <typename TValueType> static");
             gen->WriteLine("void sortN", sortMethodName, "(TValueType* A, size_t n)");
             gen->WriteBlock([=]{
                 gen->WriteLine("switch(n)");
@@ -172,7 +172,7 @@ void WriteSorter_ParameterStyle(
         networkType = RecursiveParameterNetworkType::Merge;
     }
 
-    gen->WriteLine("template <typename TValueType> static inline");
+    gen->WriteLine("template <typename TValueType> static");
     int networkSize;
     int leftMergeSize;
     int rightMergeSize;
@@ -305,7 +305,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
             }
             gen->WriteLine("");
 
-            gen->WriteLine("template <typename TValueType> static inline");
+            gen->WriteLine("template <typename TValueType> static");
             gen->WriteLine("void sortN", sortMethodName, "(TValueType* A, size_t n)");
             gen->WriteBlock([=]{
                 gen->WriteLine("switch(n)");

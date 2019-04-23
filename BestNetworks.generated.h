@@ -480,7 +480,7 @@ void sort16best(TValueType* A)
 	networks::ConditionalSwap(A[8], A[9]);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sortNbest(TValueType* A, size_t n)
 {
 	switch(n)

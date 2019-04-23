@@ -498,7 +498,7 @@ void sort16batcher(TValueType* A)
 	networks::ConditionalSwap(A[13], A[14]);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sortNbatcher(TValueType* A, size_t n)
 {
 	switch(n)

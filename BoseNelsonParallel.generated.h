@@ -510,7 +510,7 @@ void sort16bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[7], A[8]);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sortNbosenelsonparallel(TValueType* A, size_t n)
 {
 	switch(n)

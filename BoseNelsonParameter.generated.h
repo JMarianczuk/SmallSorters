@@ -14,31 +14,31 @@
 #include "NetworkSort.h"
 namespace networks
 {
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge1_1bosenelsonparameter(TValueType& left0, TValueType& right0)
 {
 	networks::ConditionalSwap(left0, right0);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort2bosenelsonparameter(TValueType& element0, TValueType& element1)
 {
 	networks::merge1_1bosenelsonparameter(element0, element1);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge1_2bosenelsonparameter(TValueType& left0, TValueType& right0, TValueType& right1)
 {
 	networks::ConditionalSwap(left0, right1);
 	networks::ConditionalSwap(left0, right0);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort3bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2)
 {
 	networks::sort2bosenelsonparameter(element1, element2);
 	networks::merge1_2bosenelsonparameter(element0, element1, element2);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge2_2bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& right0, TValueType& right1)
 {
 	networks::merge1_1bosenelsonparameter(left0, right0);
@@ -46,7 +46,7 @@ void merge2_2bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge1_1bosenelsonparameter(left1, right0);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort4bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3)
 {
 	networks::sort2bosenelsonparameter(element0, element1);
@@ -54,7 +54,7 @@ void sort4bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 	networks::merge2_2bosenelsonparameter(element0, element1, element2, element3);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge2_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& right0, TValueType& right1, TValueType& right2)
 {
 	networks::merge1_2bosenelsonparameter(left0, right0, right1);
@@ -62,7 +62,7 @@ void merge2_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge1_2bosenelsonparameter(left1, right0, right1);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort5bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4)
 {
 	networks::sort2bosenelsonparameter(element0, element1);
@@ -70,13 +70,13 @@ void sort5bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 	networks::merge2_3bosenelsonparameter(element0, element1, element2, element3, element4);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge2_1bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& right0)
 {
 	networks::ConditionalSwap(left0, right0);
 	networks::ConditionalSwap(left1, right0);
 }
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge3_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& right0, TValueType& right1, TValueType& right2)
 {
 	networks::merge1_1bosenelsonparameter(left0, right0);
@@ -84,7 +84,7 @@ void merge3_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge2_1bosenelsonparameter(left1, left2, right0);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort6bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5)
 {
 	networks::sort3bosenelsonparameter(element0, element1, element2);
@@ -92,7 +92,7 @@ void sort6bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 	networks::merge3_3bosenelsonparameter(element0, element1, element2, element3, element4, element5);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge3_4bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3)
 {
 	networks::merge1_2bosenelsonparameter(left0, right0, right1);
@@ -100,7 +100,7 @@ void merge3_4bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge2_2bosenelsonparameter(left1, left2, right0, right1);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort7bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6)
 {
 	networks::sort3bosenelsonparameter(element0, element1, element2);
@@ -108,7 +108,7 @@ void sort7bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 	networks::merge3_4bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge4_4bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3)
 {
 	networks::merge2_2bosenelsonparameter(left0, left1, right0, right1);
@@ -116,7 +116,7 @@ void merge4_4bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge2_2bosenelsonparameter(left2, left3, right0, right1);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort8bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7)
 {
 	networks::sort4bosenelsonparameter(element0, element1, element2, element3);
@@ -124,7 +124,7 @@ void sort8bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 	networks::merge4_4bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge4_5bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4)
 {
 	networks::merge2_3bosenelsonparameter(left0, left1, right0, right1, right2);
@@ -132,7 +132,7 @@ void merge4_5bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge2_3bosenelsonparameter(left2, left3, right0, right1, right2);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort9bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8)
 {
 	networks::sort4bosenelsonparameter(element0, element1, element2, element3);
@@ -140,7 +140,7 @@ void sort9bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 	networks::merge4_5bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge3_2bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& right0, TValueType& right1)
 {
 	networks::merge1_1bosenelsonparameter(left0, right0);
@@ -148,7 +148,7 @@ void merge3_2bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge2_1bosenelsonparameter(left1, left2, right0);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge5_5bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4)
 {
 	networks::merge2_2bosenelsonparameter(left0, left1, right0, right1);
@@ -156,7 +156,7 @@ void merge5_5bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge3_2bosenelsonparameter(left2, left3, left4, right0, right1);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort10bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9)
 {
 	networks::sort5bosenelsonparameter(element0, element1, element2, element3, element4);
@@ -164,7 +164,7 @@ void sort10bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 	networks::merge5_5bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge5_6bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5)
 {
 	networks::merge2_3bosenelsonparameter(left0, left1, right0, right1, right2);
@@ -172,7 +172,7 @@ void merge5_6bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge3_3bosenelsonparameter(left2, left3, left4, right0, right1, right2);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort11bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9, TValueType& element10)
 {
 	networks::sort5bosenelsonparameter(element0, element1, element2, element3, element4);
@@ -180,7 +180,7 @@ void sort11bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 	networks::merge5_6bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge6_6bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& left5, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5)
 {
 	networks::merge3_3bosenelsonparameter(left0, left1, left2, right0, right1, right2);
@@ -188,7 +188,7 @@ void merge6_6bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge3_3bosenelsonparameter(left3, left4, left5, right0, right1, right2);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort12bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9, TValueType& element10, TValueType& element11)
 {
 	networks::sort6bosenelsonparameter(element0, element1, element2, element3, element4, element5);
@@ -196,7 +196,7 @@ void sort12bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 	networks::merge6_6bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge6_7bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& left5, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5, TValueType& right6)
 {
 	networks::merge3_4bosenelsonparameter(left0, left1, left2, right0, right1, right2, right3);
@@ -204,7 +204,7 @@ void merge6_7bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge3_4bosenelsonparameter(left3, left4, left5, right0, right1, right2, right3);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort13bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9, TValueType& element10, TValueType& element11, TValueType& element12)
 {
 	networks::sort6bosenelsonparameter(element0, element1, element2, element3, element4, element5);
@@ -212,7 +212,7 @@ void sort13bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 	networks::merge6_7bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge4_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& right0, TValueType& right1, TValueType& right2)
 {
 	networks::merge2_2bosenelsonparameter(left0, left1, right0, right1);
@@ -220,7 +220,7 @@ void merge4_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge2_2bosenelsonparameter(left2, left3, right0, right1);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge7_7bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& left5, TValueType& left6, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5, TValueType& right6)
 {
 	networks::merge3_3bosenelsonparameter(left0, left1, left2, right0, right1, right2);
@@ -228,7 +228,7 @@ void merge7_7bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge4_3bosenelsonparameter(left3, left4, left5, left6, right0, right1, right2);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort14bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9, TValueType& element10, TValueType& element11, TValueType& element12, TValueType& element13)
 {
 	networks::sort7bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6);
@@ -236,7 +236,7 @@ void sort14bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 	networks::merge7_7bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge7_8bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& left5, TValueType& left6, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5, TValueType& right6, TValueType& right7)
 {
 	networks::merge3_4bosenelsonparameter(left0, left1, left2, right0, right1, right2, right3);
@@ -244,7 +244,7 @@ void merge7_8bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge4_4bosenelsonparameter(left3, left4, left5, left6, right0, right1, right2, right3);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort15bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9, TValueType& element10, TValueType& element11, TValueType& element12, TValueType& element13, TValueType& element14)
 {
 	networks::sort7bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6);
@@ -252,7 +252,7 @@ void sort15bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 	networks::merge7_8bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void merge8_8bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& left5, TValueType& left6, TValueType& left7, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5, TValueType& right6, TValueType& right7)
 {
 	networks::merge4_4bosenelsonparameter(left0, left1, left2, left3, right0, right1, right2, right3);
@@ -260,7 +260,7 @@ void merge8_8bosenelsonparameter(TValueType& left0, TValueType& left1, TValueTyp
 	networks::merge4_4bosenelsonparameter(left4, left5, left6, left7, right0, right1, right2, right3);
 }
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sort16bosenelsonparameter(TValueType& element0, TValueType& element1, TValueType& element2, TValueType& element3, TValueType& element4, TValueType& element5, TValueType& element6, TValueType& element7, TValueType& element8, TValueType& element9, TValueType& element10, TValueType& element11, TValueType& element12, TValueType& element13, TValueType& element14, TValueType& element15)
 {
 	networks::sort8bosenelsonparameter(element0, element1, element2, element3, element4, element5, element6, element7);
@@ -269,7 +269,7 @@ void sort16bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 }
 
 
-template <typename TValueType> static inline
+template <typename TValueType> static
 void sortNbosenelsonparameter(TValueType* A, size_t n)
 {
 	switch(n)
