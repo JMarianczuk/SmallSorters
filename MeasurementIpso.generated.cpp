@@ -14,7 +14,7 @@ namespace measurement
 void MeasureIpso(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureIpso<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "4       -C KR Def", &measurement::IpsoWrapper, &measurement::BaseCaseSortBlank<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "4       -C KR Def", &external::IpsoWrapper, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "4       -C KR Def");
 }

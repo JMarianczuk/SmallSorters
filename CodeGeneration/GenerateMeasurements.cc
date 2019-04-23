@@ -442,9 +442,9 @@ void GenerateMeasurementMethod(
                     WriteCompleteSorterWrapperMeasureLine(
                         ipsoGen,
                         &sRef,
-                        "MeasureIpso",
+                        "MeasureCompleteSorter",
                         BuildSorterName(Sorter::Ipso, NetworkType::None, MeasureType::Complete),
-                        "measurement::IpsoWrapper",
+                        "external::IpsoWrapper",
                         "",
                         "measurement::BaseCaseSortBlank"
                     );

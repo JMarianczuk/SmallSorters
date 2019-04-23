@@ -205,7 +205,6 @@ void MeasureCompleteSorter(
     void(*completeSorter)(TValueType*,TValueType*,bool(*)(TValueType*,TValueType*),void(*)(TValueType*,size_t)),
     void(*baseCaseSortFunc)(TValueType*,size_t))
 {
-    int place = arraySize;
     TValueType *arr = (TValueType*) malloc(sizeof(TValueType) * arraySize);
     randomisation::GenerateRandomArray(arr, arraySize);
     int numberOfBadSorts = 0;

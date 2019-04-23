@@ -26,6 +26,9 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.MeasureCompleteSort)
             ["-c"]["--measureCompleteSort"]
             ("Measure sorting of large set with special sorters at base case") |
+        Opt(options.MeasureIpso)
+            ["-4"]["--measureIpso"]
+            ("Measure sorting with ipso") |
         Opt(options.VerifyNetworks)
             ["--verifyNetworks"]
             ("Verify correctnes of networks") |

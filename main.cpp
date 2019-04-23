@@ -59,14 +59,17 @@ void test()
 #define NumberOfIterations 100
 #define NumberOfIterationsCompleteSort 20
 #define NumberOfIterationsSampleSort 50
+#define NumberOfIterationsIpso 50
 #define NumberOfMeasures 500
 #define NumberOfMeasuresInRow 10
 #define NumberOfMeasuresComplete 200
 #define NumberOfSampleSorts 200
+#define NumberOfMeasuresIpso 100
 #define SmallestArraySize 2
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 16
 #define SampleSortArraySize 256
+#define IpsoArraySize 1024 * 64
 
 uint64_t ID(int& value) {return (uint64_t) value;}
 
@@ -94,7 +97,7 @@ int main(int argumentCount, char** arguments)
         return 0;
     }
     if (options.HelpRequested 
-        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureCompleteSort))
+        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureCompleteSort && !options.MeasureIpso))
     {
         commandline::PrintHelpText(std::cout);
         return 0;
@@ -140,7 +143,10 @@ int main(int argumentCount, char** arguments)
         {
             measurement::MeasureSampleSort(perf_cpu_cycles, seed, NumberOfIterationsSampleSort, SampleSortArraySize, measureIteration);
         }
-        
+        if (options.MeasureIpso && measureIteration < NumberOfMeasuresIpso)
+        {
+            measurement::MeasureIpso(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+        }
     }
 	delete perf_cpu_cycles;
     auto timeAfter = time(NULL);

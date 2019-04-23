@@ -15,6 +15,7 @@ struct CommandLineOptions
     bool MeasureInRow;
     bool MeasureSampleSort;
     bool MeasureCompleteSort;
+    bool MeasureIpso;
 
     bool VerifyNetworks;
 
