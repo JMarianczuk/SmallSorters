@@ -18,7 +18,7 @@ options = parse_args(opt_parser)
 con <- dbConnect(SQLite(), options$dbName)
 someRes <- dbExecute(con, "PRAGMA case_sensitive_like=ON;")
 
-query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%'")
+query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
 if (!options$complete) {
     query <- paste(query, "and a =", options$array_size)
 }
