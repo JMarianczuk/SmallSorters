@@ -23,7 +23,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             }
             else if (measureType == MeasureType::SampleSort)
             {
-                result += "-S ";
+                result += "-S000 ";
             }
             return result;
         case Sorter::QuicksortCopy:
@@ -176,7 +176,6 @@ void WriteCompleteSorterWrapperMeasureLine(
     std::string measureMethod,
     std::string sorter,
     std::string sortMethod,
-    std::string additionalTemplateParameters,
     std::string baseCaseSortMethod)
 {
     for (SortableStruct *sortableStruct : *structs)
@@ -344,7 +343,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Complete),
                         "measurement::StdSortWrapper",
-                        "",
                         "measurement::BaseCaseSortBlank"
                     );
                     WriteCompleteSorterWrapperMeasureLine(
@@ -353,7 +351,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::QuicksortCopy, NetworkType::None, MeasureType::Complete),
                         "measurement::QuicksortCopyWrapper",
-                        "",
                         "measurement::BaseCaseSortBlank"
                     );
                     WriteCompleteSorterWrapperMeasureLine(
@@ -362,13 +359,12 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete),
                         "measurement::SampleSortWrapper",
-                        "",
                         "networks::sortNbest"
                     );
                 }
             );
         }, "");
-        sampleSortGen->WriteIncludeQuotes("Measurement.generated.h");
+        sampleSortGen->WriteIncludeQuotes("Measurement.generated.h", "MeasurementSampleSort.Helper.h");
         sampleSortGen->WriteNamespace("measurement", [=]{
             std::vector<MeasureParams> sampleSortMeasureParams = 
             {
@@ -378,6 +374,8 @@ void GenerateMeasurementMethod(
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "networks::sortNbosenelsonparameter", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parameter),
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("PointerOptimized") == 0;}), "insertionsort::InsertionSort", Sorter::InsertionSort, NetworkType::None)
             };
+            std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
+            std::vector<SortableStruct*> sPOp = {(*sortableStructs())[13]}; // POp
             WriteMeasureMethod(
                 sampleSortGen,
                 sampleSortMeasureName,
@@ -431,6 +429,22 @@ void GenerateMeasurementMethod(
                         },
                         measureParamsList
                     );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        sampleSortGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::SampleSort),
+                        "measurement::StdSortWrapper",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        sampleSortGen,
+                        &sPOp,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::SampleSort),
+                        "measurement::InsertionSortWrapper",
+                        "measurement::BaseCaseSortBlank"
+                    );
                 }
             );
         }, "");
@@ -450,7 +464,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Complete),
                         "external::IpsoWrapper",
-                        "",
                         "measurement::BaseCaseSortBlank"
                     );
                     WriteCompleteSorterWrapperMeasureLine(
@@ -459,7 +472,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::SortNetwork, NetworkType::BoseNelson, MeasureType::Complete, BoseNelsonNetworkType::Locality),
                         "external::IpsoWrapper",
-                        "",
                         "measurement::BaseCaseSortBlank"
                     );
                     WriteCompleteSorterWrapperMeasureLine(
@@ -468,7 +480,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Complete),
                         "measurement::StdSortWrapper",
-                        "",
                         "measurement::BaseCaseSortBlank"
                     );
                 }

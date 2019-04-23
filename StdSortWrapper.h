@@ -33,6 +33,12 @@ void SampleSortWrapper(
     bool(*compareFunc)(SortableRef_FourCmovTemp_Split* left,SortableRef_FourCmovTemp_Split* right),
     void(*sortFunc)(SortableRef_FourCmovTemp_Split*, size_t));
 
+void InsertionSortWrapper(
+    SortableRef_PointerOptimized* first,
+    SortableRef_PointerOptimized* last,
+    bool(*compareFunc)(SortableRef_PointerOptimized* left,SortableRef_PointerOptimized* right),
+    void(*sortFunc)(SortableRef_PointerOptimized*, size_t));
+    
 }
 
 #endif

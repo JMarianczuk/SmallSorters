@@ -64,7 +64,7 @@ void test()
 #define NumberOfMeasuresInRow 10
 #define NumberOfMeasuresComplete 200
 #define NumberOfSampleSorts 200
-#define NumberOfMeasuresIpso 100
+#define NumberOfMeasuresIpso 200
 #define SmallestArraySize 2
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 16
