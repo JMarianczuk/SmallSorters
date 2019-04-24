@@ -19,7 +19,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "StdSort ";
             if (measureType == MeasureType::Complete)
             {
-                result += "-C ";
+                result += "-Q ";
             }
             else if (measureType == MeasureType::SampleSort)
             {
@@ -27,10 +27,10 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             }
             return result;
         case Sorter::QuicksortCopy:
-            result += "QSort   -C ";
+            result += "QSort   -Q ";
             return result;
         case Sorter::QuicksortCopyMsvc:
-            result += "QSortMs -C ";
+            result += "QSortMs -Q ";
             return result;
         case Sorter::SampleSort:
             result += "S+";
@@ -85,7 +85,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "-I";
             break;
         case MeasureType::Complete:
-            result += "-C";
+            result += "-Q";
             break;
         case MeasureType::Complete2:
             result += "-c";

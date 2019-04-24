@@ -97,7 +97,7 @@ int main(int argumentCount, char** arguments)
         return 0;
     }
     if (options.HelpRequested 
-        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureCompleteSort && !options.MeasureIpso))
+        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureQuickSort && !options.MeasureIpso))
     {
         commandline::PrintHelpText(std::cout);
         return 0;
@@ -135,7 +135,7 @@ int main(int argumentCount, char** arguments)
                 }
             }
         }
-        if (options.MeasureCompleteSort && measureIteration < NumberOfMeasuresComplete)
+        if (options.MeasureQuickSort && measureIteration < NumberOfMeasuresComplete)
         {
             measurement::MeasureCompleteSorting(perf_cpu_cycles, seed, NumberOfIterationsCompleteSort, CompleteSortArraySize, measureIteration);
         }

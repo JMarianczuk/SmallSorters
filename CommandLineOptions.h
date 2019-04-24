@@ -14,7 +14,7 @@ struct CommandLineOptions
     bool MeasureNormal;
     bool MeasureInRow;
     bool MeasureSampleSort;
-    bool MeasureCompleteSort;
+    bool MeasureQuickSort;
     bool MeasureIpso;
 
     bool VerifyNetworks;

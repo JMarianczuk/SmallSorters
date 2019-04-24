@@ -14,6 +14,16 @@ namespace custommath
         );
         return y;
     }
+    static long longlog2(const long x)
+    {
+        long y;
+        __asm__(
+            "bsrq %[in],%[out]\n\t"
+            : [out] "=rm"(y)
+            : [in] "rm"(x)
+        );
+        return y;
+    }
 }
 
 #endif

@@ -23,8 +23,8 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.MeasureSampleSort)
             ["-s"]["--measureSampleSort"]
             ("Measure sorting of medium size set using register sample sort implementation with special sorters at base case") |
-        Opt(options.MeasureCompleteSort)
-            ["-c"]["--measureCompleteSort"]
+        Opt(options.MeasureQuickSort)
+            ["-q"]["--measureQuickSort"]
             ("Measure sorting of large set with special sorters at base case") |
         Opt(options.MeasureIpso)
             ["-4"]["--measureIpso"]

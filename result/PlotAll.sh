@@ -2,3 +2,4 @@
 ./PlotCompleteSort.sh $1
 ./PlotNormalSort.sh $1
 ./PlotInRowSort.sh $1
+./PlotIpsoSort.sh $1

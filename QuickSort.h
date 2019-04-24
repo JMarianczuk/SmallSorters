@@ -212,7 +212,10 @@ template <typename TValueType>
 inline
 void QS_Stl(TValueType* first, TValueType* last, bool(*compare)(TValueType*,TValueType*), void(*sortFunc)(TValueType*,size_t))
 {
-    QS_Stl_Internal(first, last, custommath::intlog2((int) (last - first)) * 2, compare, sortFunc);
+    if (first != last)
+    {
+        QS_Stl_Internal(first, last, custommath::intlog2((int) (last - first)) * 2, compare, sortFunc);
+    }
 }
 
 }

@@ -2,6 +2,7 @@
 
 #include "StdSortWrapper.h"
 #include "Quicksort_Copy.h"
+#include "Quicksort_Copy2.h"
 #include "SampleSort.generated.h"
 #include "StructHelpers.generated.h"
 
@@ -40,7 +41,8 @@ namespace measurement
         bool(*compareFunc)(SortableRef* left, SortableRef* right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
+        quicksortcopy2::sort(first, last, [](SortableRef left, SortableRef right){return left < right;});
+        // quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
     }
 
     void QuicksortCopyMsvcWrapper(
