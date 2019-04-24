@@ -366,6 +366,14 @@ void GenerateMeasurementMethod(
                     );
                     WriteCompleteSorterWrapperMeasureLine(
                         completeGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::QuicksortCopy, NetworkType::None, MeasureType::Complete),
+                        "measurement::QuicksortCopyMsvcWrapper",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        completeGen,
                         &bRef,
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::SortNetwork),
