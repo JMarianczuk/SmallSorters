@@ -368,7 +368,7 @@ void GenerateMeasurementMethod(
                         completeGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::QuicksortCopy, NetworkType::None, MeasureType::Complete),
+                        BuildSorterName(Sorter::QuicksortCopyMsvc, NetworkType::None, MeasureType::Complete),
                         "measurement::QuicksortCopyMsvcWrapper",
                         "measurement::BaseCaseSortBlank"
                     );

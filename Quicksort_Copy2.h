@@ -111,7 +111,9 @@ inline void
 __unguarded_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
 {
     for (_RandomAccessIterator __i = __first; __i != __last; ++__i)
+    {
         std::__unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
+    }
 }
 
 template<typename _RandomAccessIterator, typename _Compare>
@@ -129,7 +131,9 @@ __insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _C
             *__first = std::move(__val);
         }
         else
+        {
             __unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
+        }
     }
 }
 
@@ -153,18 +157,30 @@ __move_median_to_first(_Iterator __result,_Iterator __a, _Iterator __b, _Iterato
     if (__comp(__a, __b))
     {
         if (__comp(__b, __c))
+        {
             std::iter_swap(__result, __b);
+        }
         else if (__comp(__a, __c))
+        {
             std::iter_swap(__result, __c);
+        }
         else
+        {
             std::iter_swap(__result, __a);
+        }
     }
     else if (__comp(__a, __c))
+    {
         std::iter_swap(__result, __a);
+    }
     else if (__comp(__b, __c))
+    {
         std::iter_swap(__result, __c);
+    }
     else
+    {
         std::iter_swap(__result, __b);
+    }
 }
 
     template<typename _RandomAccessIterator, typename _Compare>
@@ -176,12 +192,18 @@ __unguarded_partition(_RandomAccessIterator __first,
     while (true)
     {
         while (__comp(__first, __pivot))
+        {
             ++__first;
+        }
         --__last;
         while (__comp(__pivot, __last))
+        {
             --__last;
+        }
         if (!(__first < __last))
+        {
             return __first;
+        }
         std::iter_swap(__first, __last);
         ++__first;
     }
@@ -211,8 +233,7 @@ __introsort_loop(_RandomAccessIterator __first,
             return;
         }
         --__depth_limit;
-        _RandomAccessIterator __cut =
-        __unguarded_partition_pivot(__first, __last, __comp);
+        _RandomAccessIterator __cut = __unguarded_partition_pivot(__first, __last, __comp);
         __introsort_loop(__cut, __last, __depth_limit, __comp);
         __last = __cut;
     }

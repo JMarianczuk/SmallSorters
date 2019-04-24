@@ -41,8 +41,7 @@ namespace measurement
         bool(*compareFunc)(SortableRef* left, SortableRef* right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        quicksortcopy2::sort(first, last, [](SortableRef left, SortableRef right){return left < right;});
-        // quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
+        quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
     }
 
     void QuicksortCopyMsvcWrapper(
@@ -51,7 +50,8 @@ namespace measurement
         bool(*compareFunc)(SortableRef* left, SortableRef* right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc, sortFunc);
+        quicksortcopy2::sort(first, last, [](SortableRef left, SortableRef right){return left < right;});
+        // quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc, sortFunc);
     }
 
     void SampleSortWrapper(
