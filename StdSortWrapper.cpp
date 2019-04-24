@@ -41,7 +41,7 @@ namespace measurement
         bool(*compareFunc)(SortableRef* left, SortableRef* right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        quicksortcopy2::sort(first, last, [](SortableRef left, SortableRef right){return left < right;});
+        quicksortcopy2::sort(first, last, &NormalCompare<SortableRef>);
         // quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
     }
 
