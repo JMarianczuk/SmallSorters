@@ -53,7 +53,9 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
 #define ElementCount 128
 void test()
 {
-    debug::WriteLine(std::to_string(custommath::longlog2(16)));
+    debug::WriteLine(std::to_string(sizeof(SortableRef*)));
+    debug::WriteLine(std::to_string(sizeof(long)));
+    debug::WriteLine(std::to_string(sizeof(long long)));
 }
 
 #define NumberOfIterations 100

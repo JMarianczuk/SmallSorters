@@ -17,13 +17,17 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             break;
         case Sorter::StdSort:
             result += "StdSort ";
-            if (measureType == MeasureType::Complete)
+            switch (measureType)
             {
-                result += "-Q ";
-            }
-            else if (measureType == MeasureType::SampleSort)
-            {
-                result += "-S000 ";
+                case MeasureType::Complete:
+                    result += "-Q ";
+                    break;
+                case MeasureType::SampleSort:
+                    result += "-S000 ";
+                    break;
+                case MeasureType::Ipso:
+                    result += "-4 ";
+                    break;
             }
             return result;
         case Sorter::QuicksortCopy:
@@ -333,19 +337,10 @@ void GenerateMeasurementMethod(
                         measureParams.Structs,
                         "MeasureCompleteSorter",
                         BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::Complete, measureParams._BoseNelsonNetworkType),
-                        "quicksort::QS_Stl",
+                        "quicksort::sort",
                         "",
                         measureParams.SortMethod);
                     completeGen->WriteLine("");
-                    // WriteCompleteSorterMeasureLine(
-                    //     completeGen,
-                    //     measureParams.Structs,
-                    //     "MeasureCompleteSorter",
-                    //     BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::Complete2, measureParams._BoseNelsonNetworkType),
-                    //     "quicksortcopy::Quicksort_Copy_Msvc",
-                    //     "",
-                    //     measureParams.SortMethod);
-                    // completeGen->WriteLine("");
                 },
                 [=]{
                     WriteCompleteSorterWrapperMeasureLine(
@@ -362,14 +357,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::QuicksortCopy, NetworkType::None, MeasureType::Complete),
                         "measurement::QuicksortCopyWrapper",
-                        "measurement::BaseCaseSortBlank"
-                    );
-                    WriteCompleteSorterWrapperMeasureLine(
-                        completeGen,
-                        &sRef,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::QuicksortCopyMsvc, NetworkType::None, MeasureType::Complete),
-                        "measurement::QuicksortCopyMsvcWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
                     WriteCompleteSorterWrapperMeasureLine(

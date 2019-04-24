@@ -2,7 +2,7 @@
 #ifndef QUICKSORT_H
 #define QUICKSORT_H
 
-#include <math.h>
+#include <inttypes.h>
 
 #include "CustomMath.h"
 #include "DebugHelper.h"
@@ -47,175 +47,215 @@ void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*
 
 template <typename TValueType>
 static inline
-int QS_Partition(TValueType* items, size_t arraySize)
-{
-    size_t first = 0;
-    size_t mid = arraySize / 2;
-    size_t last = arraySize - 1;
-    if (last > 40)
-    {
-        size_t step = (last + 1) / 8;
-        size_t twoStep = step * 2;
-        networks::sort9bosenelsonparameter(
-            items[first + step], items[first + twoStep], items[mid - step], items[mid], 
-            items[first], 
-            items[mid + step], items[last - twoStep], items[last - step], items[last]);
-    }
-    else
-    {
-        networks::sort3bosenelsonparameter(
-            items[mid], 
-            items[first], 
-            items[last]);
-    } // The median is now at position first because we passed items[first] as middle parameter into the network
-
-    // debug::WriteLine("partition: mid=", std::to_string(mid), ", last=", std::to_string(last));
-    // std::swap(items[mid], items[first]); 
-    auto pivot = items[first];
-    first += 1;
-
-    while(true)
-    {
-        while (items[first] < pivot)
-        {
-            first += 1;
-        }
-        while (pivot < items[last])
-        {
-            last -= 1;
-        }
-        if (last <= first)
-        {
-            std::swap(items[0], items[last]);
-            // debug::WriteLine("returning mid index ", std::to_string(last), ", size was ", std::to_string(arraySize));
-            return last;
-        }
-        std::swap(items[first], items[last]);
-        first += 1;
-        last -= 1;
-    }
-}
-
-template <typename TValueType>
-static inline
 bool templateLess(uint64_t& leftKey, TValueType& right)
 {
     return leftKey < GetKey(right);
 }
 
-template <typename TValueType>
-static inline
-void QS_Recursion(TValueType* items, size_t arraySize, size_t ideal, void(*sortFunc)(TValueType*,size_t))
-{
-    while (arraySize > BaseCaseLimit && ideal > 0)
-    {
-        // debug::WriteLine("Partitioning: arraySize=", std::to_string(arraySize));
-        auto mid = QS_Partition(items, arraySize);
-        // debug::WriteLine("Going into recursion");
-        size_t afterMid = mid + 1;
-        ideal = (ideal >> 1) + (ideal >> 2); //from std::sort (MSVC): "allow 1.5 log2(N) divisions"
+//------------------------------------------------------------------------------------
 
-        if (mid  < arraySize - afterMid)
+template<typename _Iterator, typename = std::void_t<>>
+    struct __iterator_traits { };
+
+template<typename _Iterator>
+struct __iterator_traits<_Iterator, std::void_t<typename _Iterator::value_type, typename _Iterator::difference_type>>
+{
+    typedef typename _Iterator::value_type        value_type;
+    typedef typename _Iterator::difference_type   difference_type;
+};
+
+template<typename _Iterator>
+struct iterator_traits : public __iterator_traits<_Iterator> { };
+
+    /// Partial specialization for pointer types.
+template<typename _Tp>
+struct iterator_traits<_Tp*>
+{
+    typedef _Tp                         value_type;
+    typedef ptrdiff_t                   difference_type;
+};
+
+/// Partial specialization for const pointer types.
+template<typename _Tp>
+struct iterator_traits<const _Tp*>
+{
+    typedef _Tp                         value_type;
+    typedef ptrdiff_t                   difference_type;
+};
+
+enum { _S_threshold = 16 };
+
+//-------------------------------------------------------------------------------------------------------------
+
+template<typename _RandomAccessIterator, typename _Compare>
+void
+__unguarded_linear_insert(_RandomAccessIterator __last, _Compare __comp)
+{
+    typename iterator_traits<_RandomAccessIterator>::value_type __val = std::move(*__last);
+    _RandomAccessIterator __next = __last;
+    --__next;
+    while (__comp(__val, __next))
+    {
+        *__last = std::move(*__next);
+        __last = __next;
+        --__next;
+    }
+    *__last = std::move(__val);
+}
+
+template<typename _RandomAccessIterator, typename _Compare>
+inline void
+__unguarded_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
+{
+    for (_RandomAccessIterator __i = __first; __i != __last; ++__i)
+    {
+        std::__unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
+    }
+}
+
+template<typename _RandomAccessIterator, typename _Compare>
+void
+__insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
+{
+    if (__first == __last) return;
+
+    for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
+    {
+        if (__comp(__i, __first))
         {
-            QS_Recursion(items, mid, ideal, sortFunc);
-            items += afterMid;
-            arraySize -= afterMid;
+            typename iterator_traits<_RandomAccessIterator>::value_type __val = std::move(*__i);
+            std::move_backward(__first, __i, __i + 1);
+            *__first = std::move(__val);
         }
         else
         {
-            QS_Recursion(items + afterMid, arraySize - afterMid, ideal, sortFunc);
-            arraySize = mid;
+            __unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
         }
-    }
-
-    if (arraySize > BaseCaseLimit)
-    {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(items, arraySize, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
-    }
-    else if (arraySize >= 2)
-    {
-        sortFunc(items, arraySize);
     }
 }
 
-template <typename TValueType, typename TCompare>
-TValueType* QS_UnguardedPartition(TValueType* first, TValueType* last, TValueType* pivot, TCompare compare)
+template<typename _RandomAccessIterator, typename _Compare>
+void
+__final_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
+{
+    if (__last - __first > int(_S_threshold))
+    {
+        __insertion_sort(__first, __first + int(_S_threshold), __comp);
+        __unguarded_insertion_sort(__first + int(_S_threshold), __last, __comp);
+    }
+    else
+        __insertion_sort(__first, __last, __comp);
+}
+
+template<typename _Iterator, typename _Compare>
+void
+__move_median_to_first(_Iterator __result,_Iterator __a, _Iterator __b, _Iterator __c, _Compare __comp)
+{
+    if (__comp(__a, __b))
+    {
+        if (__comp(__b, __c))
+        {
+            std::iter_swap(__result, __b);
+        }
+        else if (__comp(__a, __c))
+        {
+            std::iter_swap(__result, __c);
+        }
+        else
+        {
+            std::iter_swap(__result, __a);
+        }
+    }
+    else if (__comp(__a, __c))
+    {
+        std::iter_swap(__result, __a);
+    }
+    else if (__comp(__b, __c))
+    {
+        std::iter_swap(__result, __c);
+    }
+    else
+    {
+        std::iter_swap(__result, __b);
+    }
+}
+
+    template<typename _RandomAccessIterator, typename _Compare>
+_RandomAccessIterator
+__unguarded_partition(_RandomAccessIterator __first,
+            _RandomAccessIterator __last,
+            _RandomAccessIterator __pivot, _Compare __comp)
 {
     while (true)
     {
-        while (compare(first, pivot))
+        while (__comp(__first, __pivot))
         {
-            ++first;
+            ++__first;
         }
-        --last;
-        while (compare(pivot, last))
+        --__last;
+        while (__comp(__pivot, __last))
         {
-            --last;
+            --__last;
         }
-        if (!(first < last))
+        if (!(__first < __last))
         {
-            return first;
+            return __first;
         }
-        std::iter_swap(first, last);
-        ++first;
+        std::iter_swap(__first, __last);
+        ++__first;
     }
 }
 
-template <typename TValueType, typename TCompare>
-inline
-TValueType* QS_UnguardedPartitionPivot(TValueType* first, TValueType* last, TCompare compare)
+template<typename _RandomAccessIterator, typename _Compare>
+inline _RandomAccessIterator
+__unguarded_partition_pivot(_RandomAccessIterator __first,
+            _RandomAccessIterator __last, _Compare __comp)
 {
-    size_t size = last - first;
-    TValueType* mid = first + size / 2;
-    if (size > 40)
-    {
-        size_t step = size / 8;
-        size_t twoStep = step * 2;
-        networks::sort9bosenelsonparameter(
-            *(first + step), *(first + twoStep), *(mid - step), *mid,
-            *first,
-            *(mid + step), *(last - twoStep), *(last - step), *(last - 1)
-        );
-    }
-    else 
-    {
-        networks::sort3bosenelsonparameter(
-            *mid, 
-            *first, 
-            *(last - 1));
-    }
-    
-    return QS_UnguardedPartition(first + 1, last, first, compare);
+    _RandomAccessIterator __mid = __first + (__last - __first) / 2;
+    __move_median_to_first(__first, __first + 1, __mid, __last - 1, __comp);
+    return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
 
-template <typename TValueType, typename TCompare>
-inline
-void QS_Stl_Internal(TValueType* first, TValueType* last, int depthLimit, TCompare compare, void(*sortFunc)(TValueType*,size_t))
+template<typename _RandomAccessIterator, typename _Size, typename _Compare, typename _BaseCaseFunc>
+void
+__introsort_loop(
+    _RandomAccessIterator __first,
+    _RandomAccessIterator __last,
+    _Size __depth_limit, 
+    _Compare __comp, 
+    _BaseCaseFunc __baseCaseFunc)
 {
-    while (last - first > BaseCaseLimit)
+    while (__last - __first > int(_S_threshold))
     {
-        if (depthLimit == 0)
+        if (__depth_limit == 0)
         {
-            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, BaseCaseLimit, sortFunc, &templateLess, &GetKey<TValueType>);
-            // std::partial_sort(first, last, last, compare);
+            std::partial_sort(__first, __last, __last);
             return;
         }
-        depthLimit -= 1;
-        TValueType* cut = QS_UnguardedPartitionPivot(first, last, compare);
-        QS_Stl_Internal(cut, last, depthLimit, compare, sortFunc);
-        last = cut;
+        --__depth_limit;
+        _RandomAccessIterator __cut = __unguarded_partition_pivot(__first, __last, __comp);
+        __introsort_loop(__cut, __last, __depth_limit, __comp, __baseCaseFunc);
+        __last = __cut;
     }
-    sortFunc(first, last - first);
+    __baseCaseFunc(__first, __last - __first);
 }
 
-template <typename TValueType>
-inline
-void QS_Stl(TValueType* first, TValueType* last, bool(*compare)(TValueType*,TValueType*), void(*sortFunc)(TValueType*,size_t))
+template<typename _RandomAccessIterator, typename _Compare, typename _BaseCaseFunc>
+inline void
+__sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp, _BaseCaseFunc __baseCaseFunc)
 {
-    if (first != last)
+    if (__first != __last)
     {
-        QS_Stl_Internal(first, last, custommath::intlog2((int) (last - first)) * 2, compare, sortFunc);
+        __introsort_loop(__first, __last, custommath::longlog2(__last - __first) * 2, __comp, __baseCaseFunc);
+        // __final_insertion_sort(__first, __last, __comp);
     }
+}
+
+template<typename TValueType>
+inline void
+sort(TValueType* __first, TValueType* __last, bool(*__comp)(TValueType*,TValueType*), void(*__baseCaseFunc)(TValueType*,size_t))
+{
+    __sort(__first, __last, __comp, __baseCaseFunc);
 }
 
 }

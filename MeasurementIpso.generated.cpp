@@ -22,8 +22,8 @@ void MeasureIpso(Performancing* perf, uint64_t seed, int numberOfIterations, siz
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N BoNeL -4 KR 4CS");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort KR Def", &measurement::StdSortWrapper, &measurement::BaseCaseSortBlank<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 KR Def", &measurement::StdSortWrapper, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort KR Def");
+	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 KR Def");
 }
 } // namespace measurement
