@@ -4,7 +4,7 @@
 namespace codegeneration
 {
 
-std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType measureType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, int sampleSortSplits = 0, int sampleSortOversample = 0, int sampleSortBlockSize = 0)
+std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType measureType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, Sorter subSorter = Sorter::InsertionSort, int sampleSortSplits = 0, int sampleSortOversample = 0, int sampleSortBlockSize = 0)
 {
     std::string result = "";
     switch (sorter)
@@ -33,7 +33,15 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "QSortMs -C ";
             return result;
         case Sorter::SampleSort:
-            result += "S";
+            result += "S+";
+            switch (subSorter)
+            {
+                case Sorter::InsertionSort:
+                    result += "I";
+                    break;
+                case Sorter::SortNetwork:
+                    result += "N";
+            }
             break;
     }
     result += " ";
@@ -93,6 +101,9 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += std::to_string(sampleSortSplits);
             result += std::to_string(sampleSortOversample);
             result += std::to_string(sampleSortBlockSize);
+            break;
+        case MeasureType::Ipso:
+            result += "-4";
             break;
     }
     result += " ";
@@ -357,7 +368,7 @@ void GenerateMeasurementMethod(
                         completeGen,
                         &bRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete),
+                        BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::SortNetwork),
                         "measurement::SampleSortWrapper",
                         "networks::sortNbest"
                     );
@@ -399,7 +410,8 @@ void GenerateMeasurementMethod(
                                         measureParams._Sorter, 
                                         measureParams._NetworkType, 
                                         MeasureType::SampleSort, 
-                                        measureParams._BoseNelsonNetworkType, 
+                                        measureParams._BoseNelsonNetworkType,
+                                        Sorter::InsertionSort,
                                         splits, oversample, blockSize),
                                     "samplesort::" + sampleSortName,
                                     ", uint64_t",
@@ -420,7 +432,8 @@ void GenerateMeasurementMethod(
                                     measureParams._Sorter,
                                     measureParams._NetworkType,
                                     MeasureType::SampleSort2,
-                                    measureParams._BoseNelsonNetworkType, 
+                                    measureParams._BoseNelsonNetworkType,
+                                    Sorter::InsertionSort,
                                     3, 3, 2),
                                 "samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize", 
                                 ", uint64_t", 
@@ -462,7 +475,7 @@ void GenerateMeasurementMethod(
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Complete),
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso),
                         "external::IpsoWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
@@ -470,7 +483,7 @@ void GenerateMeasurementMethod(
                         ipsoGen,
                         &bRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::SortNetwork, NetworkType::BoseNelson, MeasureType::Complete, BoseNelsonNetworkType::Locality),
+                        BuildSorterName(Sorter::SampleSort, NetworkType::BoseNelson, MeasureType::Ipso, BoseNelsonNetworkType::Locality, Sorter::SortNetwork),
                         "external::IpsoWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
@@ -478,7 +491,7 @@ void GenerateMeasurementMethod(
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Complete),
+                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Ipso),
                         "measurement::StdSortWrapper",
                         "measurement::BaseCaseSortBlank"
                     );

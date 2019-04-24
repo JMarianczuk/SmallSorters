@@ -187,8 +187,8 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -C KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S Best  -C KR 4CS", &measurement::SampleSortWrapper, &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -C KR 4CS", &measurement::SampleSortWrapper, &networks::sortNbest<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S Best  -C KR 4CS");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -C KR 4CS");
 }
 } // namespace measurement

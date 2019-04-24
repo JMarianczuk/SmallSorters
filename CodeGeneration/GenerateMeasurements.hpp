@@ -20,8 +20,7 @@ enum class Sorter
     StdSort,
     QuicksortCopy,
     QuicksortCopyMsvc,
-    SampleSort,
-    Ipso
+    SampleSort
 };
 
 enum class NetworkType
@@ -45,7 +44,8 @@ enum class MeasureType
     Complete,
     Complete2,
     SampleSort,
-    SampleSort2
+    SampleSort2,
+    Ipso
 };
 
 struct MeasureParams
