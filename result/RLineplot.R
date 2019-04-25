@@ -15,17 +15,20 @@ options = parse_args(opt_parser)
 con <- dbConnect(SQLite(), options$dbName)
 someRes <- dbExecute(con, "PRAGMA case_sensitive_like=ON;")
 
-query <- paste("select avg(v / n) as normalized_value, s as sorter, t as sortergroup, a as arraySize from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%'")
+query <- paste("select average / a as avg, median / a as med, variance / a as var, s as sorter, a as arraySize from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
 if (options$filter != "") {
     query <- paste(query, "and", options$filter)
 }
-query <- paste(query, "group by s, a")
 res <- dbGetQuery(con, query)
 
 filename <- paste("plots/lineplot-", options$filePostfix, sep="", collapse="")
 filenameExt <- paste(filename, ".pdf", sep="", collapse="")
 
-thisplot <- ggplot(res, aes(x = arraySize, y = normalized_value, group=sorter, color=sorter)) + 
-    geom_line()
+thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=sorter)) + 
+    labs(x = "Array Size", y = "Cpu Cycles per iteration and element") +
+    geom_line() +
+    geom_point() +
+    #geom_errorbar(aes(ymin = med - sqrt(var), ymax = med + sqrt(var))) +
+    theme(legend.position="right", legend.title=element_blank(), legend.text = element_text(colour="black", size=8))
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")

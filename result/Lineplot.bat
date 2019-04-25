@@ -1,0 +1,1 @@
+Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="normalSortDeviation" --filePostfix="normal" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
