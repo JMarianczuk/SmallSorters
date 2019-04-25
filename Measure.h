@@ -195,6 +195,12 @@ bool IteratorCompare(TValueType* left, TValueType* right)
     return *left < *right;
 }
 
+template <typename TValueType>
+bool NormalCompare(TValueType left, TValueType right)
+{
+    return left < right;
+}
+
 
 template <typename TValueType>
 void MeasureCompleteSorter(
@@ -203,7 +209,7 @@ void MeasureCompleteSorter(
     size_t arraySize,
     int measureIteration,
     std::string sorterName,
-    void(*completeSorter)(TValueType*,TValueType*,bool(*)(TValueType*,TValueType*),void(*)(TValueType*,size_t)),
+    void(*completeSorter)(TValueType*,TValueType*,bool(*)(TValueType,TValueType),void(*)(TValueType*,size_t)),
     void(*baseCaseSortFunc)(TValueType*,size_t))
 {
     TValueType *arr = (TValueType*) malloc(sizeof(TValueType) * arraySize);
@@ -214,7 +220,7 @@ void MeasureCompleteSorter(
     uint64_t key_value;
     uint64_t ref_value;
     PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
-    completeSorter(arr, arr + arraySize, &IteratorCompare, baseCaseSortFunc);
+    completeSorter(arr, arr + arraySize, &NormalCompare, baseCaseSortFunc);
     if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
     {
         numberOfBadSorts += 1;
@@ -227,7 +233,7 @@ void MeasureCompleteSorter(
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
-        completeSorter(arr, arr + arraySize, &IteratorCompare, baseCaseSortFunc);
+        completeSorter(arr, arr + arraySize, &NormalCompare, baseCaseSortFunc);
         if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
         {
             numberOfBadSorts += 1;

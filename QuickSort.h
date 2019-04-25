@@ -253,9 +253,9 @@ __sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __c
 
 template<typename TValueType>
 inline void
-sort(TValueType* __first, TValueType* __last, bool(*__comp)(TValueType*,TValueType*), void(*__baseCaseFunc)(TValueType*,size_t))
+sort(TValueType* __first, TValueType* __last, bool(*__comp)(TValueType,TValueType), void(*__baseCaseFunc)(TValueType*,size_t))
 {
-    __sort(__first, __last, __comp, __baseCaseFunc);
+    __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp), __baseCaseFunc);
 }
 
 }

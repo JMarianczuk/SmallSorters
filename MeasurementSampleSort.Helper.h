@@ -12,7 +12,7 @@ namespace measurement
 void InsertionSortWrapper(
     SortableRef_PointerOptimized* first,
     SortableRef_PointerOptimized* last,
-    bool(*compareFunc)(SortableRef_PointerOptimized* left,SortableRef_PointerOptimized* right),
+    bool(*compareFunc)(SortableRef_PointerOptimized left,SortableRef_PointerOptimized right),
     void(*sortFunc)(SortableRef_PointerOptimized*, size_t))
 {
     insertionsort::InsertionSort(first, last - first);

@@ -12,25 +12,25 @@ namespace measurement
 void StdSortWrapper(
     SortableRef* first,
     SortableRef* last,
-    bool(*compareFunc)(SortableRef* left, SortableRef* right),
+    bool(*compareFunc)(SortableRef left, SortableRef right),
     void(*sortFunc)(SortableRef*, size_t));
 
 void QuicksortCopyWrapper(
     SortableRef* first,
     SortableRef* last,
-    bool(*compareFunc)(SortableRef* left, SortableRef* right),
+    bool(*compareFunc)(SortableRef left, SortableRef right),
     void(*sortFunc)(SortableRef*, size_t));
 
 void QuicksortCopyMsvcWrapper(
     SortableRef* first,
     SortableRef* last,
-    bool(*compareFunc)(SortableRef* left, SortableRef* right),
+    bool(*compareFunc)(SortableRef left, SortableRef right),
     void(*sortFunc)(SortableRef*, size_t));
 
 void SampleSortWrapper(
     SortableRef_FourCmovTemp_Split* first,
     SortableRef_FourCmovTemp_Split* last,
-    bool(*compareFunc)(SortableRef_FourCmovTemp_Split* left,SortableRef_FourCmovTemp_Split* right),
+    bool(*compareFunc)(SortableRef_FourCmovTemp_Split left,SortableRef_FourCmovTemp_Split right),
     void(*sortFunc)(SortableRef_FourCmovTemp_Split*, size_t));
 
 void InsertionSortWrapper(

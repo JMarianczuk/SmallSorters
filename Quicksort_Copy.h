@@ -438,7 +438,7 @@ void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredic
 template <typename TValueType, typename TPredicate, typename TBaseCaseSort>
 void Quicksort_Copy_Msvc(TValueType* first, TValueType* last, TPredicate predicate, TBaseCaseSort baseCaseSort)
 {
-    sort_unchecked(first, last, (uint64_t) (last - first), predicate, baseCaseSort);
+    sort_unchecked(first, last, (uint64_t) (last - first), __gnu_cxx::__ops::__iter_comp_iter(predicate), baseCaseSort);
 }
 
 }

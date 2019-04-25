@@ -29,26 +29,26 @@ namespace measurement
     void StdSortWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef* left, SortableRef* right),
+        bool(*compareFunc)(SortableRef left, SortableRef right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        std::sort(first, last, &NormalCompare<SortableRef>);
+        std::sort(first, last, compareFunc);
     }
 
     void QuicksortCopyWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef* left, SortableRef* right),
+        bool(*compareFunc)(SortableRef left, SortableRef right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        quicksortcopy2::sort(first, last, &NormalCompare<SortableRef>);
+        quicksortcopy2::sort(first, last, compareFunc);
         // quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
     }
 
     void QuicksortCopyMsvcWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef* left, SortableRef* right),
+        bool(*compareFunc)(SortableRef left, SortableRef right),
         void(*sortFunc)(SortableRef*, size_t))
     {
         quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc, sortFunc);
@@ -57,7 +57,7 @@ namespace measurement
     void SampleSortWrapper(
         SortableRef_FourCmovTemp_Split* first,
         SortableRef_FourCmovTemp_Split* last,
-        bool(*compareFunc)(SortableRef_FourCmovTemp_Split* left,SortableRef_FourCmovTemp_Split* right),
+        bool(*compareFunc)(SortableRef_FourCmovTemp_Split left,SortableRef_FourCmovTemp_Split right),
         void(*sortFunc)(SortableRef_FourCmovTemp_Split*, size_t))
     {
         samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
