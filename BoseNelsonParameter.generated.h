@@ -74,18 +74,11 @@ void sort5bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 }
 
 template <typename TValueType> static
-inline
-void merge2_1bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& right0)
-{
-	networks::ConditionalSwap(left0, right0);
-	networks::ConditionalSwap(left1, right0);
-}
-template <typename TValueType> static
 void merge3_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& right0, TValueType& right1, TValueType& right2)
 {
 	networks::merge1_1bosenelsonparameter(left0, right0);
 	networks::merge2_2bosenelsonparameter(left1, left2, right1, right2);
-	networks::merge2_1bosenelsonparameter(left1, left2, right0);
+	networks::merge1_2bosenelsonparameter(right0, left1, left2);
 }
 
 template <typename TValueType> static
@@ -145,19 +138,11 @@ void sort9bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 }
 
 template <typename TValueType> static
-void merge3_2bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& right0, TValueType& right1)
-{
-	networks::merge1_1bosenelsonparameter(left0, right0);
-	networks::merge2_1bosenelsonparameter(left1, left2, right1);
-	networks::merge2_1bosenelsonparameter(left1, left2, right0);
-}
-
-template <typename TValueType> static
 void merge5_5bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4)
 {
 	networks::merge2_2bosenelsonparameter(left0, left1, right0, right1);
 	networks::merge3_3bosenelsonparameter(left2, left3, left4, right2, right3, right4);
-	networks::merge3_2bosenelsonparameter(left2, left3, left4, right0, right1);
+	networks::merge2_3bosenelsonparameter(right0, right1, left2, left3, left4);
 }
 
 template <typename TValueType> static
@@ -217,19 +202,11 @@ void sort13bosenelsonparameter(TValueType& element0, TValueType& element1, TValu
 }
 
 template <typename TValueType> static
-void merge4_3bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& right0, TValueType& right1, TValueType& right2)
-{
-	networks::merge2_2bosenelsonparameter(left0, left1, right0, right1);
-	networks::merge2_1bosenelsonparameter(left2, left3, right2);
-	networks::merge2_2bosenelsonparameter(left2, left3, right0, right1);
-}
-
-template <typename TValueType> static
 void merge7_7bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& left2, TValueType& left3, TValueType& left4, TValueType& left5, TValueType& left6, TValueType& right0, TValueType& right1, TValueType& right2, TValueType& right3, TValueType& right4, TValueType& right5, TValueType& right6)
 {
 	networks::merge3_3bosenelsonparameter(left0, left1, left2, right0, right1, right2);
 	networks::merge4_4bosenelsonparameter(left3, left4, left5, left6, right3, right4, right5, right6);
-	networks::merge4_3bosenelsonparameter(left3, left4, left5, left6, right0, right1, right2);
+	networks::merge3_4bosenelsonparameter(right0, right1, right2, left3, left4, left5, left6);
 }
 
 template <typename TValueType> static

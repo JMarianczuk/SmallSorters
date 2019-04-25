@@ -100,8 +100,12 @@ void WriteMergeMethodName_ParameterStyle(CodeGenerator *gen, int leftMergeSize, 
     gen->WriteLine(")");
 }
 
-void WriteParameters(CodeGenerator *gen, nlohmann::json leftIndices, nlohmann::json rightIndices, std::string leftElementsName, std::string rightElementsName)
+void WriteParameters(CodeGenerator *gen, nlohmann::json leftIndices, nlohmann::json rightIndices, std::string leftElementsName, std::string rightElementsName, bool swapped = false)
 {
+    if (swapped)
+    {
+        std::swap(leftElementsName, rightElementsName);
+    }
     for (auto leftIndex : leftIndices)
     {
         gen->Write(leftElementsName);
@@ -160,6 +164,10 @@ void WriteSorter_ParameterStyle(
         {
             int leftSize = stepNetwork["LeftMergeSize"].get<int>();
             int rightSize = stepNetwork["RightMergeSize"].get<int>();
+            if (leftSize > rightSize) 
+            {
+                std::swap(leftSize, rightSize); //Only do merger 1_2 and 2_2, but not 2_1 because 2_1 is 1_2 with swapped parameters
+            }
             if (!mergeIndices[leftSize * indexArrayLength + rightSize])
             {
                 WriteSorter_ParameterStyle(
@@ -202,6 +210,10 @@ void WriteSorter_ParameterStyle(
         case RecursiveParameterNetworkType::Merge:
             leftMergeSize = network["LeftMergeSize"].get<int>();
             rightMergeSize = network["RightMergeSize"].get<int>();
+            if (leftMergeSize > rightMergeSize)
+            {
+                return;
+            }
             WriteMergeMethodName_ParameterStyle(gen, leftMergeSize, rightMergeSize, sortMethodName);
             mergeIndices[leftMergeSize * indexArrayLength + rightMergeSize] = true;
             if (leftMergeSize == 1 && rightMergeSize == 1)
@@ -258,6 +270,12 @@ void WriteSorter_ParameterStyle(
                 int rightMergeSize = stepNetwork["RightMergeSize"].get<int>();
                 auto leftIndices = step["FirstContextParameterIdsToUse"];
                 auto rightIndices = step["SecondContextParameterIdsToUse"];
+                bool swapped = leftMergeSize > rightMergeSize;
+                if (swapped)
+                {
+                    std::swap(leftIndices, rightIndices);
+                    std::swap(leftMergeSize, rightMergeSize);
+                }
                 gen->Write("networks::merge");
                 gen->Write(leftMergeSize);
                 gen->Write("_");
@@ -272,7 +290,7 @@ void WriteSorter_ParameterStyle(
                         gen->WriteLine(");");
                         break;
                     case RecursiveParameterNetworkType::Merge:
-                        WriteParameters(gen, leftIndices, rightIndices, "left", "right");
+                        WriteParameters(gen, leftIndices, rightIndices, "left", "right", swapped);
                         gen->WriteLine(");");
                         break;
                 }
