@@ -1,0 +1,1 @@
+./PlotAll.sh small_sorters_result.sqlite

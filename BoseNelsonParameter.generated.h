@@ -15,17 +15,20 @@
 namespace networks
 {
 template <typename TValueType> static
+inline
 void merge1_1bosenelsonparameter(TValueType& left0, TValueType& right0)
 {
 	networks::ConditionalSwap(left0, right0);
 }
 template <typename TValueType> static
+inline
 void sort2bosenelsonparameter(TValueType& element0, TValueType& element1)
 {
 	networks::merge1_1bosenelsonparameter(element0, element1);
 }
 
 template <typename TValueType> static
+inline
 void merge1_2bosenelsonparameter(TValueType& left0, TValueType& right0, TValueType& right1)
 {
 	networks::ConditionalSwap(left0, right1);
@@ -71,6 +74,7 @@ void sort5bosenelsonparameter(TValueType& element0, TValueType& element1, TValue
 }
 
 template <typename TValueType> static
+inline
 void merge2_1bosenelsonparameter(TValueType& left0, TValueType& left1, TValueType& right0)
 {
 	networks::ConditionalSwap(left0, right0);

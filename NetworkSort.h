@@ -118,31 +118,31 @@ void ConditionalSwap<SortableRef_FourCmovTemp_Split>(SortableRef_FourCmovTemp_Sp
 {
     uint64_t tmp = left.key;
     uint64_t tmpRef = left.reference;
-    __asm__( 
+    __asm__ volatile ( 
         "cmpq %[left_key],%[right_key]\n\t"
         : 
         : [left_key] "r"(left.key), [right_key] "r"(right.key)
         : "cc" 
     );
-    __asm__(
+    __asm__ volatile (
         "cmovbq %[right_key],%[left_key]\n\t"
         : [left_key] "=&r"(left.key)
         : "0"(left.key), [right_key] "r"(right.key)
         : 
     );
-    __asm__(
+    __asm__ volatile (
         "cmovbq %[right_reference],%[left_reference]\n\t"
         : [left_reference] "=&r"(left.reference)
         : "0"(left.reference), [right_reference] "r"(right.reference)
         :
     );
-    __asm__(
+    __asm__ volatile (
         "cmovbq %[tmp],%[right_key]\n\t"
         : [right_key] "=&r"(right.key)
         : "0"(right.key), [tmp] "r"(tmp)
         : 
     );
-    __asm__(
+    __asm__ volatile (
         "cmovbq %[tmp_ref],%[right_reference]\n\t"
         : [right_reference] "=&r"(right.reference)
         : "0"(right.reference), [tmp_ref] "r"(tmpRef)

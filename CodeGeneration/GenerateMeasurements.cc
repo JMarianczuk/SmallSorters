@@ -359,14 +359,14 @@ void GenerateMeasurementMethod(
                         "measurement::QuicksortCopyWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
-                    WriteCompleteSorterWrapperMeasureLine(
-                        completeGen,
-                        &bRef,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::SortNetwork),
-                        "measurement::SampleSortWrapper",
-                        "networks::sortNbest"
-                    );
+                    // WriteCompleteSorterWrapperMeasureLine(
+                    //     completeGen,
+                    //     &bRef,
+                    //     "MeasureCompleteSorter",
+                    //     BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::SortNetwork),
+                    //     "measurement::SampleSortWrapper",
+                    //     "networks::sortNbest"
+                    // );
                 }
             );
         }, "");

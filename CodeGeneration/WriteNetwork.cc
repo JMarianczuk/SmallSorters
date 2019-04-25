@@ -118,6 +118,18 @@ void WriteParameters(CodeGenerator *gen, nlohmann::json leftIndices, nlohmann::j
     gen->Write(rightIndices.back().get<int>());
 }
 
+bool IsInline(nlohmann::json network, RecursiveParameterNetworkType networkType)
+{
+    switch (networkType)
+    {
+        case RecursiveParameterNetworkType::Split:
+            return network["NetworkSize"].get<int>() == 2;
+        case RecursiveParameterNetworkType::Merge:
+            return (network["LeftMergeSize"].get<int>() + network["RightMergeSize"].get<int>()) <= 3;
+    }
+    
+}
+
 void WriteSorter_ParameterStyle(
     CodeGenerator *gen, 
     nlohmann::json network, 
@@ -173,6 +185,10 @@ void WriteSorter_ParameterStyle(
     }
 
     gen->WriteLine("template <typename TValueType> static");
+    if (IsInline(network, networkType))
+    {
+        gen->WriteLine("inline");
+    }
     int networkSize;
     int leftMergeSize;
     int rightMergeSize;
@@ -209,7 +225,6 @@ void WriteSorter_ParameterStyle(
                     gen->WriteLine("networks::ConditionalSwap(left0, right0);");
                     gen->WriteLine("networks::ConditionalSwap(left1, right0);");
                 });
-                
                 return;
             }
             break;
