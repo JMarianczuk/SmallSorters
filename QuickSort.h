@@ -149,7 +149,7 @@ __final_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __la
 
 template<typename _Iterator, typename _Compare>
 void
-__move_median_to_first(_Iterator __result,_Iterator __a, _Iterator __b, _Iterator __c, _Compare __comp)
+__move_median_to_first(_Iterator __result, _Iterator __a, _Iterator __b, _Iterator __c, _Compare __comp)
 {
     if (__comp(__a, __b))
     {
@@ -212,7 +212,8 @@ __unguarded_partition_pivot(_RandomAccessIterator __first,
             _RandomAccessIterator __last, _Compare __comp)
 {
     _RandomAccessIterator __mid = __first + (__last - __first) / 2;
-    __move_median_to_first(__first, __first + 1, __mid, __last - 1, __comp);
+    // __move_median_to_first(__first, __first + 1, __mid, __last - 1, __comp);
+    networks::sort3bosenelsonparameter(*__mid, *__first, *(__last-1));
     return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
 

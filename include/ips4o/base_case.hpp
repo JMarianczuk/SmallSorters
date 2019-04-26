@@ -71,20 +71,56 @@ void insertionSort(const It begin, const It end, Comp comp) {
     }
 }
 
+template<typename _Iterator, typename = std::void_t<>>
+    struct __iterator_traits { };
+
+template<typename _Iterator>
+struct __iterator_traits<_Iterator, std::void_t<typename _Iterator::value_type, typename _Iterator::difference_type>>
+{
+    typedef typename _Iterator::value_type        value_type;
+    typedef typename _Iterator::difference_type   difference_type;
+};
+
+template<typename _Iterator>
+struct iterator_traits : public __iterator_traits<_Iterator> { };
+
+    /// Partial specialization for pointer types.
+template<typename _Tp>
+struct iterator_traits<_Tp*>
+{
+    typedef _Tp                         value_type;
+    typedef ptrdiff_t                   difference_type;
+};
+
+/// Partial specialization for const pointer types.
+template<typename _Tp>
+struct iterator_traits<const _Tp*>
+{
+    typedef _Tp                         value_type;
+    typedef ptrdiff_t                   difference_type;
+};
+
 /**
  * Wrapper for base case sorter, for easier swapping.
  */
 template <class It, class Comp>
 inline void baseCaseSort(It begin, It end, Comp&& comp) {
     if (begin == end) return;
-    detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
+    typedef typename iterator_traits<It>::value_type TValueType;
+    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::sortNbosenelson<TValueType>, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
 }
 
 template <>
-inline void baseCaseSort<SortableRef_FourCmovTemp_Split*,std::less<>>(SortableRef_FourCmovTemp_Split* begin, SortableRef_FourCmovTemp_Split* end, std::less<>&& comp) {
+inline void baseCaseSort<SortableRef*,std::less<>>(SortableRef* begin, SortableRef* end, std::less<>&& comp) {
     if (begin == end) return;
-    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>, &quicksort::templateLess<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
+    detail::insertionSort(std::move(begin), std::move(end), std::forward<std::less<>>(comp));
 }
+
+// template <>
+// inline void baseCaseSort<SortableRef_FourCmovTemp_Split*,std::less<>>(SortableRef_FourCmovTemp_Split* begin, SortableRef_FourCmovTemp_Split* end, std::less<>&& comp) {
+//     if (begin == end) return;
+//     samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>, &quicksort::templateLess<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
+// }
 
 
 }  // namespace detail

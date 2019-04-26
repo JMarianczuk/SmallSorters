@@ -460,11 +460,24 @@ void GenerateMeasurementMethod(
         ipsoGen->WriteNamespace("measurement", [=]{
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
             std::vector<SortableStruct*> bRef = {(*sortableStructs())[5]}; // 4CS
+            std::vector<MeasureParams> ipsoMeasureParamsList = 
+            {
+                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->NameAbbreviation.compare("Def") != 0;}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality)
+            };
             WriteMeasureMethod(
                 ipsoGen,
                 ipsoMeasureName,
-                measureParamsList,
-                [=](MeasureParams measureParams) {},
+                ipsoMeasureParamsList,
+                [=](MeasureParams measureParams) {
+                    WriteCompleteSorterWrapperMeasureLine(
+                        ipsoGen,
+                        measureParams.Structs,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::SampleSort, measureParams._NetworkType, MeasureType::Ipso, measureParams._BoseNelsonNetworkType, measureParams._Sorter, 3, 3, 2),
+                        "external::IpsoWrapper",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                },
                 [=]{
                     WriteCompleteSorterWrapperMeasureLine(
                         ipsoGen,
@@ -474,14 +487,14 @@ void GenerateMeasurementMethod(
                         "external::IpsoWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
-                    WriteCompleteSorterWrapperMeasureLine(
-                        ipsoGen,
-                        &bRef,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::SampleSort, NetworkType::BoseNelson, MeasureType::Ipso, BoseNelsonNetworkType::Locality, Sorter::SortNetwork),
-                        "external::IpsoWrapper",
-                        "measurement::BaseCaseSortBlank"
-                    );
+                    // WriteCompleteSorterWrapperMeasureLine(
+                    //     ipsoGen,
+                    //     &bRef,
+                    //     "MeasureCompleteSorter",
+                    //     BuildSorterName(Sorter::SampleSort, NetworkType::BoseNelson, MeasureType::Ipso, BoseNelsonNetworkType::Locality, Sorter::SortNetwork),
+                    //     "external::IpsoWrapper",
+                    //     "measurement::BaseCaseSortBlank"
+                    // );
                     WriteCompleteSorterWrapperMeasureLine(
                         ipsoGen,
                         &sRef,

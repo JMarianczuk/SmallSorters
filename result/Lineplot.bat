@@ -1,1 +1,5 @@
 Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="normalSortDeviation" --filePostfix="normal" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
+Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="inrowSortDeviation" --filePostfix="inrow" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
+:Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="sampleSortDeviation" --filePostfix="sample-sort" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
+:Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="completeSortDeviation" --filePostfix="complete" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
+:Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="ipsoSortDeviation" --filePostfix="ipso" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
