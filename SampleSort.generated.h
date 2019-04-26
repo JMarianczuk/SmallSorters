@@ -130,6 +130,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -261,6 +262,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -410,6 +412,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -577,6 +580,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -762,6 +766,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -897,6 +902,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1028,6 +1034,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1177,6 +1184,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1344,6 +1352,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1529,6 +1538,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1664,6 +1674,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1795,6 +1806,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -1944,6 +1956,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -2111,6 +2124,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -2296,6 +2310,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -2431,6 +2446,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -2562,6 +2578,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -2711,6 +2728,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -2878,6 +2896,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -3063,6 +3082,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -3198,6 +3218,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -3329,6 +3350,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -3478,6 +3500,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -3645,6 +3668,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];
@@ -3830,6 +3854,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 		std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));
 		currentPos += bucketSize[currentBucket];
 	}
+	free(rawbuckets);
 	
 	exclusiveBucketSizePrefixSum[0] = 0;
 	exclusiveBucketSizePrefixSum[1] = bucketSize[0];

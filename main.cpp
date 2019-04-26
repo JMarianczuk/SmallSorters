@@ -114,6 +114,12 @@ int main(int argumentCount, char** arguments)
     std::string hostname = environment::GetComputerName();
     SetResultOutputFile();
     printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
+    printf("Parameters: ");
+    for (int i = 0; i < argumentCount; i += 1)
+    {
+        printf("%s ", arguments[i]);
+    }
+    printf("\n");
     size_t cacheSize = environment::GetCacheSizeInBytes(hostname);
     result::WriteAbbreviationExplanatoryLine();
     

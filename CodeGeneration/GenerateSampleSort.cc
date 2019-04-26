@@ -207,6 +207,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
             gen->WriteLine("std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));");
             gen->WriteLine("currentPos += bucketSize[currentBucket];");
         });
+        gen->WriteLine("free(rawbuckets);");
         gen->WriteLine("");
 
         for (int i = 0; i < numberOfBuckets; i += 1)
