@@ -71,7 +71,7 @@ void test()
 #define LargestArraySize 16
 #define CompleteSortArraySize 1024 * 16
 #define SampleSortArraySize 256
-#define IpsoArraySize 1024 * 64
+#define IpsoArraySize 1024 * 32
 
 uint64_t ID(int& value) {return (uint64_t) value;}
 
