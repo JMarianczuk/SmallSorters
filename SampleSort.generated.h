@@ -80,7 +80,6 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -92,7 +91,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -112,7 +111,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -197,7 +196,6 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -212,7 +210,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -220,7 +218,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -244,7 +242,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -332,7 +330,6 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -350,7 +347,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -358,7 +355,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -366,7 +363,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -394,7 +391,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -485,7 +482,6 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -506,7 +502,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -514,7 +510,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -522,7 +518,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -530,7 +526,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -562,7 +558,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -656,7 +652,6 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -680,7 +675,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -688,7 +683,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -696,7 +691,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -704,7 +699,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -712,7 +707,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter04x), [state] "=&r"(state4)
-			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(zero)
+			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -748,7 +743,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -852,7 +847,6 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -864,7 +858,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -884,7 +878,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -969,7 +963,6 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -984,7 +977,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -992,7 +985,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1016,7 +1009,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1104,7 +1097,6 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -1122,7 +1114,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1130,7 +1122,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1138,7 +1130,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1166,7 +1158,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1257,7 +1249,6 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -1278,7 +1269,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1286,7 +1277,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1294,7 +1285,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1302,7 +1293,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1334,7 +1325,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1428,7 +1419,6 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -1452,7 +1442,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1460,7 +1450,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1468,7 +1458,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1476,7 +1466,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1484,7 +1474,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter04x), [state] "=&r"(state4)
-			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(zero)
+			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1520,7 +1510,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1624,7 +1614,6 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -1636,7 +1625,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1656,7 +1645,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1741,7 +1730,6 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -1756,7 +1744,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1764,7 +1752,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1788,7 +1776,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1876,7 +1864,6 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -1894,7 +1881,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1902,7 +1889,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -1910,7 +1897,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -1938,7 +1925,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2029,7 +2016,6 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -2050,7 +2036,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2058,7 +2044,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2066,7 +2052,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2074,7 +2060,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2106,7 +2092,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2200,7 +2186,6 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -2224,7 +2209,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2232,7 +2217,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2240,7 +2225,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2248,7 +2233,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2256,7 +2241,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter04x), [state] "=&r"(state4)
-			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(zero)
+			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2292,7 +2277,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2396,7 +2381,6 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -2408,7 +2392,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2428,7 +2412,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2513,7 +2497,6 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -2528,7 +2511,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2536,7 +2519,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2560,7 +2543,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2648,7 +2631,6 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -2666,7 +2648,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2674,7 +2656,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2682,7 +2664,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2710,7 +2692,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2801,7 +2783,6 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -2822,7 +2803,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2830,7 +2811,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2838,7 +2819,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -2846,7 +2827,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2878,7 +2859,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -2972,7 +2953,6 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -2996,7 +2976,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3004,7 +2984,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3012,7 +2992,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3020,7 +3000,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3028,7 +3008,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter04x), [state] "=&r"(state4)
-			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(zero)
+			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3064,7 +3044,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3168,7 +3148,6 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	
 	int max = elementCount - 1;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 1)
 	{
@@ -3180,7 +3159,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3200,7 +3179,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3285,7 +3264,6 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	
 	int max = elementCount - 2;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 2)
 	{
@@ -3300,7 +3278,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3308,7 +3286,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3332,7 +3310,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3420,7 +3398,6 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	
 	int max = elementCount - 3;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 3)
 	{
@@ -3438,7 +3415,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3446,7 +3423,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3454,7 +3431,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3482,7 +3459,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3573,7 +3550,6 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	
 	int max = elementCount - 4;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 4)
 	{
@@ -3594,7 +3570,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3602,7 +3578,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3610,7 +3586,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3618,7 +3594,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3650,7 +3626,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3744,7 +3720,6 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	
 	int max = elementCount - 5;
 	int current = 0;
-	int zero = 0;
 	//Sort 'blockSize' elements simultaneously into the buckets
 	for ( ; current <= max; current += 5)
 	{
@@ -3768,7 +3743,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3776,7 +3751,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter01x), [state] "=&r"(state1)
-			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(zero)
+			: "0"(splitter01x), "1"(state1), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3784,7 +3759,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter02x), [state] "=&r"(state2)
-			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(zero)
+			: "0"(splitter02x), "1"(state2), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3792,7 +3767,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter03x), [state] "=&r"(state3)
-			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(zero)
+			: "0"(splitter03x), "1"(state3), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
 			: "cc"
 		);
 		__asm__(
@@ -3800,7 +3775,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter04x), [state] "=&r"(state4)
-			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(zero)
+			: "0"(splitter04x), "1"(state4), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
@@ -3836,7 +3811,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 			"cmovcq %[splitter2],%[splitterx]\n\t"
 			"rcl $1,%[state]\n\t"
 			: [splitterx] "=&r"(splitter00x), [state] "=&r"(state0)
-			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(zero)
+			: "0"(splitter00x), "1"(state0), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
 			: "cc"
 		);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);

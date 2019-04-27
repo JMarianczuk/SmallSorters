@@ -88,99 +88,6 @@ enum { _S_threshold = 16 };
 //-------------------------------------------------------------------------------------------------------------
 
 template<typename _RandomAccessIterator, typename _Compare>
-void
-__unguarded_linear_insert(_RandomAccessIterator __last, _Compare __comp)
-{
-    typename iterator_traits<_RandomAccessIterator>::value_type __val = std::move(*__last);
-    _RandomAccessIterator __next = __last;
-    --__next;
-    while (__comp(__val, __next))
-    {
-        *__last = std::move(*__next);
-        __last = __next;
-        --__next;
-    }
-    *__last = std::move(__val);
-}
-
-template<typename _RandomAccessIterator, typename _Compare>
-inline void
-__unguarded_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
-{
-    for (_RandomAccessIterator __i = __first; __i != __last; ++__i)
-    {
-        std::__unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
-    }
-}
-
-template<typename _RandomAccessIterator, typename _Compare>
-void
-__insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
-{
-    if (__first == __last) return;
-
-    for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
-    {
-        if (__comp(__i, __first))
-        {
-            typename iterator_traits<_RandomAccessIterator>::value_type __val = std::move(*__i);
-            std::move_backward(__first, __i, __i + 1);
-            *__first = std::move(__val);
-        }
-        else
-        {
-            __unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
-        }
-    }
-}
-
-template<typename _RandomAccessIterator, typename _Compare>
-void
-__final_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
-{
-    if (__last - __first > int(_S_threshold))
-    {
-        __insertion_sort(__first, __first + int(_S_threshold), __comp);
-        __unguarded_insertion_sort(__first + int(_S_threshold), __last, __comp);
-    }
-    else
-        __insertion_sort(__first, __last, __comp);
-}
-
-template<typename _Iterator, typename _Compare>
-void
-__move_median_to_first(_Iterator __result, _Iterator __a, _Iterator __b, _Iterator __c, _Compare __comp)
-{
-    if (__comp(__a, __b))
-    {
-        if (__comp(__b, __c))
-        {
-            std::iter_swap(__result, __b);
-        }
-        else if (__comp(__a, __c))
-        {
-            std::iter_swap(__result, __c);
-        }
-        else
-        {
-            std::iter_swap(__result, __a);
-        }
-    }
-    else if (__comp(__a, __c))
-    {
-        std::iter_swap(__result, __a);
-    }
-    else if (__comp(__b, __c))
-    {
-        std::iter_swap(__result, __c);
-    }
-    else
-    {
-        std::iter_swap(__result, __b);
-    }
-}
-
-    template<typename _RandomAccessIterator, typename _Compare>
 _RandomAccessIterator
 __unguarded_partition(_RandomAccessIterator __first,
             _RandomAccessIterator __last,
@@ -212,7 +119,6 @@ __unguarded_partition_pivot(_RandomAccessIterator __first,
             _RandomAccessIterator __last, _Compare __comp)
 {
     _RandomAccessIterator __mid = __first + (__last - __first) / 2;
-    // __move_median_to_first(__first, __first + 1, __mid, __last - 1, __comp);
     networks::sort3bosenelsonparameter(*__mid, *__first, *(__last-1));
     return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
@@ -248,7 +154,6 @@ __sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __c
     if (__first != __last)
     {
         __introsort_loop(__first, __last, custommath::longlog2(__last - __first) * 2, __comp, __baseCaseFunc);
-        // __final_insertion_sort(__first, __last, __comp);
     }
 }
 

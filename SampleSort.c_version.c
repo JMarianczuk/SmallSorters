@@ -63,17 +63,7 @@ void RegisterSampleSort_C_Style(
         }
         //END Asm block
         predicateResult = (int) predicateLess(splitter0x, array[current]);
-        //BEGIN Asm block
-        if (predicateResult > 0)
-        {
-            state << 1;
-            state = state | 1;
-        }
-        else 
-        {
-            state << 1;
-        }
-        //END Asm block
+        state = (state << 1) + predicateResult;
 
         *buckets[state] = array[current];
         buckets[state]++;

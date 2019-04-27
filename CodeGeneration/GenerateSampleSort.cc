@@ -48,7 +48,7 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
             WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
             WriteAsmLine(gen, "rcl $1,%[state]");
             gen->WriteLine(": [splitterx] \"=&r\"(splitter0", iStr, "x), [state] \"=&r\"(state", iStr, ")");
-            gen->WriteLine(": \"0\"(splitter0", iStr, "x), \"1\"(state", iStr, "), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
+            gen->WriteLine(": \"0\"(splitter0", iStr, "x), \"1\"(state", iStr, "), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(0)");
             gen->WriteLine(": \"cc\"");
         });
     }
@@ -179,7 +179,6 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
 
         gen->WriteLine("int max = elementCount - ", blockSizeStr, ";");
         gen->WriteLine("int current = 0;");
-        gen->WriteLine("int zero = 0;");
         gen->WriteLine("//Sort 'blockSize' elements simultaneously into the buckets");
         // gen->WriteLine("debug::WriteLine(\"First asm block\");"); //DEBUG
         gen->WriteLine("for ( ; current <= max; current += ", blockSizeStr, ")");

@@ -14,5 +14,5 @@ DROP TABLE "completeSortWithout";
 DROP TABLE "completeSortDeviation";
 
 DROP TABLE "ipsoSort";
-DROP TABLE "ipsoSortWitout";
+DROP TABLE "ipsoSortWithout";
 DROP TABLE "ipsoSortDeviation";

@@ -42,7 +42,6 @@ namespace measurement
         void(*sortFunc)(SortableRef*, size_t))
     {
         quicksortcopy2::sort(first, last, compareFunc);
-        // quicksortcopy::Quicksort_Copy_Stl(first, last, compareFunc);
     }
 
     void QuicksortCopyMsvcWrapper(
