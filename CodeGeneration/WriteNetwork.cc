@@ -120,6 +120,7 @@ void WriteParameters(CodeGenerator *gen, nlohmann::json leftIndices, nlohmann::j
 
 bool IsInline(nlohmann::json network, RecursiveParameterNetworkType networkType)
 {
+    return true; //Worse performance for only inlining the small networks -> probably due to the fact that too many parameters have to be pushed on the stack
     switch (networkType)
     {
         case RecursiveParameterNetworkType::Split:
