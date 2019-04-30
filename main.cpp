@@ -18,6 +18,7 @@
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
 #include "Quicksort_Copy.h"
+#include "Quicksort_Copy2.h"
 #include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"
 #include "CommandLineOptions.h"
@@ -53,9 +54,26 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
 #define ElementCount 128
 void test()
 {
-    debug::WriteLine(std::to_string(sizeof(SortableRef*)));
-    debug::WriteLine(std::to_string(sizeof(long)));
-    debug::WriteLine(std::to_string(sizeof(long long)));
+    // auto arr = (SortableRef*) malloc(sizeof(SortableRef) * 400);
+    // for (int i = 0; i < 50; i += 1)
+    // {
+    //     randomisation::GenerateRandomArray(arr, 400);
+    //     quicksortcopy2::partial_sort(arr, arr + 400, arr + 400, &measurement::IteratorCompare<SortableRef>);
+    //     uint64_t ki, ri, kv, rv;
+    //     PutPermutationValues(arr, 400, kv, ki, rv, ri);
+    //     if (!IsSortedAndPermutation(arr, 400, ki, kv, ri, rv))
+    //     {
+    //         debug::WriteLine("bad sort partial sort");
+    //     }
+    //     else
+    //     {
+    //         debug::WriteLine("good sort");
+    //     }
+    // }
+    
+    // debug::WriteLine(std::to_string(sizeof(SortableRef*)));
+    // debug::WriteLine(std::to_string(sizeof(long)));
+    // debug::WriteLine(std::to_string(sizeof(long long)));
 }
 
 #define NumberOfIterations 100
