@@ -96,6 +96,6 @@ void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t
     }
 }
 
-}
+} // namespace insertionsort
 
 #endif

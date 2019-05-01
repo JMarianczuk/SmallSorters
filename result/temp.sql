@@ -1,0 +1,5 @@
+commandLineToolbox statisticalFunctions  --database=small_sorters_result.sqlite --table=normalSortWithout129 --out=normalSortDeviation129 --value="v/n" --groups s a --functions average median variance
+commandLineToolbox statisticalFunctions  --database=small_sorters_result.sqlite --table=inrowSort --out=inrowSortDeviation129 --value="v/n" --groups s a --functions average median variance
+commandLineToolbox statisticalFunctions  --database=small_sorters_result.sqlite --table=sampleSortWithout129 --out=sampleSortDeviation129 --value="v/n" --groups s a --functions average median variance
+commandLineToolbox statisticalFunctions  --database=small_sorters_result.sqlite --table=completeSortWithout129 --out=completeSortDeviation129 --value="v/n" --groups s a --functions average median variance
+commandLineToolbox statisticalFunctions  --database=small_sorters_result.sqlite --table=ipsoSortWithout129 --out=ipsoSortDeviation129 --value="v/n" --groups s a --functions average median variance

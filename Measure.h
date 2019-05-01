@@ -305,7 +305,6 @@ void MeasureRandomGeneration(
     free(arr);
 }
 
+} // namespace measurement
 
-}
-
-#endif
+#endif // MEASURE_H

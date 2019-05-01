@@ -36,7 +36,7 @@ size_t GetCacheSizeInBytes(std::string hostname)
     }
 }
 
-}
+} // namespace environment
 
 
 

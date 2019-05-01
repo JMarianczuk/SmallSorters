@@ -1,7 +1,8 @@
 
 #include "Randomisation.h"
 
-namespace randomisation {
+namespace randomisation 
+{
 
 uint64_t _seed = 1;
 
@@ -14,4 +15,4 @@ uint64_t GenerateRandomUint64() {
     return _seed;
 }
 
-}
+} // namespace randomisation

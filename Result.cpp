@@ -5,7 +5,8 @@
 #include "Enumerations.h"
 #include "Result.h"
 
-namespace result {
+namespace result 
+{
 
 void WriteAbbreviationExplanatoryLine()
 {
@@ -52,4 +53,4 @@ void WriteResultLine(
         isActualSorterMeasurement ? 0 : 1); 
 }
 
-}
+} // namespace result

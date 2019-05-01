@@ -441,6 +441,6 @@ void Quicksort_Copy_Msvc(TValueType* first, TValueType* last, TPredicate predica
     sort_unchecked(first, last, (uint64_t) (last - first), __gnu_cxx::__ops::__iter_comp_iter(predicate), baseCaseSort);
 }
 
-}
+} // namespace quicksortcopy
 
-#endif
+#endif // QUICKSORT_COPY_H

@@ -62,5 +62,5 @@ namespace measurement
         samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
     }
     
-}
+} // namespace measurement
 

@@ -274,6 +274,6 @@ sort(TValueType* __first, TValueType* __last, bool(*__comp)(TValueType,TValueTyp
     __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp), __baseCaseFunc);
 }
 
-}
+} // quicksort
 
-#endif
+#endif // QUICKSORT_H

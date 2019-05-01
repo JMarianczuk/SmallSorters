@@ -21,6 +21,6 @@ void WriteResultLine(
     int numberOfBadSorts,
     bool isActualSorterMeasurement);
 
-}
+} // namespace result
 
-#endif
+#endif // RESULT_H

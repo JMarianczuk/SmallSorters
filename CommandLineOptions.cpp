@@ -64,4 +64,4 @@ void PrintHelpText(std::ostream &stream)
     commandLine.writeToStream(stream);
 }
 
-}
+} // namespace commandline

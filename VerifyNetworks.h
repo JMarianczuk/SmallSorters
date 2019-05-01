@@ -81,6 +81,6 @@ bool VerifyNetwork(int size, void(*network)(int*,size_t))
 	return true;
 }
 
-}
+} // namespace verification
 
 #endif // VERIFY_NETWORKS_H

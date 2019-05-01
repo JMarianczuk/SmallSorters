@@ -4,11 +4,12 @@
 
 #include <inttypes.h>
 
-namespace randomisation {
+namespace randomisation 
+{
 
 void SetSeed(uint64_t seed);
 uint64_t GenerateRandomUint64();
 
-}
+} // namespace randomisation
 
-#endif
+#endif // RANDOMISATION_H

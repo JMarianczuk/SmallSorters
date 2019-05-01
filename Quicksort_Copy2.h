@@ -39,55 +39,6 @@ struct iterator_traits<const _Tp*>
 
 enum { _S_threshold = 16 };
 
-// template<typename _Compare>
-// struct _Iter_comp_iter
-// {
-//     _Compare _M_comp;
-
-//     explicit _GLIBCXX14_CONSTEXPR
-//     _Iter_comp_iter(_Compare __comp) : _M_comp(std::move(__comp))
-//     { }
-
-//     template<typename _Iterator1, typename _Iterator2>
-//     _GLIBCXX14_CONSTEXPR
-//     bool
-//     operator()(_Iterator1 __it1, _Iterator2 __it2)
-//     { return bool(_M_comp(*__it1, *__it2)); }
-// };
-
-// template<typename _Compare>
-// struct _Val_comp_iter
-// {
-//     _Compare _M_comp;
-
-//     explicit
-//     _Val_comp_iter(_Compare __comp) : _M_comp(std::move(__comp))
-//     { }
-
-//     explicit
-//     _Val_comp_iter(const _Iter_comp_iter<_Compare>& __comp) : _M_comp(__comp._M_comp)
-//     { }
-
-//     explicit
-//     _Val_comp_iter(_Iter_comp_iter<_Compare>&& __comp) : _M_comp(std::move(__comp._M_comp))
-//     { }
-
-//     template<typename _Value, typename _Iterator>
-//     bool
-//     operator()(_Value& __val, _Iterator __it)
-//     { return bool(_M_comp(__val, *__it)); }
-// };
-
-// template<typename _Compare>
-// inline _Val_comp_iter<_Compare>
-// __val_comp_iter(_Compare __comp)
-// { return _Val_comp_iter<_Compare>(std::move(__comp)); }
-
-// template<typename _Compare>
-// inline _Val_comp_iter<_Compare>
-// __val_comp_iter(_Iter_comp_iter<_Compare> __comp)
-// { return _Val_comp_iter<_Compare>(std::move(__comp)); }
-
 //-------------------------------------------------------------------------------------------------------------
 
 template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
@@ -367,6 +318,6 @@ sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __com
     __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp));
 }
 
-}
+} // namespace quicksortcopy2
 
-#endif
+#endif // QUICKSORT_COPY2_H

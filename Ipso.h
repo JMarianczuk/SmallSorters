@@ -8,18 +8,17 @@
 
 namespace external
 {
-    template <typename TValueType>
-    void IpsoWrapper(
-        TValueType* first, 
-        TValueType* last, 
-        bool(*compareFunc)(TValueType left, TValueType right), 
-        void(*sortFunc)(TValueType*,size_t))
-    {
-        ips4o::sort(first, last);
-        // , [sortFunc](TValueType* start, TValueType* end){
-        //     samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(start, end - start, 16, sortFunc, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
-        // }
-    }
+
+template <typename TValueType>
+void IpsoWrapper(
+    TValueType* first, 
+    TValueType* last, 
+    bool(*compareFunc)(TValueType left, TValueType right), 
+    void(*sortFunc)(TValueType*,size_t))
+{
+    ips4o::sort(first, last);
 }
+
+} // namespace external
 
 #endif

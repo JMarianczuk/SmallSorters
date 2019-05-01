@@ -8,7 +8,8 @@
 #include <inttypes.h>
 #include <tuple>
 
-namespace networks {
+namespace networks 
+{
 
 template <typename TValueType>
 static inline
@@ -237,8 +238,6 @@ void ConditionalSwap<SortableRef_ClangPredicate>(SortableRef_ClangPredicate& lef
     right = *rightPointer;
 }
 
+} // namespace networks
 
-
-}
-
-#endif
+#endif // NETWORK_SORT_H

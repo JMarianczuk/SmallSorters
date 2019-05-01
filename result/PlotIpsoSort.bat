@@ -1,1 +1,1 @@
-Rscript RPlot.R --dbName="%1" --tableName="ipsoSortWithout" --filePostfix="ipso" --complete=TRUE --title="IPSSSSo"
+Rscript RPlot.R --dbName="%1" --tableName="ipsoSortWithout%2" --filePostfix="ipso-%2" --complete=TRUE --title="IPSSSSo"

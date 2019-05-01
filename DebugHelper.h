@@ -22,6 +22,6 @@ void WriteLine(TInputs... inputs)
     std::cerr << std::endl;
 }
 
-}
+} // namespace debug
 
 #endif

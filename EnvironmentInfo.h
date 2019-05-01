@@ -11,6 +11,6 @@ namespace environment
 std::string GetComputerName();
 size_t GetCacheSizeInBytes(std::string hostname);
 
-}
+} // namespace environment
 
 #endif

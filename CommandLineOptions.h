@@ -29,6 +29,6 @@ struct CommandLineOptions
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments);
 void PrintHelpText(std::ostream &stream);
 
-}
+} // namespace commandline
 
-#endif
+#endif // COMMAND_LINE_OPTIONS_H
