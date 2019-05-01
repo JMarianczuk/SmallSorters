@@ -26,6 +26,10 @@ size_t GetCacheSizeInBytes(std::string hostname)
     {
         return 30 * megabytes;
     }
+    else if (hostname.compare("i10pc133") == 0)
+    {
+        return 8 * megabytes;
+    }
     else
     {
         return 1 * megabytes;
