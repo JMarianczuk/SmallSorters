@@ -24,7 +24,7 @@ res <- dbGetQuery(con, query)
 filename <- paste("plots/lineplot-", options$filePostfix, sep="", collapse="")
 filenameExt <- paste(filename, ".pdf", sep="", collapse="")
 
-thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=sorter, shape=sorter)) + 
+thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=substr(sorter, 14, 17), shape=substr(sorter, 0, 8))) + 
     labs(x = "Array Size", y = "Cpu Cycles per element") +
     geom_line() +
     geom_point() +

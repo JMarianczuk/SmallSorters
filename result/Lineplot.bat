@@ -1,5 +1,5 @@
-Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="normalSortDeviation" --filePostfix="normal" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
-Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="inrowSortDeviation" --filePostfix="inrow" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
+Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="normalSortDeviation%1" --filePostfix="normal-%1" --filter="((s like '%%POp%%' or s like '%%4Cm%%' or s like '%%4CS%%' or s like '%%STL%%' or s like '%%CPr%%') and s not like '%%BoNeM%%')"
+Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="inrowSortDeviation%1" --filePostfix="inrow-%1" --filter="((s like '%%POp%%' or s like '%%4Cm%%' or s like '%%4CS%%' or s like '%%STL%%' or s like '%%CPr%%') and s not like '%%BoNeM%%')"
 :Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="sampleSortDeviation" --filePostfix="sample-sort" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
 :Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="completeSortDeviation" --filePostfix="complete" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
 :Rscript RLineplot.R --dbName="small_sorters_result.sqlite" --tableName="ipsoSortDeviation" --filePostfix="ipso" --filter="(s like '%%POp%%' or s like '%%4Cm%%')"
