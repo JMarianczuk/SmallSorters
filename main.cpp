@@ -171,7 +171,15 @@ int main(int argumentCount, char** arguments)
         }
         if (options.MeasureIpso && measureIteration < NumberOfMeasuresIpso)
         {
-            measurement::MeasureIpso(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+            if (hostname == "i10pc133")
+            {
+                measurement::MeasureIpso1(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+            }
+            else
+            {
+                measurement::MeasureIpso0(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+            }
+            
         }
     }
 	delete perf_cpu_cycles;

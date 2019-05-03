@@ -9,7 +9,9 @@
 
 
 #include "Measurement.generated.h"
+#include "SampleSort.generated.h"
 #include "MeasurementSampleSort.Helper.h"
+#include "StdSortWrapper.h"
 namespace measurement
 {
 void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)

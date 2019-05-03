@@ -62,7 +62,7 @@ SequentialSorter<ExtendedConfig<It, Comp, Cfg>> make_sorter(Comp comp = Comp()) 
 template <class Cfg, class It, class Comp = std::less<>>
 void sort(It begin, It end, Comp comp = Comp()) {
     if ((end - begin) <= Cfg::kBaseCaseMultiplier * Cfg::kBaseCaseSize)
-        detail::baseCaseSort(std::move(begin), std::move(end), std::move(comp));
+        detail::baseCaseSort<Cfg>(std::move(begin), std::move(end), std::move(comp));
     else
         ips4o::make_sorter<It, Cfg, Comp>(std::move(comp))(std::move(begin), std::move(end));
 }

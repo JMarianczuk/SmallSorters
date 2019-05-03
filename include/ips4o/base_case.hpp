@@ -100,43 +100,50 @@ struct iterator_traits<const _Tp*>
     typedef ptrdiff_t                   difference_type;
 };
 
+
 /**
  * Wrapper for base case sorter, for easier swapping.
  */
-template <class It, class Comp>
+template <class Cfg, class It, class Comp>
 inline void baseCaseSort(It begin, It end, Comp&& comp) {
     if (begin == end) return;
-    typedef typename iterator_traits<It>::value_type TValueType;
-    void(*sort)(TValueType*,size_t);
-#if defined BASECASE_NETWORK_BEST
-    sort = &networks::sortNbest<TValueType>;
-#elif defined BASECASE_NETWORK_BN_LOCAL
-    sort = &networks::sortNbosenelson<TValueType>;
-#elif defined BASECASE_NETWORK_BN_PAR
-    sort = &networks::sortNbosenelsonparallel<TValueType>;
-#else
-    sort = &insertionsort::InsertionSort<TValueType>;
-#endif
-
-#if defined SAMPLESORT_332
-    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
-#else
-    samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
-#endif
+    if (Cfg::kBaseCaseType == 0)
+    {
+        detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
+    }
+    else
+    {
+        typedef typename iterator_traits<It>::value_type TValueType;
+        void(*sort)(TValueType*,size_t);
+        switch (Cfg::kBaseCaseType)
+        {
+            case 1:
+                sort = &networks::sortNbest<TValueType>;
+                break;
+            case 2:
+                sort = &networks::sortNbosenelson<TValueType>;
+                break;
+            case 3:
+                sort = &networks::sortNbosenelsonparallel<TValueType>;
+                break;
+            case 4:
+                sort = &networks::sortNbosenelsonparameter<TValueType>;
+                break;
+            default:
+                sort = &insertionsort::InsertionSort<TValueType>;
+                break;
+        }
+        switch (Cfg::kSampleSortType)
+        {
+            case 0:
+                samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+                break;
+            default:
+                samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+                break;
+        }
+    }
 }
-
-template <>
-inline void baseCaseSort<SortableRef_IpsoDef*,std::less<>>(SortableRef_IpsoDef* begin, SortableRef_IpsoDef* end, std::less<>&& comp) {
-    if (begin == end) return;
-    detail::insertionSort(std::move(begin), std::move(end), std::forward<std::less<>>(comp));
-}
-
-// template <>
-// inline void baseCaseSort<SortableRef_FourCmovTemp_Split*,std::less<>>(SortableRef_FourCmovTemp_Split* begin, SortableRef_FourCmovTemp_Split* end, std::less<>&& comp) {
-//     if (begin == end) return;
-//     samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::sortNbosenelson<SortableRef_FourCmovTemp_Split>, &quicksort::templateLess<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
-// }
-
 
 }  // namespace detail
 }  // namespace ips4o

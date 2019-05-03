@@ -268,6 +268,12 @@ void CPlusPlusCodeGenerator::WriteInclude(std::vector<std::string> fileNames, st
         WriteLine("#include ", beforeFileName, fileName, afterFileName);
     }
 }
+void CPlusPlusCodeGenerator::CommentOut(std::function<void()> writeFunc)
+{
+    WriteLine("/*");
+    writeFunc();
+    WriteLine("/*");
+}
 
 //Latex
 

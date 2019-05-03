@@ -91,7 +91,9 @@
 
 namespace ips4o {
 
-template <bool AllowEqualBuckets_     = IPS4O_ALLOW_EQUAL_BUCKETS
+template <int BaseCaseType_           = 0
+        , int SampleSortType_         = 0
+        , bool AllowEqualBuckets_     = IPS4O_ALLOW_EQUAL_BUCKETS
         , std::ptrdiff_t BaseCase_    = IPS4O_BASE_CASE_SIZE
         , std::ptrdiff_t BaseCaseM_   = IPS4O_BASE_CASE_MULTIPLIER
         , std::ptrdiff_t BlockSize_   = IPS4O_BLOCK_SIZE
@@ -115,6 +117,8 @@ struct Config {
     static constexpr const bool kIs64Bit = sizeof(std::uintptr_t) == 8;
     static_assert(kIs64Bit || sizeof(std::uintptr_t) == 4, "Architecture must be 32 or 64 bit");
 
+    static constexpr const int kBaseCaseType = BaseCaseType_;
+    static constexpr const int kSampleSortType = SampleSortType_;
     /**
      * Whether equal buckets can be used.
      */

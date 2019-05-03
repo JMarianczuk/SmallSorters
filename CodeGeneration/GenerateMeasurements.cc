@@ -226,6 +226,33 @@ void WriteMeasureMethod(
     });
 }
 
+std::string GetNetworkId(MeasureParams measureParams)
+{
+    if (measureParams._NetworkType == NetworkType::Best)
+    {
+        return "1";
+    }
+    if (measureParams._NetworkType == NetworkType::BoseNelson)
+    {
+        if (measureParams._BoseNelsonNetworkType == BoseNelsonNetworkType::Locality)
+        {
+            return "2";
+        }
+        if (measureParams._BoseNelsonNetworkType == BoseNelsonNetworkType::Parallelism)
+        {
+            return "3";
+        }
+        if (measureParams._BoseNelsonNetworkType == BoseNelsonNetworkType::Parameter)
+        {
+            return "4";
+        }
+    }
+    if (measureParams._NetworkType == NetworkType::None)
+    {
+        return "5";
+    }
+}
+
 void GenerateMeasurementMethod(
     CPlusPlusCodeGenerator* headerGen, 
     CPlusPlusCodeGenerator* normalGen, 
@@ -262,17 +289,12 @@ void GenerateMeasurementMethod(
         headerGen->WriteIncludeQuotes(
             "Sortable.generated.h",
             "Performancing.h",
-            "EnvironmentInfo.h",
             "Measure.h",
             "BestNetworks.generated.h",
             "BoseNelson.generated.h",
             "BoseNelsonParallel.generated.h",
             "BoseNelsonParameter.generated.h",
-            "Batcher.generated.h",
             "InsertionSort.h",
-            "QuickSort.h",
-            "StdSortWrapper.h",
-            "Ipso.h",
             "Randomisation.h");
         headerGen->WriteLine("");
 
@@ -286,7 +308,9 @@ void GenerateMeasurementMethod(
             WriteMeasureMethodName(headerGen, normalMeasureName, true);      
             WriteMeasureMethodName(headerGen, inrowMeasureName, true);      
             WriteMeasureMethodName(headerGen, completeMeasureName, true);      
-            WriteMeasureMethodName(headerGen, sampleSortMeasureName, true);          WriteMeasureMethodName(headerGen, ipsoMeasureName, true);
+            WriteMeasureMethodName(headerGen, sampleSortMeasureName, true);          
+            WriteMeasureMethodName(headerGen, ipsoMeasureName + "0", true);
+            WriteMeasureMethodName(headerGen, ipsoMeasureName + "1", true);
         }, "");
         normalGen->WriteIncludeQuotes("Measurement.generated.h");
         normalGen->WriteNamespace("measurement", [=]{
@@ -323,7 +347,10 @@ void GenerateMeasurementMethod(
                 }
             );
         }, "");
-        completeGen->WriteIncludeQuotes("Measurement.generated.h");
+        completeGen->WriteIncludeQuotes(
+            "Measurement.generated.h",
+            "QuickSort.h",
+            "StdSortWrapper.h");
         completeGen->WriteNamespace("measurement", [=]{
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
             std::vector<SortableStruct*> bRef = {(*sortableStructs())[5]}; // 4CS
@@ -370,7 +397,11 @@ void GenerateMeasurementMethod(
                 }
             );
         }, "");
-        sampleSortGen->WriteIncludeQuotes("Measurement.generated.h", "MeasurementSampleSort.Helper.h");
+        sampleSortGen->WriteIncludeQuotes(
+            "Measurement.generated.h",
+            "SampleSort.generated.h",
+            "MeasurementSampleSort.Helper.h",
+            "StdSortWrapper.h");
         sampleSortGen->WriteNamespace("measurement", [=]{
             std::vector<MeasureParams> sampleSortMeasureParams = 
             {
@@ -456,47 +487,54 @@ void GenerateMeasurementMethod(
                 }
             );
         }, "");
-        ipsoGen->WriteIncludeQuotes("Measurement.generated.h");
+        ipsoGen->WriteIncludeQuotes(
+            "Measurement.generated.h",
+            "StdSortWrapper.h",
+            "Ipso.h");
         ipsoGen->WriteNamespace("measurement", [=]{
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
-            std::vector<SortableStruct*> iRef = {(*sortableStructs())[15]}; // IPS
+            // std::vector<SortableStruct*> iRef = {(*sortableStructs())[15]}; // IPS
             std::vector<MeasureParams> ipsoMeasureParamsList = 
             {
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->NameAbbreviation.compare("Def") != 0;}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality)
             };
-            WriteMeasureMethod(
-                ipsoGen,
-                ipsoMeasureName,
-                ipsoMeasureParamsList,
-                [=](MeasureParams measureParams) {
-                    WriteCompleteSorterWrapperMeasureLine(
-                        ipsoGen,
-                        measureParams.Structs,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::SampleSort, measureParams._NetworkType, MeasureType::Ipso, measureParams._BoseNelsonNetworkType, measureParams._Sorter, 3, 3, 2),
-                        "external::IpsoWrapper",
-                        "measurement::BaseCaseSortBlank"
-                    );
-                },
-                [=]{
-                    WriteCompleteSorterWrapperMeasureLine(
-                        ipsoGen,
-                        &iRef,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso),
-                        "external::IpsoWrapper",
-                        "measurement::BaseCaseSortBlank"
-                    );
-                    WriteCompleteSorterWrapperMeasureLine(
-                        ipsoGen,
-                        &sRef,
-                        "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Ipso),
-                        "measurement::StdSortWrapper",
-                        "measurement::BaseCaseSortBlank"
-                    );
-                }
-            );
+            //ipsoGen->WriteLine("template <int ssType>");
+            std::vector<std::string> opts = {"0", "1"};
+            Multicall<std::string>([=](std::string opt) {
+                WriteMeasureMethod(
+                    ipsoGen,
+                    ipsoMeasureName + opt,
+                    measureParamsList,
+                    [=](MeasureParams measureParams) {
+                        WriteCompleteSorterWrapperMeasureLine(
+                            ipsoGen,
+                            measureParams.Structs,
+                            "MeasureCompleteSorter",
+                            BuildSorterName(Sorter::SampleSort, measureParams._NetworkType, MeasureType::Ipso, measureParams._BoseNelsonNetworkType, measureParams._Sorter, 3, 3, 2),
+                            "external::IpsoWrapper<" + GetNetworkId(measureParams) + "," + opt + ">",
+                            "measurement::BaseCaseSortBlank"
+                        );
+                    },
+                    [=]{
+                        WriteCompleteSorterWrapperMeasureLine(
+                            ipsoGen,
+                            &sRef,
+                            "MeasureCompleteSorter",
+                            BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso),
+                            "external::IpsoWrapper<0," + opt + ">",
+                            "measurement::BaseCaseSortBlank"
+                        );
+                        WriteCompleteSorterWrapperMeasureLine(
+                            ipsoGen,
+                            &sRef,
+                            "MeasureCompleteSorter",
+                            BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Ipso),
+                            "measurement::StdSortWrapper",
+                            "measurement::BaseCaseSortBlank"
+                        );
+                    }
+                );
+            }, opts);
         }, "");
     });
 }

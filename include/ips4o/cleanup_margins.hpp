@@ -172,7 +172,7 @@ void Sorter<Cfg>::writeMargins(const int first_bucket, const int last_bucket,
 
         // Perform final base case sort here, while the data is still cached
         if (is_last_level || (bend - bstart) <= 2 * Cfg::kBaseCaseSize)
-            detail::baseCaseSort(begin_ + bstart, begin_ + bend, comp);
+            detail::baseCaseSort<Cfg>(begin_ + bstart, begin_ + bend, comp);
     }
 }
 

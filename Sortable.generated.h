@@ -445,34 +445,5 @@ struct SortableRef_ArrayIndex_FirstCheck
 		return left.key != right.key;
 	}
 };
-struct SortableRef_IpsoDef
-{
-	uint64_t key;
-	uint64_t reference;
-	friend bool operator>(const SortableRef_IpsoDef& left, const SortableRef_IpsoDef& right)
-	{
-		return left.key > right.key;
-	}
-	friend bool operator>=(const SortableRef_IpsoDef& left, const SortableRef_IpsoDef& right)
-	{
-		return left.key >= right.key;
-	}
-	friend bool operator==(const SortableRef_IpsoDef& left, const SortableRef_IpsoDef& right)
-	{
-		return left.key == right.key;
-	}
-	friend bool operator<(const SortableRef_IpsoDef& left, const SortableRef_IpsoDef& right)
-	{
-		return left.key < right.key;
-	}
-	friend bool operator<=(const SortableRef_IpsoDef& left, const SortableRef_IpsoDef& right)
-	{
-		return left.key <= right.key;
-	}
-	friend bool operator!=(const SortableRef_IpsoDef& left, const SortableRef_IpsoDef& right)
-	{
-		return left.key != right.key;
-	}
-};
 
 #endif // SORTABLE_GENERATED_H

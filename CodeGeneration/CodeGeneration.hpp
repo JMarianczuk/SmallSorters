@@ -79,6 +79,7 @@ public:
     void WriteNamespace(std::string namespaceName, std::function<void()> writeFunc, std::string indent);    
     template <typename... TInputs> void WriteIncludeBrackets(TInputs... inputs);
     template <typename... TInputs> void WriteIncludeQuotes(TInputs... inputs);
+    void CommentOut(std::function<void()> writeFunc);
 };
 
 template <typename... TInputs>

@@ -21,7 +21,6 @@ std::vector<SortableStruct*> structs =
     new SortableStruct("StlVersion", "STL", true),                  //12
     new SortableStruct("PointerOptimized", "POp", true),
     new SortableStruct("ArrayIndex_FirstCheck", "AIF", true),       //14
-    new SortableStruct("IpsoDef", "IPS", true),
 };
 
 std::vector<SortableStruct*>* sortableStructs() 
@@ -72,7 +71,7 @@ std::string SortableStruct::FullName()
 }
 bool SortableStruct::UseForNetworkSort()
 {
-    return HasReference && !IsInsertionSortOnly() && !IsIpsoSortOnly();
+    return HasReference && !IsInsertionSortOnly();
 }
 bool SortableStruct::UseForInsertionSort()
 {
@@ -86,10 +85,6 @@ bool SortableStruct::IsInsertionSortOnly()
         [fullName](std::string name){
             return fullName.find(name) != std::string::npos;
         });
-}
-bool SortableStruct::IsIpsoSortOnly()
-{
-    return FullName() == "SortableRef_IpsoDef";
 }
 
 }

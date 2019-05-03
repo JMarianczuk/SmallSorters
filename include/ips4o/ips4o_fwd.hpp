@@ -41,7 +41,7 @@
 namespace ips4o {
 namespace detail {
 
-template <class It, class Comp>
+template <class Cfg, class It, class Comp>
 inline void baseCaseSort(It begin, It end, Comp&& comp);
 
 inline constexpr unsigned long log2(unsigned long n);

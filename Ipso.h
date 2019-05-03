@@ -9,14 +9,14 @@
 namespace external
 {
 
-template <typename TValueType>
+template <int BaseCaseType, int SampleSortType, typename TValueType>
 void IpsoWrapper(
     TValueType* first, 
     TValueType* last, 
     bool(*compareFunc)(TValueType left, TValueType right), 
     void(*sortFunc)(TValueType*,size_t))
 {
-    ips4o::sort(first, last);
+    ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType>>(first, last);
 }
 
 } // namespace external

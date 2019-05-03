@@ -53,7 +53,7 @@ void Sorter<Cfg>::sequential(const iterator begin, const iterator end) {
     // Check for base case
     const auto n = end - begin;
     if (n <= 2 * Cfg::kBaseCaseSize) {
-        detail::baseCaseSort(begin, end, local_.classifier.getComparator());
+        detail::baseCaseSort<Cfg>(begin, end, local_.classifier.getComparator());
         return;
     }
     diff_t bucket_start[Cfg::kMaxBuckets + 1];

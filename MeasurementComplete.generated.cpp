@@ -9,6 +9,8 @@
 
 
 #include "Measurement.generated.h"
+#include "QuickSort.h"
+#include "StdSortWrapper.h"
 namespace measurement
 {
 void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
