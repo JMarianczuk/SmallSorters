@@ -107,11 +107,26 @@ template <class It, class Comp>
 inline void baseCaseSort(It begin, It end, Comp&& comp) {
     if (begin == end) return;
     typedef typename iterator_traits<It>::value_type TValueType;
-    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::sortNbosenelson<TValueType>, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+    void(*sort)(TValueType*,size_t);
+#if defined BASECASE_NETWORK_BEST
+    sort = &networks::sortNbest<TValueType>;
+#elif defined BASECASE_NETWORK_BN_LOCAL
+    sort = &networks::sortNbosenelson<TValueType>;
+#elif defined BASECASE_NETWORK_BN_PAR
+    sort = &networks::sortNbosenelsonparallel<TValueType>;
+#else
+    sort = &insertionsort::InsertionSort<TValueType>;
+#endif
+
+#if defined SAMPLESORT_332
+    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+#else
+    samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+#endif
 }
 
 template <>
-inline void baseCaseSort<SortableRef*,std::less<>>(SortableRef* begin, SortableRef* end, std::less<>&& comp) {
+inline void baseCaseSort<SortableRef_IpsoDef*,std::less<>>(SortableRef_IpsoDef* begin, SortableRef_IpsoDef* end, std::less<>&& comp) {
     if (begin == end) return;
     detail::insertionSort(std::move(begin), std::move(end), std::forward<std::less<>>(comp));
 }

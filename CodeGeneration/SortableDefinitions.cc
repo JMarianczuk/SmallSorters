@@ -6,21 +6,22 @@ namespace codegeneration
 
 std::vector<SortableStruct*> structs =
 {
-    new SortableStruct("", "Def", true, "KR-Default"),
+    new SortableStruct("", "Def", true, "KR-Default"),              //0
     new SortableStruct("JumpXchg", "JXc", false),
-    new SortableStruct("JumpXchg", "JXc", true),
+    new SortableStruct("JumpXchg", "JXc", true),                    //2
     new SortableStruct("TwoCmovTemp", "2Cm", false),
-    new SortableStruct("FourCmovTemp", "4Cm", true),
+    new SortableStruct("FourCmovTemp", "4Cm", true),                //4
     new SortableStruct("FourCmovTemp_Split", "4CS", true),
-    new SortableStruct("ThreeCmovRegisterTemp", "3Cm", false),
+    new SortableStruct("ThreeCmovRegisterTemp", "3Cm", false),      //6
     new SortableStruct("SixCmovRegisterTemp", "6Cm", true),
-    new SortableStruct("ClangVersion", "Cla", true),
+    new SortableStruct("ClangVersion", "Cla", true),                //8
     new SortableStruct("ClangPredicate", "CPr", true),
-    new SortableStruct("Tie", "Tie", true),
+    new SortableStruct("Tie", "Tie", true),                         //10
     new SortableStruct("QMark", "QMa", true),
-    new SortableStruct("StlVersion", "STL", true),
+    new SortableStruct("StlVersion", "STL", true),                  //12
     new SortableStruct("PointerOptimized", "POp", true),
-    new SortableStruct("ArrayIndex_FirstCheck", "AIF", true)
+    new SortableStruct("ArrayIndex_FirstCheck", "AIF", true),       //14
+    new SortableStruct("IpsoDef", "IPS", true),
 };
 
 std::vector<SortableStruct*>* sortableStructs() 
@@ -71,7 +72,7 @@ std::string SortableStruct::FullName()
 }
 bool SortableStruct::UseForNetworkSort()
 {
-    return HasReference && !IsInsertionSortOnly();
+    return HasReference && !IsInsertionSortOnly() && !IsIpsoSortOnly();
 }
 bool SortableStruct::UseForInsertionSort()
 {
@@ -85,6 +86,10 @@ bool SortableStruct::IsInsertionSortOnly()
         [fullName](std::string name){
             return fullName.find(name) != std::string::npos;
         });
+}
+bool SortableStruct::IsIpsoSortOnly()
+{
+    return FullName() == "SortableRef_IpsoDef";
 }
 
 }

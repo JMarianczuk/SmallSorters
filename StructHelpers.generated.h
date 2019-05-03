@@ -119,6 +119,12 @@ uint64_t GetKey(SortableRef_ArrayIndex_FirstCheck& item)
 }
 template <>
 inline
+uint64_t GetKey(SortableRef_IpsoDef& item)
+{
+	return item.key;
+}
+template <>
+inline
 uint64_t GetReference(SortableRef& item)
 {
 	return item.reference;
@@ -186,6 +192,12 @@ uint64_t GetReference(SortableRef_PointerOptimized& item)
 template <>
 inline
 uint64_t GetReference(SortableRef_ArrayIndex_FirstCheck& item)
+{
+	return item.reference;
+}
+template <>
+inline
+uint64_t GetReference(SortableRef_IpsoDef& item)
 {
 	return item.reference;
 }

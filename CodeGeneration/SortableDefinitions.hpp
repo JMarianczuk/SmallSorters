@@ -27,6 +27,7 @@ public:
     std::string FullName();
     bool UseForNetworkSort();
     bool UseForInsertionSort();
+    bool IsIpsoSortOnly();
 };
 
 std::vector<SortableStruct*>* sortableStructs();

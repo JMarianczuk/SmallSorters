@@ -51,6 +51,8 @@ template<>
 void GenerateRandomArray<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* arr, size_t arraySize);
 template<>
 void GenerateRandomArray<SortableRef_ArrayIndex_FirstCheck>(SortableRef_ArrayIndex_FirstCheck* arr, size_t arraySize);
+template<>
+void GenerateRandomArray<SortableRef_IpsoDef>(SortableRef_IpsoDef* arr, size_t arraySize);
 } // namespace randomisation
 
 #endif // RANDOMISATION_GENERATED_H

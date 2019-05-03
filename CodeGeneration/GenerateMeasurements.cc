@@ -459,7 +459,7 @@ void GenerateMeasurementMethod(
         ipsoGen->WriteIncludeQuotes("Measurement.generated.h");
         ipsoGen->WriteNamespace("measurement", [=]{
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
-            std::vector<SortableStruct*> bRef = {(*sortableStructs())[5]}; // 4CS
+            std::vector<SortableStruct*> iRef = {(*sortableStructs())[15]}; // IPS
             std::vector<MeasureParams> ipsoMeasureParamsList = 
             {
                 GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->NameAbbreviation.compare("Def") != 0;}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality)
@@ -481,20 +481,12 @@ void GenerateMeasurementMethod(
                 [=]{
                     WriteCompleteSorterWrapperMeasureLine(
                         ipsoGen,
-                        &sRef,
+                        &iRef,
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso),
                         "external::IpsoWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
-                    // WriteCompleteSorterWrapperMeasureLine(
-                    //     ipsoGen,
-                    //     &bRef,
-                    //     "MeasureCompleteSorter",
-                    //     BuildSorterName(Sorter::SampleSort, NetworkType::BoseNelson, MeasureType::Ipso, BoseNelsonNetworkType::Locality, Sorter::SortNetwork),
-                    //     "external::IpsoWrapper",
-                    //     "measurement::BaseCaseSortBlank"
-                    // );
                     WriteCompleteSorterWrapperMeasureLine(
                         ipsoGen,
                         &sRef,

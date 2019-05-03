@@ -154,4 +154,14 @@ void GenerateRandomArray<SortableRef_ArrayIndex_FirstCheck>(SortableRef_ArrayInd
 		arr[i].reference = reference + i;
 	}
 }
+template<>
+void GenerateRandomArray<SortableRef_IpsoDef>(SortableRef_IpsoDef* arr, size_t arraySize)
+{
+	uint64_t reference = randomisation::GenerateRandomUint64();
+	for (int i = 0; i < arraySize; i += 1)
+	{
+		arr[i].key = randomisation::GenerateRandomUint64();
+		arr[i].reference = reference + i;
+	}
+}
 } // namespace randomisation
