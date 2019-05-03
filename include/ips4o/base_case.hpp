@@ -38,6 +38,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <utility>
+#include <stdexcept>
 
 #include "ips4o_fwd.hpp"
 #include "utils.hpp"
@@ -129,8 +130,11 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
             case 4:
                 sort = &networks::sortNbosenelsonparameter<TValueType>;
                 break;
-            default:
+            case 5:
                 sort = &insertionsort::InsertionSort<TValueType>;
+                break;
+            default:
+                throw std::logic_error("Invalid base case type");
                 break;
         }
         switch (Cfg::kSampleSortType)
@@ -138,8 +142,11 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
             case 0:
                 samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
                 break;
-            default:
+            case 1:
                 samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+                break;
+            default:
+                throw std::logic_error("Invalid base case type");
                 break;
         }
     }

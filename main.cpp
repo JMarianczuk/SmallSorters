@@ -77,7 +77,7 @@ void test()
 }
 
 #define NumberOfIterations 100
-#define NumberOfIterationsCompleteSort 20
+#define NumberOfIterationsCompleteSort 50
 #define NumberOfIterationsSampleSort 50
 #define NumberOfIterationsIpso 50
 #define NumberOfMeasures 500

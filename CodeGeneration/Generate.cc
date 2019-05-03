@@ -183,21 +183,25 @@ void GenerateMeasurements()
         new CPlusPlusCodeGenerator("../../MeasurementComplete.generated.cpp");
     auto sampleSortMeasurementGen =
         new CPlusPlusCodeGenerator("../../MeasurementSampleSort.generated.cpp");
-    auto ipsoMeasurementGen =
-        new CPlusPlusCodeGenerator("../../MeasurementIpso.generated.cpp");
+    auto ipso0MeasurementGen =
+        new CPlusPlusCodeGenerator("../../MeasurementIpso0.generated.cpp");
+    auto ipso1MeasurementGen =
+        new CPlusPlusCodeGenerator("../../MeasurementIpso1.generated.cpp");
     GenerateMeasurementMethod(
         measurementHeaderGen, 
         normalMeasurementGen, 
         inrowMeasurementGen, 
         completeMeasurementGen, 
         sampleSortMeasurementGen, 
-        ipsoMeasurementGen);
+        ipso0MeasurementGen,
+        ipso1MeasurementGen);
     delete measurementHeaderGen;
     delete normalMeasurementGen;
     delete inrowMeasurementGen;
     delete completeMeasurementGen;
     delete sampleSortMeasurementGen;
-    delete ipsoMeasurementGen;
+    delete ipso0MeasurementGen;
+    delete ipso1MeasurementGen;
 }
 
 void GenerateSampleSort()
