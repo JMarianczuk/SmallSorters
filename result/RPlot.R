@@ -10,7 +10,8 @@ option_list = list(
     make_option(c("-f", "--filter"), type="character", default="", help="additional optional filter"),
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
     make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),
-    make_option(c("-t", "--title"), type="character", default="", help="Title for the diagram")
+    make_option(c("-t", "--title"), type="character", default="", help="Title for the diagram"),
+    make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right")
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -47,8 +48,13 @@ thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normaliz
     labs(x = "Sorting algorithm", y = "Cpu cycles per iteration", title = plot_title) +
     geom_boxplot() +
     coord_flip() + 
-    facet_grid(rows = vars(sortergroup), scales = "free", space = "free")  +
-    theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank())
+    theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank(), strip.text.x = element_blank())
+
+if (options$facetOut == "") {
+    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free")
+} else {
+    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), cols = vars(sortergroup == options$facetOut), scales = "free", space="free_y")
+}
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")
 

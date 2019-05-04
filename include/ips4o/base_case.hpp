@@ -116,38 +116,23 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
     {
         typedef typename iterator_traits<It>::value_type TValueType;
         void(*sort)(TValueType*,size_t);
-        switch (Cfg::kBaseCaseType)
-        {
-            case 1:
-                sort = &networks::sortNbest<TValueType>;
-                break;
-            case 2:
-                sort = &networks::sortNbosenelson<TValueType>;
-                break;
-            case 3:
-                sort = &networks::sortNbosenelsonparallel<TValueType>;
-                break;
-            case 4:
-                sort = &networks::sortNbosenelsonparameter<TValueType>;
-                break;
-            case 5:
-                sort = &insertionsort::InsertionSort<TValueType>;
-                break;
-            default:
-                throw std::logic_error("Invalid base case type");
-                break;
+        if (Cfg::kBaseCaseType == 1)         {
+            sort = &networks::sortNbest<TValueType>;
+        } else if (Cfg::kBaseCaseType == 2) {
+            sort = &networks::sortNbosenelson<TValueType>;
+        } else if (Cfg::kBaseCaseType == 3) {
+            sort = &networks::sortNbosenelsonparallel<TValueType>;
+        } else if (Cfg::kBaseCaseType == 5) {
+            sort = &insertionsort::InsertionSort<TValueType>;
+        } else {
+            throw std::logic_error("Invalid base case type");
         }
-        switch (Cfg::kSampleSortType)
-        {
-            case 0:
-                samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
-                break;
-            case 1:
-                samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
-                break;
-            default:
-                throw std::logic_error("Invalid base case type");
-                break;
+        if (Cfg::kSampleSortType == 0) {
+            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+        } else if (Cfg::kSampleSortType == 1) {
+            samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+        } else {
+            throw std::logic_error("Invalid base case type");
         }
     }
 }
