@@ -28,6 +28,7 @@ public:
     bool UseForNetworkSort();
     bool UseForInsertionSort();
     bool WillBeShownInResults();
+    bool InsertionsortSkipIpso();
 };
 
 std::vector<SortableStruct*>* sortableStructs();

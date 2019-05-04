@@ -88,7 +88,11 @@ bool SortableStruct::IsInsertionSortOnly()
 }
 bool SortableStruct::WillBeShownInResults()
 {
-    return !(NameAbbreviation == "6Cm" || NameAbbreviation == "QMa" || NameAbbreviation == "JXc");
+    return !(NameAbbreviation == "6Cm" || NameAbbreviation == "QMa" || NameAbbreviation == "JXc" || NameAbbreviation == "Def" || NameAbbreviation == "Tie");
+}
+bool SortableStruct::InsertionsortSkipIpso()
+{
+    return NameAbbreviation == "STL" || NameAbbreviation == "AIF";
 }
 
 }
