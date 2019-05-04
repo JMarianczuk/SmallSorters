@@ -86,5 +86,9 @@ bool SortableStruct::IsInsertionSortOnly()
             return fullName.find(name) != std::string::npos;
         });
 }
+bool SortableStruct::WillBeShownInResults()
+{
+    return !(NameAbbreviation == "6Cm" || NameAbbreviation == "QMa");
+}
 
 }

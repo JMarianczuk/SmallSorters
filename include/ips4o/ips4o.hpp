@@ -38,7 +38,6 @@
 #include <functional>
 #include <iterator>
 #include <type_traits>
-#include <iostream>
 
 #include "ips4o_fwd.hpp"
 #include "base_case.hpp"

@@ -62,9 +62,7 @@ void GenerateMeasurementMethod(
     CPlusPlusCodeGenerator* normalGen, 
     CPlusPlusCodeGenerator* inrowGen, 
     CPlusPlusCodeGenerator* completeGen, 
-    CPlusPlusCodeGenerator* sampleSortGen,
-    CPlusPlusCodeGenerator* ipso0Gen,
-    CPlusPlusCodeGenerator* ipso1Gen);
+    CPlusPlusCodeGenerator* sampleSortGen);
 
 }
 

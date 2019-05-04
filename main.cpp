@@ -15,6 +15,7 @@
 #include "ArrayHelpers.h"
 #include "Sortable.generated.h"
 #include "Measurement.generated.h"
+#include "MeasurementIpso.Helper.h"
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
 #include "Quicksort_Copy.h"
@@ -173,11 +174,11 @@ int main(int argumentCount, char** arguments)
         {
             if (hostname == "i10pc133")
             {
-                measurement::MeasureIpso1(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+                measurement::MeasureIpsoAll1(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
             }
             else
             {
-                measurement::MeasureIpso0(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+                measurement::MeasureIpsoAll0(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
             }
             
         }

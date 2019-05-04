@@ -27,6 +27,7 @@ public:
     std::string FullName();
     bool UseForNetworkSort();
     bool UseForInsertionSort();
+    bool WillBeShownInResults();
 };
 
 std::vector<SortableStruct*>* sortableStructs();
