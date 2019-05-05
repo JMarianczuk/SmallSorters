@@ -40,7 +40,7 @@ template<>
 inline
 void ConditionalSwap<int>(int& left, int& right)
 {
-    register int tmp = left;
+    int tmp = left;
     __asm__(
         "cmp %[left],%[right]\n\t"
         "cmovb %[right],%[left]\n\t"
