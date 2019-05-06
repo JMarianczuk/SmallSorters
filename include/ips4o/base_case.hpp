@@ -129,7 +129,7 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
             throw std::logic_error("Invalid base case type");
         }
         if constexpr (Cfg::kSampleSortType == 0) {
-            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+            samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
         } else if constexpr (Cfg::kSampleSortType == 1) {
             samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
         } else {

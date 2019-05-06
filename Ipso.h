@@ -26,7 +26,7 @@ void IpsoWrapper(
     }
     else
     {
-        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 64, 4>>(first, last);
+        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 32, 4>>(first, last);
     }
 }
 
