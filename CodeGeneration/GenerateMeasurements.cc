@@ -360,6 +360,7 @@ void GenerateMeasurementMethod(
             WriteMeasureMethodName(headerGen, completeMeasureName, true);      
             WriteMeasureMethodName(headerGen, sampleSortMeasureName, true);          
             WriteMeasureMethodName(headerGen, ipsoMeasureName + "0", true);
+            WriteMeasureMethodName(headerGen, ipsoMeasureName + "1", true);
             for (std::string pc : {"0", "1"})
             {
                 for (std::string basecase : {"1", "2", "3", "5"})
@@ -561,7 +562,7 @@ void GenerateMeasurementMethod(
                 WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso" + GetNetworkId(mp) + pc + ".generated.cpp", ipsoMeasureName + opt2, {mp}, opt, 32);
             }
             WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso0.generated.cpp", ipsoMeasureName + "0", {}, "0", 32, true);
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "0", {}, "10", 16, true);
+            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "1", {}, "10", 16, true);
         }
     });
 }

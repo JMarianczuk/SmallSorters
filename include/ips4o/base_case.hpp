@@ -108,7 +108,7 @@ struct iterator_traits<const _Tp*>
 template <class Cfg, class It, class Comp>
 inline void baseCaseSort(It begin, It end, Comp&& comp) {
     if (begin == end) return;
-    printf("BC Size: %" PRIu64 "\n", end - begin);
+    // printf("BC Size: %" PRIu64 "\n", end - begin);
     if constexpr (Cfg::kBaseCaseType == 0)
     {
         detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));

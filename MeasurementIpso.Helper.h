@@ -10,6 +10,7 @@ namespace measurement
 void MeasureIpsoAll0(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
     MeasureIpso0(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso1(perf, seed, numberOfIterations, arraySize, measureIteration);
     MeasureIpso10(perf, seed, numberOfIterations, arraySize, measureIteration);
     MeasureIpso20(perf, seed, numberOfIterations, arraySize, measureIteration);
     MeasureIpso30(perf, seed, numberOfIterations, arraySize, measureIteration);
@@ -19,6 +20,7 @@ void MeasureIpsoAll0(Performancing* perf, uint64_t seed, int numberOfIterations,
 void MeasureIpsoAll1(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
     MeasureIpso0(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso1(perf, seed, numberOfIterations, arraySize, measureIteration);
     MeasureIpso11(perf, seed, numberOfIterations, arraySize, measureIteration);
     MeasureIpso21(perf, seed, numberOfIterations, arraySize, measureIteration);
     MeasureIpso31(perf, seed, numberOfIterations, arraySize, measureIteration);
