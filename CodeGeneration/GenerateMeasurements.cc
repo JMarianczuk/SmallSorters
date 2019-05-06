@@ -287,8 +287,16 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, baseCaseSize),
-                        "external::IpsoWrapper<" + opt + ",0>",
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 32),
+                        "external::IpsoWrapper<0,0>",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        ipsoGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 16),
+                        "external::IpsoWrapper<10,0>",
                         "measurement::BaseCaseSortBlank"
                     );
                     WriteCompleteSorterWrapperMeasureLine(
@@ -360,7 +368,6 @@ void GenerateMeasurementMethod(
             WriteMeasureMethodName(headerGen, completeMeasureName, true);      
             WriteMeasureMethodName(headerGen, sampleSortMeasureName, true);          
             WriteMeasureMethodName(headerGen, ipsoMeasureName + "0", true);
-            WriteMeasureMethodName(headerGen, ipsoMeasureName + "1", true);
             for (std::string pc : {"0", "1"})
             {
                 for (std::string basecase : {"1", "2", "3", "5"})
@@ -562,7 +569,6 @@ void GenerateMeasurementMethod(
                 WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso" + GetNetworkId(mp) + pc + ".generated.cpp", ipsoMeasureName + opt2, {mp}, opt, 32);
             }
             WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso0.generated.cpp", ipsoMeasureName + "0", {}, "0", 32, true);
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "1", {}, "10", 16, true);
         }
     });
 }

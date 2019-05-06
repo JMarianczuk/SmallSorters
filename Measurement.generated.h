@@ -29,7 +29,6 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso0(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso1(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso10(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso20(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso30(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
