@@ -16,7 +16,14 @@ void IpsoWrapper(
     bool(*compareFunc)(TValueType left, TValueType right), 
     void(*sortFunc)(TValueType*,size_t))
 {
-    ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType>>(first, last);
+    if constexpr (BaseCaseType == 10)
+    {
+        ips4o::sort<ips4o::Config<0, 0>>(first, last);
+    }
+    else
+    {
+        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 32, 8>>(first, last);
+    }
 }
 
 } // namespace external

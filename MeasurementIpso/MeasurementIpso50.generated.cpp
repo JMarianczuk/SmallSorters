@@ -16,12 +16,12 @@ namespace measurement
 void MeasureIpso50(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 KR Def", &external::IpsoWrapper<5,0>, &measurement::BaseCaseSortBlank<SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 32 KR Def", &external::IpsoWrapper<5,0>, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 KR POp", &external::IpsoWrapper<5,0>, &measurement::BaseCaseSortBlank<SortableRef_PointerOptimized>);
+	measurement::MeasureCompleteSorter<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 32 KR POp", &external::IpsoWrapper<5,0>, &measurement::BaseCaseSortBlank<SortableRef_PointerOptimized>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 KR Def");
+	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 32 KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 KR POp");
+	measurement::MeasureRandomGeneration<SortableRef_PointerOptimized>(perf, numberOfIterations, arraySize, measureIteration, "S+I       -4 32 KR POp");
 }
 } // namespace measurement
