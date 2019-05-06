@@ -16,6 +16,10 @@ namespace measurement
 void MeasureIpso0(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "I + N       -4 16 KR 4CS", &external::IpsoWrapper<30,0>, &measurement::BaseCaseSortBlank<SortableRef_FourCmovTemp_Split>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "I + N       -4 16 KR 4CS");
+	randomisation::SetSeed(seed);
 	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 32 KR Def", &external::IpsoWrapper<10,0>, &measurement::BaseCaseSortBlank<SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 32 KR Def");

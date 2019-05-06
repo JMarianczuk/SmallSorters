@@ -24,6 +24,10 @@ void IpsoWrapper(
     {
         ips4o::sort<ips4o::Config<0, 0>>(first, last);
     }
+    else if constexpr (BaseCaseType == 30)
+    {
+        ips4o::sort<ips4o::Config<2, 2>>(first, last);
+    }
     else
     {
         ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 32, 4>>(first, last);

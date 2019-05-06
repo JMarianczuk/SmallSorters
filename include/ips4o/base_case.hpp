@@ -132,6 +132,15 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
             samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
         } else if constexpr (Cfg::kSampleSortType == 1) {
             samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+        } else if constexpr (Cfg::kSampleSortType == 2) {
+            if (end - begin <= 16)
+            {
+                sort(begin, end - begin);
+            }
+            else
+            {
+                detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
+            }
         } else {
             throw std::logic_error("Invalid base case type");
         }
