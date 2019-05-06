@@ -18,11 +18,15 @@ void IpsoWrapper(
 {
     if constexpr (BaseCaseType == 10)
     {
+        ips4o::sort<ips4o::Config<0, 0, true, 32, 8>>(first, last);
+    }
+    else if constexpr (BaseCaseType == 20)
+    {
         ips4o::sort<ips4o::Config<0, 0>>(first, last);
     }
     else
     {
-        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 32, 8>>(first, last);
+        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 64, 4>>(first, last);
     }
 }
 

@@ -287,7 +287,7 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 32),
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 64),
                         "external::IpsoWrapper<0,0>",
                         "measurement::BaseCaseSortBlank"
                     );
@@ -295,7 +295,7 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 16),
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 32),
                         "external::IpsoWrapper<10,0>",
                         "measurement::BaseCaseSortBlank"
                     );
@@ -303,7 +303,15 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
                         ipsoGen,
                         &sRef,
                         "MeasureCompleteSorter",
-                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, baseCaseSize),
+                        BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, 16),
+                        "external::IpsoWrapper<20,0>",
+                        "measurement::BaseCaseSortBlank"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        ipsoGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::StdSort, NetworkType::None, MeasureType::Ipso),
                         "measurement::StdSortWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
@@ -566,9 +574,9 @@ void GenerateMeasurementMethod(
             {
                 std::string opt = GetNetworkId(mp) + "," + pc;
                 std::string opt2 = GetNetworkId(mp) + pc;
-                WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso" + GetNetworkId(mp) + pc + ".generated.cpp", ipsoMeasureName + opt2, {mp}, opt, 32);
+                WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso" + GetNetworkId(mp) + pc + ".generated.cpp", ipsoMeasureName + opt2, {mp}, opt, 64);
             }
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso0.generated.cpp", ipsoMeasureName + "0", {}, "0", 32, true);
+            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso0.generated.cpp", ipsoMeasureName + "0", {}, "0", 64, true);
         }
     });
 }
