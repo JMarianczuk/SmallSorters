@@ -12,7 +12,9 @@ option_list = list(
     make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),
     make_option(c("-t", "--title"), type="character", default="", help="Title for the diagram"),
     make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right"),
-    make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%")
+    make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%"),
+    make_option(c("--percentFilter"), type="character", default="", help="name extra filter in case s is not enough"),
+    make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis")
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -58,9 +60,13 @@ if (options$facetOut == "") {
 }
 
 if (options$percentAxis != "") {
-    percentQuery <- paste("select avg(v / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "' group by s", sep="", collapse="");
+    percentQuery <- paste("select avg(v / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "'", sep="")
+    if (options$percentFilter != "") {
+        percentQuery <- paste(percentQuery, "and", options$percentFilter)
+    }
+    percentQuery <- paste(percentQuery, " group by s", sep="");
     percentRes <- dbGetQuery(con, percentQuery)
-    breaks <- seq(0, 500, by=10)
+    breaks <- seq(0, 500, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
     #+ theme(axis.title.x.top = element_text(family="Courier"))
 }

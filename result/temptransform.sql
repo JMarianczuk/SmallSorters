@@ -1,0 +1,1 @@
+UPDATE ipsoSortWithout set s = replace(s, '_000', '') where s like '%_000%';
