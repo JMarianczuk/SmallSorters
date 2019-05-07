@@ -9,7 +9,7 @@
 namespace external
 {
 
-template <int BaseCaseType, int SampleSortType, typename TValueType>
+template <int BaseCaseType, int SampleSortType, int BaseCaseSize, typename TValueType>
 void IpsoWrapper(
     TValueType* first, 
     TValueType* last, 
@@ -26,11 +26,11 @@ void IpsoWrapper(
     }
     else if constexpr (BaseCaseType == 30)
     {
-        ips4o::sort<ips4o::Config<2, 2>>(first, last);
+        ips4o::sort<ips4o::Config<2, 3>>(first, last);
     }
     else
     {
-        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, 32, 4>>(first, last);
+        ips4o::sort<ips4o::Config<BaseCaseType, SampleSortType, true, BaseCaseSize, 256 / BaseCaseSize>>(first, last);
     }
 }
 

@@ -13,11 +13,11 @@
 #include "../Ipso.h"
 namespace measurement
 {
-void MeasureIpso1(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso12_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "I + N       -4 16_000 KR 4CS", &external::IpsoWrapper<30,0,0>, &measurement::BaseCaseSortBlank<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -4 16_332 KR 4CS", &external::IpsoWrapper<1,2,16>, &measurement::BaseCaseSortBlank<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "I + N       -4 16_000 KR 4CS");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -4 16_332 KR 4CS");
 }
 } // namespace measurement

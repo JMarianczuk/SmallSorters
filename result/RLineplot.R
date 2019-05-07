@@ -25,7 +25,7 @@ filename <- paste("plots/lineplot-", options$filePostfix, sep="", collapse="")
 filenameExt <- paste(filename, ".pdf", sep="", collapse="")
 
 thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=substr(sorter, 14, 17), shape=substr(sorter, 0, 8))) + 
-    labs(x = "Array Size", y = "Cpu Cycles per element") +
+    labs(x = "Array Size", y = "CPU Cycles per element") +
     geom_line() +
     geom_point() +
     #geom_errorbar(aes(ymin = med - sqrt(var), ymax = med + sqrt(var))) +

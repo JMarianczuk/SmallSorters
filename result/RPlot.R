@@ -2,6 +2,7 @@
 library(RSQLite)
 library(optparse)
 library(ggplot2)
+library(scales)
 
 option_list = list(
     make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot"),
@@ -11,7 +12,8 @@ option_list = list(
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
     make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),
     make_option(c("-t", "--title"), type="character", default="", help="Title for the diagram"),
-    make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right")
+    make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right"),
+    make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%")
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -45,7 +47,7 @@ if (options$title == "") {
     plot_title <- options$title
 }
 thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
-    labs(x = "Sorting algorithm", y = "Cpu cycles per iteration", title = plot_title) +
+    labs(x = "Sorting algorithm", y = "CPU cycles per iteration", title = plot_title) +
     geom_boxplot() +
     coord_flip() + 
     theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank(), strip.text.x = element_blank())
@@ -54,6 +56,12 @@ if (options$facetOut == "") {
     thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free")
 } else {
     thisplot <- thisplot + facet_grid(rows = vars(sortergroup), cols = vars(sortergroup == options$facetOut), scales = "free", space="free_y")
+}
+
+if (options$percentAxis != "") {
+    percentQuery <- paste("select avg(v / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "' group by s", sep="", collapse="");
+    percentRes <- dbGetQuery(con, percentQuery)
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse="")))
 }
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")

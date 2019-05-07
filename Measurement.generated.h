@@ -32,14 +32,18 @@ void MeasureIpso1(Performancing* perf, uint64_t seed, int numberOfIterations, si
 void MeasureIpso2(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso3(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso4(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso10(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso20(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso30(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso50(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso11(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso21(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso31(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
-void MeasureIpso51(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso11_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso11_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso11_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso21_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso21_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso21_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso12_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso12_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso12_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso22_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso22_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso22_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 } // namespace measurement
 
 #endif // MEASUREMENT_GENERATED_H
