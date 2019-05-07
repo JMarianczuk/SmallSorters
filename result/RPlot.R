@@ -2,7 +2,6 @@
 library(RSQLite)
 library(optparse)
 library(ggplot2)
-library(scales)
 
 option_list = list(
     make_option(c("-s", "--array_size"), type="numeric", default=16, help="size of array to plot"),
@@ -61,7 +60,9 @@ if (options$facetOut == "") {
 if (options$percentAxis != "") {
     percentQuery <- paste("select avg(v / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "' group by s", sep="", collapse="");
     percentRes <- dbGetQuery(con, percentQuery)
-    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse="")))
+    breaks <- seq(0, 500, by=10)
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
+    #+ theme(axis.title.x.top = element_text(family="Courier"))
 }
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")

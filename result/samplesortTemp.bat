@@ -1,0 +1,1 @@
+Rscript RPlot.R --tableName="sampleSortWithout%2" --dbName="%1" --filter="s like '%%-s332%%'" --filePostfix="sample-sort-332-%2" --complete=TRUE --title="SampleSort" --percentAxis="I       -s332 KR %3"
