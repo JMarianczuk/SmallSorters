@@ -52,6 +52,8 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
     return leftKey < right.key;
 }
 
+//TODO merge sort kein problem mit instruction cache -> ein initialer Lauf mit Size 16 networks und dann merge
+
 #define ElementCount 128
 void test()
 {

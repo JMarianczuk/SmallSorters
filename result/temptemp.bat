@@ -1,0 +1,2 @@
+RScript RVerteilung.R --dbName=small_sorters_result.sqlite --tableName=statsIpsoVert --filePostfix="ipsoVert16" --title="Base Case Size Distribution for BaseCaseSize = 16" --axisBy=16
+RScript RVerteilung.R --dbName=small_sorters_result.sqlite --tableName=statsIpsoVertZwei --filePostfix="ipsoVert32" --title="Base Case Size Distribution for BaseCaseSize = 32" --axisBy=32

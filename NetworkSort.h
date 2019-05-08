@@ -219,7 +219,9 @@ void ConditionalSwap<SortableRef_ClangPredicate>(SortableRef_ClangPredicate& lef
     SortableRef_ClangPredicate* leftPointer = &left;
     SortableRef_ClangPredicate* rightPointer = &right;
     SortableRef_ClangPredicate temp = left;
-    int predicateResult = (int) (right < temp);
+    int predicateResult = (int) (right < temp); 
+    //TODO: look at generated assembly code => putting into an integer is a lot of work, maybe better put into byte and use test instead of cmp $0
+    // => The same goes for sample sort? Stichwort movbzl
     __asm__ volatile(
         "cmp $0,%[predResult]\n\t"
         "cmovneq %[right_pointer],%[left_pointer]\n\t"

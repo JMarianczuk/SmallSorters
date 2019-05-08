@@ -201,7 +201,7 @@ bool NormalCompare(TValueType left, TValueType right)
     return left < right;
 }
 
-
+//TODO measure complete without base case to get time that quicksort takes
 template <typename TValueType>
 void MeasureCompleteSorter(
     Performancing* perf,
