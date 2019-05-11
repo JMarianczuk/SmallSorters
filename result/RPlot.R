@@ -68,15 +68,6 @@ if (options$percentAxis != "") {
     percentRes <- dbGetQuery(con, percentQuery)
     breaks <- seq(0, 500, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
-    #+ theme(axis.title.x.top = element_text(family="Courier"))
 }
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")
-
-#histogram <- ggplot(subset(res, sorter %in% c("StdSort -C KR Def")), aes(normalized_value)) + 
-#    geom_histogram(bins=100)
-
-#ggsave(paste(filename, "_histogram.pdf", sep = "", collapse = ""))
-
-
-#+ scale_x_discrete(breaks = substring(res$sorter, 0, 8), label=res$x)

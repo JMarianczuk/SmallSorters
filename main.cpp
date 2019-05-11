@@ -52,31 +52,10 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
     return leftKey < right.key;
 }
 
-//TODO merge sort kein problem mit instruction cache -> ein initialer Lauf mit Size 16 networks und dann merge
-
 #define ElementCount 128
 void test()
 {
-    // auto arr = (SortableRef*) malloc(sizeof(SortableRef) * 400);
-    // for (int i = 0; i < 50; i += 1)
-    // {
-    //     randomisation::GenerateRandomArray(arr, 400);
-    //     quicksortcopy2::partial_sort(arr, arr + 400, arr + 400, &measurement::IteratorCompare<SortableRef>);
-    //     uint64_t ki, ri, kv, rv;
-    //     PutPermutationValues(arr, 400, kv, ki, rv, ri);
-    //     if (!IsSortedAndPermutation(arr, 400, ki, kv, ri, rv))
-    //     {
-    //         debug::WriteLine("bad sort partial sort");
-    //     }
-    //     else
-    //     {
-    //         debug::WriteLine("good sort");
-    //     }
-    // }
     
-    // debug::WriteLine(std::to_string(sizeof(SortableRef*)));
-    // debug::WriteLine(std::to_string(sizeof(long)));
-    // debug::WriteLine(std::to_string(sizeof(long long)));
 }
 
 #define NumberOfIterations 100
@@ -124,10 +103,6 @@ int main(int argumentCount, char** arguments)
     {
         commandline::PrintHelpText(std::cout);
         return 0;
-    }
-    if (options.ReadableNumbers)
-    {
-        // randomisation::readableNumbers = true;
     }
 
     uint64_t seed;
@@ -185,12 +160,6 @@ int main(int argumentCount, char** arguments)
     printf("Time elapsed during measurement\n");
     printf("In seconds: %" PRIi64 "\n", secondsElapsed);
     printf("In minutes: %" PRIi64 "\n", minutesElapsed);
-
-    // auto perf_cache_misses = new Performancing(PerformanceMetric::CACHE_MISSES);
-    // delete perf_cache_misses;
-
-    // auto perf_branch_misses = new Performancing(PerformanceMetric::BRANCH_MISSES);
-    // delete perf_branch_misses;
 
 	return 0;
 }

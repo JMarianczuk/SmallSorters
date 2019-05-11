@@ -28,7 +28,6 @@ thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = m
     labs(x = "Array Size", y = "CPU Cycles per element") +
     geom_line() +
     geom_point() +
-    #geom_errorbar(aes(ymin = med - sqrt(var), ymax = med + sqrt(var))) +
     theme(legend.position=c(0,1), legend.justification=c(0, 1), legend.title=element_blank(), legend.text = element_text(colour="black", size=7, family="Courier"), legend.key.size = unit(4, "mm"))
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")

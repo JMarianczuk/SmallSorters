@@ -8,12 +8,6 @@
 namespace codegeneration
 {
 
-// template <typename TValueType>
-// void VectorConcatenate(std::vector<TValueType> *source, std::vector<TValueType> *first, std::vector<TValueType> *second, std::vector<TValueType> *third = nullptr);
-// template <typename TValueType>
-// bool VectorAny(std::vector<TValueType>& source, std::function<bool(TValueType)> predicate);
-// template<typename TValueType>
-// std::vector<TValueType>* VectorWhere(std::vector<TValueType>* source, std::function<bool(TValueType)> predicate);
 template <typename TValueType>
 void VectorConcatenate(std::vector<TValueType> *source, std::vector<TValueType> *first, std::vector<TValueType> *second, std::vector<TValueType> *third = nullptr)
 {
