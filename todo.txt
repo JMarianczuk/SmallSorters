@@ -1,0 +1,7 @@
+
+//TODO merge sort kein problem mit instruction cache -> ein initialer Lauf mit Size 16 networks und dann merge, evtl in "Paketen"
+
+//TODO (Measure) measure complete without base case to get time that quicksort takes
+
+//TODO (CPr): look at generated assembly code => putting into an integer is a lot of work, maybe better put into byte and use test instead of cmp $0
+// => The same goes for sample sort? Stichwort movbzl

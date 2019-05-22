@@ -1,6 +1,4 @@
-﻿// Performancing.h : Include file for standard system include files,
-// or project specific include files.
-
+﻿
 #ifndef PERFORMANCING_H
 #define PERFORMANCING_H
 

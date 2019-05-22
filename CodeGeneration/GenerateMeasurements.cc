@@ -185,7 +185,6 @@ void WriteCompleteSorterMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
-        // gen->WriteLine("debug::WriteLine(\"", sorter, "\");"); //DEBUG
         gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
     }
@@ -202,7 +201,6 @@ void WriteCompleteSorterWrapperMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
-        // gen->WriteLine("debug::WriteLine(\"", sorter, "\");"); //DEBUG
         gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ", &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
     }
@@ -475,14 +473,6 @@ void GenerateMeasurementMethod(
                         "measurement::QuicksortCopyWrapper",
                         "measurement::BaseCaseSortBlank"
                     );
-                    // WriteCompleteSorterWrapperMeasureLine(
-                    //     completeGen,
-                    //     &bRef,
-                    //     "MeasureCompleteSorter",
-                    //     BuildSorterName(Sorter::SampleSort, NetworkType::Best, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::SortNetwork),
-                    //     "measurement::SampleSortWrapper",
-                    //     "networks::sortNbest"
-                    // );
                 }
             );
         }, "");
@@ -580,10 +570,7 @@ void GenerateMeasurementMethod(
         std::vector<MeasureParams> ipsoMeasureParamsList = 
         {
             GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->WillBeShownInResults() && ss->NameAbbreviation == "4CS";}), "networks::sortNbest", Sorter::SortNetwork, NetworkType::Best),
-            GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->WillBeShownInResults() && ss->NameAbbreviation == "4CS";}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality),
-            // GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->WillBeShownInResults();}), "networks::sortNbosenelsonparallel", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parallelism),
-            // GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort();}), "networks::sortNbosenelsonparameter", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parameter),
-            // GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForInsertionSort() && !ss->InsertionsortSkipIpso();}), "insertionsort::InsertionSort", Sorter::InsertionSort, NetworkType::None)
+            GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->WillBeShownInResults() && ss->NameAbbreviation == "4CS";}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality)
         };
         for (std::string samplesort : {"1", "2"})
         {
