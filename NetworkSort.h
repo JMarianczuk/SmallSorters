@@ -75,7 +75,7 @@ void ConditionalSwap<SortableRef_JumpXchg>(SortableRef_JumpXchg& left, SortableR
         "xchg %[left_key],%[right_key]\n\t" 
         "xchg %[left_reference],%[right_reference]\n\t"
         "%=:\n\t" 
-        : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=r"(left.reference), [right_reference] "=r"(right.reference)
+        : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=&r"(left.reference), [right_reference] "=&r"(right.reference)
         : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference)
         : "cc" 
     );
