@@ -120,7 +120,7 @@ void WriteParameters(CodeGenerator *gen, nlohmann::json leftIndices, nlohmann::j
 
 bool IsInline(nlohmann::json network, RecursiveParameterNetworkType networkType)
 {
-    return true; //Worse performance for only inlining the small networks -> probably due to the fact that too many parameters have to be pushed on the stack
+    //return true; //Worse performance for only inlining the small networks -> probably due to the fact that too many parameters have to be pushed on the stack
     switch (networkType)
     {
         case RecursiveParameterNetworkType::Split:
@@ -186,10 +186,8 @@ void WriteSorter_ParameterStyle(
     }
 
     gen->WriteLine("template <typename TValueType> static");
-    if (IsInline(network, networkType))
-    {
-        gen->WriteLine("inline");
-    }
+    gen->WriteLine("inline");
+
     int networkSize;
     int leftMergeSize;
     int rightMergeSize;
@@ -353,6 +351,218 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
             });
         }, "");
     });
+    free(splitIndices);
+    free(mergeIndices);
+}
+
+void WriteSorter_RecursiveStyle(
+    CodeGenerator *gen, 
+    nlohmann::json network, 
+    std::string sortMethodName, 
+    bool* splitIndices, 
+    bool* mergeIndices, 
+    int indexArrayLength)
+{
+    for (auto step : network["RecursiveSteps"])
+    {
+        auto stepNetwork = step["Network"];
+        auto stepType = stepNetwork["Type"].get<std::string>();
+        if (stepType.compare("Split") == 0)
+        {
+            int length = stepNetwork["NetworkSize"].get<int>();
+            if (!splitIndices[length])
+            {
+                WriteSorter_RecursiveStyle(
+                    gen,
+                    stepNetwork,
+                    sortMethodName,
+                    splitIndices,
+                    mergeIndices,
+                    indexArrayLength);
+            }
+        }
+        if (stepType.compare("Merge") == 0)
+        {
+            int leftSize = stepNetwork["LeftMergeSize"].get<int>();
+            int rightSize = stepNetwork["RightMergeSize"].get<int>();
+            if (!mergeIndices[leftSize * indexArrayLength + rightSize])
+            {
+                WriteSorter_RecursiveStyle(
+                    gen,
+                    stepNetwork,
+                    sortMethodName,
+                    splitIndices,
+                    mergeIndices,
+                    indexArrayLength);
+            }
+        }
+    }
+
+    RecursiveParameterNetworkType networkType;
+    auto type = network["Type"].get<std::string>();
+    if (type.compare("Split") == 0)
+    {
+        networkType = RecursiveParameterNetworkType::Split;
+    }
+    else if (type.compare("Merge") == 0)
+    {
+        networkType = RecursiveParameterNetworkType::Merge;
+    }
+
+    gen->WriteLine("template <typename TValueType> static");
+    if (IsInline(network, networkType))
+    {
+        gen->WriteLine("inline");
+    }
+
+    int networkSize;
+    int leftMergeSize;
+    int rightMergeSize;
+    switch (networkType)
+    {
+        case RecursiveParameterNetworkType::Split:
+            networkSize = network["NetworkSize"].get<int>();
+            gen->WriteLine("void sort", std::to_string(networkSize), sortMethodName, "(TValueType* A)");
+            splitIndices[networkSize] = true;
+            break;
+        case RecursiveParameterNetworkType::Merge:
+            leftMergeSize = network["LeftMergeSize"].get<int>();
+            rightMergeSize = network["RightMergeSize"].get<int>();
+            gen->WriteLine("void merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), sortMethodName, "(TValueType* left, TValueType* right)");
+            mergeIndices[leftMergeSize * indexArrayLength + rightMergeSize] = true;
+            if (leftMergeSize == 1 && rightMergeSize == 1)
+            {
+                gen->WriteBlock([=]{
+                    gen->WriteLine("networks::ConditionalSwap(left[0], right[0]);");
+                });
+                return;
+            }
+            else if (leftMergeSize == 1 && rightMergeSize == 2)
+            {
+                gen->WriteBlock([=]{
+                    gen->WriteLine("networks::ConditionalSwap(left[0], right[1]);");
+                    gen->WriteLine("networks::ConditionalSwap(left[0], right[0]);");
+                });
+                return;
+            }
+            else if (leftMergeSize == 2 && rightMergeSize == 1)
+            {
+                gen->WriteBlock([=]{
+                    gen->WriteLine("networks::ConditionalSwap(left[0], right[0]);");
+                    gen->WriteLine("networks::ConditionalSwap(left[1], right[0]);");
+                });
+                return;
+            }
+            break;
+    }
+    gen->WriteBlock([=]{
+        for (auto step : network["RecursiveSteps"])
+        {
+            auto stepNetwork = step["Network"];
+            auto stepType = stepNetwork["Type"].get<std::string>();
+            if (stepType.compare("Split") == 0)
+            {
+                int stepSize = stepNetwork["NetworkSize"].get<int>();
+                int indexToUse = (*step["FirstContextParameterIdsToUse"].begin()).get<int>();
+                std::string addStr = "";
+                if (indexToUse > 0)
+                {
+                    addStr = " + " + std::to_string(indexToUse);
+                }
+                gen->WriteLine("networks::sort", std::to_string(stepSize), sortMethodName, "(A", addStr, ");");
+            }
+            else if (stepType.compare("Merge") == 0)
+            {
+                int leftMergeSize = stepNetwork["LeftMergeSize"].get<int>();
+                int rightMergeSize = stepNetwork["RightMergeSize"].get<int>();
+                int leftIndex = (*step["FirstContextParameterIdsToUse"].begin()).get<int>();
+                int rightIndex = (*step["SecondContextParameterIdsToUse"].begin()).get<int>();
+                std::string leftAddStr = "";
+                std::string rightAddStr = "";
+                if (leftIndex > 0)
+                {
+                    leftAddStr = " + " + std::to_string(leftIndex);
+                }
+                if (rightIndex > 0)
+                {
+                    rightAddStr = " + " + std::to_string(rightIndex);
+                }
+                std::string callStr;
+                switch (networkType)
+                {
+                    case RecursiveParameterNetworkType::Split:
+                        callStr = "A" + leftAddStr + ", A" + rightAddStr;
+                        break;
+                    case RecursiveParameterNetworkType::Merge:
+                        callStr = "left" + leftAddStr + ", right" + rightAddStr;
+                        break;
+                }
+                gen->WriteLine("networks::merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), sortMethodName, "(", callStr, ");");
+            }
+        }
+    });
+    gen->WriteLine("");
+}
+
+void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath)
+{
+    std::ifstream input(networksJsonFilePath);
+    nlohmann::json networksJson;
+    input >> networksJson;
+
+    int maxLength = networksJson.back()["NetworkSize"].get<int>();
+    int indexLength = maxLength + 1;
+    bool* splitIndices = (bool*) malloc(indexLength * sizeof(bool));
+    bool* mergeIndices = (bool*) malloc(indexLength * indexLength * sizeof(bool));
+
+    for (int outer = 0; outer < indexLength; outer += 1)
+    {
+        splitIndices[outer] = false;
+        for (int inner = 0; inner < indexLength; inner += 1)
+        {
+            mergeIndices[outer * indexLength + inner] = false;
+        }
+    }
+
+    gen->WriteLine(GetAutogeneratedPreamble());
+    gen->WriteLine("");
+
+    gen->WriteHeaderPragma(headerDefine, [=]{
+        gen->WriteIncludeQuotes("NetworkSort.h");
+        gen->WriteNamespace("networks", [=]{
+            for (auto network : networksJson)
+            {
+                WriteSorter_RecursiveStyle(
+                    gen,
+                    network,
+                    sortMethodName,
+                    splitIndices,
+                    mergeIndices,
+                    maxLength + 1);
+            }
+            gen->WriteLine("");
+
+            gen->WriteLine("template <typename TValueType> static");
+            gen->WriteLine("void sortN", sortMethodName, "(TValueType* A, size_t n)");
+            gen->WriteBlock([=]{
+                gen->WriteLine("switch(n)");
+                gen->WriteBlock([=]{
+                    gen->WriteLine("case 0: break;");
+                    gen->WriteLine("case 1: break;");
+                    for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
+                    {
+                        auto sizeStr = std::to_string(arraySize);
+                        gen->WriteLine("case ", sizeStr, ":");
+                        gen->WriteIndented([=]{
+                            gen->WriteLine("sort", sizeStr, sortMethodName, "(A);");
+                            gen->WriteLine("break;");
+                        });
+                    }
+                });
+            });
+        }, "");
+    });
+    
     free(splitIndices);
     free(mergeIndices);
 }

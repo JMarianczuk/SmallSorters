@@ -17,6 +17,7 @@
 #include "BoseNelson.generated.h"
 #include "BoseNelsonParallel.generated.h"
 #include "BoseNelsonParameter.generated.h"
+#include "BoseNelsonRecursive.generated.h"
 #include "Batcher.generated.h"
 #include "VerifyNetworks.h"
 #include "DebugHelper.h"
@@ -71,6 +72,17 @@ void VerifyNetworks()
 			numberOfIncorrectNetworks += 1;
 		}
 	}
+	debug::WriteLine("verifying bosenelsonrecursive networks");
+	for (int arraySize = 2; arraySize < 17; arraySize += 1)
+	{
+		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		bool result = verification::VerifyNetwork(arraySize, &networks::sortNbosenelsonrecursive<int>);
+		if (!result)
+		{
+			debug::WriteLine("incorrect network: 'bosenelsonrecursive' for size '", std::to_string(arraySize), "'.");
+			numberOfIncorrectNetworks += 1;
+		}
+	}
 	debug::WriteLine("verifying batcher networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
@@ -82,7 +94,7 @@ void VerifyNetworks()
 			numberOfIncorrectNetworks += 1;
 		}
 	}
-	debug::WriteLine("finished verification. ", std::to_string(75 - numberOfIncorrectNetworks), " networks out of 75 sorted correctly.");
+	debug::WriteLine("finished verification. ", std::to_string(90 - numberOfIncorrectNetworks), " networks out of 90 sorted correctly.");
 }
 } // namespace verification
 

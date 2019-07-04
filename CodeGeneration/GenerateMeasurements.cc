@@ -59,7 +59,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "Best";
             break;
         case NetworkType::BoseNelson:
-            result += "BoNe";
+            result += "BN";
             break;
         case NetworkType::Batcher:
             result += "Batc";
@@ -71,13 +71,16 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
     switch (boseNelsonNetworkType)
     {
         case BoseNelsonNetworkType::Locality:
-            result += "L";
+            result += "Lo";
             break;
         case BoseNelsonNetworkType::Parallelism:
-            result += "P";
+            result += "PL";
             break;
         case BoseNelsonNetworkType::Parameter:
-            result += "M";
+            result += "PM";
+            break;
+        case BoseNelsonNetworkType::Recursive:
+            result += "Re";
             break;
         case BoseNelsonNetworkType::None:
             result += " ";
@@ -239,17 +242,16 @@ std::string GetNetworkId(MeasureParams measureParams)
     }
     if (measureParams._NetworkType == NetworkType::BoseNelson)
     {
-        if (measureParams._BoseNelsonNetworkType == BoseNelsonNetworkType::Locality)
+        switch (measureParams._BoseNelsonNetworkType)
         {
-            return "2";
-        }
-        if (measureParams._BoseNelsonNetworkType == BoseNelsonNetworkType::Parallelism)
-        {
-            return "3";
-        }
-        if (measureParams._BoseNelsonNetworkType == BoseNelsonNetworkType::Parameter)
-        {
-            return "4";
+            case BoseNelsonNetworkType::Locality:
+                return "2";
+            case BoseNelsonNetworkType::Parallelism:
+                return "3";
+            case BoseNelsonNetworkType::Parameter:
+                return "4";
+            case BoseNelsonNetworkType::Recursive:
+                return "6";
         }
     }
     if (measureParams._NetworkType == NetworkType::None)
@@ -341,11 +343,52 @@ void GenerateMeasurementMethod(
 {
     std::vector<MeasureParams> measureParamsList = 
     {
-        GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort();}), "networks::sortNbest", Sorter::SortNetwork, NetworkType::Best),
-        GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort();}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality),
-        GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort();}), "networks::sortNbosenelsonparallel", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parallelism),
-        GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort();}), "networks::sortNbosenelsonparameter", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parameter),
-        GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForInsertionSort();}), "insertionsort::InsertionSort", Sorter::InsertionSort, NetworkType::None)
+        GetParams(
+            VectorWhere<SortableStruct*>(
+                sortableStructs(), 
+                [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
+            "networks::sortNbest", 
+            Sorter::SortNetwork, 
+            NetworkType::Best),
+        GetParams(
+            VectorWhere<SortableStruct*>(
+                sortableStructs(), 
+                [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
+            "networks::sortNbosenelson", 
+            Sorter::SortNetwork, 
+            NetworkType::BoseNelson, 
+            BoseNelsonNetworkType::Locality),
+        GetParams(
+            VectorWhere<SortableStruct*>(
+                sortableStructs(), 
+                [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
+            "networks::sortNbosenelsonparallel", 
+            Sorter::SortNetwork, 
+            NetworkType::BoseNelson, 
+            BoseNelsonNetworkType::Parallelism),
+        GetParams(
+            VectorWhere<SortableStruct*>(
+                sortableStructs(), 
+                [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
+            "networks::sortNbosenelsonparameter", 
+            Sorter::SortNetwork, 
+            NetworkType::BoseNelson, 
+            BoseNelsonNetworkType::Parameter),
+        GetParams(
+            VectorWhere<SortableStruct*>(
+                sortableStructs(), 
+                [](SortableStruct* ss){return ss->UseForInsertionSort();}), 
+            "insertionsort::InsertionSort", 
+            Sorter::InsertionSort, 
+            NetworkType::None),
+        GetParams(
+            VectorWhere<SortableStruct*>(
+                sortableStructs(),
+                [](SortableStruct* ss){return ss->UseForNetworkSort();}),
+            "networks::sortNbosenelsonrecursive",
+            Sorter::SortNetwork,
+            NetworkType::BoseNelson,
+            BoseNelsonNetworkType::Recursive)
     };
     headerGen->WriteLine(GetAutogeneratedPreamble());
     normalGen->WriteLine(GetAutogeneratedPreamble());
@@ -484,11 +527,52 @@ void GenerateMeasurementMethod(
         sampleSortGen->WriteNamespace("measurement", [=]{
             std::vector<MeasureParams> sampleSortMeasureParams = 
             {
-                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "networks::sortNbest", Sorter::SortNetwork, NetworkType::Best),
-                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality),
-                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "networks::sortNbosenelsonparallel", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parallelism),
-                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), "networks::sortNbosenelsonparameter", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Parameter),
-                GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->Name.compare("PointerOptimized") == 0;}), "insertionsort::InsertionSort", Sorter::InsertionSort, NetworkType::None)
+                GetParams(
+                    VectorWhere<SortableStruct*>(
+                        sortableStructs(), 
+                        [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
+                    "networks::sortNbest", 
+                    Sorter::SortNetwork, 
+                    NetworkType::Best),
+                GetParams(
+                    VectorWhere<SortableStruct*>(
+                        sortableStructs(), 
+                        [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
+                    "networks::sortNbosenelson", 
+                    Sorter::SortNetwork, 
+                    NetworkType::BoseNelson, 
+                    BoseNelsonNetworkType::Locality),
+                GetParams(
+                    VectorWhere<SortableStruct*>(
+                        sortableStructs(), 
+                        [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
+                    "networks::sortNbosenelsonparallel", 
+                    Sorter::SortNetwork, 
+                    NetworkType::BoseNelson, 
+                    BoseNelsonNetworkType::Parallelism),
+                GetParams(
+                    VectorWhere<SortableStruct*>(
+                        sortableStructs(), 
+                        [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
+                    "networks::sortNbosenelsonparameter", 
+                    Sorter::SortNetwork, 
+                    NetworkType::BoseNelson, 
+                    BoseNelsonNetworkType::Parameter),
+                GetParams(
+                    VectorWhere<SortableStruct*>(
+                        sortableStructs(), 
+                        [](SortableStruct* ss){return ss->Name.compare("PointerOptimized") == 0;}), 
+                    "insertionsort::InsertionSort", 
+                    Sorter::InsertionSort, 
+                    NetworkType::None),
+                GetParams(
+                    VectorWhere<SortableStruct*>(
+                        sortableStructs(),
+                        [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}),
+                    "networks::sortNbosenelsonrecursive",
+                    Sorter::SortNetwork,
+                    NetworkType::BoseNelson,
+                    BoseNelsonNetworkType::Recursive)
             };
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
             std::vector<SortableStruct*> sPOp = {(*sortableStructs())[13]}; // POp
@@ -569,8 +653,38 @@ void GenerateMeasurementMethod(
 
         std::vector<MeasureParams> ipsoMeasureParamsList = 
         {
-            GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->WillBeShownInResults() && ss->NameAbbreviation == "4CS";}), "networks::sortNbest", Sorter::SortNetwork, NetworkType::Best),
-            GetParams(VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct* ss){return ss->UseForNetworkSort() && ss->WillBeShownInResults() && ss->NameAbbreviation == "4CS";}), "networks::sortNbosenelson", Sorter::SortNetwork, NetworkType::BoseNelson, BoseNelsonNetworkType::Locality)
+            GetParams(
+                VectorWhere<SortableStruct*>(
+                    sortableStructs(), 
+                    [](SortableStruct* ss){
+                        return ss->UseForNetworkSort() 
+                            && ss->WillBeShownInResults() 
+                            && ss->NameAbbreviation == "4CS";}),
+                "networks::sortNbest", 
+                Sorter::SortNetwork, 
+                NetworkType::Best),
+            GetParams(
+                VectorWhere<SortableStruct*>(
+                    sortableStructs(), 
+                    [](SortableStruct* ss){
+                        return ss->UseForNetworkSort() 
+                            && ss->WillBeShownInResults() 
+                            && ss->NameAbbreviation == "4CS";}), 
+                "networks::sortNbosenelson", 
+                Sorter::SortNetwork, 
+                NetworkType::BoseNelson, 
+                BoseNelsonNetworkType::Locality),
+            GetParams(
+                VectorWhere<SortableStruct*>(
+                    sortableStructs(), 
+                    [](SortableStruct* ss){
+                        return ss->UseForNetworkSort() 
+                            && ss->WillBeShownInResults() 
+                            && ss->NameAbbreviation == "4CS";}), 
+                "networks::sortNbosenelsonrecursive", 
+                Sorter::SortNetwork, 
+                NetworkType::BoseNelson, 
+                BoseNelsonNetworkType::Recursive)
         };
         for (std::string samplesort : {"1", "2"})
         {

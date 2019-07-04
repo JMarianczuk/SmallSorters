@@ -171,6 +171,18 @@ void GenerateNetworks_ParameterStyle()
     delete gen;
 }
 
+void GenerateNetworks_RecursiveStype()
+{
+    auto gen = new CPlusPlusCodeGenerator(
+        "../../BoseNelsonRecursive.generated.h");
+    WriteNetwork_RecursiveStyle(
+        gen,
+        "BOSENELSON_RECURSIVE_GENERATED_H",
+        "bosenelsonrecursive",
+        "../BoseNelsonNetworks_ParameterStyle.json");
+    delete gen;
+}
+
 void GenerateMeasurements()
 {
     auto measurementHeaderGen = 
@@ -250,6 +262,7 @@ int main()
     GenerateBoseNelsonNetworksJson();
     GenerateBatcherNetworksJson();
     GenerateNetworks_ParameterStyle();
+    GenerateNetworks_RecursiveStype();
     GenerateNetworks();
     GenerateMeasurements();
     GenerateSampleSort();

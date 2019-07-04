@@ -44,7 +44,7 @@
 #include "utils.hpp"
 #include "../../Sortable.generated.h"
 #include "../../QuickSort.h"
-#include "../../BoseNelson.generated.h"
+#include "../../Networks_Fwd.h"
 
 namespace ips4o {
 namespace detail {
@@ -126,6 +126,8 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
             sort = &networks::sortNbosenelsonparallel<TValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 5) {
             sort = &insertionsort::InsertionSort<TValueType>;
+        } else if constexpr (Cfg::kBaseCaseType == 6) {
+            sort = &networks::sortNbosenelsonrecursive<TValueType>;
         } else {
             throw std::logic_error("Invalid base case type");
         }

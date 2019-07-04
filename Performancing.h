@@ -30,6 +30,7 @@ private:
 	struct read_format* _readFormat;
 	int _fileDescriptor;
     PerformanceMetric _performanceMetric;
+    unsigned long long _ticks;
 
     void SetupPerformanceEventAttribute(PerformanceMetric metric);
 public:

@@ -35,6 +35,7 @@ enum class BoseNelsonNetworkType
     Locality,
     Parallelism,
     Parameter,
+    Recursive,
     None
 };
 enum class MeasureType

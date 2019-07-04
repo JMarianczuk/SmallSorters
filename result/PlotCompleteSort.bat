@@ -1,1 +1,1 @@
-Rscript RPlot.R --dbName="%1" --tableName="completeSortWithout%2" --filePostfix="complete-%2" --complete=TRUE --title="QuickSort" --percentAxis="I       -Q KR %3" --percentBy=%4
+Rscript RPlot.R --dbName="%1" --tableName="completeSortWithout%2" --filePostfix="complete-%2" --complete=TRUE --title="QuickSort" --percentAxis="I       -Q KR %3" --percentBy=%4 --filter="s not like '%%BoNeP%%' and s not like '%%BoNeM%%'"

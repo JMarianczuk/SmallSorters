@@ -16,8 +16,8 @@ namespace measurement
 void MeasureIpso22_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N BoNeL -4 64_332 KR 4CS", &external::IpsoWrapper<2,2,64>, &measurement::BaseCaseSortBlank<SortableRef_FourCmovTemp_Split>);
+	measurement::MeasureCompleteSorter<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N BNLo -4 64_332 KR 4CS", &external::IpsoWrapper<2,2,64>, &measurement::BaseCaseSortBlank<SortableRef_FourCmovTemp_Split>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N BoNeL -4 64_332 KR 4CS");
+	measurement::MeasureRandomGeneration<SortableRef_FourCmovTemp_Split>(perf, numberOfIterations, arraySize, measureIteration, "S+N BNLo -4 64_332 KR 4CS");
 }
 } // namespace measurement
