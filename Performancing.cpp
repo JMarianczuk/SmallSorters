@@ -71,14 +71,14 @@ unsigned long long ReadTicks()
 
 void Performancing::StartMeasuring() {
 #ifndef IGNORE_MEASUREMENT
-	_ticks = ReadTicks();
+	// _ticks = ReadTicks();
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
 #endif
 }
 void Performancing::StopMeasuring() {
 #ifndef IGNORE_MEASUREMENT
-	_ticks = ReadTicks() - _ticks;
+	// _ticks = ReadTicks() - _ticks;
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
 #endif
 }
@@ -91,7 +91,7 @@ uint64_t Performancing::GetValue() {
 	{
 		if (_readFormat->values[i].id == _id)
 		{
-			debug::WriteLine("PERF: '", std::to_string(_readFormat->values[i].value), "', RDTSC: '", std::to_string(_ticks), "'");
+			// debug::WriteLine("PERF: '", std::to_string(_readFormat->values[i].value), "', RDTSC: '", std::to_string(_ticks), "'");
 			return _readFormat->values[i].value;
 		}
 	}
