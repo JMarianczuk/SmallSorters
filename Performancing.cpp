@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <string>
 #include <stdexcept>
+#include <tuple>
 
 #include "DebugHelper.h"
 #include "Enumerations.h"
@@ -45,7 +46,7 @@ Performancing::Performancing(PerformanceMetric metric) {
 	_readFormat = (struct read_format*) _resultBuffer;
 	SetupPerformanceEventAttribute(metric);
 	_fileDescriptor = syscall(__NR_perf_event_open, &_performanceEventAttribute, 0, -1, -1, 0);
-	ioctl(_fileDescriptor, PERF_EVENT_IOC_ID, &_id);
+	ioctl(_fileDescriptor, PERF_EVENT_IOC_ID, &_idFirst);
 }
 Performancing::~Performancing() {
 	close(_fileDescriptor);
@@ -71,28 +72,29 @@ unsigned long long ReadTicks()
 
 void Performancing::StartMeasuring() {
 #ifndef IGNORE_MEASUREMENT
-	// _ticks = ReadTicks();
+	_ticks = ReadTicks();
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
 #endif
 }
 void Performancing::StopMeasuring() {
 #ifndef IGNORE_MEASUREMENT
-	// _ticks = ReadTicks() - _ticks;
+	auto newTicks = ReadTicks();
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
+	_ticks = newTicks - _ticks;
 #endif
 }
 
-uint64_t Performancing::GetValue() {
+std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 #ifndef IGNORE_MEASUREMENT
 	auto _ = read(_fileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 
 	for (int i = 0; i < _readFormat->number; i += 1)
 	{
-		if (_readFormat->values[i].id == _id)
+		if (_readFormat->values[i].id == _idFirst)
 		{
 			// debug::WriteLine("PERF: '", std::to_string(_readFormat->values[i].value), "', RDTSC: '", std::to_string(_ticks), "'");
-			return _readFormat->values[i].value;
+			return {_readFormat->values[i].value, _ticks};
 		}
 	}
 #else

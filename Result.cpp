@@ -39,12 +39,15 @@ void WriteResultLine(
             throw std::logic_error("Result_h::WriteResultLine => Missing Performance Metric!");
     }
 
+    auto [v1, v2] = perf->GetValues();
+
     printf(
-        "RESULT\ts=%s\tm=%s\tv=%" PRIu64 "\tss=%i\ta=%zu\ti=%i\tn=%i\tb=%i\tc=%i\n", 
+        "RESULT\ts=%s\tm=%s\tv=%" PRIu64 "\tv2=%" PRIu64 "\tss=%i\ta=%zu\ti=%i\tn=%i\tb=%i\tc=%i\n", 
 
         sorter.c_str(), 
         metric_name.c_str(), 
-        perf->GetValue(), 
+        v1,
+        v2,
         structSize,
         arraySize,
         measureIteration,

@@ -18,6 +18,7 @@
 #include <errno.h>
 #include <stdint.h>
 #include <time.h>
+#include <tuple>
 
 #include "Enumerations.h"
 
@@ -25,7 +26,8 @@
 class Performancing {
 private:
     struct perf_event_attr _performanceEventAttribute;
-	uint64_t _id;
+	uint64_t _idFirst;
+    uint64_t _idSecond;
 	char _resultBuffer[4096];
 	struct read_format* _readFormat;
 	int _fileDescriptor;
@@ -38,7 +40,7 @@ public:
     ~Performancing();
     void StartMeasuring();
     void StopMeasuring();
-    uint64_t GetValue();
+    std::tuple<uint64_t, uint64_t> GetValues();
     PerformanceMetric GetMetric();
 };
 

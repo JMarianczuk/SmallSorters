@@ -71,16 +71,16 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
     switch (boseNelsonNetworkType)
     {
         case BoseNelsonNetworkType::Locality:
-            result += "Lo";
+            result += "Loc";
             break;
         case BoseNelsonNetworkType::Parallelism:
-            result += "PL";
+            result += "PL ";
             break;
         case BoseNelsonNetworkType::Parameter:
-            result += "PM";
+            result += "PM ";
             break;
         case BoseNelsonNetworkType::Recursive:
-            result += "Re";
+            result += "Rec";
             break;
         case BoseNelsonNetworkType::None:
             result += " ";

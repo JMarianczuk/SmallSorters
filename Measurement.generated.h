@@ -15,7 +15,10 @@
 #include "Sortable.generated.h"
 #include "Performancing.h"
 #include "Measure.h"
-#include "Networks_Fwd.h"
+#include "BestNetworks.generated.h"
+#include "BoseNelson.generated.h"
+#include "BoseNelsonParallel.generated.h"
+#include "BoseNelsonParameter.generated.h"
 #include "InsertionSort.h"
 #include "Randomisation.h"
 
