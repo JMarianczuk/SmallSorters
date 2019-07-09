@@ -269,8 +269,8 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
 
     ipsoGen->WriteIncludeQuotes(
         "../Measurement.generated.h",
-        "../StdSortWrapper.h",
-        "../Ipso.h");
+        "../../StdSortWrapper.h",
+        "../../Ipso.h");
     ipsoGen->WriteNamespace("measurement", [=]{
         std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
         std::vector<SortableStruct*> csRef = {(*sortableStructs())[5]}; // 4CS
@@ -347,14 +347,14 @@ void GenerateMeasurementMethod(
             VectorWhere<SortableStruct*>(
                 sortableStructs(), 
                 [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
-            "networks::sortNbest", 
+            "networks::best::sortN", 
             Sorter::SortNetwork, 
             NetworkType::Best),
         GetParams(
             VectorWhere<SortableStruct*>(
                 sortableStructs(), 
                 [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
-            "networks::sortNbosenelson", 
+            "networks::bosenelson::sortN", 
             Sorter::SortNetwork, 
             NetworkType::BoseNelson, 
             BoseNelsonNetworkType::Locality),
@@ -362,7 +362,7 @@ void GenerateMeasurementMethod(
             VectorWhere<SortableStruct*>(
                 sortableStructs(), 
                 [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
-            "networks::sortNbosenelsonparallel", 
+            "networks::bosenelsonparallel::sortN", 
             Sorter::SortNetwork, 
             NetworkType::BoseNelson, 
             BoseNelsonNetworkType::Parallelism),
@@ -370,7 +370,7 @@ void GenerateMeasurementMethod(
             VectorWhere<SortableStruct*>(
                 sortableStructs(), 
                 [](SortableStruct* ss){return ss->UseForNetworkSort();}), 
-            "networks::sortNbosenelsonparameter", 
+            "networks::bosenelsonparameter::sortN", 
             Sorter::SortNetwork, 
             NetworkType::BoseNelson, 
             BoseNelsonNetworkType::Parameter),
@@ -385,7 +385,7 @@ void GenerateMeasurementMethod(
             VectorWhere<SortableStruct*>(
                 sortableStructs(),
                 [](SortableStruct* ss){return ss->UseForNetworkSort();}),
-            "networks::sortNbosenelsonrecursive",
+            "networks::bosenelsonrecursive::sortN",
             Sorter::SortNetwork,
             NetworkType::BoseNelson,
             BoseNelsonNetworkType::Recursive)
@@ -405,12 +405,12 @@ void GenerateMeasurementMethod(
     headerGen->WriteHeaderPragma("MEASUREMENT_GENERATED_H", [=](){
         headerGen->WriteIncludeBrackets("inttypes.h");
         headerGen->WriteIncludeQuotes(
-            "Sortable.generated.h",
-            "Performancing.h",
+            "../Sortable.generated.h",
+            "../Performancing.h",
             "Measure.h",
-            "Networks_Fwd.h",
-            "InsertionSort.h",
-            "Randomisation.h");
+            "../Networks_Fwd.h",
+            "../InsertionSort.h",
+            "../Randomisation.h");
         headerGen->WriteLine("");
 
         std::string normalMeasureName = "MeasureSorting";
@@ -476,8 +476,8 @@ void GenerateMeasurementMethod(
         }, "");
         completeGen->WriteIncludeQuotes(
             "Measurement.generated.h",
-            "QuickSort.h",
-            "StdSortWrapper.h");
+            "../QuickSort.h",
+            "../StdSortWrapper.h");
         completeGen->WriteNamespace("measurement", [=]{
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
             std::vector<SortableStruct*> bRef = {(*sortableStructs())[5]}; // 4CS
@@ -518,9 +518,9 @@ void GenerateMeasurementMethod(
         }, "");
         sampleSortGen->WriteIncludeQuotes(
             "Measurement.generated.h",
-            "SampleSort.generated.h",
+            "../SampleSort.generated.h",
             "MeasurementSampleSort.Helper.h",
-            "StdSortWrapper.h");
+            "../StdSortWrapper.h");
         sampleSortGen->WriteNamespace("measurement", [=]{
             std::vector<MeasureParams> sampleSortMeasureParams = 
             {
@@ -528,14 +528,14 @@ void GenerateMeasurementMethod(
                     VectorWhere<SortableStruct*>(
                         sortableStructs(), 
                         [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
-                    "networks::sortNbest", 
+                    "networks::best::sortN", 
                     Sorter::SortNetwork, 
                     NetworkType::Best),
                 GetParams(
                     VectorWhere<SortableStruct*>(
                         sortableStructs(), 
                         [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
-                    "networks::sortNbosenelson", 
+                    "networks::bosenelson::sortN", 
                     Sorter::SortNetwork, 
                     NetworkType::BoseNelson, 
                     BoseNelsonNetworkType::Locality),
@@ -543,7 +543,7 @@ void GenerateMeasurementMethod(
                     VectorWhere<SortableStruct*>(
                         sortableStructs(), 
                         [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
-                    "networks::sortNbosenelsonparallel", 
+                    "networks::bosenelsonparallel::sortN", 
                     Sorter::SortNetwork, 
                     NetworkType::BoseNelson, 
                     BoseNelsonNetworkType::Parallelism),
@@ -551,7 +551,7 @@ void GenerateMeasurementMethod(
                     VectorWhere<SortableStruct*>(
                         sortableStructs(), 
                         [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}), 
-                    "networks::sortNbosenelsonparameter", 
+                    "networks::bosenelsonparameter::sortN", 
                     Sorter::SortNetwork, 
                     NetworkType::BoseNelson, 
                     BoseNelsonNetworkType::Parameter),
@@ -566,7 +566,7 @@ void GenerateMeasurementMethod(
                     VectorWhere<SortableStruct*>(
                         sortableStructs(),
                         [](SortableStruct* ss){return ss->Name.compare("FourCmovTemp") == 0;}),
-                    "networks::sortNbosenelsonrecursive",
+                    "networks::bosenelsonrecursive::sortN",
                     Sorter::SortNetwork,
                     NetworkType::BoseNelson,
                     BoseNelsonNetworkType::Recursive)
@@ -657,7 +657,7 @@ void GenerateMeasurementMethod(
                         return ss->UseForNetworkSort() 
                             && ss->WillBeShownInResults() 
                             && ss->NameAbbreviation == "4CS";}),
-                "networks::sortNbest", 
+                "networks::best::sortN", 
                 Sorter::SortNetwork, 
                 NetworkType::Best),
             GetParams(
@@ -667,7 +667,7 @@ void GenerateMeasurementMethod(
                         return ss->UseForNetworkSort() 
                             && ss->WillBeShownInResults() 
                             && ss->NameAbbreviation == "4CS";}), 
-                "networks::sortNbosenelson", 
+                "networks::bosenelson::sortN", 
                 Sorter::SortNetwork, 
                 NetworkType::BoseNelson, 
                 BoseNelsonNetworkType::Locality),
@@ -678,7 +678,7 @@ void GenerateMeasurementMethod(
                         return ss->UseForNetworkSort() 
                             && ss->WillBeShownInResults() 
                             && ss->NameAbbreviation == "4CS";}), 
-                "networks::sortNbosenelsonrecursive", 
+                "networks::bosenelsonrecursive::sortN", 
                 Sorter::SortNetwork, 
                 NetworkType::BoseNelson, 
                 BoseNelsonNetworkType::Recursive)

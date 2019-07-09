@@ -2,9 +2,10 @@
 #ifndef MEASUREMENT_SAMPLESORT_HELPER_H
 #define MEASUREMENT_SAMPLESORT_HELPER_H
 
-#include "Sortable.generated.h"
-#include "InsertionSort.h"
 #include <inttypes.h>
+
+#include "../Sortable.generated.h"
+#include "../InsertionSort.h"
 
 namespace measurement
 {

@@ -2,7 +2,7 @@
 #ifndef NETWORK_SORT_H
 #define NETWORK_SORT_H
 
-#include "Sortable.generated.h"
+#include "../Sortable.generated.h"
 
 #include <algorithm>
 #include <inttypes.h>

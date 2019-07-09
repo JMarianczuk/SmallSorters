@@ -8,7 +8,7 @@
 #include <type_traits>
 
 #include "CustomMath.h"
-#include "BoseNelsonParameter.generated.h"
+#include "networks/BoseNelsonParameter.generated.h"
 #include "InsertionSort.h"
 
 namespace quicksortcopy
@@ -356,14 +356,14 @@ void guess_median_unchecked(TValueType* first, TValueType* mid, TValueType* last
     {
         uint64_t step = (count + 1) >> 3;
         uint64_t twoStep = step << 1;
-        networks::sort9bosenelsonparameter(
+        networks::bosenelsonparameter::sort9(
             *(first + step), *(first + twoStep), *(mid - step), *mid, 
             *first,
             *(mid + step), *(last - twoStep), *(last - step), *last);
     }
     else
     {
-        networks::sort3bosenelsonparameter(
+        networks::bosenelsonparameter::sort3(
             *mid, 
             *first, 
             *last);

@@ -12,12 +12,12 @@
 #define MEASUREMENT_GENERATED_H
 
 #include <inttypes.h>
-#include "Sortable.generated.h"
-#include "Performancing.h"
+#include "../Sortable.generated.h"
+#include "../Performancing.h"
 #include "Measure.h"
-#include "Networks_Fwd.h"
-#include "InsertionSort.h"
-#include "Randomisation.h"
+#include "../Networks_Fwd.h"
+#include "../InsertionSort.h"
+#include "../Randomisation.h"
 
 namespace measurement
 {

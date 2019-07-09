@@ -9,8 +9,8 @@
 
 
 #include "../Measurement.generated.h"
-#include "../StdSortWrapper.h"
-#include "../Ipso.h"
+#include "../../StdSortWrapper.h"
+#include "../../Ipso.h"
 namespace measurement
 {
 void MeasureIpso62_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)

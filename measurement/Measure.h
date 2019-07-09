@@ -5,15 +5,15 @@
 #include <string>
 #include <vector>
 
-#include "Result.h"
-#include "ArrayHelpers.h"
-#include "Performancing.h"
-#include "QuickSort.h"
-#include "InsertionSort.h"
-#include "Quicksort_Copy.h"
-#include "Randomisation.generated.h"
-#include "StructHelpers.generated.h"
-#include "DebugHelper.h"
+#include "../Result.h"
+#include "../ArrayHelpers.h"
+#include "../Performancing.h"
+#include "../QuickSort.h"
+#include "../InsertionSort.h"
+#include "../Quicksort_Copy.h"
+#include "../Randomisation.generated.h"
+#include "../StructHelpers.generated.h"
+#include "../DebugHelper.h"
 
 namespace measurement
 {

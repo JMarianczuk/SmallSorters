@@ -14,7 +14,7 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes("NetworkSort.h");
+        gen->WriteIncludeQuotes("../conditional_swap/NetworkSort.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
@@ -134,6 +134,7 @@ bool IsInline(nlohmann::json network, RecursiveParameterNetworkType networkType)
 void WriteSorter_ParameterStyle(
     CodeGenerator *gen, 
     nlohmann::json network,
+    std::string nested_namespace_name,
     bool* splitIndices, 
     bool* mergeIndices, 
     int indexArrayLength)
@@ -150,6 +151,7 @@ void WriteSorter_ParameterStyle(
                 WriteSorter_ParameterStyle(
                     gen, 
                     stepNetwork,
+                    nested_namespace_name,
                     splitIndices, 
                     mergeIndices, 
                     indexArrayLength);
@@ -164,6 +166,7 @@ void WriteSorter_ParameterStyle(
                 WriteSorter_ParameterStyle(
                     gen, 
                     stepNetwork,
+                    nested_namespace_name,
                     splitIndices, 
                     mergeIndices, 
                     indexArrayLength);
@@ -234,7 +237,9 @@ void WriteSorter_ParameterStyle(
             {
                 int stepSize = stepNetwork["NetworkSize"].get<int>();
                 auto indicesToUse = step["FirstContextParameterIdsToUse"];
-                gen->Write("networks::sort");
+                gen->Write("networks::");
+                gen->Write(nested_namespace_name);
+                gen->Write("::sort");
                 gen->Write(stepSize);
                 gen->Write("(");
                 for (auto it = indicesToUse.begin(); it < indicesToUse.end() - 1; it++)
@@ -253,7 +258,9 @@ void WriteSorter_ParameterStyle(
                 int rightMergeSize = stepNetwork["RightMergeSize"].get<int>();
                 auto leftIndices = step["FirstContextParameterIdsToUse"];
                 auto rightIndices = step["SecondContextParameterIdsToUse"];
-                gen->Write("networks::merge_");
+                gen->Write("networks::");
+                gen->Write(nested_namespace_name);
+                gen->Write("::merge_");
                 gen->Write(leftMergeSize);
                 gen->Write("_");
                 gen->Write(rightMergeSize);
@@ -300,7 +307,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes("NetworkSort.h");
+        gen->WriteIncludeQuotes("../conditional_swap/NetworkSort.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
@@ -308,6 +315,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
                     WriteSorter_ParameterStyle(
                         gen, 
                         network,
+                        nested_namespace_name,
                         splitIndices, 
                         mergeIndices, 
                         maxLength + 1);
@@ -326,7 +334,9 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
                             auto sizeStr = std::to_string(arraySize);
                             gen->WriteLine("case ", sizeStr, ":");
                             gen->WriteIndented([=]{
-                                gen->Write("sort");
+                                gen->Write("networks::");
+                                gen->Write(nested_namespace_name);
+                                gen->Write("::sort");
                                 gen->Write(sizeStr);
                                 gen->Write("(");
                                 for (int i = 0; i < arraySize - 1; i += 1)
@@ -353,6 +363,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
 void WriteSorter_RecursiveStyle(
     CodeGenerator *gen, 
     nlohmann::json network,
+    std::string nested_namespace_name,
     bool* splitIndices, 
     bool* mergeIndices, 
     int indexArrayLength)
@@ -369,6 +380,7 @@ void WriteSorter_RecursiveStyle(
                 WriteSorter_RecursiveStyle(
                     gen,
                     stepNetwork,
+                    nested_namespace_name,
                     splitIndices,
                     mergeIndices,
                     indexArrayLength);
@@ -383,6 +395,7 @@ void WriteSorter_RecursiveStyle(
                 WriteSorter_RecursiveStyle(
                     gen,
                     stepNetwork,
+                    nested_namespace_name,
                     splitIndices,
                     mergeIndices,
                     indexArrayLength);
@@ -461,7 +474,7 @@ void WriteSorter_RecursiveStyle(
                 {
                     addStr = " + " + std::to_string(indexToUse);
                 }
-                gen->WriteLine("networks::sort", std::to_string(stepSize), "(A", addStr, ");");
+                gen->WriteLine("networks::", nested_namespace_name, "::sort", std::to_string(stepSize), "(A", addStr, ");");
             }
             else if (stepType.compare("Merge") == 0)
             {
@@ -489,7 +502,7 @@ void WriteSorter_RecursiveStyle(
                         callStr = "left" + leftAddStr + ", right" + rightAddStr;
                         break;
                 }
-                gen->WriteLine("networks::merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), "(", callStr, ");");
+                gen->WriteLine("networks::", nested_namespace_name, "::merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), "(", callStr, ");");
             }
         }
     });
@@ -520,37 +533,40 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes("NetworkSort.h");
+        gen->WriteIncludeQuotes("../conditional_swap/NetworkSort.h");
         gen->WriteNamespace("networks", [=]{
-            for (auto network : networksJson)
-            {
-                WriteSorter_RecursiveStyle(
-                    gen,
-                    network,
-                    splitIndices,
-                    mergeIndices,
-                    maxLength + 1);
-            }
-            gen->WriteLine("");
+            gen->WriteNamespace(nested_namespace_name, [=]{
+                for (auto network : networksJson)
+                {
+                    WriteSorter_RecursiveStyle(
+                        gen,
+                        network,
+                        nested_namespace_name,
+                        splitIndices,
+                        mergeIndices,
+                        maxLength + 1);
+                }
+                gen->WriteLine("");
 
-            gen->WriteLine("template <typename ValueType> static");
-            gen->WriteLine("void sortN(ValueType* A, size_t n)");
-            gen->WriteBlock([=]{
-                gen->WriteLine("switch(n)");
+                gen->WriteLine("template <typename ValueType> static");
+                gen->WriteLine("void sortN(ValueType* A, size_t n)");
                 gen->WriteBlock([=]{
-                    gen->WriteLine("case 0: break;");
-                    gen->WriteLine("case 1: break;");
-                    for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
-                    {
-                        auto sizeStr = std::to_string(arraySize);
-                        gen->WriteLine("case ", sizeStr, ":");
-                        gen->WriteIndented([=]{
-                            gen->WriteLine("sort", sizeStr, "(A);");
-                            gen->WriteLine("break;");
-                        });
-                    }
+                    gen->WriteLine("switch(n)");
+                    gen->WriteBlock([=]{
+                        gen->WriteLine("case 0: break;");
+                        gen->WriteLine("case 1: break;");
+                        for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
+                        {
+                            auto sizeStr = std::to_string(arraySize);
+                            gen->WriteLine("case ", sizeStr, ":");
+                            gen->WriteIndented([=]{
+                                gen->WriteLine("networks::", nested_namespace_name, "::sort", sizeStr, "(A);");
+                                gen->WriteLine("break;");
+                            });
+                        }
+                    });
                 });
-            });
+            }, "");
         }, "");
     });
     

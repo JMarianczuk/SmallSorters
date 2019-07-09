@@ -17,12 +17,12 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteLine("");
 
         gen->WriteIncludeQuotes(
-            "BestNetworks.generated.h",
-            "BoseNelson.generated.h",
-            "BoseNelsonParallel.generated.h",
-            "BoseNelsonParameter.generated.h",
-            "BoseNelsonRecursive.generated.h",
-            "Batcher.generated.h",
+            "networks/BestNetworks.generated.h",
+            "networks/BoseNelson.generated.h",
+            "networks/BoseNelsonParallel.generated.h",
+            "networks/BoseNelsonParameter.generated.h",
+            "networks/BoseNelsonRecursive.generated.h",
+            "networks/Batcher.generated.h",
             "VerifyNetworks.h",
             "DebugHelper.h");
         gen->WriteLine("");
@@ -30,7 +30,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteNamespace("verification", [=](){
             gen->WriteLine("");
 
-            std::vector<std::string> networkNames = {"best", "bosenelson", "bosenelsonparallel", "bosenelsonparameter", "bosenelsonrecursive", "batcher"};
+            std::vector<std::string> network_nested_namespaces = {"best", "bosenelson", "bosenelsonparallel", "bosenelsonparameter", "bosenelsonrecursive", "batcher"};
             gen->WriteLine("void VerifyNetworks()");
             gen->WriteBlock([=]{
                 gen->WriteLine("int numberOfIncorrectNetworks = 0;");
@@ -40,7 +40,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
                         gen->WriteLine("debug::WriteLine(\"verifying ", name, " networks\");");
                         gen->WriteForLoop("arraySize", 2, 17, [=](){
                             gen->WriteLine("debug::WriteLine(\"verifying size \", std::to_string(arraySize));");
-                            gen->WriteLine("bool result = verification::VerifyNetwork(arraySize, &networks::sortN", name, "<int>);");
+                            gen->WriteLine("bool result = verification::VerifyNetwork(arraySize, &networks::", name, "::sortN<int>);");
                             gen->WriteLine("if (!result)");
                             gen->WriteBlock([=]{
                                 gen->WriteLine("debug::WriteLine(\"incorrect network: '", name, "' for size '\", std::to_string(arraySize), \"'.\");");
@@ -48,8 +48,8 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
                             });
                         });
                     },
-                    networkNames);
-                std::string totalNetworksStr = std::to_string(networkNames.size() * (16-2+1));
+                    network_nested_namespaces);
+                std::string totalNetworksStr = std::to_string(network_nested_namespaces.size() * (16-2+1));
                 gen->WriteLine("debug::WriteLine(\"finished verification. \", std::to_string(", totalNetworksStr, " - numberOfIncorrectNetworks), \" networks out of ", totalNetworksStr, " sorted correctly.\");");
             });
         }, "");

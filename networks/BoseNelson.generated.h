@@ -11,7 +11,7 @@
 #ifndef BOSENELSON_GENERATED_H
 #define BOSENELSON_GENERATED_H
 
-#include "NetworkSort.h"
+#include "../conditional_swap/NetworkSort.h"
 namespace networks
 {
 namespace bosenelson

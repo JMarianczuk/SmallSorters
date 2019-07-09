@@ -119,15 +119,15 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
         typedef typename iterator_traits<It>::value_type TValueType;
         void(*sort)(TValueType*,size_t);
         if constexpr (Cfg::kBaseCaseType == 1)         {
-            sort = &networks::sortNbest<TValueType>;
+            sort = &networks::best::sortN<TValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 2) {
-            sort = &networks::sortNbosenelson<TValueType>;
+            sort = &networks::bosenelson::sortN<TValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 3) {
-            sort = &networks::sortNbosenelsonparallel<TValueType>;
+            sort = &networks::bosenelsonparallel::sortN<TValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 5) {
             sort = &insertionsort::InsertionSort<TValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 6) {
-            sort = &networks::sortNbosenelsonrecursive<TValueType>;
+            sort = &networks::bosenelsonrecursive::sortN<TValueType>;
         } else {
             throw std::logic_error("Invalid base case type");
         }

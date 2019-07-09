@@ -7,7 +7,7 @@
 #include "CustomMath.h"
 #include "DebugHelper.h"
 #include "SampleSort.generated.h"
-#include "BoseNelsonParameter.generated.h"
+#include "networks/BoseNelsonParameter.generated.h"
 
 namespace quicksort
 {
@@ -227,7 +227,7 @@ __unguarded_partition_pivot(_RandomAccessIterator __first,
             _RandomAccessIterator __last, _Compare __comp)
 {
     _RandomAccessIterator __mid = __first + (__last - __first) / 2;
-    networks::sort3bosenelsonparameter(*__mid, *__first, *(__last-1));
+    networks::bosenelsonparameter::sort3(*__mid, *__first, *(__last-1));
     return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
 
