@@ -11,24 +11,6 @@
 namespace networks 
 {
 
-template <typename TValueType, void(*swap)(TValueType&,TValueType&)>
-void TemplateTest(TValueType* arr)
-{
-    swap(arr[0], arr[1]);
-}
-
-template <typename TValueType, typename TSwap, TSwap swap>
-void TemplateTest2(TValueType* arr)
-{
-    swap(arr[0], arr[1]);
-}
-
-template <typename TSwap, TSwap swap, typename TValueType>
-void TemplateTest3(TValueType* arr)
-{
-    swap(arr[0], arr[1]);
-}
-
 template <typename TValueType>
 static inline
 void ConditionalSwap(TValueType& left, TValueType& right)

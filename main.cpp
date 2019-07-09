@@ -25,6 +25,58 @@
 #include "CommandLineOptions.h"
 #include "DebugHelper.h"
 
+template <typename ValueType, void(*swap)(ValueType&,ValueType&)>
+void TemplateTest(ValueType* arr)
+{
+    swap(arr[0], arr[1]);
+}
+
+template <typename ValueType, typename TSwap, TSwap swap>
+void TemplateTest2(ValueType* arr)
+{
+    swap(arr[0], arr[1]);
+}
+
+template <typename TSwap, TSwap swap, typename ValueType>
+void TemplateTest3(ValueType* arr)
+{
+    swap(arr[0], arr[1]);
+}
+
+template <typename CSwap, typename ValueType>
+void TemplateTest4(ValueType* arr)
+{
+    CSwap::swap(arr[0], arr[1]);
+}
+
+class ConditionalSwapJumpXchg
+{
+public:
+    template <typename Type>
+    static void swap(Type& left, Type& right) {
+        __asm__(
+            "cmpq %[left_key],%[right_key]\n\t"
+            "jae %=f\n\t"
+            "xchg %[left_key],%[right_key]\n\t"
+            "%=:\n\t"
+            : [left_key] "+r"(left), [right_key] "+r"(right)
+            :
+            : "cc"
+            );
+    }
+};
+
+void test_class()
+{
+    auto arr = (size_t*) malloc(sizeof(size_t) * 5);
+    arr[0] = 500;
+    arr[1] = 1;
+
+    TemplateTest4<ConditionalSwapJumpXchg>(arr);
+    debug::WriteLine("first: ", std::to_string(arr[0]));
+    debug::WriteLine("second: ", std::to_string(arr[1]));
+}
+
 void SetDebugOutputFile()
 {
     time_t now = time(0);
@@ -59,21 +111,21 @@ void test()
     arr[0] = 500;
     arr[1] = 1;
 
-    networks::TemplateTest<int, &networks::ConditionalSwap<int>>(arr);
+    TemplateTest<int, &networks::ConditionalSwap<int>>(arr);
     debug::WriteLine("first: ", std::to_string(arr[0]));
     debug::WriteLine("second: ", std::to_string(arr[1]));
 
     arr[0] = 499;
     arr[1] = 2;
 
-    networks::TemplateTest2<int, void(*)(int&,int&), &networks::ConditionalSwap<int>>(arr);
+    TemplateTest2<int, void(*)(int&,int&), &networks::ConditionalSwap<int>>(arr);
     debug::WriteLine("first: ", std::to_string(arr[0]));
     debug::WriteLine("second: ", std::to_string(arr[1]));
 
     arr[0] = 498;
     arr[1] = 3;
 
-    networks::TemplateTest3<void(*)(int&,int&), &networks::ConditionalSwap<int>>(arr);
+    TemplateTest3<void(*)(int&,int&), &networks::ConditionalSwap<int>>(arr);
 
     free(arr);
 }
