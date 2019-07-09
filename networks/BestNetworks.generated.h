@@ -14,20 +14,22 @@
 #include "NetworkSort.h"
 namespace networks
 {
-template <typename TValueType> static
-void sort2best(TValueType* A)
+namespace best
+{
+template <typename ValueType> static
+void sort2(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static
-void sort3best(TValueType* A)
+template <typename ValueType> static
+void sort3(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static
-void sort4best(TValueType* A)
+template <typename ValueType> static
+void sort4(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -35,8 +37,8 @@ void sort4best(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static
-void sort5best(TValueType* A)
+template <typename ValueType> static
+void sort5(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -48,8 +50,8 @@ void sort5best(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static
-void sort6best(TValueType* A)
+template <typename ValueType> static
+void sort6(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[0], A[2]);
@@ -64,8 +66,8 @@ void sort6best(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[2], A[3]);
 }
-template <typename TValueType> static
-void sort7best(TValueType* A)
+template <typename ValueType> static
+void sort7(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[0], A[2]);
@@ -84,8 +86,8 @@ void sort7best(TValueType* A)
 	networks::ConditionalSwap(A[2], A[4]);
 	networks::ConditionalSwap(A[2], A[3]);
 }
-template <typename TValueType> static
-void sort8best(TValueType* A)
+template <typename ValueType> static
+void sort8(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -107,8 +109,8 @@ void sort8best(TValueType* A)
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
-template <typename TValueType> static
-void sort9best(TValueType* A)
+template <typename ValueType> static
+void sort9(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -136,8 +138,8 @@ void sort9best(TValueType* A)
 	networks::ConditionalSwap(A[2], A[3]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static
-void sort10best(TValueType* A)
+template <typename ValueType> static
+void sort10(ValueType* A)
 {
 	networks::ConditionalSwap(A[4], A[9]);
 	networks::ConditionalSwap(A[3], A[8]);
@@ -169,8 +171,8 @@ void sort10best(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[4], A[5]);
 }
-template <typename TValueType> static
-void sort11best(TValueType* A)
+template <typename ValueType> static
+void sort11(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -208,8 +210,8 @@ void sort11best(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[7], A[8]);
 }
-template <typename TValueType> static
-void sort12best(TValueType* A)
+template <typename ValueType> static
+void sort12(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -251,8 +253,8 @@ void sort12best(TValueType* A)
 	networks::ConditionalSwap(A[5], A[6]);
 	networks::ConditionalSwap(A[7], A[8]);
 }
-template <typename TValueType> static
-void sort13best(TValueType* A)
+template <typename ValueType> static
+void sort13(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[7]);
 	networks::ConditionalSwap(A[9], A[11]);
@@ -300,8 +302,8 @@ void sort13best(TValueType* A)
 	networks::ConditionalSwap(A[3], A[4]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static
-void sort14best(TValueType* A)
+template <typename ValueType> static
+void sort14(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -355,8 +357,8 @@ void sort14best(TValueType* A)
 	networks::ConditionalSwap(A[6], A[7]);
 	networks::ConditionalSwap(A[8], A[9]);
 }
-template <typename TValueType> static
-void sort15best(TValueType* A)
+template <typename ValueType> static
+void sort15(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -415,8 +417,8 @@ void sort15best(TValueType* A)
 	networks::ConditionalSwap(A[6], A[7]);
 	networks::ConditionalSwap(A[8], A[9]);
 }
-template <typename TValueType> static
-void sort16best(TValueType* A)
+template <typename ValueType> static
+void sort16(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -480,63 +482,64 @@ void sort16best(TValueType* A)
 	networks::ConditionalSwap(A[8], A[9]);
 }
 
-template <typename TValueType> static
-void sortNbest(TValueType* A, size_t n)
+template <typename ValueType> static
+void sortN(ValueType* A, size_t n)
 {
 	switch(n)
 	{
 		case 0: break;
 		case 1: break;
 		case 2:
-			sort2best(A);
+			sort2(A);
 			break;
 		case 3:
-			sort3best(A);
+			sort3(A);
 			break;
 		case 4:
-			sort4best(A);
+			sort4(A);
 			break;
 		case 5:
-			sort5best(A);
+			sort5(A);
 			break;
 		case 6:
-			sort6best(A);
+			sort6(A);
 			break;
 		case 7:
-			sort7best(A);
+			sort7(A);
 			break;
 		case 8:
-			sort8best(A);
+			sort8(A);
 			break;
 		case 9:
-			sort9best(A);
+			sort9(A);
 			break;
 		case 10:
-			sort10best(A);
+			sort10(A);
 			break;
 		case 11:
-			sort11best(A);
+			sort11(A);
 			break;
 		case 12:
-			sort12best(A);
+			sort12(A);
 			break;
 		case 13:
-			sort13best(A);
+			sort13(A);
 			break;
 		case 14:
-			sort14best(A);
+			sort14(A);
 			break;
 		case 15:
-			sort15best(A);
+			sort15(A);
 			break;
 		case 16:
-			sort16best(A);
+			sort16(A);
 			break;
 		default:
 			abort();
 			break;
 	}
 }
+} // namespace best
 } // namespace networks
 
 #endif // BESTNETWORKS_GENERATED_H

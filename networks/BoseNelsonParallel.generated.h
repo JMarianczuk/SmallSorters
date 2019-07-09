@@ -14,20 +14,22 @@
 #include "NetworkSort.h"
 namespace networks
 {
-template <typename TValueType> static
-void sort2bosenelsonparallel(TValueType* A)
+namespace bosenelsonparallel
+{
+template <typename ValueType> static
+void sort2(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static
-void sort3bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort3(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[0], A[2]);
 	networks::ConditionalSwap(A[0], A[1]);
 }
-template <typename TValueType> static
-void sort4bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort4(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -35,8 +37,8 @@ void sort4bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static
-void sort5bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort5(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -48,8 +50,8 @@ void sort5bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[1], A[2]);
 }
-template <typename TValueType> static
-void sort6bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort6(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[4], A[5]);
@@ -64,8 +66,8 @@ void sort6bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[1], A[3]);
 	networks::ConditionalSwap(A[2], A[3]);
 }
-template <typename TValueType> static
-void sort7bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort7(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -84,8 +86,8 @@ void sort7bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[2], A[4]);
 	networks::ConditionalSwap(A[2], A[3]);
 }
-template <typename TValueType> static
-void sort8bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort8(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -107,8 +109,8 @@ void sort8bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
-template <typename TValueType> static
-void sort9bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort9(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -138,8 +140,8 @@ void sort9bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[3], A[4]);
 }
-template <typename TValueType> static
-void sort10bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort10(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -174,8 +176,8 @@ void sort10bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[4], A[5]);
 }
-template <typename TValueType> static
-void sort11bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort11(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -216,8 +218,8 @@ void sort11bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[3], A[5]);
 	networks::ConditionalSwap(A[4], A[5]);
 }
-template <typename TValueType> static
-void sort12bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort12(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[4], A[5]);
@@ -262,8 +264,8 @@ void sort12bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[4], A[6]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static
-void sort13bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort13(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[4], A[5]);
@@ -316,8 +318,8 @@ void sort13bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[5], A[7]);
 	networks::ConditionalSwap(A[5], A[6]);
 }
-template <typename TValueType> static
-void sort14bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort14(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -375,8 +377,8 @@ void sort14bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[6], A[8]);
 	networks::ConditionalSwap(A[6], A[7]);
 }
-template <typename TValueType> static
-void sort15bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort15(ValueType* A)
 {
 	networks::ConditionalSwap(A[1], A[2]);
 	networks::ConditionalSwap(A[3], A[4]);
@@ -440,8 +442,8 @@ void sort15bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[6], A[8]);
 	networks::ConditionalSwap(A[6], A[7]);
 }
-template <typename TValueType> static
-void sort16bosenelsonparallel(TValueType* A)
+template <typename ValueType> static
+void sort16(ValueType* A)
 {
 	networks::ConditionalSwap(A[0], A[1]);
 	networks::ConditionalSwap(A[2], A[3]);
@@ -510,63 +512,64 @@ void sort16bosenelsonparallel(TValueType* A)
 	networks::ConditionalSwap(A[7], A[8]);
 }
 
-template <typename TValueType> static
-void sortNbosenelsonparallel(TValueType* A, size_t n)
+template <typename ValueType> static
+void sortN(ValueType* A, size_t n)
 {
 	switch(n)
 	{
 		case 0: break;
 		case 1: break;
 		case 2:
-			sort2bosenelsonparallel(A);
+			sort2(A);
 			break;
 		case 3:
-			sort3bosenelsonparallel(A);
+			sort3(A);
 			break;
 		case 4:
-			sort4bosenelsonparallel(A);
+			sort4(A);
 			break;
 		case 5:
-			sort5bosenelsonparallel(A);
+			sort5(A);
 			break;
 		case 6:
-			sort6bosenelsonparallel(A);
+			sort6(A);
 			break;
 		case 7:
-			sort7bosenelsonparallel(A);
+			sort7(A);
 			break;
 		case 8:
-			sort8bosenelsonparallel(A);
+			sort8(A);
 			break;
 		case 9:
-			sort9bosenelsonparallel(A);
+			sort9(A);
 			break;
 		case 10:
-			sort10bosenelsonparallel(A);
+			sort10(A);
 			break;
 		case 11:
-			sort11bosenelsonparallel(A);
+			sort11(A);
 			break;
 		case 12:
-			sort12bosenelsonparallel(A);
+			sort12(A);
 			break;
 		case 13:
-			sort13bosenelsonparallel(A);
+			sort13(A);
 			break;
 		case 14:
-			sort14bosenelsonparallel(A);
+			sort14(A);
 			break;
 		case 15:
-			sort15bosenelsonparallel(A);
+			sort15(A);
 			break;
 		case 16:
-			sort16bosenelsonparallel(A);
+			sort16(A);
 			break;
 		default:
 			abort();
 			break;
 	}
 }
+} // namespace bosenelsonparallel
 } // namespace networks
 
 #endif // BOSENELSON_PARALLEL_GENERATED_H
