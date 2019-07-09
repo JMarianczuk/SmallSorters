@@ -692,13 +692,13 @@ void GenerateMeasurementMethod(
                     std::string bcSizeStr = std::to_string(bcSize);
                     std::string opt = GetNetworkId(mp) + "," + samplesort + "," + bcSizeStr;
                     std::string opt2 = GetNetworkId(mp) + samplesort;
-                    WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso" + GetNetworkId(mp) + samplesort + "_" + bcSizeStr + ".generated.cpp", ipsoMeasureName + opt2 + "_" + bcSizeStr, {mp}, opt, bcSize, samplesort);
+                    WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso" + GetNetworkId(mp) + samplesort + "_" + bcSizeStr + ".generated.cpp", ipsoMeasureName + opt2 + "_" + bcSizeStr, {mp}, opt, bcSize, samplesort);
                 }
             }
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "1", {}, "0", 16, "", 1);
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso2.generated.cpp", ipsoMeasureName + "2", {}, "0", 32, "", 2);
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso3.generated.cpp", ipsoMeasureName + "3", {}, "0", 16, "", 3);
-            WriteIndividualIpsoMethod("../../MeasurementIpso/MeasurementIpso4.generated.cpp", ipsoMeasureName + "4", {}, "0", 0, "", 4);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "1", {}, "0", 16, "", 1);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso2.generated.cpp", ipsoMeasureName + "2", {}, "0", 32, "", 2);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso3.generated.cpp", ipsoMeasureName + "3", {}, "0", 16, "", 3);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso4.generated.cpp", ipsoMeasureName + "4", {}, "0", 0, "", 4);
         }
     });
 }

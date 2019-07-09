@@ -19,8 +19,8 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
             for (auto network : networksJson)
             {
                 std::string sizeStr = std::to_string(network["NetworkSize"].get<int>());
-                gen->WriteLine("template <typename TValueType> static");
-                gen->WriteLine("void sort", sizeStr, sortMethodName, "(TValueType* A)");
+                gen->WriteLine("template <typename ValueType> static");
+                gen->WriteLine("void sort", sizeStr, sortMethodName, "(ValueType* A)");
                 gen->WriteBlock([=]{
                     for (auto swap : network["Swaps"])
                     {
@@ -31,8 +31,8 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
                 });
             }
             gen->WriteLine("");
-            gen->WriteLine("template <typename TValueType> static");
-            gen->WriteLine("void sortN", sortMethodName, "(TValueType* A, size_t n)");
+            gen->WriteLine("template <typename ValueType> static");
+            gen->WriteLine("void sortN", sortMethodName, "(ValueType* A, size_t n)");
             gen->WriteBlock([=]{
                 gen->WriteLine("switch(n)");
                 gen->WriteBlock([=]{
@@ -58,44 +58,42 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
     });
 }
 
-void WriteSortMethodName_ParameterStyle(CodeGenerator *gen, int networkSize, std::string sortMethodName)
+void WriteSortMethodName_ParameterStyle(CodeGenerator *gen, int networkSize)
 {
     gen->Write("void sort");
     gen->Write(networkSize);
-    gen->Write(sortMethodName);
     gen->Write("(");
     for (int i = 0; i < networkSize - 1; i += 1)
     {
-        gen->Write("TValueType& element");
+        gen->Write("ValueType& element");
         gen->Write(i);
         gen->Write(", ");
     }
-    gen->Write("TValueType& element");
+    gen->Write("ValueType& element");
     gen->Write(networkSize - 1);
     gen->WriteLine(")");
 }
 
-void WriteMergeMethodName_ParameterStyle(CodeGenerator *gen, int leftMergeSize, int rightMergeSize, std::string sortMethodName)
+void WriteMergeMethodName_ParameterStyle(CodeGenerator *gen, int leftMergeSize, int rightMergeSize)
 {
-    gen->Write("void merge");
+    gen->Write("void merge_");
     gen->Write(leftMergeSize);
     gen->Write("_");
     gen->Write(rightMergeSize);
-    gen->Write(sortMethodName);
     gen->Write("(");
     for (int i = 0; i < leftMergeSize; i += 1)
     {
-        gen->Write("TValueType& left");
+        gen->Write("ValueType& left");
         gen->Write(i);
         gen->Write(", ");
     }
     for (int i = 0; i < rightMergeSize - 1; i += 1)
     {
-        gen->Write("TValueType& right");
+        gen->Write("ValueType& right");
         gen->Write(i);
         gen->Write(", ");
     }
-    gen->Write("TValueType& right");
+    gen->Write("ValueType& right");
     gen->Write(rightMergeSize - 1);
     gen->WriteLine(")");
 }
@@ -133,8 +131,7 @@ bool IsInline(nlohmann::json network, RecursiveParameterNetworkType networkType)
 
 void WriteSorter_ParameterStyle(
     CodeGenerator *gen, 
-    nlohmann::json network, 
-    std::string sortMethodName,
+    nlohmann::json network,
     bool* splitIndices, 
     bool* mergeIndices, 
     int indexArrayLength)
@@ -150,8 +147,7 @@ void WriteSorter_ParameterStyle(
             {
                 WriteSorter_ParameterStyle(
                     gen, 
-                    stepNetwork, 
-                    sortMethodName,
+                    stepNetwork,
                     splitIndices, 
                     mergeIndices, 
                     indexArrayLength);
@@ -165,8 +161,7 @@ void WriteSorter_ParameterStyle(
             {
                 WriteSorter_ParameterStyle(
                     gen, 
-                    stepNetwork, 
-                    sortMethodName,
+                    stepNetwork,
                     splitIndices, 
                     mergeIndices, 
                     indexArrayLength);
@@ -185,7 +180,7 @@ void WriteSorter_ParameterStyle(
         networkType = RecursiveParameterNetworkType::Merge;
     }
 
-    gen->WriteLine("template <typename TValueType> static");
+    gen->WriteLine("template <typename ValueType> static");
     gen->WriteLine("inline");
 
     int networkSize;
@@ -195,13 +190,13 @@ void WriteSorter_ParameterStyle(
     {
         case RecursiveParameterNetworkType::Split:
             networkSize = network["NetworkSize"].get<int>();
-            WriteSortMethodName_ParameterStyle(gen, networkSize, sortMethodName);
+            WriteSortMethodName_ParameterStyle(gen, networkSize);
             splitIndices[networkSize] = true;
             break;
         case RecursiveParameterNetworkType::Merge:
             leftMergeSize = network["LeftMergeSize"].get<int>();
             rightMergeSize = network["RightMergeSize"].get<int>();
-            WriteMergeMethodName_ParameterStyle(gen, leftMergeSize, rightMergeSize, sortMethodName);
+            WriteMergeMethodName_ParameterStyle(gen, leftMergeSize, rightMergeSize);
             mergeIndices[leftMergeSize * indexArrayLength + rightMergeSize] = true;
             if (leftMergeSize == 1 && rightMergeSize == 1)
             {
@@ -239,7 +234,6 @@ void WriteSorter_ParameterStyle(
                 auto indicesToUse = step["FirstContextParameterIdsToUse"];
                 gen->Write("networks::sort");
                 gen->Write(stepSize);
-                gen->Write(sortMethodName);
                 gen->Write("(");
                 for (auto it = indicesToUse.begin(); it < indicesToUse.end() - 1; it++)
                 {
@@ -257,11 +251,10 @@ void WriteSorter_ParameterStyle(
                 int rightMergeSize = stepNetwork["RightMergeSize"].get<int>();
                 auto leftIndices = step["FirstContextParameterIdsToUse"];
                 auto rightIndices = step["SecondContextParameterIdsToUse"];
-                gen->Write("networks::merge");
+                gen->Write("networks::merge_");
                 gen->Write(leftMergeSize);
                 gen->Write("_");
                 gen->Write(rightMergeSize);
-                gen->Write(sortMethodName);
                 gen->Write("(");
                 //Step is merge step
                 switch (networkType)
@@ -281,7 +274,7 @@ void WriteSorter_ParameterStyle(
     gen->WriteLine("");
 }
 
-void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath)
+void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string nested_namespace_name, std::string networksJsonFilePath)
 {
     std::ifstream input(networksJsonFilePath);
     nlohmann::json networksJson;
@@ -307,48 +300,48 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteHeaderPragma(headerDefine, [=]{
         gen->WriteIncludeQuotes("NetworkSort.h");
         gen->WriteNamespace("networks", [=]{
-            for (auto network : networksJson)
-            {
-                WriteSorter_ParameterStyle(
-                    gen, 
-                    network, 
-                    sortMethodName,
-                    splitIndices, 
-                    mergeIndices, 
-                    maxLength + 1);
-            }
-            gen->WriteLine("");
+            gen->WriteNamespace(nested_namespace_name, [=]{
+                for (auto network : networksJson)
+                {
+                    WriteSorter_ParameterStyle(
+                        gen, 
+                        network,
+                        splitIndices, 
+                        mergeIndices, 
+                        maxLength + 1);
+                }
+                gen->WriteLine("");
 
-            gen->WriteLine("template <typename TValueType> static");
-            gen->WriteLine("void sortN", sortMethodName, "(TValueType* A, size_t n)");
-            gen->WriteBlock([=]{
-                gen->WriteLine("switch(n)");
+                gen->WriteLine("template <typename ValueType> static");
+                gen->WriteLine("void sortN(ValueType* A, size_t n)");
                 gen->WriteBlock([=]{
-                    gen->WriteLine("case 0: break;");
-                    gen->WriteLine("case 1: break;");
-                    for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
-                    {
-                        auto sizeStr = std::to_string(arraySize);
-                        gen->WriteLine("case ", sizeStr, ":");
-                        gen->WriteIndented([=]{
-                            gen->Write("sort");
-                            gen->Write(sizeStr);
-                            gen->Write(sortMethodName);
-                            gen->Write("(");
-                            for (int i = 0; i < arraySize - 1; i += 1)
-                            {
+                    gen->WriteLine("switch(n)");
+                    gen->WriteBlock([=]{
+                        gen->WriteLine("case 0: break;");
+                        gen->WriteLine("case 1: break;");
+                        for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
+                        {
+                            auto sizeStr = std::to_string(arraySize);
+                            gen->WriteLine("case ", sizeStr, ":");
+                            gen->WriteIndented([=]{
+                                gen->Write("sort");
+                                gen->Write(sizeStr);
+                                gen->Write("(");
+                                for (int i = 0; i < arraySize - 1; i += 1)
+                                {
+                                    gen->Write("A[");
+                                    gen->Write(i);
+                                    gen->Write("], ");
+                                }
                                 gen->Write("A[");
-                                gen->Write(i);
-                                gen->Write("], ");
-                            }
-                            gen->Write("A[");
-                            gen->Write(arraySize - 1);
-                            gen->WriteLine("]);");
-                            gen->WriteLine("break;");
-                        });
-                    }
+                                gen->Write(arraySize - 1);
+                                gen->WriteLine("]);");
+                                gen->WriteLine("break;");
+                            });
+                        }
+                    });
                 });
-            });
+            }, "");
         }, "");
     });
     free(splitIndices);
@@ -409,7 +402,7 @@ void WriteSorter_RecursiveStyle(
         networkType = RecursiveParameterNetworkType::Merge;
     }
 
-    gen->WriteLine("template <typename TValueType> static");
+    gen->WriteLine("template <typename ValueType> static");
     if (IsInline(network, networkType))
     {
         gen->WriteLine("inline");
@@ -422,13 +415,13 @@ void WriteSorter_RecursiveStyle(
     {
         case RecursiveParameterNetworkType::Split:
             networkSize = network["NetworkSize"].get<int>();
-            gen->WriteLine("void sort", std::to_string(networkSize), sortMethodName, "(TValueType* A)");
+            gen->WriteLine("void sort", std::to_string(networkSize), sortMethodName, "(ValueType* A)");
             splitIndices[networkSize] = true;
             break;
         case RecursiveParameterNetworkType::Merge:
             leftMergeSize = network["LeftMergeSize"].get<int>();
             rightMergeSize = network["RightMergeSize"].get<int>();
-            gen->WriteLine("void merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), sortMethodName, "(TValueType* left, TValueType* right)");
+            gen->WriteLine("void merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), sortMethodName, "(ValueType* left, ValueType* right)");
             mergeIndices[leftMergeSize * indexArrayLength + rightMergeSize] = true;
             if (leftMergeSize == 1 && rightMergeSize == 1)
             {
@@ -542,8 +535,8 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
             }
             gen->WriteLine("");
 
-            gen->WriteLine("template <typename TValueType> static");
-            gen->WriteLine("void sortN", sortMethodName, "(TValueType* A, size_t n)");
+            gen->WriteLine("template <typename ValueType> static");
+            gen->WriteLine("void sortN", sortMethodName, "(ValueType* A, size_t n)");
             gen->WriteBlock([=]{
                 gen->WriteLine("switch(n)");
                 gen->WriteBlock([=]{

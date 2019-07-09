@@ -123,7 +123,7 @@ void GenerateBatcherNetworksJson()
 void GenerateNetworks()
 {
     auto boseNelsonLocalityGen = 
-        new CPlusPlusCodeGenerator("../../BoseNelson.generated.h");
+        new CPlusPlusCodeGenerator("../../networks/BoseNelson.generated.h");
     WriteNetwork(
         boseNelsonLocalityGen, 
         "BOSENELSON_GENERATED_H", 
@@ -132,7 +132,7 @@ void GenerateNetworks()
     delete boseNelsonLocalityGen;
 
     auto boseNelsonParallelismGen =
-        new CPlusPlusCodeGenerator("../../BoseNelsonParallel.generated.h");
+        new CPlusPlusCodeGenerator("../../networks/BoseNelsonParallel.generated.h");
     WriteNetwork(
         boseNelsonParallelismGen,
         "BOSENELSON_PARALLEL_GENERATED_H",
@@ -141,7 +141,7 @@ void GenerateNetworks()
     delete boseNelsonParallelismGen;
 
     auto batcherNetworkGen =
-        new CPlusPlusCodeGenerator("../../Batcher.generated.h");
+        new CPlusPlusCodeGenerator("../../networks/Batcher.generated.h");
     WriteNetwork(
         batcherNetworkGen,
         "BATCHER_GENERATED_H",
@@ -150,7 +150,7 @@ void GenerateNetworks()
     delete batcherNetworkGen;
 
     auto bestNetworkGen = 
-        new CPlusPlusCodeGenerator("../../BestNetworks.generated.h");
+        new CPlusPlusCodeGenerator("../../networks/BestNetworks.generated.h");
     WriteNetwork(
         bestNetworkGen, 
         "BESTNETWORKS_GENERATED_H", 
@@ -161,8 +161,8 @@ void GenerateNetworks()
 
 void GenerateNetworks_ParameterStyle()
 {
-    auto gen = new CPlusPlusCodeGenerator(
-        "../../BoseNelsonParameter.generated.h");
+    auto gen = 
+        new CPlusPlusCodeGenerator("../../networks/BoseNelsonParameter.generated.h");
     WriteNetwork_ParameterStyle(
         gen,
         "BOSENELSON_PARAMETER_GENERATED_H",
@@ -173,8 +173,8 @@ void GenerateNetworks_ParameterStyle()
 
 void GenerateNetworks_RecursiveStype()
 {
-    auto gen = new CPlusPlusCodeGenerator(
-        "../../BoseNelsonRecursive.generated.h");
+    auto gen = 
+        new CPlusPlusCodeGenerator("../../networks/BoseNelsonRecursive.generated.h");
     WriteNetwork_RecursiveStyle(
         gen,
         "BOSENELSON_RECURSIVE_GENERATED_H",
@@ -186,15 +186,15 @@ void GenerateNetworks_RecursiveStype()
 void GenerateMeasurements()
 {
     auto measurementHeaderGen = 
-        new CPlusPlusCodeGenerator("../../Measurement.generated.h");
+        new CPlusPlusCodeGenerator("../../measurement/Measurement.generated.h");
     auto normalMeasurementGen =
-        new CPlusPlusCodeGenerator("../../MeasurementNormal.generated.cpp");
+        new CPlusPlusCodeGenerator("../../measurement/MeasurementNormal.generated.cpp");
     auto inrowMeasurementGen =
-        new CPlusPlusCodeGenerator("../../MeasurementInRow.generated.cpp");
+        new CPlusPlusCodeGenerator("../../measurement/MeasurementInRow.generated.cpp");
     auto completeMeasurementGen =
-        new CPlusPlusCodeGenerator("../../MeasurementComplete.generated.cpp");
+        new CPlusPlusCodeGenerator("../../measurement/MeasurementComplete.generated.cpp");
     auto sampleSortMeasurementGen =
-        new CPlusPlusCodeGenerator("../../MeasurementSampleSort.generated.cpp");
+        new CPlusPlusCodeGenerator("../../measurement/MeasurementSampleSort.generated.cpp");
     GenerateMeasurementMethod(
         measurementHeaderGen, 
         normalMeasurementGen, 
