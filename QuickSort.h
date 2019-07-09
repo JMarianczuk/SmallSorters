@@ -8,15 +8,16 @@
 #include "DebugHelper.h"
 #include "SampleSort.generated.h"
 #include "networks/BoseNelsonParameter.generated.h"
+#include "conditional_swap/ConditionalSwapX86.h"
 
 namespace quicksort
 {
 
 #define BaseCaseLimit 16
 
-template <typename TValueType>
+template <typename ValueType>
 static inline
-void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*,size_t))
+void QuickSort(ValueType* items, size_t arraySize, void (*sortFunc)(ValueType*,size_t))
 {
     if (arraySize > BaseCaseLimit)
     {
@@ -43,9 +44,9 @@ void QuickSort(TValueType* items, size_t arraySize, void (*sortFunc)(TValueType*
     }
 }
 
-template <typename TValueType>
+template <typename ValueType>
 static inline
-bool templateLess(uint64_t& leftKey, TValueType& right)
+bool templateLess(uint64_t& leftKey, ValueType& right)
 {
     return leftKey < GetKey(right);
 }
@@ -85,8 +86,8 @@ enum { _S_threshold = 16 };
 
 //-------------------------------------------------------------------------------------------------------------
 
-template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
-void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompare& compare)
+template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
+void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType value, TCompare& compare)
 {
     TDistance parent = (holeIndex - 1) / 2;
     while (holeIndex > topIndex && compare(first + parent, &value))
@@ -98,8 +99,8 @@ void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType
     *(first + holeIndex) = std::move(value);
 }
 
-template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
-void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType value, TCompare compare)
+template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
+void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType value, TCompare compare)
 {
     const TDistance topIndex = holeIndex;
     TDistance secondChild = holeIndex;
@@ -127,7 +128,7 @@ void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType va
 template <typename TRanIt, typename TCompare>
 void make_heap(TRanIt first, TRanIt last, TCompare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::value_type ValueType;
     typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
     if (last - first < 2)
     {
@@ -138,7 +139,7 @@ void make_heap(TRanIt first, TRanIt last, TCompare& compare)
     TDistanceType parent = (len - 2) / 2;
     while (true)
     {
-        TValueType value = std::move(*(first + parent));
+        ValueType value = std::move(*(first + parent));
         adjust_heap(first, parent, len, std::move(value), compare);
         if (parent == 0)
         {
@@ -152,10 +153,10 @@ template <typename TRanIt, typename TCompare>
 inline
 void pop_heap(TRanIt first, TRanIt last, TRanIt result, TCompare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::value_type ValueType;
     typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
 
-    TValueType value = std::move(*result);
+    ValueType value = std::move(*result);
     *result = std::move(*first);
     adjust_heap(first, TDistanceType(0), TDistanceType(last - first), std::move(value), compare);
 }
@@ -227,7 +228,7 @@ __unguarded_partition_pivot(_RandomAccessIterator __first,
             _RandomAccessIterator __last, _Compare __comp)
 {
     _RandomAccessIterator __mid = __first + (__last - __first) / 2;
-    networks::bosenelsonparameter::sort3(*__mid, *__first, *(__last-1));
+    networks::bosenelsonparameter::sort3<conditional_swap::CS_FourCmovTemp_Split>(*__mid, *__first, *(__last-1));
     return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
 
@@ -255,7 +256,7 @@ __introsort_loop(
     __baseCaseFunc(__first, __last - __first);
 }
 
-template<typename _RandomAccessIterator, typename _Compare, typename _BaseCaseFunc>
+template <typename _RandomAccessIterator, typename _Compare, typename _BaseCaseFunc>
 inline void
 __sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp, _BaseCaseFunc __baseCaseFunc)
 {
@@ -265,9 +266,9 @@ __sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __c
     }
 }
 
-template<typename TValueType>
+template <typename ValueType>
 inline void
-sort(TValueType* __first, TValueType* __last, bool(*__comp)(TValueType,TValueType), void(*__baseCaseFunc)(TValueType*,size_t))
+sort(ValueType* __first, ValueType* __last, bool(*__comp)(ValueType,ValueType), void(*__baseCaseFunc)(ValueType*,size_t))
 {
     __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp), __baseCaseFunc);
 }

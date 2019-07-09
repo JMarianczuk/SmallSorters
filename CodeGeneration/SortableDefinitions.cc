@@ -6,21 +6,22 @@ namespace codegeneration
 
 std::vector<SortableStruct*> structs =
 {
-    new SortableStruct("", "Def", true, "KR-Default"),              //0
-    new SortableStruct("JumpXchg", "JXc", false),
-    new SortableStruct("JumpXchg", "JXc", true),                    //2
-    new SortableStruct("TwoCmovTemp", "2Cm", false),
-    new SortableStruct("FourCmovTemp", "4Cm", true),                //4
-    new SortableStruct("FourCmovTemp_Split", "4CS", true),
-    new SortableStruct("ThreeCmovRegisterTemp", "3Cm", false),      //6
-    new SortableStruct("SixCmovRegisterTemp", "6Cm", true),
-    new SortableStruct("ClangVersion", "Cla", true),                //8
-    new SortableStruct("ClangPredicate", "CPr", true),
-    new SortableStruct("Tie", "Tie", true),                         //10
-    new SortableStruct("QMark", "QMa", true),
-    new SortableStruct("StlVersion", "STL", true),                  //12
-    new SortableStruct("PointerOptimized", "POp", true),
-    new SortableStruct("ArrayIndex_FirstCheck", "AIF", true),       //14
+    new SortableStruct("conditional_swap::CS_", "Default", "Def", true, "KR-Default"),       //0
+    new SortableStruct("conditional_swap::CS_", "JumpXchg", "JXc", false),
+    new SortableStruct("conditional_swap::CS_", "JumpXchg_Ref", "JXc", true),                //2
+    new SortableStruct("conditional_swap::CS_", "TwoCmovTemp", "2Cm", false),
+    new SortableStruct("conditional_swap::CS_", "FourCmovTemp", "4Cm", true),                //4
+    new SortableStruct("conditional_swap::CS_", "FourCmovTemp_Split", "4CS", true),
+    new SortableStruct("conditional_swap::CS_", "ThreeCmovTemp", "3Cm", false),              //6
+    new SortableStruct("conditional_swap::CS_", "SixCmovTemp", "6Cm", true),
+    new SortableStruct("conditional_swap::CS_", "ClangVersion", "Cla", true),                //8
+    new SortableStruct("conditional_swap::CS_", "ClangPredicate", "CPr", true),
+    new SortableStruct("conditional_swap::CS_", "Tie", "Tie", true),                         //10
+    new SortableStruct("conditional_swap::CS_", "QMark", "QMa", true),
+    new SortableStruct("insertionsort::InsertionSort_", "Default", "Def", true),                     //12
+    new SortableStruct("insertionsort::InsertionSort_", "StlVersion", "STL", true),                  
+    new SortableStruct("insertionsort::InsertionSort_", "PointerOptimized", "POp", true),            //14
+    new SortableStruct("insertionsort::InsertionSort_", "ArrayIndex_FirstCheck", "AIF", true),
 };
 
 std::vector<SortableStruct*>* sortableStructs() 
@@ -34,7 +35,7 @@ std::vector<std::string> insertionSortOnlyNames =
     "ArrayIndex_FirstCheck"
 };
 
-SortableStruct::SortableStruct(std::string name, std::string nameAbbrev, bool hasReference) : Name(name), NameAbbreviation(nameAbbrev), HasReference(hasReference)
+SortableStruct::SortableStruct(std::string implementation, std::string name, std::string nameAbbrev, bool hasReference) : Implementation(implementation), Name(name), NameAbbreviation(nameAbbrev), HasReference(hasReference)
 {
     DisplayName = "K";
     if (HasReference)
@@ -50,7 +51,7 @@ SortableStruct::SortableStruct(std::string name, std::string nameAbbrev, bool ha
     }
     DisplayName += nameReplaced;
 }
-SortableStruct::SortableStruct(std::string name, std::string nameAbbrev, bool hasReference, std::string displayName) : Name(name), NameAbbreviation(nameAbbrev), HasReference(hasReference), DisplayName(displayName)
+SortableStruct::SortableStruct(std::string implementation, std::string name, std::string nameAbbrev, bool hasReference, std::string displayName) : Implementation(implementation), Name(name), NameAbbreviation(nameAbbrev), DisplayName(displayName), HasReference(hasReference)
 {
 
 }
@@ -62,28 +63,28 @@ std::string SortableStruct::FullName()
     {
         result += "Ref";
     }
-    if (Name.size() != 0)
-    {
-        result += "_";
-        result += Name;
-    }
     return result;
 }
+std::string SortableStruct::CSName()
+{
+    return Implementation + Name;
+}
+
 bool SortableStruct::UseForNetworkSort()
 {
-    return HasReference && !IsInsertionSortOnly();
+    return HasReference && Implementation == "conditional_swap::CS_";
 }
 bool SortableStruct::UseForInsertionSort()
 {
-    return FullName() == "SortableRef" || IsInsertionSortOnly();
+    return Implementation == "insertionsort::InsertionSort_";
 }
 bool SortableStruct::IsInsertionSortOnly()
 {
-    std::string fullName = FullName();
+    auto cs_name = Name;
     return VectorAny<std::string>(
         insertionSortOnlyNames, 
-        [fullName](std::string name){
-            return fullName.find(name) != std::string::npos;
+        [cs_name](std::string name){
+            return cs_name.find(name) != std::string::npos;
         });
 }
 bool SortableStruct::WillBeShownInResults()

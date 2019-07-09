@@ -1198,16 +1198,16 @@
   17:Measure.h     **** namespace measurement
   18:Measure.h     **** {
   19:Measure.h     ****     
-  20:Measure.h     **** template <typename TValueType>
+  20:Measure.h     **** template <typename ValueType>
   21:Measure.h     **** void Measure(
   22:Measure.h     ****     Performancing* perf,
   23:Measure.h     ****     int numberOfIterations,
   24:Measure.h     ****     size_t arraySize,
   25:Measure.h     ****     int measureIteration,
   26:Measure.h     ****     std::string sorterName,
-  27:Measure.h     ****     void(*sortFunc)(TValueType*,size_t))
+  27:Measure.h     ****     void(*sortFunc)(ValueType*,size_t))
   28:Measure.h     **** {
-  29:Measure.h     ****     TValueType *arr = (TValueType*) malloc(sizeof(TValueType) * arraySize);
+  29:Measure.h     ****     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
   30:Measure.h     ****     
   31:Measure.h     ****     int numberOfBadSorts = 0;
   32:Measure.h     ****     randomisation::GenerateRandomArray(arr, arraySize);
@@ -1240,7 +1240,7 @@
   59:Measure.h     ****     result::WriteResultLine(
   60:Measure.h     ****         sorterName,
   61:Measure.h     ****         perf,
-  62:Measure.h     ****         sizeof(TValueType),
+  62:Measure.h     ****         sizeof(ValueType),
   63:Measure.h     ****         arraySize,
   64:Measure.h     ****         measureIteration,
   65:Measure.h     ****         numberOfIterations,
@@ -1251,26 +1251,26 @@
   70:Measure.h     ****     free(arr);
   71:Measure.h     **** }
   72:Measure.h     **** 
-  73:Measure.h     **** template <typename TValueType>
+  73:Measure.h     **** template <typename ValueType>
   74:Measure.h     **** void MeasureInRow(
   75:Measure.h     ****     Performancing* perf,
   76:Measure.h     ****     int numberOfArrays,
   77:Measure.h     ****     size_t arraySize,
   78:Measure.h     ****     int measureIteration,
   79:Measure.h     ****     std::string sorterName,
-  80:Measure.h     ****     void(*sortFunc)(TValueType*,size_t))
+  80:Measure.h     ****     void(*sortFunc)(ValueType*,size_t))
   81:Measure.h     **** {
-  82:Measure.h     ****     TValueType *arr = (TValueType*) malloc(sizeof(TValueType) * numberOfArrays * arraySize);
-  83:Measure.h     ****     TValueType *arrEnd = arr + numberOfArrays * arraySize;
-  84:Measure.h     ****     TValueType *compare = (TValueType*) malloc(sizeof(TValueType) * numberOfArrays * arraySize);
-  85:Measure.h     ****     TValueType *compareEnd = compare + numberOfArrays * arraySize;
-  86:Measure.h     ****     TValueType warmupArr[arraySize];
+  82:Measure.h     ****     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * numberOfArrays * arraySize);
+  83:Measure.h     ****     ValueType *arrEnd = arr + numberOfArrays * arraySize;
+  84:Measure.h     ****     ValueType *compare = (ValueType*) malloc(sizeof(ValueType) * numberOfArrays * arraySize);
+  85:Measure.h     ****     ValueType *compareEnd = compare + numberOfArrays * arraySize;
+  86:Measure.h     ****     ValueType warmupArr[arraySize];
   87:Measure.h     **** 
   88:Measure.h     ****     randomisation::GenerateRandomArray(arr, numberOfArrays * arraySize);
   89:Measure.h     ****     CopyArray(arr, compare, numberOfArrays * arraySize);
   90:Measure.h     ****     randomisation::GenerateRandomArray(warmupArr, arraySize);
   91:Measure.h     **** 
-  92:Measure.h     ****     for (TValueType* current = compare; current < compareEnd; current += arraySize)
+  92:Measure.h     ****     for (ValueType* current = compare; current < compareEnd; current += arraySize)
   93:Measure.h     ****     {
   94:Measure.h     ****         insertionsort::InsertionSort(current, arraySize);
   95:Measure.h     ****     }
@@ -1283,7 +1283,7 @@
  102:Measure.h     ****     }
  103:Measure.h     ****     
  104:Measure.h     ****     perf->StartMeasuring();
- 105:Measure.h     ****     for (TValueType* current = arr; current < arrEnd; current += arraySize)
+ 105:Measure.h     ****     for (ValueType* current = arr; current < arrEnd; current += arraySize)
  106:Measure.h     ****     {
  107:Measure.h     ****         sortFunc(current, arraySize);
  108:Measure.h     ****     }
@@ -1300,7 +1300,7 @@
  119:Measure.h     ****     result::WriteResultLine(
  120:Measure.h     ****         sorterName, 
  121:Measure.h     ****         perf, 
- 122:Measure.h     ****         sizeof(TValueType),
+ 122:Measure.h     ****         sizeof(ValueType),
  123:Measure.h     ****         arraySize,
  124:Measure.h     ****         measureIteration,
  125:Measure.h     ****         numberOfArrays,
@@ -1312,17 +1312,17 @@
  131:Measure.h     ****     free(compare);
  132:Measure.h     **** }
  133:Measure.h     **** 
- 134:Measure.h     **** template <typename TValueType>
+ 134:Measure.h     **** template <typename ValueType>
  135:Measure.h     **** void MeasureSampleSort(
  136:Measure.h     ****     Performancing* perf,
  137:Measure.h     ****     int numberOfIterations,
  138:Measure.h     ****     size_t arraySize,
  139:Measure.h     ****     int measureIteration,
  140:Measure.h     ****     std::string sorterName,
- 141:Measure.h     ****     void(*sortFunc)(TValueType*,size_t,size_t,void(*)(TValueType*,size_t), bool(*)(uint64_t&,TValue
- 142:Measure.h     ****     void(*baseCaseSortFunc)(TValueType*,size_t))
+ 141:Measure.h     ****     void(*sortFunc)(ValueType*,size_t,size_t,void(*)(ValueType*,size_t), bool(*)(uint64_t&,TValue
+ 142:Measure.h     ****     void(*baseCaseSortFunc)(ValueType*,size_t))
  143:Measure.h     **** {
- 144:Measure.h     ****     TValueType *arr = (TValueType*) malloc(sizeof(TValueType) * arraySize);
+ 144:Measure.h     ****     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
  145:Measure.h     ****     randomisation::GenerateRandomArray(arr, arraySize);
  146:Measure.h     ****     int numberOfBadSorts = 0;
  147:Measure.h     ****     uint64_t key_iter = 1;
@@ -1330,7 +1330,7 @@
  149:Measure.h     ****     uint64_t key_value;
  150:Measure.h     ****     uint64_t ref_value;
  151:Measure.h     ****     PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
- 152:Measure.h     ****     sortFunc(arr, arraySize, 16, baseCaseSortFunc, &quicksort::templateLess<TValueType>, &GetKey<TV
+ 152:Measure.h     ****     sortFunc(arr, arraySize, 16, baseCaseSortFunc, &quicksort::templateLess<ValueType>, &GetKey<TV
  153:Measure.h     ****     if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
  154:Measure.h     ****     {
  155:Measure.h     ****         numberOfBadSorts += 1;
@@ -1343,7 +1343,7 @@
  162:Measure.h     ****         key_iter = 1;
  163:Measure.h     ****         ref_iter = 1;
  164:Measure.h     ****         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
- 165:Measure.h     ****         sortFunc(arr, arraySize, 16, baseCaseSortFunc, &quicksort::templateLess<TValueType>, &GetKe
+ 165:Measure.h     ****         sortFunc(arr, arraySize, 16, baseCaseSortFunc, &quicksort::templateLess<ValueType>, &GetKe
  166:Measure.h     ****         if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
  167:Measure.h     ****         {
  168:Measure.h     ****             numberOfBadSorts += 1;
@@ -1354,7 +1354,7 @@
  173:Measure.h     ****     result::WriteResultLine(
  174:Measure.h     ****         sorterName,
  175:Measure.h     ****         perf,
- 176:Measure.h     ****         sizeof(TValueType),
+ 176:Measure.h     ****         sizeof(ValueType),
  177:Measure.h     ****         arraySize,
  178:Measure.h     ****         measureIteration,
  179:Measure.h     ****         numberOfIterations,
@@ -1365,11 +1365,11 @@
  184:Measure.h     ****     free(arr);
  185:Measure.h     **** }
  186:Measure.h     **** 
- 187:Measure.h     **** template <typename TValueType>
- 188:Measure.h     **** void BaseCaseSortBlank(TValueType* arr, size_t arraySize) {}
+ 187:Measure.h     **** template <typename ValueType>
+ 188:Measure.h     **** void BaseCaseSortBlank(ValueType* arr, size_t arraySize) {}
  189:Measure.h     **** 
- 190:Measure.h     **** template <typename TValueType>
- 191:Measure.h     **** bool IteratorCompare(TValueType* left, TValueType* right)
+ 190:Measure.h     **** template <typename ValueType>
+ 191:Measure.h     **** bool IteratorCompare(ValueType* left, ValueType* right)
  102              		.loc 2 191 0
  103              		.cfi_startproc
  104              	.LVL1:
@@ -1431,8 +1431,8 @@
  125              	_ZN11measurement13NormalCompareI11SortableRefEEbRT_S3_:
  126              	.LFB3698:
  195:Measure.h     **** 
- 196:Measure.h     **** template <typename TValueType>
- 197:Measure.h     **** bool NormalCompare(TValueType& left, TValueType& right)
+ 196:Measure.h     **** template <typename ValueType>
+ 197:Measure.h     **** bool NormalCompare(ValueType& left, ValueType& right)
  127              		.loc 2 197 0
  128              		.cfi_startproc
  129              	.LVL2:
@@ -1550,8 +1550,8 @@
   13:Randomisation.generated.h **** #include "Randomisation.h"
   14:Randomisation.generated.h **** namespace randomisation
   15:Randomisation.generated.h **** {
-  16:Randomisation.generated.h **** template <typename TValueType>
-  17:Randomisation.generated.h **** void GenerateRandomArray(TValueType* arr, size_t arraySize)
+  16:Randomisation.generated.h **** template <typename ValueType>
+  17:Randomisation.generated.h **** void GenerateRandomArray(ValueType* arr, size_t arraySize)
   18:Randomisation.generated.h **** {
   19:Randomisation.generated.h **** 	throw std::logic_error("randomisation::GenerateRandomArray => Not implemented for generic type");
   20:Randomisation.generated.h **** }
@@ -13626,8 +13626,8 @@
   15:Quicksort_Copy.h **** 
   16:Quicksort_Copy.h **** #define S_threshold 16
   17:Quicksort_Copy.h **** 
-  18:Quicksort_Copy.h **** template <typename TValueType, typename TDistance, typename TCompare>
-  19:Quicksort_Copy.h **** void push_heap(TValueType* first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompa
+  18:Quicksort_Copy.h **** template <typename ValueType, typename TDistance, typename TCompare>
+  19:Quicksort_Copy.h **** void push_heap(ValueType* first, TDistance holeIndex, TDistance topIndex, ValueType value, TCompa
   20:Quicksort_Copy.h **** {
   21:Quicksort_Copy.h ****     TDistance parent = (holeIndex - 1) / 2;
   22:Quicksort_Copy.h ****     while (holeIndex > topIndex && compare(first + parent, &value))
@@ -13639,8 +13639,8 @@
   28:Quicksort_Copy.h ****     *(first + holeIndex) = std::move(value);
   29:Quicksort_Copy.h **** }
   30:Quicksort_Copy.h **** 
-  31:Quicksort_Copy.h **** template <typename TValueType, typename TDistance, typename TCompare>
-  32:Quicksort_Copy.h **** void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TValueType value, TCompare 
+  31:Quicksort_Copy.h **** template <typename ValueType, typename TDistance, typename TCompare>
+  32:Quicksort_Copy.h **** void adjust_heap(ValueType* first, TDistance holeIndex, TDistance len, ValueType value, TCompare 
  3366              		.loc 16 32 0
  3367              		.cfi_startproc
  3368              	.LVL207:
@@ -13667,7 +13667,7 @@
  3389 0010 4C89CB   		movq	%r9, %rbx	# compare, compare
  3390 0013 4883EC58 		subq	$88, %rsp	#,
  3391              		.cfi_def_cfa_offset 144
- 3392              	# Quicksort_Copy.h:32: void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TVal
+ 3392              	# Quicksort_Copy.h:32: void adjust_heap(ValueType* first, TDistance holeIndex, TDistance len, TVal
  3393              		.loc 16 32 0
  3394 0017 64488B04 		movq	%fs:40, %rax	#, tmp188
  3394      25280000 
@@ -13683,7 +13683,7 @@
   36:Quicksort_Copy.h ****     while (secondChild < (len - 1) / 2)
  3399              		.loc 16 36 0
  3400 0027 488D42FF 		leaq	-1(%rdx), %rax	#, tmp142
- 3401              	# Quicksort_Copy.h:32: void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TVal
+ 3401              	# Quicksort_Copy.h:32: void adjust_heap(ValueType* first, TDistance holeIndex, TDistance len, TVal
   32:Quicksort_Copy.h **** {
  3402              		.loc 16 32 0
  3403 002b 48897424 		movq	%rsi, 16(%rsp)	# holeIndex, %sfp
@@ -13691,7 +13691,7 @@
  3404              	# Quicksort_Copy.h:36:     while (secondChild < (len - 1) / 2)
  3405              		.loc 16 36 0
  3406 0030 4889C5   		movq	%rax, %rbp	# tmp142, tmp143
- 3407              	# Quicksort_Copy.h:32: void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TVal
+ 3407              	# Quicksort_Copy.h:32: void adjust_heap(ValueType* first, TDistance holeIndex, TDistance len, TVal
   32:Quicksort_Copy.h **** {
  3408              		.loc 16 32 0
  3409 0033 48894C24 		movq	%rcx, 24(%rsp)	# value, %sfp
@@ -13699,7 +13699,7 @@
  3410              	# Quicksort_Copy.h:36:     while (secondChild < (len - 1) / 2)
  3411              		.loc 16 36 0
  3412 0038 48C1ED3F 		shrq	$63, %rbp	#, tmp143
- 3413              	# Quicksort_Copy.h:32: void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TVal
+ 3413              	# Quicksort_Copy.h:32: void adjust_heap(ValueType* first, TDistance holeIndex, TDistance len, TVal
   32:Quicksort_Copy.h **** {
  3414              		.loc 16 32 0
  3415 003c 4C894424 		movq	%r8, 32(%rsp)	# value, %sfp
@@ -13721,7 +13721,7 @@
  3428              		.p2align 4,,10
  3429              		.p2align 3
  3430              	.L209:
- 3431              	# Quicksort_Copy.h:32: void adjust_heap(TValueType* first, TDistance holeIndex, TDistance len, TVal
+ 3431              	# Quicksort_Copy.h:32: void adjust_heap(ValueType* first, TDistance holeIndex, TDistance len, TVal
   32:Quicksort_Copy.h **** {
  3432              		.loc 16 32 0
  3433 0060 4D89E6   		movq	%r12, %r14	# holeIndex, holeIndex
@@ -14037,8 +14037,8 @@
  3675              	_ZN13quicksortcopy11heap_selectI11SortableRefPFbPS1_S2_EEEvPT_S6_S6_T0_:
  3676              	.LFB3960:
   56:Quicksort_Copy.h **** 
-  57:Quicksort_Copy.h **** template <typename TValueType, typename TCompare>
-  58:Quicksort_Copy.h **** void make_heap(TValueType* first, TValueType* last, TCompare& compare)
+  57:Quicksort_Copy.h **** template <typename ValueType, typename TCompare>
+  58:Quicksort_Copy.h **** void make_heap(ValueType* first, ValueType* last, TCompare& compare)
   59:Quicksort_Copy.h **** {
   60:Quicksort_Copy.h ****     if (last - first < 2)
   61:Quicksort_Copy.h ****     {
@@ -14049,7 +14049,7 @@
   66:Quicksort_Copy.h ****     long int parent = (len - 2) / 2;
   67:Quicksort_Copy.h ****     while (true)
   68:Quicksort_Copy.h ****     {
-  69:Quicksort_Copy.h ****         TValueType value = std::move(*(first + parent));
+  69:Quicksort_Copy.h ****         ValueType value = std::move(*(first + parent));
   70:Quicksort_Copy.h ****         adjust_heap(first, parent, len, std::move(value), compare);
   71:Quicksort_Copy.h ****         if (parent == 0)
   72:Quicksort_Copy.h ****         {
@@ -14059,17 +14059,17 @@
   76:Quicksort_Copy.h ****     }
   77:Quicksort_Copy.h **** }
   78:Quicksort_Copy.h **** 
-  79:Quicksort_Copy.h **** template <typename TValueType, typename TCompare>
+  79:Quicksort_Copy.h **** template <typename ValueType, typename TCompare>
   80:Quicksort_Copy.h **** inline
-  81:Quicksort_Copy.h **** void pop_heap(TValueType* first, TValueType* last, TValueType* result, TCompare& compare)
+  81:Quicksort_Copy.h **** void pop_heap(ValueType* first, ValueType* last, ValueType* result, TCompare& compare)
   82:Quicksort_Copy.h **** {
-  83:Quicksort_Copy.h ****     TValueType value = std::move(*result);
+  83:Quicksort_Copy.h ****     ValueType value = std::move(*result);
   84:Quicksort_Copy.h ****     *result = std::move(*first);
   85:Quicksort_Copy.h ****     adjust_heap(first, (long int) 0, last - first, std::move(value), compare);
   86:Quicksort_Copy.h **** }
   87:Quicksort_Copy.h **** 
-  88:Quicksort_Copy.h **** template <typename TValueType, typename TCompare>
-  89:Quicksort_Copy.h **** void sort_heap(TValueType* first, TValueType* last, TCompare& compare)
+  88:Quicksort_Copy.h **** template <typename ValueType, typename TCompare>
+  89:Quicksort_Copy.h **** void sort_heap(ValueType* first, ValueType* last, TCompare& compare)
   90:Quicksort_Copy.h **** {
   91:Quicksort_Copy.h ****     while (last - first > 1)
   92:Quicksort_Copy.h ****     {
@@ -14079,8 +14079,8 @@
   96:Quicksort_Copy.h **** }
   97:Quicksort_Copy.h **** 
   98:Quicksort_Copy.h **** 
-  99:Quicksort_Copy.h **** template <typename TValueType, typename TCompare>
- 100:Quicksort_Copy.h **** void heap_select(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
+  99:Quicksort_Copy.h **** template <typename ValueType, typename TCompare>
+ 100:Quicksort_Copy.h **** void heap_select(ValueType* first, ValueType* middle, ValueType* last, TCompare compare)
  3677              		.loc 16 100 0
  3678              		.cfi_startproc
  3679              	.LVL245:
@@ -14095,7 +14095,7 @@
  3687 0002 4889F0   		movq	%rsi, %rax	# middle, _24
  3688              	.LBE2437:
  3689              	.LBE2436:
- 3690              	# Quicksort_Copy.h:100: void heap_select(TValueType* first, TValueType* middle, TValueType* last, T
+ 3690              	# Quicksort_Copy.h:100: void heap_select(ValueType* first, ValueType* middle, ValueType* last, T
  3691              		.loc 16 100 0
  3692 0005 4156     		pushq	%r14	#
  3693              		.cfi_def_cfa_offset 24
@@ -14108,7 +14108,7 @@
  3699 0007 4829F8   		subq	%rdi, %rax	# first, _24
  3700              	.LBE2439:
  3701              	.LBE2441:
- 3702              	# Quicksort_Copy.h:100: void heap_select(TValueType* first, TValueType* middle, TValueType* last, T
+ 3702              	# Quicksort_Copy.h:100: void heap_select(ValueType* first, ValueType* middle, ValueType* last, T
  3703              		.loc 16 100 0
  3704 000a 4155     		pushq	%r13	#
  3705              		.cfi_def_cfa_offset 32
@@ -14127,7 +14127,7 @@
  3718              		.cfi_offset 3, -56
  3719 0019 4883EC18 		subq	$24, %rsp	#,
  3720              		.cfi_def_cfa_offset 80
- 3721              	# Quicksort_Copy.h:100: void heap_select(TValueType* first, TValueType* middle, TValueType* last, T
+ 3721              	# Quicksort_Copy.h:100: void heap_select(ValueType* first, ValueType* middle, ValueType* last, T
  3722              		.loc 16 100 0
  3723 001d 48891424 		movq	%rdx, (%rsp)	# last, %sfp
  3724              	.LBB2442:
@@ -14171,7 +14171,7 @@
  3757 0058 4983EE01 		subq	$1, %r14	#, parent
  3758              	.LVL250:
  3759              	.L235:
- 3760              	# Quicksort_Copy.h:69:         TValueType value = std::move(*(first + parent));
+ 3760              	# Quicksort_Copy.h:69:         ValueType value = std::move(*(first + parent));
   69:Quicksort_Copy.h ****         adjust_heap(first, parent, len, std::move(value), compare);
  3761              		.loc 16 69 0
  3762 005c 488B0B   		movq	(%rbx), %rcx	# MEM[base: _50, offset: 0], value
@@ -14199,10 +14199,10 @@
  3781              	.LBE2440:
  3782              	.LBE2442:
  3783              	.LBB2443:
- 3784              	# Quicksort_Copy.h:103:     for (TValueType* i = middle; i < last; ++i)
+ 3784              	# Quicksort_Copy.h:103:     for (ValueType* i = middle; i < last; ++i)
  101:Quicksort_Copy.h **** {
  102:Quicksort_Copy.h ****     make_heap(first, middle, compare);
- 103:Quicksort_Copy.h ****     for (TValueType* i = middle; i < last; ++i)
+ 103:Quicksort_Copy.h ****     for (ValueType* i = middle; i < last; ++i)
  3785              		.loc 16 103 0 discriminator 1
  3786 007d 488B0424 		movq	(%rsp), %rax	# %sfp, last
  3787 0081 4839C5   		cmpq	%rax, %rbp	# last, middle
@@ -14228,7 +14228,7 @@
  3804              	.L237:
  3805              	.LBE2445:
  3806              	.LBE2444:
- 3807              	# Quicksort_Copy.h:103:     for (TValueType* i = middle; i < last; ++i)
+ 3807              	# Quicksort_Copy.h:103:     for (ValueType* i = middle; i < last; ++i)
  3808              		.loc 16 103 0 discriminator 2
  3809 00a8 4889DD   		movq	%rbx, %rbp	# middle, middle
  3810              	.LVL255:
@@ -14251,7 +14251,7 @@
  3825              	.LVL258:
  3826              	.LBB2448:
  3827              	.LBB2446:
- 3828              	# Quicksort_Copy.h:83:     TValueType value = std::move(*result);
+ 3828              	# Quicksort_Copy.h:83:     ValueType value = std::move(*result);
   83:Quicksort_Copy.h ****     *result = std::move(*first);
  3829              		.loc 16 83 0
  3830 00c1 488B4D00 		movq	0(%rbp), %rcx	# MEM[base: i_14, offset: 0], value
@@ -14262,7 +14262,7 @@
  3834 00c5 4D89E9   		movq	%r13, %r9	# compare,
  3835 00c8 4C89F2   		movq	%r14, %rdx	# tmp147,
  3836 00cb 31F6     		xorl	%esi, %esi	#
- 3837              	# Quicksort_Copy.h:83:     TValueType value = std::move(*result);
+ 3837              	# Quicksort_Copy.h:83:     ValueType value = std::move(*result);
   83:Quicksort_Copy.h ****     *result = std::move(*first);
  3838              		.loc 16 83 0
  3839 00cd 4C8B4508 		movq	8(%rbp), %r8	# MEM[base: i_14, offset: 0], value
@@ -14279,7 +14279,7 @@
  3846      00
  3847              	.LBE2446:
  3848              	.LBE2448:
- 3849              	# Quicksort_Copy.h:103:     for (TValueType* i = middle; i < last; ++i)
+ 3849              	# Quicksort_Copy.h:103:     for (ValueType* i = middle; i < last; ++i)
  103:Quicksort_Copy.h ****     {
  3850              		.loc 16 103 0
  3851 00df 4889DD   		movq	%rbx, %rbp	# middle, middle
@@ -14294,7 +14294,7 @@
  3858              	.LVL261:
  3859              	.LBE2447:
  3860              	.LBE2449:
- 3861              	# Quicksort_Copy.h:103:     for (TValueType* i = middle; i < last; ++i)
+ 3861              	# Quicksort_Copy.h:103:     for (ValueType* i = middle; i < last; ++i)
  103:Quicksort_Copy.h ****     {
  3862              		.loc 16 103 0
  3863 00e7 4C39FB   		cmpq	%r15, %rbx	# _43, middle
@@ -14336,9 +14336,9 @@
  3895              	_ZN13quicksortcopy14introsort_loopI11SortableReflPFbPS1_S2_EEEvPT_S6_T0_T1_.constprop.61:
  3896              	.LFB4146:
  111:Quicksort_Copy.h **** 
- 112:Quicksort_Copy.h **** template <typename TValueType, typename TCompare>
+ 112:Quicksort_Copy.h **** template <typename ValueType, typename TCompare>
  113:Quicksort_Copy.h **** inline
- 114:Quicksort_Copy.h **** void partial_sort(TValueType* first, TValueType* middle, TValueType* last, TCompare compare)
+ 114:Quicksort_Copy.h **** void partial_sort(ValueType* first, ValueType* middle, ValueType* last, TCompare compare)
  115:Quicksort_Copy.h **** {
  116:Quicksort_Copy.h ****     heap_select(first, middle, last, compare);
  117:Quicksort_Copy.h ****     sort_heap(first, middle, compare);
@@ -14346,11 +14346,11 @@
  119:Quicksort_Copy.h **** 
  120:Quicksort_Copy.h **** //---------------------------------------------------------------------------------------------
  121:Quicksort_Copy.h **** 
- 122:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
- 123:Quicksort_Copy.h **** void unguarded_linear_insert(TValueType* last, TCompare compare)
+ 122:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
+ 123:Quicksort_Copy.h **** void unguarded_linear_insert(ValueType* last, TCompare compare)
  124:Quicksort_Copy.h **** {
- 125:Quicksort_Copy.h ****     TValueType val = std::move(*last);
- 126:Quicksort_Copy.h ****     TValueType* next = last;
+ 125:Quicksort_Copy.h ****     ValueType val = std::move(*last);
+ 126:Quicksort_Copy.h ****     ValueType* next = last;
  127:Quicksort_Copy.h ****     --next;
  128:Quicksort_Copy.h ****     while (compare(&val, next))
  129:Quicksort_Copy.h ****     {
@@ -14361,28 +14361,28 @@
  134:Quicksort_Copy.h ****     *last = std::move(val);
  135:Quicksort_Copy.h **** }
  136:Quicksort_Copy.h **** 
- 137:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
- 138:Quicksort_Copy.h **** inline void unguarded_insertion_sort(TValueType* first, TValueType* last, TCompare compare)
+ 137:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
+ 138:Quicksort_Copy.h **** inline void unguarded_insertion_sort(ValueType* first, ValueType* last, TCompare compare)
  139:Quicksort_Copy.h **** {
- 140:Quicksort_Copy.h ****     for (TValueType* i = first; i != last; ++i)
+ 140:Quicksort_Copy.h ****     for (ValueType* i = first; i != last; ++i)
  141:Quicksort_Copy.h ****     {
  142:Quicksort_Copy.h ****         unguarded_linear_insert(i, compare);
  143:Quicksort_Copy.h ****     }
  144:Quicksort_Copy.h **** }
  145:Quicksort_Copy.h **** 
- 146:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
- 147:Quicksort_Copy.h **** void insertion_sort(TValueType* first, TValueType* last, TCompare compare)
+ 146:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
+ 147:Quicksort_Copy.h **** void insertion_sort(ValueType* first, ValueType* last, TCompare compare)
  148:Quicksort_Copy.h **** {
  149:Quicksort_Copy.h ****     if (first == last) 
  150:Quicksort_Copy.h ****     {
  151:Quicksort_Copy.h ****         return;
  152:Quicksort_Copy.h ****     }
  153:Quicksort_Copy.h **** 
- 154:Quicksort_Copy.h ****     for (TValueType* i = first + 1; i != last; ++i)
+ 154:Quicksort_Copy.h ****     for (ValueType* i = first + 1; i != last; ++i)
  155:Quicksort_Copy.h ****     {
  156:Quicksort_Copy.h ****         if (compare(i, first))
  157:Quicksort_Copy.h ****         {
- 158:Quicksort_Copy.h ****             TValueType val = std::move(*i);
+ 158:Quicksort_Copy.h ****             ValueType val = std::move(*i);
  159:Quicksort_Copy.h ****             std::move_backward(first, i, i + 1);
  160:Quicksort_Copy.h ****             *first = std::move(val);
  161:Quicksort_Copy.h ****         }
@@ -14394,8 +14394,8 @@
  167:Quicksort_Copy.h ****     }
  168:Quicksort_Copy.h **** }
  169:Quicksort_Copy.h **** 
- 170:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
- 171:Quicksort_Copy.h **** void final_insertion_sort(TValueType* first, TValueType* last, TCompare compare)
+ 170:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
+ 171:Quicksort_Copy.h **** void final_insertion_sort(ValueType* first, ValueType* last, TCompare compare)
  172:Quicksort_Copy.h **** {
  173:Quicksort_Copy.h ****     if (last - first > S_threshold)
  174:Quicksort_Copy.h ****     {
@@ -14408,8 +14408,8 @@
  181:Quicksort_Copy.h ****     }
  182:Quicksort_Copy.h **** }
  183:Quicksort_Copy.h **** 
- 184:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
- 185:Quicksort_Copy.h **** TValueType* unguarded_partition(TValueType* first, TValueType* last, TValueType* pivot, TCompare co
+ 184:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
+ 185:Quicksort_Copy.h **** ValueType* unguarded_partition(ValueType* first, ValueType* last, ValueType* pivot, TCompare co
  186:Quicksort_Copy.h **** {
  187:Quicksort_Copy.h ****     while (true)
  188:Quicksort_Copy.h ****     {
@@ -14431,8 +14431,8 @@
  204:Quicksort_Copy.h ****     }
  205:Quicksort_Copy.h **** }
  206:Quicksort_Copy.h **** 
- 207:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
- 208:Quicksort_Copy.h **** void move_median_to_first(TValueType* result, TValueType* one, TValueType* two, TValueType* three, 
+ 207:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
+ 208:Quicksort_Copy.h **** void move_median_to_first(ValueType* result, ValueType* one, ValueType* two, ValueType* three, 
  209:Quicksort_Copy.h **** {
  210:Quicksort_Copy.h ****     if (compare(one, two))
  211:Quicksort_Copy.h ****     {
@@ -14464,18 +14464,18 @@
  237:Quicksort_Copy.h ****     }
  238:Quicksort_Copy.h **** }
  239:Quicksort_Copy.h **** 
- 240:Quicksort_Copy.h **** template<typename TValueType, typename TCompare>
+ 240:Quicksort_Copy.h **** template<typename ValueType, typename TCompare>
  241:Quicksort_Copy.h **** inline 
- 242:Quicksort_Copy.h **** TValueType* unguarded_partition_pivot(TValueType* first, TValueType* last, TCompare compare)
+ 242:Quicksort_Copy.h **** ValueType* unguarded_partition_pivot(ValueType* first, ValueType* last, TCompare compare)
  243:Quicksort_Copy.h **** {
- 244:Quicksort_Copy.h ****     TValueType* mid = first + (last - first) / 2;
+ 244:Quicksort_Copy.h ****     ValueType* mid = first + (last - first) / 2;
  245:Quicksort_Copy.h ****     move_median_to_first(first, first + 1, mid, last - 1, compare);
  246:Quicksort_Copy.h ****     return unguarded_partition(first + 1, last, first, compare);
  247:Quicksort_Copy.h **** }
  248:Quicksort_Copy.h **** 
  249:Quicksort_Copy.h **** 
- 250:Quicksort_Copy.h **** template <typename TValueType, typename TSize, typename TCompare>
- 251:Quicksort_Copy.h **** void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit, TCompare compare)
+ 250:Quicksort_Copy.h **** template <typename ValueType, typename TSize, typename TCompare>
+ 251:Quicksort_Copy.h **** void introsort_loop(ValueType* first, ValueType* last, TSize depth_limit, TCompare compare)
  3897              		.loc 16 251 0
  3898              		.cfi_startproc
  3899              	.LVL267:
@@ -14489,7 +14489,7 @@
  3904      0000
  3905 0afc 0F8EA601 		jle	.L277	#,
  3905      0000
- 3906              	# Quicksort_Copy.h:251: void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit,
+ 3906              	# Quicksort_Copy.h:251: void introsort_loop(ValueType* first, ValueType* last, TSize depth_limit,
  251:Quicksort_Copy.h **** {
  3907              		.loc 16 251 0
  3908 0b02 4156     		pushq	%r14	#
@@ -14522,7 +14522,7 @@
  3932              	.L254:
  3933              	.LBB2513:
  3934              	.LBB2514:
- 3935              	# Quicksort_Copy.h:244:     TValueType* mid = first + (last - first) / 2;
+ 3935              	# Quicksort_Copy.h:244:     ValueType* mid = first + (last - first) / 2;
  244:Quicksort_Copy.h ****     move_median_to_first(first, first + 1, mid, last - 1, compare);
  3936              		.loc 16 244 0
  3937 0b1d 48C1F805 		sarq	$5, %rax	#, tmp126
@@ -14551,7 +14551,7 @@
  3954              	.LVL269:
  3955              	.LBB2544:
  3956              	.LBB2541:
- 3957              	# Quicksort_Copy.h:244:     TValueType* mid = first + (last - first) / 2;
+ 3957              	# Quicksort_Copy.h:244:     ValueType* mid = first + (last - first) / 2;
  244:Quicksort_Copy.h ****     move_median_to_first(first, first + 1, mid, last - 1, compare);
  3958              		.loc 16 244 0
  3959 0b29 48C1E004 		salq	$4, %rax	#, tmp127
@@ -14824,7 +14824,7 @@
  4016              	.LBE2541:
  4017              	.LBE2544:
  4018              	.LBE2512:
- 4019              	# Quicksort_Copy.h:251: void introsort_loop(TValueType* first, TValueType* last, TSize depth_limit,
+ 4019              	# Quicksort_Copy.h:251: void introsort_loop(ValueType* first, ValueType* last, TSize depth_limit,
  251:Quicksort_Copy.h **** {
  4020              		.loc 16 251 0
  4021 0b79 4889F0   		movq	%rsi, %rax	# last, last
@@ -14919,7 +14919,7 @@
  4100              	.LBE2542:
  4101              	.LBE2545:
  4102              	# Quicksort_Copy.h:263:         introsort_loop(cut, last, depth_limit, compare);
- 261:Quicksort_Copy.h ****         TValueType* cut =
+ 261:Quicksort_Copy.h ****         ValueType* cut =
  262:Quicksort_Copy.h ****         unguarded_partition_pivot(first, last, compare);
  263:Quicksort_Copy.h ****         introsort_loop(cut, last, depth_limit, compare);
  4103              		.loc 16 263 0
@@ -14990,7 +14990,7 @@
  4155              	.LVL292:
  4156              	.LBB2553:
  4157              	.LBB2552:
- 4158              	# Quicksort_Copy.h:83:     TValueType value = std::move(*result);
+ 4158              	# Quicksort_Copy.h:83:     ValueType value = std::move(*result);
   83:Quicksort_Copy.h ****     *result = std::move(*first);
  4159              		.loc 16 83 0
  4160 0c1c 488B4D00 		movq	0(%rbp), %rcx	# MEM[base: last_24, offset: 0], value
@@ -15000,7 +15000,7 @@
  4163              		.loc 16 85 0
  4164 0c20 31F6     		xorl	%esi, %esi	#
  4165 0c22 4D89E1   		movq	%r12, %r9	# tmp139,
- 4166              	# Quicksort_Copy.h:83:     TValueType value = std::move(*result);
+ 4166              	# Quicksort_Copy.h:83:     ValueType value = std::move(*result);
   83:Quicksort_Copy.h ****     *result = std::move(*first);
  4167              		.loc 16 83 0
  4168 0c25 4C8B4508 		movq	8(%rbp), %r8	# MEM[base: last_24, offset: 0], value
@@ -17691,7 +17691,7 @@
 1686:/usr/include/c++/7/bits/stl_algo.h **** 			_Compare __comp)
 1687:/usr/include/c++/7/bits/stl_algo.h ****     {
 1688:/usr/include/c++/7/bits/stl_algo.h ****       typedef typename iterator_traits<_InputIterator>::value_type
-1689:/usr/include/c++/7/bits/stl_algo.h **** 	_InputValueType;
+1689:/usr/include/c++/7/bits/stl_algo.h **** 	_InpuValueType;
 1690:/usr/include/c++/7/bits/stl_algo.h ****       typedef iterator_traits<_RandomAccessIterator> _RItTraits;
 1691:/usr/include/c++/7/bits/stl_algo.h ****       typedef typename _RItTraits::difference_type _DistanceType;
 1692:/usr/include/c++/7/bits/stl_algo.h **** 
@@ -17712,7 +17712,7 @@
 1707:/usr/include/c++/7/bits/stl_algo.h **** 	    std::__adjust_heap(__result_first, _DistanceType(0),
 1708:/usr/include/c++/7/bits/stl_algo.h **** 			       _DistanceType(__result_real_last
 1709:/usr/include/c++/7/bits/stl_algo.h **** 					     - __result_first),
-1710:/usr/include/c++/7/bits/stl_algo.h **** 			       _InputValueType(*__first), __comp);
+1710:/usr/include/c++/7/bits/stl_algo.h **** 			       _InpuValueType(*__first), __comp);
 1711:/usr/include/c++/7/bits/stl_algo.h **** 	  ++__first;
 1712:/usr/include/c++/7/bits/stl_algo.h **** 	}
 1713:/usr/include/c++/7/bits/stl_algo.h ****       std::__sort_heap(__result_first, __result_real_last, __comp);
@@ -17745,18 +17745,18 @@
 1740:/usr/include/c++/7/bits/stl_algo.h ****     {
 1741:/usr/include/c++/7/bits/stl_algo.h **** #ifdef _GLIBCXX_CONCEPT_CHECKS
 1742:/usr/include/c++/7/bits/stl_algo.h ****       typedef typename iterator_traits<_InputIterator>::value_type
-1743:/usr/include/c++/7/bits/stl_algo.h **** 	_InputValueType;
+1743:/usr/include/c++/7/bits/stl_algo.h **** 	_InpuValueType;
 1744:/usr/include/c++/7/bits/stl_algo.h ****       typedef typename iterator_traits<_RandomAccessIterator>::value_type
-1745:/usr/include/c++/7/bits/stl_algo.h **** 	_OutputValueType;
+1745:/usr/include/c++/7/bits/stl_algo.h **** 	_OutpuValueType;
 1746:/usr/include/c++/7/bits/stl_algo.h **** #endif
 1747:/usr/include/c++/7/bits/stl_algo.h **** 
 1748:/usr/include/c++/7/bits/stl_algo.h ****       // concept requirements
 1749:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
-1750:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_ConvertibleConcept<_InputValueType,
-1751:/usr/include/c++/7/bits/stl_algo.h **** 				  _OutputValueType>)
-1752:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_LessThanOpConcept<_InputValueType,
-1753:/usr/include/c++/7/bits/stl_algo.h **** 						     _OutputValueType>)
-1754:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_LessThanComparableConcept<_OutputValueType>)
+1750:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_ConvertibleConcept<_InpuValueType,
+1751:/usr/include/c++/7/bits/stl_algo.h **** 				  _OutpuValueType>)
+1752:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_LessThanOpConcept<_InpuValueType,
+1753:/usr/include/c++/7/bits/stl_algo.h **** 						     _OutpuValueType>)
+1754:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_LessThanComparableConcept<_OutpuValueType>)
 1755:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_requires_valid_range(__first, __last);
 1756:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_requires_irreflexive(__first, __last);
 1757:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_requires_valid_range(__result_first, __result_last);
@@ -17796,21 +17796,21 @@
 1791:/usr/include/c++/7/bits/stl_algo.h ****     {
 1792:/usr/include/c++/7/bits/stl_algo.h **** #ifdef _GLIBCXX_CONCEPT_CHECKS
 1793:/usr/include/c++/7/bits/stl_algo.h ****       typedef typename iterator_traits<_InputIterator>::value_type
-1794:/usr/include/c++/7/bits/stl_algo.h **** 	_InputValueType;
+1794:/usr/include/c++/7/bits/stl_algo.h **** 	_InpuValueType;
 1795:/usr/include/c++/7/bits/stl_algo.h ****       typedef typename iterator_traits<_RandomAccessIterator>::value_type
-1796:/usr/include/c++/7/bits/stl_algo.h **** 	_OutputValueType;
+1796:/usr/include/c++/7/bits/stl_algo.h **** 	_OutpuValueType;
 1797:/usr/include/c++/7/bits/stl_algo.h **** #endif
 1798:/usr/include/c++/7/bits/stl_algo.h **** 
 1799:/usr/include/c++/7/bits/stl_algo.h ****       // concept requirements
 1800:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
 1801:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_Mutable_RandomAccessIteratorConcept<
 1802:/usr/include/c++/7/bits/stl_algo.h **** 				  _RandomAccessIterator>)
-1803:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_ConvertibleConcept<_InputValueType,
-1804:/usr/include/c++/7/bits/stl_algo.h **** 				  _OutputValueType>)
+1803:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_ConvertibleConcept<_InpuValueType,
+1804:/usr/include/c++/7/bits/stl_algo.h **** 				  _OutpuValueType>)
 1805:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_BinaryPredicateConcept<_Compare,
-1806:/usr/include/c++/7/bits/stl_algo.h **** 				  _InputValueType, _OutputValueType>)
+1806:/usr/include/c++/7/bits/stl_algo.h **** 				  _InpuValueType, _OutpuValueType>)
 1807:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_function_requires(_BinaryPredicateConcept<_Compare,
-1808:/usr/include/c++/7/bits/stl_algo.h **** 				  _OutputValueType, _OutputValueType>)
+1808:/usr/include/c++/7/bits/stl_algo.h **** 				  _OutpuValueType, _OutpuValueType>)
 1809:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_requires_valid_range(__first, __last);
 1810:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_requires_irreflexive_pred(__first, __last, __comp);
 1811:/usr/include/c++/7/bits/stl_algo.h ****       __glibcxx_requires_valid_range(__result_first, __result_last);
@@ -18870,8 +18870,8 @@
  5256              	.LBE2903:
  5257              	# Quicksort_Copy.h:273:         introsort_loop(first, last, (int64_t) custommath::intlog2((int) (la
  267:Quicksort_Copy.h **** 
- 268:Quicksort_Copy.h **** template <typename TValueType, typename TCompare>
- 269:Quicksort_Copy.h **** void Quicksort_Copy_Stl(TValueType* first, TValueType* last, TCompare compare)
+ 268:Quicksort_Copy.h **** template <typename ValueType, typename TCompare>
+ 269:Quicksort_Copy.h **** void Quicksort_Copy_Stl(ValueType* first, ValueType* last, TCompare compare)
  270:Quicksort_Copy.h **** {
  271:Quicksort_Copy.h ****     if (first != last)
  272:Quicksort_Copy.h **** 	{
@@ -18917,7 +18917,7 @@
  5291              	.LBB2944:
  5292              	.LBB2910:
  5293              	.LBB2911:
- 5294              	# Quicksort_Copy.h:154:     for (TValueType* i = first + 1; i != last; ++i)
+ 5294              	# Quicksort_Copy.h:154:     for (ValueType* i = first + 1; i != last; ++i)
  154:Quicksort_Copy.h ****     {
  5295              		.loc 16 154 0
  5296 0f97 488D4510 		leaq	16(%rbp), %rax	#, tmp250
@@ -19543,7 +19543,7 @@
  5338              	.LBE2914:
  5339              	.LBE2913:
  5340              	.LBE2912:
- 5341              	# Quicksort_Copy.h:154:     for (TValueType* i = first + 1; i != last; ++i)
+ 5341              	# Quicksort_Copy.h:154:     for (ValueType* i = first + 1; i != last; ++i)
  154:Quicksort_Copy.h ****     {
  5342              		.loc 16 154 0
  5343 0fdc 4983C610 		addq	$16, %r14	#, i
@@ -19558,7 +19558,7 @@
  5351              	.LVL405:
  5352              	.LBE2920:
  5353              	.LBE2927:
- 5354              	# Quicksort_Copy.h:154:     for (TValueType* i = first + 1; i != last; ++i)
+ 5354              	# Quicksort_Copy.h:154:     for (ValueType* i = first + 1; i != last; ++i)
  154:Quicksort_Copy.h ****     {
  5355              		.loc 16 154 0
  5356 0fe8 4D39F4   		cmpq	%r14, %r12	# i, _87
@@ -19630,7 +19630,7 @@
  5411              	.LBE2924:
  5412              	.LBE2923:
  5413              	.LBE2928:
- 5414              	# Quicksort_Copy.h:154:     for (TValueType* i = first + 1; i != last; ++i)
+ 5414              	# Quicksort_Copy.h:154:     for (ValueType* i = first + 1; i != last; ++i)
  154:Quicksort_Copy.h ****     {
  5415              		.loc 16 154 0
  5416 102d 4983C610 		addq	$16, %r14	#, i
@@ -19649,8 +19649,8 @@
  5427              	.LBB2932:
  5428              	.LBB2933:
  5429              	.LBB2934:
- 5430              	# Quicksort_Copy.h:125:     TValueType val = std::move(*last);
- 125:Quicksort_Copy.h ****     TValueType* next = last;
+ 5430              	# Quicksort_Copy.h:125:     ValueType val = std::move(*last);
+ 125:Quicksort_Copy.h ****     ValueType* next = last;
  5431              		.loc 16 125 0
  5432 1040 498B0E   		movq	(%r14), %rcx	# MEM[base: i_208, offset: 0], val
  5433              	.LVL416:
@@ -19694,7 +19694,7 @@
  5462 1074 77EA     		ja	.L380	#,
  5463              	.LBE2934:
  5464              	.LBE2933:
- 5465              	# Quicksort_Copy.h:140:     for (TValueType* i = first; i != last; ++i)
+ 5465              	# Quicksort_Copy.h:140:     for (ValueType* i = first; i != last; ++i)
  140:Quicksort_Copy.h ****     {
  5466              		.loc 16 140 0
  5467 1076 4983C610 		addq	$16, %r14	#, i
@@ -19709,7 +19709,7 @@
  5475              	.LVL422:
  5476              	.LBE2935:
  5477              	.LBE2938:
- 5478              	# Quicksort_Copy.h:140:     for (TValueType* i = first; i != last; ++i)
+ 5478              	# Quicksort_Copy.h:140:     for (ValueType* i = first; i != last; ++i)
  140:Quicksort_Copy.h ****     {
  5479              		.loc 16 140 0
  5480 1081 4D39F7   		cmpq	%r14, %r15	# i, _235
@@ -19739,12 +19739,12 @@
    9:ArrayHelpers.h **** #include "StructHelpers.generated.h"
   10:ArrayHelpers.h **** #include "DebugHelper.h"
   11:ArrayHelpers.h **** 
-  12:ArrayHelpers.h **** template<typename TValueType>
-  13:ArrayHelpers.h **** void PrintArray(TValueType* source, int arraySize, std::string comment, uint64_t(*getKeyFunc)(TValu
+  12:ArrayHelpers.h **** template<typename ValueType>
+  13:ArrayHelpers.h **** void PrintArray(ValueType* source, int arraySize, std::string comment, uint64_t(*getKeyFunc)(TValu
   14:ArrayHelpers.h **** {
   15:ArrayHelpers.h ****     if (getKeyFunc == nullptr)
   16:ArrayHelpers.h ****     {
-  17:ArrayHelpers.h ****         getKeyFunc = &GetKey<TValueType>;
+  17:ArrayHelpers.h ****         getKeyFunc = &GetKey<ValueType>;
   18:ArrayHelpers.h ****     }
   19:ArrayHelpers.h ****     printf("%s: ", comment.c_str());
   20:ArrayHelpers.h ****     for (int i = 0; i < arraySize; i += 1)
@@ -19754,19 +19754,19 @@
   24:ArrayHelpers.h ****     printf("\n");
   25:ArrayHelpers.h **** }
   26:ArrayHelpers.h **** 
-  27:ArrayHelpers.h **** template <typename TValueType>
-  28:ArrayHelpers.h **** void PrintVector(std::vector<TValueType> source, std::string comment)
+  27:ArrayHelpers.h **** template <typename ValueType>
+  28:ArrayHelpers.h **** void PrintVector(std::vector<ValueType> source, std::string comment)
   29:ArrayHelpers.h **** {
   30:ArrayHelpers.h ****     printf("%s: ", comment.c_str());
-  31:ArrayHelpers.h ****     for (TValueType ele : source)
+  31:ArrayHelpers.h ****     for (ValueType ele : source)
   32:ArrayHelpers.h ****     {
   33:ArrayHelpers.h ****         printf("%" PRIu64 ", ", GetKey(ele));
   34:ArrayHelpers.h ****     }
   35:ArrayHelpers.h ****     printf("\n");
   36:ArrayHelpers.h **** }
   37:ArrayHelpers.h **** 
-  38:ArrayHelpers.h **** template <typename TValueType>
-  39:ArrayHelpers.h **** void CopyArray(TValueType* source, std::vector<TValueType>& destination, int arraySize) 
+  38:ArrayHelpers.h **** template <typename ValueType>
+  39:ArrayHelpers.h **** void CopyArray(ValueType* source, std::vector<ValueType>& destination, int arraySize) 
   40:ArrayHelpers.h **** {
   41:ArrayHelpers.h ****     for (int i = 0; i < arraySize; i += 1) 
   42:ArrayHelpers.h ****     {
@@ -19774,8 +19774,8 @@
   44:ArrayHelpers.h ****     }
   45:ArrayHelpers.h **** }
   46:ArrayHelpers.h **** 
-  47:ArrayHelpers.h **** template <typename TValueType>
-  48:ArrayHelpers.h **** void CopyArray(TValueType* source, TValueType* destination, size_t arraySize)
+  47:ArrayHelpers.h **** template <typename ValueType>
+  48:ArrayHelpers.h **** void CopyArray(ValueType* source, ValueType* destination, size_t arraySize)
   49:ArrayHelpers.h **** {
   50:ArrayHelpers.h ****     for (int i = 0; i < arraySize; i += 1) 
   51:ArrayHelpers.h ****     {
@@ -20294,7 +20294,7 @@
  5898              	.LVL466:
  5899              	.LBE2936:
  5900              	.LBE2939:
- 5901              	# Quicksort_Copy.h:140:     for (TValueType* i = first; i != last; ++i)
+ 5901              	# Quicksort_Copy.h:140:     for (ValueType* i = first; i != last; ++i)
  140:Quicksort_Copy.h ****     {
  5902              		.loc 16 140 0
  5903 129c 4983C610 		addq	$16, %r14	#, i
@@ -20309,7 +20309,7 @@
  5911              	.LVL468:
  5912              	.LBE2937:
  5913              	.LBE2940:
- 5914              	# Quicksort_Copy.h:140:     for (TValueType* i = first; i != last; ++i)
+ 5914              	# Quicksort_Copy.h:140:     for (ValueType* i = first; i != last; ++i)
  140:Quicksort_Copy.h ****     {
  5915              		.loc 16 140 0
  5916 12a7 4D39F7   		cmpq	%r14, %r15	# i, _235

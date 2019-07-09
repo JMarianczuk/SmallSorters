@@ -23,6 +23,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
             "networks/BoseNelsonParameter.generated.h",
             "networks/BoseNelsonRecursive.generated.h",
             "networks/Batcher.generated.h",
+            "conditional_swap/ConditionalSwapX86.h",
             "VerifyNetworks.h",
             "DebugHelper.h");
         gen->WriteLine("");
@@ -40,7 +41,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
                         gen->WriteLine("debug::WriteLine(\"verifying ", name, " networks\");");
                         gen->WriteForLoop("arraySize", 2, 17, [=](){
                             gen->WriteLine("debug::WriteLine(\"verifying size \", std::to_string(arraySize));");
-                            gen->WriteLine("bool result = verification::VerifyNetwork(arraySize, &networks::", name, "::sortN<int>);");
+                            gen->WriteLine("bool result = verification::VerifyNetwork(arraySize, &networks::", name, "::sortN<conditional_swap::CS_Int, int>);");
                             gen->WriteLine("if (!result)");
                             gen->WriteBlock([=]{
                                 gen->WriteLine("debug::WriteLine(\"incorrect network: '", name, "' for size '\", std::to_string(arraySize), \"'.\");");

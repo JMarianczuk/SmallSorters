@@ -9,12 +9,12 @@
 #include "StructHelpers.generated.h"
 #include "DebugHelper.h"
 
-template<typename TValueType>
-void PrintArray(TValueType* source, int arraySize, std::string comment, uint64_t(*getKeyFunc)(TValueType&) = nullptr)
+template<typename ValueType>
+void PrintArray(ValueType* source, int arraySize, std::string comment, uint64_t(*getKeyFunc)(ValueType&) = nullptr)
 {
     if (getKeyFunc == nullptr)
     {
-        getKeyFunc = &GetKey<TValueType>;
+        getKeyFunc = &GetKey<ValueType>;
     }
     printf("%s: ", comment.c_str());
     for (int i = 0; i < arraySize; i += 1)
@@ -24,19 +24,19 @@ void PrintArray(TValueType* source, int arraySize, std::string comment, uint64_t
     printf("\n");
 }
 
-template <typename TValueType>
-void PrintVector(std::vector<TValueType> source, std::string comment)
+template <typename ValueType>
+void PrintVector(std::vector<ValueType> source, std::string comment)
 {
     printf("%s: ", comment.c_str());
-    for (TValueType ele : source)
+    for (ValueType ele : source)
     {
         printf("%" PRIu64 ", ", GetKey(ele));
     }
     printf("\n");
 }
 
-template <typename TValueType>
-void CopyArray(TValueType* source, std::vector<TValueType>& destination, int arraySize) 
+template <typename ValueType>
+void CopyArray(ValueType* source, std::vector<ValueType>& destination, int arraySize) 
 {
     for (int i = 0; i < arraySize; i += 1) 
     {
@@ -44,8 +44,8 @@ void CopyArray(TValueType* source, std::vector<TValueType>& destination, int arr
     }
 }
 
-template <typename TValueType>
-void CopyArray(TValueType* source, TValueType* destination, size_t arraySize)
+template <typename ValueType>
+void CopyArray(ValueType* source, ValueType* destination, size_t arraySize)
 {
     for (int i = 0; i < arraySize; i += 1) 
     {

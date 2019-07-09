@@ -168,7 +168,7 @@ void WriteMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     if (measureRandomGeneration) 
     {
@@ -176,8 +176,23 @@ void WriteMeasureLine(
     }
 }
 
-
 void WriteCompleteSorterMeasureLine(
+    CodeGenerator* gen,
+    const std::vector<SortableStruct*>* structs,
+    std::string measureMethod,
+    std::string sorter,
+    std::string sortMethod,
+    std::string baseCaseSortMethod)
+{
+    for (SortableStruct *sortableStruct : *structs)
+    {
+        gen->WriteLine("randomisation::SetSeed(seed);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
+    }
+    WriteMeasureRandomLine(gen, structs, sorter);
+}
+
+void WriteSampleSortMeasureLine(
     CodeGenerator* gen,
     const std::vector<SortableStruct*>* structs,
     std::string measureMethod,
@@ -189,7 +204,7 @@ void WriteCompleteSorterMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
@@ -205,7 +220,7 @@ void WriteCompleteSorterWrapperMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ", &", baseCaseSortMethod, "<", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ", &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
@@ -439,7 +454,10 @@ void GenerateMeasurementMethod(
                 }
             }
         }, "");
-        normalGen->WriteIncludeQuotes("Measurement.generated.h");
+        normalGen->WriteIncludeQuotes(
+            "Measurement.generated.h",
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h");
         normalGen->WriteNamespace("measurement", [=]{
             WriteMeasureMethod(
                 normalGen, 
@@ -456,7 +474,10 @@ void GenerateMeasurementMethod(
                 }
             );
         }, "");
-        inrowGen->WriteIncludeQuotes("Measurement.generated.h");
+        inrowGen->WriteIncludeQuotes(
+            "Measurement.generated.h",
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h");
         inrowGen->WriteNamespace("measurement", [=]{
             WriteMeasureMethod(
                 inrowGen,
@@ -476,6 +497,8 @@ void GenerateMeasurementMethod(
         }, "");
         completeGen->WriteIncludeQuotes(
             "Measurement.generated.h",
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h",
             "../QuickSort.h",
             "../StdSortWrapper.h");
         completeGen->WriteNamespace("measurement", [=]{
@@ -492,7 +515,6 @@ void GenerateMeasurementMethod(
                         "MeasureCompleteSorter",
                         BuildSorterName(measureParams._Sorter, measureParams._NetworkType, MeasureType::Complete, measureParams._BoseNelsonNetworkType),
                         "quicksort::sort",
-                        "",
                         measureParams.SortMethod);
                     completeGen->WriteLine("");
                 },
@@ -518,6 +540,8 @@ void GenerateMeasurementMethod(
         }, "");
         sampleSortGen->WriteIncludeQuotes(
             "Measurement.generated.h",
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h",
             "../SampleSort.generated.h",
             "MeasurementSampleSort.Helper.h",
             "../StdSortWrapper.h");
@@ -588,7 +612,7 @@ void GenerateMeasurementMethod(
                             {
                                 std::string blockStr = std::to_string(blockSize);
                                 std::string sampleSortName = "SampleSort" + splitStr + "Splitters" + oversampleStr + "OversamplingFactor" + blockStr + "BlockSize";
-                                WriteCompleteSorterMeasureLine(
+                                WriteSampleSortMeasureLine(
                                     sampleSortGen,
                                     measureParams.Structs,
                                     "MeasureSampleSort",
@@ -610,7 +634,7 @@ void GenerateMeasurementMethod(
                 [=] {
                     Multicall<MeasureParams>(
                         [=](MeasureParams measureParams){
-                            WriteCompleteSorterMeasureLine(
+                            WriteSampleSortMeasureLine(
                                 sampleSortGen,
                                 measureParams.Structs,
                                 "MeasureSampleSort",

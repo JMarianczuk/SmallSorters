@@ -27,8 +27,8 @@ void Dispose(Network network);
 ConditionalSwap GetSwap(int leftIndex, int rightIndex);
 nlohmann::json SwapToJson(const ConditionalSwap swap);
 nlohmann::json NetworkToJson(const Network network);
-template <typename TValueType>
-void ArrayWrite(TValueType* arr, int arrSize, TValueType value);
+template <typename ValueType>
+void ArrayWrite(ValueType* arr, int arrSize, ValueType value);
 void GetLevels(
     std::vector<std::vector<ConditionalSwap>*>& levels, 
     std::vector<ConditionalSwap>* source, 

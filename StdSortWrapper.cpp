@@ -5,23 +5,24 @@
 #include "Quicksort_Copy2.h"
 #include "SampleSort.generated.h"
 #include "StructHelpers.generated.h"
+#include "conditional_swap/ConditionalSwapGeneric.h"
 
 namespace measurement
 {
-    template <typename TValueType>
-    bool NormalCompare(TValueType& left, TValueType& right)
+    template <typename ValueType>
+    bool NormalCompare(ValueType& left, ValueType& right)
     {
         return left < right;
     }
 
-    template <typename TValueType>
-    bool IteratorCompare(TValueType* left, TValueType* right)
+    template <typename ValueType>
+    bool IteratorCompare(ValueType* left, ValueType* right)
     {
         return *left < *right;
     }
 
-    template <typename TValueType>
-    bool KeySortableCompare(uint64_t& key, TValueType& value)
+    template <typename ValueType>
+    bool KeySortableCompare(uint64_t& key, ValueType& value)
     {
         return key < GetKey(value);
     }
@@ -50,16 +51,16 @@ namespace measurement
         bool(*compareFunc)(SortableRef left, SortableRef right),
         void(*sortFunc)(SortableRef*, size_t))
     {
-        quicksortcopy::Quicksort_Copy_Msvc(first, last, compareFunc, sortFunc);
+        quicksortcopy::Quicksort_Copy_Msvc<conditional_swap::CS_Default>(first, last, compareFunc, sortFunc);
     }
 
     void SampleSortWrapper(
-        SortableRef_FourCmovTemp_Split* first,
-        SortableRef_FourCmovTemp_Split* last,
-        bool(*compareFunc)(SortableRef_FourCmovTemp_Split left,SortableRef_FourCmovTemp_Split right),
-        void(*sortFunc)(SortableRef_FourCmovTemp_Split*, size_t))
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right),
+        void(*sortFunc)(SortableRef*, size_t))
     {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef_FourCmovTemp_Split>, &GetKey<SortableRef_FourCmovTemp_Split>);
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef>, &GetKey<SortableRef>);
     }
     
 } // namespace measurement

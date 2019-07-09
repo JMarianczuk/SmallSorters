@@ -11,300 +11,301 @@
 #ifndef BOSENELSON_PARAMETER_GENERATED_H
 #define BOSENELSON_PARAMETER_GENERATED_H
 
-#include "../conditional_swap/NetworkSort.h"
+#include "../conditional_swap/ConditionalSwapGeneric.h"
+#include "../conditional_swap/ConditionalSwapX86.h"
 namespace networks
 {
 namespace bosenelsonparameter
 {
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_1_1(ValueType& left0, ValueType& right0)
 {
-	networks::ConditionalSwap(left0, right0);
+	CSwap::swap(left0, right0);
 }
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort2(ValueType& element0, ValueType& element1)
 {
-	networks::bosenelsonparameter::merge_1_1(element0, element1);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(element0, element1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_1_2(ValueType& left0, ValueType& right0, ValueType& right1)
 {
-	networks::ConditionalSwap(left0, right1);
-	networks::ConditionalSwap(left0, right0);
+	CSwap::swap(left0, right1);
+	CSwap::swap(left0, right0);
 }
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort3(ValueType& element0, ValueType& element1, ValueType& element2)
 {
-	networks::bosenelsonparameter::sort2(element1, element2);
-	networks::bosenelsonparameter::merge_1_2(element0, element1, element2);
+	networks::bosenelsonparameter::sort2<CSwap>(element1, element2);
+	networks::bosenelsonparameter::merge_1_2<CSwap>(element0, element1, element2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_2_2(ValueType& left0, ValueType& left1, ValueType& right0, ValueType& right1)
 {
-	networks::bosenelsonparameter::merge_1_1(left0, right0);
-	networks::bosenelsonparameter::merge_1_1(left1, right1);
-	networks::bosenelsonparameter::merge_1_1(left1, right0);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(left0, right0);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(left1, right1);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(left1, right0);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort4(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3)
 {
-	networks::bosenelsonparameter::sort2(element0, element1);
-	networks::bosenelsonparameter::sort2(element2, element3);
-	networks::bosenelsonparameter::merge_2_2(element0, element1, element2, element3);
+	networks::bosenelsonparameter::sort2<CSwap>(element0, element1);
+	networks::bosenelsonparameter::sort2<CSwap>(element2, element3);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(element0, element1, element2, element3);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_2_3(ValueType& left0, ValueType& left1, ValueType& right0, ValueType& right1, ValueType& right2)
 {
-	networks::bosenelsonparameter::merge_1_2(left0, right0, right1);
-	networks::bosenelsonparameter::merge_1_1(left1, right2);
-	networks::bosenelsonparameter::merge_1_2(left1, right0, right1);
+	networks::bosenelsonparameter::merge_1_2<CSwap>(left0, right0, right1);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(left1, right2);
+	networks::bosenelsonparameter::merge_1_2<CSwap>(left1, right0, right1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort5(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4)
 {
-	networks::bosenelsonparameter::sort2(element0, element1);
-	networks::bosenelsonparameter::sort3(element2, element3, element4);
-	networks::bosenelsonparameter::merge_2_3(element0, element1, element2, element3, element4);
+	networks::bosenelsonparameter::sort2<CSwap>(element0, element1);
+	networks::bosenelsonparameter::sort3<CSwap>(element2, element3, element4);
+	networks::bosenelsonparameter::merge_2_3<CSwap>(element0, element1, element2, element3, element4);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_2_1(ValueType& left0, ValueType& left1, ValueType& right0)
 {
-	networks::ConditionalSwap(left0, right0);
-	networks::ConditionalSwap(left1, right0);
+	CSwap::swap(left0, right0);
+	CSwap::swap(left1, right0);
 }
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_3_3(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& right0, ValueType& right1, ValueType& right2)
 {
-	networks::bosenelsonparameter::merge_1_1(left0, right0);
-	networks::bosenelsonparameter::merge_2_2(left1, left2, right1, right2);
-	networks::bosenelsonparameter::merge_2_1(left1, left2, right0);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(left0, right0);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left1, left2, right1, right2);
+	networks::bosenelsonparameter::merge_2_1<CSwap>(left1, left2, right0);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort6(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5)
 {
-	networks::bosenelsonparameter::sort3(element0, element1, element2);
-	networks::bosenelsonparameter::sort3(element3, element4, element5);
-	networks::bosenelsonparameter::merge_3_3(element0, element1, element2, element3, element4, element5);
+	networks::bosenelsonparameter::sort3<CSwap>(element0, element1, element2);
+	networks::bosenelsonparameter::sort3<CSwap>(element3, element4, element5);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(element0, element1, element2, element3, element4, element5);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_3_4(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3)
 {
-	networks::bosenelsonparameter::merge_1_2(left0, right0, right1);
-	networks::bosenelsonparameter::merge_2_2(left1, left2, right2, right3);
-	networks::bosenelsonparameter::merge_2_2(left1, left2, right0, right1);
+	networks::bosenelsonparameter::merge_1_2<CSwap>(left0, right0, right1);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left1, left2, right2, right3);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left1, left2, right0, right1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort7(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6)
 {
-	networks::bosenelsonparameter::sort3(element0, element1, element2);
-	networks::bosenelsonparameter::sort4(element3, element4, element5, element6);
-	networks::bosenelsonparameter::merge_3_4(element0, element1, element2, element3, element4, element5, element6);
+	networks::bosenelsonparameter::sort3<CSwap>(element0, element1, element2);
+	networks::bosenelsonparameter::sort4<CSwap>(element3, element4, element5, element6);
+	networks::bosenelsonparameter::merge_3_4<CSwap>(element0, element1, element2, element3, element4, element5, element6);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_4_4(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3)
 {
-	networks::bosenelsonparameter::merge_2_2(left0, left1, right0, right1);
-	networks::bosenelsonparameter::merge_2_2(left2, left3, right2, right3);
-	networks::bosenelsonparameter::merge_2_2(left2, left3, right0, right1);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left0, left1, right0, right1);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left2, left3, right2, right3);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left2, left3, right0, right1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort8(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7)
 {
-	networks::bosenelsonparameter::sort4(element0, element1, element2, element3);
-	networks::bosenelsonparameter::sort4(element4, element5, element6, element7);
-	networks::bosenelsonparameter::merge_4_4(element0, element1, element2, element3, element4, element5, element6, element7);
+	networks::bosenelsonparameter::sort4<CSwap>(element0, element1, element2, element3);
+	networks::bosenelsonparameter::sort4<CSwap>(element4, element5, element6, element7);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_4_5(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4)
 {
-	networks::bosenelsonparameter::merge_2_3(left0, left1, right0, right1, right2);
-	networks::bosenelsonparameter::merge_2_2(left2, left3, right3, right4);
-	networks::bosenelsonparameter::merge_2_3(left2, left3, right0, right1, right2);
+	networks::bosenelsonparameter::merge_2_3<CSwap>(left0, left1, right0, right1, right2);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left2, left3, right3, right4);
+	networks::bosenelsonparameter::merge_2_3<CSwap>(left2, left3, right0, right1, right2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort9(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8)
 {
-	networks::bosenelsonparameter::sort4(element0, element1, element2, element3);
-	networks::bosenelsonparameter::sort5(element4, element5, element6, element7, element8);
-	networks::bosenelsonparameter::merge_4_5(element0, element1, element2, element3, element4, element5, element6, element7, element8);
+	networks::bosenelsonparameter::sort4<CSwap>(element0, element1, element2, element3);
+	networks::bosenelsonparameter::sort5<CSwap>(element4, element5, element6, element7, element8);
+	networks::bosenelsonparameter::merge_4_5<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_3_2(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& right0, ValueType& right1)
 {
-	networks::bosenelsonparameter::merge_1_1(left0, right0);
-	networks::bosenelsonparameter::merge_2_1(left1, left2, right1);
-	networks::bosenelsonparameter::merge_2_1(left1, left2, right0);
+	networks::bosenelsonparameter::merge_1_1<CSwap>(left0, right0);
+	networks::bosenelsonparameter::merge_2_1<CSwap>(left1, left2, right1);
+	networks::bosenelsonparameter::merge_2_1<CSwap>(left1, left2, right0);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_5_5(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4)
 {
-	networks::bosenelsonparameter::merge_2_2(left0, left1, right0, right1);
-	networks::bosenelsonparameter::merge_3_3(left2, left3, left4, right2, right3, right4);
-	networks::bosenelsonparameter::merge_3_2(left2, left3, left4, right0, right1);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left0, left1, right0, right1);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left2, left3, left4, right2, right3, right4);
+	networks::bosenelsonparameter::merge_3_2<CSwap>(left2, left3, left4, right0, right1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort10(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9)
 {
-	networks::bosenelsonparameter::sort5(element0, element1, element2, element3, element4);
-	networks::bosenelsonparameter::sort5(element5, element6, element7, element8, element9);
-	networks::bosenelsonparameter::merge_5_5(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9);
+	networks::bosenelsonparameter::sort5<CSwap>(element0, element1, element2, element3, element4);
+	networks::bosenelsonparameter::sort5<CSwap>(element5, element6, element7, element8, element9);
+	networks::bosenelsonparameter::merge_5_5<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_5_6(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4, ValueType& right5)
 {
-	networks::bosenelsonparameter::merge_2_3(left0, left1, right0, right1, right2);
-	networks::bosenelsonparameter::merge_3_3(left2, left3, left4, right3, right4, right5);
-	networks::bosenelsonparameter::merge_3_3(left2, left3, left4, right0, right1, right2);
+	networks::bosenelsonparameter::merge_2_3<CSwap>(left0, left1, right0, right1, right2);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left2, left3, left4, right3, right4, right5);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left2, left3, left4, right0, right1, right2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort11(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9, ValueType& element10)
 {
-	networks::bosenelsonparameter::sort5(element0, element1, element2, element3, element4);
-	networks::bosenelsonparameter::sort6(element5, element6, element7, element8, element9, element10);
-	networks::bosenelsonparameter::merge_5_6(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10);
+	networks::bosenelsonparameter::sort5<CSwap>(element0, element1, element2, element3, element4);
+	networks::bosenelsonparameter::sort6<CSwap>(element5, element6, element7, element8, element9, element10);
+	networks::bosenelsonparameter::merge_5_6<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_6_6(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& left5, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4, ValueType& right5)
 {
-	networks::bosenelsonparameter::merge_3_3(left0, left1, left2, right0, right1, right2);
-	networks::bosenelsonparameter::merge_3_3(left3, left4, left5, right3, right4, right5);
-	networks::bosenelsonparameter::merge_3_3(left3, left4, left5, right0, right1, right2);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left0, left1, left2, right0, right1, right2);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left3, left4, left5, right3, right4, right5);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left3, left4, left5, right0, right1, right2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort12(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9, ValueType& element10, ValueType& element11)
 {
-	networks::bosenelsonparameter::sort6(element0, element1, element2, element3, element4, element5);
-	networks::bosenelsonparameter::sort6(element6, element7, element8, element9, element10, element11);
-	networks::bosenelsonparameter::merge_6_6(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11);
+	networks::bosenelsonparameter::sort6<CSwap>(element0, element1, element2, element3, element4, element5);
+	networks::bosenelsonparameter::sort6<CSwap>(element6, element7, element8, element9, element10, element11);
+	networks::bosenelsonparameter::merge_6_6<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_6_7(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& left5, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4, ValueType& right5, ValueType& right6)
 {
-	networks::bosenelsonparameter::merge_3_4(left0, left1, left2, right0, right1, right2, right3);
-	networks::bosenelsonparameter::merge_3_3(left3, left4, left5, right4, right5, right6);
-	networks::bosenelsonparameter::merge_3_4(left3, left4, left5, right0, right1, right2, right3);
+	networks::bosenelsonparameter::merge_3_4<CSwap>(left0, left1, left2, right0, right1, right2, right3);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left3, left4, left5, right4, right5, right6);
+	networks::bosenelsonparameter::merge_3_4<CSwap>(left3, left4, left5, right0, right1, right2, right3);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort13(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9, ValueType& element10, ValueType& element11, ValueType& element12)
 {
-	networks::bosenelsonparameter::sort6(element0, element1, element2, element3, element4, element5);
-	networks::bosenelsonparameter::sort7(element6, element7, element8, element9, element10, element11, element12);
-	networks::bosenelsonparameter::merge_6_7(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12);
+	networks::bosenelsonparameter::sort6<CSwap>(element0, element1, element2, element3, element4, element5);
+	networks::bosenelsonparameter::sort7<CSwap>(element6, element7, element8, element9, element10, element11, element12);
+	networks::bosenelsonparameter::merge_6_7<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_4_3(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& right0, ValueType& right1, ValueType& right2)
 {
-	networks::bosenelsonparameter::merge_2_2(left0, left1, right0, right1);
-	networks::bosenelsonparameter::merge_2_1(left2, left3, right2);
-	networks::bosenelsonparameter::merge_2_2(left2, left3, right0, right1);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left0, left1, right0, right1);
+	networks::bosenelsonparameter::merge_2_1<CSwap>(left2, left3, right2);
+	networks::bosenelsonparameter::merge_2_2<CSwap>(left2, left3, right0, right1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_7_7(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& left5, ValueType& left6, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4, ValueType& right5, ValueType& right6)
 {
-	networks::bosenelsonparameter::merge_3_3(left0, left1, left2, right0, right1, right2);
-	networks::bosenelsonparameter::merge_4_4(left3, left4, left5, left6, right3, right4, right5, right6);
-	networks::bosenelsonparameter::merge_4_3(left3, left4, left5, left6, right0, right1, right2);
+	networks::bosenelsonparameter::merge_3_3<CSwap>(left0, left1, left2, right0, right1, right2);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(left3, left4, left5, left6, right3, right4, right5, right6);
+	networks::bosenelsonparameter::merge_4_3<CSwap>(left3, left4, left5, left6, right0, right1, right2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort14(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9, ValueType& element10, ValueType& element11, ValueType& element12, ValueType& element13)
 {
-	networks::bosenelsonparameter::sort7(element0, element1, element2, element3, element4, element5, element6);
-	networks::bosenelsonparameter::sort7(element7, element8, element9, element10, element11, element12, element13);
-	networks::bosenelsonparameter::merge_7_7(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13);
+	networks::bosenelsonparameter::sort7<CSwap>(element0, element1, element2, element3, element4, element5, element6);
+	networks::bosenelsonparameter::sort7<CSwap>(element7, element8, element9, element10, element11, element12, element13);
+	networks::bosenelsonparameter::merge_7_7<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_7_8(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& left5, ValueType& left6, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4, ValueType& right5, ValueType& right6, ValueType& right7)
 {
-	networks::bosenelsonparameter::merge_3_4(left0, left1, left2, right0, right1, right2, right3);
-	networks::bosenelsonparameter::merge_4_4(left3, left4, left5, left6, right4, right5, right6, right7);
-	networks::bosenelsonparameter::merge_4_4(left3, left4, left5, left6, right0, right1, right2, right3);
+	networks::bosenelsonparameter::merge_3_4<CSwap>(left0, left1, left2, right0, right1, right2, right3);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(left3, left4, left5, left6, right4, right5, right6, right7);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(left3, left4, left5, left6, right0, right1, right2, right3);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort15(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9, ValueType& element10, ValueType& element11, ValueType& element12, ValueType& element13, ValueType& element14)
 {
-	networks::bosenelsonparameter::sort7(element0, element1, element2, element3, element4, element5, element6);
-	networks::bosenelsonparameter::sort8(element7, element8, element9, element10, element11, element12, element13, element14);
-	networks::bosenelsonparameter::merge_7_8(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14);
+	networks::bosenelsonparameter::sort7<CSwap>(element0, element1, element2, element3, element4, element5, element6);
+	networks::bosenelsonparameter::sort8<CSwap>(element7, element8, element9, element10, element11, element12, element13, element14);
+	networks::bosenelsonparameter::merge_7_8<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge_8_8(ValueType& left0, ValueType& left1, ValueType& left2, ValueType& left3, ValueType& left4, ValueType& left5, ValueType& left6, ValueType& left7, ValueType& right0, ValueType& right1, ValueType& right2, ValueType& right3, ValueType& right4, ValueType& right5, ValueType& right6, ValueType& right7)
 {
-	networks::bosenelsonparameter::merge_4_4(left0, left1, left2, left3, right0, right1, right2, right3);
-	networks::bosenelsonparameter::merge_4_4(left4, left5, left6, left7, right4, right5, right6, right7);
-	networks::bosenelsonparameter::merge_4_4(left4, left5, left6, left7, right0, right1, right2, right3);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(left0, left1, left2, left3, right0, right1, right2, right3);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(left4, left5, left6, left7, right4, right5, right6, right7);
+	networks::bosenelsonparameter::merge_4_4<CSwap>(left4, left5, left6, left7, right0, right1, right2, right3);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort16(ValueType& element0, ValueType& element1, ValueType& element2, ValueType& element3, ValueType& element4, ValueType& element5, ValueType& element6, ValueType& element7, ValueType& element8, ValueType& element9, ValueType& element10, ValueType& element11, ValueType& element12, ValueType& element13, ValueType& element14, ValueType& element15)
 {
-	networks::bosenelsonparameter::sort8(element0, element1, element2, element3, element4, element5, element6, element7);
-	networks::bosenelsonparameter::sort8(element8, element9, element10, element11, element12, element13, element14, element15);
-	networks::bosenelsonparameter::merge_8_8(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14, element15);
+	networks::bosenelsonparameter::sort8<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7);
+	networks::bosenelsonparameter::sort8<CSwap>(element8, element9, element10, element11, element12, element13, element14, element15);
+	networks::bosenelsonparameter::merge_8_8<CSwap>(element0, element1, element2, element3, element4, element5, element6, element7, element8, element9, element10, element11, element12, element13, element14, element15);
 }
 
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sortN(ValueType* A, size_t n)
 {
 	switch(n)
@@ -312,49 +313,49 @@ void sortN(ValueType* A, size_t n)
 		case 0: break;
 		case 1: break;
 		case 2:
-			networks::bosenelsonparameter::sort2(A[0], A[1]);
+			networks::bosenelsonparameter::sort2<CSwap>(A[0], A[1]);
 			break;
 		case 3:
-			networks::bosenelsonparameter::sort3(A[0], A[1], A[2]);
+			networks::bosenelsonparameter::sort3<CSwap>(A[0], A[1], A[2]);
 			break;
 		case 4:
-			networks::bosenelsonparameter::sort4(A[0], A[1], A[2], A[3]);
+			networks::bosenelsonparameter::sort4<CSwap>(A[0], A[1], A[2], A[3]);
 			break;
 		case 5:
-			networks::bosenelsonparameter::sort5(A[0], A[1], A[2], A[3], A[4]);
+			networks::bosenelsonparameter::sort5<CSwap>(A[0], A[1], A[2], A[3], A[4]);
 			break;
 		case 6:
-			networks::bosenelsonparameter::sort6(A[0], A[1], A[2], A[3], A[4], A[5]);
+			networks::bosenelsonparameter::sort6<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5]);
 			break;
 		case 7:
-			networks::bosenelsonparameter::sort7(A[0], A[1], A[2], A[3], A[4], A[5], A[6]);
+			networks::bosenelsonparameter::sort7<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6]);
 			break;
 		case 8:
-			networks::bosenelsonparameter::sort8(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7]);
+			networks::bosenelsonparameter::sort8<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7]);
 			break;
 		case 9:
-			networks::bosenelsonparameter::sort9(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8]);
+			networks::bosenelsonparameter::sort9<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8]);
 			break;
 		case 10:
-			networks::bosenelsonparameter::sort10(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9]);
+			networks::bosenelsonparameter::sort10<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9]);
 			break;
 		case 11:
-			networks::bosenelsonparameter::sort11(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10]);
+			networks::bosenelsonparameter::sort11<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10]);
 			break;
 		case 12:
-			networks::bosenelsonparameter::sort12(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11]);
+			networks::bosenelsonparameter::sort12<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11]);
 			break;
 		case 13:
-			networks::bosenelsonparameter::sort13(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12]);
+			networks::bosenelsonparameter::sort13<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12]);
 			break;
 		case 14:
-			networks::bosenelsonparameter::sort14(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13]);
+			networks::bosenelsonparameter::sort14<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13]);
 			break;
 		case 15:
-			networks::bosenelsonparameter::sort15(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13], A[14]);
+			networks::bosenelsonparameter::sort15<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13], A[14]);
 			break;
 		case 16:
-			networks::bosenelsonparameter::sort16(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13], A[14], A[15]);
+			networks::bosenelsonparameter::sort16<CSwap>(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7], A[8], A[9], A[10], A[11], A[12], A[13], A[14], A[15]);
 			break;
 	}
 }

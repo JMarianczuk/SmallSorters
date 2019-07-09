@@ -31,8 +31,8 @@ nlohmann::json NetworkToJson(const Network network)
     return networkJson;
 }
 
-template <typename TValueType>
-void ArrayWrite(TValueType* arr, int arrSize, TValueType value)
+template <typename ValueType>
+void ArrayWrite(ValueType* arr, int arrSize, ValueType value)
 {
     for (int i = 0; i < arrSize; i += 1)
     {

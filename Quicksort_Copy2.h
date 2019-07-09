@@ -41,8 +41,8 @@ enum { _S_threshold = 16 };
 
 //-------------------------------------------------------------------------------------------------------------
 
-template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
-void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompare& compare)
+template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
+void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType value, TCompare& compare)
 {
     TDistance parent = (holeIndex - 1) / 2;
     while (holeIndex > topIndex && compare(first + parent, &value))
@@ -54,8 +54,8 @@ void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType
     *(first + holeIndex) = std::move(value);
 }
 
-template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
-void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType value, TCompare compare)
+template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
+void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType value, TCompare compare)
 {
     const TDistance topIndex = holeIndex;
     TDistance secondChild = holeIndex;
@@ -83,7 +83,7 @@ void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType va
 template <typename TRanIt, typename TCompare>
 void make_heap(TRanIt first, TRanIt last, TCompare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::value_type ValueType;
     typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
     if (last - first < 2)
     {
@@ -94,7 +94,7 @@ void make_heap(TRanIt first, TRanIt last, TCompare& compare)
     TDistanceType parent = (len - 2) / 2;
     while (true)
     {
-        TValueType value = std::move(*(first + parent));
+        ValueType value = std::move(*(first + parent));
         adjust_heap(first, parent, len, std::move(value), compare);
         if (parent == 0)
         {
@@ -108,10 +108,10 @@ template <typename TRanIt, typename TCompare>
 inline
 void pop_heap(TRanIt first, TRanIt last, TRanIt result, TCompare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::value_type ValueType;
     typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
 
-    TValueType value = std::move(*result);
+    ValueType value = std::move(*result);
     *result = std::move(*first);
     adjust_heap(first, TDistanceType(0), TDistanceType(last - first), std::move(value), compare);
 }

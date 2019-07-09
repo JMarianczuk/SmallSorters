@@ -11,12 +11,12 @@ namespace measurement
 {
 
 void InsertionSortWrapper(
-    SortableRef_PointerOptimized* first,
-    SortableRef_PointerOptimized* last,
-    bool(*compareFunc)(SortableRef_PointerOptimized left,SortableRef_PointerOptimized right),
-    void(*sortFunc)(SortableRef_PointerOptimized*, size_t))
+    SortableRef* first,
+    SortableRef* last,
+    bool(*compareFunc)(SortableRef left,SortableRef right),
+    void(*sortFunc)(SortableRef*, size_t))
 {
-    insertionsort::InsertionSort(first, last - first);
+    insertionsort::InsertionSort<insertionsort::InsertionSort_PointerOptimized>(first, last - first);
 }
 
 }

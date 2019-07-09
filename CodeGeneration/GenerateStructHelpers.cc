@@ -13,21 +13,27 @@ void WriteStructHelpers(CPlusPlusCodeGenerator* gen)
         gen->WriteIncludeQuotes("Sortable.generated.h");
         gen->WriteLine("");
 
-        gen->WriteLine("template <typename TValueType>");
+        gen->WriteLine("template <typename ValueType>");
         gen->WriteLine("static inline");
-        gen->WriteLine("uint64_t GetKey(TValueType& item)");
+        gen->WriteLine("uint64_t GetKey(ValueType& item)");
         gen->WriteBlock([=]{
             gen->WriteLine("return 0;");
         });
-        gen->WriteLine("template <typename TValueType>");
+        gen->WriteLine("template <typename ValueType>");
         gen->WriteLine("static inline");
-        gen->WriteLine("uint64_t GetReference(TValueType& item)");
+        gen->WriteLine("uint64_t GetReference(ValueType& item)");
         gen->WriteBlock([=]{
             gen->WriteLine("return 0;");
         });
         gen->WriteLine("");
 
-        for (SortableStruct* sortableStruct : *sortableStructs())
+        std::vector<SortableStruct*> structs = 
+        {
+            new SortableStruct("", "", "", false),
+            new SortableStruct("", "", "", true)
+        };
+
+        for (SortableStruct* sortableStruct : structs)
         {
             gen->WriteLine("template <>");
             gen->WriteLine("inline");
@@ -36,7 +42,7 @@ void WriteStructHelpers(CPlusPlusCodeGenerator* gen)
                 gen->WriteLine("return item.key;");
             });
         }
-        for (SortableStruct* sortableStruct : *VectorWhere<SortableStruct*>(sortableStructs(), [=](SortableStruct* ss){return ss->HasReference;}))
+        for (SortableStruct* sortableStruct : *VectorWhere<SortableStruct*>(&structs, [=](SortableStruct* ss){return ss->HasReference;}))
         {
             gen->WriteLine("template <>");
             gen->WriteLine("inline");

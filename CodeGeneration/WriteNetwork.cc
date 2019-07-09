@@ -14,25 +14,27 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes("../conditional_swap/NetworkSort.h");
+        gen->WriteIncludeQuotes(
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
                 {
                     std::string sizeStr = std::to_string(network["NetworkSize"].get<int>());
-                    gen->WriteLine("template <typename ValueType> static");
+                    gen->WriteLine("template <typename CSwap, typename ValueType> static");
                     gen->WriteLine("void sort", sizeStr, "(ValueType* A)");
                     gen->WriteBlock([=]{
                         for (auto swap : network["Swaps"])
                         {
                             std::string leftStr = std::to_string(swap["LeftIndex"].get<int>());
                             std::string rightStr = std::to_string(swap["RightIndex"].get<int>());
-                            gen->WriteLine("networks::ConditionalSwap(A[", leftStr, "], A[", rightStr, "]);");
+                            gen->WriteLine("CSwap::swap(A[", leftStr, "], A[", rightStr, "]);");
                         }
                     });
                 }
                 gen->WriteLine("");
-                gen->WriteLine("template <typename ValueType> static");
+                gen->WriteLine("template <typename CSwap, typename ValueType> static");
                 gen->WriteLine("void sortN(ValueType* A, size_t n)");
                 gen->WriteBlock([=]{
                     gen->WriteLine("switch(n)");
@@ -44,7 +46,7 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
                             std::string sizeStr = std::to_string(network["NetworkSize"].get<int>());
                             gen->WriteLine("case ", sizeStr, ":");
                             gen->WriteIndented([=]{
-                                gen->WriteLine("sort", sizeStr, "(A);");
+                                gen->WriteLine("sort", sizeStr, "<CSwap>(A);");
                                 gen->WriteLine("break;");
                             });
                         }
@@ -185,7 +187,7 @@ void WriteSorter_ParameterStyle(
         networkType = RecursiveParameterNetworkType::Merge;
     }
 
-    gen->WriteLine("template <typename ValueType> static");
+    gen->WriteLine("template <typename CSwap, typename ValueType> static");
     gen->WriteLine("inline");
 
     int networkSize;
@@ -206,23 +208,23 @@ void WriteSorter_ParameterStyle(
             if (leftMergeSize == 1 && rightMergeSize == 1)
             {
                 gen->WriteBlock([=]{
-                    gen->WriteLine("networks::ConditionalSwap(left0, right0);");
+                    gen->WriteLine("CSwap::swap(left0, right0);");
                 });
                 return;
             }
             else if (leftMergeSize == 1 && rightMergeSize == 2)
             {
                 gen->WriteBlock([=]{
-                    gen->WriteLine("networks::ConditionalSwap(left0, right1);");
-                    gen->WriteLine("networks::ConditionalSwap(left0, right0);");
+                    gen->WriteLine("CSwap::swap(left0, right1);");
+                    gen->WriteLine("CSwap::swap(left0, right0);");
                 });
                 return;
             }
             else if (leftMergeSize == 2 && rightMergeSize == 1)
             {
                 gen->WriteBlock([=]{
-                    gen->WriteLine("networks::ConditionalSwap(left0, right0);");
-                    gen->WriteLine("networks::ConditionalSwap(left1, right0);");
+                    gen->WriteLine("CSwap::swap(left0, right0);");
+                    gen->WriteLine("CSwap::swap(left1, right0);");
                 });
                 return;
             }
@@ -241,7 +243,7 @@ void WriteSorter_ParameterStyle(
                 gen->Write(nested_namespace_name);
                 gen->Write("::sort");
                 gen->Write(stepSize);
-                gen->Write("(");
+                gen->Write("<CSwap>(");
                 for (auto it = indicesToUse.begin(); it < indicesToUse.end() - 1; it++)
                 {
                     gen->Write("element");
@@ -264,7 +266,7 @@ void WriteSorter_ParameterStyle(
                 gen->Write(leftMergeSize);
                 gen->Write("_");
                 gen->Write(rightMergeSize);
-                gen->Write("(");
+                gen->Write("<CSwap>(");
                 //Step is merge step
                 switch (networkType)
                 {
@@ -307,7 +309,9 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes("../conditional_swap/NetworkSort.h");
+        gen->WriteIncludeQuotes(
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
@@ -322,7 +326,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
                 }
                 gen->WriteLine("");
 
-                gen->WriteLine("template <typename ValueType> static");
+                gen->WriteLine("template <typename CSwap, typename ValueType> static");
                 gen->WriteLine("void sortN(ValueType* A, size_t n)");
                 gen->WriteBlock([=]{
                     gen->WriteLine("switch(n)");
@@ -338,7 +342,7 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
                                 gen->Write(nested_namespace_name);
                                 gen->Write("::sort");
                                 gen->Write(sizeStr);
-                                gen->Write("(");
+                                gen->Write("<CSwap>(");
                                 for (int i = 0; i < arraySize - 1; i += 1)
                                 {
                                     gen->Write("A[");
@@ -414,7 +418,7 @@ void WriteSorter_RecursiveStyle(
         networkType = RecursiveParameterNetworkType::Merge;
     }
 
-    gen->WriteLine("template <typename ValueType> static");
+    gen->WriteLine("template <typename CSwap, typename ValueType> static");
     if (IsInline(network, networkType))
     {
         gen->WriteLine("inline");
@@ -438,23 +442,23 @@ void WriteSorter_RecursiveStyle(
             if (leftMergeSize == 1 && rightMergeSize == 1)
             {
                 gen->WriteBlock([=]{
-                    gen->WriteLine("networks::ConditionalSwap(left[0], right[0]);");
+                    gen->WriteLine("CSwap::swap(left[0], right[0]);");
                 });
                 return;
             }
             else if (leftMergeSize == 1 && rightMergeSize == 2)
             {
                 gen->WriteBlock([=]{
-                    gen->WriteLine("networks::ConditionalSwap(left[0], right[1]);");
-                    gen->WriteLine("networks::ConditionalSwap(left[0], right[0]);");
+                    gen->WriteLine("CSwap::swap(left[0], right[1]);");
+                    gen->WriteLine("CSwap::swap(left[0], right[0]);");
                 });
                 return;
             }
             else if (leftMergeSize == 2 && rightMergeSize == 1)
             {
                 gen->WriteBlock([=]{
-                    gen->WriteLine("networks::ConditionalSwap(left[0], right[0]);");
-                    gen->WriteLine("networks::ConditionalSwap(left[1], right[0]);");
+                    gen->WriteLine("CSwap::swap(left[0], right[0]);");
+                    gen->WriteLine("CSwap::swap(left[1], right[0]);");
                 });
                 return;
             }
@@ -474,7 +478,7 @@ void WriteSorter_RecursiveStyle(
                 {
                     addStr = " + " + std::to_string(indexToUse);
                 }
-                gen->WriteLine("networks::", nested_namespace_name, "::sort", std::to_string(stepSize), "(A", addStr, ");");
+                gen->WriteLine("networks::", nested_namespace_name, "::sort", std::to_string(stepSize), "<CSwap>(A", addStr, ");");
             }
             else if (stepType.compare("Merge") == 0)
             {
@@ -502,7 +506,7 @@ void WriteSorter_RecursiveStyle(
                         callStr = "left" + leftAddStr + ", right" + rightAddStr;
                         break;
                 }
-                gen->WriteLine("networks::", nested_namespace_name, "::merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), "(", callStr, ");");
+                gen->WriteLine("networks::", nested_namespace_name, "::merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), "<CSwap>(", callStr, ");");
             }
         }
     });
@@ -533,7 +537,9 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes("../conditional_swap/NetworkSort.h");
+        gen->WriteIncludeQuotes(
+            "../conditional_swap/ConditionalSwapGeneric.h",
+            "../conditional_swap/ConditionalSwapX86.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
@@ -548,7 +554,7 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
                 }
                 gen->WriteLine("");
 
-                gen->WriteLine("template <typename ValueType> static");
+                gen->WriteLine("template <typename CSwap, typename ValueType> static");
                 gen->WriteLine("void sortN(ValueType* A, size_t n)");
                 gen->WriteBlock([=]{
                     gen->WriteLine("switch(n)");
@@ -560,7 +566,7 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
                             auto sizeStr = std::to_string(arraySize);
                             gen->WriteLine("case ", sizeStr, ":");
                             gen->WriteIndented([=]{
-                                gen->WriteLine("networks::", nested_namespace_name, "::sort", sizeStr, "(A);");
+                                gen->WriteLine("networks::", nested_namespace_name, "::sort", sizeStr, "<CSwap>(A);");
                                 gen->WriteLine("break;");
                             });
                         }

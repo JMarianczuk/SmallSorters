@@ -16,15 +16,17 @@ class SortableStruct
 private:
     bool IsInsertionSortOnly();
 public:
+    std::string Implementation; 
     std::string Name;
     std::string NameAbbreviation;
     std::string DisplayName;
     bool HasReference;
 
-    SortableStruct(std::string name, std::string nameAbbrev, bool hasReference);
-    SortableStruct(std::string name, std::string nameAbbrev, bool hasReference, std::string displayName);
+    SortableStruct(std::string implementation, std::string name, std::string nameAbbrev, bool hasReference);
+    SortableStruct(std::string implementation, std::string name, std::string nameAbbrev, bool hasReference, std::string displayName);
 
     std::string FullName();
+    std::string CSName();
     bool UseForNetworkSort();
     bool UseForInsertionSort();
     bool WillBeShownInResults();

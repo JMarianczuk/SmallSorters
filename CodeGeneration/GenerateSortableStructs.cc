@@ -39,7 +39,12 @@ void WriteSortableStructs(CPlusPlusCodeGenerator* gen)
     gen->WriteHeaderPragma("SORTABLE_GENERATED_H", [=]{
         gen->WriteLine("#define ArraySize 16");
         gen->WriteIncludeBrackets("inttypes.h");
-        for (SortableStruct* sortableStruct : *sortableStructs())
+        std::vector<SortableStruct*> structs = 
+        {
+            new SortableStruct("", "", "", false),
+            new SortableStruct("", "", "", true)
+        };
+        for (SortableStruct* sortableStruct : structs)
         {
             gen->WriteStruct(sortableStruct->FullName(), [=]{
                 WriteVariables(gen, sortableStruct);

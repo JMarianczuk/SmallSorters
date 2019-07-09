@@ -9,91 +9,110 @@
 
 namespace insertionsort {
 
-template <typename TValueType>
-static inline
-void InsertionSort(TValueType* items, size_t arraySize) 
+class InsertionSort_Default
 {
-    int inner, outer;
-    for (outer = 1; outer < arraySize; outer += 1) {
-        TValueType current = std::move(items[outer]);
-        for (inner = outer; inner > 0 && items[inner - 1] > current; inner -= 1) 
-        {
-            items[inner] = std::move(items[inner - 1]);
-        }
-        items[inner] = std::move(current);
-    }
-}
-
-template<>
-inline
-void InsertionSort<SortableRef_ArrayIndex_FirstCheck>(SortableRef_ArrayIndex_FirstCheck* items, size_t arraySize)
-{
-    int inner, outer;
-    for (outer = 1; outer < arraySize; outer += 1)
+public:
+    template <typename Type>
+    static inline void sort(Type* items, size_t arraySize)
     {
-        auto current = std::move(items[outer]);
-        if (current < items[0])
-        {
-            std::move_backward(items, &items[outer], &items[outer + 1]);
-            items[0] = std::move(current);
-        }
-        else 
-        {
-            for (inner = outer; items[inner - 1] > current; inner -= 1)
+        int inner, outer;
+        for (outer = 1; outer < arraySize; outer += 1) {
+            Type current = std::move(items[outer]);
+            for (inner = outer; inner > 0 && items[inner - 1] > current; inner -= 1) 
             {
                 items[inner] = std::move(items[inner - 1]);
             }
             items[inner] = std::move(current);
         }
     }
-}
+};
 
-template<>
-inline
-void InsertionSort<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* first, size_t arraySize) 
+class InsertionSort_ArrayIndex_FirstCheck
 {
-    auto last = first + arraySize;
-    for (auto current = first + 1; current < last; current += 1)
+public:
+    template <typename Type>
+    static inline void sort(Type* items, size_t arraySize)
     {
-        auto next_temp = current;
-        auto val = std::move(*current);
-        auto first_temp = next_temp - 1;
-        while (first_temp >= first && val < *first_temp)
+        int inner, outer;
+        for (outer = 1; outer < arraySize; outer += 1)
         {
-            *next_temp = std::move(*first_temp);
-            next_temp = first_temp;
-            first_temp -= 1;
+            auto current = std::move(items[outer]);
+            if (current < items[0])
+            {
+                std::move_backward(items, &items[outer], &items[outer + 1]);
+                items[0] = std::move(current);
+            }
+            else 
+            {
+                for (inner = outer; items[inner - 1] > current; inner -= 1)
+                {
+                    items[inner] = std::move(items[inner - 1]);
+                }
+                items[inner] = std::move(current);
+            }
         }
-        *next_temp = std::move(val);
     }
-}
+};
 
-template<>
-inline
-void InsertionSort<SortableRef_StlVersion>(SortableRef_StlVersion* first, size_t arraySize) 
+class InsertionSort_PointerOptimized
 {
-    SortableRef_StlVersion* last = first + arraySize;
-    for (SortableRef_StlVersion* next = first; ++next < last; )
+public:
+    template <typename Type>
+    static inline void sort(Type* first, size_t arraySize)
     {
-        SortableRef_StlVersion val = std::move(*next);
-
-        if (val < *first)
+        auto last = first + arraySize;
+        for (auto current = first + 1; current < last; current += 1)
         {
-            std::move_backward(first, next, next+1);
-            *first = std::move(val);
-        }
-        else
-        {
-            SortableRef_StlVersion* next_temp = next;
-            for (SortableRef_StlVersion* first_temp = next_temp; 
-                val < *--first_temp; 
-                next_temp = first_temp)
+            auto next_temp = current;
+            auto val = std::move(*current);
+            auto first_temp = next_temp - 1;
+            while (first_temp >= first && val < *first_temp)
             {
                 *next_temp = std::move(*first_temp);
+                next_temp = first_temp;
+                first_temp -= 1;
             }
             *next_temp = std::move(val);
         }
     }
+};
+
+class InsertionSort_StlVersion
+{
+public:
+    template <typename Type>
+    static inline void sort(Type* first, size_t arraySize)
+    {
+        Type* last = first + arraySize;
+        for (Type* next = first; ++next < last; )
+        {
+            Type val = std::move(*next);
+
+            if (val < *first)
+            {
+                std::move_backward(first, next, next+1);
+                *first = std::move(val);
+            }
+            else
+            {
+                Type* next_temp = next;
+                for (Type* first_temp = next_temp; 
+                    val < *--first_temp; 
+                    next_temp = first_temp)
+                {
+                    *next_temp = std::move(*first_temp);
+                }
+                *next_temp = std::move(val);
+            }
+        }
+    }
+};
+
+template <typename InsertionSortImplementation, typename ValueType>
+static inline
+void InsertionSort(ValueType* items, size_t arraySize) 
+{
+    InsertionSortImplementation::sort(items, arraySize);
 }
 
 } // namespace insertionsort

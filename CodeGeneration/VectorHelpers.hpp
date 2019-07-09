@@ -8,8 +8,8 @@
 namespace codegeneration
 {
 
-template <typename TValueType>
-void VectorConcatenate(std::vector<TValueType> *source, std::vector<TValueType> *first, std::vector<TValueType> *second, std::vector<TValueType> *third = nullptr)
+template <typename ValueType>
+void VectorConcatenate(std::vector<ValueType> *source, std::vector<ValueType> *first, std::vector<ValueType> *second, std::vector<ValueType> *third = nullptr)
 {
     source->insert(source->end(), first->begin(), first->end());
     source->insert(source->end(), second->begin(), second->end());
@@ -22,10 +22,10 @@ void VectorConcatenate(std::vector<TValueType> *source, std::vector<TValueType> 
     }
 }
 
-template <typename TValueType>
-bool VectorAny(std::vector<TValueType>& source, std::function<bool(TValueType)> predicate)
+template <typename ValueType>
+bool VectorAny(std::vector<ValueType>& source, std::function<bool(ValueType)> predicate)
 {
-    for (TValueType item : source)
+    for (ValueType item : source)
     {
         if (predicate(item))
         {
@@ -35,11 +35,11 @@ bool VectorAny(std::vector<TValueType>& source, std::function<bool(TValueType)> 
     return false;
 }
 
-template<typename TValueType>
-std::vector<TValueType>* VectorWhere(std::vector<TValueType>* source, std::function<bool(TValueType)> predicate)
+template<typename ValueType>
+std::vector<ValueType>* VectorWhere(std::vector<ValueType>* source, std::function<bool(ValueType)> predicate)
 {
-    auto result = new std::vector<TValueType>();
-    for (TValueType item : *source)
+    auto result = new std::vector<ValueType>();
+    for (ValueType item : *source)
     {
         if (predicate(item))
         {

@@ -45,6 +45,8 @@
 #include "../../Sortable.generated.h"
 #include "../../QuickSort.h"
 #include "../../Networks_Fwd.h"
+#include "../../conditional_swap/ConditionalSwapGeneric.h"
+#include "../../conditional_swap/ConditionalSwapX86.h"
 
 namespace ips4o {
 namespace detail {
@@ -116,25 +118,25 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
     }
     else
     {
-        typedef typename iterator_traits<It>::value_type TValueType;
-        void(*sort)(TValueType*,size_t);
+        typedef typename iterator_traits<It>::value_type ValueType;
+        void(*sort)(ValueType*,size_t);
         if constexpr (Cfg::kBaseCaseType == 1)         {
-            sort = &networks::best::sortN<TValueType>;
+            sort = &networks::best::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 2) {
-            sort = &networks::bosenelson::sortN<TValueType>;
+            sort = &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 3) {
-            sort = &networks::bosenelsonparallel::sortN<TValueType>;
+            sort = &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 5) {
-            sort = &insertionsort::InsertionSort<TValueType>;
+            sort = &insertionsort::InsertionSort<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 6) {
-            sort = &networks::bosenelsonrecursive::sortN<TValueType>;
+            sort = &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else {
             throw std::logic_error("Invalid base case type");
         }
         if constexpr (Cfg::kSampleSortType == 1) {
-            samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+            samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
         } else if constexpr (Cfg::kSampleSortType == 2) {
-            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<TValueType>, &GetKey<TValueType>);
+            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
         } else if constexpr (Cfg::kSampleSortType == 3) {
             if (end - begin <= 16)
             {

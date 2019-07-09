@@ -9,12 +9,12 @@
 namespace external
 {
 
-template <int BaseCaseType, int SampleSortType, int BaseCaseSize, typename TValueType>
+template <int BaseCaseType, int SampleSortType, int BaseCaseSize, typename ValueType>
 void IpsoWrapper(
-    TValueType* first, 
-    TValueType* last, 
-    bool(*compareFunc)(TValueType left, TValueType right), 
-    void(*sortFunc)(TValueType*,size_t))
+    ValueType* first, 
+    ValueType* last, 
+    bool(*compareFunc)(ValueType left, ValueType right), 
+    void(*sortFunc)(ValueType*,size_t))
 {
     if constexpr (BaseCaseType == 10)
     {

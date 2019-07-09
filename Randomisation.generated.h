@@ -16,41 +16,15 @@
 #include "Sortable.generated.h"
 namespace randomisation
 {
-template <typename TValueType>
-void GenerateRandomArray(TValueType* arr, size_t arraySize)
+template <typename ValueType>
+void GenerateRandomArray(ValueType* arr, size_t arraySize)
 {
 	throw std::logic_error("randomisation::GenerateRandomArray => Not implemented for generic type");
 }
 template<>
+void GenerateRandomArray<Sortable>(Sortable* arr, size_t arraySize);
+template<>
 void GenerateRandomArray<SortableRef>(SortableRef* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<Sortable_JumpXchg>(Sortable_JumpXchg* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_JumpXchg>(SortableRef_JumpXchg* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<Sortable_TwoCmovTemp>(Sortable_TwoCmovTemp* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_FourCmovTemp>(SortableRef_FourCmovTemp* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_FourCmovTemp_Split>(SortableRef_FourCmovTemp_Split* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<Sortable_ThreeCmovRegisterTemp>(Sortable_ThreeCmovRegisterTemp* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_SixCmovRegisterTemp>(SortableRef_SixCmovRegisterTemp* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_ClangVersion>(SortableRef_ClangVersion* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_ClangPredicate>(SortableRef_ClangPredicate* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_Tie>(SortableRef_Tie* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_QMark>(SortableRef_QMark* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_StlVersion>(SortableRef_StlVersion* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_PointerOptimized>(SortableRef_PointerOptimized* arr, size_t arraySize);
-template<>
-void GenerateRandomArray<SortableRef_ArrayIndex_FirstCheck>(SortableRef_ArrayIndex_FirstCheck* arr, size_t arraySize);
 } // namespace randomisation
 
 #endif // RANDOMISATION_GENERATED_H

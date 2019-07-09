@@ -11,271 +11,272 @@
 #ifndef BOSENELSON_RECURSIVE_GENERATED_H
 #define BOSENELSON_RECURSIVE_GENERATED_H
 
-#include "../conditional_swap/NetworkSort.h"
+#include "../conditional_swap/ConditionalSwapGeneric.h"
+#include "../conditional_swap/ConditionalSwapX86.h"
 namespace networks
 {
 namespace bosenelsonrecursive
 {
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge1_1(ValueType* left, ValueType* right)
 {
-	networks::ConditionalSwap(left[0], right[0]);
+	CSwap::swap(left[0], right[0]);
 }
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void sort2(ValueType* A)
 {
-	networks::bosenelsonrecursive::merge1_1(A, A + 1);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(A, A + 1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge1_2(ValueType* left, ValueType* right)
 {
-	networks::ConditionalSwap(left[0], right[1]);
-	networks::ConditionalSwap(left[0], right[0]);
+	CSwap::swap(left[0], right[1]);
+	CSwap::swap(left[0], right[0]);
 }
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort3(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort2(A + 1);
-	networks::bosenelsonrecursive::merge1_2(A, A + 1);
+	networks::bosenelsonrecursive::sort2<CSwap>(A + 1);
+	networks::bosenelsonrecursive::merge1_2<CSwap>(A, A + 1);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge2_2(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge1_1(left, right);
-	networks::bosenelsonrecursive::merge1_1(left + 1, right + 1);
-	networks::bosenelsonrecursive::merge1_1(left + 1, right);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(left + 1, right + 1);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(left + 1, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort4(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort2(A);
-	networks::bosenelsonrecursive::sort2(A + 2);
-	networks::bosenelsonrecursive::merge2_2(A, A + 2);
+	networks::bosenelsonrecursive::sort2<CSwap>(A);
+	networks::bosenelsonrecursive::sort2<CSwap>(A + 2);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(A, A + 2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge2_3(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge1_2(left, right);
-	networks::bosenelsonrecursive::merge1_1(left + 1, right + 2);
-	networks::bosenelsonrecursive::merge1_2(left + 1, right);
+	networks::bosenelsonrecursive::merge1_2<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(left + 1, right + 2);
+	networks::bosenelsonrecursive::merge1_2<CSwap>(left + 1, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort5(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort2(A);
-	networks::bosenelsonrecursive::sort3(A + 2);
-	networks::bosenelsonrecursive::merge2_3(A, A + 2);
+	networks::bosenelsonrecursive::sort2<CSwap>(A);
+	networks::bosenelsonrecursive::sort3<CSwap>(A + 2);
+	networks::bosenelsonrecursive::merge2_3<CSwap>(A, A + 2);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 inline
 void merge2_1(ValueType* left, ValueType* right)
 {
-	networks::ConditionalSwap(left[0], right[0]);
-	networks::ConditionalSwap(left[1], right[0]);
+	CSwap::swap(left[0], right[0]);
+	CSwap::swap(left[1], right[0]);
 }
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge3_3(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge1_1(left, right);
-	networks::bosenelsonrecursive::merge2_2(left + 1, right + 1);
-	networks::bosenelsonrecursive::merge2_1(left + 1, right);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 1, right + 1);
+	networks::bosenelsonrecursive::merge2_1<CSwap>(left + 1, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort6(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort3(A);
-	networks::bosenelsonrecursive::sort3(A + 3);
-	networks::bosenelsonrecursive::merge3_3(A, A + 3);
+	networks::bosenelsonrecursive::sort3<CSwap>(A);
+	networks::bosenelsonrecursive::sort3<CSwap>(A + 3);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(A, A + 3);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge3_4(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge1_2(left, right);
-	networks::bosenelsonrecursive::merge2_2(left + 1, right + 2);
-	networks::bosenelsonrecursive::merge2_2(left + 1, right);
+	networks::bosenelsonrecursive::merge1_2<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 1, right + 2);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 1, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort7(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort3(A);
-	networks::bosenelsonrecursive::sort4(A + 3);
-	networks::bosenelsonrecursive::merge3_4(A, A + 3);
+	networks::bosenelsonrecursive::sort3<CSwap>(A);
+	networks::bosenelsonrecursive::sort4<CSwap>(A + 3);
+	networks::bosenelsonrecursive::merge3_4<CSwap>(A, A + 3);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge4_4(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge2_2(left, right);
-	networks::bosenelsonrecursive::merge2_2(left + 2, right + 2);
-	networks::bosenelsonrecursive::merge2_2(left + 2, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 2, right + 2);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 2, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort8(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort4(A);
-	networks::bosenelsonrecursive::sort4(A + 4);
-	networks::bosenelsonrecursive::merge4_4(A, A + 4);
+	networks::bosenelsonrecursive::sort4<CSwap>(A);
+	networks::bosenelsonrecursive::sort4<CSwap>(A + 4);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(A, A + 4);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge4_5(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge2_3(left, right);
-	networks::bosenelsonrecursive::merge2_2(left + 2, right + 3);
-	networks::bosenelsonrecursive::merge2_3(left + 2, right);
+	networks::bosenelsonrecursive::merge2_3<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 2, right + 3);
+	networks::bosenelsonrecursive::merge2_3<CSwap>(left + 2, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort9(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort4(A);
-	networks::bosenelsonrecursive::sort5(A + 4);
-	networks::bosenelsonrecursive::merge4_5(A, A + 4);
+	networks::bosenelsonrecursive::sort4<CSwap>(A);
+	networks::bosenelsonrecursive::sort5<CSwap>(A + 4);
+	networks::bosenelsonrecursive::merge4_5<CSwap>(A, A + 4);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge3_2(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge1_1(left, right);
-	networks::bosenelsonrecursive::merge2_1(left + 1, right + 1);
-	networks::bosenelsonrecursive::merge2_1(left + 1, right);
+	networks::bosenelsonrecursive::merge1_1<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge2_1<CSwap>(left + 1, right + 1);
+	networks::bosenelsonrecursive::merge2_1<CSwap>(left + 1, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge5_5(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge2_2(left, right);
-	networks::bosenelsonrecursive::merge3_3(left + 2, right + 2);
-	networks::bosenelsonrecursive::merge3_2(left + 2, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left + 2, right + 2);
+	networks::bosenelsonrecursive::merge3_2<CSwap>(left + 2, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort10(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort5(A);
-	networks::bosenelsonrecursive::sort5(A + 5);
-	networks::bosenelsonrecursive::merge5_5(A, A + 5);
+	networks::bosenelsonrecursive::sort5<CSwap>(A);
+	networks::bosenelsonrecursive::sort5<CSwap>(A + 5);
+	networks::bosenelsonrecursive::merge5_5<CSwap>(A, A + 5);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge5_6(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge2_3(left, right);
-	networks::bosenelsonrecursive::merge3_3(left + 2, right + 3);
-	networks::bosenelsonrecursive::merge3_3(left + 2, right);
+	networks::bosenelsonrecursive::merge2_3<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left + 2, right + 3);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left + 2, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort11(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort5(A);
-	networks::bosenelsonrecursive::sort6(A + 5);
-	networks::bosenelsonrecursive::merge5_6(A, A + 5);
+	networks::bosenelsonrecursive::sort5<CSwap>(A);
+	networks::bosenelsonrecursive::sort6<CSwap>(A + 5);
+	networks::bosenelsonrecursive::merge5_6<CSwap>(A, A + 5);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge6_6(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge3_3(left, right);
-	networks::bosenelsonrecursive::merge3_3(left + 3, right + 3);
-	networks::bosenelsonrecursive::merge3_3(left + 3, right);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left + 3, right + 3);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left + 3, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort12(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort6(A);
-	networks::bosenelsonrecursive::sort6(A + 6);
-	networks::bosenelsonrecursive::merge6_6(A, A + 6);
+	networks::bosenelsonrecursive::sort6<CSwap>(A);
+	networks::bosenelsonrecursive::sort6<CSwap>(A + 6);
+	networks::bosenelsonrecursive::merge6_6<CSwap>(A, A + 6);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge6_7(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge3_4(left, right);
-	networks::bosenelsonrecursive::merge3_3(left + 3, right + 4);
-	networks::bosenelsonrecursive::merge3_4(left + 3, right);
+	networks::bosenelsonrecursive::merge3_4<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left + 3, right + 4);
+	networks::bosenelsonrecursive::merge3_4<CSwap>(left + 3, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort13(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort6(A);
-	networks::bosenelsonrecursive::sort7(A + 6);
-	networks::bosenelsonrecursive::merge6_7(A, A + 6);
+	networks::bosenelsonrecursive::sort6<CSwap>(A);
+	networks::bosenelsonrecursive::sort7<CSwap>(A + 6);
+	networks::bosenelsonrecursive::merge6_7<CSwap>(A, A + 6);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge4_3(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge2_2(left, right);
-	networks::bosenelsonrecursive::merge2_1(left + 2, right + 2);
-	networks::bosenelsonrecursive::merge2_2(left + 2, right);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge2_1<CSwap>(left + 2, right + 2);
+	networks::bosenelsonrecursive::merge2_2<CSwap>(left + 2, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge7_7(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge3_3(left, right);
-	networks::bosenelsonrecursive::merge4_4(left + 3, right + 3);
-	networks::bosenelsonrecursive::merge4_3(left + 3, right);
+	networks::bosenelsonrecursive::merge3_3<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(left + 3, right + 3);
+	networks::bosenelsonrecursive::merge4_3<CSwap>(left + 3, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort14(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort7(A);
-	networks::bosenelsonrecursive::sort7(A + 7);
-	networks::bosenelsonrecursive::merge7_7(A, A + 7);
+	networks::bosenelsonrecursive::sort7<CSwap>(A);
+	networks::bosenelsonrecursive::sort7<CSwap>(A + 7);
+	networks::bosenelsonrecursive::merge7_7<CSwap>(A, A + 7);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge7_8(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge3_4(left, right);
-	networks::bosenelsonrecursive::merge4_4(left + 3, right + 4);
-	networks::bosenelsonrecursive::merge4_4(left + 3, right);
+	networks::bosenelsonrecursive::merge3_4<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(left + 3, right + 4);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(left + 3, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort15(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort7(A);
-	networks::bosenelsonrecursive::sort8(A + 7);
-	networks::bosenelsonrecursive::merge7_8(A, A + 7);
+	networks::bosenelsonrecursive::sort7<CSwap>(A);
+	networks::bosenelsonrecursive::sort8<CSwap>(A + 7);
+	networks::bosenelsonrecursive::merge7_8<CSwap>(A, A + 7);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void merge8_8(ValueType* left, ValueType* right)
 {
-	networks::bosenelsonrecursive::merge4_4(left, right);
-	networks::bosenelsonrecursive::merge4_4(left + 4, right + 4);
-	networks::bosenelsonrecursive::merge4_4(left + 4, right);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(left, right);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(left + 4, right + 4);
+	networks::bosenelsonrecursive::merge4_4<CSwap>(left + 4, right);
 }
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sort16(ValueType* A)
 {
-	networks::bosenelsonrecursive::sort8(A);
-	networks::bosenelsonrecursive::sort8(A + 8);
-	networks::bosenelsonrecursive::merge8_8(A, A + 8);
+	networks::bosenelsonrecursive::sort8<CSwap>(A);
+	networks::bosenelsonrecursive::sort8<CSwap>(A + 8);
+	networks::bosenelsonrecursive::merge8_8<CSwap>(A, A + 8);
 }
 
 
-template <typename ValueType> static
+template <typename CSwap, typename ValueType> static
 void sortN(ValueType* A, size_t n)
 {
 	switch(n)
@@ -283,49 +284,49 @@ void sortN(ValueType* A, size_t n)
 		case 0: break;
 		case 1: break;
 		case 2:
-			networks::bosenelsonrecursive::sort2(A);
+			networks::bosenelsonrecursive::sort2<CSwap>(A);
 			break;
 		case 3:
-			networks::bosenelsonrecursive::sort3(A);
+			networks::bosenelsonrecursive::sort3<CSwap>(A);
 			break;
 		case 4:
-			networks::bosenelsonrecursive::sort4(A);
+			networks::bosenelsonrecursive::sort4<CSwap>(A);
 			break;
 		case 5:
-			networks::bosenelsonrecursive::sort5(A);
+			networks::bosenelsonrecursive::sort5<CSwap>(A);
 			break;
 		case 6:
-			networks::bosenelsonrecursive::sort6(A);
+			networks::bosenelsonrecursive::sort6<CSwap>(A);
 			break;
 		case 7:
-			networks::bosenelsonrecursive::sort7(A);
+			networks::bosenelsonrecursive::sort7<CSwap>(A);
 			break;
 		case 8:
-			networks::bosenelsonrecursive::sort8(A);
+			networks::bosenelsonrecursive::sort8<CSwap>(A);
 			break;
 		case 9:
-			networks::bosenelsonrecursive::sort9(A);
+			networks::bosenelsonrecursive::sort9<CSwap>(A);
 			break;
 		case 10:
-			networks::bosenelsonrecursive::sort10(A);
+			networks::bosenelsonrecursive::sort10<CSwap>(A);
 			break;
 		case 11:
-			networks::bosenelsonrecursive::sort11(A);
+			networks::bosenelsonrecursive::sort11<CSwap>(A);
 			break;
 		case 12:
-			networks::bosenelsonrecursive::sort12(A);
+			networks::bosenelsonrecursive::sort12<CSwap>(A);
 			break;
 		case 13:
-			networks::bosenelsonrecursive::sort13(A);
+			networks::bosenelsonrecursive::sort13<CSwap>(A);
 			break;
 		case 14:
-			networks::bosenelsonrecursive::sort14(A);
+			networks::bosenelsonrecursive::sort14<CSwap>(A);
 			break;
 		case 15:
-			networks::bosenelsonrecursive::sort15(A);
+			networks::bosenelsonrecursive::sort15<CSwap>(A);
 			break;
 		case 16:
-			networks::bosenelsonrecursive::sort16(A);
+			networks::bosenelsonrecursive::sort16<CSwap>(A);
 			break;
 	}
 }

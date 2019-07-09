@@ -14,19 +14,25 @@
 #include <inttypes.h>
 #include "Sortable.generated.h"
 
-template <typename TValueType>
+template <typename ValueType>
 static inline
-uint64_t GetKey(TValueType& item)
+uint64_t GetKey(ValueType& item)
 {
 	return 0;
 }
-template <typename TValueType>
+template <typename ValueType>
 static inline
-uint64_t GetReference(TValueType& item)
+uint64_t GetReference(ValueType& item)
 {
 	return 0;
 }
 
+template <>
+inline
+uint64_t GetKey(Sortable& item)
+{
+	return item.key;
+}
 template <>
 inline
 uint64_t GetKey(SortableRef& item)
@@ -35,157 +41,7 @@ uint64_t GetKey(SortableRef& item)
 }
 template <>
 inline
-uint64_t GetKey(Sortable_JumpXchg& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_JumpXchg& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(Sortable_TwoCmovTemp& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_FourCmovTemp& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_FourCmovTemp_Split& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(Sortable_ThreeCmovRegisterTemp& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_SixCmovRegisterTemp& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_ClangVersion& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_ClangPredicate& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_Tie& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_QMark& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_StlVersion& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_PointerOptimized& item)
-{
-	return item.key;
-}
-template <>
-inline
-uint64_t GetKey(SortableRef_ArrayIndex_FirstCheck& item)
-{
-	return item.key;
-}
-template <>
-inline
 uint64_t GetReference(SortableRef& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_JumpXchg& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_FourCmovTemp& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_FourCmovTemp_Split& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_SixCmovRegisterTemp& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_ClangVersion& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_ClangPredicate& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_Tie& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_QMark& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_StlVersion& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_PointerOptimized& item)
-{
-	return item.reference;
-}
-template <>
-inline
-uint64_t GetReference(SortableRef_ArrayIndex_FirstCheck& item)
 {
 	return item.reference;
 }

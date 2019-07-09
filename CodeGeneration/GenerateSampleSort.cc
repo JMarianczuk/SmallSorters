@@ -86,19 +86,19 @@ void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversampl
 {
     int sampleSize = numberOfSplitters * oversamplingFactor;
     std::string sampleSizeStr = std::to_string(sampleSize);
-    gen->WriteLine("template <typename TValueType, typename TKey>");
+    gen->WriteLine("template <typename ValueType, typename TKey>");
     gen->WriteLine("static inline");
     gen->WriteLine("void Find", GetName(numberOfSplitters, oversamplingFactor), "(");
 
     gen->WriteIndented([=]{
-        gen->WriteLine("TValueType* items,");
+        gen->WriteLine("ValueType* items,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("TKey* splitterDestination,");
-        gen->WriteLine("void(*sortFunc)(TValueType*,size_t),");
-        gen->WriteLine("TKey(*getKeyFunc)(TValueType&))");
+        gen->WriteLine("void(*sortFunc)(ValueType*,size_t),");
+        gen->WriteLine("TKey(*getKeyFunc)(ValueType&))");
     });
     gen->WriteBlock([=]{
-        gen->WriteLine("TValueType sample[", sampleSizeStr, "];");
+        gen->WriteLine("ValueType sample[", sampleSizeStr, "];");
         
         gen->WriteLine("int blockSize = elementCount / ", sampleSizeStr, ";");
 
@@ -125,16 +125,16 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
     std::string numberOfSplittersStr = std::to_string(numberOfSplitters);
     std::string numberOfBucketsStr = std::to_string(numberOfBuckets);
 
-    gen->WriteLine("template <typename TValueType, typename TKey>");
+    gen->WriteLine("template <typename ValueType, typename TKey>");
     gen->WriteLine("inline");
     gen->WriteLine("void SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(");
     gen->WriteIndented([=]{
-        gen->WriteLine("TValueType* A,");
+        gen->WriteLine("ValueType* A,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("size_t baseCaseLimit,");
-        gen->WriteLine("void(*sortFunc)(TValueType*,size_t),");
-        gen->WriteLine("bool(*predicateLess)(TKey&,TValueType&),");
-        gen->WriteLine("TKey(*getKeyFunc)(TValueType&),");
+        gen->WriteLine("void(*sortFunc)(ValueType*,size_t),");
+        gen->WriteLine("bool(*predicateLess)(TKey&,ValueType&),");
+        gen->WriteLine("TKey(*getKeyFunc)(ValueType&),");
         gen->WriteLine("int depthLimit)");
     });
     gen->WriteBlock([=]{
@@ -146,7 +146,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("");
         gen->WriteLine("if (depthLimit == 0)");
         gen->WriteBlock([=]{
-            gen->WriteLine("insertionsort::InsertionSort(A, elementCount);");
+            gen->WriteLine("insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);");
             gen->WriteLine("return;");
         });
 
@@ -159,8 +159,8 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         }
         gen->WriteLine("");
 
-        gen->WriteLine("TValueType *rawbuckets = (TValueType*) malloc(sizeof(TValueType) * ", numberOfBucketsStr, " * elementCount);");
-        gen->WriteLine("TValueType* buckets[", numberOfBucketsStr, "];");
+        gen->WriteLine("ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * ", numberOfBucketsStr, " * elementCount);");
+        gen->WriteLine("ValueType* buckets[", numberOfBucketsStr, "];");
         gen->WriteForLoop("i", 0, numberOfBuckets, [=]{
             gen->WriteLine("buckets[i] = &rawbuckets[i * elementCount];");
         });
@@ -190,14 +190,14 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         });
         gen->WriteLine("");
 
-        gen->WriteLine("TValueType* currentPos = A;");
+        gen->WriteLine("ValueType* currentPos = A;");
         gen->WriteLine("int bucketSize[", numberOfBucketsStr, "];");
 
         gen->WriteLine("int exclusiveBucketSizePrefixSum[", numberOfBucketsStr, "];");
         
         gen->WriteForLoop("currentBucket", 0, numberOfBuckets, [=]{
             gen->WriteLine("bucketSize[currentBucket] = (int) (buckets[currentBucket] - &rawbuckets[currentBucket * elementCount]);");
-            gen->WriteLine("std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(TValueType));");
+            gen->WriteLine("std::memcpy((void*) currentPos, (void*) &rawbuckets[currentBucket * elementCount], bucketSize[currentBucket] * sizeof(ValueType));");
             gen->WriteLine("currentPos += bucketSize[currentBucket];");
         });
         gen->WriteLine("free(rawbuckets);");
@@ -227,15 +227,15 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         });
     });
 
-    gen->WriteLine("template <typename TValueType, typename TKey>");
+    gen->WriteLine("template <typename ValueType, typename TKey>");
     gen->WriteLine("void SampleSort", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(");
     gen->WriteIndented([=]{
-        gen->WriteLine("TValueType* A,");
+        gen->WriteLine("ValueType* A,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("size_t baseCaseLimit,");
-        gen->WriteLine("void(*sortFunc)(TValueType*,size_t),");
-        gen->WriteLine("bool(*predicateLess)(TKey&,TValueType&),");
-        gen->WriteLine("TKey(*getKeyFunc)(TValueType&))");
+        gen->WriteLine("void(*sortFunc)(ValueType*,size_t),");
+        gen->WriteLine("bool(*predicateLess)(TKey&,ValueType&),");
+        gen->WriteLine("TKey(*getKeyFunc)(ValueType&))");
     });
     gen->WriteBlock([=]{
         gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSizeStr, "BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * ", std::to_string(2.0 / log2(numberOfSplitters + 1)), "); //log to base {(numberOfSplitters + 1) / 2}");

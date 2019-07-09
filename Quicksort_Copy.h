@@ -50,8 +50,8 @@ namespace quicksortcopy
 
 #define S_threshold 16
 
-template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
-void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType value, TCompare& compare)
+template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
+void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType value, TCompare& compare)
 {
     TDistance parent = (holeIndex - 1) / 2;
     while (holeIndex > topIndex && compare(first + parent, &value))
@@ -63,8 +63,8 @@ void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, TValueType
     *(first + holeIndex) = std::move(value);
 }
 
-template <typename TRanIt, typename TDistance, typename TValueType, typename TCompare>
-void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType value, TCompare compare)
+template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
+void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType value, TCompare compare)
 {
     const TDistance topIndex = holeIndex;
     TDistance secondChild = holeIndex;
@@ -92,7 +92,7 @@ void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, TValueType va
 template <typename TRanIt, typename TCompare>
 void make_heap(TRanIt first, TRanIt last, TCompare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::value_type ValueType;
     typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
     if (last - first < 2)
     {
@@ -103,7 +103,7 @@ void make_heap(TRanIt first, TRanIt last, TCompare& compare)
     TDistanceType parent = (len - 2) / 2;
     while (true)
     {
-        TValueType value = std::move(*(first + parent));
+        ValueType value = std::move(*(first + parent));
         adjust_heap(first, parent, len, std::move(value), compare);
         if (parent == 0)
         {
@@ -117,10 +117,10 @@ template <typename TRanIt, typename TCompare>
 inline
 void pop_heap(TRanIt first, TRanIt last, TRanIt result, TCompare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type TValueType;
+    typedef typename iterator_traits<TRanIt>::value_type ValueType;
     typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
 
-    TValueType value = std::move(*result);
+    ValueType value = std::move(*result);
     *result = std::move(*first);
     adjust_heap(first, TDistanceType(0), TDistanceType(last - first), std::move(value), compare);
 }
@@ -317,15 +317,15 @@ void Quicksort_Copy_Stl(TRanIt first, TRanIt last, TCompare compare)
 
 #define ISortMax 16
 
-template <typename TValueType, typename TPredicate>
+template <typename ValueType, typename TPredicate>
 inline
-void insertion_sort_unchecked(TValueType* first, TValueType* last, TPredicate predicate)
+void insertion_sort_unchecked(ValueType* first, ValueType* last, TPredicate predicate)
 {
     if (first != last)
     {
-        for (TValueType* next = first; ++next != last; )
+        for (ValueType* next = first; ++next != last; )
         {
-            TValueType val = std::move(*next);
+            ValueType val = std::move(*next);
 
             if (predicate(&val, first))
             {
@@ -334,8 +334,8 @@ void insertion_sort_unchecked(TValueType* first, TValueType* last, TPredicate pr
             }
             else
             {
-                TValueType* next_temp = next;
-                for (TValueType* first_temp = next_temp; 
+                ValueType* next_temp = next;
+                for (ValueType* first_temp = next_temp; 
                     predicate(&val, --first_temp); 
                     next_temp = first_temp)
                 {
@@ -347,37 +347,37 @@ void insertion_sort_unchecked(TValueType* first, TValueType* last, TPredicate pr
     }
 }
 
-template <typename TValueType, typename TPredicate>
+template <typename CSwap, typename ValueType, typename TPredicate>
 inline
-void guess_median_unchecked(TValueType* first, TValueType* mid, TValueType* last, TPredicate predicate)
+void guess_median_unchecked(ValueType* first, ValueType* mid, ValueType* last, TPredicate predicate)
 {
     uint64_t count = (uint64_t) (last - first);
     if (count > 40)
     {
         uint64_t step = (count + 1) >> 3;
         uint64_t twoStep = step << 1;
-        networks::bosenelsonparameter::sort9(
+        networks::bosenelsonparameter::sort9<CSwap>(
             *(first + step), *(first + twoStep), *(mid - step), *mid, 
             *first,
             *(mid + step), *(last - twoStep), *(last - step), *last);
     }
     else
     {
-        networks::bosenelsonparameter::sort3(
+        networks::bosenelsonparameter::sort3<CSwap>(
             *mid, 
             *first, 
             *last);
     }
 }
 
-template <typename TValueType, typename TPredicate>
+template <typename CSwap, typename ValueType, typename TPredicate>
 inline
-TValueType* partition_by_median_guess_unchecked(TValueType* first, TValueType* last, TPredicate predicate)
+ValueType* partition_by_median_guess_unchecked(ValueType* first, ValueType* last, TPredicate predicate)
 {
-    TValueType* mid = first + ((last - first) >> 1);
-    guess_median_unchecked(first, mid, last - 1, predicate);
+    ValueType* mid = first + ((last - first) >> 1);
+    guess_median_unchecked<CSwap>(first, mid, last - 1, predicate);
 
-    TValueType* pivot = first;
+    ValueType* pivot = first;
     while (true)
     {
         ++first;
@@ -401,26 +401,26 @@ TValueType* partition_by_median_guess_unchecked(TValueType* first, TValueType* l
 
 
 
-template <typename TValueType, typename TPredicate, typename TBaseCaseSort>
+template <typename CSwap, typename ValueType, typename TPredicate, typename TBaseCaseSort>
 inline
-void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredicate predicate, TBaseCaseSort baseCaseSort)
+void sort_unchecked(ValueType* first, ValueType* last, uint64_t ideal, TPredicate predicate, TBaseCaseSort baseCaseSort)
 {
     uint64_t count;
     while (ISortMax < (count = (uint64_t) (last - first)) && ideal > 0)
     {
-        auto mid = partition_by_median_guess_unchecked(first, last, predicate);
+        auto mid = partition_by_median_guess_unchecked<CSwap>(first, last, predicate);
         auto afterMid = mid + 1;
 
         ideal = (ideal >> 1) + (ideal >> 2);
 
         if (mid - first < last - afterMid)
         {
-            sort_unchecked(first, mid, ideal, predicate, baseCaseSort);
+            sort_unchecked<CSwap>(first, mid, ideal, predicate, baseCaseSort);
             first = afterMid;
         }
         else
         {
-            sort_unchecked(afterMid, last, ideal, predicate, baseCaseSort);
+            sort_unchecked<CSwap>(afterMid, last, ideal, predicate, baseCaseSort);
             last = mid;
         }
     }
@@ -435,10 +435,10 @@ void sort_unchecked(TValueType* first, TValueType* last, uint64_t ideal, TPredic
     }
 }
 
-template <typename TValueType, typename TPredicate, typename TBaseCaseSort>
-void Quicksort_Copy_Msvc(TValueType* first, TValueType* last, TPredicate predicate, TBaseCaseSort baseCaseSort)
+template <typename CSwap, typename ValueType, typename TPredicate, typename TBaseCaseSort>
+void Quicksort_Copy_Msvc(ValueType* first, ValueType* last, TPredicate predicate, TBaseCaseSort baseCaseSort)
 {
-    sort_unchecked(first, last, (uint64_t) (last - first), __gnu_cxx::__ops::__iter_comp_iter(predicate), baseCaseSort);
+    sort_unchecked<CSwap>(first, last, (uint64_t) (last - first), __gnu_cxx::__ops::__iter_comp_iter(predicate), baseCaseSort);
 }
 
 } // namespace quicksortcopy
