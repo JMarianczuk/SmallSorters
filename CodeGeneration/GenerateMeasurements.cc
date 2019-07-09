@@ -408,10 +408,7 @@ void GenerateMeasurementMethod(
             "Sortable.generated.h",
             "Performancing.h",
             "Measure.h",
-            "BestNetworks.generated.h",
-            "BoseNelson.generated.h",
-            "BoseNelsonParallel.generated.h",
-            "BoseNelsonParameter.generated.h",
+            "Networks_Fwd.h",
             "InsertionSort.h",
             "Randomisation.h");
         headerGen->WriteLine("");

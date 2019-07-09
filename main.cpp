@@ -55,7 +55,27 @@ bool sref_less(uint64_t& leftKey, SortableRef_FourCmovTemp& right)
 #define ElementCount 128
 void test()
 {
-    
+    auto arr = (int*) malloc(sizeof(int) * 5);
+    arr[0] = 500;
+    arr[1] = 1;
+
+    networks::TemplateTest<int, &networks::ConditionalSwap<int>>(arr);
+    debug::WriteLine("first: ", std::to_string(arr[0]));
+    debug::WriteLine("second: ", std::to_string(arr[1]));
+
+    arr[0] = 499;
+    arr[1] = 2;
+
+    networks::TemplateTest2<int, void(*)(int&,int&), &networks::ConditionalSwap<int>>(arr);
+    debug::WriteLine("first: ", std::to_string(arr[0]));
+    debug::WriteLine("second: ", std::to_string(arr[1]));
+
+    arr[0] = 498;
+    arr[1] = 3;
+
+    networks::TemplateTest3<void(*)(int&,int&), &networks::ConditionalSwap<int>>(arr);
+
+    free(arr);
 }
 
 #define NumberOfIterations 100
