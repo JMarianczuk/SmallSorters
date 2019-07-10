@@ -8,9 +8,12 @@
 //------------------------------------------------------------------------------
 
 
-#include "Measurement.generated.h"
+#include "Measure.h"
+#include "../Performancing.h"
+#include "../Networks_Fwd.h"
 #include "../conditional_swap/ConditionalSwapGeneric.h"
 #include "../conditional_swap/ConditionalSwapX86.h"
+#include "../InsertionSort.h"
 namespace measurement
 {
 void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)

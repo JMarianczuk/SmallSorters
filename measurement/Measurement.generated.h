@@ -12,12 +12,7 @@
 #define MEASUREMENT_GENERATED_H
 
 #include <inttypes.h>
-#include "../Sortable.generated.h"
 #include "../Performancing.h"
-#include "Measure.h"
-#include "../Networks_Fwd.h"
-#include "../InsertionSort.h"
-#include "../Randomisation.h"
 
 namespace measurement
 {
@@ -35,12 +30,18 @@ void MeasureIpso11_64(Performancing* perf, uint64_t seed, int numberOfIterations
 void MeasureIpso21_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso21_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso21_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso61_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso61_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso61_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso12_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso12_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso12_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso22_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso22_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 void MeasureIpso22_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso62_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso62_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
+void MeasureIpso62_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration);
 } // namespace measurement
 
 #endif // MEASUREMENT_GENERATED_H

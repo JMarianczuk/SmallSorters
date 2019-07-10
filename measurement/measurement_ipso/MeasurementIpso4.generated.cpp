@@ -8,7 +8,9 @@
 //------------------------------------------------------------------------------
 
 
-#include "../Measurement.generated.h"
+#include <inttypes.h>
+#include "../Measure.h"
+#include "../../Performancing.h"
 #include "../../StdSortWrapper.h"
 #include "../../Ipso.h"
 namespace measurement

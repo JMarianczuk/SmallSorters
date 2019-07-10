@@ -8,9 +8,12 @@
 //------------------------------------------------------------------------------
 
 
-#include "Measurement.generated.h"
+#include "Measure.h"
+#include "../Performancing.h"
+#include "../Networks_Fwd.h"
 #include "../conditional_swap/ConditionalSwapGeneric.h"
 #include "../conditional_swap/ConditionalSwapX86.h"
+#include "../InsertionSort.h"
 #include "../SampleSort.generated.h"
 #include "MeasurementSampleSort.Helper.h"
 #include "../StdSortWrapper.h"
@@ -975,8 +978,8 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -S000 KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -S000 KR STL", &measurement::InsertionSortWrapper, &measurement::BaseCaseSortBlank<insertionsort::InsertionSort_StlVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -S000 KR POp", &measurement::InsertionSortWrapper, &measurement::BaseCaseSortBlank<insertionsort::InsertionSort_PointerOptimized, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -S000 KR STL");
+	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -S000 KR POp");
 }
 } // namespace measurement
