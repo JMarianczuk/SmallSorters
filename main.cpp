@@ -24,58 +24,6 @@
 #include "CommandLineOptions.h"
 #include "DebugHelper.h"
 
-template <typename ValueType, void(*swap)(ValueType&,ValueType&)>
-void TemplateTest(ValueType* arr)
-{
-    swap(arr[0], arr[1]);
-}
-
-template <typename ValueType, typename TSwap, TSwap swap>
-void TemplateTest2(ValueType* arr)
-{
-    swap(arr[0], arr[1]);
-}
-
-template <typename TSwap, TSwap swap, typename ValueType>
-void TemplateTest3(ValueType* arr)
-{
-    swap(arr[0], arr[1]);
-}
-
-template <typename CSwap, typename ValueType>
-void TemplateTest4(ValueType* arr)
-{
-    CSwap::swap(arr[0], arr[1]);
-}
-
-class ConditionalSwapJumpXchg
-{
-public:
-    template <typename Type>
-    static void swap(Type& left, Type& right) {
-        __asm__(
-            "cmpq %[left_key],%[right_key]\n\t"
-            "jae %=f\n\t"
-            "xchg %[left_key],%[right_key]\n\t"
-            "%=:\n\t"
-            : [left_key] "+r"(left), [right_key] "+r"(right)
-            :
-            : "cc"
-            );
-    }
-};
-
-void test_class()
-{
-    auto arr = (size_t*) malloc(sizeof(size_t) * 5);
-    arr[0] = 500;
-    arr[1] = 1;
-
-    TemplateTest4<ConditionalSwapJumpXchg>(arr);
-    debug::WriteLine("first: ", std::to_string(arr[0]));
-    debug::WriteLine("second: ", std::to_string(arr[1]));
-}
-
 void SetDebugOutputFile()
 {
     time_t now = time(0);
@@ -126,6 +74,89 @@ void test()
 
 uint64_t ID(int& value) {return (uint64_t) value;}
 
+bool ExecuteExtraordinaryAction(commandline::CommandLineOptions options)
+{
+    if (options.VerifyNetworks)
+    {
+        verification::VerifyNetworks();
+        return true;
+    }
+    if (options.ExecuteTestMethod)
+    {
+        std::cout << "Executing test method" << std::endl;
+        test();
+        return true;
+    }
+    if (options.HelpRequested 
+        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureQuickSort && !options.MeasureIpso))
+    {
+        commandline::PrintHelpText(std::cout);
+        return true;
+    }
+}
+
+void PrintInfos(int argumentCount, char** arguments)
+{
+    std::string hostname = environment::GetComputerName();
+    std::string commit = GetGitCommitOfContainingRepository();
+    printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
+    printf("Parameters: ");
+    for (int i = 0; i < argumentCount; i += 1)
+    {
+        printf("%s ", arguments[i]);
+    }
+    printf("\n");
+    result::WriteAbbreviationExplanatoryLine();
+}
+
+void PerformMeasurements(commandline::CommandLineOptions options, Performancing* perf, char** arguments, int argumentCount)
+{
+    uint64_t seed;
+    SetResultOutputFile();
+    size_t cacheSize = environment::GetCacheSizeInBytes(environment::GetComputerName());
+    PrintInfos(argumentCount, arguments);
+    
+    auto timeBefore = time(NULL);
+    for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
+    {
+        seed = time(NULL);
+        if (options.MeasureNormal || options.MeasureInRow)
+        {
+            for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
+            {
+                if (options.MeasureNormal) 
+                {
+                    measurement::MeasureSorting(perf, seed, NumberOfIterations, arraySize, measureIteration);
+                }
+                if (options.MeasureInRow && measureIteration < NumberOfMeasuresInRow)
+                {
+                    int numberOfArrays = 1.2f * cacheSize / (arraySize * sizeof(SortableRef));
+                    measurement::MeasureSortingInRow(perf, seed, numberOfArrays, arraySize, measureIteration);
+                }
+            }
+        }
+        if (options.MeasureQuickSort && measureIteration < NumberOfMeasuresComplete)
+        {
+            measurement::MeasureCompleteSorting(perf, seed, NumberOfIterationsCompleteSort, CompleteSortArraySize, measureIteration);
+        }
+        if (options.MeasureSampleSort && measureIteration < NumberOfSampleSorts)
+        {
+            measurement::MeasureSampleSort(perf, seed, NumberOfIterationsSampleSort, SampleSortArraySize, measureIteration);
+        }
+        if (options.MeasureIpso && measureIteration < NumberOfMeasuresIpso)
+        {
+            measurement::MeasureIpsoAll(perf, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
+            
+        }
+    }
+    auto timeAfter = time(NULL);
+    auto secondsElapsed = timeAfter - timeBefore;
+    auto minutesElapsed = secondsElapsed / ((int64_t) 60);
+    printf("Time elapsed during measurement\n");
+    printf("In seconds: %" PRIi64 "\n", secondsElapsed);
+    printf("In minutes: %" PRIi64 "\n", minutesElapsed);
+}
+
 int main(int argumentCount, char** arguments)
 {
     auto options = commandline::ParseOptions(arguments, argumentCount);
@@ -138,79 +169,14 @@ int main(int argumentCount, char** arguments)
     {
         SetDebugOutputFile();
     }
-    if (options.VerifyNetworks)
+    if (ExecuteExtraordinaryAction(options))
     {
-        verification::VerifyNetworks();
-        return 0;
-    }
-    if (options.ExecuteTestMethod)
-    {
-        std::cout << "Executing test method" << std::endl;
-        test();
-        return 0;
-    }
-    if (options.HelpRequested 
-        || (!options.MeasureNormal && !options.MeasureInRow && !options.MeasureSampleSort && !options.MeasureQuickSort && !options.MeasureIpso))
-    {
-        commandline::PrintHelpText(std::cout);
         return 0;
     }
 
-    uint64_t seed;
-    std::string commit = GetGitCommitOfContainingRepository();
-    std::string hostname = environment::GetComputerName();
-    SetResultOutputFile();
-    printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
-    printf("Parameters: ");
-    for (int i = 0; i < argumentCount; i += 1)
-    {
-        printf("%s ", arguments[i]);
-    }
-    printf("\n");
-    size_t cacheSize = environment::GetCacheSizeInBytes(hostname);
-    result::WriteAbbreviationExplanatoryLine();
-    
-    auto timeBefore = time(NULL);
-	auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
-    for (int measureIteration = 0; measureIteration < NumberOfMeasures; measureIteration += 1)
-    {
-        seed = time(NULL);
-        if (options.MeasureNormal || options.MeasureInRow)
-        {
-            for (int arraySize = SmallestArraySize; arraySize <= LargestArraySize; arraySize += 1)
-            {
-                if (options.MeasureNormal) 
-                {
-                    measurement::MeasureSorting(perf_cpu_cycles, seed, NumberOfIterations, arraySize, measureIteration);
-                }
-                if (options.MeasureInRow && measureIteration < NumberOfMeasuresInRow)
-                {
-                    int numberOfArrays = 1.2f * cacheSize / (arraySize * sizeof(SortableRef));
-                    measurement::MeasureSortingInRow(perf_cpu_cycles, seed, numberOfArrays, arraySize, measureIteration);
-                }
-            }
-        }
-        if (options.MeasureQuickSort && measureIteration < NumberOfMeasuresComplete)
-        {
-            measurement::MeasureCompleteSorting(perf_cpu_cycles, seed, NumberOfIterationsCompleteSort, CompleteSortArraySize, measureIteration);
-        }
-        if (options.MeasureSampleSort && measureIteration < NumberOfSampleSorts)
-        {
-            measurement::MeasureSampleSort(perf_cpu_cycles, seed, NumberOfIterationsSampleSort, SampleSortArraySize, measureIteration);
-        }
-        if (options.MeasureIpso && measureIteration < NumberOfMeasuresIpso)
-        {
-            measurement::MeasureIpsoAll(perf_cpu_cycles, seed, NumberOfIterationsIpso, IpsoArraySize, measureIteration);
-            
-        }
-    }
-	delete perf_cpu_cycles;
-    auto timeAfter = time(NULL);
-    auto secondsElapsed = timeAfter - timeBefore;
-    auto minutesElapsed = secondsElapsed / ((int64_t) 60);
-    printf("Time elapsed during measurement\n");
-    printf("In seconds: %" PRIi64 "\n", secondsElapsed);
-    printf("In minutes: %" PRIi64 "\n", minutesElapsed);
+    auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
+    PerformMeasurements(options, perf_cpu_cycles, arguments, argumentCount);
+    delete perf_cpu_cycles;
 
 	return 0;
 }

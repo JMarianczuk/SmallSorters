@@ -40,18 +40,18 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
                     {
                         gen->WriteLine("debug::WriteLine(\"verifying ", name, " networks\");");
                         gen->WriteForLoop("arraySize", 2, 17, [=](){
-                            gen->WriteLine("debug::WriteLine(\"verifying size \", std::to_string(arraySize));");
+                            gen->WriteLine("debug::WriteLine(\"verifying size \", arraySize);");
                             gen->WriteLine("bool result = verification::VerifyNetwork(arraySize, &networks::", name, "::sortN<conditional_swap::CS_Int, int>);");
                             gen->WriteLine("if (!result)");
                             gen->WriteBlock([=]{
-                                gen->WriteLine("debug::WriteLine(\"incorrect network: '", name, "' for size '\", std::to_string(arraySize), \"'.\");");
+                                gen->WriteLine("debug::WriteLine(\"incorrect network: '", name, "' for size '\", arraySize, \"'.\");");
                                 gen->WriteLine("numberOfIncorrectNetworks += 1;");
                             });
                         });
                     },
                     network_nested_namespaces);
-                std::string totalNetworksStr = std::to_string(network_nested_namespaces.size() * (16-2+1));
-                gen->WriteLine("debug::WriteLine(\"finished verification. \", std::to_string(", totalNetworksStr, " - numberOfIncorrectNetworks), \" networks out of ", totalNetworksStr, " sorted correctly.\");");
+                int totalNetworks = network_nested_namespaces.size() * (16-2+1);
+                gen->WriteLine("debug::WriteLine(\"finished verification. \", ", totalNetworks, " - numberOfIncorrectNetworks, \" networks out of ", totalNetworks, " sorted correctly.\");");
             });
         }, "");
     });

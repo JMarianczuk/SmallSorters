@@ -188,7 +188,7 @@ void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusiv
 }
 void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, int upperExclusive, std::function<void()> writeFunc, std::string indent)
 {
-    WriteLine("for (int ", loopVariableName, " = ", std::to_string(lowerInclusive), "; ", loopVariableName, " < ", std::to_string(upperExclusive), "; ", loopVariableName, " += 1)");
+    WriteLine("for (int ", loopVariableName, " = ", lowerInclusive, "; ", loopVariableName, " < ", upperExclusive, "; ", loopVariableName, " += 1)");
     WriteBlock(writeFunc, indent);
 }
 void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc)
@@ -197,7 +197,7 @@ void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusiv
 }
 void CodeGenerator::WriteForLoop(std::string loopVariableName, int lowerInclusive, std::string upperExclusive, std::function<void()> writeFunc, std::string indent)
 {
-    WriteLine("for (int ", loopVariableName, " = ", std::to_string(lowerInclusive), "; ", loopVariableName, " < ", upperExclusive, "; ", loopVariableName, " += 1)");
+    WriteLine("for (int ", loopVariableName, " = ", lowerInclusive, "; ", loopVariableName, " < ", upperExclusive, "; ", loopVariableName, " += 1)");
     WriteBlock(writeFunc, indent);
 }
 void CodeGenerator::WriteForEachLoop(std::string loopVariableName, std::string source, std::function<void()> writeFunc, std::string loopVariableType)

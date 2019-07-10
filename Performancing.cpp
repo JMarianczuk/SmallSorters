@@ -93,7 +93,7 @@ std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 	{
 		if (_readFormat->values[i].id == _idFirst)
 		{
-			// debug::WriteLine("PERF: '", std::to_string(_readFormat->values[i].value), "', RDTSC: '", std::to_string(_ticks), "'");
+			// debug::WriteLine("PERF: '", _readFormat->values[i].value, "', RDTSC: '", _ticks, "'");
 			return {_readFormat->values[i].value, _ticks};
 		}
 	}

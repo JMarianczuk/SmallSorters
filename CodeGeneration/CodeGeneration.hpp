@@ -26,6 +26,8 @@ private:
     std::ofstream _fileStream;
     bool _indentBeforeWrite;
     void MakeStream();
+    template <typename Single> void WriteLineRec(Single s);
+    template <typename First, typename... Inputs> void WriteLineRec(First first, Inputs... inputs);
 protected:
     std::string _indent;
     void WriteIndent();
@@ -51,16 +53,24 @@ public:
     void WriteForEachLoop(std::string loopVariableName, std::string source, std::function<void()> writeFunc, std::string indent, std::string loopVariableType = "auto");
 };
 
+template <typename Single>
+void CodeGenerator::WriteLineRec(Single s)
+{
+    Write(s);
+    WriteEndl();
+}
+
+template <typename First, typename... Inputs>
+void CodeGenerator::WriteLineRec(First first, Inputs... inputs)
+{
+    Write(first);
+    WriteLineRec(inputs...);
+}
+
 template <typename... TInputs>
 void CodeGenerator::WriteLine(TInputs... inputs)
 {
-    std::vector<std::string> args = {inputs...};
-    
-    for (std::string arg : args)
-    {
-        Write(arg);
-    }
-    WriteEndl();
+    WriteLineRec(inputs...);
 }
 
 class CPlusPlusCodeGenerator : public CodeGenerator

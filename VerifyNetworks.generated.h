@@ -32,70 +32,70 @@ void VerifyNetworks()
 	debug::WriteLine("verifying best networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
-		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		debug::WriteLine("verifying size ", arraySize);
 		bool result = verification::VerifyNetwork(arraySize, &networks::best::sortN<conditional_swap::CS_Int, int>);
 		if (!result)
 		{
-			debug::WriteLine("incorrect network: 'best' for size '", std::to_string(arraySize), "'.");
+			debug::WriteLine("incorrect network: 'best' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
 	debug::WriteLine("verifying bosenelson networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
-		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		debug::WriteLine("verifying size ", arraySize);
 		bool result = verification::VerifyNetwork(arraySize, &networks::bosenelson::sortN<conditional_swap::CS_Int, int>);
 		if (!result)
 		{
-			debug::WriteLine("incorrect network: 'bosenelson' for size '", std::to_string(arraySize), "'.");
+			debug::WriteLine("incorrect network: 'bosenelson' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
 	debug::WriteLine("verifying bosenelsonparallel networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
-		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		debug::WriteLine("verifying size ", arraySize);
 		bool result = verification::VerifyNetwork(arraySize, &networks::bosenelsonparallel::sortN<conditional_swap::CS_Int, int>);
 		if (!result)
 		{
-			debug::WriteLine("incorrect network: 'bosenelsonparallel' for size '", std::to_string(arraySize), "'.");
+			debug::WriteLine("incorrect network: 'bosenelsonparallel' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
 	debug::WriteLine("verifying bosenelsonparameter networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
-		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		debug::WriteLine("verifying size ", arraySize);
 		bool result = verification::VerifyNetwork(arraySize, &networks::bosenelsonparameter::sortN<conditional_swap::CS_Int, int>);
 		if (!result)
 		{
-			debug::WriteLine("incorrect network: 'bosenelsonparameter' for size '", std::to_string(arraySize), "'.");
+			debug::WriteLine("incorrect network: 'bosenelsonparameter' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
 	debug::WriteLine("verifying bosenelsonrecursive networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
-		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		debug::WriteLine("verifying size ", arraySize);
 		bool result = verification::VerifyNetwork(arraySize, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_Int, int>);
 		if (!result)
 		{
-			debug::WriteLine("incorrect network: 'bosenelsonrecursive' for size '", std::to_string(arraySize), "'.");
+			debug::WriteLine("incorrect network: 'bosenelsonrecursive' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
 	debug::WriteLine("verifying batcher networks");
 	for (int arraySize = 2; arraySize < 17; arraySize += 1)
 	{
-		debug::WriteLine("verifying size ", std::to_string(arraySize));
+		debug::WriteLine("verifying size ", arraySize);
 		bool result = verification::VerifyNetwork(arraySize, &networks::batcher::sortN<conditional_swap::CS_Int, int>);
 		if (!result)
 		{
-			debug::WriteLine("incorrect network: 'batcher' for size '", std::to_string(arraySize), "'.");
+			debug::WriteLine("incorrect network: 'batcher' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
-	debug::WriteLine("finished verification. ", std::to_string(90 - numberOfIncorrectNetworks), " networks out of 90 sorted correctly.");
+	debug::WriteLine("finished verification. ", 90 - numberOfIncorrectNetworks, " networks out of 90 sorted correctly.");
 }
 } // namespace verification
 

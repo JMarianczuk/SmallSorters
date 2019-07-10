@@ -21,15 +21,15 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
                 {
-                    std::string sizeStr = std::to_string(network["NetworkSize"].get<int>());
+                    int size = network["NetworkSize"].get<int>();
                     gen->WriteLine("template <typename CSwap, typename ValueType> static");
-                    gen->WriteLine("void sort", sizeStr, "(ValueType* A)");
+                    gen->WriteLine("void sort", size, "(ValueType* A)");
                     gen->WriteBlock([=]{
                         for (auto swap : network["Swaps"])
                         {
-                            std::string leftStr = std::to_string(swap["LeftIndex"].get<int>());
-                            std::string rightStr = std::to_string(swap["RightIndex"].get<int>());
-                            gen->WriteLine("CSwap::swap(A[", leftStr, "], A[", rightStr, "]);");
+                            int left =swap["LeftIndex"].get<int>();
+                            int right = swap["RightIndex"].get<int>();
+                            gen->WriteLine("CSwap::swap(A[", left, "], A[", right, "]);");
                         }
                     });
                 }
@@ -43,10 +43,10 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
                         gen->WriteLine("case 1: break;");
                         for (auto network : networksJson)
                         {
-                            std::string sizeStr = std::to_string(network["NetworkSize"].get<int>());
-                            gen->WriteLine("case ", sizeStr, ":");
+                            int size = network["NetworkSize"].get<int>();
+                            gen->WriteLine("case ", size, ":");
                             gen->WriteIndented([=]{
-                                gen->WriteLine("sort", sizeStr, "<CSwap>(A);");
+                                gen->WriteLine("sort", size, "<CSwap>(A);");
                                 gen->WriteLine("break;");
                             });
                         }
@@ -335,13 +335,12 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
                         gen->WriteLine("case 1: break;");
                         for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
                         {
-                            auto sizeStr = std::to_string(arraySize);
-                            gen->WriteLine("case ", sizeStr, ":");
+                            gen->WriteLine("case ", arraySize, ":");
                             gen->WriteIndented([=]{
                                 gen->Write("networks::");
                                 gen->Write(nested_namespace_name);
                                 gen->Write("::sort");
-                                gen->Write(sizeStr);
+                                gen->Write(arraySize);
                                 gen->Write("<CSwap>(");
                                 for (int i = 0; i < arraySize - 1; i += 1)
                                 {
@@ -431,13 +430,13 @@ void WriteSorter_RecursiveStyle(
     {
         case RecursiveParameterNetworkType::Split:
             networkSize = network["NetworkSize"].get<int>();
-            gen->WriteLine("void sort", std::to_string(networkSize), "(ValueType* A)");
+            gen->WriteLine("void sort", networkSize, "(ValueType* A)");
             splitIndices[networkSize] = true;
             break;
         case RecursiveParameterNetworkType::Merge:
             leftMergeSize = network["LeftMergeSize"].get<int>();
             rightMergeSize = network["RightMergeSize"].get<int>();
-            gen->WriteLine("void merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), "(ValueType* left, ValueType* right)");
+            gen->WriteLine("void merge", leftMergeSize, "_", rightMergeSize, "(ValueType* left, ValueType* right)");
             mergeIndices[leftMergeSize * indexArrayLength + rightMergeSize] = true;
             if (leftMergeSize == 1 && rightMergeSize == 1)
             {
@@ -478,7 +477,7 @@ void WriteSorter_RecursiveStyle(
                 {
                     addStr = " + " + std::to_string(indexToUse);
                 }
-                gen->WriteLine("networks::", nested_namespace_name, "::sort", std::to_string(stepSize), "<CSwap>(A", addStr, ");");
+                gen->WriteLine("networks::", nested_namespace_name, "::sort", stepSize, "<CSwap>(A", addStr, ");");
             }
             else if (stepType.compare("Merge") == 0)
             {
@@ -506,7 +505,7 @@ void WriteSorter_RecursiveStyle(
                         callStr = "left" + leftAddStr + ", right" + rightAddStr;
                         break;
                 }
-                gen->WriteLine("networks::", nested_namespace_name, "::merge", std::to_string(leftMergeSize), "_", std::to_string(rightMergeSize), "<CSwap>(", callStr, ");");
+                gen->WriteLine("networks::", nested_namespace_name, "::merge", leftMergeSize, "_", rightMergeSize, "<CSwap>(", callStr, ");");
             }
         }
     });
@@ -563,10 +562,9 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
                         gen->WriteLine("case 1: break;");
                         for (int arraySize = 2; arraySize <= maxLength; arraySize += 1)
                         {
-                            auto sizeStr = std::to_string(arraySize);
-                            gen->WriteLine("case ", sizeStr, ":");
+                            gen->WriteLine("case ", arraySize, ":");
                             gen->WriteIndented([=]{
-                                gen->WriteLine("networks::", nested_namespace_name, "::sort", sizeStr, "<CSwap>(A);");
+                                gen->WriteLine("networks::", nested_namespace_name, "::sort", arraySize, "<CSwap>(A);");
                                 gen->WriteLine("break;");
                             });
                         }
