@@ -43,7 +43,7 @@
 #include "ips4o_fwd.hpp"
 #include "utils.hpp"
 #include "../../Sortable.generated.h"
-#include "../../QuickSort.h"
+#include "../../sorters/QuickSort.h"
 #include "../../Networks_Fwd.h"
 #include "../../conditional_swap/ConditionalSwapGeneric.h"
 #include "../../conditional_swap/ConditionalSwapX86.h"

@@ -288,8 +288,8 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
     ipsoGen->WriteIncludeQuotes(
         "../Measure.h",
         "../../Performancing.h",
-        "../../StdSortWrapper.h",
-        "../../Ipso.h");
+        "../../sorters/StdSortWrapper.h",
+        "../../sorters/Ipso.h");
     ipsoGen->WriteNamespace("measurement", [=]{
         std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
         std::vector<SortableStruct*> csRef = {(*sortableStructs())[5]}; // 4CS
@@ -361,7 +361,7 @@ void WriteMeasurementIncludes(CPlusPlusCodeGenerator* gen)
         "../Networks_Fwd.h",
         "../conditional_swap/ConditionalSwapGeneric.h",
         "../conditional_swap/ConditionalSwapX86.h",
-        "../InsertionSort.h"
+        "../sorters/InsertionSort.h"
     );
 }
 
@@ -501,8 +501,8 @@ void GenerateMeasurementMethod(
         }, "");
         WriteMeasurementIncludes(completeGen);
         completeGen->WriteIncludeQuotes(
-            "../QuickSort.h",
-            "../StdSortWrapper.h");
+            "../sorters/QuickSort.h",
+            "../sorters/StdSortWrapper.h");
         completeGen->WriteNamespace("measurement", [=]{
             std::vector<SortableStruct*> sRef = {(*sortableStructs())[0]}; // Def
             std::vector<SortableStruct*> bRef = {(*sortableStructs())[5]}; // 4CS
@@ -542,9 +542,9 @@ void GenerateMeasurementMethod(
         }, "");
         WriteMeasurementIncludes(sampleSortGen);
         sampleSortGen->WriteIncludeQuotes(
-            "../SampleSort.generated.h",
+            "../sorters/SampleSort.generated.h",
             "MeasurementSampleSort.Helper.h",
-            "../StdSortWrapper.h");
+            "../sorters/StdSortWrapper.h");
         sampleSortGen->WriteNamespace("measurement", [=]{
             std::vector<MeasureParams> sampleSortMeasureParams = 
             {

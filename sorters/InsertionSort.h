@@ -5,8 +5,6 @@
 #include <utility>
 #include <algorithm>
 
-#include "Sortable.generated.h"
-
 namespace insertionsort {
 
 class InsertionSort_Default

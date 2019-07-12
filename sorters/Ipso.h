@@ -2,7 +2,7 @@
 #ifndef IPSO_H
 #define IPSO_H
 
-#include "include/ips4o.hpp"
+#include "../include/ips4o.hpp"
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
 

@@ -1,12 +1,57 @@
 
-#ifndef QUICKSORT_COPY2_H
-#define QUICKSORT_COPY2_H
+#ifndef QUICKSORT_H
+#define QUICKSORT_H
 
-#include <algorithm>
-#include "CustomMath.h"
+#include <inttypes.h>
 
-namespace quicksortcopy2
+#include "../CustomMath.h"
+#include "../DebugHelper.h"
+#include "SampleSort.generated.h"
+#include "../networks/BoseNelsonParameter.generated.h"
+#include "../conditional_swap/ConditionalSwapX86.h"
+
+namespace quicksort
 {
+
+#define BaseCaseLimit 16
+
+template <typename ValueType>
+static inline
+void QuickSort(ValueType* items, size_t arraySize, void (*sortFunc)(ValueType*,size_t))
+{
+    if (arraySize > BaseCaseLimit)
+    {
+        auto mid = arraySize / 2;
+        auto pivot = items[mid];
+        int last = arraySize - 1;
+        std::swap(items[mid], items[last]);
+        int firstGreater = 0;
+        for (int current = 0; current < last; current += 1)
+        {
+            if (items[current] <= pivot)
+            {
+                std::swap(items[current], items[firstGreater]);
+                firstGreater += 1;
+            }
+        }
+        std::swap(items[firstGreater], items[last]);
+        QuickSort(items, firstGreater, sortFunc);
+        QuickSort(items + firstGreater + 1, last - firstGreater, sortFunc);
+    }
+    else if (arraySize >= 2)
+    {
+        sortFunc(items, arraySize);
+    }
+}
+
+template <typename ValueType>
+static inline
+bool templateLess(uint64_t& leftKey, ValueType& right)
+{
+    return leftKey < GetKey(right);
+}
+
+//------------------------------------------------------------------------------------
 
 template<typename _Iterator, typename = std::void_t<>>
     struct __iterator_traits { };
@@ -152,99 +197,6 @@ void partial_sort(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
 //-------------------------------------------------------------------------------------------------------------
 
 template<typename _RandomAccessIterator, typename _Compare>
-void
-__unguarded_linear_insert(_RandomAccessIterator __last, _Compare __comp)
-{
-    typename iterator_traits<_RandomAccessIterator>::value_type __val = std::move(*__last);
-    _RandomAccessIterator __next = __last;
-    --__next;
-    while (__comp(__val, __next))
-    {
-        *__last = std::move(*__next);
-        __last = __next;
-        --__next;
-    }
-    *__last = std::move(__val);
-}
-
-template<typename _RandomAccessIterator, typename _Compare>
-inline void
-__unguarded_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
-{
-    for (_RandomAccessIterator __i = __first; __i != __last; ++__i)
-    {
-        std::__unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
-    }
-}
-
-template<typename _RandomAccessIterator, typename _Compare>
-void
-__insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
-{
-    if (__first == __last) return;
-
-    for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
-    {
-        if (__comp(__i, __first))
-        {
-            typename iterator_traits<_RandomAccessIterator>::value_type __val = std::move(*__i);
-            std::move_backward(__first, __i, __i + 1);
-            *__first = std::move(__val);
-        }
-        else
-        {
-            __unguarded_linear_insert(__i, __gnu_cxx::__ops::__val_comp_iter(__comp));
-        }
-    }
-}
-
-template<typename _RandomAccessIterator, typename _Compare>
-void
-__final_insertion_sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
-{
-    if (__last - __first > int(_S_threshold))
-    {
-        __insertion_sort(__first, __first + int(_S_threshold), __comp);
-        __unguarded_insertion_sort(__first + int(_S_threshold), __last, __comp);
-    }
-    else
-        __insertion_sort(__first, __last, __comp);
-}
-
-template<typename _Iterator, typename _Compare>
-void
-__move_median_to_first(_Iterator __result,_Iterator __a, _Iterator __b, _Iterator __c, _Compare __comp)
-{
-    if (__comp(__a, __b))
-    {
-        if (__comp(__b, __c))
-        {
-            std::iter_swap(__result, __b);
-        }
-        else if (__comp(__a, __c))
-        {
-            std::iter_swap(__result, __c);
-        }
-        else
-        {
-            std::iter_swap(__result, __a);
-        }
-    }
-    else if (__comp(__a, __c))
-    {
-        std::iter_swap(__result, __a);
-    }
-    else if (__comp(__b, __c))
-    {
-        std::iter_swap(__result, __c);
-    }
-    else
-    {
-        std::iter_swap(__result, __b);
-    }
-}
-
-    template<typename _RandomAccessIterator, typename _Compare>
 _RandomAccessIterator
 __unguarded_partition(_RandomAccessIterator __first,
             _RandomAccessIterator __last,
@@ -276,15 +228,18 @@ __unguarded_partition_pivot(_RandomAccessIterator __first,
             _RandomAccessIterator __last, _Compare __comp)
 {
     _RandomAccessIterator __mid = __first + (__last - __first) / 2;
-    __move_median_to_first(__first, __first + 1, __mid, __last - 1, __comp);
+    networks::bosenelsonparameter::sort3<conditional_swap::CS_FourCmovTemp_Split>(*__mid, *__first, *(__last-1));
     return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
 
-template<typename _RandomAccessIterator, typename _Size, typename _Compare>
+template<typename _RandomAccessIterator, typename _Size, typename _Compare, typename _BaseCaseFunc>
 void
-__introsort_loop(_RandomAccessIterator __first,
-            _RandomAccessIterator __last,
-            _Size __depth_limit, _Compare __comp)
+__introsort_loop(
+    _RandomAccessIterator __first,
+    _RandomAccessIterator __last,
+    _Size __depth_limit, 
+    _Compare __comp, 
+    _BaseCaseFunc __baseCaseFunc)
 {
     while (__last - __first > int(_S_threshold))
     {
@@ -295,29 +250,29 @@ __introsort_loop(_RandomAccessIterator __first,
         }
         --__depth_limit;
         _RandomAccessIterator __cut = __unguarded_partition_pivot(__first, __last, __comp);
-        __introsort_loop(__cut, __last, __depth_limit, __comp);
+        __introsort_loop(__cut, __last, __depth_limit, __comp, __baseCaseFunc);
         __last = __cut;
     }
+    __baseCaseFunc(__first, __last - __first);
 }
 
-template<typename _RandomAccessIterator, typename _Compare>
+template <typename _RandomAccessIterator, typename _Compare, typename _BaseCaseFunc>
 inline void
-__sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
+__sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp, _BaseCaseFunc __baseCaseFunc)
 {
     if (__first != __last)
     {
-        __introsort_loop(__first, __last, custommath::intlog2(__last - __first) * 2, __comp);
-        __final_insertion_sort(__first, __last, __comp);
+        __introsort_loop(__first, __last, custommath::longlog2(__last - __first) * 2, __comp, __baseCaseFunc);
     }
 }
 
-template<typename _RandomAccessIterator, typename _Compare>
+template <typename ValueType>
 inline void
-sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
+sort(ValueType* __first, ValueType* __last, bool(*__comp)(ValueType,ValueType), void(*__baseCaseFunc)(ValueType*,size_t))
 {
-    __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp));
+    __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp), __baseCaseFunc);
 }
 
-} // namespace quicksortcopy2
+} // quicksort
 
-#endif // QUICKSORT_COPY2_H
+#endif // QUICKSORT_H

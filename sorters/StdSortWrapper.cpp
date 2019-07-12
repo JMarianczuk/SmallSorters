@@ -4,8 +4,8 @@
 #include "Quicksort_Copy.h"
 #include "Quicksort_Copy2.h"
 #include "SampleSort.generated.h"
-#include "StructHelpers.generated.h"
-#include "conditional_swap/ConditionalSwapGeneric.h"
+#include "../StructHelpers.generated.h"
+#include "../conditional_swap/ConditionalSwapGeneric.h"
 
 namespace measurement
 {

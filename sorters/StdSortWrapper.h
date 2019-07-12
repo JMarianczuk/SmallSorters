@@ -4,7 +4,7 @@
 
 #include <cstdlib>
 
-#include "Sortable.generated.h"
+#include "../Sortable.generated.h"
 
 namespace measurement
 {

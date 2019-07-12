@@ -5,7 +5,6 @@
 #include <fstream>
 
 #include "Performancing.h"
-#include "InsertionSort.h"
 #include "Networks_Fwd.h"
 #include "Result.h"
 #include "GitInfo.h"
@@ -13,12 +12,16 @@
 #include "Randomisation.h"
 #include "ArrayHelpers.h"
 #include "Sortable.generated.h"
+
 #include "measurement/Measurement.generated.h"
 #include "measurement/MeasurementIpso.Helper.h"
-#include "SampleSort.generated.h"
-#include "QuickSort.h"
-#include "Quicksort_Copy.h"
-#include "Quicksort_Copy2.h"
+
+#include "sorters/InsertionSort.h"
+#include "sorters/SampleSort.generated.h"
+#include "sorters/QuickSort.h"
+#include "sorters/Quicksort_Copy.h"
+#include "sorters/Quicksort_Copy2.h"
+
 #include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"
 #include "CommandLineOptions.h"

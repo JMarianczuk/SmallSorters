@@ -7,8 +7,8 @@
 #include <inttypes.h>
 #include <type_traits>
 
-#include "CustomMath.h"
-#include "networks/BoseNelsonParameter.generated.h"
+#include "../CustomMath.h"
+#include "../networks/BoseNelsonParameter.generated.h"
 #include "InsertionSort.h"
 
 namespace quicksortcopy

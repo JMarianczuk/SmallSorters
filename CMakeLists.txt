@@ -7,6 +7,8 @@ file(GLOB small_sorters_SRC
     "measurement/*.cpp"
     "measurement/measurement_ipso/*.cpp"
     "networks/*.h"
+    "sorters/*.h"
+    "sorters/*.cpp"
     "lib/*.hpp"
     "include/*.hpp"
 )

@@ -5,7 +5,7 @@
 #include <inttypes.h>
 
 #include "../Sortable.generated.h"
-#include "../InsertionSort.h"
+#include "../sorters/InsertionSort.h"
 
 namespace measurement
 {
