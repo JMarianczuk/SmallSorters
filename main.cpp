@@ -4,11 +4,11 @@
 #include <iostream>
 #include <fstream>
 
-#include "Performancing.h"
+#include "environment/Performancing.h"
 #include "Networks_Fwd.h"
 #include "Result.h"
-#include "GitInfo.h"
-#include "EnvironmentInfo.h"
+#include "environment/GitInfo.h"
+#include "environment/EnvironmentInfo.h"
 #include "Randomisation.h"
 #include "ArrayHelpers.h"
 #include "Sortable.generated.h"
@@ -24,7 +24,7 @@
 
 #include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"
-#include "CommandLineOptions.h"
+#include "environment/CommandLineOptions.h"
 #include "DebugHelper.h"
 
 void SetDebugOutputFile()

@@ -1,6 +1,6 @@
 
-#include "SampleSort.generated.h"
-#include "BestNetworks.generated.h"
+#include "sorters/SampleSort.generated.h"
+#include "networks/BestNetworks.generated.h"
 #include "StructHelpers.generated.h"
 #include "Randomisation.generated.h"
 #include "ArrayHelpers.h"

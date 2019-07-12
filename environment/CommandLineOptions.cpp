@@ -1,7 +1,7 @@
 
 #include <ostream>
 
-#include "lib/clara.hpp"
+#include "../lib/clara.hpp"
 #include "CommandLineOptions.h"
 
 namespace commandline

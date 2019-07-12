@@ -287,7 +287,7 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
     );
     ipsoGen->WriteIncludeQuotes(
         "../Measure.h",
-        "../../Performancing.h",
+        "../../environment/Performancing.h",
         "../../sorters/StdSortWrapper.h",
         "../../sorters/Ipso.h");
     ipsoGen->WriteNamespace("measurement", [=]{
@@ -357,7 +357,7 @@ void WriteMeasurementIncludes(CPlusPlusCodeGenerator* gen)
 {
     gen->WriteIncludeQuotes(
         "Measure.h",
-        "../Performancing.h",
+        "../environment/Performancing.h",
         "../Networks_Fwd.h",
         "../conditional_swap/ConditionalSwapGeneric.h",
         "../conditional_swap/ConditionalSwapX86.h",
@@ -435,7 +435,7 @@ void GenerateMeasurementMethod(
 
     headerGen->WriteHeaderPragma("MEASUREMENT_GENERATED_H", [=](){
         headerGen->WriteIncludeBrackets("inttypes.h");
-        headerGen->WriteIncludeQuotes("../Performancing.h");
+        headerGen->WriteIncludeQuotes("../environment/Performancing.h");
         headerGen->WriteLine("");
 
         std::string normalMeasureName = "MeasureSorting";

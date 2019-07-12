@@ -5,8 +5,8 @@
 #include <stdexcept>
 #include <tuple>
 
-#include "DebugHelper.h"
-#include "Enumerations.h"
+#include "../DebugHelper.h"
+#include "../Enumerations.h"
 #include "Performancing.h"
 
 struct read_format {
