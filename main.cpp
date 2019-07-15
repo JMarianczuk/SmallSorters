@@ -58,7 +58,8 @@ bool sref_less(uint64_t& leftKey, SortableRef& right)
 #define ElementCount 128
 void test()
 {
-    
+    SetResultOutputFile();
+    printf("Test output");
 }
 
 #define NumberOfIterations 100
@@ -103,6 +104,7 @@ void PrintInfos(int argumentCount, char** arguments)
 {
     std::string hostname = environment::GetComputerName();
     std::string commit = GetGitCommitOfContainingRepository();
+    SetResultOutputFile();
     printf("General Info: Commit=%s, Hostname=%s\n", commit.c_str(), hostname.c_str());
     printf("Parameters: ");
     for (int i = 0; i < argumentCount; i += 1)
@@ -116,8 +118,8 @@ void PrintInfos(int argumentCount, char** arguments)
 void PerformMeasurements(commandline::CommandLineOptions options, Performancing* perf, char** arguments, int argumentCount)
 {
     uint64_t seed;
-    SetResultOutputFile();
     size_t cacheSize = environment::GetCacheSizeInBytes(environment::GetComputerName());
+    // stdout is changed multiple times in PrintInfos. The correct order is handled there
     PrintInfos(argumentCount, arguments);
     
     auto timeBefore = time(NULL);
