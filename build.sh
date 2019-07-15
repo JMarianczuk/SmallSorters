@@ -6,4 +6,4 @@ rm *.o
 cd MeasurementIpso
 rm *.o
 cd ../../..
-make
+make -j4
