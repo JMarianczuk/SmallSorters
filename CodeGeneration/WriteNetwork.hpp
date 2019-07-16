@@ -16,7 +16,7 @@ namespace codegeneration
 
 void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath);
 void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath);
-void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath);
+void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string sortMethodName, std::string networksJsonFilePath, int numberOfSwapsInlineThreshold);
 
 }
 

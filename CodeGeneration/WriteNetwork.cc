@@ -120,17 +120,69 @@ void WriteParameters(CodeGenerator *gen, nlohmann::json leftIndices, nlohmann::j
     gen->Write(rightIndices.back().get<int>());
 }
 
-bool IsInline(nlohmann::json network, RecursiveParameterNetworkType networkType)
+RecursiveParameterNetworkType GetNetworkType(nlohmann::json network)
 {
-    //return true; //Worse performance for only inlining the small networks -> probably due to the fact that too many parameters have to be pushed on the stack
-    switch (networkType)
+    auto type = network["Type"].get<std::string>();
+    if (type.compare("Split") == 0)
     {
-        case RecursiveParameterNetworkType::Split:
-            return network["NetworkSize"].get<int>() == 2;
-        case RecursiveParameterNetworkType::Merge:
-            return (network["LeftMergeSize"].get<int>() + network["RightMergeSize"].get<int>()) <= 3;
+        return RecursiveParameterNetworkType::Split;
+    }
+    else if (type.compare("Merge") == 0)
+    {
+        return RecursiveParameterNetworkType::Merge;
+    }
+    else
+    {
+        throw std::logic_error("Bad network");
     }
     
+}
+
+int GetNumberOfInstructions(nlohmann::json network)
+{
+    if (GetNetworkType(network) == RecursiveParameterNetworkType::Merge)
+    {
+            int leftSize = network["LeftMergeSize"].get<int>();
+            int rightSize = network["RightMergeSize"].get<int>();
+            if (leftSize + rightSize <= 3)
+            {
+                return (leftSize + rightSize) - 1;
+            }
+    }
+    int result = 0;
+    for (auto step : network["RecursiveSteps"])
+    {
+        result += GetNumberOfInstructions(step["Network"]);
+    }
+    return result;
+}
+
+bool IsSingleUseNetwork(nlohmann::json network, nlohmann::json allNetworks)
+{
+    if (GetNetworkType(network) == RecursiveParameterNetworkType::Split)
+    {
+        return false;
+    }
+    int encountered = 0;
+    for (auto n : allNetworks)
+    {
+        for (auto step : n["RecursiveSteps"])
+        {
+            auto inner = step["Network"];
+            if (inner["Type"] == network["Type"] && inner["LeftMergeSize"] == network["LeftMergeSize"] && inner["RightMergeSize"] == network["RightMergeSize"])
+            {
+                encountered += 1;
+            }
+        }
+    }
+    return false;//encountered <= 1;
+}
+
+bool IsInline(nlohmann::json network, int numberOfSwapsInlineThreshold, nlohmann::json allNetworks)
+{
+    //return true; //Worse performance for only inlining the small networks -> probably due to the fact that too many parameters have to be pushed on the stack
+    return GetNumberOfInstructions(network) <= numberOfSwapsInlineThreshold
+        || IsSingleUseNetwork(network, allNetworks);
 }
 
 void WriteSorter_ParameterStyle(
@@ -369,7 +421,9 @@ void WriteSorter_RecursiveStyle(
     std::string nested_namespace_name,
     bool* splitIndices, 
     bool* mergeIndices, 
-    int indexArrayLength)
+    int indexArrayLength,
+    int numberOfSwapsInlineThreshold,
+    nlohmann::json allNetworks)
 {
     for (auto step : network["RecursiveSteps"])
     {
@@ -386,7 +440,9 @@ void WriteSorter_RecursiveStyle(
                     nested_namespace_name,
                     splitIndices,
                     mergeIndices,
-                    indexArrayLength);
+                    indexArrayLength,
+                    numberOfSwapsInlineThreshold,
+                    allNetworks);
             }
         }
         if (stepType.compare("Merge") == 0)
@@ -401,24 +457,17 @@ void WriteSorter_RecursiveStyle(
                     nested_namespace_name,
                     splitIndices,
                     mergeIndices,
-                    indexArrayLength);
+                    indexArrayLength,
+                    numberOfSwapsInlineThreshold,
+                    allNetworks);
             }
         }
     }
 
-    RecursiveParameterNetworkType networkType;
-    auto type = network["Type"].get<std::string>();
-    if (type.compare("Split") == 0)
-    {
-        networkType = RecursiveParameterNetworkType::Split;
-    }
-    else if (type.compare("Merge") == 0)
-    {
-        networkType = RecursiveParameterNetworkType::Merge;
-    }
+    RecursiveParameterNetworkType networkType = GetNetworkType(network);
 
     gen->WriteLine("template <typename CSwap, typename ValueType> static");
-    if (IsInline(network, networkType))
+    if (IsInline(network, numberOfSwapsInlineThreshold, allNetworks))
     {
         gen->WriteLine("inline");
     }
@@ -512,7 +561,7 @@ void WriteSorter_RecursiveStyle(
     gen->WriteLine("");
 }
 
-void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string nested_namespace_name, std::string networksJsonFilePath)
+void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::string nested_namespace_name, std::string networksJsonFilePath, int numberOfSwapsInlineThreshold)
 {
     std::ifstream input(networksJsonFilePath);
     nlohmann::json networksJson;
@@ -549,7 +598,9 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
                         nested_namespace_name,
                         splitIndices,
                         mergeIndices,
-                        maxLength + 1);
+                        maxLength + 1,
+                        numberOfSwapsInlineThreshold,
+                        networksJson);
                 }
                 gen->WriteLine("");
 

@@ -179,7 +179,8 @@ void GenerateNetworks_RecursiveStype()
         gen,
         "BOSENELSON_RECURSIVE_GENERATED_H",
         "bosenelsonrecursive",
-        "../BoseNelsonNetworks_ParameterStyle.json");
+        "../BoseNelsonNetworks_ParameterStyle.json",
+        4);
     delete gen;
 }
 
