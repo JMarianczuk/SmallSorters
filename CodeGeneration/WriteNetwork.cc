@@ -175,7 +175,7 @@ bool IsSingleUseNetwork(nlohmann::json network, nlohmann::json allNetworks)
             }
         }
     }
-    return false;//encountered <= 1;
+    return encountered <= 1;
 }
 
 bool IsInline(nlohmann::json network, int numberOfSwapsInlineThreshold, nlohmann::json allNetworks)

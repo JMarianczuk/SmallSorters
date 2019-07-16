@@ -63,6 +63,7 @@ void sort4(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge2_3(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge1_2<CSwap>(left, right);
@@ -86,6 +87,7 @@ void merge2_1(ValueType* left, ValueType* right)
 	CSwap::swap(left[1], right[0]);
 }
 template <typename CSwap, typename ValueType> static
+inline
 void merge3_3(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge1_1<CSwap>(left, right);
@@ -102,6 +104,7 @@ void sort6(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge3_4(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge1_2<CSwap>(left, right);
@@ -118,6 +121,7 @@ void sort7(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge4_4(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge2_2<CSwap>(left, right);
@@ -134,6 +138,7 @@ void sort8(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge4_5(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge2_3<CSwap>(left, right);
@@ -150,6 +155,7 @@ void sort9(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge3_2(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge1_1<CSwap>(left, right);
@@ -158,6 +164,7 @@ void merge3_2(ValueType* left, ValueType* right)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge5_5(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge2_2<CSwap>(left, right);
@@ -174,6 +181,7 @@ void sort10(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge5_6(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge2_3<CSwap>(left, right);
@@ -190,6 +198,7 @@ void sort11(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge6_6(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge3_3<CSwap>(left, right);
@@ -206,6 +215,7 @@ void sort12(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge6_7(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge3_4<CSwap>(left, right);
@@ -222,6 +232,7 @@ void sort13(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge4_3(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge2_2<CSwap>(left, right);
@@ -230,6 +241,7 @@ void merge4_3(ValueType* left, ValueType* right)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge7_7(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge3_3<CSwap>(left, right);
@@ -246,6 +258,7 @@ void sort14(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge7_8(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge3_4<CSwap>(left, right);
@@ -262,6 +275,7 @@ void sort15(ValueType* A)
 }
 
 template <typename CSwap, typename ValueType> static
+inline
 void merge8_8(ValueType* left, ValueType* right)
 {
 	networks::bosenelsonrecursive::merge4_4<CSwap>(left, right);
