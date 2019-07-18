@@ -14,9 +14,6 @@ void WriteNetwork(CPlusPlusCodeGenerator *gen, std::string headerDefine, std::st
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes(
-            "../conditional_swap/ConditionalSwapGeneric.h",
-            "../conditional_swap/ConditionalSwapX86.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
@@ -361,9 +358,6 @@ void WriteNetwork_ParameterStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes(
-            "../conditional_swap/ConditionalSwapGeneric.h",
-            "../conditional_swap/ConditionalSwapX86.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)
@@ -585,9 +579,6 @@ void WriteNetwork_RecursiveStyle(CPlusPlusCodeGenerator *gen, std::string header
     gen->WriteLine("");
 
     gen->WriteHeaderPragma(headerDefine, [=]{
-        gen->WriteIncludeQuotes(
-            "../conditional_swap/ConditionalSwapGeneric.h",
-            "../conditional_swap/ConditionalSwapX86.h");
         gen->WriteNamespace("networks", [=]{
             gen->WriteNamespace(nested_namespace_name, [=]{
                 for (auto network : networksJson)

@@ -11,8 +11,6 @@
 #ifndef BESTNETWORKS_GENERATED_H
 #define BESTNETWORKS_GENERATED_H
 
-#include "../conditional_swap/ConditionalSwapGeneric.h"
-#include "../conditional_swap/ConditionalSwapX86.h"
 namespace networks
 {
 namespace best

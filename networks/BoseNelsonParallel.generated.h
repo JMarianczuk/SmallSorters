@@ -11,8 +11,6 @@
 #ifndef BOSENELSON_PARALLEL_GENERATED_H
 #define BOSENELSON_PARALLEL_GENERATED_H
 
-#include "../conditional_swap/ConditionalSwapGeneric.h"
-#include "../conditional_swap/ConditionalSwapX86.h"
 namespace networks
 {
 namespace bosenelsonparallel

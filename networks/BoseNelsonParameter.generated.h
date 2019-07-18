@@ -11,8 +11,6 @@
 #ifndef BOSENELSON_PARAMETER_GENERATED_H
 #define BOSENELSON_PARAMETER_GENERATED_H
 
-#include "../conditional_swap/ConditionalSwapGeneric.h"
-#include "../conditional_swap/ConditionalSwapX86.h"
 namespace networks
 {
 namespace bosenelsonparameter
