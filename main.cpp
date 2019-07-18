@@ -28,6 +28,18 @@
 #include "environment/CommandLineOptions.h"
 #include "DebugHelper.h"
 
+// #if __x86_64__
+//   #include "funcs_x86_64.h"
+// #elif defined(__i386__)
+//   #include "funcs_x86_32.h"
+// #elif __aarch64__
+//   #include "funcs_arm64.h"
+// #elif __arm__
+//   #include "funcs_arm.h"
+// #else
+//   #include "funcs_c.h"
+// #endif
+
 void SetDebugOutputFile()
 {
     time_t now = time(0);
@@ -73,9 +85,9 @@ void test()
 #define NumberOfMeasuresIpso 200
 #define SmallestArraySize 2
 #define LargestArraySize 16
-#define CompleteSortArraySize 1024 * 16
+#define CompleteSortArraySize 1024 * 128
 #define SampleSortArraySize 256
-#define IpsoArraySize 1024 * 32
+#define IpsoArraySize 1024 * 256
 
 uint64_t ID(int& value) {return (uint64_t) value;}
 

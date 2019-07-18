@@ -8,16 +8,16 @@ std::vector<SortableStruct*> structs =
 {
     new SortableStruct("conditional_swap::CS_", "Default", "Def", true, "KR-Default"),       //0
     new SortableStruct("conditional_swap::CS_", "JumpXchg", "JXc", false),
-    new SortableStruct("conditional_swap::CS_", "JumpXchg_Ref", "JXc", true),                //2
+    //new SortableStruct("conditional_swap::CS_", "JumpXchg_Ref", "JXc", true),                //2
     new SortableStruct("conditional_swap::CS_", "TwoCmovTemp", "2Cm", false),
     new SortableStruct("conditional_swap::CS_", "FourCmovTemp", "4Cm", true),                //4
     new SortableStruct("conditional_swap::CS_", "FourCmovTemp_Split", "4CS", true),
     new SortableStruct("conditional_swap::CS_", "ThreeCmovTemp", "3Cm", false),              //6
-    new SortableStruct("conditional_swap::CS_", "SixCmovTemp", "6Cm", true),
+    //new SortableStruct("conditional_swap::CS_", "SixCmovTemp", "6Cm", true),
     new SortableStruct("conditional_swap::CS_", "ClangVersion", "Cla", true),                //8
     new SortableStruct("conditional_swap::CS_", "ClangPredicate", "CPr", true),
     new SortableStruct("conditional_swap::CS_", "Tie", "Tie", true),                         //10
-    new SortableStruct("conditional_swap::CS_", "QMark", "QMa", true),
+    //new SortableStruct("conditional_swap::CS_", "QMark", "QMa", true),
     new SortableStruct("insertionsort::InsertionSort_", "Default", "Def", true),                     //12
     new SortableStruct("insertionsort::InsertionSort_", "StlVersion", "STL", true),                  
     new SortableStruct("insertionsort::InsertionSort_", "PointerOptimized", "POp", true),            //14
