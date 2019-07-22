@@ -45,17 +45,7 @@
 #include "../../Sortable.generated.h"
 #include "../../sorters/QuickSort.h"
 #include "../../Networks_Fwd.h"
-#include "../../conditional_swap/ConditionalSwapGeneric.h"
-#if __x86_64__
-	#include "../../conditional_swap/ConditionalSwapX86.h"
-#elif defined(__i386__)
-	#include "../../conditional_swap/ConditionalSwapX86.h"
-#elif __aarch64__
-	#include "../../conditional_swap/ConditionalSwapARM32.h"
-#elif __arm__
-	#include "../../conditional_swap/ConditionalSwapARM32.h"
-#else
-#endif
+#include "../../conditional_swap/ConditionalSwap.h"
 
 namespace ips4o {
 namespace detail {

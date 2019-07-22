@@ -23,31 +23,9 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
             "networks/BoseNelsonParameter.generated.h",
             "networks/BoseNelsonRecursive.generated.h",
             "networks/Batcher.generated.h",
+            "conditional_swap/ConditionalSwap.h",
             "VerifyNetworks.h",
             "DebugHelper.h");
-        gen->WriteLine("");
-        gen->WriteLine("#if __x86_64__");
-        gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapX86.h");
-        });
-        gen->WriteLine("#elif defined(__i386__)");
-        gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapX86.h");
-        });
-        gen->WriteLine("#elif __aarch64__");
-        gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapARM32.h");
-        });
-        gen->WriteLine("#elif __arm__");
-        gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapARM32.h");
-        });
-        gen->WriteLine("#else");
-        gen->WriteIndented([=]{
-
-        });
-        gen->WriteLine("#endif");
-        gen->WriteLine("");
         gen->WriteLine("");
 
         gen->WriteNamespace("verification", [=](){

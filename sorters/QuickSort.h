@@ -8,16 +8,7 @@
 #include "../DebugHelper.h"
 #include "SampleSort.generated.h"
 #include "../networks/BoseNelsonParameter.generated.h"
-#if __x86_64__
-	#include "../conditional_swap/ConditionalSwapX86.h"
-#elif defined(__i386__)
-	#include "../conditional_swap/ConditionalSwapX86.h"
-#elif __aarch64__
-	#include "../conditional_swap/ConditionalSwapARM32.h"
-#elif __arm__
-	#include "../conditional_swap/ConditionalSwapARM32.h"
-#else
-#endif
+#include "../conditional_swap/ConditionalSwap.h"
 
 namespace quicksort
 {
