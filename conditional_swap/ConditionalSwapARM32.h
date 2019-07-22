@@ -15,9 +15,9 @@ public:
     {
         int tmp = left;
         __asm__(
-            "cmp %[left],%[right]\n\t"
-            "movlo %[right],%[left]\n\t"
-            "movlo %[tmp],%[right]\n\t"
+            "cmp %[right],%[left]\n\t"
+            "movlo %[left],%[right]\n\t"
+            "movlo %[right],%[tmp]\n\t"
             : [left] "=&r" (left), [right] "=&r"(right)
             : "0"(left), "1"(right), [tmp] "r"(tmp)
             : "cc"
