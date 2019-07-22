@@ -28,6 +28,63 @@ void WriteAsmLine(CodeGenerator* gen, std::string content)
     gen->WriteLine("\"", content, "\\n\\t\"");
 }
 
+void WriteSplitterComparisonGeneric(CodeGenerator* gen)
+{
+    gen->WriteLine("if (predicateResult > 0)");
+    gen->WriteBlock([=]{
+        gen->WriteLine("splitterx = splitter2;");
+    });
+}
+
+void WriteSplitterComparisonX86(CodeGenerator* gen)
+{
+    WriteAsmBlock(gen, [=]{
+        WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+        WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
+
+        gen->WriteLine(": [splitterx] \"=&r\"(splitterx)");
+        gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult), [zero] \"r\"(0)");
+        gen->WriteLine(": \"cc\"");
+    });
+}
+
+void WriteSplitterComparisonARM(CodeGenerator* gen)
+{
+    WriteSplitterComparisonGeneric(gen);
+}
+
+void WriteSplitterComparisonRoutine(CodeGenerator* gen)
+{
+    gen->WriteLine("template <typename Key>");
+    gen->WriteLine("inline");
+    gen->WriteLine("void PerformSplitterComparison(Key &splitterx, Key &splitter2, int &predResult)");
+    gen->WriteBlock([=]{
+        gen->WriteLine("");
+        gen->WriteLine("#if __x86_64__");
+        gen->WriteIndented([=]{
+            WriteSplitterComparisonX86(gen);
+        });
+        gen->WriteLine("#elif defined(__i386__)");
+        gen->WriteIndented([=]{
+            WriteSplitterComparisonX86(gen);
+        });
+        gen->WriteLine("#elif __aarch64__");
+        gen->WriteIndented([=]{
+            WriteSplitterComparisonARM(gen);
+        });
+        gen->WriteLine("#elif __arm__");
+        gen->WriteIndented([=]{
+            WriteSplitterComparisonARM(gen);
+        });
+        gen->WriteLine("#else");
+        gen->WriteIndented([=]{
+            WriteSplitterComparisonGeneric(gen);
+        });
+        gen->WriteLine("#endif");
+        gen->WriteLine("");
+    });
+}
+
 void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int blockSize)
 {
     for (int i = 0; i < blockSize; i += 1)
@@ -38,19 +95,15 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
     }
     for (int i = 0; i < blockSize; i += 1)
     {
-        // gen->WriteLine("splitter0", i, "x = predicateResult", i, " ? splitter2 : splitter0", i, "x;");
-        // gen->WriteLine("state", i, " = predicateResult", i, " << 1;");
+        gen->WriteLine("PerformSplitterComparison(splitter0", i, "x, splitter2, predicateResult", i, ");");
+        // WriteAsmBlock(gen, [=]{
+        //     WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+        //     WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
 
-        WriteAsmBlock(gen, [=]{
-            WriteAsmLine(gen, "cmp %[predResult],%[zero]");
-            WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
-            // WriteAsmLine(gen, "rcl $1,%[state]");
-            gen->WriteLine(": [splitterx] \"=&r\"(splitter0", i, "x)");
-            // gen->WriteLine(": [splitterx] \"=&r\"(splitter0", i, "x), [state] \"=&r\"(state", i, ")");
-            gen->WriteLine(": \"0\"(splitter0", i, "x), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", i, "), [zero] \"r\"(0)");
-            // gen->WriteLine(": \"0\"(splitter0", i, "x), \"1\"(state", i, "), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", i, "), [zero] \"r\"(0)");
-            gen->WriteLine(": \"cc\"");
-        });
+        //     gen->WriteLine(": [splitterx] \"=&r\"(splitter0", i, "x)");
+        //     gen->WriteLine(": \"0\"(splitter0", i, "x), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predicateResult", i, "), [zero] \"r\"(0)");
+        //     gen->WriteLine(": \"cc\"");
+        // });
     }
     for (int i = 0; i < blockSize; i += 1)
     {
@@ -58,17 +111,7 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
     }
     for (int i = 0; i < blockSize; i += 1)
     {
-        // gen->WriteLine("state", i, " = state", i, " + predicateResult", i, ";");
-
         gen->WriteLine("state", i, " = (state", i, " << 1) + predicateResult", i, ";");
-
-        // WriteAsmBlock(gen, [=]{
-        //     WriteAsmLine(gen, "cmp %[predResult],%[zero]");
-        //     WriteAsmLine(gen, "rcl $1,%[state]");
-        //     gen->WriteLine(": [state] \"=&r\"(state", iStr, ")");
-        //     gen->WriteLine(": \"0\"(state", iStr, "), [predResult] \"r\"(predicateResult", iStr, "), [zero] \"r\"(zero)");
-        //     gen->WriteLine(": \"cc\"");
-        // });
     }
     for (int i = 0; i < blockSize; i += 1)
     {

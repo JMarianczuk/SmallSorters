@@ -18,6 +18,45 @@
 #include "../custommath/CustomMath.h"
 namespace samplesort
 {
+template <typename Key>
+inline
+void PerformSplitterComparison(Key &splitterx, Key &splitter2, int &predResult)
+{
+	
+	#if __x86_64__
+		__asm__(
+			"cmp %[predResult],%[zero]\n\t"
+			"cmovcq %[splitter2],%[splitterx]\n\t"
+			: [splitterx] "=&r"(splitterx)
+			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult), [zero] "r"(0)
+			: "cc"
+		);
+	#elif defined(__i386__)
+		__asm__(
+			"cmp %[predResult],%[zero]\n\t"
+			"cmovcq %[splitter2],%[splitterx]\n\t"
+			: [splitterx] "=&r"(splitterx)
+			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult), [zero] "r"(0)
+			: "cc"
+		);
+	#elif __aarch64__
+		if (predicateResult > 0)
+		{
+			splitterx = splitter2;
+		}
+	#elif __arm__
+		if (predicateResult > 0)
+		{
+			splitterx = splitter2;
+		}
+	#else
+		if (predicateResult > 0)
+		{
+			splitterx = splitter2;
+		}
+	#endif
+	
+}
 template <typename ValueType, typename TKey>
 static inline
 void Find3Splitters1OversamplingFactor(
@@ -86,13 +125,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -105,13 +138,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -202,20 +229,8 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 		predicateResult1 = (int) predicateLess(splitter1, A[current + 1]);
 		state1 = predicateResult1;
 		splitter01x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		state0 = (state0 << 1) + predicateResult0;
@@ -232,13 +247,7 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -335,27 +344,9 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 		predicateResult2 = (int) predicateLess(splitter1, A[current + 2]);
 		state2 = predicateResult2;
 		splitter02x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -376,13 +367,7 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -485,34 +470,10 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 		predicateResult3 = (int) predicateLess(splitter1, A[current + 3]);
 		state3 = predicateResult3;
 		splitter03x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -537,13 +498,7 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -652,41 +607,11 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 		predicateResult4 = (int) predicateLess(splitter1, A[current + 4]);
 		state4 = predicateResult4;
 		splitter04x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter04x)
-			: "0"(splitter04x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
+		PerformSplitterComparison(splitter04x, splitter2, predicateResult4);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -715,13 +640,7 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -828,13 +747,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -847,13 +760,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -944,20 +851,8 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 		predicateResult1 = (int) predicateLess(splitter1, A[current + 1]);
 		state1 = predicateResult1;
 		splitter01x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		state0 = (state0 << 1) + predicateResult0;
@@ -974,13 +869,7 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1077,27 +966,9 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 		predicateResult2 = (int) predicateLess(splitter1, A[current + 2]);
 		state2 = predicateResult2;
 		splitter02x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -1118,13 +989,7 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1227,34 +1092,10 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 		predicateResult3 = (int) predicateLess(splitter1, A[current + 3]);
 		state3 = predicateResult3;
 		splitter03x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -1279,13 +1120,7 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1394,41 +1229,11 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 		predicateResult4 = (int) predicateLess(splitter1, A[current + 4]);
 		state4 = predicateResult4;
 		splitter04x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter04x)
-			: "0"(splitter04x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
+		PerformSplitterComparison(splitter04x, splitter2, predicateResult4);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -1457,13 +1262,7 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1570,13 +1369,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1589,13 +1382,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1686,20 +1473,8 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 		predicateResult1 = (int) predicateLess(splitter1, A[current + 1]);
 		state1 = predicateResult1;
 		splitter01x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		state0 = (state0 << 1) + predicateResult0;
@@ -1716,13 +1491,7 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1819,27 +1588,9 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 		predicateResult2 = (int) predicateLess(splitter1, A[current + 2]);
 		state2 = predicateResult2;
 		splitter02x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -1860,13 +1611,7 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -1969,34 +1714,10 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 		predicateResult3 = (int) predicateLess(splitter1, A[current + 3]);
 		state3 = predicateResult3;
 		splitter03x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -2021,13 +1742,7 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2136,41 +1851,11 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 		predicateResult4 = (int) predicateLess(splitter1, A[current + 4]);
 		state4 = predicateResult4;
 		splitter04x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter04x)
-			: "0"(splitter04x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
+		PerformSplitterComparison(splitter04x, splitter2, predicateResult4);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -2199,13 +1884,7 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2312,13 +1991,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2331,13 +2004,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2428,20 +2095,8 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 		predicateResult1 = (int) predicateLess(splitter1, A[current + 1]);
 		state1 = predicateResult1;
 		splitter01x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		state0 = (state0 << 1) + predicateResult0;
@@ -2458,13 +2113,7 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2561,27 +2210,9 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 		predicateResult2 = (int) predicateLess(splitter1, A[current + 2]);
 		state2 = predicateResult2;
 		splitter02x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -2602,13 +2233,7 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2711,34 +2336,10 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 		predicateResult3 = (int) predicateLess(splitter1, A[current + 3]);
 		state3 = predicateResult3;
 		splitter03x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -2763,13 +2364,7 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -2878,41 +2473,11 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 		predicateResult4 = (int) predicateLess(splitter1, A[current + 4]);
 		state4 = predicateResult4;
 		splitter04x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter04x)
-			: "0"(splitter04x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
+		PerformSplitterComparison(splitter04x, splitter2, predicateResult4);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -2941,13 +2506,7 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -3054,13 +2613,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -3073,13 +2626,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -3170,20 +2717,8 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 		predicateResult1 = (int) predicateLess(splitter1, A[current + 1]);
 		state1 = predicateResult1;
 		splitter01x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		state0 = (state0 << 1) + predicateResult0;
@@ -3200,13 +2735,7 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -3303,27 +2832,9 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 		predicateResult2 = (int) predicateLess(splitter1, A[current + 2]);
 		state2 = predicateResult2;
 		splitter02x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -3344,13 +2855,7 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -3453,34 +2958,10 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 		predicateResult3 = (int) predicateLess(splitter1, A[current + 3]);
 		state3 = predicateResult3;
 		splitter03x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -3505,13 +2986,7 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];
@@ -3620,41 +3095,11 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 		predicateResult4 = (int) predicateLess(splitter1, A[current + 4]);
 		state4 = predicateResult4;
 		splitter04x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter01x)
-			: "0"(splitter01x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult1), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter02x)
-			: "0"(splitter02x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult2), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter03x)
-			: "0"(splitter03x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult3), [zero] "r"(0)
-			: "cc"
-		);
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter04x)
-			: "0"(splitter04x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult4), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
+		PerformSplitterComparison(splitter01x, splitter2, predicateResult1);
+		PerformSplitterComparison(splitter02x, splitter2, predicateResult2);
+		PerformSplitterComparison(splitter03x, splitter2, predicateResult3);
+		PerformSplitterComparison(splitter04x, splitter2, predicateResult4);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		predicateResult1 = (int) predicateLess(splitter01x, A[current + 1]);
 		predicateResult2 = (int) predicateLess(splitter02x, A[current + 2]);
@@ -3683,13 +3128,7 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 		predicateResult0 = (int) predicateLess(splitter1, A[current]);
 		state0 = predicateResult0;
 		splitter00x = splitter0;
-		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
-			: [splitterx] "=&r"(splitter00x)
-			: "0"(splitter00x), [splitter2] "r"(splitter2), [predResult] "r"(predicateResult0), [zero] "r"(0)
-			: "cc"
-		);
+		PerformSplitterComparison(splitter00x, splitter2, predicateResult0);
 		predicateResult0 = (int) predicateLess(splitter00x, A[current]);
 		state0 = (state0 << 1) + predicateResult0;
 		*buckets[state0] = A[current];

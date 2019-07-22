@@ -54,11 +54,20 @@ Performancing::~Performancing() {
 static inline 
 unsigned long long ReadTicks()
 {
-	unsigned high, low;
+	unsigned high = 0;
+	unsigned low = 0;
+	
+#if __x86_64__
 	__asm__ volatile (
 		"rdtsc"
 		: "=a"(low), "=d"(high)
 	);
+#elif defined(__i386__)
+	__asm__ volatile (
+		"rdtsc"
+		: "=a"(low), "=d"(high)
+	);
+#endif
 	return 
 	( 
 		(unsigned long long) low

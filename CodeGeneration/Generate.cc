@@ -224,6 +224,7 @@ void GenerateSampleSort()
             "../DebugHelper.h",
             "../custommath/CustomMath.h");
         sampleSortGen->WriteNamespace("samplesort", [=]{
+            WriteSplitterComparisonRoutine(sampleSortGen);
             for (int splits = 3; splits <= 3; splits += 1)
             {
                 for (int oversample = 1; oversample * splits <= 16; oversample += 1)

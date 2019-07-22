@@ -10,6 +10,7 @@
 namespace codegeneration
 {
 
+void WriteSplitterComparisonRoutine(CodeGenerator* gen);
 void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversamplingFactor);
 void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int oversamplingFactor, int blockSize);
 
