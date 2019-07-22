@@ -19,9 +19,20 @@
 #include "networks/BoseNelsonParameter.generated.h"
 #include "networks/BoseNelsonRecursive.generated.h"
 #include "networks/Batcher.generated.h"
-#include "conditional_swap/ConditionalSwapX86.h"
 #include "VerifyNetworks.h"
 #include "DebugHelper.h"
+
+#if __x86_64__
+	#include "../conditional_swap/ConditionalSwapX86.h"
+#elif defined(__i386__)
+	#include "../conditional_swap/ConditionalSwapX86.h"
+#elif __aarch64__
+	#include "../conditional_swap/ConditionalSwapARM32.h"
+#elif __arm__
+	#include "../conditional_swap/ConditionalSwapARM32.h"
+#else
+#endif
+
 
 namespace verification
 {

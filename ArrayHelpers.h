@@ -70,7 +70,7 @@ static const uint64_t p = 4294967291; // largest prime < 2^32
 static const uint64_t two_to_power_of_31_minus_1 = 2147483647;
 
 template<typename TComparable>
-uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value_func)(TComparable& item), size_t& iteration)
+uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*value_func)(TComparable& item), uint64_t& iteration)
 {
     for (uint64_t iter = 1; iter < 100000; iter += 1)
     {
