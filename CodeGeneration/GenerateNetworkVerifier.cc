@@ -28,19 +28,19 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteLine("");
         gen->WriteLine("#if __x86_64__");
         gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapX86.h");
+            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapX86.h");
         });
         gen->WriteLine("#elif defined(__i386__)");
         gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapX86.h");
+            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapX86.h");
         });
         gen->WriteLine("#elif __aarch64__");
         gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapARM32.h");
+            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapARM32.h");
         });
         gen->WriteLine("#elif __arm__");
         gen->WriteIndented([=]{
-            gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapARM32.h");
+            gen->WriteIncludeQuotes("conditional_swap/ConditionalSwapARM32.h");
         });
         gen->WriteLine("#else");
         gen->WriteIndented([=]{
