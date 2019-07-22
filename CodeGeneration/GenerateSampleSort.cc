@@ -30,7 +30,7 @@ void WriteAsmLine(CodeGenerator* gen, std::string content)
 
 void WriteSplitterComparisonGeneric(CodeGenerator* gen)
 {
-    gen->WriteLine("if (predicateResult > 0)");
+    gen->WriteLine("if (predResult > 0)");
     gen->WriteBlock([=]{
         gen->WriteLine("splitterx = splitter2;");
     });

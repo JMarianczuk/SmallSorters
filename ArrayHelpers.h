@@ -95,7 +95,7 @@ uint64_t GetPermutationValue(TComparable* items, size_t arraySize, uint64_t(*val
 }
 
 template <typename TComparable>
-void PutPermutationValues(TComparable* items, size_t arraySize, uint64_t& keyValue, size_t& keyIter, uint64_t& refValue, size_t& refIter)
+void PutPermutationValues(TComparable* items, size_t arraySize, uint64_t& keyValue, uint64_t& keyIter, uint64_t& refValue, uint64_t& refIter)
 {
     keyValue = GetPermutationValue(items, arraySize, &GetKey<TComparable>, keyIter);
     refValue = GetPermutationValue(items, arraySize, &GetReference<TComparable>, refIter);

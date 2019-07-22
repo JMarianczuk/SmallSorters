@@ -40,17 +40,17 @@ void PerformSplitterComparison(Key &splitterx, Key &splitter2, int &predResult)
 			: "cc"
 		);
 	#elif __aarch64__
-		if (predicateResult > 0)
+		if (predResult > 0)
 		{
 			splitterx = splitter2;
 		}
 	#elif __arm__
-		if (predicateResult > 0)
+		if (predResult > 0)
 		{
 			splitterx = splitter2;
 		}
 	#else
-		if (predicateResult > 0)
+		if (predResult > 0)
 		{
 			splitterx = splitter2;
 		}
