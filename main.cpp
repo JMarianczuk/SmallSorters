@@ -121,6 +121,7 @@ bool ExecuteExtraordinaryAction(commandline::CommandLineOptions options)
         commandline::PrintHelpText(std::cout);
         return true;
     }
+    return false;
 }
 
 void PrintInfos(int argumentCount, char** arguments)
