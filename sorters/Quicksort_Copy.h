@@ -7,7 +7,7 @@
 #include <inttypes.h>
 #include <type_traits>
 
-#include "../CustomMath.h"
+#include "../custommath/CustomMath.h"
 #include "../networks/BoseNelsonParameter.generated.h"
 #include "InsertionSort.h"
 

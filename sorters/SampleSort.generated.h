@@ -15,7 +15,7 @@
 
 #include "InsertionSort.h"
 #include "../DebugHelper.h"
-#include "../CustomMath.h"
+#include "../custommath/CustomMath.h"
 namespace samplesort
 {
 template <typename ValueType, typename TKey>

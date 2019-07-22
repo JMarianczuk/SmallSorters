@@ -3,7 +3,7 @@
 #define QUICKSORT_COPY2_H
 
 #include <algorithm>
-#include "../CustomMath.h"
+#include "../custommath/CustomMath.h"
 
 namespace quicksortcopy2
 {

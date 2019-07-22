@@ -12,8 +12,19 @@
 #include "../environment/Performancing.h"
 #include "../Networks_Fwd.h"
 #include "../conditional_swap/ConditionalSwapGeneric.h"
-#include "../conditional_swap/ConditionalSwapX86.h"
 #include "../sorters/InsertionSort.h"
+
+#if __x86_64__
+	#include "../conditional_swap/ConditionalSwapX86.h"
+#elif defined(__i386__)
+	#include "../conditional_swap/ConditionalSwapX86.h"
+#elif __aarch64__
+	#include "../conditional_swap/ConditionalSwapARM32.h"
+#elif __arm__
+	#include "../conditional_swap/ConditionalSwapARM32.h"
+#else
+#endif
+
 #include "../sorters/QuickSort.h"
 #include "../sorters/StdSortWrapper.h"
 namespace measurement

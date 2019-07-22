@@ -222,7 +222,7 @@ void GenerateSampleSort()
         sampleSortGen->WriteIncludeQuotes(
             "InsertionSort.h",
             "../DebugHelper.h",
-            "../CustomMath.h");
+            "../custommath/CustomMath.h");
         sampleSortGen->WriteNamespace("samplesort", [=]{
             for (int splits = 3; splits <= 3; splits += 1)
             {

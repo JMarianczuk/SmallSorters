@@ -1,6 +1,6 @@
 
-#ifndef CUSTOM_MATH_H
-#define CUSTOM_MATH_H
+#ifndef CUSTOM_MATH_X86
+#define CUSTOM_MATH_X86
 
 #include <inttypes.h>
 
@@ -28,6 +28,6 @@ static int64_t longlog2(const int64_t x)
     return y;
 }
 
-} // namespace custommath
+}
 
 #endif

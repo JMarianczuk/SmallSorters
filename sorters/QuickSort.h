@@ -4,7 +4,7 @@
 
 #include <inttypes.h>
 
-#include "../CustomMath.h"
+#include "../custommath/CustomMath.h"
 #include "../DebugHelper.h"
 #include "SampleSort.generated.h"
 #include "../networks/BoseNelsonParameter.generated.h"

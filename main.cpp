@@ -70,8 +70,19 @@ bool sref_less(uint64_t& leftKey, SortableRef& right)
 #define ElementCount 128
 void test()
 {
-    SetResultOutputFile();
-    printf("Test output");
+    int number = 0;
+    #if __x86_64__
+    number = 1;
+    #elif defined(__i386__)
+    number = 2;
+    #elif __aarch64__
+    number = 3;
+    #elif __arm__
+    number = 4;
+    #else
+    number = 5;
+    #endif
+    printf("Number: %i\n", number);
 }
 
 #define NumberOfIterations 100

@@ -366,6 +366,18 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
     delete ipsoGen;
 }
 
+// #if __x86_64__
+//   #include "funcs_x86_64.h"
+// #elif defined(__i386__)
+//   #include "funcs_x86_32.h"
+// #elif __aarch64__
+//   #include "funcs_arm64.h"
+// #elif __arm__
+//   #include "funcs_arm.h"
+// #else
+//   #include "funcs_c.h"
+// #endif
+
 void WriteMeasurementIncludes(CPlusPlusCodeGenerator* gen)
 {
     gen->WriteIncludeQuotes(
@@ -373,9 +385,31 @@ void WriteMeasurementIncludes(CPlusPlusCodeGenerator* gen)
         "../environment/Performancing.h",
         "../Networks_Fwd.h",
         "../conditional_swap/ConditionalSwapGeneric.h",
-        "../conditional_swap/ConditionalSwapX86.h",
         "../sorters/InsertionSort.h"
     );
+    gen->WriteLine("");
+    gen->WriteLine("#if __x86_64__");
+    gen->WriteIndented([=]{
+        gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapX86.h");
+    });
+    gen->WriteLine("#elif defined(__i386__)");
+    gen->WriteIndented([=]{
+        gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapX86.h");
+    });
+    gen->WriteLine("#elif __aarch64__");
+    gen->WriteIndented([=]{
+        gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapARM32.h");
+    });
+    gen->WriteLine("#elif __arm__");
+    gen->WriteIndented([=]{
+        gen->WriteIncludeQuotes("../conditional_swap/ConditionalSwapARM32.h");
+    });
+    gen->WriteLine("#else");
+    gen->WriteIndented([=]{
+
+    });
+    gen->WriteLine("#endif");
+    gen->WriteLine("");
 }
 
 void GenerateMeasurementMethod(
