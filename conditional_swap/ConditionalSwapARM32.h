@@ -13,7 +13,15 @@ class CS_Int
 public:
     static inline void swap(int& left, int& right)
     {
-        CS_Default::swap(left, right);
+        int tmp = left;
+        __asm__(
+            "cmp %[left],%[right]\n\t"
+            "movlo %[right],%[left]\n\t"
+            "movlo %[tmp],%[right]\n\t"
+            : [left] "=&r" (left), [right] "=&r"(right)
+            : "0"(left), "1"(right), [tmp] "r"(tmp)
+            : "cc"
+        );
     }
 };
 
