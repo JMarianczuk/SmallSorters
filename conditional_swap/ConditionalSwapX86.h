@@ -197,7 +197,7 @@ public:
             "cmpq %[tmp_key],%[right_key]\n\t"
             "cmovbq %[right_pointer],%[left_pointer]\n\t"
             : [left_pointer] "=&r"(leftPointer)
-            : "0"(leftPointer), [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [right_key] "r"(rightKey)
+            : "0"(leftPointer), [right_pointer] "r"(rightPointer), [tmp_key] "r"(tmp.key), [right_key] "r"(rightKey)
             : "cc"
         );
         left = *leftPointer;
