@@ -137,6 +137,19 @@ void PrintInfos(int argumentCount, char** arguments)
     }
     printf("\n");
     result::WriteAbbreviationExplanatoryLine();
+    std::string arch;
+    #if __x86_64__
+        arch = "x86_64";
+    #elif defined(__i386__)
+        arch = "i386";
+    #elif __aarch64__
+        arch = "aarch64";
+    #elif __arm__
+        arch = "arm";
+    #else
+        arch = "other";
+    #endif
+    printf("architecture: %s\n", arch.c_str());
 }
 
 void PerformMeasurements(commandline::CommandLineOptions options, Performancing* perf, char** arguments, int argumentCount)

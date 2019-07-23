@@ -53,15 +53,16 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        uint64_t tmp = left.key; 
-        __asm__( 
-            "cmp %[right_key],%[left_key]\n\t" 
-            "movlo %[left_key],%[right_key]\n\t" 
-            "movlo %[right_key],%[tmp]\n\t"
-            : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key)
-            : "0"(left.key), "1"(right.key), [tmp] "r"(tmp) 
-            : "cc" 
-        );
+        CS_Default::swap(left, right);
+        // uint64_t tmp = left.key; 
+        // __asm__( 
+        //     "cmp %[right_key],%[left_key]\n\t" 
+        //     "movlo %[left_key],%[right_key]\n\t" 
+        //     "movlo %[right_key],%[tmp]\n\t"
+        //     : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key)
+        //     : "0"(left.key), "1"(right.key), [tmp] "r"(tmp) 
+        //     : "cc" 
+        // );
     }
 };
 
@@ -71,18 +72,19 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        uint64_t tmp = left.key;
-        uint64_t tmpRef = left.reference;
-        __asm__( 
-            "cmp %[right_key],%[left_key]\n\t" 
-            "movlo %[left_key],%[right_key]\n\t" 
-            "movlo %[left_reference],%[right_reference]\n\t"
-            "movlo %[right_key],%[tmp]\n\t"
-            "movlo %[right_reference],%[tmp_ref]\n\t"
-            : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=&r"(left.reference), [right_reference] "=&r"(right.reference)
-            : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference), [tmp] "r"(tmp), [tmp_ref] "r"(tmpRef)
-            : "cc" 
-        );
+        CS_Default::swap(left, right);
+        // uint64_t tmp = left.key;
+        // uint64_t tmpRef = left.reference;
+        // __asm__( 
+        //     "cmp %[right_key],%[left_key]\n\t" 
+        //     "movlo %[left_key],%[right_key]\n\t" 
+        //     "movlo %[left_reference],%[right_reference]\n\t"
+        //     "movlo %[right_key],%[tmp]\n\t"
+        //     "movlo %[right_reference],%[tmp_ref]\n\t"
+        //     : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=&r"(left.reference), [right_reference] "=&r"(right.reference)
+        //     : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference), [tmp] "r"(tmp), [tmp_ref] "r"(tmpRef)
+        //     : "cc" 
+        // );
     }
 };
 
@@ -92,38 +94,39 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        uint64_t tmp = left.key;
-        uint64_t tmpRef = left.reference;
-        __asm__ volatile ( 
-            "cmp %[right_key],%[left_key]\n\t"
-            : 
-            : [left_key] "r"(left.key), [right_key] "r"(right.key)
-            : "cc" 
-        );
-        __asm__ volatile (
-            "movlo %[left_key],%[right_key]\n\t"
-            : [left_key] "=&r"(left.key)
-            : "0"(left.key), [right_key] "r"(right.key)
-            : 
-        );
-        __asm__ volatile (
-            "movlo %[left_reference],%[right_reference]\n\t"
-            : [left_reference] "=&r"(left.reference)
-            : "0"(left.reference), [right_reference] "r"(right.reference)
-            :
-        );
-        __asm__ volatile (
-            "movlo %[right_key],%[tmp]\n\t"
-            : [right_key] "=&r"(right.key)
-            : "0"(right.key), [tmp] "r"(tmp)
-            : 
-        );
-        __asm__ volatile (
-            "movlo %[right_reference],%[tmp_ref]\n\t"
-            : [right_reference] "=&r"(right.reference)
-            : "0"(right.reference), [tmp_ref] "r"(tmpRef)
-            : 
-        );
+        CS_Default::swap(left, right);
+        // uint64_t tmp = left.key;
+        // uint64_t tmpRef = left.reference;
+        // __asm__ volatile ( 
+        //     "cmp %[right_key],%[left_key]\n\t"
+        //     : 
+        //     : [left_key] "r"(left.key), [right_key] "r"(right.key)
+        //     : "cc" 
+        // );
+        // __asm__ volatile (
+        //     "movlo %[left_key],%[right_key]\n\t"
+        //     : [left_key] "=&r"(left.key)
+        //     : "0"(left.key), [right_key] "r"(right.key)
+        //     : 
+        // );
+        // __asm__ volatile (
+        //     "movlo %[left_reference],%[right_reference]\n\t"
+        //     : [left_reference] "=&r"(left.reference)
+        //     : "0"(left.reference), [right_reference] "r"(right.reference)
+        //     :
+        // );
+        // __asm__ volatile (
+        //     "movlo %[right_key],%[tmp]\n\t"
+        //     : [right_key] "=&r"(right.key)
+        //     : "0"(right.key), [tmp] "r"(tmp)
+        //     : 
+        // );
+        // __asm__ volatile (
+        //     "movlo %[right_reference],%[tmp_ref]\n\t"
+        //     : [right_reference] "=&r"(right.reference)
+        //     : "0"(right.reference), [tmp_ref] "r"(tmpRef)
+        //     : 
+        // );
     }
 };
 
@@ -153,26 +156,27 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        Type* leftPointer = &left;
-        Type* rightPointer = &right;
-        uint64_t rightKey = right.key;
-        Type tmp = left;
-        __asm__ volatile(
-            "cmp %[right_key],%[tmp_key]\n\t"
-            "movlo %[left_pointer],%[right_pointer]\n\t"
-            : [left_pointer] "=&r"(leftPointer)
-            : "0"(leftPointer), [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [right_key] "r"(rightKey)
-            : "cc"
-        );
-        left = *leftPointer;
-        leftPointer = &tmp;
-        __asm__ volatile(
-            "movlo %[right_pointer],%[left_pointer]\n\t"
-            : [right_pointer] "=&r"(rightPointer)
-            : "0"(rightPointer), [left_pointer] "r"(leftPointer)
-            :
-        );
-        right = *rightPointer;
+        CS_Default::swap(left, right);
+        // Type* leftPointer = &left;
+        // Type* rightPointer = &right;
+        // uint64_t rightKey = right.key;
+        // Type tmp = left;
+        // __asm__ volatile(
+        //     "cmp %[right_key],%[tmp_key]\n\t"
+        //     "movlo %[left_pointer],%[right_pointer]\n\t"
+        //     : [left_pointer] "=&r"(leftPointer)
+        //     : "0"(leftPointer), [right_pointer] "r"(rightPointer), [tmp_key] "m"(tmp.key), [right_key] "r"(rightKey)
+        //     : "cc"
+        // );
+        // left = *leftPointer;
+        // leftPointer = &tmp;
+        // __asm__ volatile(
+        //     "movlo %[right_pointer],%[left_pointer]\n\t"
+        //     : [right_pointer] "=&r"(rightPointer)
+        //     : "0"(rightPointer), [left_pointer] "r"(leftPointer)
+        //     :
+        // );
+        // right = *rightPointer;
     }
 };
 
