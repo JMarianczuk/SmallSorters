@@ -11,14 +11,14 @@
 #include "../sorters/QuickSort.h"
 #include "../sorters/InsertionSort.h"
 #include "../sorters/Quicksort_Copy.h"
-#include "../Randomisation.generated.h"
+#include "../Randomisation.Sortable.h"
 #include "../StructHelpers.generated.h"
 #include "../DebugHelper.h"
 
 namespace measurement
 {
     
-template <typename ValueType>
+template <typename ValueType, RandomisationMode rMode>
 void Measure(
     Performancing* perf,
     int numberOfIterations,
@@ -30,7 +30,7 @@ void Measure(
     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
     
     int numberOfBadSorts = 0;
-    randomisation::GenerateRandomArray(arr, arraySize);
+    randomisation::GenerateRandomArray<rMode>(arr, arraySize);
     uint64_t key_iter = 1;
     uint64_t ref_iter = 1;
     uint64_t key_value;
@@ -45,7 +45,7 @@ void Measure(
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
-        randomisation::GenerateRandomArray(arr, arraySize);
+        randomisation::GenerateRandomArray<rMode>(arr, arraySize);
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
@@ -72,7 +72,7 @@ void Measure(
     free(arr);
 }
 
-template <typename ValueType>
+template <typename ValueType, RandomisationMode rMode>
 void MeasureInRow(
     Performancing* perf,
     int numberOfArrays,
@@ -87,9 +87,9 @@ void MeasureInRow(
     ValueType *compareEnd = compare + numberOfArrays * arraySize;
     ValueType warmupArr[arraySize];
 
-    randomisation::GenerateRandomArray(arr, numberOfArrays * arraySize);
+    randomisation::GenerateRandomArray<rMode>(arr, numberOfArrays * arraySize);
     CopyArray(arr, compare, numberOfArrays * arraySize);
-    randomisation::GenerateRandomArray(warmupArr, arraySize);
+    randomisation::GenerateRandomArray<rMode>(warmupArr, arraySize);
 
     for (ValueType* current = compare; current < compareEnd; current += arraySize)
     {
@@ -133,7 +133,7 @@ void MeasureInRow(
     free(compare);
 }
 
-template <typename ValueType>
+template <typename ValueType, RandomisationMode rMode>
 void MeasureSampleSort(
     Performancing* perf,
     int numberOfIterations,
@@ -144,7 +144,7 @@ void MeasureSampleSort(
     void(*baseCaseSortFunc)(ValueType*,size_t))
 {
     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
-    randomisation::GenerateRandomArray(arr, arraySize);
+    randomisation::GenerateRandomArray<rMode>(arr, arraySize);
     int numberOfBadSorts = 0;
     uint64_t key_iter = 1;
     uint64_t ref_iter = 1;
@@ -160,7 +160,7 @@ void MeasureSampleSort(
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
-        randomisation::GenerateRandomArray(arr, arraySize);
+        randomisation::GenerateRandomArray<rMode>(arr, arraySize);
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
@@ -201,7 +201,7 @@ bool NormalCompare(ValueType left, ValueType right)
     return left < right;
 }
 
-template <typename ValueType>
+template <typename ValueType, RandomisationMode rMode>
 void MeasureCompleteSorter(
     Performancing* perf,
     int numberOfIterations,
@@ -212,7 +212,7 @@ void MeasureCompleteSorter(
     void(*baseCaseSortFunc)(ValueType*,size_t))
 {
     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
-    randomisation::GenerateRandomArray(arr, arraySize);
+    randomisation::GenerateRandomArray<rMode>(arr, arraySize);
     int numberOfBadSorts = 0;
     uint64_t key_iter = 1;
     uint64_t ref_iter = 1;
@@ -228,7 +228,7 @@ void MeasureCompleteSorter(
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
-        randomisation::GenerateRandomArray(arr, arraySize);
+        randomisation::GenerateRandomArray<rMode>(arr, arraySize);
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
@@ -254,7 +254,7 @@ void MeasureCompleteSorter(
     free(arr);
 }
 
-template <typename ValueType>
+template <typename ValueType, RandomisationMode rMode>
 void MeasureRandomGeneration(
     Performancing* perf,
     int numberOfIterations,
@@ -265,7 +265,7 @@ void MeasureRandomGeneration(
     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
 
     int numberOfEqualNeighbours = 0;
-    randomisation::GenerateRandomArray(arr, arraySize);
+    randomisation::GenerateRandomArray<rMode>(arr, arraySize);
     if (!NotHasEqualNeighbour(arr, arraySize))
     {
         numberOfEqualNeighbours += 1;
@@ -278,7 +278,7 @@ void MeasureRandomGeneration(
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
-        randomisation::GenerateRandomArray(arr, arraySize);
+        randomisation::GenerateRandomArray<rMode>(arr, arraySize);
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);

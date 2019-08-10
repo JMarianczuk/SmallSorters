@@ -8,4 +8,11 @@ enum class PerformanceMetric {
     BRANCH_MISSES,
 };
 
+enum class RandomisationMode
+{
+    DEFAULT,
+    SORTED,
+    INVERSE_SORTED
+};
+
 #endif

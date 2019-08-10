@@ -43,7 +43,21 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);
+        uint64_t tmp = left.key;
+        uint64_t tmpRef = left.reference;
+        __asm__(
+            "cmp %[right_key],%[left_key]\n\t"
+            "bhs %=f\n\t" //branch higher or same
+            "mov %[left_key],%[right_key]\n\t" 
+            "mov %[left_reference],%[right_reference]\n\t"
+            "mov %[right_key],%[tmp]\n\t"
+            "mov %[right_reference],%[tmp_ref]\n\t"
+            "%=:\n\t"
+            : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=&r"(left.reference), [right_reference] "=&r"(right.reference)
+            : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference), [tmp] "r"(tmp), [tmp_ref] "r"(tmpRef)
+            : "cc" 
+        );
+        // CS_Default::swap(left, right);
     }
 };
 

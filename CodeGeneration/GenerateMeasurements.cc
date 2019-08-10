@@ -10,11 +10,11 @@ SortableStruct* DefSortable()
 }
 SortableStruct* FourCSSortable()
 {
-    return (*sortableStructs())[4];
+    return (*sortableStructs())[5];
 }
 SortableStruct* POpSortable()
 {
-    return (*sortableStructs())[11];
+    return (*sortableStructs())[12];
 }
 
 std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType measureType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, Sorter subSorter = Sorter::InsertionSort, int sampleSortSplits = 0, int sampleSortOversample = 0, int sampleSortBlockSize = 0, int ipsoBaseCaseSize = 0, bool isInsertionPlusNetwork = false)
@@ -166,7 +166,7 @@ void WriteMeasureRandomLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::MeasureRandomGeneration<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\");");
+        gen->WriteLine("measurement::MeasureRandomGeneration<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\");");
     }
 }
 
@@ -181,7 +181,7 @@ void WriteMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     if (measureRandomGeneration) 
     {
@@ -200,7 +200,7 @@ void WriteCompleteSorterMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
@@ -217,7 +217,7 @@ void WriteSampleSortMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), additionalTemplateParameters, ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
@@ -233,7 +233,7 @@ void WriteCompleteSorterWrapperMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ">(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ", &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
+        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ", &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }

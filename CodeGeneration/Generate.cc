@@ -12,7 +12,6 @@
 #include "GenerateMeasurements.hpp"
 #include "GenerateSortableStructs.hpp"
 #include "GenerateStructHelpers.hpp"
-#include "GenerateRandomisation.hpp"
 #include "GenerateSampleSort.hpp"
 #include "GenerateNetworkVerifier.hpp"
 
@@ -36,17 +35,6 @@ void GenerateStructHelpers()
         new CPlusPlusCodeGenerator("../../StructHelpers.generated.h");
     WriteStructHelpers(structHelpersGen);
     delete structHelpersGen;
-}
-
-void GenerateRandomisation()
-{
-    auto randomisationHeaderGen = 
-        new CPlusPlusCodeGenerator("../../Randomisation.generated.h");
-    auto randomisationImplGen =
-        new CPlusPlusCodeGenerator("../../Randomisation.generated.cpp");
-    WriteRandomisation(randomisationHeaderGen, randomisationImplGen);
-    delete randomisationHeaderGen;
-    delete randomisationImplGen;
 }
 
 void GenerateBoseNelsonNetworkWithArrangement(
@@ -260,7 +248,6 @@ int main()
 {
     GenerateSortableStructs();
     GenerateStructHelpers();
-    GenerateRandomisation();
     GenerateBoseNelsonNetworksJson();
     GenerateBatcherNetworksJson();
     GenerateNetworks_ParameterStyle();

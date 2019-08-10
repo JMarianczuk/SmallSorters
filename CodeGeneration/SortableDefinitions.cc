@@ -8,7 +8,7 @@ std::vector<SortableStruct*> structs =
 {
     new SortableStruct("conditional_swap::CS_", "Default", "Def", true, "KR-Default"),       //0
     new SortableStruct("conditional_swap::CS_", "JumpXchg", "JXc", false),
-    //new SortableStruct("conditional_swap::CS_", "JumpXchg_Ref", "JXc", true),                //2
+    new SortableStruct("conditional_swap::CS_", "JumpXchg_Ref", "JXc", true),                //2
     new SortableStruct("conditional_swap::CS_", "TwoCmovTemp", "2Cm", false),
     new SortableStruct("conditional_swap::CS_", "FourCmovTemp", "4Cm", true),                //4
     new SortableStruct("conditional_swap::CS_", "FourCmovTemp_Split", "4CS", true),

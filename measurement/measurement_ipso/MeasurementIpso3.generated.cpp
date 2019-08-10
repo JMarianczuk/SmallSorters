@@ -18,8 +18,8 @@ namespace measurement
 void MeasureIpso3(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 16_000 KR Def", &external::IpsoWrapper<20,0,0>, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 16_000 KR Def", &external::IpsoWrapper<20,0,0>, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 16_000 KR Def");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 16_000 KR Def");
 }
 } // namespace measurement
