@@ -70,5 +70,21 @@ struct SortableRef
 		return left.key != right.key;
 	}
 };
+struct LargeSortable
+{
+	float first;
+	float second;
+	float third;
+	uint64_t payload[1024];
+	friend bool operator<(const LargeSortable& left, const LargeSortable& right)
+	{
+		return left.first < right.first ||
+			(left.first == right.first &&
+				(left.second < right.second ||
+					(left.second == right.second && left.third <right.third)
+				)
+			);
+	}
+};
 
 #endif // SORTABLE_GENERATED_H
