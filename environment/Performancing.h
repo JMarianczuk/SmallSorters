@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <tuple>
+#include <chrono>
 
 #include "../Enumerations.h"
 
@@ -33,6 +34,8 @@ private:
 	int _fileDescriptor;
     PerformanceMetric _performanceMetric;
     unsigned long long _ticks;
+    std::chrono::steady_clock::time_point _time;
+    std::chrono::duration<int64_t, std::milli> _timeSpan;
 
     void SetupPerformanceEventAttribute(PerformanceMetric metric);
 public:
