@@ -779,6 +779,35 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -s332 KR Tie");
 	
 	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR Def", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_Default, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR JXc", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR 4Cm", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR 4CS", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR Cla", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR CPr", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR Tie", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<SortableRef, uint64_t>, &networks::bosenelson_2::sortN<conditional_swap::CS_Tie, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR Def");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR JXc");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR 4Cm");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR 4CS");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR Cla");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR CPr");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -s332 KR Tie");
+	
+	randomisation::SetSeed(seed);
 	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -S000 KR Def", &measurement::StdSortWrapper, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -S000 KR Def");

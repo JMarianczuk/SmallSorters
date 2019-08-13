@@ -38,6 +38,18 @@ void InsertionSortWrapper(
     SortableRef* last,
     bool(*compareFunc)(SortableRef* left,SortableRef* right),
     void(*sortFunc)(SortableRef*, size_t));
+
+void RadixSortThrillWrapper(
+    SortableRef* first,
+    SortableRef* last,
+    bool(*compareFunc)(SortableRef left,SortableRef right),
+    void(*sortFunc)(SortableRef*,size_t));
+
+void SkaSortWrapper(
+    SortableRef* first,
+    SortableRef* last,
+    bool(*compareFunc)(SortableRef left,SortableRef right),
+    void(*sortFunc)(SortableRef*,size_t));
     
 }
 

@@ -40,6 +40,7 @@ struct Sortable
 	{
 		return left.key != right.key;
 	}
+	const uint8_t at_radix(size_t depth) const {return (uint8_t) (key >> (8 * depth));}
 };
 struct SortableRef
 {
@@ -69,6 +70,7 @@ struct SortableRef
 	{
 		return left.key != right.key;
 	}
+	const uint8_t at_radix(size_t depth) const {return (uint8_t) (key >> (8 * depth));}
 };
 struct LargeSortable
 {

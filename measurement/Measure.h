@@ -235,6 +235,7 @@ void MeasureCompleteSorter(
         completeSorter(arr, arr + arraySize, &NormalCompare, baseCaseSortFunc);
         if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
         {
+            PrintArray(arr, arraySize, "badly sorted", &GetKey<ValueType>);
             numberOfBadSorts += 1;
         }
     }

@@ -3,3 +3,4 @@
 #include "networks/BoseNelsonParallel.generated.h"
 #include "networks/BoseNelsonParameter.generated.h"
 #include "networks/BoseNelsonRecursive.generated.h"
+#include "networks/bose_nelson.h"

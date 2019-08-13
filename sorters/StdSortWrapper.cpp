@@ -4,6 +4,8 @@
 #include "Quicksort_Copy.h"
 #include "Quicksort_Copy2.h"
 #include "SampleSort.generated.h"
+#include "radix_sort_thrill.h"
+#include "ska_sort.h"
 #include "../StructHelpers.generated.h"
 #include "../conditional_swap/ConditionalSwapGeneric.h"
 
@@ -61,6 +63,25 @@ namespace measurement
         void(*sortFunc)(SortableRef*, size_t))
     {
         samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef>, &GetKey<SortableRef>);
+    }
+
+    void RadixSortThrillWrapper(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right),
+        void(*sortFunc)(SortableRef*,size_t))
+    {
+        thrill::common::RadixSort<SortableRef, 8> sorter(256);
+        sorter(first, last, compareFunc);
+    }
+
+    void SkaSortWrapper(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right),
+        void(*sortFunc)(SortableRef*,size_t))
+    {
+        skasort::ska_sort(first, last, [](SortableRef& item) {return item.key;});
     }
     
 } // namespace measurement

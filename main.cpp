@@ -22,6 +22,8 @@
 #include "sorters/QuickSort.h"
 #include "sorters/Quicksort_Copy.h"
 #include "sorters/Quicksort_Copy2.h"
+#include "sorters/radix_sort_thrill.h"
+#include "sorters/ska_sort.h"
 
 #include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"

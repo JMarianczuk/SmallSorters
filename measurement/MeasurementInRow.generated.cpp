@@ -86,5 +86,20 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -I KR Tie", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_Tie, SortableRef>);
 	
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR Def", &networks::bosenelson_2::sortN<conditional_swap::CS_Default, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR JXc", &networks::bosenelson_2::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR 4Cm", &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR 4CS", &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR Cla", &networks::bosenelson_2::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR CPr", &networks::bosenelson_2::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -I KR Tie", &networks::bosenelson_2::sortN<conditional_swap::CS_Tie, SortableRef>);
+	
 }
 } // namespace measurement

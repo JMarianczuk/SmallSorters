@@ -150,5 +150,34 @@ void MeasureSorting(Performancing* perf, uint64_t seed, int numberOfIterations, 
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -N KR Tie");
 	
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR Def", &networks::bosenelson_2::sortN<conditional_swap::CS_Default, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR JXc", &networks::bosenelson_2::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR 4Cm", &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR 4CS", &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR Cla", &networks::bosenelson_2::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR CPr", &networks::bosenelson_2::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::Measure<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR Tie", &networks::bosenelson_2::sortN<conditional_swap::CS_Tie, SortableRef>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR Def");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR JXc");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR 4Cm");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR 4CS");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR Cla");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR CPr");
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -N KR Tie");
+	
 }
 } // namespace measurement

@@ -12,6 +12,7 @@
 #elif __arm__
 	#include "ConditionalSwapARM32.h"
 #else
+	#include "ConditionalSwapDummy.h"
 #endif
 
 #endif

@@ -44,6 +44,7 @@
 #include "utils.hpp"
 #include "../../Sortable.generated.h"
 #include "../../sorters/QuickSort.h"
+#include "../../sorters/SampleSort.generated.h"
 #include "../../Networks_Fwd.h"
 #include "../../conditional_swap/ConditionalSwap.h"
 
@@ -129,6 +130,8 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
             sort = &insertionsort::InsertionSort<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 6) {
             sort = &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
+        } else if constexpr (Cfg::kBaseCaseType == 7) {
+            sort = &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else {
             throw std::logic_error("Invalid base case type");
         }

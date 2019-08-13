@@ -20,7 +20,9 @@ enum class Sorter
     StdSort,
     QuicksortCopy,
     QuicksortCopyMsvc,
-    SampleSort
+    SampleSort,
+    RadixSortThrill,
+    SkaSort
 };
 
 enum class NetworkType
@@ -36,6 +38,7 @@ enum class BoseNelsonNetworkType
     Parallelism,
     Parameter,
     Recursive,
+    Constexpr,
     None
 };
 enum class MeasureType
