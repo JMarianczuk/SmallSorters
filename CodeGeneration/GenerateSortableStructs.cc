@@ -40,7 +40,10 @@ void WriteOperators(CodeGenerator* gen, std::string sortableStructName, std::fun
 
 void WriteAtRadix(CodeGenerator* gen)
 {
-    gen->WriteLine("const uint8_t at_radix(size_t depth) const {return (uint8_t) (key >> (8 * depth));}");
+    gen->WriteLine("const uint8_t at_radix(size_t depth) const");
+    gen->WriteBlock([=]{
+        gen->WriteLine("return (uint8_t) ( key >> (8 * (7 - depth)) );");
+    });
 }
 
 void WriteSortableStructs(CPlusPlusCodeGenerator* gen)

@@ -11,9 +11,11 @@
 #include "environment/GitInfo.h"
 #include "environment/EnvironmentInfo.h"
 #include "Randomisation.h"
+#include "Randomisation.Sortable.h"
 #include "ArrayHelpers.h"
 #include "Sortable.generated.h"
 
+#include "measurement/Measure.h"
 #include "measurement/Measurement.generated.h"
 #include "measurement/MeasurementIpso.Helper.h"
 
@@ -70,21 +72,17 @@ bool sref_less(uint64_t& leftKey, SortableRef& right)
 }
 
 #define ElementCount 128
-void test()
+void Experiment()
 {
-    int number = 0;
-    #if __x86_64__
-    number = 1;
-    #elif defined(__i386__)
-    number = 2;
-    #elif __aarch64__
-    number = 3;
-    #elif __arm__
-    number = 4;
-    #else
-    number = 5;
-    #endif
-    printf("Number: %i\n", number);
+    size_t arrSize = 400;
+    SortableRef* arr = (SortableRef*) malloc(sizeof(SortableRef) * arrSize);
+    randomisation::GenerateRandomArray<RandomisationMode::DEFAULT>(arr, arrSize);
+    thrill::common::RadixSort<SortableRef, 8> sorter(256);
+    // PrintArray(arr, arrSize, "beforeMeasurement");
+    sorter(arr, arr + arrSize, &measurement::NormalCompare<SortableRef>);
+    // PrintArray(arr, arrSize, "After");
+    debug::WriteLine("Is Sorted: ", std::to_string(IsSorted(arr, arrSize)));
+
 }
 
 #define NumberOfIterations 100
@@ -111,10 +109,10 @@ bool ExecuteExtraordinaryAction(commandline::CommandLineOptions options)
         verification::VerifyNetworks();
         return true;
     }
-    if (options.ExecuteTestMethod)
+    if (options.ExecuteExperimentMethod)
     {
         std::cout << "Executing test method" << std::endl;
-        test();
+        Experiment();
         return true;
     }
     if (options.HelpRequested 

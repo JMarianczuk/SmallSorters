@@ -4,3 +4,4 @@
 #include "networks/BoseNelsonParameter.generated.h"
 #include "networks/BoseNelsonRecursive.generated.h"
 #include "networks/bose_nelson.h"
+#include "networks/Batcher.generated.h"

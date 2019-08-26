@@ -19,7 +19,8 @@ struct CommandLineOptions
 
     bool VerifyNetworks;
 
-    bool ExecuteTestMethod;
+    bool ExecuteUnitTests;
+    bool ExecuteExperimentMethod;
     bool HelpRequested;
 
     bool ReadableNumbers;

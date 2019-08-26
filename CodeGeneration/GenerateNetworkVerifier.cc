@@ -17,12 +17,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteLine("");
 
         gen->WriteIncludeQuotes(
-            "networks/BestNetworks.generated.h",
-            "networks/BoseNelson.generated.h",
-            "networks/BoseNelsonParallel.generated.h",
-            "networks/BoseNelsonParameter.generated.h",
-            "networks/BoseNelsonRecursive.generated.h",
-            "networks/Batcher.generated.h",
+            "Networks_Fwd.h",
             "conditional_swap/ConditionalSwap.h",
             "VerifyNetworks.h",
             "DebugHelper.h");
@@ -31,7 +26,7 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
         gen->WriteNamespace("verification", [=](){
             gen->WriteLine("");
 
-            std::vector<std::string> network_nested_namespaces = {"best", "bosenelson", "bosenelsonparallel", "bosenelsonparameter", "bosenelsonrecursive", "batcher"};
+            std::vector<std::string> network_nested_namespaces = {"best", "bosenelson", "bosenelson_2", "bosenelsonparallel", "bosenelsonparameter", "bosenelsonrecursive", "batcher"};
             gen->WriteLine("void VerifyNetworks()");
             gen->WriteBlock([=]{
                 gen->WriteLine("int numberOfIncorrectNetworks = 0;");

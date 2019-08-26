@@ -13,12 +13,7 @@
 #include <inttypes.h>
 #include <ostream>
 
-#include "networks/BestNetworks.generated.h"
-#include "networks/BoseNelson.generated.h"
-#include "networks/BoseNelsonParallel.generated.h"
-#include "networks/BoseNelsonParameter.generated.h"
-#include "networks/BoseNelsonRecursive.generated.h"
-#include "networks/Batcher.generated.h"
+#include "Networks_Fwd.h"
 #include "conditional_swap/ConditionalSwap.h"
 #include "VerifyNetworks.h"
 #include "DebugHelper.h"
@@ -48,6 +43,17 @@ void VerifyNetworks()
 		if (!result)
 		{
 			debug::WriteLine("incorrect network: 'bosenelson' for size '", arraySize, "'.");
+			numberOfIncorrectNetworks += 1;
+		}
+	}
+	debug::WriteLine("verifying bosenelson_2 networks");
+	for (int arraySize = 2; arraySize < 17; arraySize += 1)
+	{
+		debug::WriteLine("verifying size ", arraySize);
+		bool result = verification::VerifyNetwork(arraySize, &networks::bosenelson_2::sortN<conditional_swap::CS_Int, int>);
+		if (!result)
+		{
+			debug::WriteLine("incorrect network: 'bosenelson_2' for size '", arraySize, "'.");
 			numberOfIncorrectNetworks += 1;
 		}
 	}
@@ -95,7 +101,7 @@ void VerifyNetworks()
 			numberOfIncorrectNetworks += 1;
 		}
 	}
-	debug::WriteLine("finished verification. ", 90 - numberOfIncorrectNetworks, " networks out of 90 sorted correctly.");
+	debug::WriteLine("finished verification. ", 105 - numberOfIncorrectNetworks, " networks out of 105 sorted correctly.");
 }
 } // namespace verification
 

@@ -32,9 +32,12 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.VerifyNetworks)
             ["--verifyNetworks"]
             ("Verify correctnes of networks") |
-        Opt(options.ExecuteTestMethod)
+        Opt(options.ExecuteExperimentMethod)
+            ["-e"]["--experiment"]
+            ("Execute experiment method") |
+        Opt(options.ExecuteUnitTests)
             ["-t"]["--test"]
-            ("Execute test method") |
+            ("Execute unit tests") |
         Opt(options.HelpRequested)
             ["-h"]["--help"]
             ("Display help information") |
@@ -49,7 +52,7 @@ detail::Parser GetParser(CommandLineOptions& options)
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)
 {
-    CommandLineOptions options = {false, false, false, false, false, false, false};
+    CommandLineOptions options = {false, false, false, false, false, false, false, false};
     auto commandLine = GetParser(options);
     
     auto result = commandLine.parse(Args(numberOfArguments, arguments));
