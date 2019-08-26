@@ -20,7 +20,7 @@
 #include <type_traits>
 
 #include "SampleSort.generated.h"
-#include "Quicksort.h"
+#include "QuickSort.h"
 #include "../Networks_Fwd.h"
 #include "../Sortable.generated.h"
 #include "../StructHelpers.generated.h"
