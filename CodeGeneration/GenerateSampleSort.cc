@@ -123,7 +123,7 @@ void WriteSortElementsIntoBuckets(CodeGenerator* gen, int numberOfSplitters, int
 void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversamplingFactor)
 {
     int sampleSize = numberOfSplitters * oversamplingFactor;
-    gen->WriteLine("template <typename ValueType, typename TKey>");
+    gen->WriteLine("template <typename BaseCaseSorter, typename ValueType, typename TKey>");
     gen->WriteLine("static inline");
     gen->WriteLine("void Find", GetName(numberOfSplitters, oversamplingFactor), "(");
 
@@ -131,7 +131,6 @@ void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversampl
         gen->WriteLine("ValueType* items,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("TKey* splitterDestination,");
-        gen->WriteLine("void(*sortFunc)(ValueType*,size_t),");
         gen->WriteLine("TKey(*getKeyFunc)(ValueType&))");
     });
     gen->WriteBlock([=]{
@@ -142,7 +141,8 @@ void WriteFindSplitters(CodeGenerator* gen, int numberOfSplitters, int oversampl
         gen->WriteForLoop("i", 0, sampleSize, [=]{
             gen->WriteLine("sample[i] = items[i * blockSize];");
         });
-        gen->WriteLine("sortFunc(sample, ", sampleSize, ");");
+        gen->WriteLine("BaseCaseSorter::sort(sample, ", sampleSize, ");");
+        // gen->WriteLine("sortFunc(sample, ", sampleSize, ");");
         gen->WriteLine("");
 
         gen->WriteForLoop("i", 0, numberOfSplitters, [=]{
@@ -159,14 +159,13 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
 {
     int numberOfBuckets = numberOfSplitters + 1;
 
-    gen->WriteLine("template <typename ValueType, typename TKey>");
+    gen->WriteLine("template <typename BaseCaseSorter, typename ValueType, typename TKey>");
     gen->WriteLine("inline");
     gen->WriteLine("void SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSize, "BlockSize(");
     gen->WriteIndented([=]{
         gen->WriteLine("ValueType* A,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("size_t baseCaseLimit,");
-        gen->WriteLine("void(*sortFunc)(ValueType*,size_t),");
         gen->WriteLine("bool(*predicateLess)(TKey&,ValueType&),");
         gen->WriteLine("TKey(*getKeyFunc)(ValueType&),");
         gen->WriteLine("int depthLimit)");
@@ -174,7 +173,8 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
     gen->WriteBlock([=]{
         gen->WriteLine("if (elementCount <= baseCaseLimit)");
         gen->WriteBlock([=]{
-            gen->WriteLine("sortFunc(A, elementCount);");
+            gen->WriteLine("BaseCaseSorter::sort(A, elementCount);");
+            // gen->WriteLine("sortFunc(A, elementCount);");
             gen->WriteLine("return;");
         });
         gen->WriteLine("");
@@ -185,7 +185,7 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         });
 
         gen->WriteLine("TKey splitters[", numberOfSplitters, "];");
-        gen->WriteLine("Find", GetName(numberOfSplitters, oversamplingFactor), "(A, elementCount, splitters, sortFunc, getKeyFunc);");
+        gen->WriteLine("Find", GetName(numberOfSplitters, oversamplingFactor), "<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);");
         for (int i = 0; i < numberOfSplitters; i += 1)
         {
             gen->WriteLine("TKey splitter", i, " = splitters[", i, "];");
@@ -254,22 +254,21 @@ void WriteRegisterSampleSort(CodeGenerator* gen, int numberOfSplitters, int over
         gen->WriteLine("");
 
         gen->WriteForLoop("currentBucket", 0, numberOfBuckets, [=]{
-            gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSize, "BlockSize(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, sortFunc, predicateLess, getKeyFunc, depthLimit - 1);");
+            gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSize, "BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);");
         });
     });
 
-    gen->WriteLine("template <typename ValueType, typename TKey>");
+    gen->WriteLine("template <typename BaseCaseSorter, typename ValueType, typename TKey>");
     gen->WriteLine("void SampleSort", GetName(numberOfSplitters, oversamplingFactor), blockSize, "BlockSize(");
     gen->WriteIndented([=]{
         gen->WriteLine("ValueType* A,");
         gen->WriteLine("size_t elementCount,");
         gen->WriteLine("size_t baseCaseLimit,");
-        gen->WriteLine("void(*sortFunc)(ValueType*,size_t),");
         gen->WriteLine("bool(*predicateLess)(TKey&,ValueType&),");
         gen->WriteLine("TKey(*getKeyFunc)(ValueType&))");
     });
     gen->WriteBlock([=]{
-        gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSize, "BlockSize(A, elementCount, baseCaseLimit, sortFunc, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * ", std::to_string(2.0 / log2(numberOfSplitters + 1)), "); //log to base {(numberOfSplitters + 1) / 2}");
+        gen->WriteLine("SampleSortInternal", GetName(numberOfSplitters, oversamplingFactor), blockSize, "BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * ", std::to_string(2.0 / log2(numberOfSplitters + 1)), "); //log to base {(numberOfSplitters + 1) / 2}");
     });
 }
 

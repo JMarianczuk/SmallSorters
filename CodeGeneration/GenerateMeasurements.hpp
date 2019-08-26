@@ -55,7 +55,8 @@ enum class MeasureType
 struct MeasureParams
 {
     std::vector<SortableStruct*>* Structs;
-    std::string SortMethod;
+    std::string SortMethodPointer;
+    std::string StaticSortMethod;
     Sorter _Sorter;
     NetworkType _NetworkType;
     BoseNelsonNetworkType _BoseNelsonNetworkType;

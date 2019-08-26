@@ -32,8 +32,7 @@ namespace measurement
     void StdSortWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef left, SortableRef right),
-        void(*sortFunc)(SortableRef*, size_t))
+        bool(*compareFunc)(SortableRef left, SortableRef right))
     {
         std::sort(first, last, compareFunc);
     }
@@ -41,35 +40,32 @@ namespace measurement
     void QuicksortCopyWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef left, SortableRef right),
-        void(*sortFunc)(SortableRef*, size_t))
+        bool(*compareFunc)(SortableRef left, SortableRef right))
     {
         quicksortcopy2::sort(first, last, compareFunc);
     }
 
-    void QuicksortCopyMsvcWrapper(
-        SortableRef* first,
-        SortableRef* last,
-        bool(*compareFunc)(SortableRef left, SortableRef right),
-        void(*sortFunc)(SortableRef*, size_t))
-    {
-        quicksortcopy::Quicksort_Copy_Msvc<conditional_swap::CS_Default>(first, last, compareFunc, sortFunc);
-    }
+    // void QuicksortCopyMsvcWrapper(
+    //     SortableRef* first,
+    //     SortableRef* last,
+    //     bool(*compareFunc)(SortableRef left, SortableRef right))
+    // {
+    //     quicksortcopy::Quicksort_Copy_Msvc<conditional_swap::CS_Default>(first, last, compareFunc, sortFunc);
+    // }
 
-    void SampleSortWrapper(
-        SortableRef* first,
-        SortableRef* last,
-        bool(*compareFunc)(SortableRef left,SortableRef right),
-        void(*sortFunc)(SortableRef*, size_t))
-    {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef>, &GetKey<SortableRef>);
-    }
+    // void SampleSortWrapper(
+    //     SortableRef* first,
+    //     SortableRef* last,
+    //     bool(*compareFunc)(SortableRef left,SortableRef right),
+    //     void(*sortFunc)(SortableRef*, size_t))
+    // {
+    //     samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef>, &GetKey<SortableRef>);
+    // }
 
     void RadixSortThrillWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef left,SortableRef right),
-        void(*sortFunc)(SortableRef*,size_t))
+        bool(*compareFunc)(SortableRef left,SortableRef right))
     {
         thrill::common::RadixSort<SortableRef, 8> sorter(256);
         sorter(first, last, compareFunc);
@@ -78,8 +74,7 @@ namespace measurement
     void SkaSortWrapper(
         SortableRef* first,
         SortableRef* last,
-        bool(*compareFunc)(SortableRef left,SortableRef right),
-        void(*sortFunc)(SortableRef*,size_t))
+        bool(*compareFunc)(SortableRef left,SortableRef right))
     {
         skasort::ska_sort(first, last, [](SortableRef& item) {return item.key;});
     }

@@ -46,6 +46,7 @@
 #include "../../sorters/QuickSort.h"
 #include "../../sorters/SampleSort.generated.h"
 #include "../../Networks_Fwd.h"
+#include "../../sorters/StaticSorters.h"
 #include "../../conditional_swap/ConditionalSwap.h"
 
 namespace ips4o {
@@ -107,6 +108,29 @@ struct iterator_traits<const _Tp*>
 /**
  * Wrapper for base case sorter, for easier swapping.
  */
+template <typename BaseCaseSorter, class Cfg, class It, class Comp>
+inline void nestedBaseCaseSort(It begin, It end, Comp&& comp) 
+{
+    typedef typename iterator_traits<It>::value_type ValueType;
+
+    if constexpr (Cfg::kSampleSortType == 1) {
+        samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
+    } else if constexpr (Cfg::kSampleSortType == 2) {
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
+    } else if constexpr (Cfg::kSampleSortType == 3) {
+        if (end - begin <= 16)
+        {
+            BaseCaseSorter::sort(begin, end - begin);
+        }
+        else
+        {
+            detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
+        }
+    } else {
+        throw std::logic_error("Invalid base case type");
+    }
+}
+
 template <class Cfg, class It, class Comp>
 inline void baseCaseSort(It begin, It end, Comp&& comp) {
     if (begin == end) return;
@@ -118,39 +142,29 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
     }
     else
     {
-        typedef typename iterator_traits<It>::value_type ValueType;
-        void(*sort)(ValueType*,size_t);
-        if constexpr (Cfg::kBaseCaseType == 1)         {
-            sort = &networks::best::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
+        void(*sort)(It,It,Comp&&);
+        if constexpr (Cfg::kBaseCaseType == 1) {
+            sort = &nestedBaseCaseSort<static_sorters::BestNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
+            // sort = &networks::best::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 2) {
-            sort = &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
+            sort = &nestedBaseCaseSort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
+            // sort = &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 3) {
-            sort = &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
+            sort = &nestedBaseCaseSort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
+            // sort = &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 5) {
-            sort = &insertionsort::InsertionSort<conditional_swap::CS_FourCmovTemp, ValueType>;
+            sort = &nestedBaseCaseSort<static_sorters::InsertionSort<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
+            // sort = &insertionsort::InsertionSort<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 6) {
-            sort = &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
+            sort = &nestedBaseCaseSort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
+            // sort = &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else if constexpr (Cfg::kBaseCaseType == 7) {
-            sort = &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
+            sort = &nestedBaseCaseSort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
+            // sort = &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else {
             throw std::logic_error("Invalid base case type");
         }
-        if constexpr (Cfg::kSampleSortType == 1) {
-            samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
-        } else if constexpr (Cfg::kSampleSortType == 2) {
-            samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, sort, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
-        } else if constexpr (Cfg::kSampleSortType == 3) {
-            if (end - begin <= 16)
-            {
-                sort(begin, end - begin);
-            }
-            else
-            {
-                detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
-            }
-        } else {
-            throw std::logic_error("Invalid base case type");
-        }
+        sort(begin, end, std::forward<Comp>(comp));
     }
 }
 

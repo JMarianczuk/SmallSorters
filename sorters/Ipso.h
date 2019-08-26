@@ -13,8 +13,7 @@ template <int BaseCaseType, int SampleSortType, int BaseCaseSize, typename Value
 void IpsoWrapper(
     ValueType* first, 
     ValueType* last, 
-    bool(*compareFunc)(ValueType left, ValueType right), 
-    void(*sortFunc)(ValueType*,size_t))
+    bool(*compareFunc)(ValueType left, ValueType right))
 {
     if constexpr (BaseCaseType == 10)
     {

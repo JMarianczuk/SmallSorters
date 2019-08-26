@@ -10,7 +10,7 @@
 
 #include "Measure.h"
 #include "../environment/Performancing.h"
-#include "../Networks_Fwd.h"
+#include "../sorters/StaticSorters.h"
 #include "../conditional_swap/ConditionalSwap.h"
 #include "../sorters/InsertionSort.h"
 #include "../sorters/QuickSort.h"
@@ -20,19 +20,19 @@ namespace measurement
 void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Def", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Def", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_Default>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR JXc", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR JXc", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_JumpXchg_Ref>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR 4Cm", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR 4Cm", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_FourCmovTemp>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR 4CS", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR 4CS", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Cla", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Cla", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_ClangVersion>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR CPr", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR CPr", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_ClangPredicate>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Tie", &quicksort::sort<SortableRef>, &networks::best::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Tie", &quicksort::sort<static_sorters::BestNetworks<conditional_swap::CS_Tie>, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Def");
 	randomisation::SetSeed(seed);
@@ -49,19 +49,19 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N Best  -Q KR Tie");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Def", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Def", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_Default>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR JXc", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR JXc", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_JumpXchg_Ref>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR 4Cm", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR 4Cm", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR 4CS", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR 4CS", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Cla", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Cla", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_ClangVersion>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR CPr", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR CPr", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_ClangPredicate>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Tie", &quicksort::sort<SortableRef>, &networks::bosenelson::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Tie", &quicksort::sort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_Tie>, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Def");
 	randomisation::SetSeed(seed);
@@ -78,19 +78,19 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNLoc -Q KR Tie");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Def", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Def", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_Default>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR JXc", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR JXc", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_JumpXchg_Ref>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR 4Cm", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR 4Cm", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_FourCmovTemp>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR 4CS", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR 4CS", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Cla", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Cla", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_ClangVersion>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR CPr", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR CPr", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_ClangPredicate>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Tie", &quicksort::sort<SortableRef>, &networks::bosenelsonparallel::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Tie", &quicksort::sort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_Tie>, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Def");
 	randomisation::SetSeed(seed);
@@ -107,13 +107,13 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNPL  -Q KR Tie");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR Def", &quicksort::sort<SortableRef>, &insertionsort::InsertionSort<insertionsort::InsertionSort_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR Def", &quicksort::sort<static_sorters::InsertionSort<insertionsort::InsertionSort_Default>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR STL", &quicksort::sort<SortableRef>, &insertionsort::InsertionSort<insertionsort::InsertionSort_StlVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR STL", &quicksort::sort<static_sorters::InsertionSort<insertionsort::InsertionSort_StlVersion>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR POp", &quicksort::sort<SortableRef>, &insertionsort::InsertionSort<insertionsort::InsertionSort_PointerOptimized, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR POp", &quicksort::sort<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR AIF", &quicksort::sort<SortableRef>, &insertionsort::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR AIF", &quicksort::sort<static_sorters::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck>, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR Def");
 	randomisation::SetSeed(seed);
@@ -124,19 +124,19 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -Q KR AIF");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Def", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Def", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_Default>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR JXc", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR JXc", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_JumpXchg_Ref>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR 4Cm", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR 4Cm", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_FourCmovTemp>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR 4CS", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR 4CS", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Cla", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Cla", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_ClangVersion>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR CPr", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR CPr", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_ClangPredicate>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Tie", &quicksort::sort<SortableRef>, &networks::bosenelsonrecursive::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Tie", &quicksort::sort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_Tie>, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Def");
 	randomisation::SetSeed(seed);
@@ -153,19 +153,19 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNRec -Q KR Tie");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Def", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Def", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_Default>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR JXc", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR JXc", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_JumpXchg_Ref>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR 4Cm", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR 4Cm", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_FourCmovTemp>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR 4CS", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR 4CS", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Cla", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_ClangVersion, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Cla", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_ClangVersion>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR CPr", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_ClangPredicate, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR CPr", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_ClangPredicate>, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Tie", &quicksort::sort<SortableRef>, &networks::bosenelson_2::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Tie", &quicksort::sort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_Tie>, SortableRef>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Def");
 	randomisation::SetSeed(seed);
@@ -182,19 +182,19 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "N BNCEx -Q KR Tie");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -Q KR Def", &measurement::StdSortWrapper, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -Q KR Def", &measurement::StdSortWrapper);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -Q KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -Q KR Def", &measurement::QuicksortCopyWrapper, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -Q KR Def", &measurement::QuicksortCopyWrapper);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "QSort   -Q KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "RadixT  -Q KR Def", &measurement::RadixSortThrillWrapper, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "RadixT  -Q KR Def", &measurement::RadixSortThrillWrapper);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "RadixT  -Q KR Def");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q KR Def", &measurement::SkaSortWrapper, &measurement::BaseCaseSortBlank<conditional_swap::CS_Default, SortableRef>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q KR Def", &measurement::SkaSortWrapper);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q KR Def");
 }

@@ -21,6 +21,7 @@
 
 #include "SampleSort.generated.h"
 #include "QuickSort.h"
+#include "StaticSorters.h"
 #include "../Networks_Fwd.h"
 #include "../Sortable.generated.h"
 #include "../StructHelpers.generated.h"
@@ -52,7 +53,7 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
     const size_t size = end - begin;
     if (size < 32)
     {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(begin, end - begin, 16, &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>, &quicksort::templateLess<SortableRef>, &GetKey<SortableRef>);
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>, &GetKey<SortableRef>);
         return;
         // return std::sort(begin, end, cmp);
     }

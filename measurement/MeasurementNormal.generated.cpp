@@ -10,7 +10,7 @@
 
 #include "Measure.h"
 #include "../environment/Performancing.h"
-#include "../Networks_Fwd.h"
+#include "../sorters/StaticSorters.h"
 #include "../conditional_swap/ConditionalSwap.h"
 #include "../sorters/InsertionSort.h"
 namespace measurement

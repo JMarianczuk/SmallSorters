@@ -232,14 +232,13 @@ __unguarded_partition_pivot(_RandomAccessIterator __first,
     return __unguarded_partition(__first + 1, __last, __first, __comp);
 }
 
-template<typename _RandomAccessIterator, typename _Size, typename _Compare, typename _BaseCaseFunc>
+template<typename BaseCaseSorter, typename _RandomAccessIterator, typename _Size, typename _Compare>
 void
 __introsort_loop(
     _RandomAccessIterator __first,
     _RandomAccessIterator __last,
     _Size __depth_limit, 
-    _Compare __comp, 
-    _BaseCaseFunc __baseCaseFunc)
+    _Compare __comp)
 {
     while (__last - __first > int(_S_threshold))
     {
@@ -250,27 +249,27 @@ __introsort_loop(
         }
         --__depth_limit;
         _RandomAccessIterator __cut = __unguarded_partition_pivot(__first, __last, __comp);
-        __introsort_loop(__cut, __last, __depth_limit, __comp, __baseCaseFunc);
+        __introsort_loop<BaseCaseSorter>(__cut, __last, __depth_limit, __comp);
         __last = __cut;
     }
-    __baseCaseFunc(__first, __last - __first);
+    BaseCaseSorter::sort(__first, __last - __first);
 }
 
-template <typename _RandomAccessIterator, typename _Compare, typename _BaseCaseFunc>
+template <typename BaseCaseSorter, typename _RandomAccessIterator, typename _Compare>
 inline void
-__sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp, _BaseCaseFunc __baseCaseFunc)
+__sort(_RandomAccessIterator __first, _RandomAccessIterator __last, _Compare __comp)
 {
     if (__first != __last)
     {
-        __introsort_loop(__first, __last, custommath::longlog2(__last - __first) * 2, __comp, __baseCaseFunc);
+        __introsort_loop<BaseCaseSorter>(__first, __last, custommath::longlog2(__last - __first) * 2, __comp);
     }
 }
 
-template <typename ValueType>
+template <typename BaseCaseSorter, typename ValueType>
 inline void
-sort(ValueType* __first, ValueType* __last, bool(*__comp)(ValueType,ValueType), void(*__baseCaseFunc)(ValueType*,size_t))
+sort(ValueType* __first, ValueType* __last, bool(*__comp)(ValueType,ValueType))
 {
-    __sort(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp), __baseCaseFunc);
+    __sort<BaseCaseSorter>(__first, __last, __gnu_cxx::__ops::__iter_comp_iter(__comp));
 }
 
 } // quicksort
