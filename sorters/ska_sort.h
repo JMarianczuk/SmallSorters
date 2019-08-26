@@ -11,7 +11,7 @@
 #include <utility>
 
 #include "SampleSort.generated.h"
-#include "Quicksort.h"
+#include "QuickSort.h"
 #include "../conditional_swap/ConditionalSwap.h"
 #include "../Networks_Fwd.h"
 #include "../Sortable.generated.h"
