@@ -195,9 +195,11 @@ void PerformMeasurements(commandline::CommandLineOptions options, Performancing*
     auto timeAfter = time(NULL);
     auto secondsElapsed = timeAfter - timeBefore;
     auto minutesElapsed = secondsElapsed / ((int64_t) 60);
+    auto hoursElapsed = ((double) secondsElapsed) / 3600.0;
     printf("Time elapsed during measurement\n");
     printf("In seconds: %" PRIi64 "\n", secondsElapsed);
     printf("In minutes: %" PRIi64 "\n", minutesElapsed);
+    printf("In hours: %4.2f\n", hoursElapsed);
 }
 
 int main(int argumentCount, char** arguments)

@@ -38,19 +38,37 @@ void WriteSplitterComparisonGeneric(CodeGenerator* gen)
 
 void WriteSplitterComparisonX86(CodeGenerator* gen)
 {
+    //Reworked this to use tst instead of cmp to not need zero in register anymore
     WriteAsmBlock(gen, [=]{
-        WriteAsmLine(gen, "cmp %[predResult],%[zero]");
-        WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
+        WriteAsmLine(gen, "test %[predResult],%[predResult]");
+        WriteAsmLine(gen, "cmovne %[splitter2],%[splitterx]");
 
         gen->WriteLine(": [splitterx] \"=&r\"(splitterx)");
-        gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult), [zero] \"r\"(0)");
+        gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult)");
         gen->WriteLine(": \"cc\"");
     });
+
+    // WriteAsmBlock(gen, [=]{
+    //     WriteAsmLine(gen, "cmp %[predResult],%[zero]");
+    //     WriteAsmLine(gen, "cmovcq %[splitter2],%[splitterx]");
+
+    //     gen->WriteLine(": [splitterx] \"=&r\"(splitterx)");
+    //     gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult), [zero] \"r\"(0)");
+    //     gen->WriteLine(": \"cc\"");
+    // });
 }
 
 void WriteSplitterComparisonARM(CodeGenerator* gen)
 {
-    WriteSplitterComparisonGeneric(gen);
+    WriteAsmBlock(gen, [=]{
+        WriteAsmLine(gen, "tst %[predResult],%[predResult]");
+        WriteAsmLine(gen, "movne %[splitterx], %[splitter2]");
+
+        gen->WriteLine(": [splitterx] \"=&r\"(splitterx)");
+        gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult)");
+        gen->WriteLine(": \"cc\"");
+    });
+    // WriteSplitterComparisonGeneric(gen);
 }
 
 void WriteSplitterComparisonRoutine(CodeGenerator* gen)

@@ -9,8 +9,6 @@
 namespace codegeneration
 {
 
-
-
 nlohmann::json RecursiveNetworkToJson(RecursiveParameterNetwork network)
 {
     nlohmann::json networkJson;
@@ -21,10 +19,10 @@ nlohmann::json RecursiveNetworkToJson(RecursiveParameterNetwork network)
             networkJson["NetworkSize"] = network.NetworkSize;
             break;
         case RecursiveParameterNetworkType::Merge:
-             networkJson["Type"] = "Merge";
-             networkJson["LeftMergeSize"] = network.LeftMergeSize;
-             networkJson["RightMergeSize"] = network.RightMergeSize;
-             break;
+            networkJson["Type"] = "Merge";
+            networkJson["LeftMergeSize"] = network.LeftMergeSize;
+            networkJson["RightMergeSize"] = network.RightMergeSize;
+            break;
         default:
             printf("Missing type!");
     }
@@ -57,6 +55,6 @@ nlohmann::json RecursiveNetworkToJson(RecursiveParameterNetwork network)
     return networkJson;
 }
 
-}
+} // namespace codegeneration
 
 #endif

@@ -37,20 +37,15 @@ void GenerateStructHelpers()
     delete structHelpersGen;
 }
 
-void GenerateBoseNelsonNetworkWithArrangement(
-    std::string filename, 
-    NetworkArrangement arrangement)
+void GenerateBoseNelsonNetworkWithArrangement(std::string filename, NetworkArrangement arrangement)
 {
     std::ofstream filestream;
     filestream.open(filename);
     nlohmann::json boseNelsonNetworks = nlohmann::json::array();
     for (int arraySize = 2; arraySize <= 16; arraySize += 1)
     {
-        auto network = GenerateBoseNelsonNetwork(
-            arraySize, 
-            arrangement);
-        boseNelsonNetworks.push_back(
-            NetworkToJson(network));
+        auto network = GenerateBoseNelsonNetwork(arraySize, arrangement);
+        boseNelsonNetworks.push_back(NetworkToJson(network));
         Dispose(network);
     }
     filestream << std::setw(2) << boseNelsonNetworks << std::endl;
@@ -66,8 +61,7 @@ void GenerateBoseNelsonNetwork_ParameterStyle(std::string filename)
     for (int arraySize = 2; arraySize <= 16; arraySize += 1)
     {
         auto network = GenerateBoseNelsonRecursiveParameterNetwork(arraySize);
-        boseNelsonRecursive.push_back(
-            RecursiveNetworkToJson(network));
+        boseNelsonRecursive.push_back(RecursiveNetworkToJson(network));
         Dispose(network);
     }
     nlohmann::json boseNelsonResult = nlohmann::json::array();

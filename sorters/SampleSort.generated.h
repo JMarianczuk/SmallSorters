@@ -25,30 +25,36 @@ void PerformSplitterComparison(Key &splitterx, Key &splitter2, int &predResult)
 	
 	#if __x86_64__
 		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
+			"test %[predResult],%[predResult]\n\t"
+			"cmovne %[splitter2],%[splitterx]\n\t"
 			: [splitterx] "=&r"(splitterx)
-			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult), [zero] "r"(0)
+			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult)
 			: "cc"
 		);
 	#elif defined(__i386__)
 		__asm__(
-			"cmp %[predResult],%[zero]\n\t"
-			"cmovcq %[splitter2],%[splitterx]\n\t"
+			"test %[predResult],%[predResult]\n\t"
+			"cmovne %[splitter2],%[splitterx]\n\t"
 			: [splitterx] "=&r"(splitterx)
-			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult), [zero] "r"(0)
+			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult)
 			: "cc"
 		);
 	#elif __aarch64__
-		if (predResult > 0)
-		{
-			splitterx = splitter2;
-		}
+		__asm__(
+			"tst %[predResult],%[predResult]\n\t"
+			"movne %[splitterx], %[splitter2]\n\t"
+			: [splitterx] "=&r"(splitterx)
+			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult)
+			: "cc"
+		);
 	#elif __arm__
-		if (predResult > 0)
-		{
-			splitterx = splitter2;
-		}
+		__asm__(
+			"tst %[predResult],%[predResult]\n\t"
+			"movne %[splitterx], %[splitter2]\n\t"
+			: [splitterx] "=&r"(splitterx)
+			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult)
+			: "cc"
+		);
 	#else
 		if (predResult > 0)
 		{

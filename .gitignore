@@ -45,6 +45,7 @@ test-O3_slim.s
 
 build/commit.txt
 result/plots/*
+result/plots_/*
 result/combined/*.aux
 result/combined/*.log
 result/combined/*.gz

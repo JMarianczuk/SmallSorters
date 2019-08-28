@@ -1,162 +1,9 @@
 
 #include "GenerateMeasurements.hpp"
+#include "GenerateMeasurementHelpers.hpp"
 
 namespace codegeneration
 {
-
-SortableStruct* DefSortable()
-{
-    return (*sortableStructs())[0];
-}
-SortableStruct* FourCSSortable()
-{
-    return (*sortableStructs())[5];
-}
-SortableStruct* POpSortable()
-{
-    return (*sortableStructs())[12];
-}
-
-std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType measureType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, Sorter subSorter = Sorter::InsertionSort, int sampleSortSplits = 0, int sampleSortOversample = 0, int sampleSortBlockSize = 0, int ipsoBaseCaseSize = 0, bool isInsertionPlusNetwork = false)
-{
-    std::string result = "";
-    switch (sorter)
-    {
-        case Sorter::InsertionSort:
-            result += "I";
-            if (isInsertionPlusNetwork)
-            {
-                result += " + N";
-            }
-            break;
-        case Sorter::SortNetwork:
-            result += "N";
-            break;
-        case Sorter::StdSort:
-            result += "StdSort ";
-            switch (measureType)
-            {
-                case MeasureType::Complete:
-                    result += "-Q ";
-                    break;
-                case MeasureType::SampleSort:
-                    result += "-S000 ";
-                    break;
-                case MeasureType::Ipso:
-                    result += "-4 ";
-                    break;
-            }
-            return result;
-        case Sorter::QuicksortCopy:
-            result += "QSort   -Q ";
-            return result;
-        case Sorter::QuicksortCopyMsvc:
-            result += "QSortMs -Q ";
-            return result;
-        case Sorter::RadixSortThrill:
-            result += "RadixT  -Q ";
-            return result;
-        case Sorter::SkaSort:
-            result += "SkaSort -Q ";
-            return result;
-        case Sorter::SampleSort:
-            result += "S+";
-            switch (subSorter)
-            {
-                case Sorter::InsertionSort:
-                    result += "I";
-                    break;
-                case Sorter::SortNetwork:
-                    result += "N";
-            }
-            break;
-    }
-    result += " ";
-    switch (networkType)
-    {
-        case NetworkType::Best:
-            result += "Best";
-            break;
-        case NetworkType::BoseNelson:
-            result += "BN";
-            break;
-        case NetworkType::Batcher:
-            result += "Batc";
-            break;
-        case NetworkType::None:
-            result += "    ";
-            break;
-    }
-    switch (boseNelsonNetworkType)
-    {
-        case BoseNelsonNetworkType::Locality:
-            result += "Loc";
-            break;
-        case BoseNelsonNetworkType::Parallelism:
-            result += "PL ";
-            break;
-        case BoseNelsonNetworkType::Parameter:
-            result += "PM ";
-            break;
-        case BoseNelsonNetworkType::Recursive:
-            result += "Rec";
-            break;
-        case BoseNelsonNetworkType::Constexpr:
-            result += "CEx";
-            break;
-        case BoseNelsonNetworkType::None:
-            result += " ";
-            break;
-    }
-    result += " ";
-    switch (measureType)
-    {
-        case MeasureType::Normal:
-            result += "-N";
-            break;
-        case MeasureType::InRow:
-            result += "-I";
-            break;
-        case MeasureType::Complete:
-            result += "-Q";
-            break;
-        case MeasureType::Complete2:
-            result += "-c";
-            break;
-        case MeasureType::SampleSort:
-            result += "-S";
-            result += std::to_string(sampleSortSplits);
-            result += std::to_string(sampleSortOversample);
-            result += std::to_string(sampleSortBlockSize);
-            break;
-        case MeasureType::SampleSort2:
-            result += "-s";
-            result += std::to_string(sampleSortSplits);
-            result += std::to_string(sampleSortOversample);
-            result += std::to_string(sampleSortBlockSize);
-            break;
-        case MeasureType::Ipso:
-            result += "-4 " + std::to_string(ipsoBaseCaseSize) + "_";
-            result += std::to_string(sampleSortSplits);
-            result += std::to_string(sampleSortOversample);
-            result += std::to_string(sampleSortBlockSize);
-            break;
-    }
-    result += " ";
-    return result;
-}
-
-std::string AddStructName(const std::string sorter, SortableStruct* sortableStruct)
-{
-    std::string result(sorter);
-    result += "K";
-    result += sortableStruct->HasReference ? "R" : " ";
-    result += " ";
-
-    result += sortableStruct->NameAbbreviation;
-
-    return result;
-}
 
 MeasureParams GetParams(std::vector<SortableStruct*>* structs, std::string sortMethodPointer, std::string staticSortMethod, Sorter sorter, NetworkType networkType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None)
 {
@@ -175,7 +22,12 @@ void WriteMeasureRandomLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::MeasureRandomGeneration<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\");");
+        gen->WriteLine(
+            "measurement::MeasureRandomGeneration<", 
+            sortableStruct->FullName(), 
+            ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", 
+            AddStructName(sorter, sortableStruct), "\");"
+        );
     }
 }
 
@@ -189,8 +41,21 @@ void WriteMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
+        std::string measureMethodTemplateParameters = "<" + sortableStruct->FullName() + ", RandomisationMode::DEFAULT>";
+        std::string sortMethodTemplateParameters = "<" + sortableStruct->CSName() + ", " + sortableStruct->FullName() + ">";
+
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
+        gen->WriteLine(
+            "measurement::", 
+            measureMethod, 
+            measureMethodTemplateParameters,
+            "(perf, numberOfIterations, arraySize, measureIteration, \"", 
+            AddStructName(sorter, sortableStruct), 
+            "\", &", 
+            sortMethod, 
+            sortMethodTemplateParameters,
+            ");"
+        );
     }
     if (measureRandomGeneration) 
     {
@@ -208,10 +73,21 @@ void WriteCompleteSorterMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
+        std::string measureMethodTemplateParameters = "<" + sortableStruct->FullName() + ", RandomisationMode::DEFAULT>";
+        std::string sortMethodTemplateParameters = "<" + baseCaseSortMethod + "<" + sortableStruct->CSName() + ">, " + sortableStruct->FullName() + ">";
+
         gen->WriteLine("randomisation::SetSeed(seed);");
-        // gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT, ", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), "> >(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">);");
-        // gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", sortableStruct->FullName(), ">, &", baseCaseSortMethod, "<", sortableStruct->CSName(), ", ", sortableStruct->FullName(), ">);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", baseCaseSortMethod, "<", sortableStruct->CSName(), ">, ", sortableStruct->FullName(), ">);");
+        gen->WriteLine(
+            "measurement::", 
+            measureMethod, 
+            measureMethodTemplateParameters,
+            "(perf, numberOfIterations, arraySize, measureIteration, \"", 
+            AddStructName(sorter, sortableStruct), 
+            "\", &", 
+            sortMethod, 
+            sortMethodTemplateParameters,
+            ");"
+        );
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
@@ -227,8 +103,21 @@ void WriteSampleSortMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
+        std::string measureMethodTemplateParameters = "<" + sortableStruct->FullName() + ", RandomisationMode::DEFAULT>";
+        std::string sortMethodTemplateParameters = "<" + baseCaseSortMethod + "<" + sortableStruct->CSName() + ">, " + sortableStruct->FullName() + additionalTemplateParameters + ">";
+
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, "<", baseCaseSortMethod, "<", sortableStruct->CSName(), ">, ", sortableStruct->FullName(), additionalTemplateParameters, ">);");
+        gen->WriteLine(
+            "measurement::", 
+            measureMethod, 
+            measureMethodTemplateParameters, 
+            "(perf, numberOfIterations, arraySize, measureIteration, \"", 
+            AddStructName(sorter, sortableStruct), 
+            "\", &", 
+            sortMethod, 
+            sortMethodTemplateParameters,
+            ");"
+        );
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
@@ -243,15 +132,31 @@ void WriteCompleteSorterWrapperMeasureLine(
 {
     for (SortableStruct *sortableStruct : *structs)
     {
+        std::string measureMethodTemplateParameters = "<" + sortableStruct->FullName() + ", RandomisationMode::DEFAULT>";
+
         gen->WriteLine("randomisation::SetSeed(seed);");
-        gen->WriteLine("measurement::", measureMethod, "<", sortableStruct->FullName(), ", RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, \"", AddStructName(sorter, sortableStruct), "\", &", sortMethod, ");");
+        gen->WriteLine(
+            "measurement::", 
+            measureMethod, 
+            measureMethodTemplateParameters,
+            "(perf, numberOfIterations, arraySize, measureIteration, \"", 
+            AddStructName(sorter, sortableStruct), 
+            "\", &", 
+            sortMethod, 
+            ");"
+        );
     }
     WriteMeasureRandomLine(gen, structs, sorter);
 }
 
 void WriteMeasureMethodName(CodeGenerator *gen, std::string measureMethodName, bool isDeclaration = false)
 {
-    gen->WriteLine("void ", measureMethodName, "(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)", (isDeclaration ? ";" : ""));
+    gen->WriteLine(
+        "void ", 
+        measureMethodName, 
+        "(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)", 
+        (isDeclaration ? ";" : "")
+    );
 }
 
 void WriteMeasureMethod(
@@ -263,9 +168,7 @@ void WriteMeasureMethod(
 {
     WriteMeasureMethodName(gen, measureMethodName, false);
     gen->WriteBlock([=](){
-        Multicall<MeasureParams>(
-            multicallAction, 
-            measureParamsList);
+        Multicall<MeasureParams>(multicallAction, measureParamsList);
         if (additionalAction != nullptr)
         {
             additionalAction();
@@ -309,8 +212,7 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
     ipsoGen->WriteLine("");
 
     ipsoGen->WriteIncludeBrackets(
-        "inttypes.h"
-    );
+        "inttypes.h");
     ipsoGen->WriteIncludeQuotes(
         "../Measure.h",
         "../../environment/Performancing.h",

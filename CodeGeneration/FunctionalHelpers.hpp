@@ -4,6 +4,7 @@
 
 #include <functional>
 #include <vector>
+#include <utility>
 
 namespace codegeneration
 {
@@ -17,6 +18,6 @@ void Multicall(std::function<void(ValueType)> action, std::vector<ValueType> arg
     }
 }
 
-}
+} // namespace codegeneration
 
 #endif

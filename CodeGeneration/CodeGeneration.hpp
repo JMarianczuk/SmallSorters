@@ -67,8 +67,8 @@ void CodeGenerator::WriteLineRec(First first, Inputs... inputs)
     WriteLineRec(inputs...);
 }
 
-template <typename... TInputs>
-void CodeGenerator::WriteLine(TInputs... inputs)
+template <typename... Inputs>
+void CodeGenerator::WriteLine(Inputs... inputs)
 {
     WriteLineRec(inputs...);
 }
@@ -92,14 +92,14 @@ public:
     void CommentOut(std::function<void()> writeFunc);
 };
 
-template <typename... TInputs>
-void CPlusPlusCodeGenerator::WriteIncludeBrackets(TInputs... inputs)
+template <typename... Inputs>
+void CPlusPlusCodeGenerator::WriteIncludeBrackets(Inputs... inputs)
 {
     std::vector<std::string> args = {inputs...};
     WriteInclude(args, "<", ">");
 }
-template <typename... TInputs>
-void CPlusPlusCodeGenerator::WriteIncludeQuotes(TInputs... inputs)
+template <typename... Inputs>
+void CPlusPlusCodeGenerator::WriteIncludeQuotes(Inputs... inputs)
 {
     std::vector<std::string> args = {inputs...};
     WriteInclude(args, "\"", "\"");

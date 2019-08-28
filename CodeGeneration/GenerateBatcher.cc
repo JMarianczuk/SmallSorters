@@ -41,7 +41,6 @@ Network GenerateBatcherNetwork(int arraySize)
             {
                 break;
             }
-            
         }
 
         p = p / 2;
