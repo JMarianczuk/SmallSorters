@@ -140,7 +140,7 @@ void MeasureSampleSort(
     size_t arraySize,
     int measureIteration,
     std::string sorterName,
-    void(*sortFunc)(ValueType*,size_t,size_t,bool(*)(uint64_t&,ValueType&),uint64_t(*)(ValueType&)))
+    void(*sortFunc)(ValueType*,size_t,size_t,bool(*)(uint64_t&,ValueType&)))
 {
     ValueType *arr = (ValueType*) malloc(sizeof(ValueType) * arraySize);
     randomisation::GenerateRandomArray<rMode>(arr, arraySize);
@@ -150,7 +150,7 @@ void MeasureSampleSort(
     uint64_t key_value;
     uint64_t ref_value;
     PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
-    sortFunc(arr, arraySize, 16, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
+    sortFunc(arr, arraySize, 16, &quicksort::templateLess<ValueType>);
     if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
     {
         numberOfBadSorts += 1;
@@ -163,7 +163,7 @@ void MeasureSampleSort(
         key_iter = 1;
         ref_iter = 1;
         PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
-        sortFunc(arr, arraySize, 16, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
+        sortFunc(arr, arraySize, 16, &quicksort::templateLess<ValueType>);
         if (!IsSortedAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
         {
             numberOfBadSorts += 1;

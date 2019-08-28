@@ -53,7 +53,7 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
     const size_t size = end - begin;
     if (size < 32)
     {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>, &GetKey<SortableRef>);
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
         return;
         // return std::sort(begin, end, cmp);
     }

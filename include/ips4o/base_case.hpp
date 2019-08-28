@@ -114,9 +114,9 @@ inline void nestedBaseCaseSort(It begin, It end, Comp&& comp)
     typedef typename iterator_traits<It>::value_type ValueType;
 
     if constexpr (Cfg::kSampleSortType == 1) {
-        samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
+        samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>);
     } else if constexpr (Cfg::kSampleSortType == 2) {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>, &GetKey<ValueType>);
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>);
     } else if constexpr (Cfg::kSampleSortType == 3) {
         if (end - begin <= 16)
         {

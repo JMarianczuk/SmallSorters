@@ -50,10 +50,10 @@ namespace quicksortcopy
 
 #define S_threshold 16
 
-template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
-void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType value, TCompare& compare)
+template <typename RandomIterator, typename Distance, typename ValueType, typename Compare>
+void push_heap(RandomIterator first, Distance holeIndex, Distance topIndex, ValueType value, Compare& compare)
 {
-    TDistance parent = (holeIndex - 1) / 2;
+    Distance parent = (holeIndex - 1) / 2;
     while (holeIndex > topIndex && compare(first + parent, &value))
     {
         *(first + holeIndex) = std::move(*(first + parent));
@@ -63,11 +63,11 @@ void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType 
     *(first + holeIndex) = std::move(value);
 }
 
-template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
-void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType value, TCompare compare)
+template <typename RandomIterator, typename Distance, typename ValueType, typename Compare>
+void adjust_heap(RandomIterator first, Distance holeIndex, Distance len, ValueType value, Compare compare)
 {
-    const TDistance topIndex = holeIndex;
-    TDistance secondChild = holeIndex;
+    const Distance topIndex = holeIndex;
+    Distance secondChild = holeIndex;
     while (secondChild < (len - 1) / 2)
     {
         secondChild = 2 * (secondChild + 1);
@@ -89,18 +89,18 @@ void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType val
     push_heap(first, holeIndex, topIndex, std::move(value), compare);
 }
 
-template <typename TRanIt, typename TCompare>
-void make_heap(TRanIt first, TRanIt last, TCompare& compare)
+template <typename RandomIterator, typename Compare>
+void make_heap(RandomIterator first, RandomIterator last, Compare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type ValueType;
-    typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
+    typedef typename iterator_traits<RandomIterator>::value_type ValueType;
+    typedef typename iterator_traits<RandomIterator>::difference_type DistanceType;
     if (last - first < 2)
     {
         return;
     }
 
-    const TDistanceType len = last - first;
-    TDistanceType parent = (len - 2) / 2;
+    const DistanceType len = last - first;
+    DistanceType parent = (len - 2) / 2;
     while (true)
     {
         ValueType value = std::move(*(first + parent));
@@ -113,20 +113,20 @@ void make_heap(TRanIt first, TRanIt last, TCompare& compare)
     }
 }
 
-template <typename TRanIt, typename TCompare>
+template <typename RandomIterator, typename Compare>
 inline
-void pop_heap(TRanIt first, TRanIt last, TRanIt result, TCompare& compare)
+void pop_heap(RandomIterator first, RandomIterator last, RandomIterator result, Compare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type ValueType;
-    typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
+    typedef typename iterator_traits<RandomIterator>::value_type ValueType;
+    typedef typename iterator_traits<RandomIterator>::difference_type DistanceType;
 
     ValueType value = std::move(*result);
     *result = std::move(*first);
-    adjust_heap(first, TDistanceType(0), TDistanceType(last - first), std::move(value), compare);
+    adjust_heap(first, DistanceType(0), DistanceType(last - first), std::move(value), compare);
 }
 
-template <typename TRanIt, typename TCompare>
-void sort_heap(TRanIt first, TRanIt last, TCompare& compare)
+template <typename RandomIterator, typename Compare>
+void sort_heap(RandomIterator first, RandomIterator last, Compare& compare)
 {
     while (last - first > 1)
     {
@@ -136,11 +136,11 @@ void sort_heap(TRanIt first, TRanIt last, TCompare& compare)
 }
 
 
-template <typename TRanIt, typename TCompare>
-void heap_select(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
+template <typename RandomIterator, typename Compare>
+void heap_select(RandomIterator first, RandomIterator middle, RandomIterator last, Compare compare)
 {
     make_heap(first, middle, compare);
-    for (TRanIt i = middle; i < last; ++i)
+    for (RandomIterator i = middle; i < last; ++i)
     {
         if (compare(i, first))
         {
@@ -149,9 +149,9 @@ void heap_select(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
     }
 }
 
-template <typename TRanIt, typename TCompare>
+template <typename RandomIterator, typename Compare>
 inline
-void partial_sort(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
+void partial_sort(RandomIterator first, RandomIterator middle, RandomIterator last, Compare compare)
 {
     heap_select(first, middle, last, compare);
     sort_heap(first, middle, compare);
@@ -159,11 +159,11 @@ void partial_sort(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
 
 //---------------------------------------------------------------------------------------------
 
-template<typename TRanIt, typename TCompare>
-void unguarded_linear_insert(TRanIt last, TCompare compare)
+template<typename RandomIterator, typename Compare>
+void unguarded_linear_insert(RandomIterator last, Compare compare)
 {
-    typename iterator_traits<TRanIt>::value_type val = std::move(*last);
-    TRanIt next = last;
+    typename iterator_traits<RandomIterator>::value_type val = std::move(*last);
+    RandomIterator next = last;
     --next;
     while (compare(&val, next))
     {
@@ -174,28 +174,28 @@ void unguarded_linear_insert(TRanIt last, TCompare compare)
     *last = std::move(val);
 }
 
-template<typename TRanIt, typename TCompare>
-inline void unguarded_insertion_sort(TRanIt first, TRanIt last, TCompare compare)
+template<typename RandomIterator, typename Compare>
+inline void unguarded_insertion_sort(RandomIterator first, RandomIterator last, Compare compare)
 {
-    for (TRanIt i = first; i != last; ++i)
+    for (RandomIterator i = first; i != last; ++i)
     {
         unguarded_linear_insert(i, compare);
     }
 }
 
-template<typename TRanIt, typename TCompare>
-void insertion_sort(TRanIt first, TRanIt last, TCompare compare)
+template<typename RandomIterator, typename Compare>
+void insertion_sort(RandomIterator first, RandomIterator last, Compare compare)
 {
     if (first == last) 
     {
         return;
     }
 
-    for (TRanIt i = first + 1; i != last; ++i)
+    for (RandomIterator i = first + 1; i != last; ++i)
     {
         if (compare(i, first))
         {
-            typename iterator_traits<TRanIt>::value_type val = std::move(*i);
+            typename iterator_traits<RandomIterator>::value_type val = std::move(*i);
             std::move_backward(first, i, i + 1);
             *first = std::move(val);
         }
@@ -207,8 +207,8 @@ void insertion_sort(TRanIt first, TRanIt last, TCompare compare)
     }
 }
 
-template<typename TRanIt, typename TCompare>
-void final_insertion_sort(TRanIt first, TRanIt last, TCompare compare)
+template<typename RandomIterator, typename Compare>
+void final_insertion_sort(RandomIterator first, RandomIterator last, Compare compare)
 {
     if (last - first > S_threshold)
     {
@@ -221,8 +221,8 @@ void final_insertion_sort(TRanIt first, TRanIt last, TCompare compare)
     }
 }
 
-template<typename TRanIt, typename TCompare>
-TRanIt unguarded_partition(TRanIt first, TRanIt last, TRanIt pivot, TCompare compare)
+template<typename RandomIterator, typename Compare>
+RandomIterator unguarded_partition(RandomIterator first, RandomIterator last, RandomIterator pivot, Compare compare)
 {
     while (true)
     {
@@ -244,8 +244,8 @@ TRanIt unguarded_partition(TRanIt first, TRanIt last, TRanIt pivot, TCompare com
     }
 }
 
-template<typename TRanIt, typename TCompare>
-void move_median_to_first(TRanIt result, TRanIt one, TRanIt two, TRanIt three, TCompare compare)
+template<typename RandomIterator, typename Compare>
+void move_median_to_first(RandomIterator result, RandomIterator one, RandomIterator two, RandomIterator three, Compare compare)
 {
     if (compare(one, two))
     {
@@ -277,17 +277,17 @@ void move_median_to_first(TRanIt result, TRanIt one, TRanIt two, TRanIt three, T
     }
 }
 
-template<typename TRanIt, typename TCompare>
+template<typename RandomIterator, typename Compare>
 inline 
-TRanIt unguarded_partition_pivot(TRanIt first, TRanIt last, TCompare compare)
+RandomIterator unguarded_partition_pivot(RandomIterator first, RandomIterator last, Compare compare)
 {
-    TRanIt mid = first + (last - first) / 2;
+    RandomIterator mid = first + (last - first) / 2;
     move_median_to_first(first, first + 1, mid, last - 1, compare);
     return unguarded_partition(first + 1, last, first, compare);
 }
 
-template <typename TRanIt, typename TSize, typename TCompare>
-void introsort_loop(TRanIt first, TRanIt last, TSize depth_limit, TCompare compare)
+template <typename RandomIterator, typename Size, typename Compare>
+void introsort_loop(RandomIterator first, RandomIterator last, Size depth_limit, Compare compare)
 {
     while (last - first > S_threshold)
 	{
@@ -297,14 +297,14 @@ void introsort_loop(TRanIt first, TRanIt last, TSize depth_limit, TCompare compa
             return;
         }
         --depth_limit;
-        TRanIt cut = unguarded_partition_pivot(first, last, compare);
+        RandomIterator cut = unguarded_partition_pivot(first, last, compare);
         introsort_loop(cut, last, depth_limit, compare);
         last = cut;
 	}
 }
 
-template <typename TRanIt, typename TCompare>
-void Quicksort_Copy_Stl(TRanIt first, TRanIt last, TCompare compare)
+template <typename RandomIterator, typename Compare>
+void Quicksort_Copy_Stl(RandomIterator first, RandomIterator last, Compare compare)
 {
     if (first != last)
 	{
@@ -317,9 +317,9 @@ void Quicksort_Copy_Stl(TRanIt first, TRanIt last, TCompare compare)
 
 #define ISortMax 16
 
-template <typename ValueType, typename TPredicate>
+template <typename ValueType, typename Predicate>
 inline
-void insertion_sort_unchecked(ValueType* first, ValueType* last, TPredicate predicate)
+void insertion_sort_unchecked(ValueType* first, ValueType* last, Predicate predicate)
 {
     if (first != last)
     {
@@ -347,9 +347,9 @@ void insertion_sort_unchecked(ValueType* first, ValueType* last, TPredicate pred
     }
 }
 
-template <typename CSwap, typename ValueType, typename TPredicate>
+template <typename CSwap, typename ValueType, typename Predicate>
 inline
-void guess_median_unchecked(ValueType* first, ValueType* mid, ValueType* last, TPredicate predicate)
+void guess_median_unchecked(ValueType* first, ValueType* mid, ValueType* last, Predicate predicate)
 {
     uint64_t count = (uint64_t) (last - first);
     if (count > 40)
@@ -370,9 +370,9 @@ void guess_median_unchecked(ValueType* first, ValueType* mid, ValueType* last, T
     }
 }
 
-template <typename CSwap, typename ValueType, typename TPredicate>
+template <typename CSwap, typename ValueType, typename Predicate>
 inline
-ValueType* partition_by_median_guess_unchecked(ValueType* first, ValueType* last, TPredicate predicate)
+ValueType* partition_by_median_guess_unchecked(ValueType* first, ValueType* last, Predicate predicate)
 {
     ValueType* mid = first + ((last - first) >> 1);
     guess_median_unchecked<CSwap>(first, mid, last - 1, predicate);
@@ -401,9 +401,9 @@ ValueType* partition_by_median_guess_unchecked(ValueType* first, ValueType* last
 
 
 
-template <typename CSwap, typename ValueType, typename TPredicate, typename TBaseCaseSort>
+template <typename CSwap, typename ValueType, typename Predicate, typename BaseCaseSort>
 inline
-void sort_unchecked(ValueType* first, ValueType* last, uint64_t ideal, TPredicate predicate, TBaseCaseSort baseCaseSort)
+void sort_unchecked(ValueType* first, ValueType* last, uint64_t ideal, Predicate predicate, BaseCaseSort baseCaseSort)
 {
     uint64_t count;
     while (ISortMax < (count = (uint64_t) (last - first)) && ideal > 0)
@@ -435,8 +435,8 @@ void sort_unchecked(ValueType* first, ValueType* last, uint64_t ideal, TPredicat
     }
 }
 
-template <typename CSwap, typename ValueType, typename TPredicate, typename TBaseCaseSort>
-void Quicksort_Copy_Msvc(ValueType* first, ValueType* last, TPredicate predicate, TBaseCaseSort baseCaseSort)
+template <typename CSwap, typename ValueType, typename Predicate, typename BaseCaseSort>
+void Quicksort_Copy_Msvc(ValueType* first, ValueType* last, Predicate predicate, BaseCaseSort baseCaseSort)
 {
     sort_unchecked<CSwap>(first, last, (uint64_t) (last - first), __gnu_cxx::__ops::__iter_comp_iter(predicate), baseCaseSort);
 }

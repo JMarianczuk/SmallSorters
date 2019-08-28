@@ -51,6 +51,13 @@ void WriteStructHelpers(CPlusPlusCodeGenerator* gen)
                 gen->WriteLine("return item.reference;");
             });
         }
+
+        gen->WriteClassDeclaration("SortableRefKeyGetter", []{}, [=]{
+            gen->WriteLine("static inline uint64_t get(SortableRef& item)");
+            gen->WriteBlock([=]{
+                gen->WriteLine("return item.key;");
+            });
+        });
     });
 }
 

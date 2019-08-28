@@ -67,7 +67,6 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        // CS_Default::swap(left, right);
         uint64_t tmp = left.key; 
         __asm__( 
             "cmp %[right_key],%[left_key]\n\t" 
@@ -86,7 +85,6 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        // CS_Default::swap(left, right);
         uint64_t tmp = left.key;
         uint64_t tmpRef = left.reference;
         __asm__( 
@@ -108,7 +106,6 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        // CS_Default::swap(left, right);
         uint64_t tmp = left.key;
         uint64_t tmpRef = left.reference;
         __asm__ volatile ( 
@@ -170,7 +167,6 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        // CS_Default::swap(left, right);
         Type* leftPointer = &left;
         Type* rightPointer = &right;
         uint64_t rightKey = right.key;

@@ -86,10 +86,10 @@ enum { _S_threshold = 16 };
 
 //-------------------------------------------------------------------------------------------------------------
 
-template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
-void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType value, TCompare& compare)
+template <typename RandomIterator, typename Distance, typename ValueType, typename Compare>
+void push_heap(RandomIterator first, Distance holeIndex, Distance topIndex, ValueType value, Compare& compare)
 {
-    TDistance parent = (holeIndex - 1) / 2;
+    Distance parent = (holeIndex - 1) / 2;
     while (holeIndex > topIndex && compare(first + parent, &value))
     {
         *(first + holeIndex) = std::move(*(first + parent));
@@ -99,11 +99,11 @@ void push_heap(TRanIt first, TDistance holeIndex, TDistance topIndex, ValueType 
     *(first + holeIndex) = std::move(value);
 }
 
-template <typename TRanIt, typename TDistance, typename ValueType, typename TCompare>
-void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType value, TCompare compare)
+template <typename RandomIterator, typename Distance, typename ValueType, typename Compare>
+void adjust_heap(RandomIterator first, Distance holeIndex, Distance len, ValueType value, Compare compare)
 {
-    const TDistance topIndex = holeIndex;
-    TDistance secondChild = holeIndex;
+    const Distance topIndex = holeIndex;
+    Distance secondChild = holeIndex;
     while (secondChild < (len - 1) / 2)
     {
         secondChild = 2 * (secondChild + 1);
@@ -125,18 +125,18 @@ void adjust_heap(TRanIt first, TDistance holeIndex, TDistance len, ValueType val
     push_heap(first, holeIndex, topIndex, std::move(value), compare);
 }
 
-template <typename TRanIt, typename TCompare>
-void make_heap(TRanIt first, TRanIt last, TCompare& compare)
+template <typename RandomIterator, typename Compare>
+void make_heap(RandomIterator first, RandomIterator last, Compare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type ValueType;
-    typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
+    typedef typename iterator_traits<RandomIterator>::value_type ValueType;
+    typedef typename iterator_traits<RandomIterator>::difference_type DistanceType;
     if (last - first < 2)
     {
         return;
     }
 
-    const TDistanceType len = last - first;
-    TDistanceType parent = (len - 2) / 2;
+    const DistanceType len = last - first;
+    DistanceType parent = (len - 2) / 2;
     while (true)
     {
         ValueType value = std::move(*(first + parent));
@@ -149,20 +149,20 @@ void make_heap(TRanIt first, TRanIt last, TCompare& compare)
     }
 }
 
-template <typename TRanIt, typename TCompare>
+template <typename RandomIterator, typename Compare>
 inline
-void pop_heap(TRanIt first, TRanIt last, TRanIt result, TCompare& compare)
+void pop_heap(RandomIterator first, RandomIterator last, RandomIterator result, Compare& compare)
 {
-    typedef typename iterator_traits<TRanIt>::value_type ValueType;
-    typedef typename iterator_traits<TRanIt>::difference_type TDistanceType;
+    typedef typename iterator_traits<RandomIterator>::value_type ValueType;
+    typedef typename iterator_traits<RandomIterator>::difference_type DistanceType;
 
     ValueType value = std::move(*result);
     *result = std::move(*first);
-    adjust_heap(first, TDistanceType(0), TDistanceType(last - first), std::move(value), compare);
+    adjust_heap(first, DistanceType(0), DistanceType(last - first), std::move(value), compare);
 }
 
-template <typename TRanIt, typename TCompare>
-void sort_heap(TRanIt first, TRanIt last, TCompare& compare)
+template <typename RandomIterator, typename Compare>
+void sort_heap(RandomIterator first, RandomIterator last, Compare& compare)
 {
     while (last - first > 1)
     {
@@ -172,11 +172,11 @@ void sort_heap(TRanIt first, TRanIt last, TCompare& compare)
 }
 
 
-template <typename TRanIt, typename TCompare>
-void heap_select(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
+template <typename RandomIterator, typename Compare>
+void heap_select(RandomIterator first, RandomIterator middle, RandomIterator last, Compare compare)
 {
     make_heap(first, middle, compare);
-    for (TRanIt i = middle; i < last; ++i)
+    for (RandomIterator i = middle; i < last; ++i)
     {
         if (compare(i, first))
         {
@@ -185,9 +185,9 @@ void heap_select(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
     }
 }
 
-template <typename TRanIt, typename TCompare>
+template <typename RandomIterator, typename Compare>
 inline
-void partial_sort(TRanIt first, TRanIt middle, TRanIt last, TCompare compare)
+void partial_sort(RandomIterator first, RandomIterator middle, RandomIterator last, Compare compare)
 {
     heap_select(first, middle, last, compare);
     sort_heap(first, middle, compare);

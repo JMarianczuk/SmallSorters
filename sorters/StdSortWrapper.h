@@ -25,12 +25,6 @@ void QuicksortCopyWrapper(
 //     bool(*compareFunc)(SortableRef left, SortableRef right),
 //     void(*sortFunc)(SortableRef*, size_t));
 
-// void SampleSortWrapper(
-//     SortableRef* first,
-//     SortableRef* last,
-//     bool(*compareFunc)(SortableRef left,SortableRef right),
-//     void(*sortFunc)(SortableRef*, size_t));
-
 void InsertionSortWrapper(
     SortableRef* first,
     SortableRef* last,

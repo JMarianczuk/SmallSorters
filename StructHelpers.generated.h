@@ -45,5 +45,14 @@ uint64_t GetReference(SortableRef& item)
 {
 	return item.reference;
 }
+class SortableRefKeyGetter
+{
+private:
+public:
+	static inline uint64_t get(SortableRef& item)
+	{
+		return item.key;
+	}
+};
 
 #endif // STRUCT_HELPERS_H

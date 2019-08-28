@@ -53,15 +53,6 @@ namespace measurement
     //     quicksortcopy::Quicksort_Copy_Msvc<conditional_swap::CS_Default>(first, last, compareFunc, sortFunc);
     // }
 
-    // void SampleSortWrapper(
-    //     SortableRef* first,
-    //     SortableRef* last,
-    //     bool(*compareFunc)(SortableRef left,SortableRef right),
-    //     void(*sortFunc)(SortableRef*, size_t))
-    // {
-    //     samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize(first, last - first, 16, sortFunc, &KeySortableCompare<SortableRef>, &GetKey<SortableRef>);
-    // }
-
     void RadixSortThrillWrapper(
         SortableRef* first,
         SortableRef* last,

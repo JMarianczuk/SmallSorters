@@ -104,7 +104,7 @@ void WriteSampleSortMeasureLine(
     for (SortableStruct *sortableStruct : *structs)
     {
         std::string measureMethodTemplateParameters = "<" + sortableStruct->FullName() + ", RandomisationMode::DEFAULT>";
-        std::string sortMethodTemplateParameters = "<" + baseCaseSortMethod + "<" + sortableStruct->CSName() + ">, " + sortableStruct->FullName() + additionalTemplateParameters + ">";
+        std::string sortMethodTemplateParameters = "<" + baseCaseSortMethod + "<" + sortableStruct->CSName() + ">, SortableRefKeyGetter, " + sortableStruct->FullName() + additionalTemplateParameters + ">";
 
         gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine(

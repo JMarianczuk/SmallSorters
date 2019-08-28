@@ -63,13 +63,12 @@ void PerformSplitterComparison(Key &splitterx, Key &splitter2, int &predResult)
 	#endif
 	
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 static inline
 void Find3Splitters1OversamplingFactor(
 	ValueType* items,
 	size_t elementCount,
-	TKey* splitterDestination,
-	TKey(*getKeyFunc)(ValueType&))
+	Key* splitterDestination)
 {
 	ValueType sample[3];
 	int blockSize = elementCount / 3;
@@ -81,17 +80,16 @@ void Find3Splitters1OversamplingFactor(
 	
 	for (int i = 0; i < 3; i += 1)
 	{
-		splitterDestination[i] = getKeyFunc(sample[i * 1 + 0]);
+		splitterDestination[i] = KeyGetter::get(sample[i * 1 + 0]);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -105,11 +103,11 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters1OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters1OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -119,7 +117,7 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
@@ -167,27 +165,25 @@ void SampleSortInternal3Splitters1OversamplingFactor1BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters1OversamplingFactor1BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters1OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters1OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor1BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters1OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -201,11 +197,11 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters1OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters1OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -215,10 +211,10 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
@@ -274,27 +270,25 @@ void SampleSortInternal3Splitters1OversamplingFactor2BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters1OversamplingFactor2BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters1OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters1OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor2BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters1OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -308,11 +302,11 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters1OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters1OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -322,13 +316,13 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
@@ -392,27 +386,25 @@ void SampleSortInternal3Splitters1OversamplingFactor3BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters1OversamplingFactor3BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters1OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters1OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor3BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters1OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -426,11 +418,11 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters1OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters1OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -440,16 +432,16 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
@@ -521,27 +513,25 @@ void SampleSortInternal3Splitters1OversamplingFactor4BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters1OversamplingFactor4BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters1OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters1OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor4BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters1OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -555,11 +545,11 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters1OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters1OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -569,19 +559,19 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	int state4;
 	int predicateResult4;
-	TKey splitter04x;
+	Key splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
@@ -661,26 +651,24 @@ void SampleSortInternal3Splitters1OversamplingFactor5BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters1OversamplingFactor5BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters1OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters1OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters1OversamplingFactor5BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters1OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 static inline
 void Find3Splitters2OversamplingFactor(
 	ValueType* items,
 	size_t elementCount,
-	TKey* splitterDestination,
-	TKey(*getKeyFunc)(ValueType&))
+	Key* splitterDestination)
 {
 	ValueType sample[6];
 	int blockSize = elementCount / 6;
@@ -692,17 +680,16 @@ void Find3Splitters2OversamplingFactor(
 	
 	for (int i = 0; i < 3; i += 1)
 	{
-		splitterDestination[i] = getKeyFunc(sample[i * 2 + 1]);
+		splitterDestination[i] = KeyGetter::get(sample[i * 2 + 1]);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -716,11 +703,11 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters2OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters2OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -730,7 +717,7 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
@@ -778,27 +765,25 @@ void SampleSortInternal3Splitters2OversamplingFactor1BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters2OversamplingFactor1BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters2OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters2OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor1BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters2OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -812,11 +797,11 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters2OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters2OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -826,10 +811,10 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
@@ -885,27 +870,25 @@ void SampleSortInternal3Splitters2OversamplingFactor2BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters2OversamplingFactor2BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters2OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters2OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor2BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters2OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -919,11 +902,11 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters2OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters2OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -933,13 +916,13 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
@@ -1003,27 +986,25 @@ void SampleSortInternal3Splitters2OversamplingFactor3BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters2OversamplingFactor3BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters2OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters2OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor3BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters2OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1037,11 +1018,11 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters2OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters2OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1051,16 +1032,16 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
@@ -1132,27 +1113,25 @@ void SampleSortInternal3Splitters2OversamplingFactor4BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters2OversamplingFactor4BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters2OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters2OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor4BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters2OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1166,11 +1145,11 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters2OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters2OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1180,19 +1159,19 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	int state4;
 	int predicateResult4;
-	TKey splitter04x;
+	Key splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
@@ -1272,26 +1251,24 @@ void SampleSortInternal3Splitters2OversamplingFactor5BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters2OversamplingFactor5BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters2OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters2OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters2OversamplingFactor5BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters2OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 static inline
 void Find3Splitters3OversamplingFactor(
 	ValueType* items,
 	size_t elementCount,
-	TKey* splitterDestination,
-	TKey(*getKeyFunc)(ValueType&))
+	Key* splitterDestination)
 {
 	ValueType sample[9];
 	int blockSize = elementCount / 9;
@@ -1303,17 +1280,16 @@ void Find3Splitters3OversamplingFactor(
 	
 	for (int i = 0; i < 3; i += 1)
 	{
-		splitterDestination[i] = getKeyFunc(sample[i * 3 + 1]);
+		splitterDestination[i] = KeyGetter::get(sample[i * 3 + 1]);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1327,11 +1303,11 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters3OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters3OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1341,7 +1317,7 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
@@ -1389,27 +1365,25 @@ void SampleSortInternal3Splitters3OversamplingFactor1BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters3OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1423,11 +1397,11 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters3OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters3OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1437,10 +1411,10 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
@@ -1496,27 +1470,25 @@ void SampleSortInternal3Splitters3OversamplingFactor2BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters3OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1530,11 +1502,11 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters3OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters3OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1544,13 +1516,13 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
@@ -1614,27 +1586,25 @@ void SampleSortInternal3Splitters3OversamplingFactor3BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters3OversamplingFactor3BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters3OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters3OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor3BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters3OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1648,11 +1618,11 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters3OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters3OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1662,16 +1632,16 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
@@ -1743,27 +1713,25 @@ void SampleSortInternal3Splitters3OversamplingFactor4BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters3OversamplingFactor4BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters3OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters3OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor4BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters3OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1777,11 +1745,11 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters3OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters3OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1791,19 +1759,19 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	int state4;
 	int predicateResult4;
-	TKey splitter04x;
+	Key splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
@@ -1883,26 +1851,24 @@ void SampleSortInternal3Splitters3OversamplingFactor5BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters3OversamplingFactor5BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters3OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters3OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters3OversamplingFactor5BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters3OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 static inline
 void Find3Splitters4OversamplingFactor(
 	ValueType* items,
 	size_t elementCount,
-	TKey* splitterDestination,
-	TKey(*getKeyFunc)(ValueType&))
+	Key* splitterDestination)
 {
 	ValueType sample[12];
 	int blockSize = elementCount / 12;
@@ -1914,17 +1880,16 @@ void Find3Splitters4OversamplingFactor(
 	
 	for (int i = 0; i < 3; i += 1)
 	{
-		splitterDestination[i] = getKeyFunc(sample[i * 4 + 2]);
+		splitterDestination[i] = KeyGetter::get(sample[i * 4 + 2]);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -1938,11 +1903,11 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters4OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters4OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -1952,7 +1917,7 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
@@ -2000,27 +1965,25 @@ void SampleSortInternal3Splitters4OversamplingFactor1BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters4OversamplingFactor1BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters4OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters4OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor1BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters4OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2034,11 +1997,11 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters4OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters4OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2048,10 +2011,10 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
@@ -2107,27 +2070,25 @@ void SampleSortInternal3Splitters4OversamplingFactor2BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters4OversamplingFactor2BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters4OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters4OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor2BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters4OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2141,11 +2102,11 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters4OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters4OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2155,13 +2116,13 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
@@ -2225,27 +2186,25 @@ void SampleSortInternal3Splitters4OversamplingFactor3BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters4OversamplingFactor3BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters4OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters4OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor3BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters4OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2259,11 +2218,11 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters4OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters4OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2273,16 +2232,16 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
@@ -2354,27 +2313,25 @@ void SampleSortInternal3Splitters4OversamplingFactor4BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters4OversamplingFactor4BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters4OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters4OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor4BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters4OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2388,11 +2345,11 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters4OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters4OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2402,19 +2359,19 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	int state4;
 	int predicateResult4;
-	TKey splitter04x;
+	Key splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
@@ -2494,26 +2451,24 @@ void SampleSortInternal3Splitters4OversamplingFactor5BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters4OversamplingFactor5BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters4OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters4OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters4OversamplingFactor5BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters4OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 static inline
 void Find3Splitters5OversamplingFactor(
 	ValueType* items,
 	size_t elementCount,
-	TKey* splitterDestination,
-	TKey(*getKeyFunc)(ValueType&))
+	Key* splitterDestination)
 {
 	ValueType sample[15];
 	int blockSize = elementCount / 15;
@@ -2525,17 +2480,16 @@ void Find3Splitters5OversamplingFactor(
 	
 	for (int i = 0; i < 3; i += 1)
 	{
-		splitterDestination[i] = getKeyFunc(sample[i * 5 + 2]);
+		splitterDestination[i] = KeyGetter::get(sample[i * 5 + 2]);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2549,11 +2503,11 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters5OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters5OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2563,7 +2517,7 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	
 	int max = elementCount - 1;
 	int current = 0;
@@ -2611,27 +2565,25 @@ void SampleSortInternal3Splitters5OversamplingFactor1BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters5OversamplingFactor1BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters5OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters5OversamplingFactor1BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor1BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters5OversamplingFactor1BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2645,11 +2597,11 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters5OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters5OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2659,10 +2611,10 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	
 	int max = elementCount - 2;
 	int current = 0;
@@ -2718,27 +2670,25 @@ void SampleSortInternal3Splitters5OversamplingFactor2BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters5OversamplingFactor2BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters5OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters5OversamplingFactor2BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor2BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters5OversamplingFactor2BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2752,11 +2702,11 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters5OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters5OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2766,13 +2716,13 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	
 	int max = elementCount - 3;
 	int current = 0;
@@ -2836,27 +2786,25 @@ void SampleSortInternal3Splitters5OversamplingFactor3BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters5OversamplingFactor3BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters5OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters5OversamplingFactor3BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor3BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters5OversamplingFactor3BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2870,11 +2818,11 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters5OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters5OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -2884,16 +2832,16 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	
 	int max = elementCount - 4;
 	int current = 0;
@@ -2965,27 +2913,25 @@ void SampleSortInternal3Splitters5OversamplingFactor4BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters5OversamplingFactor4BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters5OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters5OversamplingFactor4BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor4BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters5OversamplingFactor4BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 inline
 void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&),
+	bool(*predicateLess)(Key&,ValueType&),
 	int depthLimit)
 {
 	if (elementCount <= baseCaseLimit)
@@ -2999,11 +2945,11 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 		insertionsort::InsertionSort<insertionsort::InsertionSort_Default>(A, elementCount);
 		return;
 	}
-	TKey splitters[3];
-	Find3Splitters5OversamplingFactor<BaseCaseSorter>(A, elementCount, splitters, getKeyFunc);
-	TKey splitter0 = splitters[0];
-	TKey splitter1 = splitters[1];
-	TKey splitter2 = splitters[2];
+	Key splitters[3];
+	Find3Splitters5OversamplingFactor<BaseCaseSorter, KeyGetter>(A, elementCount, splitters);
+	Key splitter0 = splitters[0];
+	Key splitter1 = splitters[1];
+	Key splitter2 = splitters[2];
 	
 	ValueType *rawbuckets = (ValueType*) malloc(sizeof(ValueType) * 4 * elementCount);
 	ValueType* buckets[4];
@@ -3013,19 +2959,19 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	}
 	int state0;
 	int predicateResult0;
-	TKey splitter00x;
+	Key splitter00x;
 	int state1;
 	int predicateResult1;
-	TKey splitter01x;
+	Key splitter01x;
 	int state2;
 	int predicateResult2;
-	TKey splitter02x;
+	Key splitter02x;
 	int state3;
 	int predicateResult3;
-	TKey splitter03x;
+	Key splitter03x;
 	int state4;
 	int predicateResult4;
-	TKey splitter04x;
+	Key splitter04x;
 	
 	int max = elementCount - 5;
 	int current = 0;
@@ -3105,18 +3051,17 @@ void SampleSortInternal3Splitters5OversamplingFactor5BlockSize(
 	
 	for (int currentBucket = 0; currentBucket < 4; currentBucket += 1)
 	{
-		SampleSortInternal3Splitters5OversamplingFactor5BlockSize<BaseCaseSorter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, getKeyFunc, depthLimit - 1);
+		SampleSortInternal3Splitters5OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(&A[exclusiveBucketSizePrefixSum[currentBucket]], bucketSize[currentBucket], baseCaseLimit, predicateLess, depthLimit - 1);
 	}
 }
-template <typename BaseCaseSorter, typename ValueType, typename TKey>
+template <typename BaseCaseSorter, typename KeyGetter, typename ValueType, typename Key>
 void SampleSort3Splitters5OversamplingFactor5BlockSize(
 	ValueType* A,
 	size_t elementCount,
 	size_t baseCaseLimit,
-	bool(*predicateLess)(TKey&,ValueType&),
-	TKey(*getKeyFunc)(ValueType&))
+	bool(*predicateLess)(Key&,ValueType&))
 {
-	SampleSortInternal3Splitters5OversamplingFactor5BlockSize<BaseCaseSorter>(A, elementCount, baseCaseLimit, predicateLess, getKeyFunc, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
+	SampleSortInternal3Splitters5OversamplingFactor5BlockSize<BaseCaseSorter, KeyGetter>(A, elementCount, baseCaseLimit, predicateLess, custommath::intlog2(elementCount) * 1.000000); //log to base {(numberOfSplitters + 1) / 2}
 }
 } // namespace samplesort
 

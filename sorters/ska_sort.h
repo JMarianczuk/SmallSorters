@@ -1054,7 +1054,7 @@ template<typename It, typename ExtractKey>
 inline void StdSortFallback(It begin, It end, ExtractKey & extract_key)
 {
     // std::sort(begin, end, [&](auto && l, auto && r){ return extract_key(l) < extract_key(r); });
-    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>, &GetKey<SortableRef>);
+    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
 
 }
 
