@@ -5,40 +5,62 @@
 #include <cstdlib>
 
 #include "../Sortable.generated.h"
+#include "StaticSorters.h"
 
 namespace measurement
 {
 
-void StdSortWrapper(
-    SortableRef* first,
-    SortableRef* last,
-    bool(*compareFunc)(SortableRef left, SortableRef right));
+    void StdSortWrapper(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left, SortableRef right));
 
-void QuicksortCopyWrapper(
-    SortableRef* first,
-    SortableRef* last,
-    bool(*compareFunc)(SortableRef left, SortableRef right));
+    void QuicksortCopyWrapper(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left, SortableRef right));
 
-// void QuicksortCopyMsvcWrapper(
-//     SortableRef* first,
-//     SortableRef* last,
-//     bool(*compareFunc)(SortableRef left, SortableRef right),
-//     void(*sortFunc)(SortableRef*, size_t));
+    // void QuicksortCopyMsvcWrapper(
+    //     SortableRef* first,
+    //     SortableRef* last,
+    //     bool(*compareFunc)(SortableRef left, SortableRef right),
+    //     void(*sortFunc)(SortableRef*, size_t));
 
-void InsertionSortWrapper(
-    SortableRef* first,
-    SortableRef* last,
-    bool(*compareFunc)(SortableRef* left,SortableRef* right));
+    template <typename BaseCaseSorter>
+    void RadixSortThrillWrapper(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right));
 
-void RadixSortThrillWrapper(
-    SortableRef* first,
-    SortableRef* last,
-    bool(*compareFunc)(SortableRef left,SortableRef right));
+    template <>
+    void RadixSortThrillWrapper<static_sorters::SampleSort>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right));
 
-void SkaSortWrapper(
-    SortableRef* first,
-    SortableRef* last,
-    bool(*compareFunc)(SortableRef left,SortableRef right));
+    template <>
+    void RadixSortThrillWrapper<static_sorters::StdSort>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right));
+
+    template <typename BaseCaseSorter>
+    void SkaSortWrapper(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right));
+
+    template <>
+    void SkaSortWrapper<static_sorters::SampleSort>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right));
+
+    template <>
+    void SkaSortWrapper<static_sorters::StdSort>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right));
     
 }
 

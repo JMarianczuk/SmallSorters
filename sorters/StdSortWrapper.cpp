@@ -3,11 +3,9 @@
 #include "StdSortWrapper.h"
 #include "Quicksort_Copy.h"
 #include "Quicksort_Copy2.h"
-#include "SampleSort.generated.h"
-#include "radix_sort_thrill.h"
-#include "ska_sort.h"
 #include "../StructHelpers.generated.h"
-#include "../conditional_swap/ConditionalSwapGeneric.h"
+#include "ska_sort.h"
+#include "radix_sort_thrill.h"
 
 namespace measurement
 {
@@ -53,21 +51,42 @@ namespace measurement
     //     quicksortcopy::Quicksort_Copy_Msvc<conditional_swap::CS_Default>(first, last, compareFunc, sortFunc);
     // }
 
-    void RadixSortThrillWrapper(
+    template <>
+    void RadixSortThrillWrapper<static_sorters::SampleSort>(
         SortableRef* first,
         SortableRef* last,
         bool(*compareFunc)(SortableRef left,SortableRef right))
     {
-        thrill::common::RadixSort<SortableRef, 8> sorter(256);
+        thrill::common::RadixSort<static_sorters::SampleSort, SortableRef, 8> sorter(256);
         sorter(first, last, compareFunc);
     }
 
-    void SkaSortWrapper(
+    template <>
+    void RadixSortThrillWrapper<static_sorters::StdSort>(
         SortableRef* first,
         SortableRef* last,
         bool(*compareFunc)(SortableRef left,SortableRef right))
     {
-        skasort::ska_sort(first, last, [](SortableRef& item) {return item.key;});
+        thrill::common::RadixSort<static_sorters::StdSort, SortableRef, 8> sorter(256);
+        sorter(first, last, compareFunc);
+    }
+
+    template <>
+    void SkaSortWrapper<static_sorters::SampleSort>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right))
+    {
+        skasort::ska_sort<static_sorters::SampleSort>(first, last, [](SortableRef& item) {return item.key;});
+    }
+
+    template <>
+    void SkaSortWrapper<static_sorters::StdSort>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left,SortableRef right))
+    {
+        skasort::ska_sort<static_sorters::StdSort>(first, last, [](SortableRef& item) {return item.key;});
     }
     
 } // namespace measurement

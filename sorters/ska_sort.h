@@ -10,8 +10,6 @@
 #include <tuple>
 #include <utility>
 
-#include "SampleSort.generated.h"
-#include "QuickSort.h"
 #include "../conditional_swap/ConditionalSwap.h"
 #include "../Networks_Fwd.h"
 #include "../Sortable.generated.h"
@@ -1050,29 +1048,29 @@ struct FallbackSubKey<T, typename std::enable_if<has_subscript_operator<T>::valu
 {
 };
 
-template<typename It, typename ExtractKey>
+template<typename BaseCaseSorter, typename It, typename ExtractKey>
 inline void StdSortFallback(It begin, It end, ExtractKey & extract_key)
 {
-    // std::sort(begin, end, [&](auto && l, auto && r){ return extract_key(l) < extract_key(r); });
-    samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
+    BaseCaseSorter::sort(begin, end, [&](auto && l, auto && r){ return extract_key(l) < extract_key(r); });
+    // samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
 
 }
 
-template<std::ptrdiff_t StdSortThreshold, typename It, typename ExtractKey>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, typename It, typename ExtractKey>
 inline bool StdSortIfLessThanThreshold(It begin, It end, std::ptrdiff_t num_elements, ExtractKey & extract_key)
 {
     if (num_elements <= 1)
         return true;
     if (num_elements >= StdSortThreshold)
         return false;
-    StdSortFallback(begin, end, extract_key);
+    StdSortFallback<BaseCaseSorter>(begin, end, extract_key);
     return true;
 }
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType = typename CurrentSubKey::sub_key_type>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType = typename CurrentSubKey::sub_key_type>
 struct InplaceSorter;
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, size_t NumBytes, size_t Offset = 0>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, size_t NumBytes, size_t Offset = 0>
 struct UnsignedInplaceSorter
 {
     static constexpr size_t ShiftAmount = (((NumBytes - 1) - Offset) * 8);
@@ -1161,9 +1159,9 @@ struct UnsignedInplaceSorter
                 size_t end_offset = partitions[*it].next_offset;
                 It partition_end = begin + end_offset;
                 std::ptrdiff_t num_elements = end_offset - start_offset;
-                if (!StdSortIfLessThanThreshold<StdSortThreshold>(partition_begin, partition_end, num_elements, extract_key))
+                if (!StdSortIfLessThanThreshold<BaseCaseSorter, StdSortThreshold>(partition_begin, partition_end, num_elements, extract_key))
                 {
-                    UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, NumBytes, Offset + 1>::sort(partition_begin, partition_end, num_elements, extract_key, next_sort, sort_data);
+                    UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, NumBytes, Offset + 1>::sort(partition_begin, partition_end, num_elements, extract_key, next_sort, sort_data);
                 }
                 start_offset = end_offset;
                 partition_begin = partition_end;
@@ -1222,17 +1220,17 @@ struct UnsignedInplaceSorter
                 It partition_begin = begin + start_offset;
                 It partition_end = begin + end_offset;
                 std::ptrdiff_t num_elements = end_offset - start_offset;
-                if (!StdSortIfLessThanThreshold<StdSortThreshold>(partition_begin, partition_end, num_elements, extract_key))
+                if (!StdSortIfLessThanThreshold<BaseCaseSorter, StdSortThreshold>(partition_begin, partition_end, num_elements, extract_key))
                 {
-                    UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, NumBytes, Offset + 1>::sort(partition_begin, partition_end, num_elements, extract_key, next_sort, sort_data);
+                    UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, NumBytes, Offset + 1>::sort(partition_begin, partition_end, num_elements, extract_key, next_sort, sort_data);
                 }
             }
         }
     }
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, size_t NumBytes>
-struct UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, NumBytes, NumBytes>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, size_t NumBytes>
+struct UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, NumBytes, NumBytes>
 {
     template<typename It, typename ExtractKey>
     inline static void sort(It begin, It end, std::ptrdiff_t num_elements, ExtractKey & extract_key, void (*next_sort)(It, It, std::ptrdiff_t, ExtractKey &, void *), void * next_sort_data)
@@ -1272,7 +1270,7 @@ size_t CommonPrefix(It begin, It end, size_t start_index, ExtractKey && extract_
     return largest_match;
 }
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename ListType>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename ListType>
 struct ListInplaceSorter
 {
     using ElementSubKey = ListElementSubKey<CurrentSubKey, ListType>;
@@ -1295,15 +1293,15 @@ struct ListInplaceSorter
             return current_key(elem).size() <= current_index;
         });
         std::ptrdiff_t num_shorter_ones = end_of_shorter_ones - begin;
-        if (sort_data->next_sort && !StdSortIfLessThanThreshold<StdSortThreshold>(begin, end_of_shorter_ones, num_shorter_ones, extract_key))
+        if (sort_data->next_sort && !StdSortIfLessThanThreshold<BaseCaseSorter, StdSortThreshold>(begin, end_of_shorter_ones, num_shorter_ones, extract_key))
         {
             sort_data->next_sort(begin, end_of_shorter_ones, num_shorter_ones, extract_key, next_sort_data);
         }
         std::ptrdiff_t num_elements = end - end_of_shorter_ones;
-        if (!StdSortIfLessThanThreshold<StdSortThreshold>(end_of_shorter_ones, end, num_elements, extract_key))
+        if (!StdSortIfLessThanThreshold<BaseCaseSorter, StdSortThreshold>(end_of_shorter_ones, end, num_elements, extract_key))
         {
             void (*sort_next_element)(It, It, std::ptrdiff_t, ExtractKey &, void *) = static_cast<void (*)(It, It, std::ptrdiff_t, ExtractKey &, void *)>(&sort_from_recursion);
-            InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, ElementSubKey>::sort(end_of_shorter_ones, end, num_elements, extract_key, sort_next_element, sort_data);
+            InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, ElementSubKey>::sort(end_of_shorter_ones, end, num_elements, extract_key, sort_next_element, sort_data);
         }
     }
 
@@ -1336,8 +1334,8 @@ struct ListInplaceSorter
     }
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
-struct InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, bool>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+struct InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, bool>
 {
     template<typename It, typename ExtractKey>
     static void sort(It begin, It end, std::ptrdiff_t, ExtractKey & extract_key, void (*next_sort)(It, It, std::ptrdiff_t, ExtractKey &, void *), void * sort_data)
@@ -1351,40 +1349,40 @@ struct InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey,
     }
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
-struct InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint8_t> : UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 1>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+struct InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint8_t> : UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 1>
 {
 };
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
-struct InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint16_t> : UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 2>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+struct InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint16_t> : UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 2>
 {
 };
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
-struct InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint32_t> : UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 4>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+struct InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint32_t> : UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 4>
 {
 };
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
-struct InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint64_t> : UnsignedInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 8>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+struct InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, uint64_t> : UnsignedInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, 8>
 {
 };
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType, typename Enable = void>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType, typename Enable = void>
 struct FallbackInplaceSorter;
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType>
-struct InplaceSorter : FallbackInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, SubKeyType>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType>
+struct InplaceSorter : FallbackInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, SubKeyType>
 {
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType>
-struct FallbackInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, SubKeyType, typename std::enable_if<has_subscript_operator<SubKeyType>::value>::type>
-	: ListInplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, SubKeyType>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey, typename SubKeyType>
+struct FallbackInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, SubKeyType, typename std::enable_if<has_subscript_operator<SubKeyType>::value>::type>
+	: ListInplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey, SubKeyType>
 {
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
 struct SortStarter;
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold>
-struct SortStarter<StdSortThreshold, AmericanFlagSortThreshold, SubKey<void>>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold>
+struct SortStarter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, SubKey<void>>
 {
     template<typename It, typename ExtractKey>
     static void sort(It, It, std::ptrdiff_t, ExtractKey &, void *)
@@ -1392,27 +1390,27 @@ struct SortStarter<StdSortThreshold, AmericanFlagSortThreshold, SubKey<void>>
     }
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename CurrentSubKey>
 struct SortStarter
 {
     template<typename It, typename ExtractKey>
     static void sort(It begin, It end, std::ptrdiff_t num_elements, ExtractKey & extract_key, void * next_sort_data = nullptr)
     {
-        if (StdSortIfLessThanThreshold<StdSortThreshold>(begin, end, num_elements, extract_key))
+        if (StdSortIfLessThanThreshold<BaseCaseSorter, StdSortThreshold>(begin, end, num_elements, extract_key))
             return;
 
-        void (*next_sort)(It, It, std::ptrdiff_t, ExtractKey &, void *) = static_cast<void (*)(It, It, std::ptrdiff_t, ExtractKey &, void *)>(&SortStarter<StdSortThreshold, AmericanFlagSortThreshold, typename CurrentSubKey::next>::sort);
-        if (next_sort == static_cast<void (*)(It, It, std::ptrdiff_t, ExtractKey &, void *)>(&SortStarter<StdSortThreshold, AmericanFlagSortThreshold, SubKey<void>>::sort))
+        void (*next_sort)(It, It, std::ptrdiff_t, ExtractKey &, void *) = static_cast<void (*)(It, It, std::ptrdiff_t, ExtractKey &, void *)>(&SortStarter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, typename CurrentSubKey::next>::sort);
+        if (next_sort == static_cast<void (*)(It, It, std::ptrdiff_t, ExtractKey &, void *)>(&SortStarter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, SubKey<void>>::sort))
             next_sort = nullptr;
-        InplaceSorter<StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey>::sort(begin, end, num_elements, extract_key, next_sort, next_sort_data);
+        InplaceSorter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, CurrentSubKey>::sort(begin, end, num_elements, extract_key, next_sort, next_sort_data);
     }
 };
 
-template<std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename It, typename ExtractKey>
+template<typename BaseCaseSorter, std::ptrdiff_t StdSortThreshold, std::ptrdiff_t AmericanFlagSortThreshold, typename It, typename ExtractKey>
 void inplace_radix_sort(It begin, It end, ExtractKey & extract_key)
 {
     using SubKey = SubKey<decltype(extract_key(*begin))>;
-    SortStarter<StdSortThreshold, AmericanFlagSortThreshold, SubKey>::sort(begin, end, end - begin, extract_key);
+    SortStarter<BaseCaseSorter, StdSortThreshold, AmericanFlagSortThreshold, SubKey>::sort(begin, end, end - begin, extract_key);
 }
 
 struct IdentityFunctor
@@ -1426,16 +1424,16 @@ struct IdentityFunctor
 
 } // namespace detail
 
-template<typename It, typename ExtractKey>
+template<typename BaseCaseSorter, typename It, typename ExtractKey>
 static void ska_sort(It begin, It end, ExtractKey && extract_key)
 {
-    detail::inplace_radix_sort<128, 1024>(begin, end, extract_key);
+    detail::inplace_radix_sort<BaseCaseSorter, 128, 1024>(begin, end, extract_key);
 }
 
-template<typename It>
+template<typename BaseCaseSorter, typename It>
 static void ska_sort(It begin, It end)
 {
-    ska_sort(begin, end, detail::IdentityFunctor());
+    ska_sort<BaseCaseSorter>(begin, end, detail::IdentityFunctor());
 }
 
 template<typename It, typename OutIt, typename ExtractKey>

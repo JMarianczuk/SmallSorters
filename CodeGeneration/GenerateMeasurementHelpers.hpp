@@ -58,9 +58,27 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             return result;
         case Sorter::RadixSortThrill:
             result += "RadixT  -Q ";
+            switch (subSorter)
+            {
+                case Sorter::SampleSort:
+                    result += "RSS";
+                    break;
+                case Sorter::StdSort:
+                    result += "Std";
+                    break;
+            }
             return result;
         case Sorter::SkaSort:
             result += "SkaSort -Q ";
+            switch (subSorter)
+            {
+                case Sorter::SampleSort:
+                    result += "RSS";
+                    break;
+                case Sorter::StdSort:
+                    result += "Std";
+                    break;
+            }
             return result;
         case Sorter::SampleSort:
             result += "S+";

@@ -19,9 +19,6 @@
 #include <functional>
 #include <type_traits>
 
-#include "SampleSort.generated.h"
-#include "QuickSort.h"
-#include "StaticSorters.h"
 #include "../Networks_Fwd.h"
 #include "../Sortable.generated.h"
 #include "../StructHelpers.generated.h"
@@ -40,7 +37,7 @@ public:
  * Internal helper method, use radix_sort_CI below.
  */
 template <
-    size_t MaxDepth, typename Iterator, typename Char,
+    typename BaseCaseSorter, size_t MaxDepth, typename Iterator, typename Char,
     typename Comparator =
         std::less<typename std::iterator_traits<Iterator>::value_type>,
     typename SubSorter = NoOperation>
@@ -53,7 +50,8 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
     const size_t size = end - begin;
     if (size < 32)
     {
-        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
+        BaseCaseSorter::sort(begin, end, cmp);
+        // samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
         return;
         // return std::sort(begin, end, cmp);
     }
@@ -110,7 +108,7 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
         size_t bsum = 0;
         for (size_t i = 0; i < K; bsum += bkt_size[i++]) {
             if (bkt_size[i] <= 1) continue;
-            radix_sort_CI<MaxDepth>(
+            radix_sort_CI<BaseCaseSorter, MaxDepth>(
                 begin + bsum, begin + bsum + bkt_size[i],
                 K, cmp, sub_sort, depth + 1, char_cache);
         }
@@ -125,7 +123,7 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
  * values must be less than K (the counting array size).
  */
 template <
-    size_t MaxDepth, typename Iterator,
+    typename BaseCaseSorter, size_t MaxDepth, typename Iterator,
     typename Comparator =
         std::less<typename std::iterator_traits<Iterator>::value_type>,
     typename SubSorter = NoOperation>
@@ -148,7 +146,7 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
 
     // allocate character cache once
     Char* char_cache = new Char[size];
-    radix_sort_CI<MaxDepth>(
+    radix_sort_CI<BaseCaseSorter, MaxDepth>(
         begin, end, K, cmp, sub_sort, /* depth */ 0, char_cache);
     delete[] char_cache;
 }
@@ -157,7 +155,7 @@ void radix_sort_CI(Iterator begin, Iterator end, size_t K,
  * SortAlgorithm class for use with api::Sort() which calls radix_sort_CI() if K
  * is small enough.
  */
-template <typename Type, size_t MaxDepth>
+template <typename BaseCaseSorter, typename Type, size_t MaxDepth>
 class RadixSort
 {
 public:
@@ -166,7 +164,7 @@ public:
     void operator () (Iterator begin, Iterator end,
                       const CompareFunction& cmp) const {
         if (K_ < 4096)
-            thrill::common::radix_sort_CI<MaxDepth>(begin, end, K_, cmp);
+            thrill::common::radix_sort_CI<BaseCaseSorter, MaxDepth>(begin, end, K_, cmp);
         else
             std::sort(begin, end, cmp);
     }

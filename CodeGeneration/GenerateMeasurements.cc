@@ -489,14 +489,28 @@ void GenerateMeasurementMethod(
                         &sRef,
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::RadixSortThrill, NetworkType::BoseNelson, MeasureType::Complete, BoseNelsonNetworkType::Locality, Sorter::SampleSort, 3, 3, 2),
-                        "measurement::RadixSortThrillWrapper"
+                        "measurement::RadixSortThrillWrapper<static_sorters::SampleSort>"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        completeGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::RadixSortThrill, NetworkType::None, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::StdSort),
+                        "measurement::RadixSortThrillWrapper<static_sorters::StdSort>"
                     );
                     WriteCompleteSorterWrapperMeasureLine(
                         completeGen,
                         &sRef,
                         "MeasureCompleteSorter",
                         BuildSorterName(Sorter::SkaSort, NetworkType::BoseNelson, MeasureType::Complete, BoseNelsonNetworkType::Locality, Sorter::SampleSort, 3, 3, 2),
-                        "measurement::SkaSortWrapper"
+                        "measurement::SkaSortWrapper<static_sorters::SampleSort>"
+                    );
+                    WriteCompleteSorterWrapperMeasureLine(
+                        completeGen,
+                        &sRef,
+                        "MeasureCompleteSorter",
+                        BuildSorterName(Sorter::SkaSort, NetworkType::None, MeasureType::Complete, BoseNelsonNetworkType::None, Sorter::StdSort),
+                        "measurement::SkaSortWrapper<static_sorters::StdSort>"
                     );
                 }
             );

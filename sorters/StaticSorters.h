@@ -2,9 +2,14 @@
 #ifndef SORTERS_H
 #define SORTERS_H
 
+#include <algorithm>
+
 #include "../Sortable.generated.h"
 #include "../Networks_Fwd.h"
-#include "../sorters/InsertionSort.h"
+#include "InsertionSort.h"
+#include "SampleSort.generated.h"
+#include "QuickSort.h"
+#include "../StructHelpers.generated.h"
 
 namespace static_sorters
 {
@@ -83,6 +88,26 @@ public:
     static inline void sort(ValueType* array, size_t arraySize)
     {
         networks::bosenelson_2::sortN<CSwap, ValueType>(array, arraySize);
+    }
+};
+
+class SampleSort
+{
+public:
+    template <typename ValueType, typename Predicate>
+    static inline void sort(ValueType* begin, ValueType* end, Predicate pred)
+    {
+        samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp_Split>, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<SortableRef>);
+    }
+};
+
+class StdSort
+{
+public:
+    template <typename ValueType, typename Predicate>
+    static inline void sort(ValueType* begin, ValueType* end, Predicate pred)
+    {
+        std::sort(begin, end, pred);
     }
 };
 

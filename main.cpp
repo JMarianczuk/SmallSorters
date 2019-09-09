@@ -26,6 +26,7 @@
 #include "sorters/Quicksort_Copy2.h"
 #include "sorters/radix_sort_thrill.h"
 #include "sorters/ska_sort.h"
+#include "sorters/StaticSorters.h"
 
 #include "VerifyNetworks.h"
 #include "VerifyNetworks.generated.h"
@@ -77,7 +78,7 @@ void Experiment()
     size_t arrSize = 400;
     SortableRef* arr = (SortableRef*) malloc(sizeof(SortableRef) * arrSize);
     randomisation::GenerateRandomArray<RandomisationMode::DEFAULT>(arr, arrSize);
-    thrill::common::RadixSort<SortableRef, 8> sorter(256);
+    thrill::common::RadixSort<static_sorters::StdSort, SortableRef, 8> sorter(256);
     // PrintArray(arr, arrSize, "beforeMeasurement");
     sorter(arr, arr + arrSize, &measurement::NormalCompare<SortableRef>);
     // PrintArray(arr, arrSize, "After");
