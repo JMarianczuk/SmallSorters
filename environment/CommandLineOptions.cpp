@@ -47,12 +47,21 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.DebugToFile)
             ["--debugToFile"]
             ("Write Debug output to file") |
+        Opt(options.MeasureCpuCycles)
+            ["--cycles"]
+            ("Measure Cpu Cycles") |
+        Opt(options.MeasureL1InstrCache)
+            ["--l1icache"]
+            ("Measure L1 Instr. Cache Accesses and Misses") |
         name;
 }
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)
 {
-    CommandLineOptions options = {false, false, false, false, false, false, false, false};
+    CommandLineOptions options = {
+        false, false, false, false, false, 
+        false, false, false, false, false, 
+        false, false, false, false};
     auto commandLine = GetParser(options);
     
     auto result = commandLine.parse(Args(numberOfArguments, arguments));

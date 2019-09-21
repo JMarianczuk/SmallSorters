@@ -25,6 +25,9 @@ struct CommandLineOptions
 
     bool ReadableNumbers;
     bool DebugToFile;
+
+    bool MeasureCpuCycles;
+    bool MeasureL1InstrCache;
 };
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments);
