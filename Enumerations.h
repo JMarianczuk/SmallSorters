@@ -4,7 +4,7 @@
 
 enum class PerformanceMetric {
 	CPU_CYCLES,
-    CACHE_MISSES,
+    L1_INSTR_CACHE_MISSES,
     BRANCH_MISSES,
 };
 

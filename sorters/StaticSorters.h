@@ -111,6 +111,17 @@ public:
     }
 };
 
+template <typename Implementation>
+class InsertionSortPred
+{
+public:
+    template <typename ValueType, typename Predicate>
+    static inline void sort(ValueType* begin, ValueType* end, Predicate pred)
+    {
+        InsertionSort<Implementation>::sort(begin, end - begin);
+    }
+};
+
 } // namespace static_sorters
 
 #endif // SORTERS_H

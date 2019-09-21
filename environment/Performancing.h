@@ -2,36 +2,26 @@
 #ifndef PERFORMANCING_H
 #define PERFORMANCING_H
 
-#include <iostream>
 #include <inttypes.h>
-#include <sys/ioctl.h>
 
 #include <linux/perf_event.h>
 #include <linux/hw_breakpoint.h>
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/syscall.h>
-#include <string.h>
-#include <asm/unistd.h>
-#include <errno.h>
-#include <stdint.h>
-#include <time.h>
-#include <tuple>
 #include <chrono>
+#include <tuple>
 
 #include "../Enumerations.h"
-
 
 class Performancing {
 private:
     struct perf_event_attr _performanceEventAttribute;
+    struct perf_event_attr _performanceChildEventAttribute;
 	uint64_t _idFirst;
     uint64_t _idSecond;
 	char _resultBuffer[4096];
 	struct read_format* _readFormat;
 	int _fileDescriptor;
+    int _childFileDescriptor;
     PerformanceMetric _performanceMetric;
     unsigned long long _ticks;
     std::chrono::steady_clock::time_point _time;

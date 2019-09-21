@@ -44,6 +44,12 @@ namespace measurement
         SortableRef* last,
         bool(*compareFunc)(SortableRef left,SortableRef right));
 
+    template <>
+    void RadixSortThrillWrapper<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left, SortableRef right));
+
     template <typename BaseCaseSorter>
     void SkaSortWrapper(
         SortableRef* first,
@@ -61,6 +67,12 @@ namespace measurement
         SortableRef* first,
         SortableRef* last,
         bool(*compareFunc)(SortableRef left,SortableRef right));
+
+    template <>
+    void SkaSortWrapper<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left, SortableRef right));
     
 }
 

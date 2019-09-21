@@ -198,11 +198,19 @@ void MeasureCompleteSorting(Performancing* perf, uint64_t seed, int numberOfIter
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "RadixT  -Q StdKR Def");
 	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "RadixT  -Q StdKR Def", &measurement::RadixSortThrillWrapper<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "RadixT  -Q StdKR Def");
+	randomisation::SetSeed(seed);
 	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q RSSKR Def", &measurement::SkaSortWrapper<static_sorters::SampleSort>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q RSSKR Def");
 	randomisation::SetSeed(seed);
 	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q StdKR Def", &measurement::SkaSortWrapper<static_sorters::StdSort>);
+	randomisation::SetSeed(seed);
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q StdKR Def");
+	randomisation::SetSeed(seed);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q StdKR Def", &measurement::SkaSortWrapper<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SkaSort -Q StdKR Def");
 }

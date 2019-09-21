@@ -3884,7 +3884,7 @@
   34:Result.h      ****         case PerformanceMetric::CPU_CYCLES:
   35:Result.h      ****             metric_name = "Cpu Cycles";
   36:Result.h      ****             break;
-  37:Result.h      ****         case PerformanceMetric::CACHE_MISSES:
+  37:Result.h      ****         case PerformanceMetric::L1_INSTR_CACHE_MISSES:
   38:Result.h      ****             metric_name = "Cache Misses";
   39:Result.h      ****             break;
   40:Result.h      ****         case PerformanceMetric::BRANCH_MISSES:

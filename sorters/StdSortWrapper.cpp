@@ -72,6 +72,16 @@ namespace measurement
     }
 
     template <>
+    void RadixSortThrillWrapper<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left, SortableRef right))
+    {
+        thrill::common::RadixSort<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>, SortableRef, 8> sorter(256);
+        sorter(first, last, compareFunc);
+    }
+
+    template <>
     void SkaSortWrapper<static_sorters::SampleSort>(
         SortableRef* first,
         SortableRef* last,
@@ -87,6 +97,15 @@ namespace measurement
         bool(*compareFunc)(SortableRef left,SortableRef right))
     {
         skasort::ska_sort<static_sorters::StdSort>(first, last, [](SortableRef& item) {return item.key;});
+    }
+
+    template <>
+    void SkaSortWrapper<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>(
+        SortableRef* first,
+        SortableRef* last,
+        bool(*compareFunc)(SortableRef left, SortableRef right))
+    {
+        skasort::ska_sort<static_sorters::InsertionSortPred<insertionsort::InsertionSort_Default>>(first, last, [](SortableRef& item) {return item.key;});
     }
     
 } // namespace measurement

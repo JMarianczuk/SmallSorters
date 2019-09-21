@@ -29,8 +29,8 @@ void WriteResultLine(
         case PerformanceMetric::CPU_CYCLES:
             metric_name = "Cpu Cycles";
             break;
-        case PerformanceMetric::CACHE_MISSES:
-            metric_name = "Cache Misses";
+        case PerformanceMetric::L1_INSTR_CACHE_MISSES:
+            metric_name = "L1 Instr. Cache Misses";
             break;
         case PerformanceMetric::BRANCH_MISSES:
             metric_name = "Branch Misses";
