@@ -1,0 +1,1346 @@
+  branch-instructions OR branches                    [Hardware event]
+  branch-misses                                      [Hardware event]
+  bus-cycles                                         [Hardware event]
+  cache-misses                                       [Hardware event]
+  cache-references                                   [Hardware event]
+  cpu-cycles OR cycles                               [Hardware event]
+  instructions                                       [Hardware event]
+  ref-cycles                                         [Hardware event]
+  stalled-cycles-frontend OR idle-cycles-frontend    [Hardware event]
+  alignment-faults                                   [Software event]
+  bpf-output                                         [Software event]
+  context-switches OR cs                             [Software event]
+  cpu-clock                                          [Software event]
+  cpu-migrations OR migrations                       [Software event]
+  dummy                                              [Software event]
+  emulation-faults                                   [Software event]
+  major-faults                                       [Software event]
+  minor-faults                                       [Software event]
+  page-faults OR faults                              [Software event]
+  task-clock                                         [Software event]
+  L1-dcache-load-misses                              [Hardware cache event]
+  L1-dcache-loads                                    [Hardware cache event]
+  L1-dcache-prefetch-misses                          [Hardware cache event]
+  L1-dcache-store-misses                             [Hardware cache event]
+  L1-dcache-stores                                   [Hardware cache event]
+  L1-icache-load-misses                              [Hardware cache event]
+  LLC-load-misses                                    [Hardware cache event]
+  LLC-loads                                          [Hardware cache event]
+  LLC-prefetch-misses                                [Hardware cache event]
+  LLC-prefetches                                     [Hardware cache event]
+  LLC-store-misses                                   [Hardware cache event]
+  LLC-stores                                         [Hardware cache event]
+  branch-load-misses                                 [Hardware cache event]
+  branch-loads                                       [Hardware cache event]
+  dTLB-load-misses                                   [Hardware cache event]
+  dTLB-loads                                         [Hardware cache event]
+  dTLB-store-misses                                  [Hardware cache event]
+  dTLB-stores                                        [Hardware cache event]
+  iTLB-load-misses                                   [Hardware cache event]
+  iTLB-loads                                         [Hardware cache event]
+  node-load-misses                                   [Hardware cache event]
+  node-loads                                         [Hardware cache event]
+  node-prefetch-misses                               [Hardware cache event]
+  node-prefetches                                    [Hardware cache event]
+  node-store-misses                                  [Hardware cache event]
+  node-stores                                        [Hardware cache event]
+  branch-instructions OR cpu/branch-instructions/    [Kernel PMU event]
+  branch-misses OR cpu/branch-misses/                [Kernel PMU event]
+  bus-cycles OR cpu/bus-cycles/                      [Kernel PMU event]
+  cache-misses OR cpu/cache-misses/                  [Kernel PMU event]
+  cache-references OR cpu/cache-references/          [Kernel PMU event]
+  cpu-cycles OR cpu/cpu-cycles/                      [Kernel PMU event]
+  cstate_core/c3-residency/                          [Kernel PMU event]
+  cstate_core/c6-residency/                          [Kernel PMU event]
+  cstate_core/c7-residency/                          [Kernel PMU event]
+  cstate_pkg/c2-residency/                           [Kernel PMU event]
+  cstate_pkg/c3-residency/                           [Kernel PMU event]
+  cstate_pkg/c6-residency/                           [Kernel PMU event]
+  cstate_pkg/c7-residency/                           [Kernel PMU event]
+  instructions OR cpu/instructions/                  [Kernel PMU event]
+  mem-loads OR cpu/mem-loads/                        [Kernel PMU event]
+  mem-stores OR cpu/mem-stores/                      [Kernel PMU event]
+  msr/aperf/                                         [Kernel PMU event]
+  msr/mperf/                                         [Kernel PMU event]
+  msr/smi/                                           [Kernel PMU event]
+  msr/tsc/                                           [Kernel PMU event]
+  power/energy-cores/                                [Kernel PMU event]
+  power/energy-pkg/                                  [Kernel PMU event]
+  power/energy-ram/                                  [Kernel PMU event]
+  ref-cycles OR cpu/ref-cycles/                      [Kernel PMU event]
+  stalled-cycles-frontend OR cpu/stalled-cycles-frontend/ [Kernel PMU event]
+  topdown-fetch-bubbles OR cpu/topdown-fetch-bubbles/ [Kernel PMU event]
+  topdown-recovery-bubbles OR cpu/topdown-recovery-bubbles/ [Kernel PMU event]
+  topdown-slots-issued OR cpu/topdown-slots-issued/  [Kernel PMU event]
+  topdown-slots-retired OR cpu/topdown-slots-retired/ [Kernel PMU event]
+  topdown-total-slots OR cpu/topdown-total-slots/    [Kernel PMU event]
+  uncore_imc_0/cas_count_read/                       [Kernel PMU event]
+  uncore_imc_0/cas_count_write/                      [Kernel PMU event]
+  uncore_imc_0/clockticks/                           [Kernel PMU event]
+  uncore_imc_1/cas_count_read/                       [Kernel PMU event]
+  uncore_imc_1/cas_count_write/                      [Kernel PMU event]
+  uncore_imc_1/clockticks/                           [Kernel PMU event]
+  uncore_imc_2/cas_count_read/                       [Kernel PMU event]
+  uncore_imc_2/cas_count_write/                      [Kernel PMU event]
+  uncore_imc_2/clockticks/                           [Kernel PMU event]
+  uncore_imc_3/cas_count_read/                       [Kernel PMU event]
+  uncore_imc_3/cas_count_write/                      [Kernel PMU event]
+  uncore_imc_3/clockticks/                           [Kernel PMU event]
+
+cache:
+  l1d.replacement                                   
+       [L1D data line replacements]
+  l1d_pend_miss.fb_full                             
+       [Cycles a demand request was blocked due to Fill Buffers inavailability]
+  l1d_pend_miss.pending                             
+       [L1D miss oustandings duration in cycles]
+  l1d_pend_miss.pending_cycles                      
+       [Cycles with L1D load Misses outstanding]
+  l1d_pend_miss.pending_cycles_any                  
+       [Cycles with L1D load Misses outstanding from any thread on physical
+        core]
+  l2_l1d_wb_rqsts.all                               
+       [Not rejected writebacks from L1D to L2 cache lines in any state]
+  l2_l1d_wb_rqsts.hit_e                             
+       [Not rejected writebacks from L1D to L2 cache lines in E state]
+  l2_l1d_wb_rqsts.hit_m                             
+       [Not rejected writebacks from L1D to L2 cache lines in M state]
+  l2_l1d_wb_rqsts.miss                              
+       [Count the number of modified Lines evicted from L1 and missed L2.
+        (Non-rejected WBs from the DCU.)]
+  l2_lines_in.all                                   
+       [L2 cache lines filling L2]
+  l2_lines_in.e                                     
+       [L2 cache lines in E state filling L2]
+  l2_lines_in.i                                     
+       [L2 cache lines in I state filling L2]
+  l2_lines_in.s                                     
+       [L2 cache lines in S state filling L2]
+  l2_lines_out.demand_clean                         
+       [Clean L2 cache lines evicted by demand]
+  l2_lines_out.demand_dirty                         
+       [Dirty L2 cache lines evicted by demand]
+  l2_lines_out.dirty_all                            
+       [Dirty L2 cache lines filling the L2]
+  l2_lines_out.pf_clean                             
+       [Clean L2 cache lines evicted by L2 prefetch]
+  l2_lines_out.pf_dirty                             
+       [Dirty L2 cache lines evicted by L2 prefetch]
+  l2_rqsts.all_code_rd                              
+       [L2 code requests]
+  l2_rqsts.all_demand_data_rd                       
+       [Demand Data Read requests]
+  l2_rqsts.all_pf                                   
+       [Requests from L2 hardware prefetchers]
+  l2_rqsts.all_rfo                                  
+       [RFO requests to L2 cache]
+  l2_rqsts.code_rd_hit                              
+       [L2 cache hits when fetching instructions, code reads]
+  l2_rqsts.code_rd_miss                             
+       [L2 cache misses when fetching instructions]
+  l2_rqsts.demand_data_rd_hit                       
+       [Demand Data Read requests that hit L2 cache]
+  l2_rqsts.pf_hit                                   
+       [Requests from the L2 hardware prefetchers that hit L2 cache]
+  l2_rqsts.pf_miss                                  
+       [Requests from the L2 hardware prefetchers that miss L2 cache]
+  l2_rqsts.rfo_hit                                  
+       [RFO requests that hit L2 cache]
+  l2_rqsts.rfo_miss                                 
+       [RFO requests that miss L2 cache]
+  l2_store_lock_rqsts.all                           
+       [RFOs that access cache lines in any state]
+  l2_store_lock_rqsts.hit_m                         
+       [RFOs that hit cache lines in M state]
+  l2_store_lock_rqsts.miss                          
+       [RFOs that miss cache lines]
+  l2_trans.all_pf                                   
+       [L2 or LLC HW prefetches that access L2 cache]
+  l2_trans.all_requests                             
+       [Transactions accessing L2 pipe]
+  l2_trans.code_rd                                  
+       [L2 cache accesses when fetching instructions]
+  l2_trans.demand_data_rd                           
+       [Demand Data Read requests that access L2 cache]
+  l2_trans.l1d_wb                                   
+       [L1D writebacks that access L2 cache]
+  l2_trans.l2_fill                                  
+       [L2 fill requests that access L2 cache]
+  l2_trans.l2_wb                                    
+       [L2 writebacks that access L2 cache]
+  l2_trans.rfo                                      
+       [RFO requests that access L2 cache]
+  lock_cycles.cache_lock_duration                   
+       [Cycles when L1D is locked]
+  longest_lat_cache.miss                            
+       [Core-originated cacheable demand requests missed LLC]
+  longest_lat_cache.reference                       
+       [Core-originated cacheable demand requests that refer to LLC]
+  mem_load_uops_llc_hit_retired.xsnp_hit            
+       [Retired load uops which data sources were LLC and cross-core snoop
+        hits in on-pkg core cache (Precise event)]
+  mem_load_uops_llc_hit_retired.xsnp_hitm           
+       [Retired load uops which data sources were HitM responses from shared
+        LLC (Precise event)]
+  mem_load_uops_llc_hit_retired.xsnp_miss           
+       [Retired load uops which data sources were LLC hit and cross-core snoop
+        missed in on-pkg core cache (Precise event)]
+  mem_load_uops_llc_hit_retired.xsnp_none           
+       [Retired load uops which data sources were hits in LLC without snoops
+        required (Precise event)]
+  mem_load_uops_llc_miss_retired.local_dram         
+       [Retired load uops which data sources missed LLC but serviced from
+        local dram]
+  mem_load_uops_llc_miss_retired.remote_dram        
+       [Retired load uops whose data source was remote DRAM (Snoop not needed,
+        Snoop Miss, or Snoop Hit data not forwarded)]
+  mem_load_uops_llc_miss_retired.remote_fwd         
+       [Data forwarded from remote cache]
+  mem_load_uops_llc_miss_retired.remote_hitm        
+       [Remote cache HITM]
+  mem_load_uops_retired.hit_lfb                     
+       [Retired load uops which data sources were load uops missed L1 but hit
+        FB due to preceding miss to the same cache line with data not ready
+        (Precise event)]
+  mem_load_uops_retired.l1_hit                      
+       [Retired load uops with L1 cache hits as data sources (Precise event)]
+  mem_load_uops_retired.l1_miss                     
+       [Retired load uops which data sources following L1 data-cache miss
+        (Precise event)]
+  mem_load_uops_retired.l2_hit                      
+       [Retired load uops with L2 cache hits as data sources (Precise event)]
+  mem_load_uops_retired.l2_miss                     
+       [Miss in mid-level (L2) cache. Excludes Unknown data-source (Precise
+        event)]
+  mem_load_uops_retired.llc_hit                     
+       [Retired load uops which data sources were data hits in LLC without
+        snoops required (Precise event)]
+  mem_load_uops_retired.llc_miss                    
+       [Miss in last-level (L3) cache. Excludes Unknown data-source (Precise
+        event)]
+  mem_uops_retired.all_loads                        
+       [All retired load uops (Precise event)]
+  mem_uops_retired.all_stores                       
+       [All retired store uops (Precise event)]
+  mem_uops_retired.lock_loads                       
+       [Retired load uops with locked access (Precise event)]
+  mem_uops_retired.split_loads                      
+       [Retired load uops that split across a cacheline boundary (Precise
+        event)]
+  mem_uops_retired.split_stores                     
+       [Retired store uops that split across a cacheline boundary (Precise
+        event)]
+  mem_uops_retired.stlb_miss_loads                  
+       [Retired load uops that miss the STLB (Precise event)]
+  mem_uops_retired.stlb_miss_stores                 
+       [Retired store uops that miss the STLB (Precise event)]
+  offcore_requests.all_data_rd                      
+       [Demand and prefetch data reads]
+  offcore_requests.demand_code_rd                   
+       [Cacheable and noncachaeble code read requests]
+  offcore_requests.demand_data_rd                   
+       [Demand Data Read requests sent to uncore]
+  offcore_requests.demand_rfo                       
+       [Demand RFO requests including regular RFOs, locks, ItoM]
+  offcore_requests_buffer.sq_full                   
+       [Cases when offcore requests buffer cannot take more entries for core]
+  offcore_requests_outstanding.all_data_rd          
+       [Offcore outstanding cacheable Core Data Read transactions in
+        SuperQueue (SQ), queue to uncore]
+  offcore_requests_outstanding.cycles_with_data_rd  
+       [Cycles when offcore outstanding cacheable Core Data Read transactions
+        are present in SuperQueue (SQ), queue to uncore]
+  offcore_requests_outstanding.cycles_with_demand_code_rd
+       [Offcore outstanding code reads transactions in SuperQueue (SQ), queue
+        to uncore, every cycle]
+  offcore_requests_outstanding.cycles_with_demand_data_rd
+       [Cycles when offcore outstanding Demand Data Read transactions are
+        present in SuperQueue (SQ), queue to uncore]
+  offcore_requests_outstanding.cycles_with_demand_rfo
+       [Offcore outstanding demand rfo reads transactions in SuperQueue (SQ),
+        queue to uncore, every cycle]
+  offcore_requests_outstanding.demand_code_rd       
+       [Offcore outstanding code reads transactions in SuperQueue (SQ), queue
+        to uncore, every cycle]
+  offcore_requests_outstanding.demand_data_rd       
+       [Offcore outstanding Demand Data Read transactions in uncore queue]
+  offcore_requests_outstanding.demand_data_rd_ge_6  
+       [Cycles with at least 6 offcore outstanding Demand Data Read
+        transactions in uncore queue]
+  offcore_requests_outstanding.demand_rfo           
+       [Offcore outstanding RFO store transactions in SuperQueue (SQ), queue
+        to uncore]
+  offcore_response.all_data_rd.llc_hit.hit_other_core_no_fwd
+       [Counts demand & prefetch data reads that hit in the LLC and the snoops
+        to sibling cores hit in either E/S state and the line is not forwarded]
+  offcore_response.all_data_rd.llc_hit.hitm_other_core
+       [Counts demand & prefetch data reads that hit in the LLC and the snoop
+        to one of the sibling cores hits the line in M state and the line is
+        forwarded]
+  offcore_response.all_data_rd.llc_hit.no_snoop_needed
+       [Counts demand & prefetch data reads that hit in the LLC and sibling
+        core snoops are not needed as either the core-valid bit is not set or
+        the shared line is present in multiple cores]
+  offcore_response.all_data_rd.llc_hit.snoop_miss   
+       [Counts demand & prefetch data reads that hit in the LLC and sibling
+        core snoop returned a clean response]
+  offcore_response.all_pf_data_rd.llc_hit.any_response
+       [Counts all prefetch data reads that hit the LLC]
+  offcore_response.all_pf_data_rd.llc_hit.hit_other_core_no_fwd
+       [Counts prefetch data reads that hit in the LLC and the snoops to
+        sibling cores hit in either E/S state and the line is not forwarded]
+  offcore_response.all_pf_data_rd.llc_hit.hitm_other_core
+       [Counts prefetch data reads that hit in the LLC and the snoop to one of
+        the sibling cores hits the line in M state and the line is forwarded]
+  offcore_response.all_pf_data_rd.llc_hit.no_snoop_needed
+       [Counts prefetch data reads that hit in the LLC and sibling core snoops
+        are not needed as either the core-valid bit is not set or the shared
+        line is present in multiple cores]
+  offcore_response.all_pf_data_rd.llc_hit.snoop_miss
+       [Counts prefetch data reads that hit in the LLC and sibling core snoop
+        returned a clean response]
+  offcore_response.all_reads.llc_hit.any_response   
+       [Counts all data/code/rfo reads (demand & prefetch) that hit in the LLC]
+  offcore_response.all_reads.llc_hit.hit_other_core_no_fwd
+       [Counts all data/code/rfo reads (demand & prefetch) that hit in the LLC
+        and the snoops to sibling cores hit in either E/S state and the line
+        is not forwarded]
+  offcore_response.all_reads.llc_hit.hitm_other_core
+       [Counts all data/code/rfo reads (demand & prefetch) that hit in the LLC
+        and the snoop to one of the sibling cores hits the line in M state and
+        the line is forwarded]
+  offcore_response.all_reads.llc_hit.no_snoop_needed
+       [Counts all data/code/rfo reads (demand & prefetch) that hit in the LLC
+        and sibling core snoops are not needed as either the core-valid bit is
+        not set or the shared line is present in multiple cores]
+  offcore_response.all_reads.llc_hit.snoop_miss     
+       [Counts all data/code/rfo reads (demand & prefetch) that hit in the LLC
+        and sibling core snoop returned a clean response]
+  offcore_response.corewb.any_response              
+       [Counts all writebacks from the core to the LLC]
+  offcore_response.demand_code_rd.llc_hit.any_response
+       [Counts all demand code reads that hit in the LLC]
+  offcore_response.demand_data_rd.llc_hit.any_response
+       [Counts all demand data reads that hit in the LLC]
+  offcore_response.demand_data_rd.llc_hit.hit_other_core_no_fwd
+       [Counts demand data reads that hit in the LLC and the snoops to sibling
+        cores hit in either E/S state and the line is not forwarded]
+  offcore_response.demand_data_rd.llc_hit.hitm_other_core
+       [Counts demand data reads that hit in the LLC and the snoop to one of
+        the sibling cores hits the line in M state and the line is forwarded]
+  offcore_response.demand_data_rd.llc_hit.no_snoop_needed
+       [Counts demand data reads that hit in the LLC and sibling core snoops
+        are not needed as either the core-valid bit is not set or the shared
+        line is present in multiple cores]
+  offcore_response.demand_data_rd.llc_hit.snoop_miss
+       [Counts demand data reads that hit in the LLC and sibling core snoop
+        returned a clean response]
+  offcore_response.demand_rfo.llc_hit.hitm_other_core
+       [Counts demand data writes (RFOs) that hit in the LLC and the snoop to
+        one of the sibling cores hits the line in M state and the line is
+        forwarded]
+  offcore_response.other.lru_hints                  
+       [Counts L2 hints sent to LLC to keep a line from being evicted out of
+        the core caches]
+  offcore_response.other.portio_mmio_uc             
+       [Counts miscellaneous accesses that include port i/o, MMIO and
+        uncacheable memory accesses]
+  offcore_response.pf_l2_code_rd.llc_hit.any_response
+       [Counts all prefetch (that bring data to L2) code reads that hit in the
+        LLC]
+  offcore_response.pf_l2_data_rd.llc_hit.any_response
+       [Counts prefetch (that bring data to L2) data reads that hit in the LLC]
+  offcore_response.pf_l2_data_rd.llc_hit.hit_other_core_no_fwd
+       [Counts prefetch (that bring data to L2) data reads that hit in the LLC
+        and the snoops to sibling cores hit in either E/S state and the line
+        is not forwarded]
+  offcore_response.pf_l2_data_rd.llc_hit.hitm_other_core
+       [Counts prefetch (that bring data to L2) data reads that hit in the LLC
+        and the snoop to one of the sibling cores hits the line in M state and
+        the line is forwarded]
+  offcore_response.pf_l2_data_rd.llc_hit.no_snoop_needed
+       [Counts prefetch (that bring data to L2) data reads that hit in the LLC
+        and sibling core snoops are not needed as either the core-valid bit is
+        not set or the shared line is present in multiple cores]
+  offcore_response.pf_l2_data_rd.llc_hit.snoop_miss 
+       [Counts prefetch (that bring data to L2) data reads that hit in the LLC
+        and the snoops sent to sibling cores return clean response]
+  offcore_response.pf_llc_code_rd.llc_hit.any_response
+       [Counts all prefetch (that bring data to LLC only) code reads that hit
+        in the LLC]
+  offcore_response.pf_llc_data_rd.llc_hit.any_response
+       [Counts prefetch (that bring data to LLC only) data reads that hit in
+        the LLC]
+  offcore_response.pf_llc_data_rd.llc_hit.hit_other_core_no_fwd
+       [Counts prefetch (that bring data to LLC only) data reads that hit in
+        the LLC and the snoops to sibling cores hit in either E/S state and
+        the line is not forwarded]
+  offcore_response.pf_llc_data_rd.llc_hit.hitm_other_core
+       [Counts prefetch (that bring data to LLC only) data reads that hit in
+        the LLC and the snoop to one of the sibling cores hits the line in M
+        state and the line is forwarded]
+  offcore_response.pf_llc_data_rd.llc_hit.no_snoop_needed
+       [Counts prefetch (that bring data to LLC only) data reads that hit in
+        the LLC and sibling core snoops are not needed as either the
+        core-valid bit is not set or the shared line is present in multiple
+        cores]
+  offcore_response.pf_llc_data_rd.llc_hit.snoop_miss
+       [Counts prefetch (that bring data to LLC only) data reads that hit in
+        the LLC and the snoops sent to sibling cores return clean response]
+  offcore_response.split_lock_uc_lock.any_response  
+       [Counts requests where the address of an atomic lock instruction spans
+        a cache line boundary or the lock instruction is executed on
+        uncacheable address]
+  offcore_response.streaming_stores.any_response    
+       [Counts non-temporal stores]
+  sq_misc.split_lock                                
+       [Split locks in SQ]
+
+floating point:
+  fp_assist.any                                     
+       [Cycles with any input/output SSE or FP assist]
+  fp_assist.simd_input                              
+       [Number of SIMD FP assists due to input values]
+  fp_assist.simd_output                             
+       [Number of SIMD FP assists due to Output values]
+  fp_assist.x87_input                               
+       [Number of X87 assists due to input value]
+  fp_assist.x87_output                              
+       [Number of X87 assists due to output value]
+  fp_comp_ops_exe.sse_packed_double                 
+       [Number of SSE* or AVX-128 FP Computational packed double-precision
+        uops issued this cycle]
+  fp_comp_ops_exe.sse_packed_single                 
+       [Number of SSE* or AVX-128 FP Computational packed single-precision
+        uops issued this cycle]
+  fp_comp_ops_exe.sse_scalar_double                 
+       [Number of SSE* or AVX-128 FP Computational scalar double-precision
+        uops issued this cycle]
+  fp_comp_ops_exe.sse_scalar_single                 
+       [Number of SSE* or AVX-128 FP Computational scalar single-precision
+        uops issued this cycle]
+  fp_comp_ops_exe.x87                               
+       [Number of FP Computational Uops Executed this cycle. The number of
+        FADD, FSUB, FCOM, FMULs, integer MULsand IMULs, FDIVs, FPREMs, FSQRTS,
+        integer DIVs, and IDIVs. This event does not distinguish an FADD used
+        in the middle of a transcendental flow from a s]
+  other_assists.avx_store                           
+       [Number of GSSE memory assist for stores. GSSE microcode assist is
+        being invoked whenever the hardware is unable to properly handle
+        GSSE-256b operations]
+  other_assists.avx_to_sse                          
+       [Number of transitions from AVX-256 to legacy SSE when penalty
+        applicable]
+  other_assists.sse_to_avx                          
+       [Number of transitions from SSE to AVX-256 when penalty applicable]
+  simd_fp_256.packed_double                         
+       [number of AVX-256 Computational FP double precision uops issued this
+        cycle]
+  simd_fp_256.packed_single                         
+       [number of GSSE-256 Computational FP single precision uops issued this
+        cycle]
+
+frontend:
+  dsb2mite_switches.count                           
+       [Decode Stream Buffer (DSB)-to-MITE switches]
+  dsb2mite_switches.penalty_cycles                  
+       [Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles]
+  dsb_fill.exceed_dsb_lines                         
+       [Cycles when Decode Stream Buffer (DSB) fill encounter more than 3
+        Decode Stream Buffer (DSB) lines]
+  icache.hit                                        
+       [Number of Instruction Cache, Streaming Buffer and Victim Cache Reads.
+        both cacheable and noncacheable, including UC fetches]
+  icache.ifetch_stall                               
+       [Cycles where a code-fetch stalled due to L1 instruction-cache miss or
+        an iTLB miss]
+  icache.misses                                     
+       [Instruction cache, streaming buffer and victim cache misses]
+  idq.all_dsb_cycles_4_uops                         
+       [Cycles Decode Stream Buffer (DSB) is delivering 4 Uops]
+  idq.all_dsb_cycles_any_uops                       
+       [Cycles Decode Stream Buffer (DSB) is delivering any Uop]
+  idq.all_mite_cycles_4_uops                        
+       [Cycles MITE is delivering 4 Uops]
+  idq.all_mite_cycles_any_uops                      
+       [Cycles MITE is delivering any Uop]
+  idq.dsb_cycles                                    
+       [Cycles when uops are being delivered to Instruction Decode Queue (IDQ)
+        from Decode Stream Buffer (DSB) path]
+  idq.dsb_uops                                      
+       [Uops delivered to Instruction Decode Queue (IDQ) from the Decode
+        Stream Buffer (DSB) path]
+  idq.empty                                         
+       [Instruction Decode Queue (IDQ) empty cycles]
+  idq.mite_all_uops                                 
+       [Uops delivered to Instruction Decode Queue (IDQ) from MITE path]
+  idq.mite_cycles                                   
+       [Cycles when uops are being delivered to Instruction Decode Queue (IDQ)
+        from MITE path]
+  idq.mite_uops                                     
+       [Uops delivered to Instruction Decode Queue (IDQ) from MITE path]
+  idq.ms_cycles                                     
+       [Cycles when uops are being delivered to Instruction Decode Queue (IDQ)
+        while Microcode Sequenser (MS) is busy]
+  idq.ms_dsb_cycles                                 
+       [Cycles when uops initiated by Decode Stream Buffer (DSB) are being
+        delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser
+        (MS) is busy]
+  idq.ms_dsb_occur                                  
+       [Deliveries to Instruction Decode Queue (IDQ) initiated by Decode
+        Stream Buffer (DSB) while Microcode Sequenser (MS) is busy]
+  idq.ms_dsb_uops                                   
+       [Uops initiated by Decode Stream Buffer (DSB) that are being delivered
+        to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is
+        busy]
+  idq.ms_mite_uops                                  
+       [Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ)
+        while Microcode Sequenser (MS) is busy]
+  idq.ms_switches                                   
+       [Number of switches from DSB (Decode Stream Buffer) or MITE (legacy
+        decode pipeline) to the Microcode Sequencer]
+  idq.ms_uops                                       
+       [Uops delivered to Instruction Decode Queue (IDQ) while Microcode
+        Sequenser (MS) is busy]
+  idq_uops_not_delivered.core                       
+       [Uops not delivered to Resource Allocation Table (RAT) per thread when
+        backend of the machine is not stalled]
+  idq_uops_not_delivered.cycles_0_uops_deliv.core   
+       [Cycles per thread when 4 or more uops are not delivered to Resource
+        Allocation Table (RAT) when backend of the machine is not stalled]
+  idq_uops_not_delivered.cycles_fe_was_ok           
+       [Counts cycles FE delivered 4 uops or Resource Allocation Table (RAT)
+        was stalling FE]
+  idq_uops_not_delivered.cycles_le_1_uop_deliv.core 
+       [Cycles per thread when 3 or more uops are not delivered to Resource
+        Allocation Table (RAT) when backend of the machine is not stalled]
+  idq_uops_not_delivered.cycles_le_2_uop_deliv.core 
+       [Cycles with less than 2 uops delivered by the front end]
+  idq_uops_not_delivered.cycles_le_3_uop_deliv.core 
+       [Cycles with less than 3 uops delivered by the front end]
+
+memory:
+  machine_clears.memory_ordering                    
+       [Counts the number of machine clears due to memory order conflicts]
+  mem_trans_retired.load_latency_gt_128             
+       [Loads with latency value being above 128 (Must be precise)]
+  mem_trans_retired.load_latency_gt_16              
+       [Loads with latency value being above 16 (Must be precise)]
+  mem_trans_retired.load_latency_gt_256             
+       [Loads with latency value being above 256 (Must be precise)]
+  mem_trans_retired.load_latency_gt_32              
+       [Loads with latency value being above 32 (Must be precise)]
+  mem_trans_retired.load_latency_gt_4               
+       [Loads with latency value being above 4 (Must be precise)]
+  mem_trans_retired.load_latency_gt_512             
+       [Loads with latency value being above 512 (Must be precise)]
+  mem_trans_retired.load_latency_gt_64              
+       [Loads with latency value being above 64 (Must be precise)]
+  mem_trans_retired.load_latency_gt_8               
+       [Loads with latency value being above 8 (Must be precise)]
+  mem_trans_retired.precise_store                   
+       [Sample stores and collect precise store operation via PEBS record.
+        PMC3 only (Must be precise)]
+  misalign_mem_ref.loads                            
+       [Speculative cache line split load uops dispatched to L1 cache]
+  misalign_mem_ref.stores                           
+       [Speculative cache line split STA uops dispatched to L1 cache]
+  offcore_response.all_code_rd.llc_miss.any_response
+       [Counts all demand & prefetch code reads that miss the LLC]
+  offcore_response.all_code_rd.llc_miss.remote_dram 
+       [Counts all demand & prefetch code reads that miss the LLC and the data
+        returned from remote dram]
+  offcore_response.all_code_rd.llc_miss.remote_hit_forward
+       [Counts all demand & prefetch code reads that miss the LLC and the data
+        forwarded from remote cache]
+  offcore_response.all_data_rd.llc_miss.any_response
+       [Counts all demand & prefetch data reads that hits the LLC]
+  offcore_response.all_reads.llc_miss.any_response  
+       [Counts all data/code/rfo reads (demand & prefetch) that hit the LLC]
+  offcore_response.all_reads.llc_miss.local_dram    
+       [Counts all data/code/rfo reads (demand & prefetch) that miss the LLC
+        and the data returned from local dram]
+  offcore_response.all_reads.llc_miss.remote_hit_forward
+       [Counts all data/code/rfo reads (demand & prefetch) that miss the LLC
+        and the data forwarded from remote cache]
+  offcore_response.all_reads.llc_miss.remote_hitm   
+       [Counts all data/code/rfo reads (demand & prefetch) that miss the LLC
+        the data is found in M state in remote cache and forwarded from there]
+  offcore_response.demand_code_rd.llc_miss.any_response
+       [Counts all demand code reads that miss the LLC]
+  offcore_response.demand_code_rd.llc_miss.local_dram
+       [Counts all demand code reads that miss the LLC and the data returned
+        from local dram]
+  offcore_response.demand_code_rd.llc_miss.remote_dram
+       [Counts all demand code reads that miss the LLC and the data returned
+        from remote dram]
+  offcore_response.demand_code_rd.llc_miss.remote_hit_forward
+       [Counts all demand code reads that miss the LLC and the data forwarded
+        from remote cache]
+  offcore_response.demand_code_rd.llc_miss.remote_hitm
+       [Counts all demand code reads that miss the LLC the data is found in M
+        state in remote cache and forwarded from there]
+  offcore_response.demand_data_rd.llc_miss.any_dram 
+       [Counts demand data reads that miss the LLC and the data returned from
+        remote & local dram]
+  offcore_response.demand_data_rd.llc_miss.any_response
+       [Counts demand data reads that miss in the LLC]
+  offcore_response.demand_data_rd.llc_miss.local_dram
+       [Counts demand data reads that miss the LLC and the data returned from
+        local dram]
+  offcore_response.demand_data_rd.llc_miss.remote_dram
+       [Counts demand data reads that miss the LLC and the data returned from
+        remote dram]
+  offcore_response.demand_data_rd.llc_miss.remote_hit_forward
+       [Counts demand data reads that miss the LLC and the data forwarded from
+        remote cache]
+  offcore_response.demand_data_rd.llc_miss.remote_hitm
+       [Counts demand data reads that miss the LLC the data is found in M
+        state in remote cache and forwarded from there]
+  offcore_response.demand_rfo.llc_miss.remote_hitm  
+       [Counts all demand data writes (RFOs) that miss the LLC and the data is
+        found in M state in remote cache and forwarded from there]
+  offcore_response.pf_l2_code_rd.llc_miss.any_response
+       [Counts all prefetch (that bring data to L2) code reads that miss the
+        LLC and the data returned from remote & local dram]
+  offcore_response.pf_l2_data_rd.llc_miss.any_dram  
+       [Counts prefetch (that bring data to L2) data reads that miss the LLC
+        and the data returned from remote & local dram]
+  offcore_response.pf_l2_data_rd.llc_miss.any_response
+       [Counts prefetch (that bring data to L2) data reads that miss in the
+        LLC]
+  offcore_response.pf_l2_data_rd.llc_miss.local_dram
+       [Counts prefetch (that bring data to L2) data reads that miss the LLC
+        and the data returned from local dram]
+  offcore_response.pf_l2_data_rd.llc_miss.remote_dram
+       [Counts prefetch (that bring data to L2) data reads that miss the LLC
+        and the data returned from remote dram]
+  offcore_response.pf_l2_data_rd.llc_miss.remote_hit_forward
+       [Counts prefetch (that bring data to L2) data reads that miss the LLC
+        and the data forwarded from remote cache]
+  offcore_response.pf_l2_data_rd.llc_miss.remote_hitm
+       [Counts prefetch (that bring data to L2) data reads that miss the LLC
+        the data is found in M state in remote cache and forwarded from there]
+  offcore_response.pf_llc_code_rd.llc_miss.any_response
+       [Counts all prefetch (that bring data to LLC only) code reads that miss
+        in the LLC]
+  offcore_response.pf_llc_data_rd.llc_miss.any_response
+       [Counts prefetch (that bring data to LLC only) data reads that miss in
+        the LLC]
+
+other:
+  cpl_cycles.ring0                                  
+       [Unhalted core cycles when the thread is in ring 0]
+  cpl_cycles.ring0_trans                            
+       [Number of intervals between processor halts while thread is in ring 0]
+  cpl_cycles.ring123                                
+       [Unhalted core cycles when thread is in rings 1, 2, or 3]
+  lock_cycles.split_lock_uc_lock_duration           
+       [Cycles when L1 and L2 are locked due to UC or split lock]
+
+pipeline:
+  arith.fpu_div                                     
+       [Divide operations executed]
+  arith.fpu_div_active                              
+       [Cycles when divider is busy executing divide operations]
+  baclears.any                                      
+       [Counts the total number when the front end is resteered, mainly when
+        the BPU cannot provide a correct prediction and this is corrected by
+        other branch handling mechanisms at the front end]
+  br_inst_exec.all_branches                         
+       [Speculative and retired branches]
+  br_inst_exec.all_conditional                      
+       [Speculative and retired macro-conditional branches]
+  br_inst_exec.all_direct_jmp                       
+       [Speculative and retired macro-unconditional branches excluding calls
+        and indirects]
+  br_inst_exec.all_direct_near_call                 
+       [Speculative and retired direct near calls]
+  br_inst_exec.all_indirect_jump_non_call_ret       
+       [Speculative and retired indirect branches excluding calls and returns]
+  br_inst_exec.all_indirect_near_return             
+       [Speculative and retired indirect return branches]
+  br_inst_exec.nontaken_conditional                 
+       [Not taken macro-conditional branches]
+  br_inst_exec.taken_conditional                    
+       [Taken speculative and retired macro-conditional branches]
+  br_inst_exec.taken_direct_jump                    
+       [Taken speculative and retired macro-conditional branch instructions
+        excluding calls and indirects]
+  br_inst_exec.taken_direct_near_call               
+       [Taken speculative and retired direct near calls]
+  br_inst_exec.taken_indirect_jump_non_call_ret     
+       [Taken speculative and retired indirect branches excluding calls and
+        returns]
+  br_inst_exec.taken_indirect_near_call             
+       [Taken speculative and retired indirect calls]
+  br_inst_exec.taken_indirect_near_return           
+       [Taken speculative and retired indirect branches with return mnemonic]
+  br_inst_retired.all_branches                      
+       [All (macro) branch instructions retired]
+  br_inst_retired.all_branches_pebs                 
+       [All (macro) branch instructions retired (Must be precise)]
+  br_inst_retired.conditional                       
+       [Conditional branch instructions retired (Precise event)]
+  br_inst_retired.far_branch                        
+       [Far branch instructions retired]
+  br_inst_retired.near_call                         
+       [Direct and indirect near call instructions retired (Precise event)]
+  br_inst_retired.near_return                       
+       [Return instructions retired (Precise event)]
+  br_inst_retired.near_taken                        
+       [Taken branch instructions retired (Precise event)]
+  br_inst_retired.not_taken                         
+       [Not taken branch instructions retired]
+  br_misp_exec.all_branches                         
+       [Speculative and retired mispredicted macro conditional branches]
+  br_misp_exec.all_conditional                      
+       [Speculative and retired mispredicted macro conditional branches]
+  br_misp_exec.all_indirect_jump_non_call_ret       
+       [Mispredicted indirect branches excluding calls and returns]
+  br_misp_exec.nontaken_conditional                 
+       [Not taken speculative and retired mispredicted macro conditional
+        branches]
+  br_misp_exec.taken_conditional                    
+       [Taken speculative and retired mispredicted macro conditional branches]
+  br_misp_exec.taken_indirect_jump_non_call_ret     
+       [Taken speculative and retired mispredicted indirect branches excluding
+        calls and returns]
+  br_misp_exec.taken_indirect_near_call             
+       [Taken speculative and retired mispredicted indirect calls]
+  br_misp_exec.taken_return_near                    
+       [Taken speculative and retired mispredicted indirect branches with
+        return mnemonic]
+  br_misp_retired.all_branches                      
+       [All mispredicted macro branch instructions retired]
+  br_misp_retired.all_branches_pebs                 
+       [Mispredicted macro branch instructions retired (Must be precise)]
+  br_misp_retired.conditional                       
+       [Mispredicted conditional branch instructions retired (Precise event)]
+  br_misp_retired.near_taken                        
+       [number of near branch instructions retired that were mispredicted and
+        taken (Precise event)]
+  cpu_clk_thread_unhalted.one_thread_active         
+       [Count XClk pulses when this thread is unhalted and the other is halted]
+  cpu_clk_thread_unhalted.ref_xclk                  
+       [Reference cycles when the thread is unhalted (counts at 100 MHz rate)]
+  cpu_clk_thread_unhalted.ref_xclk_any              
+       [Reference cycles when the at least one thread on the physical core is
+        unhalted. (counts at 100 MHz rate)]
+  cpu_clk_unhalted.one_thread_active                
+       [Count XClk pulses when this thread is unhalted and the other thread is
+        halted]
+  cpu_clk_unhalted.ref_tsc                          
+       [Reference cycles when the core is not in halt state]
+  cpu_clk_unhalted.ref_xclk                         
+       [Reference cycles when the thread is unhalted (counts at 100 MHz rate)]
+  cpu_clk_unhalted.ref_xclk_any                     
+       [Reference cycles when the at least one thread on the physical core is
+        unhalted. (counts at 100 MHz rate)]
+  cpu_clk_unhalted.thread                           
+       [Core cycles when the thread is not in halt state]
+  cpu_clk_unhalted.thread_any                       
+       [Core cycles when at least one thread on the physical core is not in
+        halt state]
+  cpu_clk_unhalted.thread_p                         
+       [Thread cycles when thread is not in halt state]
+  cpu_clk_unhalted.thread_p_any                     
+       [Core cycles when at least one thread on the physical core is not in
+        halt state]
+  cycle_activity.cycles_l1d_miss                    
+       [Cycles while L1 cache miss demand load is outstanding]
+  cycle_activity.cycles_l1d_pending                 
+       [Cycles with pending L1 cache miss loads]
+  cycle_activity.cycles_l2_miss                     
+       [Cycles while L2 cache miss load* is outstanding]
+  cycle_activity.cycles_l2_pending                  
+       [Cycles with pending L2 cache miss loads]
+  cycle_activity.cycles_ldm_pending                 
+       [Cycles with pending memory loads]
+  cycle_activity.cycles_mem_any                     
+       [Cycles while memory subsystem has an outstanding load]
+  cycle_activity.cycles_no_execute                  
+       [Total execution stalls]
+  cycle_activity.stalls_l1d_miss                    
+       [Execution stalls while L1 cache miss demand load is outstanding]
+  cycle_activity.stalls_l1d_pending                 
+       [Execution stalls due to L1 data cache misses]
+  cycle_activity.stalls_l2_miss                     
+       [Execution stalls while L2 cache miss load* is outstanding]
+  cycle_activity.stalls_l2_pending                  
+       [Execution stalls due to L2 cache misses]
+  cycle_activity.stalls_ldm_pending                 
+       [Execution stalls due to memory subsystem]
+  cycle_activity.stalls_mem_any                     
+       [Execution stalls while memory subsystem has an outstanding load]
+  cycle_activity.stalls_total                       
+       [Total execution stalls]
+  ild_stall.iq_full                                 
+       [Stall cycles because IQ is full]
+  ild_stall.lcp                                     
+       [Stalls caused by changing prefix length of the instruction]
+  inst_retired.any                                  
+       [Instructions retired from execution]
+  inst_retired.any_p                                
+       [Number of instructions retired. General Counter - architectural event]
+  inst_retired.prec_dist                            
+       [Precise instruction retired event with HW to reduce effect of PEBS
+        shadow in IP distribution (Must be precise)]
+  int_misc.recovery_cycles                          
+       [Number of cycles waiting for the checkpoints in Resource Allocation
+        Table (RAT) to be recovered after Nuke due to all other cases except
+        JEClear (e.g. whenever a ucode assist is needed like SSE exception,
+        memory disambiguation, etc.)]
+  int_misc.recovery_cycles_any                      
+       [Core cycles the allocator was stalled due to recovery from earlier
+        clear event for any thread running on the physical core (e.g.
+        misprediction or memory nuke)]
+  int_misc.recovery_stalls_count                    
+       [Number of occurences waiting for the checkpoints in Resource
+        Allocation Table (RAT) to be recovered after Nuke due to all other
+        cases except JEClear (e.g. whenever a ucode assist is needed like SSE
+        exception, memory disambiguation, etc.)]
+  ld_blocks.no_sr                                   
+       [This event counts the number of times that split load operations are
+        temporarily blocked because all resources for handling the split
+        accesses are in use]
+  ld_blocks.store_forward                           
+       [Cases when loads get true Block-on-Store blocking code preventing
+        store forwarding]
+  ld_blocks_partial.address_alias                   
+       [False dependencies in MOB due to partial compare on address]
+  load_hit_pre.hw_pf                                
+       [Not software-prefetch load dispatches that hit FB allocated for
+        hardware prefetch]
+  load_hit_pre.sw_pf                                
+       [Not software-prefetch load dispatches that hit FB allocated for
+        software prefetch]
+  lsd.cycles_4_uops                                 
+       [Cycles 4 Uops delivered by the LSD, but didn't come from the decoder]
+  lsd.cycles_active                                 
+       [Cycles Uops delivered by the LSD, but didn't come from the decoder]
+  lsd.uops                                          
+       [Number of Uops delivered by the LSD]
+  machine_clears.count                              
+       [Number of machine clears (nukes) of any type]
+  machine_clears.maskmov                            
+       [This event counts the number of executed Intel AVX masked load
+        operations that refer to an illegal address range with the mask bits
+        set to 0]
+  machine_clears.smc                                
+       [Self-modifying code (SMC) detected]
+  move_elimination.int_eliminated                   
+       [Number of integer Move Elimination candidate uops that were eliminated]
+  move_elimination.int_not_eliminated               
+       [Number of integer Move Elimination candidate uops that were not
+        eliminated]
+  move_elimination.simd_eliminated                  
+       [Number of SIMD Move Elimination candidate uops that were eliminated]
+  move_elimination.simd_not_eliminated              
+       [Number of SIMD Move Elimination candidate uops that were not
+        eliminated]
+  other_assists.any_wb_assist                       
+       [Number of times any microcode assist is invoked by HW upon uop
+        writeback]
+  resource_stalls.any                               
+       [Resource-related stall cycles]
+  resource_stalls.rob                               
+       [Cycles stalled due to re-order buffer full]
+  resource_stalls.rs                                
+       [Cycles stalled due to no eligible RS entry available]
+  resource_stalls.sb                                
+       [Cycles stalled due to no store buffers available. (not including
+        draining form sync)]
+  rob_misc_events.lbr_inserts                       
+       [Count cases of saving new LBR]
+  rs_events.empty_cycles                            
+       [Cycles when Reservation Station (RS) is empty for the thread]
+  rs_events.empty_end                               
+       [Counts end of periods where the Reservation Station (RS) was empty.
+        Could be useful to precisely locate Frontend Latency Bound issues]
+  uops_dispatched_port.port_0                       
+       [Cycles per thread when uops are dispatched to port 0]
+  uops_dispatched_port.port_0_core                  
+       [Cycles per core when uops are dispatched to port 0]
+  uops_dispatched_port.port_1                       
+       [Cycles per thread when uops are dispatched to port 1]
+  uops_dispatched_port.port_1_core                  
+       [Cycles per core when uops are dispatched to port 1]
+  uops_dispatched_port.port_2                       
+       [Cycles per thread when load or STA uops are dispatched to port 2]
+  uops_dispatched_port.port_2_core                  
+       [Uops dispatched to port 2, loads and stores per core (speculative and
+        retired)]
+  uops_dispatched_port.port_3                       
+       [Cycles per thread when load or STA uops are dispatched to port 3]
+  uops_dispatched_port.port_3_core                  
+       [Cycles per core when load or STA uops are dispatched to port 3]
+  uops_dispatched_port.port_4                       
+       [Cycles per thread when uops are dispatched to port 4]
+  uops_dispatched_port.port_4_core                  
+       [Cycles per core when uops are dispatched to port 4]
+  uops_dispatched_port.port_5                       
+       [Cycles per thread when uops are dispatched to port 5]
+  uops_dispatched_port.port_5_core                  
+       [Cycles per core when uops are dispatched to port 5]
+  uops_executed.core                                
+       [Number of uops executed on the core]
+  uops_executed.core_cycles_ge_1                    
+       [Cycles at least 1 micro-op is executed from any thread on physical
+        core]
+  uops_executed.core_cycles_ge_2                    
+       [Cycles at least 2 micro-op is executed from any thread on physical
+        core]
+  uops_executed.core_cycles_ge_3                    
+       [Cycles at least 3 micro-op is executed from any thread on physical
+        core]
+  uops_executed.core_cycles_ge_4                    
+       [Cycles at least 4 micro-op is executed from any thread on physical
+        core]
+  uops_executed.core_cycles_none                    
+       [Cycles with no micro-ops executed from any thread on physical core]
+  uops_executed.cycles_ge_1_uop_exec                
+       [Cycles where at least 1 uop was executed per-thread]
+  uops_executed.cycles_ge_2_uops_exec               
+       [Cycles where at least 2 uops were executed per-thread]
+  uops_executed.cycles_ge_3_uops_exec               
+       [Cycles where at least 3 uops were executed per-thread]
+  uops_executed.cycles_ge_4_uops_exec               
+       [Cycles where at least 4 uops were executed per-thread]
+  uops_executed.stall_cycles                        
+       [Counts number of cycles no uops were dispatched to be executed on this
+        thread]
+  uops_executed.thread                              
+       [Counts the number of uops to be executed per-thread each cycle]
+  uops_issued.any                                   
+       [Uops that Resource Allocation Table (RAT) issues to Reservation
+        Station (RS)]
+  uops_issued.core_stall_cycles                     
+       [Cycles when Resource Allocation Table (RAT) does not issue Uops to
+        Reservation Station (RS) for all threads]
+  uops_issued.flags_merge                           
+       [Number of flags-merge uops being allocated]
+  uops_issued.single_mul                            
+       [Number of Multiply packed/scalar single precision uops allocated]
+  uops_issued.slow_lea                              
+       [Number of slow LEA uops being allocated. A uop is generally considered
+        SlowLea if it has 3 sources (e.g. 2 sources + immediate) regardless if
+        as a result of LEA instruction or not]
+  uops_issued.stall_cycles                          
+       [Cycles when Resource Allocation Table (RAT) does not issue Uops to
+        Reservation Station (RS) for the thread]
+  uops_retired.all                                  
+       [Actually retired uops (Precise event)]
+  uops_retired.core_stall_cycles                    
+       [Cycles without actually retired uops]
+  uops_retired.retire_slots                         
+       [Retirement slots used (Precise event)]
+  uops_retired.stall_cycles                         
+       [Cycles without actually retired uops]
+  uops_retired.total_cycles                         
+       [Cycles with less than 10 actually retired uops]
+
+uncore cache:
+  llc_misses.code_llc_prefetch                      
+       [LLC prefetch misses for code reads. Derived from
+        unc_c_tor_inserts.miss_opcode.code. Unit: uncore_cbox]
+  llc_misses.data_llc_prefetch                      
+       [LLC prefetch misses for data reads. Derived from
+        unc_c_tor_inserts.miss_opcode.data_read. Unit: uncore_cbox]
+  llc_misses.data_read                              
+       [LLC misses - demand and prefetch data reads - excludes LLC prefetches.
+        Derived from unc_c_tor_inserts.miss_opcode.demand. Unit: uncore_cbox]
+  llc_misses.itom_write                             
+       [LLC misses for ItoM writes (as part of fast string memcpy stores).
+        Derived from unc_c_tor_inserts.miss_opcode.itom_write. Unit:
+        uncore_cbox]
+  llc_misses.pcie_non_snoop_read                    
+       [LLC misses for PCIe non-snoop reads. Derived from
+        unc_c_tor_inserts.miss_opcode.pcie_read. Unit: uncore_cbox]
+  llc_misses.pcie_non_snoop_write                   
+       [LLC misses for PCIe non-snoop writes (full line). Derived from
+        unc_c_tor_inserts.miss_opcode.pcie_write. Unit: uncore_cbox]
+  llc_misses.pcie_read                              
+       [LLC misses for PCIe read current. Derived from
+        unc_c_tor_inserts.miss_opcode.pcie_read. Unit: uncore_cbox]
+  llc_misses.pcie_write                             
+       [PCIe allocating writes that miss LLC - DDIO misses. Derived from
+        unc_c_tor_inserts.miss_opcode.ddio_miss. Unit: uncore_cbox]
+  llc_misses.rfo_llc_prefetch                       
+       [LLC prefetch misses for RFO. Derived from
+        unc_c_tor_inserts.miss_opcode.rfo_prefetch. Unit: uncore_cbox]
+  llc_misses.uncacheable                            
+       [LLC misses - Uncacheable reads. Derived from
+        unc_c_tor_inserts.miss_opcode.uncacheable. Unit: uncore_cbox]
+  llc_references.itom_write                         
+       [ItoM write hits (as part of fast string memcpy stores). Derived from
+        unc_c_tor_inserts.opcode.itom_write_hit. Unit: uncore_cbox]
+  llc_references.pcie_ns_partial_write              
+       [PCIe non-snoop writes (partial). Derived from
+        unc_c_tor_inserts.opcode.pcie_partial_write. Unit: uncore_cbox]
+  llc_references.pcie_ns_read                       
+       [PCIe non-snoop reads. Derived from unc_c_tor_inserts.opcode.pcie_read.
+        Unit: uncore_cbox]
+  llc_references.pcie_ns_write                      
+       [PCIe non-snoop writes (full line). Derived from
+        unc_c_tor_inserts.opcode.pcie_full_write. Unit: uncore_cbox]
+  llc_references.pcie_partial_read                  
+       [Partial PCIe reads. Derived from
+        unc_c_tor_inserts.opcode.pcie_partial. Unit: uncore_cbox]
+  llc_references.pcie_read                          
+       [PCIe read current. Derived from
+        unc_c_tor_inserts.opcode.pcie_read_current. Unit: uncore_cbox]
+  llc_references.pcie_write                         
+       [PCIe allocating writes that hit in LLC (DDIO hits). Derived from
+        unc_c_tor_inserts.opcode.ddio_hit. Unit: uncore_cbox]
+  llc_references.streaming_full                     
+       [Streaming stores (full cache line). Derived from
+        unc_c_tor_inserts.opcode.streaming_full. Unit: uncore_cbox]
+  llc_references.streaming_partial                  
+       [Streaming stores (partial cache line). Derived from
+        unc_c_tor_inserts.opcode.streaming_partial. Unit: uncore_cbox]
+  unc_c_clockticks                                  
+       [Uncore cache clock ticks. Unit: uncore_cbox]
+  unc_c_llc_lookup.any                              
+       [All LLC Misses (code+ data rd + data wr - including demand and
+        prefetch). Unit: uncore_cbox]
+  unc_c_llc_victims.m_state                         
+       [M line evictions from LLC (writebacks to memory). Unit: uncore_cbox]
+  unc_c_tor_occupancy.llc_data_read                 
+       [Occupancy counter for LLC data reads (demand and L2 prefetch). Derived
+        from unc_c_tor_occupancy.miss_opcode.llc_data_read. Unit: uncore_cbox]
+  unc_c_tor_occupancy.miss_local                    
+       [Occupancy for all LLC misses that are addressed to local memory. Unit:
+        uncore_cbox]
+  unc_c_tor_occupancy.miss_remote                   
+       [Occupancy for all LLC misses that are addressed to remote memory.
+        Unit: uncore_cbox]
+  unc_h_requests.reads                              
+       [Read requests to home agent. Unit: uncore_ha]
+  unc_h_requests.writes                             
+       [Write requests to home agent. Unit: uncore_ha]
+  unc_h_snoop_resp.rsp_fwd_wb                       
+       [M line forwarded from remote cache along with writeback to memory.
+        Unit: uncore_ha]
+  unc_h_snoop_resp.rspifwd                          
+       [M line forwarded from remote cache with no writeback to memory. Unit:
+        uncore_ha]
+  unc_h_snoop_resp.rsps                             
+       [Shared line response from remote cache. Unit: uncore_ha]
+  unc_h_snoop_resp.rspsfwd                          
+       [Shared line forwarded from remote cache. Unit: uncore_ha]
+
+uncore memory:
+  llc_misses.mem_read                               
+       [Read requests to memory controller. Derived from unc_m_cas_count.rd.
+        Unit: uncore_imc]
+  llc_misses.mem_write                              
+       [Write requests to memory controller. Derived from unc_m_cas_count.wr.
+        Unit: uncore_imc]
+  unc_m_act_count.rd                                
+       [Memory page activates for reads and writes. Unit: uncore_imc]
+  unc_m_clockticks                                  
+       [Memory controller clock ticks. Use to generate percentages for memory
+        controller CYCLES events. Unit: uncore_imc]
+  unc_m_power_channel_ppd                           
+       [Cycles where DRAM ranks are in power down (CKE) mode. Unit: uncore_imc]
+  unc_m_power_critical_throttle_cycles              
+       [Cycles all ranks are in critical thermal throttle. Unit: uncore_imc]
+  unc_m_power_self_refresh                          
+       [Cycles Memory is in self refresh power mode. Unit: uncore_imc]
+  unc_m_pre_count.page_miss                         
+       [Memory page conflicts. Unit: uncore_imc]
+
+uncore power:
+  unc_p_clockticks                                  
+       [PCU clock ticks. Use to get percentages of PCU cycles events. Unit:
+        uncore_pcu]
+  unc_p_freq_band0_cycles                           
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to the frequency that is configured in the
+        filter. (filter_band0=XXX, with XXX in 100Mhz units). One can also use
+        inversion (filter_inv=1) to track cycles when we were less than the
+        configured frequency. Unit: uncore_pcu]
+  unc_p_freq_band0_transitions                      
+       [Counts the number of times that the uncore transitioned a frequency
+        greater than or equal to the frequency that is configured in the
+        filter. (filter_band0=XXX, with XXX in 100Mhz units). One can also use
+        inversion (filter_inv=1) to track cycles when we were less than the
+        configured frequency. Derived from unc_p_freq_band0_cycles. Unit:
+        uncore_pcu]
+  unc_p_freq_band1_cycles                           
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to the frequency that is configured in the
+        filter. (filter_band1=XXX, with XXX in 100Mhz units). One can also use
+        inversion (filter_inv=1) to track cycles when we were less than the
+        configured frequency. Unit: uncore_pcu]
+  unc_p_freq_band1_transitions                      
+       [Counts the number of times that the uncore transitioned to a frequency
+        greater than or equal to the frequency that is configured in the
+        filter. (filter_band1=XXX, with XXX in 100Mhz units). One can also use
+        inversion (filter_inv=1) to track cycles when we were less than the
+        configured frequency. Derived from unc_p_freq_band1_cycles. Unit:
+        uncore_pcu]
+  unc_p_freq_band2_cycles                           
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to the frequency that is configured in the
+        filter. (filter_band2=XXX, with XXX in 100Mhz units). One can also use
+        inversion (filter_inv=1) to track cycles when we were less than the
+        configured frequency. Unit: uncore_pcu]
+  unc_p_freq_band2_transitions                      
+       [Counts the number of cycles that the uncore transitioned to a
+        frequency greater than or equal to the frequency that is configured in
+        the filter. (filter_band2=XXX, with XXX in 100Mhz units). One can also
+        use inversion (filter_inv=1) to track cycles when we were less than
+        the configured frequency. Derived from unc_p_freq_band2_cycles. Unit:
+        uncore_pcu]
+  unc_p_freq_band3_cycles                           
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to the frequency that is configured in the
+        filter. (filter_band3=XXX, with XXX in 100Mhz units). One can also use
+        inversion (filter_inv=1) to track cycles when we were less than the
+        configured frequency. Unit: uncore_pcu]
+  unc_p_freq_band3_transitions                      
+       [Counts the number of cycles that the uncore transitioned to a
+        frequency greater than or equal to the frequency that is configured in
+        the filter. (filter_band3=XXX, with XXX in 100Mhz units). One can also
+        use inversion (filter_inv=1) to track cycles when we were less than
+        the configured frequency. Derived from unc_p_freq_band3_cycles. Unit:
+        uncore_pcu]
+  unc_p_freq_ge_1200mhz_cycles                      
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to 1.2Ghz. Derived from unc_p_freq_band0_cycles.
+        Unit: uncore_pcu]
+  unc_p_freq_ge_1200mhz_transitions                 
+       [Counts the number of times that the uncore transitioned to a frequency
+        greater than or equal to 1.2Ghz. Derived from unc_p_freq_band0_cycles.
+        Unit: uncore_pcu]
+  unc_p_freq_ge_2000mhz_cycles                      
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to 2Ghz. Derived from unc_p_freq_band1_cycles.
+        Unit: uncore_pcu]
+  unc_p_freq_ge_2000mhz_transitions                 
+       [Counts the number of times that the uncore transitioned to a frequency
+        greater than or equal to 2Ghz. Derived from unc_p_freq_band1_cycles.
+        Unit: uncore_pcu]
+  unc_p_freq_ge_3000mhz_cycles                      
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to 3Ghz. Derived from unc_p_freq_band2_cycles.
+        Unit: uncore_pcu]
+  unc_p_freq_ge_3000mhz_transitions                 
+       [Counts the number of cycles that the uncore transitioned to a
+        frequency greater than or equal to 3Ghz. Derived from
+        unc_p_freq_band2_cycles. Unit: uncore_pcu]
+  unc_p_freq_ge_4000mhz_cycles                      
+       [Counts the number of cycles that the uncore was running at a frequency
+        greater than or equal to 4Ghz. Derived from unc_p_freq_band3_cycles.
+        Unit: uncore_pcu]
+  unc_p_freq_ge_4000mhz_transitions                 
+       [Counts the number of cycles that the uncore transitioned to a
+        frequency greater than or equal to 4Ghz. Derived from
+        unc_p_freq_band3_cycles. Unit: uncore_pcu]
+  unc_p_freq_max_current_cycles                     
+       [Counts the number of cycles when current is the upper limit on
+        frequency. Unit: uncore_pcu]
+  unc_p_freq_max_limit_thermal_cycles               
+       [Counts the number of cycles when temperature is the upper limit on
+        frequency. Unit: uncore_pcu]
+  unc_p_freq_max_os_cycles                          
+       [Counts the number of cycles when the OS is the upper limit on
+        frequency. Unit: uncore_pcu]
+  unc_p_freq_max_power_cycles                       
+       [Counts the number of cycles when power is the upper limit on
+        frequency. Unit: uncore_pcu]
+  unc_p_freq_trans_cycles                           
+       [Cycles spent changing Frequency. Unit: uncore_pcu]
+  unc_p_power_state_occupancy.cores_c0              
+       [This is an occupancy event that tracks the number of cores that are in
+        C0. It can be used by itself to get the average number of cores in C0,
+        with threshholding to generate histograms, or with other PCU events
+        and occupancy triggering to capture other details. Unit: uncore_pcu]
+  unc_p_power_state_occupancy.cores_c3              
+       [This is an occupancy event that tracks the number of cores that are in
+        C3. It can be used by itself to get the average number of cores in C0,
+        with threshholding to generate histograms, or with other PCU events
+        and occupancy triggering to capture other details. Unit: uncore_pcu]
+  unc_p_power_state_occupancy.cores_c6              
+       [This is an occupancy event that tracks the number of cores that are in
+        C6. It can be used by itself to get the average number of cores in C0,
+        with threshholding to generate histograms, or with other PCU events .
+        Unit: uncore_pcu]
+  unc_p_prochot_external_cycles                     
+       [Counts the number of cycles that we are in external PROCHOT mode. This
+        mode is triggered when a sensor off the die determines that something
+        off-die (like DRAM) is too hot and must throttle to avoid damaging the
+        chip. Unit: uncore_pcu]
+
+virtual memory:
+  dtlb_load_misses.demand_ld_walk_completed         
+       [Demand load Miss in all translation lookaside buffer (TLB) levels
+        causes a page walk that completes of any page size]
+  dtlb_load_misses.demand_ld_walk_duration          
+       [Demand load cycles page miss handler (PMH) is busy with this walk]
+  dtlb_load_misses.large_page_walk_completed        
+       [Page walk for a large page completed for Demand load]
+  dtlb_load_misses.miss_causes_a_walk               
+       [Demand load Miss in all translation lookaside buffer (TLB) levels
+        causes an page walk of any page size]
+  dtlb_load_misses.stlb_hit                         
+       [Load operations that miss the first DTLB level but hit the second and
+        do not cause page walks]
+  dtlb_load_misses.walk_completed                   
+       [Demand load Miss in all translation lookaside buffer (TLB) levels
+        causes a page walk that completes of any page size]
+  dtlb_load_misses.walk_duration                    
+       [Demand load cycles page miss handler (PMH) is busy with this walk]
+  dtlb_store_misses.miss_causes_a_walk              
+       [Store misses in all DTLB levels that cause page walks]
+  dtlb_store_misses.stlb_hit                        
+       [Store operations that miss the first TLB level but hit the second and
+        do not cause page walks]
+  dtlb_store_misses.walk_completed                  
+       [Store misses in all DTLB levels that cause completed page walks]
+  dtlb_store_misses.walk_duration                   
+       [Cycles when PMH is busy with page walks]
+  ept.walk_cycles                                   
+       [Cycle count for an Extended Page table walk. The Extended Page
+        Directory cache is used by Virtual Machine operating systems while the
+        guest operating systems use the standard TLB caches]
+  itlb.itlb_flush                                   
+       [Flushing of the Instruction TLB (ITLB) pages, includes 4k/2M/4M pages]
+  itlb_misses.large_page_walk_completed             
+       [Completed page walks in ITLB due to STLB load misses for large pages]
+  itlb_misses.miss_causes_a_walk                    
+       [Misses at all ITLB levels that cause page walks]
+  itlb_misses.stlb_hit                              
+       [Operations that miss the first ITLB level but hit the second and do
+        not cause any page walks]
+  itlb_misses.walk_completed                        
+       [Misses in all ITLB levels that cause completed page walks]
+  itlb_misses.walk_duration                         
+       [Cycles when PMH is busy with page walks]
+  tlb_flush.dtlb_thread                             
+       [DTLB flush attempts of the thread-specific entries]
+  tlb_flush.stlb_any                                
+       [STLB flush attempts]
+  rNNN                                               [Raw hardware event descriptor]
+  cpu/t1=v1[,t2=v2,t3 ...]/modifier                  [Raw hardware event descriptor]
+  mem:<addr>[/len][:access]                          [Hardware breakpoint]
+  sdt_libc:lll_lock_wait_private                     [SDT event]
+  sdt_libc:longjmp                                   [SDT event]
+  sdt_libc:longjmp_target                            [SDT event]
+  sdt_libc:memory_arena_new                          [SDT event]
+  sdt_libc:memory_arena_retry                        [SDT event]
+  sdt_libc:memory_arena_reuse                        [SDT event]
+  sdt_libc:memory_arena_reuse_free_list              [SDT event]
+  sdt_libc:memory_arena_reuse_wait                   [SDT event]
+  sdt_libc:memory_calloc_retry                       [SDT event]
+  sdt_libc:memory_heap_free                          [SDT event]
+  sdt_libc:memory_heap_less                          [SDT event]
+  sdt_libc:memory_heap_more                          [SDT event]
+  sdt_libc:memory_heap_new                           [SDT event]
+  sdt_libc:memory_malloc_retry                       [SDT event]
+  sdt_libc:memory_mallopt                            [SDT event]
+  sdt_libc:memory_mallopt_arena_max                  [SDT event]
+  sdt_libc:memory_mallopt_arena_test                 [SDT event]
+  sdt_libc:memory_mallopt_free_dyn_thresholds        [SDT event]
+  sdt_libc:memory_mallopt_mmap_max                   [SDT event]
+  sdt_libc:memory_mallopt_mmap_threshold             [SDT event]
+  sdt_libc:memory_mallopt_mxfast                     [SDT event]
+  sdt_libc:memory_mallopt_perturb                    [SDT event]
+  sdt_libc:memory_mallopt_top_pad                    [SDT event]
+  sdt_libc:memory_mallopt_trim_threshold             [SDT event]
+  sdt_libc:memory_memalign_retry                     [SDT event]
+  sdt_libc:memory_realloc_retry                      [SDT event]
+  sdt_libc:memory_sbrk_less                          [SDT event]
+  sdt_libc:memory_sbrk_more                          [SDT event]
+  sdt_libc:memory_tunable_tcache_count               [SDT event]
+  sdt_libc:memory_tunable_tcache_max_bytes           [SDT event]
+  sdt_libc:memory_tunable_tcache_unsorted_limit      [SDT event]
+  sdt_libc:setjmp                                    [SDT event]
+
+Metric Groups:
+
+DSB:
+  DSB_Coverage
+	[Fraction of Uops delivered by the DSB (aka Decoded Icache; or Uop Cache)]
+FLOPS:
+  GFLOPs
+	[Giga Floating Point Operations Per Second]
+Frontend:
+  IFetch_Line_Utilization
+	[Rough Estimation of fraction of fetched lines bytes that were likely consumed by program instructions]
+Frontend_Bandwidth:
+  DSB_Coverage
+	[Fraction of Uops delivered by the DSB (aka Decoded Icache; or Uop Cache)]
+Memory_BW:
+  MLP
+	[Memory-Level-Parallelism (average number of L1 miss demand load when there is at least 1 such miss)]
+Memory_Bound:
+  Load_Miss_Real_Latency
+	[Actual Average Latency for L1 data-cache miss demand loads]
+  MLP
+	[Memory-Level-Parallelism (average number of L1 miss demand load when there is at least 1 such miss)]
+Memory_Lat:
+  Load_Miss_Real_Latency
+	[Actual Average Latency for L1 data-cache miss demand loads]
+Pipeline:
+  CPI
+	[Cycles Per Instruction (threaded)]
+  ILP
+	[Instruction-Level-Parallelism (average number of uops executed when there is at least 1 uop executed)]
+  UPI
+	[Uops Per Instruction]
+Ports_Utilization:
+  ILP
+	[Instruction-Level-Parallelism (average number of uops executed when there is at least 1 uop executed)]
+Power:
+  C2_Pkg_Residency
+	[C2 residency percent per package]
+  C3_Core_Residency
+	[C3 residency percent per core]
+  C3_Pkg_Residency
+	[C3 residency percent per package]
+  C6_Core_Residency
+	[C6 residency percent per core]
+  C6_Pkg_Residency
+	[C6 residency percent per package]
+  C7_Core_Residency
+	[C7 residency percent per core]
+  C7_Pkg_Residency
+	[C7 residency percent per package]
+  Turbo_Utilization
+	[Average Frequency Utilization relative nominal frequency]
+SMT:
+  CORE_CLKS
+	[Core actual clocks when any thread is active on the physical core]
+  CoreIPC
+	[Instructions Per Cycle (per physical core)]
+  SMT_2T_Utilization
+	[Fraction of cycles where both hardware threads were active]
+Summary:
+  CLKS
+	[Per-thread actual clocks when the logical processor is active. This is called 'Clockticks' in VTune]
+  CPI
+	[Cycles Per Instruction (threaded)]
+  CPU_Utilization
+	[Average CPU Utilization]
+  GFLOPs
+	[Giga Floating Point Operations Per Second]
+  Instructions
+	[Total number of retired Instructions]
+  Kernel_Utilization
+	[Fraction of cycles spent in Kernel mode]
+  SMT_2T_Utilization
+	[Fraction of cycles where both hardware threads were active]
+TLB:
+  Page_Walks_Utilization
+	[Utilization of the core's Page Walker(s) serving STLB misses triggered by instruction/Load/Store accesses]
+TopDownL1:
+  IPC
+	[Instructions Per Cycle (per logical thread)]
+  SLOTS
+	[Total issue-pipeline slots]
+Unknown_Branches:
+  BAClear_Cost
+	[Average Branch Address Clear Cost (fraction of cycles)]
