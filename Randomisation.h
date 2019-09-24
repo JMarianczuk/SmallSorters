@@ -11,7 +11,7 @@ namespace randomisation
 void SetSeed(uint64_t seed);
 
 template <RandomisationMode rMode>
-uint64_t GenerateRandomUint64() {}
+uint64_t GenerateRandomUint64();
 
 template <>
 uint64_t GenerateRandomUint64<RandomisationMode::DEFAULT>();
