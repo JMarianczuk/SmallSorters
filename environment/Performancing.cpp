@@ -22,7 +22,7 @@
 // };
 struct read_format {
 	uint64_t value;
-}
+};
 
 void Performancing::SetupPerformanceEventAttribute(PerformanceMetric metric)
 {
