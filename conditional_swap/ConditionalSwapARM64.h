@@ -17,9 +17,9 @@ public:
     {
         int tmp = left;
         __asm__(
-            "csel "
             "cmp %[right],%[left]\n\t"
             "csel %[left],%[right],%[left],LO\n\t"
+            "csel %[right],%[tmp],%[right],LO\n\t"
             // "movmi %[right],%[tmp]\n\t"
             : [left] "=&r" (left), [right] "=&r"(right)
             : "0"(left), "1"(right), [tmp] "r"(tmp)
