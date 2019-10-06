@@ -42,7 +42,7 @@ void PerformSplitterComparison(Key &splitterx, Key &splitter2, int &predResult)
 	#elif __aarch64__
 		__asm__(
 			"tst %[predResult],%[predResult]\n\t"
-			"movne %[splitterx], %[splitter2]\n\t"
+			"csel %[splitterx], %[splitter2], %[splitterx], NE\n\t"
 			: [splitterx] "=&r"(splitterx)
 			: "0"(splitterx), [splitter2] "r"(splitter2), [predResult] "r"(predResult)
 			: "cc"

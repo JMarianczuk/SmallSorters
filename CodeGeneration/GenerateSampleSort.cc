@@ -58,11 +58,23 @@ void WriteSplitterComparisonX86(CodeGenerator* gen)
     // });
 }
 
-void WriteSplitterComparisonARM(CodeGenerator* gen)
+void WriteSplitterComparisonARM32(CodeGenerator* gen)
 {
     WriteAsmBlock(gen, [=]{
         WriteAsmLine(gen, "tst %[predResult],%[predResult]");
         WriteAsmLine(gen, "movne %[splitterx], %[splitter2]");
+
+        gen->WriteLine(": [splitterx] \"=&r\"(splitterx)");
+        gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult)");
+        gen->WriteLine(": \"cc\"");
+    });
+}
+
+void WriteSplitterComparisonARM64(CodeGenerator* gen)
+{
+    WriteAsmBlock(gen, [=]{
+        WriteAsmLine(gen, "tst %[predResult],%[predResult]");
+        WriteAsmLine(gen, "csel %[splitterx], %[splitter2], %[splitterx], NE");
 
         gen->WriteLine(": [splitterx] \"=&r\"(splitterx)");
         gen->WriteLine(": \"0\"(splitterx), [splitter2] \"r\"(splitter2), [predResult] \"r\"(predResult)");
@@ -87,11 +99,11 @@ void WriteSplitterComparisonRoutine(CodeGenerator* gen)
         });
         gen->WriteLine("#elif __aarch64__");
         gen->WriteIndented([=]{
-            WriteSplitterComparisonARM(gen);
+            WriteSplitterComparisonARM64(gen);
         });
         gen->WriteLine("#elif __arm__");
         gen->WriteIndented([=]{
-            WriteSplitterComparisonARM(gen);
+            WriteSplitterComparisonARM32(gen);
         });
         gen->WriteLine("#else");
         gen->WriteIndented([=]{
