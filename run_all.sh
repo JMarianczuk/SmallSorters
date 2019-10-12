@@ -1,1 +1,1 @@
-./run_with_option.sh -nisq4 --cycles --l1icache
+./run_with_option.sh -nisq4 --cycles #--l1icache
