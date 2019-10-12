@@ -88,6 +88,20 @@ unsigned long long ReadTicks()
 		"rdtsc"
 		: "=a"(low), "=d"(high)
 	);
+#elif __aarch64__
+	int64_t svalue;
+	__asm__ volatile (
+		"mrs %0, cntcvt_e10"
+		: "=r"(svalue)
+	);
+	return (uint64_t) svalue;
+#elif __arm__
+	uint32_t raw_value;
+	__asm__ volatile (
+		"mrc p15, 0, %0, c9, c13, 0" 
+		: "=r"(raw_value)
+	);
+	return ((uint64_t) (raw_value)) * 64;
 #endif
 	return 
 	( 
