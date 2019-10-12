@@ -104,17 +104,17 @@ void Performancing::StartMeasuring() {
 #ifndef IGNORE_MEASUREMENT
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
 	_ticks = ReadTicks();
-	_time = std::chrono::steady_clock::now();
+	// _time = std::chrono::steady_clock::now();
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
 #endif
 }
 void Performancing::StopMeasuring() {
 #ifndef IGNORE_MEASUREMENT
 	auto newTicks = ReadTicks();
-    std::chrono::steady_clock::time_point timeEnd = std::chrono::steady_clock::now();
+    // std::chrono::steady_clock::time_point timeEnd = std::chrono::steady_clock::now();
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
 	_ticks = newTicks - _ticks;
-	_timeSpan = std::chrono::duration_cast<std::chrono::duration<int64_t, std::milli>>(timeEnd - _time);
+	// _timeSpan = std::chrono::duration_cast<std::chrono::duration<int64_t, std::milli>>(timeEnd - _time);
 #endif
 }
 
@@ -131,7 +131,7 @@ std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 	}
 	else 
 	{
-		childValue = _timeSpan.count();
+		childValue = _ticks;
 	}
 	// for (int i = 0; i < _readFormat->number; i += 1)
 	// {
