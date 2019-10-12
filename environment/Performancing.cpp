@@ -91,7 +91,7 @@ unsigned long long ReadTicks()
 #elif __aarch64__
 	int64_t svalue;
 	__asm__ volatile (
-		"mrs %0, cntcvt_e10"
+		"mrs %0, cntvct_el0"
 		: "=r"(svalue)
 	);
 	return (uint64_t) svalue;
