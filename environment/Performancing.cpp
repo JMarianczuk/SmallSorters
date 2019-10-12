@@ -50,7 +50,7 @@ void Performancing::SetupPerformanceEventAttribute(PerformanceMetric metric)
 	_performanceEventAttribute.disabled = 1;
 	_performanceEventAttribute.exclude_kernel = 1;
 	_performanceEventAttribute.exclude_hv = 1;
-	_performanceEventAttribute.read_format = PERF_FORMAT_GROUP | PERF_FORMAT_ID;
+	_performanceEventAttribute.read_format = PERF_FORMAT_ID;
 	_performanceChildEventAttribute.disabled = 0;
 	_performanceChildEventAttribute.exclude_kernel = 1;
 	_performanceChildEventAttribute.exclude_hv = 1;
