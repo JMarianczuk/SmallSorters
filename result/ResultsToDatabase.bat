@@ -1,5 +1,4 @@
 sqlplot import-data -D sqlite:small_sorters_result.sqlite stats%2 data/%1
-sqlite3 small_sorters_result.sqlite < createTypeColumn.sql
-sqlite3 small_sorters_result.sqlite < copyToSpecialTables.sql
-sqlite3 small_sorters_result.sqlite < temptransform.sql
-call MakeDeviationTables.bat
+sqlite3 small_sorters_result.sqlite -batch -cmd "ALTER TABLE stats%2 ADD COLUMN t VARCHAR; UPDATE stats%2 SET t = substr(s, 0, 10);" < sqlite.quit
+call CopyToSpecialTables.bat %2
+call MakeDeviationTables.bat %2

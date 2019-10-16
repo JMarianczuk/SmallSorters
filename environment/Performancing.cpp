@@ -13,15 +13,9 @@
 #include "../Enumerations.h"
 #include "Performancing.h"
 
-// struct read_format {
-// 	uint64_t number;
-// 	struct {
-// 		uint64_t value;
-// 		uint64_t id;
-// 	} values[];
-// };
 struct read_format {
 	uint64_t value;
+	uint64_t id;
 };
 
 void Performancing::SetupPerformanceEventAttribute(PerformanceMetric metric)
@@ -62,11 +56,9 @@ Performancing::Performancing(PerformanceMetric metric) {
 	_readFormat = (struct read_format*) _resultBuffer;
 	SetupPerformanceEventAttribute(metric);
 	_fileDescriptor = syscall(__NR_perf_event_open, &_performanceEventAttribute, 0, -1, -1, 0);
-	// ioctl(_fileDescriptor, PERF_EVENT_IOC_ID, &_idFirst);
 	// if (metric == PerformanceMetric::L1_INSTR_CACHE_MISSES)
 	// {
 	// 	_childFileDescriptor = syscall(__NR_perf_event_open, &_performanceChildEventAttribute, 0, -1, _fileDescriptor, 0);
-	// 	// ioctl(_fileDescriptor, PERF_EVENT_IOC_ID, &_idSecond);
 	// }
 }
 Performancing::~Performancing() {
@@ -137,28 +129,7 @@ std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 	auto _ = read(_fileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 
 	uint64_t value = _readFormat->value;
-	uint64_t childValue;
-	if (_performanceMetric == PerformanceMetric::L1_INSTR_CACHE_MISSES)
-	{
-		// _ = read(_childFileDescriptor, _resultBuffer, sizeof(_resultBuffer));
-		// childValue = _readFormat->value;
-	}
-	else 
-	{
-		childValue = _ticks;
-	}
-	// for (int i = 0; i < _readFormat->number; i += 1)
-	// {
-	// 	if (_readFormat->values[i].id == _idFirst)
-	// 	{
-	// 		value = _readFormat->values[i].value;
-	// 	}
-	// 	if (_readFormat->values[i].id == _idSecond)
-	// 	{
-	// 		childValue = _readFormat->values[i].value;
-	// 	}
-	// }
-	return {value, childValue};
+	return {value, 0};
 #else
 	return 0;
 #endif
