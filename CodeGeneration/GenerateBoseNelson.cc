@@ -102,10 +102,19 @@ RecursiveParameterNetwork BoseNelsonRecursiveParameterNetworkSplit(int length)
         {
             network.RecursiveSteps->push_back(firstHalfCall);
         }
+        else
+        {
+            Dispose(firstHalfCall);
+        }
         if (length - halfLength >= 2)
         {
             network.RecursiveSteps->push_back(secondHalfCall);
         }
+        else
+        {
+            Dispose(secondHalfCall);
+        }
+        
         network.RecursiveSteps->push_back(mergeCall);
     }
     return network;
@@ -237,13 +246,18 @@ RecursiveParameterNetwork GenerateBoseNelsonRecursiveParameterNetwork(int arrayS
     return BoseNelsonRecursiveParameterNetworkSplit(arraySize);
 }
 
-void Dispose(RecursiveParameterNetwork network)
+void Dispose(RecursiveParameterNetworkCall& recursiveCall)
+{
+    Dispose(recursiveCall.Network);
+    delete recursiveCall.FirstContextParametersIdsToUse;
+    delete recursiveCall.SecondContextParametersIdsToUse;
+}
+
+void Dispose(RecursiveParameterNetwork& network)
 {
     for (auto call : *network.RecursiveSteps)
     {
-        Dispose(call.Network);
-        delete call.FirstContextParametersIdsToUse;
-        delete call.SecondContextParametersIdsToUse;
+        Dispose(call);
     }
     delete network.RecursiveSteps;
 }

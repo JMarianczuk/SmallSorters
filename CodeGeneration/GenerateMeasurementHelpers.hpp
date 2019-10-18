@@ -167,7 +167,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
     return result;
 }
 
-std::string AddStructName(const std::string sorter, SortableStruct* sortableStruct)
+std::string AddStructName(const std::string& sorter, SortableStruct* sortableStruct)
 {
     std::string result(sorter);
     result += "K";

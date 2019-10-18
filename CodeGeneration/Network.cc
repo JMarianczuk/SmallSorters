@@ -70,10 +70,12 @@ std::vector<ConditionalSwap>* MergeNetworksForParallelism(
 {
     if (left->size() == 0)
     {
+        delete left;
         return right;
     }
     if (right->size() == 0)
     {
+        delete right;
         return left;
     }
     //assertion: The swaps from left are completely independent from the swaps from right

@@ -42,7 +42,8 @@ void WriteStructHelpers(CPlusPlusCodeGenerator* gen)
                 gen->WriteLine("return item.key;");
             });
         }
-        for (SortableStruct* sortableStruct : *VectorWhere<SortableStruct*>(&structs, [=](SortableStruct* ss){return ss->HasReference;}))
+        auto withReference = VectorWhere<SortableStruct*>(&structs, [=](SortableStruct* ss){return ss->HasReference;});
+        for (SortableStruct* sortableStruct : *withReference)
         {
             gen->WriteLine("template <>");
             gen->WriteLine("inline");
@@ -51,6 +52,7 @@ void WriteStructHelpers(CPlusPlusCodeGenerator* gen)
                 gen->WriteLine("return item.reference;");
             });
         }
+        delete withReference;
 
         gen->WriteClassDeclaration("SortableRefKeyGetter", []{}, [=]{
             gen->WriteLine("static inline uint64_t get(SortableRef& item)");
@@ -58,6 +60,9 @@ void WriteStructHelpers(CPlusPlusCodeGenerator* gen)
                 gen->WriteLine("return item.key;");
             });
         });
+
+        delete structs[0];
+        delete structs[1];
     });
 }
 

@@ -7,6 +7,14 @@
 namespace codegeneration
 {
 
+void Dispose(std::vector<MeasureParams>& measureParamsList)
+{
+    for (auto measureParams : measureParamsList)
+    {
+        delete measureParams.Structs;
+    }
+}
+
 MeasureParams GetParams(std::vector<SortableStruct*>* structs, std::string sortMethodPointer, std::string staticSortMethod, Sorter sorter, NetworkType networkType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None)
 {
     MeasureParams result =
@@ -138,7 +146,7 @@ void WriteCompleteSorterWrapperMeasureLine(
 
         gen->WriteLine("randomisation::SetSeed(seed);");
         gen->WriteLine(
-            "measurement::", 
+            "measurement::",
             measureMethod, 
             measureMethodTemplateParameters,
             "(perf, numberOfIterations, arraySize, measureIteration, \"", 
@@ -262,12 +270,20 @@ std::string SampleSortTypeToString(IpsoSampleSortType ssType)
 
 std::string BuildIpsoWrapperName(IpsoBaseCaseType bcType, IpsoSampleSortType ssType, int baseCaseSize)
 {
-    std::string result = "external::IpsoWrapper<" + BaseCaseTypeToString(bcType) + ", " + SampleSortTypeToString(ssType) + ", " + std::to_string(baseCaseSize);
-
-    //TODO
+    return "external::IpsoWrapper<" + BaseCaseTypeToString(bcType) + ", " + SampleSortTypeToString(ssType) + ", " + std::to_string(baseCaseSize) + ">";
 }
 
-void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName, std::vector<MeasureParams> mpList, std::string opt, int baseCaseSize, std::string samplesort, bool extraAction = false, bool stdSort = false, IpsoBaseCaseType bcType = IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType ssType = IpsoSampleSortType::NONE)
+void WriteIndividualIpsoMethod(
+    std::string filename, 
+    std::string ipsoMeasureName, 
+    std::vector<MeasureParams> mpList, 
+    std::string opt, 
+    int baseCaseSize, 
+    std::string samplesort, 
+    bool extraAction = false, 
+    bool stdSort = false, 
+    IpsoBaseCaseType bcType = IpsoBaseCaseType::INSERTION_SORT, 
+    IpsoSampleSortType ssType = IpsoSampleSortType::NONE)
 {
     std::vector<SortableStruct*> sRef = {DefSortable()}; // Def
     auto ipsoGen = new CPlusPlusCodeGenerator(filename);
@@ -316,7 +332,15 @@ void WriteIndividualIpsoMethod(std::string filename, std::string ipsoMeasureName
                             ipsoGen,
                             ssType == IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID ? &csRef : &sRef,
                             "MeasureCompleteSorter",
-                            BuildSorterName(Sorter::InsertionSort, NetworkType::None, MeasureType::Ipso, BoseNelsonNetworkType::None, Sorter::InsertionSort, 0, 0, 0, baseCaseSize, ssType == IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID),
+                            BuildSorterName(
+                                Sorter::InsertionSort, 
+                                NetworkType::None, 
+                                MeasureType::Ipso, 
+                                BoseNelsonNetworkType::None, 
+                                Sorter::InsertionSort, 
+                                0, 0, 0, 
+                                baseCaseSize, 
+                                ssType == IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID),
                             BuildIpsoWrapperName(bcType, ssType, baseCaseSize)
                         );
                     }
@@ -715,6 +739,8 @@ void GenerateMeasurementMethod(
                     );
                 }
             );
+
+            Dispose(sampleSortMeasureParams);
         }, "");
 
         std::vector<MeasureParams> ipsoMeasureParamsList = 
@@ -772,7 +798,11 @@ void GenerateMeasurementMethod(
             WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso3.generated.cpp", ipsoMeasureName + "3", {}, "0", 16, "", true, false, IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE);
             WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso4.generated.cpp", ipsoMeasureName + "4", {}, "0", 0, "", true, true);
         }
+
+        Dispose(ipsoMeasureParamsList);
     });
+
+    Dispose(measureParamsList);
 }
 
 }

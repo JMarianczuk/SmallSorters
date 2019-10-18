@@ -47,7 +47,8 @@ struct RecursiveParameterNetworkCall
     std::vector<int>* SecondContextParametersIdsToUse;
 };
 
-void Dispose(RecursiveParameterNetwork network);
+void Dispose(RecursiveParameterNetwork& network);
+void Dispose(RecursiveParameterNetworkCall& recursiveCall);
 
 RecursiveParameterNetwork GetRecursiveParameterSplit(int networkSize);
 RecursiveParameterNetwork GetRecursiveParameterMerge(int leftMergeSize, int rightMergeSize);

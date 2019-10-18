@@ -10,7 +10,7 @@ namespace codegeneration
 {
 
 template <typename ValueType>
-void Multicall(std::function<void(ValueType)> action, std::vector<ValueType> arguments)
+void Multicall(std::function<void(ValueType)> action, const std::vector<ValueType>& arguments)
 {
     for (ValueType parameter : arguments)
     {

@@ -238,6 +238,14 @@ void GenerateMeasurementLatex()
     delete latexGen;
 }
 
+void CleanupGlobalMemory()
+{
+    for (auto sortableStruct : *sortableStructs())
+    {
+        delete sortableStruct;
+    }
+}
+
 int main()
 {
     GenerateSortableStructs();
@@ -253,4 +261,6 @@ int main()
     GenerateNetworkVerifier();
 
     GenerateMeasurementLatex();
+
+    CleanupGlobalMemory();
 }
