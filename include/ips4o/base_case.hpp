@@ -42,6 +42,7 @@
 
 #include "ips4o_fwd.hpp"
 #include "utils.hpp"
+#include "../../Enumerations.h"
 #include "../../Sortable.generated.h"
 #include "../../sorters/QuickSort.h"
 #include "../../sorters/SampleSort.generated.h"
@@ -51,6 +52,7 @@
 
 namespace ips4o {
 namespace detail {
+
 
 /**
  * Insertion sort.
@@ -113,11 +115,11 @@ inline void nestedBaseCaseSort(It begin, It end, Comp&& comp)
 {
     typedef typename iterator_traits<It>::value_type ValueType;
 
-    if constexpr (Cfg::kSampleSortType == 1) {
+    if constexpr (Cfg::kSampleSortType == IpsoSampleSortType::SAMPLE_SORT_331) {
         samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<BaseCaseSorter, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>);
-    } else if constexpr (Cfg::kSampleSortType == 2) {
+    } else if constexpr (Cfg::kSampleSortType == IpsoSampleSortType::SAMPLE_SORT_332) {
         samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<BaseCaseSorter, SortableRefKeyGetter>(begin, end - begin, 16, &quicksort::templateLess<ValueType>);
-    } else if constexpr (Cfg::kSampleSortType == 3) {
+    } else if constexpr (Cfg::kSampleSortType == IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID) {
         if (end - begin <= 16)
         {
             BaseCaseSorter::sort(begin, end - begin);
@@ -136,29 +138,29 @@ inline void baseCaseSort(It begin, It end, Comp&& comp) {
     if (begin == end) return;
 
     // printf("RESULT\tbs=%" PRIu64 "\n", end - begin);
-    if constexpr (Cfg::kBaseCaseType == 0)
+    if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::INSERTION_SORT)
     {
         detail::insertionSort(std::move(begin), std::move(end), std::forward<Comp>(comp));
     }
     else
     {
         void(*sort)(It,It,Comp&&);
-        if constexpr (Cfg::kBaseCaseType == 1) {
+        if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::BEST_NETWORKS) {
             sort = &nestedBaseCaseSort<static_sorters::BestNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
             // sort = &networks::best::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
-        } else if constexpr (Cfg::kBaseCaseType == 2) {
+        } else if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::BOSE_NELSON_NETWORKS) {
             sort = &nestedBaseCaseSort<static_sorters::BoseNelsonNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
             // sort = &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
-        } else if constexpr (Cfg::kBaseCaseType == 3) {
+        } else if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::BOSE_NELSON_PARALLEL) {
             sort = &nestedBaseCaseSort<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
             // sort = &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
-        } else if constexpr (Cfg::kBaseCaseType == 5) {
+        } else if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::CUSTOM_INSERTION_SORT) {
             sort = &nestedBaseCaseSort<static_sorters::InsertionSort<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
             // sort = &insertionsort::InsertionSort<conditional_swap::CS_FourCmovTemp, ValueType>;
-        } else if constexpr (Cfg::kBaseCaseType == 6) {
+        } else if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::BOSE_NELSON_RECURSIVE) {
             sort = &nestedBaseCaseSort<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
             // sort = &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
-        } else if constexpr (Cfg::kBaseCaseType == 7) {
+        } else if constexpr (Cfg::kBaseCaseType == IpsoBaseCaseType::BOSE_NELSON_UNROLLED) {
             sort = &nestedBaseCaseSort<static_sorters::BoseNelsonUnrolledNetworks<conditional_swap::CS_FourCmovTemp>, Cfg, It, Comp>;
             // sort = &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, ValueType>;
         } else {

@@ -44,6 +44,7 @@
 
 #include "thread_pool.hpp"
 #include "utils.hpp"
+#include "../../Enumerations.h"
 
 #ifndef IPS4O_ALLOW_EQUAL_BUCKETS
 #define IPS4O_ALLOW_EQUAL_BUCKETS true
@@ -91,8 +92,8 @@
 
 namespace ips4o {
 
-template <int BaseCaseType_           = 0
-        , int SampleSortType_         = 0
+template <IpsoBaseCaseType BaseCaseType_           = IpsoBaseCaseType::INSERTION_SORT
+        , IpsoSampleSortType SampleSortType_         = IpsoSampleSortType::SAMPLE_SORT_331
         , bool AllowEqualBuckets_     = IPS4O_ALLOW_EQUAL_BUCKETS
         , std::ptrdiff_t BaseCase_    = IPS4O_BASE_CASE_SIZE
         , std::ptrdiff_t BaseCaseM_   = IPS4O_BASE_CASE_MULTIPLIER
@@ -117,8 +118,8 @@ struct Config {
     static constexpr const bool kIs64Bit = sizeof(std::uintptr_t) == 8;
     static_assert(kIs64Bit || sizeof(std::uintptr_t) == 4, "Architecture must be 32 or 64 bit");
 
-    static constexpr const int kBaseCaseType = BaseCaseType_;
-    static constexpr const int kSampleSortType = SampleSortType_;
+    static constexpr const IpsoBaseCaseType kBaseCaseType = BaseCaseType_;
+    static constexpr const IpsoSamplesortType kSampleSortType = SampleSortType_;
     /**
      * Whether equal buckets can be used.
      */
