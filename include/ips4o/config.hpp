@@ -119,7 +119,7 @@ struct Config {
     static_assert(kIs64Bit || sizeof(std::uintptr_t) == 4, "Architecture must be 32 or 64 bit");
 
     static constexpr const IpsoBaseCaseType kBaseCaseType = BaseCaseType_;
-    static constexpr const IpsoSamplesortType kSampleSortType = SampleSortType_;
+    static constexpr const IpsoSampleSortType kSampleSortType = SampleSortType_;
     /**
      * Whether equal buckets can be used.
      */

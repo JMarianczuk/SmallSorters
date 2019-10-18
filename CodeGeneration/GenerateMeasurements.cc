@@ -186,31 +186,29 @@ void WriteMeasureMethod(
     });
 }
 
-std::string GetNetworkId(MeasureParams measureParams)
+IpsoBaseCaseType GetIpsoBaseCaseType(MeasureParams measureParams)
 {
     if (measureParams._NetworkType == NetworkType::Best)
     {
-        return "1";
+        return IpsoBaseCaseType::BEST_NETWORKS;
     }
     if (measureParams._NetworkType == NetworkType::BoseNelson)
     {
         switch (measureParams._BoseNelsonNetworkType)
         {
             case BoseNelsonNetworkType::Locality:
-                return "2";
+                return IpsoBaseCaseType::BOSE_NELSON_NETWORKS;
             case BoseNelsonNetworkType::Parallelism:
-                return "3";
-            case BoseNelsonNetworkType::Parameter:
-                return "4";
+                return IpsoBaseCaseType::BOSE_NELSON_PARALLEL;
             case BoseNelsonNetworkType::Recursive:
-                return "6";
+                return IpsoBaseCaseType::BOSE_NELSON_RECURSIVE;
             case BoseNelsonNetworkType::Constexpr:
-                return "7";
+                return IpsoBaseCaseType::BOSE_NELSON_UNROLLED;
         }
     }
     if (measureParams._NetworkType == NetworkType::None)
     {
-        return "5";
+        throw std::logic_error("Wrong network type");
     }
 }
 
@@ -273,13 +271,43 @@ std::string BuildIpsoWrapperName(IpsoBaseCaseType bcType, IpsoSampleSortType ssT
     return "external::IpsoWrapper<" + BaseCaseTypeToString(bcType) + ", " + SampleSortTypeToString(ssType) + ", " + std::to_string(baseCaseSize) + ">";
 }
 
+int BlockSizeFromSampleSortType(IpsoSampleSortType ssType)
+{
+    switch (ssType)
+    {
+        case IpsoSampleSortType::SAMPLE_SORT_331:
+            return 1;
+        case IpsoSampleSortType::SAMPLE_SORT_332:
+            return 2;
+        default:
+            throw std::logic_error("Not applicable");
+    }
+}
+
+std::string GetNetworkDisplayName(MeasureParams mp)
+{
+    return BuildNetworkName(mp._NetworkType, mp._BoseNelsonNetworkType, false);
+}
+
+std::string GetSampleSortDisplayName(IpsoSampleSortType ssType)
+{
+    switch (ssType)
+    {
+        case IpsoSampleSortType::SAMPLE_SORT_331:
+            return "331";
+        case IpsoSampleSortType::SAMPLE_SORT_332:
+            return "332";
+        default:
+            throw std::logic_error("Not applicable");
+    }
+}
+
 void WriteIndividualIpsoMethod(
     std::string filename, 
     std::string ipsoMeasureName, 
     std::vector<MeasureParams> mpList, 
     std::string opt, 
-    int baseCaseSize, 
-    std::string samplesort, 
+    int baseCaseSize,
     bool extraAction = false, 
     bool stdSort = false, 
     IpsoBaseCaseType bcType = IpsoBaseCaseType::INSERTION_SORT, 
@@ -309,7 +337,7 @@ void WriteIndividualIpsoMethod(
                     ipsoGen,
                     measureParams.Structs,
                     "MeasureCompleteSorter",
-                    BuildSorterName(Sorter::SampleSort, measureParams._NetworkType, MeasureType::Ipso, measureParams._BoseNelsonNetworkType, measureParams._Sorter, 3, 3, std::stoi(samplesort), baseCaseSize),
+                    BuildSorterName(Sorter::SampleSort, measureParams._NetworkType, MeasureType::Ipso, measureParams._BoseNelsonNetworkType, measureParams._Sorter, 3, 3, BlockSizeFromSampleSortType(ssType), baseCaseSize),
                     "external::IpsoWrapper<" + opt + ">"
                 );
             },
@@ -781,22 +809,23 @@ void GenerateMeasurementMethod(
                 NetworkType::BoseNelson, 
                 BoseNelsonNetworkType::Recursive)
         };
-        for (std::string samplesort : {"1", "2"})
+        for (IpsoSampleSortType samplesort : {IpsoSampleSortType::SAMPLE_SORT_331, IpsoSampleSortType::SAMPLE_SORT_332})
         {
             for (auto mp : ipsoMeasureParamsList)
             {
                 for (int bcSize : {16, 32, 64})
                 {
                     std::string bcSizeStr = std::to_string(bcSize);
-                    std::string opt = GetNetworkId(mp) + "," + samplesort + "," + bcSizeStr;
-                    std::string opt2 = GetNetworkId(mp) + samplesort;
-                    WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso" + GetNetworkId(mp) + samplesort + "_" + bcSizeStr + ".generated.cpp", ipsoMeasureName + opt2 + "_" + bcSizeStr, {mp}, opt, bcSize, samplesort);
+                    auto bcType = GetIpsoBaseCaseType(mp);
+                    std::string opt = BaseCaseTypeToString(bcType) + "," + SampleSortTypeToString(samplesort) + "," + bcSizeStr;
+                    std::string opt2 = BaseCaseTypeToString(bcType) + SampleSortTypeToString(samplesort);
+                    WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso_" + GetNetworkDisplayName(mp) + "_" + GetSampleSortDisplayName(samplesort) + "_" + bcSizeStr + ".generated.cpp", ipsoMeasureName + opt2 + "_" + bcSizeStr, {mp}, opt, bcSize, false, false, bcType, samplesort);
                 }
             }
-            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "1", {}, "0", 16, "", true, false, IpsoBaseCaseType::BOSE_NELSON_RECURSIVE, IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID);
-            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso2.generated.cpp", ipsoMeasureName + "2", {}, "0", 32, "", true, false, IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE);
-            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso3.generated.cpp", ipsoMeasureName + "3", {}, "0", 16, "", true, false, IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE);
-            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso4.generated.cpp", ipsoMeasureName + "4", {}, "0", 0, "", true, true);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso1.generated.cpp", ipsoMeasureName + "1", {}, "0", 16, true, false, IpsoBaseCaseType::BOSE_NELSON_RECURSIVE, IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso2.generated.cpp", ipsoMeasureName + "2", {}, "0", 32, true, false, IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso3.generated.cpp", ipsoMeasureName + "3", {}, "0", 16, true, false, IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE);
+            WriteIndividualIpsoMethod("../../measurement/measurement_ipso/MeasurementIpso4.generated.cpp", ipsoMeasureName + "4", {}, "0", 0, true, true);
         }
 
         Dispose(ipsoMeasureParamsList);

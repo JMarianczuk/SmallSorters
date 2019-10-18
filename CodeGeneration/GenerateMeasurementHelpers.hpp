@@ -20,6 +20,48 @@ SortableStruct* POpSortable()
     return (*sortableStructs())[12];
 }
 
+std::string BuildNetworkName(NetworkType networkType, BoseNelsonNetworkType boseNelsonNetworkType, bool withSpaces = true)
+{
+    std::string result = "";
+    switch (networkType)
+    {
+        case NetworkType::Best:
+            result += "Best";
+            break;
+        case NetworkType::BoseNelson:
+            result += "BN";
+            break;
+        case NetworkType::Batcher:
+            result += "Batc";
+            break;
+        case NetworkType::None:
+            result += withSpaces ? "    " : "";
+            break;
+    }
+    switch (boseNelsonNetworkType)
+    {
+        case BoseNelsonNetworkType::Locality:
+            result += "Loc";
+            break;
+        case BoseNelsonNetworkType::Parallelism:
+            result += withSpaces ? "PL " : "PL";
+            break;
+        case BoseNelsonNetworkType::Parameter:
+            result += withSpaces ? "PM " : "PM";
+            break;
+        case BoseNelsonNetworkType::Recursive:
+            result += "Rec";
+            break;
+        case BoseNelsonNetworkType::Constexpr:
+            result += "CEx";
+            break;
+        case BoseNelsonNetworkType::None:
+            result += withSpaces ? " " : "";
+            break;
+    }
+    return result;
+}
+
 std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType measureType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, Sorter subSorter = Sorter::InsertionSort, int sampleSortSplits = 0, int sampleSortOversample = 0, int sampleSortBlockSize = 0, int ipsoBaseCaseSize = 0, bool isInsertionPlusNetwork = false)
 {
     std::string result = "";
@@ -93,42 +135,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             break;
     }
     result += " ";
-    switch (networkType)
-    {
-        case NetworkType::Best:
-            result += "Best";
-            break;
-        case NetworkType::BoseNelson:
-            result += "BN";
-            break;
-        case NetworkType::Batcher:
-            result += "Batc";
-            break;
-        case NetworkType::None:
-            result += "    ";
-            break;
-    }
-    switch (boseNelsonNetworkType)
-    {
-        case BoseNelsonNetworkType::Locality:
-            result += "Loc";
-            break;
-        case BoseNelsonNetworkType::Parallelism:
-            result += "PL ";
-            break;
-        case BoseNelsonNetworkType::Parameter:
-            result += "PM ";
-            break;
-        case BoseNelsonNetworkType::Recursive:
-            result += "Rec";
-            break;
-        case BoseNelsonNetworkType::Constexpr:
-            result += "CEx";
-            break;
-        case BoseNelsonNetworkType::None:
-            result += " ";
-            break;
-    }
+    result += BuildNetworkName(networkType, boseNelsonNetworkType);
     result += " ";
     switch (measureType)
     {

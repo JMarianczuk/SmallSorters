@@ -15,11 +15,11 @@
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso11_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpsoIpsoBaseCaseType::BOSE_NELSON_NETWORKSIpsoSampleSortType::SAMPLE_SORT_332_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -4 64_331 KR 4CS", &external::IpsoWrapper<1,1,64>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N BNLoc -4 64_332 KR 4CS", &external::IpsoWrapper<IpsoBaseCaseType::BOSE_NELSON_NETWORKS,IpsoSampleSortType::SAMPLE_SORT_332,64>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -4 64_331 KR 4CS");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N BNLoc -4 64_332 KR 4CS");
 }
 } // namespace measurement
