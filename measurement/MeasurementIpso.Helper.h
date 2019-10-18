@@ -9,34 +9,35 @@ namespace measurement
 
 void MeasureIpsoAll(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
-    MeasureIpso1(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso2(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso3(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso4(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Def16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Def32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Hybrid_Best(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Hybrid_BNRec(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Std(perf, seed, numberOfIterations, arraySize, measureIteration);
 
-    MeasureIpso11_16(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso11_32(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso11_64(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Best_331_16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Best_331_32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Best_331_64(perf, seed, numberOfIterations, arraySize, measureIteration);
 
-    MeasureIpso21_16(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso21_32(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso21_64(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNLoc_331_16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNLoc_331_32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNLoc_331_64(perf, seed, numberOfIterations, arraySize, measureIteration);
 
-    MeasureIpso61_16(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso61_32(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso61_64(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNRec_331_16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNRec_331_32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNRec_331_64(perf, seed, numberOfIterations, arraySize, measureIteration);
 
-    MeasureIpso12_16(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso12_32(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso12_64(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Best_332_16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Best_332_32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_Best_332_64(perf, seed, numberOfIterations, arraySize, measureIteration);
 
-    MeasureIpso22_16(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso22_32(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso22_64(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNLoc_332_16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNLoc_332_32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNLoc_332_64(perf, seed, numberOfIterations, arraySize, measureIteration);
     
-    MeasureIpso62_16(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso62_32(perf, seed, numberOfIterations, arraySize, measureIteration);
-    MeasureIpso62_64(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNRec_332_16(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNRec_332_32(perf, seed, numberOfIterations, arraySize, measureIteration);
+    MeasureIpso_BNRec_332_64(perf, seed, numberOfIterations, arraySize, measureIteration);
 }
 
 }

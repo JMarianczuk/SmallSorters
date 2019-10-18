@@ -10,16 +10,17 @@
 
 #include <inttypes.h>
 #include "../Measure.h"
+#include "../../Enumerations.h"
 #include "../../environment/Performancing.h"
 #include "../../sorters/StdSortWrapper.h"
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso2(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_Def16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 32_000 KR Def", &external::IpsoWrapper<IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE, 32>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 16_000 KR Def", &external::IpsoWrapper<IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE, 16>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 32_000 KR Def");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I       -4 16_000 KR Def");
 }
 } // namespace measurement

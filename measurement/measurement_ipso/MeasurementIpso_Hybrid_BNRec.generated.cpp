@@ -10,16 +10,17 @@
 
 #include <inttypes.h>
 #include "../Measure.h"
+#include "../../Enumerations.h"
 #include "../../environment/Performancing.h"
 #include "../../sorters/StdSortWrapper.h"
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso4(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_Hybrid_BNRec(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 KR Def", &measurement::StdSortWrapper);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I + N BN Rec  -4 16_000 KR 4CS", &external::IpsoWrapper<IpsoBaseCaseType::BOSE_NELSON_RECURSIVE, IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID, 16>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 KR Def");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "I + N BN Rec  -4 16_000 KR 4CS");
 }
 } // namespace measurement

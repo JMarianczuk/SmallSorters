@@ -3,6 +3,7 @@
 #define GEMERATE_MEASUREMENT_HELPERS_HPP
 
 #include "GenerateMeasurements.hpp"
+#include "../Enumerations.h"
 
 namespace codegeneration
 {
@@ -62,7 +63,18 @@ std::string BuildNetworkName(NetworkType networkType, BoseNelsonNetworkType bose
     return result;
 }
 
-std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType measureType, BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, Sorter subSorter = Sorter::InsertionSort, int sampleSortSplits = 0, int sampleSortOversample = 0, int sampleSortBlockSize = 0, int ipsoBaseCaseSize = 0, bool isInsertionPlusNetwork = false)
+std::string BuildSorterName(
+    Sorter sorter, 
+    NetworkType networkType, 
+    MeasureType measureType, 
+    BoseNelsonNetworkType boseNelsonNetworkType = BoseNelsonNetworkType::None, 
+    Sorter subSorter = Sorter::InsertionSort, 
+    int sampleSortSplits = 0, 
+    int sampleSortOversample = 0, 
+    int sampleSortBlockSize = 0, 
+    int ipsoBaseCaseSize = 0, 
+    bool isInsertionPlusNetwork = false,
+    IpsoBaseCaseType bcType = IpsoBaseCaseType::BEST_NETWORKS)
 {
     std::string result = "";
     switch (sorter)
@@ -71,7 +83,18 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             result += "I";
             if (isInsertionPlusNetwork)
             {
-                result += " + N";
+                result += " + N ";
+                switch (bcType)
+                {
+                    case IpsoBaseCaseType::BEST_NETWORKS:
+                        result += "Best  ";
+                        break;
+                    case IpsoBaseCaseType::BOSE_NELSON_RECURSIVE:
+                        result += "BN Rec";
+                        break;
+                    default:
+                        throw std::logic_error("BuildSorterName - I+N not implemented for this N");
+                }
             }
             break;
         case Sorter::SortNetwork:
@@ -135,7 +158,7 @@ std::string BuildSorterName(Sorter sorter, NetworkType networkType, MeasureType 
             break;
     }
     result += " ";
-    result += BuildNetworkName(networkType, boseNelsonNetworkType);
+    result += BuildNetworkName(networkType, boseNelsonNetworkType, !isInsertionPlusNetwork);
     result += " ";
     switch (measureType)
     {

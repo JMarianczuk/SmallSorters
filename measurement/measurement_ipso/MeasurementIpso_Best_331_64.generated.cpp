@@ -10,12 +10,13 @@
 
 #include <inttypes.h>
 #include "../Measure.h"
+#include "../../Enumerations.h"
 #include "../../environment/Performancing.h"
 #include "../../sorters/StdSortWrapper.h"
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpsoIpsoBaseCaseType::BEST_NETWORKSIpsoSampleSortType::SAMPLE_SORT_331_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_Best_331_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
 	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N Best  -4 64_331 KR 4CS", &external::IpsoWrapper<IpsoBaseCaseType::BEST_NETWORKS,IpsoSampleSortType::SAMPLE_SORT_331,64>);
