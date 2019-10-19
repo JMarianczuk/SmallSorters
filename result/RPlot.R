@@ -14,7 +14,8 @@ option_list = list(
     make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right"),
     make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%"),
     make_option(c("--percentFilter"), type="character", default="", help="name extra filter in case s is not enough"),
-    make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis")
+    make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis"),
+    make_option(c("--unit"), type="character", default="CPU cycles", help="if cycles or cache misses were measured")
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -47,11 +48,12 @@ if (options$title == "") {
 } else {
     plot_title <- options$title
 }
+
 thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
-    labs(x = "Sorting algorithm", y = "CPU cycles per iteration", title = plot_title) +
+    labs(x = "Sorting algorithm", y = paste(options$unit, " per iteration"), title = plot_title) +
     geom_boxplot() +
     coord_flip() + 
-    theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank(), strip.text.x = element_blank())
+    theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank(), strip.text.x = element_blank(), text = element_text(family="Times"))
 
 if (options$facetOut == "") {
     thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free")
@@ -66,7 +68,7 @@ if (options$percentAxis != "") {
     }
     percentQuery <- paste(percentQuery, " group by s", sep="");
     percentRes <- dbGetQuery(con, percentQuery)
-    breaks <- seq(0, 500, by=options$percentBy)
+    breaks <- seq(0, 5000, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
 }
 
