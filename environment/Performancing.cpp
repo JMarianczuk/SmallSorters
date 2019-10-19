@@ -28,12 +28,8 @@ void Performancing::SetupPerformanceEventAttribute(PerformanceMetric metric)
 		case PerformanceMetric::CPU_CYCLES:
 			_performanceEventAttribute.type = PERF_TYPE_HARDWARE;
 			_performanceEventAttribute.config = PERF_COUNT_HW_CPU_CYCLES;
-			break;
-		case PerformanceMetric::L1_INSTR_CACHE_MISSES:
-			_performanceEventAttribute.type = PERF_TYPE_HW_CACHE;
-			_performanceEventAttribute.config = PERF_COUNT_HW_CACHE_L1I | (PERF_COUNT_HW_CACHE_OP_READ << 8) | (PERF_COUNT_HW_CACHE_RESULT_MISS << 16);
 			_performanceChildEventAttribute.type = PERF_TYPE_HW_CACHE;
-			_performanceChildEventAttribute.config = PERF_COUNT_HW_CACHE_L1I | (PERF_COUNT_HW_CACHE_OP_READ << 8) | (PERF_COUNT_HW_CACHE_RESULT_ACCESS << 16);
+			_performanceChildEventAttribute.config = PERF_COUNT_HW_CACHE_L1I | (PERF_COUNT_HW_CACHE_OP_READ << 8) | (PERF_COUNT_HW_CACHE_RESULT_MISS << 16);
 			break;
 		case PerformanceMetric::BRANCH_MISSES:
 			_performanceEventAttribute.config = PERF_COUNT_HW_BRANCH_MISSES;
@@ -56,6 +52,7 @@ Performancing::Performancing(PerformanceMetric metric) {
 	_readFormat = (struct read_format*) _resultBuffer;
 	SetupPerformanceEventAttribute(metric);
 	_fileDescriptor = syscall(__NR_perf_event_open, &_performanceEventAttribute, 0, -1, -1, 0);
+	_childFileDescriptor = syscall(__NR_perf_event_open, &_performanceChildEventAttribute, 0, -1, _fileDescriptor, 0);
 	// if (metric == PerformanceMetric::L1_INSTR_CACHE_MISSES)
 	// {
 	// 	_childFileDescriptor = syscall(__NR_perf_event_open, &_performanceChildEventAttribute, 0, -1, _fileDescriptor, 0);
@@ -131,9 +128,12 @@ void Performancing::StopMeasuring() {
 std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 #ifndef IGNORE_MEASUREMENT
 	auto _ = read(_fileDescriptor, _resultBuffer, sizeof(_resultBuffer));
-
 	uint64_t value = _readFormat->value;
-	return {value, 0};
+
+	_ = read(_childFileDescriptor, _resultBuffer, sizeof(_resultBuffer));
+	uint64_t value2 = _readFormat->value;
+
+	return {value, value2};
 #else
 	return 0;
 #endif
