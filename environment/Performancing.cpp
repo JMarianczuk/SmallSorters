@@ -110,7 +110,7 @@ void Performancing::StartMeasuring() {
 
 	// _ticks = ReadTicks();
 
-	// _time = std::chrono::steady_clock::now();
+	_time = std::chrono::steady_clock::now();
 #endif
 }
 void Performancing::StopMeasuring() {
@@ -120,8 +120,8 @@ void Performancing::StopMeasuring() {
 	// auto newTicks = ReadTicks();
 	// _ticks = newTicks - _ticks;
 	
-    // std::chrono::steady_clock::time_point timeEnd = std::chrono::steady_clock::now();
-	// _timeSpan = std::chrono::duration_cast<std::chrono::duration<int64_t, std::milli>>(timeEnd - _time);
+    std::chrono::steady_clock::time_point timeEnd = std::chrono::steady_clock::now();
+	_timeSpan = std::chrono::duration_cast<std::chrono::duration<int64_t, std::milli>>(timeEnd - _time);
 #endif
 }
 
@@ -133,7 +133,7 @@ std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 	_ = read(_childFileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 	uint64_t value2 = _readFormat->value;
 
-	return {value, value2};
+	return {value, _timeSpan.count()};
 #else
 	return 0;
 #endif
