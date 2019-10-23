@@ -14,7 +14,9 @@ option_list = list(
     make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right"),
     make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%"),
     make_option(c("--percentFilter"), type="character", default="", help="name extra filter in case s is not enough"),
+    make_option(c("--secondAxis"), type="character", default="", help="name of the axis if second values are plotted"),
     make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis"),
+    make_option(c("--missesBy"), type="numeric", default=20, help="percent steps on the axis"),
     make_option(c("--unit"), type="character", default="CPU cycles", help="if cycles or cache misses were measured")
 )
 opt_parser = OptionParser(option_list = option_list)
@@ -23,7 +25,8 @@ options = parse_args(opt_parser)
 con <- dbConnect(SQLite(), options$dbName)
 someRes <- dbExecute(con, "PRAGMA case_sensitive_like=ON;")
 
-query <- paste("select (v / n) as normalized_value, s as sorter, t as sortergroup from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
+
+query <- paste("select (cycles / n) as normalized_value, cachemisses, s as sorter, t as sortergroup from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
 if (!options$complete) {
     query <- paste(query, "and a =", options$array_size)
 }
@@ -52,6 +55,7 @@ if (options$title == "") {
 thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
     labs(x = "Sorting algorithm", y = paste(options$unit, " per iteration"), title = plot_title) +
     geom_boxplot() +
+    geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * 70000), color = "blue") +
     coord_flip() + 
     theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank(), strip.text.x = element_blank(), text = element_text(family="Times"))
 
@@ -62,7 +66,7 @@ if (options$facetOut == "") {
 }
 
 if (options$percentAxis != "") {
-    percentQuery <- paste("select avg(v / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "'", sep="")
+    percentQuery <- paste("select avg(cycles / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "'", sep="")
     if (options$percentFilter != "") {
         percentQuery <- paste(percentQuery, "and", options$percentFilter)
     }
@@ -70,6 +74,9 @@ if (options$percentAxis != "") {
     percentRes <- dbGetQuery(con, percentQuery)
     breaks <- seq(0, 5000, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
+} else if (options$secondAxis != "") {
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / 70000, name = options$secondAxis)) +
+    theme(axis.title.x.top = element_text(color="blue"), axis.text.x.top = element_text(color="blue"))
 }
 
 ggsave(filenameExt, thisplot, width=18, height=11, units="cm")
