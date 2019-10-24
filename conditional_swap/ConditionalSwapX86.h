@@ -176,8 +176,12 @@ public:
             "cmovbq %[right_reference],%[left_reference]\n\t"
             "cmovbq %[tmp],%[right_key]\n\t"
             "cmovbq %[tmp_ref],%[right_reference]\n\t"
-            : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key), [left_reference] "=&r"(left.reference), [right_reference] "=&r"(right.reference), [tmp] "=&r"(tmp), [tmp_ref] "=&r"(tmpRef)
-            : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference), "4"(tmp), "5"(tmpRef)
+            : [left_key] "=&r"(left.key), [right_key] "=&r"(right.key),
+              [left_reference] "=&r"(left.reference),
+              [right_reference] "=&r"(right.reference),
+              [tmp] "=&r"(tmp), [tmp_ref] "=&r"(tmpRef)
+            : "0"(left.key), "1"(right.key), "2"(left.reference),
+              "3"(right.reference), "4"(tmp), "5"(tmpRef)
             : "cc" 
         ); 
     }
@@ -191,13 +195,13 @@ public:
     {
         Type* leftPointer = &left;
         Type* rightPointer = &right;
-        uint64_t rightKey = right.key;
         Type tmp = left;
         __asm__ volatile(
             "cmpq %[tmp_key],%[right_key]\n\t"
             "cmovbq %[right_pointer],%[left_pointer]\n\t"
             : [left_pointer] "=&r"(leftPointer)
-            : "0"(leftPointer), [right_pointer] "r"(rightPointer), [tmp_key] "r"(tmp.key), [right_key] "r"(rightKey)
+            : "0"(leftPointer), [right_pointer] "r"(rightPointer),
+              [tmp_key] "r"(tmp.key), [right_key] "r"(right.key)
             : "cc"
         );
         left = *leftPointer;
@@ -220,17 +224,18 @@ public:
     {
         Type* leftPointer = &left;
         Type* rightPointer = &right;
-        Type temp = left;
-        int predicateResult = (int) (right < temp);
+        Type tmp = left;
+        int predicateResult = (int) (right < tmp);
         __asm__ volatile(
             "cmp $0,%[predResult]\n\t"
             "cmovneq %[right_pointer],%[left_pointer]\n\t"
             : [left_pointer] "=&r"(leftPointer)
-            : "0"(leftPointer), [right_pointer] "r"(rightPointer), [predResult] "r"(predicateResult)
+            : "0"(leftPointer), [right_pointer] "r"(rightPointer),
+              [predResult] "r"(predicateResult)
             : "cc"
         );
         left = *leftPointer;
-        leftPointer = &temp;
+        leftPointer = &tmp;
         __asm__ volatile(
             "cmovneq %[left_pointer],%[right_pointer]\n\t"
             : [right_pointer] "=&r"(rightPointer)
