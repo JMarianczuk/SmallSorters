@@ -220,18 +220,22 @@ int main(int argumentCount, char** arguments)
         return 0;
     }
 
-    if (options.MeasureCpuCycles)
-    {
-        auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
-        PerformMeasurements(options, perf_cpu_cycles, arguments, argumentCount);
-        delete perf_cpu_cycles;
-    }
-    if (options.MeasureL1InstrCache)
-    {
-        auto perf_l1_instr_cache = new Performancing(PerformanceMetric::L1_INSTR_CACHE_MISSES);
-        PerformMeasurements(options, perf_l1_instr_cache, arguments, argumentCount);
-        delete perf_l1_instr_cache;
-    }
+    auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
+    PerformMeasurements(options, perf_cpu_cycles, arguments, argumentCount);
+    delete perf_cpu_cycles;
+
+    // if (options.MeasureCpuCycles)
+    // {
+    //     auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
+    //     PerformMeasurements(options, perf_cpu_cycles, arguments, argumentCount);
+    //     delete perf_cpu_cycles;
+    // }
+    // if (options.MeasureL1InstrCache)
+    // {
+    //     auto perf_l1_instr_cache = new Performancing(PerformanceMetric::L1_INSTR_CACHE_MISSES);
+    //     PerformMeasurements(options, perf_l1_instr_cache, arguments, argumentCount);
+    //     delete perf_l1_instr_cache;
+    // }
 
 	return 0;
 }

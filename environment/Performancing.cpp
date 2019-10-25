@@ -133,7 +133,7 @@ std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 	_ = read(_childFileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 	uint64_t value2 = _readFormat->value;
 
-	return {value, _timeSpan.count()};
+	return {value, value2};
 #else
 	return 0;
 #endif
