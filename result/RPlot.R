@@ -60,7 +60,13 @@ if (options$secondAxis != "") {
 }
 thisplot <- thisplot + 
     coord_flip() + 
-    theme(axis.text.y = element_text(family="Courier"), strip.background = element_blank(), strip.text.y = element_blank(), strip.text.x = element_blank(), text = element_text(family="Times"))
+    theme(axis.text.x = element_text(family="Times", size=10),
+          axis.text.y = element_text(family="Courier", size=9),
+          strip.background = element_blank(),
+          strip.text.y = element_blank(),
+          strip.text.x = element_blank(),
+          plot.title = element_text(hjust = 0.5),
+          text = element_text(family="Times", size=10))
 
 if (options$facetOut == "") {
     thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free")
@@ -82,4 +88,4 @@ if (options$percentAxis != "") {
     theme(axis.title.x.top = element_text(color="blue"), axis.text.x.top = element_text(color="blue"))
 }
 
-ggsave(filenameExt, thisplot, width=18, height=11, units="cm")
+ggsave(filenameExt, thisplot, width=17, height=10, units="cm")
