@@ -65,7 +65,7 @@ thisplot <- thisplot +
           strip.background = element_blank(),
           strip.text.y = element_blank(),
           strip.text.x = element_blank(),
-          plot.title = element_text(hjust = 0.5),
+          plot.title = element_text(family="Times", size=12, hjust = 0.5),
           text = element_text(family="Times", size=10))
 
 if (options$facetOut == "") {
