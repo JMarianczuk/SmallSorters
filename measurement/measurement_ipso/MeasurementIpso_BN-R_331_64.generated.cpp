@@ -16,11 +16,7 @@
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso_Def32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_BN-R_331_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
-	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -4 32_000 ISwp", &external::IpsoWrapper<IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE, 32>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -4 32_000 ISwp");
 }
 } // namespace measurement

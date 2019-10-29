@@ -8,7 +8,7 @@
 namespace codegeneration
 {
 
-SortableStruct* DefSortable()
+SortableStruct* IfSwapSortable()
 {
     return (*sortableStructs())[0];
 }
@@ -42,22 +42,22 @@ std::string BuildNetworkName(NetworkType networkType, BoseNelsonNetworkType bose
     switch (boseNelsonNetworkType)
     {
         case BoseNelsonNetworkType::Locality:
-            result += "Loc";
+            result += "-L";
             break;
         case BoseNelsonNetworkType::Parallelism:
-            result += withSpaces ? "PL " : "PL";
+            result += "-P";
             break;
         case BoseNelsonNetworkType::Parameter:
-            result += withSpaces ? "PM " : "PM";
+            // result += withSpaces ? "PM " : "PM";
             break;
         case BoseNelsonNetworkType::Recursive:
-            result += "Rec";
+            result += "-R";
             break;
         case BoseNelsonNetworkType::Constexpr:
-            result += "CEx";
+            // result += "CEx";
             break;
         case BoseNelsonNetworkType::None:
-            result += withSpaces ? " " : "";
+            // result += withSpaces ? "" : "";
             break;
     }
     return result;
@@ -80,25 +80,25 @@ std::string BuildSorterName(
     switch (sorter)
     {
         case Sorter::InsertionSort:
-            result += "I";
+            result += "IS";
             if (isInsertionPlusNetwork)
             {
-                result += " + N ";
+                result += "+SN ";
                 switch (bcType)
                 {
                     case IpsoBaseCaseType::BEST_NETWORKS:
-                        result += "Best  ";
+                        result += "Best";
                         break;
                     case IpsoBaseCaseType::BOSE_NELSON_RECURSIVE:
-                        result += "BN Rec";
+                        result += "BN-R";
                         break;
                     default:
-                        throw std::logic_error("BuildSorterName - I+N not implemented for this N");
+                        throw std::logic_error("BuildSorterName - IS+SN not implemented for this SN");
                 }
             }
             break;
         case Sorter::SortNetwork:
-            result += "N";
+            result += "SN";
             break;
         case Sorter::StdSort:
             result += "StdSort ";
@@ -150,10 +150,10 @@ std::string BuildSorterName(
             switch (subSorter)
             {
                 case Sorter::InsertionSort:
-                    result += "I";
+                    result += "IS";
                     break;
                 case Sorter::SortNetwork:
-                    result += "N";
+                    result += "SN";
             }
             break;
     }
@@ -200,9 +200,6 @@ std::string BuildSorterName(
 std::string AddStructName(const std::string& sorter, SortableStruct* sortableStruct)
 {
     std::string result(sorter);
-    result += "K";
-    result += sortableStruct->HasReference ? "R" : " ";
-    result += " ";
 
     result += sortableStruct->NameAbbreviation;
 

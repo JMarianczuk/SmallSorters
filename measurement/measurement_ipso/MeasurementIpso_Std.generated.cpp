@@ -19,8 +19,8 @@ namespace measurement
 void MeasureIpso_Std(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 KR Def", &measurement::StdSortWrapper);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 ", &measurement::StdSortWrapper);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 KR Def");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -4 ");
 }
 } // namespace measurement
