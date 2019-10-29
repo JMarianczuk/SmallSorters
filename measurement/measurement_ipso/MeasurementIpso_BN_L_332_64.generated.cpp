@@ -16,7 +16,7 @@
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso_BN-L_332_32(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_BN_L_332_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 }
 } // namespace measurement

@@ -16,11 +16,7 @@
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso_BNRec_332_64(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_BN_L_332_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
-	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N BNRec -4 64_332 KR 4CS", &external::IpsoWrapper<IpsoBaseCaseType::BOSE_NELSON_RECURSIVE,IpsoSampleSortType::SAMPLE_SORT_332,64>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+N BNRec -4 64_332 KR 4CS");
 }
 } // namespace measurement

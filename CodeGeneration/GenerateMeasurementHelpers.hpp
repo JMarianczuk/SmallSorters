@@ -21,7 +21,7 @@ SortableStruct* POpSortable()
     return (*sortableStructs())[12];
 }
 
-std::string BuildNetworkName(NetworkType networkType, BoseNelsonNetworkType boseNelsonNetworkType, bool withSpaces = true)
+std::string BuildNetworkName(NetworkType networkType, BoseNelsonNetworkType boseNelsonNetworkType, bool forFileName = false)
 {
     std::string result = "";
     switch (networkType)
@@ -36,28 +36,28 @@ std::string BuildNetworkName(NetworkType networkType, BoseNelsonNetworkType bose
             result += "Batc";
             break;
         case NetworkType::None:
-            result += withSpaces ? "    " : "";
+            result += forFileName ? "" : "    ";
             break;
     }
     switch (boseNelsonNetworkType)
     {
         case BoseNelsonNetworkType::Locality:
-            result += "-L";
+            result += forFileName ? "_L" : "-L";
             break;
         case BoseNelsonNetworkType::Parallelism:
-            result += "-P";
+            result += forFileName ? "_P" : "-P";
             break;
         case BoseNelsonNetworkType::Parameter:
-            // result += withSpaces ? "PM " : "PM";
+            // result += forFileName ? "PM" : "PM ";
             break;
         case BoseNelsonNetworkType::Recursive:
-            result += "-R";
+            result += forFileName ? "_R" : "-R";
             break;
         case BoseNelsonNetworkType::Constexpr:
             // result += "CEx";
             break;
         case BoseNelsonNetworkType::None:
-            // result += withSpaces ? "" : "";
+            // result += forFileName ? "" : "";
             break;
     }
     return result;

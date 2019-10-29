@@ -16,11 +16,11 @@
 #include "../../sorters/Ipso.h"
 namespace measurement
 {
-void MeasureIpso_Hybrid_BNRec(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
+void MeasureIpso_Hybrid_BN_R(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS+SN BN-R  -4 16_000 4CmS", &external::IpsoWrapper<IpsoBaseCaseType::BOSE_NELSON_RECURSIVE, IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID, 16>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS+SN BN-R      -4 16_000 4CmS", &external::IpsoWrapper<IpsoBaseCaseType::BOSE_NELSON_RECURSIVE, IpsoSampleSortType::INSERTION_SORT_NETWORK_HYBRID, 16>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS+SN BN-R  -4 16_000 4CmS");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS+SN BN-R      -4 16_000 4CmS");
 }
 } // namespace measurement
