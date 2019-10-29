@@ -160,7 +160,7 @@ public:
     }
 };
 
-class CS_ClangVersion
+class CS_TwoConditionalPointerMove
 {
 public:
     template <typename Type>
@@ -189,7 +189,7 @@ public:
     }
 };
 
-class CS_ClangPredicate
+class CS_TwoConditionalPointerMovePredicate
 {
 public:
     template <typename Type>

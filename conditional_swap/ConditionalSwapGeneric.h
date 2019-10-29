@@ -7,7 +7,7 @@
 namespace conditional_swap
 {
 
-class CS_Default
+class CS_IfSwap
 {
 public:
     template <typename Type>
@@ -28,7 +28,7 @@ public:
     }
 };
 
-class CS_QMark
+class CS_TernaryConditionalOperator
 {
 public:
     template <typename Type>
