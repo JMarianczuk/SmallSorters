@@ -1,1 +1,1 @@
-Rscript RPlot.R --dbName="%1" --tableName="ipsoSortWithout%2" --filePostfix="ipso-%2" --filter="s not like '%%StdSort%%'" --complete=TRUE --title="IPSSSSo" --percentAxis="I       -4 16_000 KR Def" --percentBy=2
+Rscript RPlot.R --dbName="%1" --tableName="ipsoSortWithout%2" --filePostfix="ipso-%2" --filter="s not like '%%StdSort%%'" --complete=TRUE --title="IPSSSSo" --percentAxis="IS      -4 16_000 Def" --percentBy=2

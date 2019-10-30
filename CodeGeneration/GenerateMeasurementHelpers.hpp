@@ -16,6 +16,10 @@ SortableStruct* FourCSSortable()
 {
     return (*sortableStructs())[5];
 }
+SortableStruct* DefSortable()
+{
+    return (*sortableStructs())[10];
+}
 SortableStruct* POpSortable()
 {
     return (*sortableStructs())[12];
@@ -158,7 +162,7 @@ std::string BuildSorterName(
             break;
     }
     result += " ";
-    result += BuildNetworkName(networkType, boseNelsonNetworkType, !isInsertionPlusNetwork);
+    result += BuildNetworkName(networkType, boseNelsonNetworkType, isInsertionPlusNetwork);
     result += " ";
     switch (measureType)
     {

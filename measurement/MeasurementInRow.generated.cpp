@@ -33,73 +33,58 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -I Tie ", &networks::best::sortN<conditional_swap::CS_Tie, SortableRef>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I ISwp", &networks::bosenelson::sortN<conditional_swap::CS_IfSwap, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I ISwp", &networks::bosenelson::sortN<conditional_swap::CS_IfSwap, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I JXhg", &networks::bosenelson::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I JXhg", &networks::bosenelson::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I 4Cm ", &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I 4Cm ", &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I 4CmS", &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I 4CmS", &networks::bosenelson::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I 2CPm", &networks::bosenelson::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I 2CPm", &networks::bosenelson::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I 2CPp", &networks::bosenelson::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I 2CPp", &networks::bosenelson::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_L -I Tie ", &networks::bosenelson::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -I Tie ", &networks::bosenelson::sortN<conditional_swap::CS_Tie, SortableRef>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I ISwp", &networks::bosenelsonparallel::sortN<conditional_swap::CS_IfSwap, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I ISwp", &networks::bosenelsonparallel::sortN<conditional_swap::CS_IfSwap, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I JXhg", &networks::bosenelsonparallel::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I JXhg", &networks::bosenelsonparallel::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I 4Cm ", &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I 4Cm ", &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I 4CmS", &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I 4CmS", &networks::bosenelsonparallel::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I 2CPm", &networks::bosenelsonparallel::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I 2CPm", &networks::bosenelsonparallel::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I 2CPp", &networks::bosenelsonparallel::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I 2CPp", &networks::bosenelsonparallel::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_P -I Tie ", &networks::bosenelsonparallel::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I Tie ", &networks::bosenelsonparallel::sortN<conditional_swap::CS_Tie, SortableRef>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS  -I Def", &insertionsort::InsertionSort<insertionsort::InsertionSort_Default, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I Def", &insertionsort::InsertionSort<insertionsort::InsertionSort_Default, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS  -I STL", &insertionsort::InsertionSort<insertionsort::InsertionSort_StlVersion, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I STL", &insertionsort::InsertionSort<insertionsort::InsertionSort_StlVersion, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS  -I POp", &insertionsort::InsertionSort<insertionsort::InsertionSort_PointerOptimized, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I POp", &insertionsort::InsertionSort<insertionsort::InsertionSort_PointerOptimized, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS  -I AIF", &insertionsort::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I AIF", &insertionsort::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck, SortableRef>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I ISwp", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_IfSwap, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I ISwp", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_IfSwap, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I JXhg", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I JXhg", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I 4Cm ", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I 4Cm ", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I 4CmS", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I 4CmS", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I 2CPm", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I 2CPm", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I 2CPp", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I 2CPp", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN_R -I Tie ", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_Tie, SortableRef>);
-	
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I ISwp", &networks::bosenelson_2::sortN<conditional_swap::CS_IfSwap, SortableRef>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I JXhg", &networks::bosenelson_2::sortN<conditional_swap::CS_JumpXchg_Ref, SortableRef>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I 4Cm ", &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp, SortableRef>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I 4CmS", &networks::bosenelson_2::sortN<conditional_swap::CS_FourCmovTemp_Split, SortableRef>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I 2CPm", &networks::bosenelson_2::sortN<conditional_swap::CS_TwoConditionalPointerMove, SortableRef>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I 2CPp", &networks::bosenelson_2::sortN<conditional_swap::CS_TwoConditionalPointerMovePredicate, SortableRef>);
-	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN -I Tie ", &networks::bosenelson_2::sortN<conditional_swap::CS_Tie, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I Tie ", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_Tie, SortableRef>);
 	
 }
 } // namespace measurement
