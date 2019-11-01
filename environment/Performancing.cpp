@@ -103,6 +103,11 @@ unsigned long long ReadTicks()
 	);
 }
 
+static inline int64_t Timestamp()
+{
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+}
+
 void Performancing::StartMeasuring() {
 #ifndef IGNORE_MEASUREMENT
 	ioctl(_fileDescriptor, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
@@ -110,7 +115,8 @@ void Performancing::StartMeasuring() {
 
 	// _ticks = ReadTicks();
 
-	_time = std::chrono::steady_clock::now();
+	// _time = std::chrono::steady_clock::now();
+	_timestamp = Timestamp();
 #endif
 }
 void Performancing::StopMeasuring() {
@@ -120,12 +126,13 @@ void Performancing::StopMeasuring() {
 	// auto newTicks = ReadTicks();
 	// _ticks = newTicks - _ticks;
 	
-    std::chrono::steady_clock::time_point timeEnd = std::chrono::steady_clock::now();
-	_timeSpan = std::chrono::duration_cast<std::chrono::duration<int64_t, std::milli>>(timeEnd - _time);
+    // std::chrono::steady_clock::time_point timeEnd = std::chrono::steady_clock::now();
+	// _timeSpan = std::chrono::duration_cast<std::chrono::duration<int64_t, std::milli>>(timeEnd - _time);
+	_timestamp = Timestamp() - _timestamp;
 #endif
 }
 
-std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
+std::tuple<uint64_t, uint64_t, int64_t> Performancing::GetValues() {
 #ifndef IGNORE_MEASUREMENT
 	auto _ = read(_fileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 	uint64_t value = _readFormat->value;
@@ -133,7 +140,7 @@ std::tuple<uint64_t, uint64_t> Performancing::GetValues() {
 	_ = read(_childFileDescriptor, _resultBuffer, sizeof(_resultBuffer));
 	uint64_t value2 = _readFormat->value;
 
-	return {value, value2};
+	return {value, value2, _timestamp};
 #else
 	return 0;
 #endif

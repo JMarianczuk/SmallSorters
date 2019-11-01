@@ -9,7 +9,7 @@
 namespace conditional_swap
 {
 
-class CS_Int
+class CS_Int final
 {
 public:
     static inline void swap(int& left, int& right)
@@ -18,7 +18,7 @@ public:
     }
 };
 
-class CS_JumpXchg
+class CS_JumpXchg final
 {
 public:
     template <typename Type>
@@ -28,7 +28,7 @@ public:
     }
 };
 
-class CS_JumpXchg_Ref
+class CS_JumpXchg_Ref final
 {
 public:
     template <typename Type>
@@ -38,7 +38,7 @@ public:
     }
 };
 
-class CS_TwoCmovTemp
+class CS_TwoCmovTemp final
 {
 public:
     template <typename Type>
@@ -48,7 +48,7 @@ public:
     }
 };
 
-class CS_FourCmovTemp
+class CS_FourCmovTemp final
 {
 public:
     template <typename Type>
@@ -58,7 +58,7 @@ public:
     }
 };
 
-class CS_FourCmovTemp_Split
+class CS_FourCmovTemp_Split final
 {
 public:
     template <typename Type>
@@ -68,7 +68,7 @@ public:
     }
 };
 
-class CS_ThreeCmovTemp
+class CS_ThreeCmovTemp final
 {
 public:
     template <typename Type>
@@ -78,7 +78,7 @@ public:
     }
 };
 
-class CS_SixCmovTemp
+class CS_SixCmovTemp final
 {
 public:
     template <typename Type>
@@ -88,7 +88,7 @@ public:
     }
 };
 
-class CS_TwoConditionalPointerMove
+class CS_TwoConditionalPointerMove final
 {
 public:
     template <typename Type>
@@ -98,7 +98,7 @@ public:
     }
 };
 
-class CS_TwoConditionalPointerMovePredicate
+class CS_TwoConditionalPointerMovePredicate final
 {
 public:
     template <typename Type>

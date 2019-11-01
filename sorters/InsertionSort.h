@@ -7,7 +7,7 @@
 
 namespace insertionsort {
 
-class InsertionSort_Default
+class InsertionSort_Default final
 {
 public:
     template <typename Type>
@@ -25,7 +25,7 @@ public:
     }
 };
 
-class InsertionSort_ArrayIndex_FirstCheck
+class InsertionSort_ArrayIndex_FirstCheck final
 {
 public:
     template <typename Type>
@@ -52,7 +52,7 @@ public:
     }
 };
 
-class InsertionSort_PointerOptimized
+class InsertionSort_PointerOptimized final
 {
 public:
     template <typename Type>
@@ -75,7 +75,7 @@ public:
     }
 };
 
-class InsertionSort_StlVersion
+class InsertionSort_StlVersion final
 {
 public:
     template <typename Type>

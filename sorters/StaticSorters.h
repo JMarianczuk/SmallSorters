@@ -15,7 +15,7 @@ namespace static_sorters
 {
 
 template <typename CSwap>
-class BestNetworks
+class BestNetworks final
 {
 public:
     template <typename ValueType>
@@ -26,7 +26,7 @@ public:
 };
 
 template <typename CSwap>
-class BoseNelsonNetworks
+class BoseNelsonNetworks final
 {
 public:
     template <typename ValueType>
@@ -37,7 +37,7 @@ public:
 };
 
 template <typename CSwap>
-class BoseNelsonParallelNetworks
+class BoseNelsonParallelNetworks final
 {
 public:
     template <typename ValueType>
@@ -48,7 +48,7 @@ public:
 };
 
 template <typename CSwap>
-class BoseNelsonParameterNetworks
+class BoseNelsonParameterNetworks final
 {
 public:
     template <typename ValueType>
@@ -59,7 +59,7 @@ public:
 };
 
 template <typename Implementation>
-class InsertionSort
+class InsertionSort final
 {
 public:
     template <typename ValueType>
@@ -70,7 +70,7 @@ public:
 };
 
 template <typename CSwap>
-class BoseNelsonRecursiveNetworks
+class BoseNelsonRecursiveNetworks final
 {
 public:
     template <typename ValueType>
@@ -81,7 +81,7 @@ public:
 };
 
 template <typename CSwap>
-class BoseNelsonUnrolledNetworks
+class BoseNelsonUnrolledNetworks final
 {
 public:
     template <typename ValueType>
@@ -91,7 +91,7 @@ public:
     }
 };
 
-class SampleSort
+class SampleSort final
 {
 public:
     template <typename ValueType, typename Predicate>
@@ -101,7 +101,7 @@ public:
     }
 };
 
-class StdSort
+class StdSort final
 {
 public:
     template <typename ValueType, typename Predicate>
@@ -112,7 +112,7 @@ public:
 };
 
 template <typename Implementation>
-class InsertionSortPred
+class InsertionSortPred final
 {
 public:
     template <typename ValueType, typename Predicate>

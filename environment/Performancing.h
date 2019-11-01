@@ -12,7 +12,7 @@
 
 #include "../Enumerations.h"
 
-class Performancing {
+class Performancing final {
 private:
     struct perf_event_attr _performanceEventAttribute;
     struct perf_event_attr _performanceChildEventAttribute;
@@ -24,6 +24,7 @@ private:
     int _childFileDescriptor;
     PerformanceMetric _performanceMetric;
     unsigned long long _ticks;
+    int64_t _timestamp;
     std::chrono::steady_clock::time_point _time;
     std::chrono::duration<int64_t, std::milli> _timeSpan;
 
@@ -33,7 +34,7 @@ public:
     ~Performancing();
     void StartMeasuring();
     void StopMeasuring();
-    std::tuple<uint64_t, uint64_t> GetValues();
+    std::tuple<uint64_t, uint64_t, int64_t> GetValues();
     PerformanceMetric GetMetric();
 };
 

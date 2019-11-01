@@ -2,7 +2,8 @@
 #ifndef ENUMERATIONS_H
 #define ENUMERATIONS_H
 
-enum class PerformanceMetric {
+enum class PerformanceMetric
+{
 	CPU_CYCLES,
     L1_INSTR_CACHE_MISSES,
     BRANCH_MISSES,

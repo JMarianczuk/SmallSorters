@@ -7,7 +7,7 @@
 namespace conditional_swap
 {
 
-class CS_IfSwap
+class CS_IfSwap final
 {
 public:
     template <typename Type>
@@ -17,7 +17,7 @@ public:
     }
 };
 
-class CS_Tie
+class CS_Tie final
 {
 public:
     template <typename Type>
@@ -28,7 +28,7 @@ public:
     }
 };
 
-class CS_TernaryConditionalOperator
+class CS_TernaryConditionalOperator final
 {
 public:
     template <typename Type>
