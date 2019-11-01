@@ -14,7 +14,7 @@ class CS_Int final
 public:
     static inline void swap(int& left, int& right)
     {
-        CS_Default::swap(left, right);
+        CS_IfSwap::swap(left, right);
     }
 };
 
@@ -24,7 +24,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -34,7 +34,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -44,7 +44,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -54,7 +54,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -64,7 +64,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -74,7 +74,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -84,7 +84,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -94,7 +94,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
 
@@ -104,7 +104,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);        
+        CS_IfSwap::swap(left, right);        
     }
 };
     

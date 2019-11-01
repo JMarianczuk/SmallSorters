@@ -33,7 +33,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);
+        CS_IfSwap::swap(left, right);
     }
 };
 
@@ -57,7 +57,7 @@ public:
             : "0"(left.key), "1"(right.key), "2"(left.reference), "3"(right.reference), [tmp] "r"(tmp), [tmp_ref] "r"(tmpRef)
             : "cc" 
         );
-        // CS_Default::swap(left, right);
+        // CS_IfSwap::swap(left, right);
     }
 };
 
@@ -147,7 +147,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);
+        CS_IfSwap::swap(left, right);
     }
 };
 
@@ -157,7 +157,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);
+        CS_IfSwap::swap(left, right);
     }
 };
 
@@ -196,7 +196,7 @@ public:
     template <typename Type>
     static inline void swap(Type& left, Type& right)
     {
-        CS_Default::swap(left, right);
+        CS_IfSwap::swap(left, right);
     }
 };
 
