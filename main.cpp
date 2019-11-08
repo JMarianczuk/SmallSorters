@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
 #include "environment/Performancing.h"
 
@@ -220,6 +222,10 @@ int main(int argumentCount, char** arguments)
         return 0;
     }
 
+    if (!options.TestRun)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+    }
     auto perf_cpu_cycles = new Performancing(PerformanceMetric::CPU_CYCLES);
     PerformMeasurements(options, perf_cpu_cycles, arguments, argumentCount);
     delete perf_cpu_cycles;
