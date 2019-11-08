@@ -265,15 +265,16 @@ void MeasureRandomGeneration(
 
     int numberOfEqualNeighbours = 0;
     randomisation::GenerateRandomArray<rMode>(arr, arraySize);
-    if (!NotHasEqualNeighbour(arr, arraySize))
-    {
-        numberOfEqualNeighbours += 1;
-    }
-    
     uint64_t key_iter = 1;
     uint64_t ref_iter = 1;
     uint64_t key_value;
     uint64_t ref_value;
+    PutPermutationValues(arr, arraySize, key_value, key_iter, ref_value, ref_iter);
+    if (!NotHasEqualNeighbourAndPermutation(arr, arraySize, key_iter, key_value, ref_iter, ref_value))
+    {
+        numberOfEqualNeighbours += 1;
+    }
+    
     perf->StartMeasuring();
     for (int i = 0; i < numberOfIterations; i += 1)
     {
