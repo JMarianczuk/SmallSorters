@@ -28,6 +28,8 @@ struct CommandLineOptions
 
     bool MeasureCpuCycles;
     bool MeasureL1InstrCache;
+
+    bool TestRun;
 };
 
 CommandLineOptions ParseOptions(char **arguments, int numberOfArguments);

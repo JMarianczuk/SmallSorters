@@ -53,6 +53,9 @@ detail::Parser GetParser(CommandLineOptions& options)
         Opt(options.MeasureL1InstrCache)
             ["--l1icache"]
             ("Measure L1 Instr. Cache Accesses and Misses") |
+        Opt(options.TestRun)
+            ["--testRun"]
+            ("Dont wait with starting the measurement") |
         name;
 }
 
@@ -61,7 +64,7 @@ CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)
     CommandLineOptions options = {
         false, false, false, false, false, 
         false, false, false, false, false, 
-        false, false, false, false};
+        false, false, false, false, false};
     auto commandLine = GetParser(options);
     
     auto result = commandLine.parse(Args(numberOfArguments, arguments));
