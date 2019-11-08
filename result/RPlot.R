@@ -53,7 +53,7 @@ if (options$title == "") {
 }
 
 thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
-    labs(x = "Sorting algorithm", y = paste(options$unit, " per iteration"), title = plot_title) +
+    labs(x = "Sorting algorithm", y = paste(options$unit, "per iteration"), title = plot_title) +
     geom_boxplot()
 if (options$secondAxis != "") {
     thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * 70000), color = "blue")
