@@ -1,1 +1,2 @@
-Rscript RPlot.R --tableName="sampleSortWithout%2" --dbName="%1" --filter="s like '%%-s332%%' and s not like '%%Tie%%' and s not like '%%BNPM%%'" --filePostfix="sample-sort-332-%2" --complete=TRUE --title="SampleSort" --percentAxis="I       -s332 KR %3"
+REM Rscript RPlot.R --tableName="sampleSortWithout%2" --dbName="%1" --filter="s like '%%BN-R%%' and s like '%%-S%%'" --filePostfix="sample-sort-bosenelson-rec-%2" --complete=TRUE --title="SampleSort"
+sqlite3 small_sorters_result.sqlite -batch -cmd "UPDATE %1%2 SET s = replace(s, ' -%3 ', ' ');" < sqlite.quit
