@@ -24,10 +24,16 @@ res <- dbGetQuery(con, query)
 filename <- paste("plots/lineplot-", options$filePostfix, sep="", collapse="")
 filenameExt <- paste(filename, ".pdf", sep="", collapse="")
 
-thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=substr(sorter, 14, 17), shape=substr(sorter, 0, 8))) + 
+thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=substr(sorter, 12, 16), shape=substr(sorter, 0, 8))) + 
     labs(x = "Array Size", y = "CPU Cycles per element") +
     geom_line() +
     geom_point() +
-    theme(legend.position=c(0,1), legend.justification=c(0, 1), legend.title=element_blank(), legend.text = element_text(colour="black", size=7, family="Courier"), legend.key.size = unit(4, "mm"))
+    theme(legend.position=c(0,1), 
+          legend.justification=c(0, 1), 
+          legend.title=element_blank(),
+          legend.text = element_text(colour="black", size=7, family="Courier"),
+          legend.key.size = unit(4, "mm"),
+          plot.title = element_text(family="Times", size=12),
+          text = element_text(family="Times", size=10))
 
-ggsave(filenameExt, thisplot, width=18, height=11, units="cm")
+ggsave(filenameExt, thisplot, width=9, height=6, units="cm")

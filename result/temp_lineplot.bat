@@ -1,0 +1,2 @@
+Rscript FourLineplot.R --dbName="%1" --tableName="normalSortDeviation%2" --filePostfix="normal-%2" --filter="((s like '%%POp%%' or s like '%%4Cm%%' or s like '%%4CS%%' or s like '%%Def%%' or s like '%%CPr%%') and s not like '%%BN-P%%' and s not like '%%BNPL%%')" --machine="%3" %4
+Rscript FourLineplot.R --dbName="%1" --tableName="inrowSortDeviation%2" --filePostfix="inrow-%2" --filter="((s like '%%POp%%' or s like '%%4Cm%%' or s like '%%4CS%%' or s like '%%Def%%' or s like '%%CPr%%') and s not like '%%BN-P%%' and s not like '%%BNPL%%')" --machine="%3" %4
