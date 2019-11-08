@@ -19,8 +19,8 @@ namespace measurement
 void MeasureIpso_Best_331_16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+SN Best -4 16_331 4CmS", &external::IpsoWrapper<IpsoBaseCaseType::BEST_NETWORKS,IpsoSampleSortType::SAMPLE_SORT_331,16>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SS+SN Best -4 16_331 4CmS", &external::IpsoWrapper<IpsoBaseCaseType::BEST_NETWORKS,IpsoSampleSortType::SAMPLE_SORT_331,16>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "S+SN Best -4 16_331 4CmS");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SS+SN Best -4 16_331 4CmS");
 }
 } // namespace measurement

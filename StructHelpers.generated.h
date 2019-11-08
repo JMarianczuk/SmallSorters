@@ -45,7 +45,7 @@ uint64_t GetReference(SortableRef& item)
 {
 	return item.reference;
 }
-class SortableRefKeyGetter final
+class SortableRefKeyGetter
 {
 private:
 public:

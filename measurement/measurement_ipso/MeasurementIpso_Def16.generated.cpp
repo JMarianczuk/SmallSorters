@@ -19,8 +19,8 @@ namespace measurement
 void MeasureIpso_Def16(Performancing* perf, uint64_t seed, int numberOfIterations, size_t arraySize, int measureIteration)
 {
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -4 16_000 Def", &external::IpsoWrapper<IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE, 16>);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -4 16 Def", &external::IpsoWrapper<IpsoBaseCaseType::INSERTION_SORT, IpsoSampleSortType::NONE, 16>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -4 16_000 Def");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -4 16 Def");
 }
 } // namespace measurement

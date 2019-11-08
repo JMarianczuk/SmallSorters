@@ -150,7 +150,7 @@ std::string BuildSorterName(
             }
             return result;
         case Sorter::SampleSort:
-            result += "S+";
+            result += "SS+";
             switch (subSorter)
             {
                 case Sorter::InsertionSort:
@@ -191,10 +191,14 @@ std::string BuildSorterName(
             result += std::to_string(sampleSortBlockSize);
             break;
         case MeasureType::Ipso:
-            result += "-4 " + std::to_string(ipsoBaseCaseSize) + "_";
-            result += std::to_string(sampleSortSplits);
-            result += std::to_string(sampleSortOversample);
-            result += std::to_string(sampleSortBlockSize);
+            result += "-4 " + std::to_string(ipsoBaseCaseSize);
+            if (sampleSortSplits != 0)
+            {
+                result += "_";
+                result += std::to_string(sampleSortSplits);
+                result += std::to_string(sampleSortOversample);
+                result += std::to_string(sampleSortBlockSize);
+            }
             break;
     }
     result += " ";
