@@ -30,22 +30,23 @@ filenameExt <- paste(filename, ".pdf", sep="", collapse="")
 
 y.range = range(res$med)
 
-thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=substr(sorter, 9, 13), shape=substr(sorter, 0, 8))) + 
+thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = med, group=sorter, color=substr(sorter, 9, 13), linetype=substr(sorter, 9, 13), shape=substr(sorter, 0, 8))) + 
     labs(x = "Array Size", y = paste(options$unit, "per element")) +
     geom_line() +
     geom_point() + 
-    annotate("label", x = 2, y = y.range[2] * (9/10), label=options$machine, size=10)
+    annotate("label", x = 2, y = y.range[2] * (9/10), label=options$machine, size=8)
 
 if (options$legend) {
     thisplot <- thisplot + theme(legend.position="top" ,
                                  legend.title=element_blank(),
-                                 legend.text = element_text(colour="black", size=8, family="Courier"),
-                                 legend.key.size = unit(4, "mm"))
+                                 legend.text = element_text(colour="black", size=7, family="Courier"),
+                                 legend.key.width=unit(7.8, "mm"),
+                                 legend.key.height=unit(3.5, "mm"))
     leg <- get_legend(thisplot)
-    ggsave(filenameExt, leg, width=12, height=1, units="cm")
+    ggsave(filenameExt, leg, width=14, height=0.8, units="cm")
 } else {
     thisplot <- thisplot + theme(legend.position="none",
                                  plot.title = element_text(family="Times", size=12),
                                  text = element_text(family="Times", size=10))
-    ggsave(filenameExt, thisplot, width=9, height=6, units="cm")
+    ggsave(filenameExt, thisplot, width=8, height=6, units="cm")
 }

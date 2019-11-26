@@ -11,10 +11,11 @@ option_list = list(
     make_option(c("-p", "--filePostfix"), type="character", default="normal", help="postfix for output file"),
     make_option(c("-c", "--complete"), type="logical", default=FALSE, help="If plot is to be made for complete measurement"),
     make_option(c("-t", "--title"), type="character", default="", help="Title for the diagram"),
-    make_option(c("--facetOut"), type="character", default = "", help="put some value group into a different facet on the left/right"),
+    make_option(c("--facetOut"), type="logical", default = FALSE, help="put some value group into a different facet on the left/right"),
     make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%"),
     make_option(c("--percentFilter"), type="character", default="", help="name extra filter in case s is not enough"),
     make_option(c("--secondAxis"), type="character", default="", help="name of the axis if second values are plotted"),
+    make_option(c("--secondAxisAdaptation"), type="numeric", default=70000),
     make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis"),
     make_option(c("--missesBy"), type="numeric", default=20, help="percent steps on the axis"),
     make_option(c("--unit"), type="character", default="CPU cycles", help="if cycles or cache misses were measured")
@@ -22,17 +23,27 @@ option_list = list(
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
 
+# if (options$)
+
 con <- dbConnect(SQLite(), options$dbName)
 someRes <- dbExecute(con, "PRAGMA case_sensitive_like=ON;")
 
+getQuery <- function(value, facet) {
+    query <- paste("select", value, "as normalized_value, s as sorter, t as sortergroup,", facet, "as facet from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
+    if (!options$complete) {
+        query <- paste(query, "and a =", options$array_size)
+    }
 
-query <- paste("select (cycles / n) as normalized_value, cachemisses, s as sorter, t as sortergroup from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
-if (!options$complete) {
-    query <- paste(query, "and a =", options$array_size)
+    if (options$filter != "") {
+        query <- paste(query, "and", options$filter)
+    }
+    query
 }
 
-if (options$filter != "") {
-    query <- paste(query, "and", options$filter)
+query <- getQuery("(cycles / n)", 1)
+if (options$facetOut)
+{
+    query <- paste(query, "UNION", getQuery("(cachemisses / n)", 2))
 }
 res <- dbGetQuery(con, query)
 
@@ -52,11 +63,14 @@ if (options$title == "") {
     plot_title <- options$title
 }
 
+ylab <- paste(options$unit, "per iteration")
+ylab2 <- paste("cache misses per iteration")
+
 thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
-    labs(x = "Sorting algorithm", y = paste(options$unit, "per iteration"), title = plot_title) +
+    labs(x = "Sorting algorithm", y = ylab, title = plot_title) +
     geom_boxplot()
 if (options$secondAxis != "") {
-    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * 70000), color = "blue")
+    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * options$secondAxisAdaptation), color = "blue")
 }
 thisplot <- thisplot + 
     coord_flip() + 
@@ -68,10 +82,10 @@ thisplot <- thisplot +
           plot.title = element_text(family="Times", size=12, hjust = 0.5),
           text = element_text(family="Times", size=10))
 
-if (options$facetOut == "") {
-    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free")
+if (options$facetOut) {
+    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), cols = vars(facet), scales = "free", space="free_y", labeller=labeller(.cols=c(ylab, ylab2)))
 } else {
-    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), cols = vars(sortergroup == options$facetOut), scales = "free", space="free_y")
+    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free_x")
 }
 
 if (options$percentAxis != "") {
@@ -84,7 +98,7 @@ if (options$percentAxis != "") {
     breaks <- seq(0, 5000, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
 } else if (options$secondAxis != "") {
-    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / 70000, name = options$secondAxis)) +
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / options$secondAxisAdaptation, name = options$secondAxis)) +
     theme(axis.title.x.top = element_text(color="blue"), axis.text.x.top = element_text(color="blue"))
 }
 

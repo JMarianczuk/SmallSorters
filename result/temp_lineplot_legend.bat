@@ -1,0 +1,1 @@
+Rscript FourLineplot.R --dbName="small_sorters_result.sqlite" --tableName="normalSortDeviation129_2" --filePostfix="normal-legend" --filter="((s like '%%POp%%' or s like '%%4Cm%%' or s like '%%4CS%%' or s like '%%Def%%' or s like '%%CPr%%') and s not like '%%BN-P%%' and s not like '%%BNPL%%')" --legend=TRUE

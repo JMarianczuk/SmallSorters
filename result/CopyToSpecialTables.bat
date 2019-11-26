@@ -1,4 +1,4 @@
-sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'normalSort%1' as select * from stats%1 where s like '%%-N%%;'" < sqlite.quit
+sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'normalSort%1' as select * from stats%1 where s like '%%-N%%';" < sqlite.quit
 sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'inrowSort%1' as select * from stats%1 where s like '%%-I%%';" < sqlite.quit
 sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'sampleSort%1' as select * from stats%1 where s like '%%-S%%';" < sqlite.quit
 sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'completeSort%1' as select * from stats%1 where s like '%%-Q%%' or s like '%%-c%%';" < sqlite.quit
@@ -8,3 +8,4 @@ sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'sam
 sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'completeSortWithout%1' as select replace(lef.s, ' -Q', '') as s, cast (lef.v - rig.v as INT) as cycles, cast (lef.v2 - rig.v2 as INT) as cachemisses, lef.a as a, lef.n as n, lef.t as t from completeSort%1 lef, completeSort%1 rig where lef.s = rig.s and lef.a = rig.a and lef.n = rig.n and lef.i = rig.i and lef.c = 0 and rig.c = 1;" < sqlite.quit
 sqlite3 small_sorters_result.sqlite -batch -cmd "CREATE TABLE IF NOT EXISTS 'ipsoSortWithout%1' as select replace(lef.s, ' -4', '') as s, cast (lef.v - rig.v as INT) as cycles, cast (lef.v2 - rig.v2 as INT) as cachemisses, lef.a as a, lef.n as n, lef.t as t from ipsoSort%1 lef, ipsoSort%1 rig where lef.s = rig.s and lef.a = rig.a and lef.n = rig.n and lef.i = rig.i and lef.c = 0 and rig.c = 1;" < sqlite.quit
 sqlite3 small_sorters_result.sqlite -batch -cmd "ALTER TABLE inrowSort%1 RENAME COLUMN v TO cycles; ALTER TABLE inrowSort%1 RENAME COLUMN v2 to cachemisses;" < sqlite.quit
+sqlite3 small_sorters_result.sqlite -batch -cmd "UPDATE inrowSort%1 SET s = replace(s, ' -I', '');" < sqlite.quit
