@@ -63,13 +63,13 @@ void MeasureSortingInRow(Performancing* perf, uint64_t seed, int numberOfIterati
 	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -I Tie ", &networks::bosenelsonparallel::sortN<conditional_swap::CS_Tie, SortableRef>);
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I Def", &insertionsort::InsertionSort<insertionsort::InsertionSort_Default, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I Def ", &insertionsort::InsertionSort<insertionsort::InsertionSort_Default, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I STL", &insertionsort::InsertionSort<insertionsort::InsertionSort_StlVersion, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I STL ", &insertionsort::InsertionSort<insertionsort::InsertionSort_StlVersion, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I POp", &insertionsort::InsertionSort<insertionsort::InsertionSort_PointerOptimized, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I POp ", &insertionsort::InsertionSort<insertionsort::InsertionSort_PointerOptimized, SortableRef>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I AIF", &insertionsort::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck, SortableRef>);
+	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -I AIF ", &insertionsort::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck, SortableRef>);
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureInRow<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -I ISwp", &networks::bosenelsonrecursive::sortN<conditional_swap::CS_IfSwap, SortableRef>);

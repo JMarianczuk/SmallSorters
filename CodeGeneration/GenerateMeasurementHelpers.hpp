@@ -199,6 +199,10 @@ std::string BuildSorterName(
                 result += std::to_string(sampleSortOversample);
                 result += std::to_string(sampleSortBlockSize);
             }
+            else 
+            {
+                result += "    ";
+            }
             break;
     }
     result += " ";

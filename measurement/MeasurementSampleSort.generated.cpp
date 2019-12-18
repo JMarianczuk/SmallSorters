@@ -396,129 +396,129 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -S355 4Cm ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S311 POp", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S311 POp ", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S311 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S311 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S312 POp", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S312 POp ", &samplesort::SampleSort3Splitters1OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S312 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S312 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S313 POp", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S313 POp ", &samplesort::SampleSort3Splitters1OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S313 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S313 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S314 POp", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S314 POp ", &samplesort::SampleSort3Splitters1OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S314 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S314 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S315 POp", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S315 POp ", &samplesort::SampleSort3Splitters1OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S315 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S315 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S321 POp", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S321 POp ", &samplesort::SampleSort3Splitters2OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S321 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S321 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S322 POp", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S322 POp ", &samplesort::SampleSort3Splitters2OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S322 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S322 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S323 POp", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S323 POp ", &samplesort::SampleSort3Splitters2OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S323 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S323 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S324 POp", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S324 POp ", &samplesort::SampleSort3Splitters2OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S324 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S324 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S325 POp", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S325 POp ", &samplesort::SampleSort3Splitters2OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S325 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S325 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S331 POp", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S331 POp ", &samplesort::SampleSort3Splitters3OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S331 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S331 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S332 POp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S332 POp ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S332 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S332 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S333 POp", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S333 POp ", &samplesort::SampleSort3Splitters3OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S333 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S333 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S334 POp", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S334 POp ", &samplesort::SampleSort3Splitters3OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S334 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S334 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S335 POp", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S335 POp ", &samplesort::SampleSort3Splitters3OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S335 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S335 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S341 POp", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S341 POp ", &samplesort::SampleSort3Splitters4OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S341 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S341 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S342 POp", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S342 POp ", &samplesort::SampleSort3Splitters4OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S342 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S342 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S343 POp", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S343 POp ", &samplesort::SampleSort3Splitters4OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S343 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S343 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S344 POp", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S344 POp ", &samplesort::SampleSort3Splitters4OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S344 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S344 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S345 POp", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S345 POp ", &samplesort::SampleSort3Splitters4OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S345 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S345 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S351 POp", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S351 POp ", &samplesort::SampleSort3Splitters5OversamplingFactor1BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S351 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S351 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S352 POp", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S352 POp ", &samplesort::SampleSort3Splitters5OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S352 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S352 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S353 POp", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S353 POp ", &samplesort::SampleSort3Splitters5OversamplingFactor3BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S353 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S353 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S354 POp", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S354 POp ", &samplesort::SampleSort3Splitters5OversamplingFactor4BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S354 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S354 POp ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S355 POp", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S355 POp ", &samplesort::SampleSort3Splitters5OversamplingFactor5BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S355 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S355 POp ");
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -S311 4Cm ", &samplesort::SampleSort3Splitters1OversamplingFactor1BlockSize<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_FourCmovTemp>, SortableRefKeyGetter, SortableRef, uint64_t>);
@@ -733,21 +733,21 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 Tie ");
 	
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 Def", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_Default>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 Def ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_Default>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 STL", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_StlVersion>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 STL ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_StlVersion>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 POp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 POp ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_PointerOptimized>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 AIF", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 AIF ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_ArrayIndex_FirstCheck>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 Def");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 Def ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 STL");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 STL ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 POp ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 AIF");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 AIF ");
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 ISwp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_IfSwap>, SortableRefKeyGetter, SortableRef, uint64_t>);
@@ -783,8 +783,8 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -S000 ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S000 POp", &measurement::InsertionSortWrapper);
+	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S000 POp ", &measurement::InsertionSortWrapper);
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S000 POp");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -S000 POp ");
 }
 } // namespace measurement
