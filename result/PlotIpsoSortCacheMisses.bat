@@ -1,0 +1,1 @@
+Rscript RPlot.R --dbName="%1" --tableName="ipsoSortWithout%2" --filePostfix="ipso-cachemisses-%2" --filter="s not like '%%StdSort%%'" --complete=TRUE --title="IPSSSSo" --alternativeValues="(cachemisses / n)" --unit="cache misses" --plotColor="blue" --logScale=TRUE

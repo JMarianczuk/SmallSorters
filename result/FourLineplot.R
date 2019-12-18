@@ -34,7 +34,7 @@ thisplot <- ggplot(res, aes(x = reorder(arraySize, as.integer(arraySize)), y = m
     labs(x = "Array Size", y = paste(options$unit, "per element")) +
     geom_line() +
     geom_point() + 
-    annotate("label", x = 2, y = y.range[2] * (9/10), label=options$machine, size=8)
+    annotate("label", x = 2, y = y.range[2] * (9/10), label=options$machine, size=6)
 
 if (options$legend) {
     thisplot <- thisplot + theme(legend.position="top" ,

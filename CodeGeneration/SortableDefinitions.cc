@@ -16,10 +16,10 @@ std::vector<SortableStruct*> structs =
     new SortableStruct("conditional_swap::CS_", "TwoConditionalPointerMove", "2CPm", true),
     new SortableStruct("conditional_swap::CS_", "TwoConditionalPointerMovePredicate", "2CPp", true), //8
     new SortableStruct("conditional_swap::CS_", "Tie", "Tie ", true),
-    new SortableStruct("insertionsort::InsertionSort_", "Default", "Def", true),                     //10
-    new SortableStruct("insertionsort::InsertionSort_", "StlVersion", "STL", true),                  
-    new SortableStruct("insertionsort::InsertionSort_", "PointerOptimized", "POp", true),            //12
-    new SortableStruct("insertionsort::InsertionSort_", "ArrayIndex_FirstCheck", "AIF", true),
+    new SortableStruct("insertionsort::InsertionSort_", "Default", "Def ", true),                     //10
+    new SortableStruct("insertionsort::InsertionSort_", "StlVersion", "STL ", true),                  
+    new SortableStruct("insertionsort::InsertionSort_", "PointerOptimized", "POp ", true),            //12
+    new SortableStruct("insertionsort::InsertionSort_", "ArrayIndex_FirstCheck", "AIF ", true),
 
     //new SortableStruct("conditional_swap::CS_", "SixCmovTemp", "6Cm", true),
     //new SortableStruct("conditional_swap::CS_", "TernaryConditionalOperator", "TCOp", true),

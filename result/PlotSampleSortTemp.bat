@@ -1,0 +1,1 @@
+Rscript RPlot.R --tableName="sampleSortWithout%2" --dbName="%1" --filter="s like '%%BN-R%%' and stype like '%%-S%%'" --filePostfix="sample-sort-bosenelson-rec-%2" --complete=TRUE --title="SampleSort"

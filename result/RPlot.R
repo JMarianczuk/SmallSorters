@@ -18,7 +18,11 @@ option_list = list(
     make_option(c("--secondAxisAdaptation"), type="numeric", default=70000),
     make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis"),
     make_option(c("--missesBy"), type="numeric", default=20, help="percent steps on the axis"),
-    make_option(c("--unit"), type="character", default="CPU cycles", help="if cycles or cache misses were measured")
+    make_option(c("--unit"), type="character", default="CPU cycles", help="if cycles or cache misses were measured"),
+    make_option(c("--alternativeValues"), type="character", default=""),
+    make_option(c("--alternativeOrdering"), type="character", default="", help="column of which to extract the alternative ordering"),
+    make_option(c("--plotColor"), type="character", default="black"),
+    make_option(c("--logScale"), type="logical", default=FALSE)
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -29,7 +33,12 @@ con <- dbConnect(SQLite(), options$dbName)
 someRes <- dbExecute(con, "PRAGMA case_sensitive_like=ON;")
 
 getQuery <- function(value, facet) {
-    query <- paste("select", value, "as normalized_value, s as sorter, t as sortergroup,", facet, "as facet from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
+    query <- paste("select", value, "as normalized_value, s as sorter, t as sortergroup,", facet, "as facet") 
+    if (options$alternativeOrdering != "")
+    {
+        query <- paste(query, ", ", options$alternativeOrdering, " as alternativeOrdering", sep="", collapse="")
+    }
+    query <- paste(query, "from", options$tableName, "where s not like '%JXc%' and s not like '%6Cm%' and s not like '%QMa%'")
     if (!options$complete) {
         query <- paste(query, "and a =", options$array_size)
     }
@@ -40,7 +49,11 @@ getQuery <- function(value, facet) {
     query
 }
 
-query <- getQuery("(cycles / n)", 1)
+if (options$alternativeValues != "") {
+    query <- getQuery(options$alternativeValues, 1)
+} else {
+    query <- getQuery("(cycles / n)", 1)
+}
 if (options$facetOut)
 {
     query <- paste(query, "UNION", getQuery("(cachemisses / n)", 2))
@@ -66,15 +79,21 @@ if (options$title == "") {
 ylab <- paste(options$unit, "per iteration")
 ylab2 <- paste("cache misses per iteration")
 
-thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value)) +
+if (options$alternativeOrdering != "") {
+    thisplot <- ggplot(res, aes(x = reorder(sorter, -alternativeOrdering), y = normalized_value))
+} else {
+    thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value))
+}
+thisplot <- thisplot +
     labs(x = "Sorting algorithm", y = ylab, title = plot_title) +
-    geom_boxplot()
+    geom_boxplot(color = options$plotColor)
 if (options$secondAxis != "") {
     thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * options$secondAxisAdaptation), color = "blue")
 }
 thisplot <- thisplot + 
     coord_flip() + 
-    theme(axis.text.x = element_text(family="Times", size=10),
+    theme(
+          axis.text.x = element_text(family="Times", size=10),
           axis.text.y = element_text(family="Courier", size=9),
           strip.background = element_blank(),
           strip.text.y = element_blank(),
@@ -85,7 +104,11 @@ thisplot <- thisplot +
 if (options$facetOut) {
     thisplot <- thisplot + facet_grid(rows = vars(sortergroup), cols = vars(facet), scales = "free", space="free_y", labeller=labeller(.cols=c(ylab, ylab2)))
 } else {
-    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free_x")
+    thisplot <- thisplot + facet_grid(rows = vars(sortergroup), scales = "free", space = "free")
+}
+
+if (options$logScale) {
+    thisplot <- thisplot + scale_y_log10()
 }
 
 if (options$percentAxis != "") {
