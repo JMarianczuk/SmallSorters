@@ -15,7 +15,8 @@ option_list = list(
     make_option(c("--percentAxis"), type="character", default = "", help="name of the sorter to use as 100%"),
     make_option(c("--percentFilter"), type="character", default="", help="name extra filter in case s is not enough"),
     make_option(c("--secondAxis"), type="character", default="", help="name of the axis if second values are plotted"),
-    make_option(c("--secondAxisAdaptation"), type="numeric", default=70000),
+    make_option(c("--secondAxisAdaptationScale"), type="numeric", default=70000),
+    make_option(c("--secondAxisAdaptationLinear"), type="numeric", default=30000),
     make_option(c("--percentBy"), type="numeric", default=10, help="percent steps on the axis"),
     make_option(c("--missesBy"), type="numeric", default=20, help="percent steps on the axis"),
     make_option(c("--unit"), type="character", default="CPU cycles", help="if cycles or cache misses were measured"),
@@ -33,7 +34,7 @@ con <- dbConnect(SQLite(), options$dbName)
 someRes <- dbExecute(con, "PRAGMA case_sensitive_like=ON;")
 
 getQuery <- function(value, facet) {
-    query <- paste("select", value, "as normalized_value, s as sorter, t as sortergroup,", facet, "as facet") 
+    query <- paste("select", value, "as normalized_value, s as sorter, t as sortergroup,", facet, "as facet, cachemisses") 
     if (options$alternativeOrdering != "")
     {
         query <- paste(query, ", ", options$alternativeOrdering, " as alternativeOrdering", sep="", collapse="")
@@ -88,7 +89,7 @@ thisplot <- thisplot +
     labs(x = "Sorting algorithm", y = ylab, title = plot_title) +
     geom_boxplot(color = options$plotColor)
 if (options$secondAxis != "") {
-    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * options$secondAxisAdaptation), color = "blue")
+    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses / options$secondAxisAdaptationScale + options$secondAxisAdaptationLinear), color = "blue")
 }
 thisplot <- thisplot + 
     coord_flip() + 
@@ -121,7 +122,7 @@ if (options$percentAxis != "") {
     breaks <- seq(0, 5000, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
 } else if (options$secondAxis != "") {
-    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / options$secondAxisAdaptation, name = options$secondAxis)) +
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / options$secondAxisAdaptationScale + options$secondAxisAdaptationLinear, name = options$secondAxis)) +
     theme(axis.title.x.top = element_text(color="blue"), axis.text.x.top = element_text(color="blue"))
 }
 
