@@ -1,0 +1,1 @@
+cltbdebug statisticalTable --database=small_sorters_result.sqlite --outputFormat=latex --main=s --mainGroup=t --mainGroupSep="\smallskip \\\\" --secondaries=a --secondaryAliases="Array Size" --value="cycles/n" --mainFont="\verb+{0}+" --metric=average --out=%1AvgTableAll.tex --printAbsoluteValues --excludeFromGeom=2 --onlyGeoms --table %1%2129%3 %1%2130%3 %1%2133%3 %1%2144%3

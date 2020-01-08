@@ -89,7 +89,7 @@ thisplot <- thisplot +
     labs(x = "Sorting algorithm", y = ylab, title = plot_title) +
     geom_boxplot(color = options$plotColor)
 if (options$secondAxis != "") {
-    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses / options$secondAxisAdaptationScale + options$secondAxisAdaptationLinear), color = "blue")
+    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * options$secondAxisAdaptationScale + options$secondAxisAdaptationLinear), color = "blue")
 }
 thisplot <- thisplot + 
     coord_flip() + 
@@ -122,7 +122,7 @@ if (options$percentAxis != "") {
     breaks <- seq(0, 5000, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
 } else if (options$secondAxis != "") {
-    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / options$secondAxisAdaptationScale + options$secondAxisAdaptationLinear, name = options$secondAxis)) +
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / options$secondAxisAdaptationScale - options$secondAxisAdaptationLinear / options$secondAxisAdaptationScale, name = options$secondAxis)) + #the weird double division comes from R not accepting parenthesis in this formula, thus (~. - scale) / linear was not recognised as a formula
     theme(axis.title.x.top = element_text(color="blue"), axis.text.x.top = element_text(color="blue"))
 }
 
