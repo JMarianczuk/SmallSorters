@@ -23,7 +23,8 @@ option_list = list(
     make_option(c("--alternativeValues"), type="character", default=""),
     make_option(c("--alternativeOrdering"), type="character", default="", help="column of which to extract the alternative ordering"),
     make_option(c("--plotColor"), type="character", default="black"),
-    make_option(c("--logScale"), type="logical", default=FALSE)
+    make_option(c("--logScale"), type="logical", default=FALSE),
+    make_option(c("--axisFactor"), type="numeric", default=1)
 )
 opt_parser = OptionParser(option_list = option_list)
 options = parse_args(opt_parser)
@@ -78,18 +79,24 @@ if (options$title == "") {
 }
 
 ylab <- paste(options$unit, "per iteration")
+if (options$axisFactor == 1000) {
+    ylab <- paste(ylab, "in thousands")
+}
 ylab2 <- paste("cache misses per iteration")
 
 if (options$alternativeOrdering != "") {
-    thisplot <- ggplot(res, aes(x = reorder(sorter, -alternativeOrdering), y = normalized_value))
+    thisplot <- ggplot(res, aes(x = reorder(sorter, -alternativeOrdering), y = normalized_value / options$axisFactor))
 } else {
-    thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value))
+    thisplot <- ggplot(res, aes(x = reorder(sorter, -normalized_value), y = normalized_value / options$axisFactor))
 }
+
 thisplot <- thisplot +
     labs(x = "Sorting algorithm", y = ylab, title = plot_title) +
     geom_boxplot(color = options$plotColor)
 if (options$secondAxis != "") {
-    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = cachemisses * options$secondAxisAdaptationScale + options$secondAxisAdaptationLinear), color = "blue")
+    multiply <- options$secondAxisAdaptationScale
+    addition <- options$secondAxisAdaptationLinear
+    thisplot <- thisplot + geom_boxplot(mapping = aes(x = reorder(sorter, -normalized_value), y = (cachemisses * multiply + addition) / options$axisFactor), color = "blue")
 }
 thisplot <- thisplot + 
     coord_flip() + 
@@ -113,7 +120,7 @@ if (options$logScale) {
 }
 
 if (options$percentAxis != "") {
-    percentQuery <- paste("select avg(cycles / n) as avg from ", options$tableName, " where s = '", options$percentAxis, "'", sep="")
+    percentQuery <- paste("select avg(cycles / n) / ", options$axisFactor, " as avg from ", options$tableName, " where s = '", options$percentAxis, "'", sep="")
     if (options$percentFilter != "") {
         percentQuery <- paste(percentQuery, "and", options$percentFilter)
     }
@@ -122,7 +129,9 @@ if (options$percentAxis != "") {
     breaks <- seq(0, 5000, by=options$percentBy)
     thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. * 100 / percentRes[1]$avg, name = paste("Value in relation to '", options$percentAxis, "'", sep="", collapse=""), breaks = breaks, labels = paste(breaks, "%", sep=""))) 
 } else if (options$secondAxis != "") {
-    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / options$secondAxisAdaptationScale - options$secondAxisAdaptationLinear / options$secondAxisAdaptationScale, name = options$secondAxis)) + #the weird double division comes from R not accepting parenthesis in this formula, thus (~. - scale) / linear was not recognised as a formula
+    divide <- options$secondAxisAdaptationScale
+    subtract <- options$secondAxisAdaptationLinear / (divide * options$axisFactor)
+    thisplot <- thisplot + scale_y_continuous(sec.axis = sec_axis(~. / divide - subtract, name = options$secondAxis)) + 
     theme(axis.title.x.top = element_text(color="blue"), axis.text.x.top = element_text(color="blue"))
 }
 

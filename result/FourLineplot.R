@@ -48,5 +48,5 @@ if (options$legend) {
     thisplot <- thisplot + theme(legend.position="none",
                                  plot.title = element_text(family="Times", size=12),
                                  text = element_text(family="Times", size=10))
-    ggsave(filenameExt, thisplot, width=8, height=6, units="cm")
+    ggsave(filenameExt, thisplot, width=8, height=5.5, units="cm")
 }
