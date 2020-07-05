@@ -103,6 +103,68 @@ void VerifyNetworks()
 	}
 	debug::WriteLine("finished verification. ", 105 - numberOfIncorrectNetworks, " networks out of 105 sorted correctly.");
 }
+void VerifySwaps()
+{
+	int numberOfIncorrectSwaps = 0;
+	bool result = false;
+	debug::WriteLine("verifying conditional_swap::CS_IfSwap swap");
+	result = verification::VerifySwap<conditional_swap::CS_IfSwap>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_IfSwap'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_JumpXchg_Ref swap");
+	result = verification::VerifySwap<conditional_swap::CS_JumpXchg_Ref>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_JumpXchg_Ref'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_FourCmovTemp swap");
+	result = verification::VerifySwap<conditional_swap::CS_FourCmovTemp>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_FourCmovTemp'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_FourCmovTemp_Split swap");
+	result = verification::VerifySwap<conditional_swap::CS_FourCmovTemp_Split>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_FourCmovTemp_Split'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_TwoConditionalPointerMove swap");
+	result = verification::VerifySwap<conditional_swap::CS_TwoConditionalPointerMove>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_TwoConditionalPointerMove'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_TwoConditionalPointerMovePredicate swap");
+	result = verification::VerifySwap<conditional_swap::CS_TwoConditionalPointerMovePredicate>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_TwoConditionalPointerMovePredicate'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_Tie swap");
+	result = verification::VerifySwap<conditional_swap::CS_Tie>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_Tie'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("verifying conditional_swap::CS_CmovXor swap");
+	result = verification::VerifySwap<conditional_swap::CS_CmovXor>();
+	if (!result)
+	{
+		debug::WriteLine("incorrect swap: 'conditional_swap::CS_CmovXor'.");
+		numberOfIncorrectSwaps += 1;
+	}
+	debug::WriteLine("finished verification. ", 8 - numberOfIncorrectSwaps, " swaps out of 8 swapped correctly.");
+}
 } // namespace verification
 
 #endif // VERIFY_NETWORKS_GENERATED_H

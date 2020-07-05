@@ -92,7 +92,7 @@ public:
             "cmovbq %[right_key],%[left_key]\n\t"
             "cmovbq %[right_reference],%[left_reference]\n\t"
             : [left_key] "=&r"(left.key), [left_reference] "=&r"(left.reference)
-            : "0"(left.key), [right_key] "r" (right.key)
+            : "0"(left.key), [right_key] "r" (right.key), [right_reference] "r" (right.reference)
             : "cc"
         );
         right.key ^= tmp ^ left.key;

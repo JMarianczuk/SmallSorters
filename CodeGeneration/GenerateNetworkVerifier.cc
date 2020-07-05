@@ -58,11 +58,12 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
             gen->WriteLine("void VerifySwaps()");
             gen->WriteBlock([=]{
                 gen->WriteLine("int numberOfIncorrectSwaps = 0;");
+                gen->WriteLine("bool result = false;");
                 Multicall<std::string>(
                     [=](std::string name)
                     {
                         gen->WriteLine("debug::WriteLine(\"verifying ", name, " swap\");");
-                        gen->WriteLine("bool result = verification::VerifySwap(&", name, "::swap<SortableRef>);");
+                        gen->WriteLine("result = verification::VerifySwap<", name, ">();");
                         gen->WriteLine("if (!result)");
                         gen->WriteBlock([=]{
                             gen->WriteLine("debug::WriteLine(\"incorrect swap: '", name, "'.\");");

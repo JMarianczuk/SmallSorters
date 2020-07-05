@@ -81,7 +81,8 @@ bool VerifyNetwork(int size, void(*network)(int*,size_t))
 	return true;
 }
 
-bool VerifySwap(bool(*swap)(SortableRef&,SortableRef&))
+template <typename Swap>
+bool VerifySwap()
 {
 	SortableRef left;
 	SortableRef right;
@@ -89,12 +90,12 @@ bool VerifySwap(bool(*swap)(SortableRef&,SortableRef&))
 	left.reference = 32;
 	right.key = 4;
 	right.reference = 15;
-	swap(left, right);
+	Swap::swap(left, right);
 	if (left.key != 4 || left.reference != 15 || right.key != 5 || right.reference != 32)
 	{
 		return false;
 	}
-	swap(left, right);
+	Swap::swap(left, right);
 	if (left.key != 4 || left.reference != 15 || right.key != 5 || right.reference != 32)
 	{
 		return false;
