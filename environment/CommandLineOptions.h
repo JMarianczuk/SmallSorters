@@ -18,6 +18,7 @@ struct CommandLineOptions
     bool MeasureIpso;
 
     bool VerifyNetworks;
+    bool VerifySwaps;
 
     bool ExecuteUnitTests;
     bool ExecuteExperimentMethod;

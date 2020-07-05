@@ -48,6 +48,16 @@ public:
     }
 };
 
+class CS_CmovXor final
+{
+public:
+    template <typename Type>
+    static inline void swap(Type& left, Type& right)
+    {
+        CS_IfSwap::swap(left, right);
+    }
+};
+
 class CS_FourCmovTemp final
 {
 public:

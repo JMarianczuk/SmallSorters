@@ -79,6 +79,35 @@ public:
     }
 };
 
+class CS_CmovXor final
+{
+public:
+    template <typename Type>
+    static inline void swap(Type& left, Type& right)
+    {
+        uint64_t tmp = left.key;
+        uint64_t tmpRef = left.reference;
+        __asm__(
+            "cmpq %[left_key],%[right_key]\n\t"
+            "cmovbq %[right_key],%[left_key]\n\t"
+            "cmovbq %[right_reference],%[left_reference]\n\t"
+            : [left_key] "=&r"(left.key), [left_reference] "=&r"(left.reference)
+            : "0"(left.key), [right_key] "r" (right.key)
+            : "cc"
+        );
+        right.key ^= tmp ^ left.key;
+        right.reference ^= tmpRef ^ left.reference;
+    }
+};
+/**
+ * int ax = a[x] 
+ *      => tmp = left.key
+ * COND(a[y]<ax, a[x], a[y]) 
+ *      => a[x] = a[y]<ax ? a[y] : a[x];
+ * a[y] ^= ax ^ a[x]
+ * 
+ * */
+
 class CS_FourCmovTemp final
 {
 public:

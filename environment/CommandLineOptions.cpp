@@ -31,7 +31,10 @@ detail::Parser GetParser(CommandLineOptions& options)
             ("Measure sorting with ipso") |
         Opt(options.VerifyNetworks)
             ["--verifyNetworks"]
-            ("Verify correctnes of networks") |
+            ("Verify correctness of networks") |
+        Opt(options.VerifySwaps)
+            ["--verifySwaps"]
+            ("Verify correctness of swaps") |
         Opt(options.ExecuteExperimentMethod)
             ["-e"]["--experiment"]
             ("Execute experiment method") |
@@ -64,7 +67,8 @@ CommandLineOptions ParseOptions(char **arguments, int numberOfArguments)
     CommandLineOptions options = {
         false, false, false, false, false, 
         false, false, false, false, false, 
-        false, false, false, false, false};
+        false, false, false, false, false,
+        false};
     auto commandLine = GetParser(options);
     
     auto result = commandLine.parse(Args(numberOfArguments, arguments));

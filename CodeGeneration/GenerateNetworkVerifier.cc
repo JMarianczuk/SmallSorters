@@ -2,6 +2,7 @@
 #include <string>
 #include "FunctionalHelpers.hpp"
 
+#include "SortableDefinitions.hpp"
 #include "GenerateNetworkVerifier.hpp"
 
 namespace codegeneration
@@ -47,6 +48,30 @@ void WriteNetworkVerification(CPlusPlusCodeGenerator* gen)
                     network_nested_namespaces);
                 int totalNetworks = network_nested_namespaces.size() * (16-2+1);
                 gen->WriteLine("debug::WriteLine(\"finished verification. \", ", totalNetworks, " - numberOfIncorrectNetworks, \" networks out of ", totalNetworks, " sorted correctly.\");");
+            });
+
+            std::vector<std::string> swap_namespaces;
+            for (auto str : *VectorWhere<SortableStruct*>(sortableStructs(), [](SortableStruct *str){return str->UseForNetworkSort();}))
+            {
+                swap_namespaces.push_back(str->CSName());
+            } 
+            gen->WriteLine("void VerifySwaps()");
+            gen->WriteBlock([=]{
+                gen->WriteLine("int numberOfIncorrectSwaps = 0;");
+                Multicall<std::string>(
+                    [=](std::string name)
+                    {
+                        gen->WriteLine("debug::WriteLine(\"verifying ", name, " swap\");");
+                        gen->WriteLine("bool result = verification::VerifySwap(&", name, "::swap<SortableRef>);");
+                        gen->WriteLine("if (!result)");
+                        gen->WriteBlock([=]{
+                            gen->WriteLine("debug::WriteLine(\"incorrect swap: '", name, "'.\");");
+                            gen->WriteLine("numberOfIncorrectSwaps += 1;");
+                        });
+                    },
+                    swap_namespaces);
+                int totalSwaps = swap_namespaces.size();
+                gen->WriteLine("debug::WriteLine(\"finished verification. \", ", totalSwaps, " - numberOfIncorrectSwaps, \" swaps out of ", totalSwaps, " swapped correctly.\");");
             });
         }, "");
     });

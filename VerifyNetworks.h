@@ -81,6 +81,27 @@ bool VerifyNetwork(int size, void(*network)(int*,size_t))
 	return true;
 }
 
+bool VerifySwap(bool(*swap)(SortableRef&,SortableRef&))
+{
+	SortableRef left;
+	SortableRef right;
+	left.key = 5;
+	left.reference = 32;
+	right.key = 4;
+	right.reference = 15;
+	swap(left, right);
+	if (left.key != 4 || left.reference != 15 || right.key != 5 || right.reference != 32)
+	{
+		return false;
+	}
+	swap(left, right);
+	if (left.key != 4 || left.reference != 15 || right.key != 5 || right.reference != 32)
+	{
+		return false;
+	}
+	return true;
+}
+
 } // namespace verification
 
 #endif // VERIFY_NETWORKS_H

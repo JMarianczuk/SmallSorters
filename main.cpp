@@ -112,6 +112,11 @@ bool ExecuteExtraordinaryAction(commandline::CommandLineOptions options)
         verification::VerifyNetworks();
         return true;
     }
+    if (options.VerifySwaps)
+    {
+        verification::VerifySwaps();
+        return true;
+    }
     if (options.ExecuteExperimentMethod)
     {
         std::cout << "Executing test method" << std::endl;

@@ -3,6 +3,7 @@
 #define CONDITONAL_SWAP_H
 
 #include "ConditionalSwapGeneric.h"
+
 #if __x86_64__
 	#include "ConditionalSwapX86.h"
 #elif defined(__i386__)
