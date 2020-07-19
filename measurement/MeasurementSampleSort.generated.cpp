@@ -660,7 +660,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 Tie ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BestNetworks<conditional_swap::CS_Tie>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 CmX", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BestNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 CmX ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BestNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 ISwp");
 	randomisation::SetSeed(seed);
@@ -676,7 +676,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 Tie ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 CmX");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN Best -s332 CmX ");
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 ISwp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_IfSwap>, SortableRefKeyGetter, SortableRef, uint64_t>);
@@ -693,7 +693,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 Tie ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_Tie>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 CmX", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 CmX ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 ISwp");
 	randomisation::SetSeed(seed);
@@ -709,7 +709,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 Tie ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 CmX");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-L -s332 CmX ");
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 ISwp", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_IfSwap>, SortableRefKeyGetter, SortableRef, uint64_t>);
@@ -726,7 +726,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 Tie ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_Tie>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 CmX", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 CmX ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonParallelNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 ISwp");
 	randomisation::SetSeed(seed);
@@ -742,7 +742,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 Tie ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 CmX");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-P -s332 CmX ");
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "IS      -s332 Def ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::InsertionSort<insertionsort::InsertionSort_Default>, SortableRefKeyGetter, SortableRef, uint64_t>);
@@ -776,7 +776,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 Tie ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_Tie>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
-	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 CmX", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
+	measurement::MeasureSampleSort<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 CmX ", &samplesort::SampleSort3Splitters3OversamplingFactor2BlockSize<static_sorters::BoseNelsonRecursiveNetworks<conditional_swap::CS_CmovXor>, SortableRefKeyGetter, SortableRef, uint64_t>);
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 ISwp");
 	randomisation::SetSeed(seed);
@@ -792,7 +792,7 @@ void MeasureSampleSort(Performancing* perf, uint64_t seed, int numberOfIteration
 	randomisation::SetSeed(seed);
 	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 Tie ");
 	randomisation::SetSeed(seed);
-	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 CmX");
+	measurement::MeasureRandomGeneration<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "SN BN-R -s332 CmX ");
 	
 	randomisation::SetSeed(seed);
 	measurement::MeasureCompleteSorter<SortableRef, RandomisationMode::DEFAULT>(perf, numberOfIterations, arraySize, measureIteration, "StdSort -S000 ", &measurement::StdSortWrapper);

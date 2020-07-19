@@ -20,7 +20,7 @@ std::vector<SortableStruct*> structs =
     new SortableStruct("insertionsort::InsertionSort_", "StlVersion", "STL ", true),                  
     new SortableStruct("insertionsort::InsertionSort_", "PointerOptimized", "POp ", true),            //12
     new SortableStruct("insertionsort::InsertionSort_", "ArrayIndex_FirstCheck", "AIF ", true),
-    new SortableStruct("conditional_swap::CS_", "CmovXor", "CmX", true),
+    new SortableStruct("conditional_swap::CS_", "CmovXor", "CmX ", true),
 
     //new SortableStruct("conditional_swap::CS_", "SixCmovTemp", "6Cm", true),
     //new SortableStruct("conditional_swap::CS_", "TernaryConditionalOperator", "TCOp", true),

@@ -86,17 +86,34 @@ bool VerifySwap()
 {
 	SortableRef left;
 	SortableRef right;
-	left.key = 5;
-	left.reference = 32;
-	right.key = 4;
-	right.reference = 15;
+
+	uint64_t largerKey = 5;
+	uint64_t largerKeyRef = 436862519;
+
+	uint64_t smallerKey = 4;
+	uint64_t smallerKeyRef = 436862520;
+
+	left.key = largerKey;
+	left.reference = largerKeyRef;
+	// left.reference = 32;
+
+	right.key = smallerKey;
+	right.reference = smallerKeyRef;
+
 	Swap::swap(left, right);
-	if (left.key != 4 || left.reference != 15 || right.key != 5 || right.reference != 32)
+	if (left.key != smallerKey 
+		|| left.reference != smallerKeyRef 
+		|| right.key != largerKey 
+		|| right.reference != largerKeyRef)
 	{
 		return false;
 	}
+
 	Swap::swap(left, right);
-	if (left.key != 4 || left.reference != 15 || right.key != 5 || right.reference != 32)
+	if (left.key != smallerKey 
+		|| left.reference != smallerKeyRef 
+		|| right.key != largerKey 
+		|| right.reference != largerKeyRef)
 	{
 		return false;
 	}
